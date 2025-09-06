@@ -1,29 +1,12 @@
-# Astro Starter Kit: Minimal
+# PyCon AU 2026 Website
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Website for PyCon AU 2026 built with AstroJS and Tailwind CSS.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Tech Stack
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
+- **AstroJS** - Static site generator
+- **Tailwind CSS v4** - Styling with CSS-based theme configuration
+- **MDX** - Markdown with JSX components
 
 ## 🧞 Commands
 
@@ -38,6 +21,3 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
