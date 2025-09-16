@@ -18,11 +18,11 @@
     <!-- / Fathom -->
   </head>
   <body>
-    
-    <section id="hero-section" x-data="{ 
+
+    <section id="hero-section" x-data="{
       hasVisitedBefore: sessionStorage.getItem('pycon-visited'),
-      scrollToContent: function() { 
-        document.getElementById('first-content').scrollIntoView({ behavior: 'smooth' }); 
+      scrollToContent: function() {
+        document.getElementById('first-content').scrollIntoView({ behavior: 'smooth' });
       }
     }" x-init="
     if (hasVisitedBefore) {
@@ -49,7 +49,7 @@
           </div>
           <a href="#" @click="scrollToContent" class="down-arrow"><img src="/down-arrow.svg" alt="down arrow"></a>
         </div>
-        
+
         <!-- <img src="/curlyboi.svg" id="curlyboi" class="translate-y-0 absolute top-20 right-10 lg:w-auto w-2/3" alt="Curlyboi"> -->
         <div id="curlyboii" class="-translate-y-1/2 absolute top-[10%] right-10"></div>
       </div>
@@ -78,7 +78,7 @@
               <p class="text-white 2xl:text-[1.75rem] 2xl:leading-[1.35] lg:text-xl text-lg lg:px-20">We are always looking for sponsors to help us make the conference accessible and affordable for everyone. Download our prospectus to find out about the exciting sponsorship opportunities available for 2026.</p>
               <!-- <a href="#" class="btn btn-secondary 2xl:mt-10">Download Prospectus</a> -->
                <a href="mailto:sponsor@pycon.org.au" class="btn btn-secondary 2xl:mt-10">sponsor@pycon.org.au</a>
-              
+
             </div>
           </div>
         </div>
@@ -88,7 +88,7 @@
 
     <section class="slide-up bg-brand-secondary lg:rounded-tl-[5.9rem] lg:rounded-tr-[5.9rem] rounded-tl-[2.3rem] rounded-tr-[2.3rem] mt-[-5.9rem] relative z-20 pb-[5.9rem]">
       <div class="2xl:container 2xl:mx-auto lg:px-20 px-10 py-20">
-        <div class="max-w-[873px] 2xl:max-w-[1120px] mx-auto text-center">  
+        <div class="max-w-[873px] 2xl:max-w-[1120px] mx-auto text-center">
           <!--
           <h3 class="2xl:text-[2.625rem] lg:text-2xl text-lg font-roboto-slab font-regular mb-10">Subscribe to our mailing list</h3>
           <form action="" class="flex lg:flex-row flex-col lg:gap-0 gap-5 items-center lg:rounded-[2.3rem] overflow-hidden w-full relative lg:h-[64px]">
