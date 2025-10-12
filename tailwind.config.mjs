@@ -18,6 +18,7 @@ export default {
         'pycon-dark-gray': '#282828',
         'pycon-off-white': '#EDEDED',
         'pycon-accent': '#C5F57A',
+        'pycon-coral': '#EF553C',
       },
       fontFamily: {
         jakarta: ['Plus Jakarta Sans', 'sans-serif'],

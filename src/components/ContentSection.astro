@@ -1,5 +1,19 @@
 ---
 // Main content section with conference info and sponsor callout
+import { getCollection } from 'astro:content';
+
+// Get the 5 most recent blog posts
+const allPosts = await getCollection('blog');
+const recentPosts = allPosts
+  .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf())
+  .slice(0, 5);
+
+// Category display names
+const categoryNames = {
+  'news': 'News & Announcements',
+  'directors-desk': "From the Director's Desk",
+  'uncategorised': 'Blog'
+};
 ---
 
 <section id="content" class="">
@@ -62,6 +76,46 @@
           </p>
         </div>
       </div>
+
+      <!-- Blog Posts Section -->
+      {recentPosts.length > 0 && (
+        <div class="flex justify-center pb-40">
+          <div class="fade-up bg-brand-neutral max-w-[873px] 2xl:max-w-[1120px] lg:rounded-[5.9rem] rounded-[2.3rem] py-14 lg:px-20 px-10 text-center">
+            <h2 class="2xl:text-4xl lg:text-3xl text-lg font-roboto-slab font-regular mb-10">
+              Latest Updates
+            </h2>
+
+            <div class="flex flex-col gap-6">
+              {recentPosts.map((post) => (
+                <article class="text-left border-b border-gray-300 last:border-0 pb-6 last:pb-0">
+                  <div class="flex flex-col gap-3">
+                    <div class="flex items-center justify-between gap-3">
+                      <span class={`${post.data.category === 'news' ? 'text-purple-800' : post.data.category === 'directors-desk' ? 'text-pycon-coral' : 'text-pycon-purple'} font-roboto-slab font-semibold text-xs tracking-wider`}>
+                        {categoryNames[post.data.category]}
+                      </span>
+                      <span class="text-gray-600 text-sm">
+                        {post.data.published.toLocaleDateString('en-AU', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })}
+                      </span>
+                    </div>
+                    <a href={`/blog/${post.slug}`} class="flex items-center justify-between gap-4 group">
+                      <h3 class="2xl:text-2xl lg:text-xl text-lg font-jakarta font-medium group-hover:underline">
+                        {post.data.title}
+                      </h3>
+                      <svg class="w-6 h-6 flex-shrink-0 text-pycon-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   </div>
 </section>
