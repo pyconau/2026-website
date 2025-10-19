@@ -1,0 +1,122 @@
+---
+// Main content section with conference info and sponsor callout
+import { getCollection } from 'astro:content';
+
+// Get the 5 most recent blog posts
+const allPosts = await getCollection('posts');
+const recentPosts = allPosts
+  .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf())
+  .slice(0, 5);
+
+// Category display names
+const categoryNames = {
+  'news': 'News & Announcements',
+  'directors-desk': "From the Director's Desk",
+  'uncategorised': 'posts'
+};
+---
+
+<section id="content" class="">
+  <div class="bg-separator translate-y-full"></div>
+  <div class="bg-brand-gray bg-pattern">
+    <div class="2xl:container mx-5 lg:mx-auto lg:px-20 px-5 pt-40 z-10 relative">
+      <div id="first-content" class="flex justify-center">
+        <div
+          class="fade-up bg-brand-neutral lg:max-w-[873px] 2xl:max-w-[1120px] lg:rounded-[5.9rem] rounded-[2.3rem] py-14 lg:px-20 px-10 text-center"
+        >
+          <h2 class="2xl:text-4xl lg:text-3xl text-lg font-roboto-slab font-regular">
+            Australia's peak Python conference is heading to Brisbane in 2026!
+          </h2>
+          <div class="flex flex-col gap-4 my-14 lg:px-20 px-0">
+            <p class="2xl:text-[1.375rem] 2xl:leading-[1.36] text-base">
+              PyCon AU is Australia's national conference for everyone using the Python
+              programming language and is a must-attend event for hundreds of technologists
+              worldwide.
+            </p>
+            <p class="2xl:text-[1.375rem] 2xl:leading-[1.36] text-base">
+              In 2026, PyCon AU will be hosted at the Sofitel Brisbane Central between
+              26&ndash;30 August.
+            </p>
+          </div>
+          <div class="flex lg:flex-row flex-col gap-4 justify-center">
+            <a href="https://pretix.eu/pyconau/2026/" class="btn btn-primary"
+              >Register Today</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center pt-20 pb-40">
+        <div
+          class="fade-up max-w-[873px] 2xl:max-w-[1120px] py-14 text-center flex flex-col gap-10 items-center"
+        >
+          <h2
+            class="2xl:text-7xl lg:text-6xl text-3xl lg:leading-[1.31] tracking-[-0.02em] font-jakarta font-bold text-pycon-green"
+          >
+            Become a Sponsor
+          </h2>
+          <p
+            class="text-white 2xl:text-[1.75rem] 2xl:leading-[1.35] lg:text-xl text-lg lg:px-20"
+          >
+            We are always looking for sponsors to help us make the conference accessible and
+            affordable for everyone. Download our prospectus to find out about the exciting
+            sponsorship opportunities available for 2026.
+          </p>
+          <a
+            href="/files/PyCon AU 2026 Sponsorship Prospectus v1.pdf"
+            class="btn btn-secondary 2xl:mt-10">Download Prospectus</a
+          >
+
+          <p
+            class="text-white 2xl:text-[1.75rem] 2xl:leading-[1.35] lg:text-xl text-lg lg:px-20"
+          >
+            You can always get in touch via <a
+              href="mailto:sponsor@pycon.org.au"
+              class="underline">sponsor@pycon.org.au</a
+            > too!
+          </p>
+        </div>
+      </div>
+
+      <!-- Blog Posts Section -->
+      {recentPosts.length > 0 && (
+        <div id="latest-updates" class="flex justify-center pb-40">
+          <div class="fade-up bg-brand-neutral max-w-[873px] 2xl:max-w-[1120px] lg:rounded-[5.9rem] rounded-[2.3rem] py-14 lg:px-20 px-10 text-center">
+            
+            <h2 class="2xl:text-4xl lg:text-3xl text-lg font-roboto-slab font-regular mb-10">
+              Latest Updates
+            </h2>
+
+            <div class="flex flex-col gap-6">
+              {recentPosts.map((post) => (
+                <article class="text-left border-b border-gray-300 last:border-0 pb-6 last:pb-0">
+                  <div class="flex flex-col gap-3">
+                    <div class="flex items-center justify-between gap-3">
+                      <span class={`${post.data.category === 'news' ? 'text-purple-800' : post.data.category === 'directors-desk' ? 'text-pycon-coral' : 'text-pycon-purple'} font-roboto-slab font-semibold text-xs tracking-wider`}>
+                        {categoryNames[post.data.category]}
+                      </span>
+                      <span class="text-gray-600 text-sm">
+                        {post.data.published.toLocaleDateString('en-AU', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })}
+                      </span>
+                    </div>
+                    <a href={`/posts/${post.slug}`} class="flex items-center justify-between gap-4 group">
+                      <h3 class="2xl:text-2xl lg:text-xl text-lg font-jakarta font-medium group-hover:underline">
+                        {post.data.title}
+                      </h3>
+                      <svg class="w-6 h-6 flex-shrink-0 text-pycon-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+</section>

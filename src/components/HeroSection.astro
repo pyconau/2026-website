@@ -1,0 +1,61 @@
+---
+// Hero section with Alpine.js for smooth scrolling and GSAP animation targets
+---
+
+<section
+  id="hero-section"
+  x-data="{
+    hasVisitedBefore: sessionStorage.getItem('pycon-visited'),
+    scrollToContent: function() {
+      document.getElementById('first-content').scrollIntoView({ behavior: 'smooth' });
+    }
+  }"
+  x-init="
+  if (hasVisitedBefore) {
+    // Skip loading animation for returning visitors - do nothing
+  } else {
+    // First-time visitor - show loading animation
+    // Listen for animation completion event
+    window.addEventListener('animation-complete', function() {
+      // Mark as visited for future visits
+      sessionStorage.setItem('pycon-visited', 'true');
+    });
+    // Fallback timeout in case animation doesn't load
+    setTimeout(function() {
+      sessionStorage.setItem('pycon-visited', 'true');
+    }, 6000);
+  }
+  "
+  class="bg-brand-neutral"
+>
+  <div
+    class="2xl:container 2xl:mx-auto h-[84vh] flex flex-col gap-20 justify-between py-14 lg:px-20 px-5 relative"
+  >
+    <img
+      src="/pycon26.svg"
+      id="pycon26"
+      class="translate-y-1/2 opacity-0"
+      alt="Pycon AU 2026"
+    />
+    <div class="time-date translate-y-1/2 opacity-0 flex justify-end relative">
+      <div class="absolute bottom-0 left-0">
+        <h2
+          class="2xl:text-[3.81rem] lg:text-[2.37rem] text-3xl tracking-[-0.01em] leading-none font-jakarta font-extrabold text-pycon-dark-gray"
+        >
+          Brisbane
+        </h2>
+        <h2
+          class="2xl:text-[3.93rem] lg:text-[2.56rem] text-3xl leading-none font-manrope font-extralight text-pycon-dark-gray"
+        >
+          August 26-30
+        </h2>
+      </div>
+      <a href="#" @click="scrollToContent" class="down-arrow"
+        ><img src="/down-arrow.svg" alt="down arrow" /></a
+      >
+    </div>
+
+    <!-- Lottie animation container -->
+    <div id="curlyboii" class="-translate-y-1/2 absolute top-[10%] right-10"></div>
+  </div>
+</section>

@@ -1,0 +1,69 @@
+---
+// Image modal for full-size viewing
+---
+
+<div id="image-modal" class="hidden fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4">
+  <button
+    id="close-modal"
+    class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10"
+    aria-label="Close modal"
+  >
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+    </svg>
+  </button>
+  <img id="modal-image" src="" alt="" class="max-w-full max-h-full object-contain" />
+</div>
+
+<script>
+  const modal = document.getElementById('image-modal');
+  const modalImage = document.getElementById('modal-image') as HTMLImageElement;
+  const closeButton = document.getElementById('close-modal');
+
+  // Function to open modal
+  function openModal(src: string, alt: string) {
+    if (modal && modalImage) {
+      modalImage.src = src;
+      modalImage.alt = alt;
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  // Function to close modal
+  function closeModal() {
+    if (modal) {
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+  }
+
+  // Add click handlers to all article images
+  document.addEventListener('DOMContentLoaded', () => {
+    const articleImages = document.querySelectorAll('article img');
+    articleImages.forEach((img) => {
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', () => {
+        const htmlImg = img as HTMLImageElement;
+        openModal(htmlImg.src, htmlImg.alt);
+      });
+    });
+
+    // Close button click
+    closeButton?.addEventListener('click', closeModal);
+
+    // Close on background click
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+        closeModal();
+      }
+    });
+  });
+</script>
