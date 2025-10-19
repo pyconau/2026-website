@@ -3,7 +3,7 @@
 import { getCollection } from 'astro:content';
 
 // Get the 5 most recent blog posts
-const allPosts = await getCollection('blog');
+const allPosts = await getCollection('posts');
 const recentPosts = allPosts
   .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf())
   .slice(0, 5);
@@ -12,7 +12,7 @@ const recentPosts = allPosts
 const categoryNames = {
   'news': 'News & Announcements',
   'directors-desk': "From the Director's Desk",
-  'uncategorised': 'Blog'
+  'uncategorised': 'posts'
 };
 ---
 

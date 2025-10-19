@@ -3,10 +3,10 @@ import { getCollection } from 'astro:content';
 import type { APIContext } from 'astro';
 
 export async function GET(context: APIContext) {
-  const blog = await getCollection('blog');
+  const posts = await getCollection('posts');
 
   // Filter for news and announcements only, and sort by date descending
-  const newsAndAnnouncements = blog
+  const newsAndAnnouncements = posts
     .filter(post => post.data.category === 'news')
     .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf());
 
