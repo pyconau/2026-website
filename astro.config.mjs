@@ -5,6 +5,7 @@ import tailwind from "@astrojs/tailwind"
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://2026.pycon.org.au',
   markdown: {
     syntaxHighlight: "prism",
   },

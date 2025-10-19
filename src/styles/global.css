@@ -46,10 +46,17 @@
     hover:bg-brand-accent hover:text-brand-dark;
 }
 .btn-secondary {
-  @apply 
-    bg-brand-accent 
-    text-[#191717]
-    hover:bg-black hover:text-pycon-accent;
+  @apply
+    text-base
+    font-semibold
+    no-underline
+    bg-pycon-accent
+    text-brand-dark
+    hover:bg-brand-dark hover:text-pycon-accent
+    hover:visited:bg-brand-dark hover:visited:text-pycon-accent
+    active:bg-brand-dark active:text-pycon-accent
+    visited:bg-pycon-accent visited:text-brand-dark
+    transition-colors duration-300;
 }
 .input-field {
   @apply
