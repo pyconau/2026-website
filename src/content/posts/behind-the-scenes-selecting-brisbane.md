@@ -30,7 +30,7 @@ There are surprisingly few venues that can accommodate a ‘small but wide’ co
 
 Venue evaluations considered a broad array of criteria. Capacity, catering, equipment, facilities, floor plan/layout, foyer & exhibition space, public transport, accessibility, atmosphere/vibe and more. The spreadsheet we had for evaluation grew wider and taller with every passing week.
 
-We eventually shortlisted 12 locations, and visited ~8 sites in Brisbane, Sydney and Melbourne. Having an open0.
+We eventually shortlisted 12 locations, and visited ~8 sites in Brisbane, Sydney and Melbourne. Having an open
  mind to the city allowed us to focus on the attendee experience and the operational complexity of each venue.
 
 And I mean it - we conducted several site visits and inspected rooms inside and out. Walked several tens-of-thousands of steps through convention centers, hotel hallways, and even inspected hotel rooms to evaluate options. We did so with a 'secret shopper' mindset - staying at several potential venues and nearby hotels (that attendees were likely to choose) to get the inside experience.
@@ -40,7 +40,7 @@ And I mean it - we conducted several site visits and inspected rooms inside and 
 In the end, we shortlisted two venues, coincidentally both in Brisbane. Ultimately, the Brisbane Sofitel Central was the right balance of physical conference space, available dates & city location for a PyCon AU.
 
 ## With the support of a city
-Finding the right physical venue was only half the vision for PyCon AU 2026. Part of the criteria above was proximity to other transport and services that attendees to enjoy.
+Finding the right physical venue was only half the vision for PyCon AU 2026. Part of the criteria above was proximity to other transport and services that attendees commonly enjoy.
 
 Affordable transport options make access to the conference easier for everyone. Proximity to restaurants and bars make socialising easier every day. And having a lively city location means the community is more likely to travel before, and after and enjoy the ‘shoulder days’ of attending a conference.
 
