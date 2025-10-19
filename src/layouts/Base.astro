@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 export interface Props {
   title: string;
   description?: string;
@@ -37,9 +39,6 @@ const { title, description, ogImage, schemaData } = Astro.props;
 
     <!-- Fathom Analytics -->
     <script src="https://cdn.usefathom.com/script.js" data-site="BETINVUJ" defer></script>
-
-    <!-- Global Styles -->
-    <link rel="stylesheet" href="/src/styles/global.css" />
 
     <!-- Schema.org structured data -->
     {
