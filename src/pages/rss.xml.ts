@@ -17,7 +17,7 @@ export async function GET(context: APIContext) {
     items: newsAndAnnouncements.map((post) => ({
       title: post.data.title,
       pubDate: post.data.published,
-      link: `/blog/${post.slug}/`,
+      link: `/posts/${post.slug}/`,
     })),
     customData: `<language>en-au</language>`,
   });
