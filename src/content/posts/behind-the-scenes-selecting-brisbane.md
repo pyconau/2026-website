@@ -6,7 +6,7 @@ category: "directors-desk"
 _Welcome to the directors desk! This is a more informal series of posts written predominantly by PyCon AU 2026 conference director, Jack Skinner. These posts are intended to be a little off-the-cuff, a little behind the scenes, and a little long form essay. All in an effort to be more open and transparent about how we make decisions at PyCon AU, and to share what the team is focusing on over the next 11 months as we plan PyCon AU 2026._
 
 
-You’ve probably seen the news, or perhaps saw the announcement on stage at the 2025 conference close. **PyCon AU 2026 will run 26-30 August 2026 at the Brisbane Sofitel Central**… in Brisbane!
+You’ve probably seen the news, or perhaps saw the announcement on stage at the 2025 conference close. **PyCon AU 2026 will run 26-30 August 2026 at the Sofitel Brisbane Central**… in Brisbane!
 
 This announcement was the culmination of almost 9+ months of effort. The original planning doc for 2026 was penned as a 3 pager ‘pitch’ back in October 2024. With that much lead time, we had a vision to select the right location for a PyCon AU, not just find an acceptable place proximate to the organisers. Historically, PyCon AU organisers would be driven by an enthusiasm to bring Pycon AU to their city, but the online times and recent years have shown how a mostly-remote team can run perfectly cromulent PyCon’s AU.
 
@@ -37,7 +37,7 @@ And I mean it - we conducted several site visits and inspected rooms inside and 
 
 ![Photos from site visits](/files/2026_site_visits.png)
 
-In the end, we shortlisted two venues, coincidentally both in Brisbane. Ultimately, the Brisbane Sofitel Central was the right balance of physical conference space, available dates & city location for a PyCon AU.
+In the end, we shortlisted two venues, coincidentally both in Brisbane. Ultimately, the Sofitel Brisbane Central was the right balance of physical conference space, available dates & city location for a PyCon AU.
 
 ## With the support of a city
 Finding the right physical venue was only half the vision for PyCon AU 2026. Part of the criteria above was proximity to other transport and services that attendees commonly enjoy.
