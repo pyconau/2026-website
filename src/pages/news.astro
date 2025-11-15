@@ -1,0 +1,373 @@
+---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Base from "../layouts/Base.astro";
+
+// TODO: Edit schemaData
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  additionalType: "ExhibitionEvent",
+  url: "https://2026.pycon.org.au/",
+  name: "PyCon AU 2026",
+  description:
+    "PyCon AU is Australia's national conference for everyone using the Python programming language and is a must-attend event for hundreds of technologists worldwide.",
+  startDate: "2026-08-26",
+  endDate: "2026-08-30",
+  about: {
+    "@type": "ComputerLanguage",
+    name: "Python",
+    url: "https://www.python.org/",
+  },
+  location: {
+    "@type": "Place",
+    name: "Sofitel Brisbane Central",
+    url: "https://www.sofitelbrisbane.com.au/",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "249 Turbot Street",
+      addressLocality: "Brisbane City",
+      postalCode: "4000",
+      addressRegion: "QLD",
+      addressCountry: "AU",
+    },
+  },
+  eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode",
+  inLanguage: "en-AU",
+  offers: [
+    {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      url: "https://pretix.eu/pyconau/2026/",
+    },
+  ],
+  superEvent: {
+    "@type": "EventSeries",
+    name: "PyCon AU",
+    url: "https://pycon.org.au/",
+    organizer: {
+      "@id": "#organization",
+    },
+    sameAs: "https://www.wikidata.org/wiki/Q134350078",
+  },
+  organizer: {
+    "@id": "#organization",
+    "@type": "Organization",
+    name: "PyCon AU",
+    url: "https://pycon.org.au/",
+    sameAs: [
+      "https://mastodon.pycon.org.au/@pyconau",
+      "https://bsky.app/profile/pyconau.bsky.social",
+      "https://www.linkedin.com/company/pyconau/",
+    ],
+  },
+  sameAs: ["https://www.wikidata.org/wiki/Q136290798"],
+};
+---
+
+<Base title="PyCon AU 2026" schemaData={schemaData}>
+  <Header dark={false} />
+
+  <section class="bg-stone pt-[98px] pb-20 overflow-hidden">
+    <div class="container relative">
+      <img
+        src="/images/star-lavender.svg"
+        class="absolute left-0 top-32"
+        alt=""
+      />
+      <div class="w-[85%] mx-auto">
+        <div class="breadcrumb pt-14">
+          <ul class="flex items-center gap-2 text-charcoal">
+            <li class="flex items-center gap-2">
+              <a href="#">Home</a><span>></span>
+            </li>
+          </ul>
+        </div>
+        <div class="flex justify-between items-center relative pt-10">
+          <div class="space-y-20 relative">
+            <div
+              class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em] leading-none"
+            >
+              <h1 class="text-charcoal">News & Updates</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="bg-stone pt-10 pb-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <div class="space-y-5">
+            <a
+              href="#"
+              class="bg-white hover:bg-lemon rounded-[3.125rem] p-10 flex flex-col justify-between gap-20 row-span-2 group"
+            >
+              <div
+                class="flex lg:flex-nowrap flex-wrap lg:gap-0 gap-2 items-center justify-between"
+              >
+                <div class="tag group-hover:border-charcoal!">Category Tag</div>
+                <div class="date">14 September 2025</div>
+              </div>
+              <div
+                class="flex lg:flex-row flex-col gap-10 items-end justify-between"
+              >
+                <div class="lg:w-[90%] w-full flex lg:flex-row flex-col gap-10">
+                  <h3
+                    class="text-3xl font-sans font-medium leading-[1.1] lg:w-[45%] w-full"
+                  >
+                    A longer headline goes in this space here and might go over
+                    a few lines.
+                  </h3>
+                  <p class="lg:w-[50%] w-full">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut nd dolore. Lorem ipsum dolor
+                    sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut nd dolore.
+                  </p>
+                </div>
+                <svg
+                  class="w-[48px] group-hover:translate-x-3 transition-all duration-300"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="43.594"
+                  height="21.64"
+                  viewBox="0 0 43.594 21.64"
+                >
+                  <defs>
+                    <clipPath id="a">
+                      <rect
+                        width="43.594"
+                        height="21.64"
+                        fill="none"
+                        stroke="#363636"
+                        stroke-width="2"></rect>
+                    </clipPath>
+                  </defs>
+                  <g clip-path="url(#a)">
+                    <path
+                      d="M41.1,1H0V-1H41.1Z"
+                      transform="translate(0 10.82)"
+                      fill="#363636"></path>
+                    <path
+                      d="M25.847,21.64h-2a9.96,9.96,0,0,1,1.172-4.677,11.986,11.986,0,0,1,3.142-3.753,14.925,14.925,0,0,1,4.3-2.39,14.926,14.926,0,0,1-4.3-2.39,11.986,11.986,0,0,1-3.142-3.753A9.958,9.958,0,0,1,23.847,0h2c0,5.414,5.587,9.819,12.455,9.819v2C31.434,11.819,25.847,16.225,25.847,21.64Z"
+                      transform="translate(5.292 0)"
+                      fill="#363636"></path>
+                  </g>
+                </svg>
+              </div>
+            </a>
+            <a
+              href="#"
+              class="bg-white hover:bg-lemon rounded-[3.125rem] p-10 flex lg:flex-row flex-col justify-between gap-10 row-span-2 group"
+            >
+              <div
+                class="flex lg:flex-col lg:flex-nowrap flex-wrap lg:gap-4 gap-2 items-start justify-between lg:w-[20%]"
+              >
+                <div class="tag group-hover:border-charcoal!">Category Tag</div>
+                <div class="date">14 September 2025</div>
+              </div>
+              <div
+                class="flex lg:flex-row flex-col gap-10 items-end justify-between lg:w-[80%]"
+              >
+                <h3
+                  class="text-3xl font-sans font-medium leading-[1.1] lg:w-[90%] w-full"
+                >
+                  A longer headline goes in this space here and might go over a
+                  few lines.
+                </h3>
+                <svg
+                  class="w-[48px] group-hover:translate-x-3 transition-all duration-300"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="43.594"
+                  height="21.64"
+                  viewBox="0 0 43.594 21.64"
+                >
+                  <defs>
+                    <clipPath id="a">
+                      <rect
+                        width="43.594"
+                        height="21.64"
+                        fill="none"
+                        stroke="#363636"
+                        stroke-width="2"></rect>
+                    </clipPath>
+                  </defs>
+                  <g clip-path="url(#a)">
+                    <path
+                      d="M41.1,1H0V-1H41.1Z"
+                      transform="translate(0 10.82)"
+                      fill="#363636"></path>
+                    <path
+                      d="M25.847,21.64h-2a9.96,9.96,0,0,1,1.172-4.677,11.986,11.986,0,0,1,3.142-3.753,14.925,14.925,0,0,1,4.3-2.39,14.926,14.926,0,0,1-4.3-2.39,11.986,11.986,0,0,1-3.142-3.753A9.958,9.958,0,0,1,23.847,0h2c0,5.414,5.587,9.819,12.455,9.819v2C31.434,11.819,25.847,16.225,25.847,21.64Z"
+                      transform="translate(5.292 0)"
+                      fill="#363636"></path>
+                  </g>
+                </svg>
+              </div>
+            </a>
+            <a
+              href="#"
+              class="bg-white hover:bg-lemon rounded-[3.125rem] p-10 flex lg:flex-row flex-col justify-between gap-10 row-span-2 group"
+            >
+              <div
+                class="flex lg:flex-col lg:flex-nowrap flex-wrap lg:gap-4 gap-2 items-start justify-between lg:w-[20%]"
+              >
+                <div class="tag group-hover:border-charcoal!">Category Tag</div>
+                <div class="date">14 September 2025</div>
+              </div>
+              <div
+                class="flex lg:flex-row flex-col gap-10 items-end justify-between lg:w-[80%]"
+              >
+                <h3
+                  class="text-3xl font-sans font-medium leading-[1.1] lg:w-[90%] w-full"
+                >
+                  A longer headline goes in this space here and might go over a
+                  few lines.
+                </h3>
+                <svg
+                  class="w-[48px] group-hover:translate-x-3 transition-all duration-300"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="43.594"
+                  height="21.64"
+                  viewBox="0 0 43.594 21.64"
+                >
+                  <defs>
+                    <clipPath id="a">
+                      <rect
+                        width="43.594"
+                        height="21.64"
+                        fill="none"
+                        stroke="#363636"
+                        stroke-width="2"></rect>
+                    </clipPath>
+                  </defs>
+                  <g clip-path="url(#a)">
+                    <path
+                      d="M41.1,1H0V-1H41.1Z"
+                      transform="translate(0 10.82)"
+                      fill="#363636"></path>
+                    <path
+                      d="M25.847,21.64h-2a9.96,9.96,0,0,1,1.172-4.677,11.986,11.986,0,0,1,3.142-3.753,14.925,14.925,0,0,1,4.3-2.39,14.926,14.926,0,0,1-4.3-2.39,11.986,11.986,0,0,1-3.142-3.753A9.958,9.958,0,0,1,23.847,0h2c0,5.414,5.587,9.819,12.455,9.819v2C31.434,11.819,25.847,16.225,25.847,21.64Z"
+                      transform="translate(5.292 0)"
+                      fill="#363636"></path>
+                  </g>
+                </svg>
+              </div>
+            </a>
+            <a
+              href="#"
+              class="bg-white hover:bg-lemon rounded-[3.125rem] p-10 flex lg:flex-row flex-col justify-between gap-10 row-span-2 group"
+            >
+              <div
+                class="flex lg:flex-col lg:flex-nowrap flex-wrap lg:gap-4 gap-2 items-start justify-between lg:w-[20%]"
+              >
+                <div class="tag group-hover:border-charcoal!">Category Tag</div>
+                <div class="date">14 September 2025</div>
+              </div>
+              <div
+                class="flex lg:flex-row flex-col gap-10 items-end justify-between lg:w-[80%]"
+              >
+                <h3
+                  class="text-3xl font-sans font-medium leading-[1.1] lg:w-[90%] w-full"
+                >
+                  A longer headline goes in this space here and might go over a
+                  few lines.
+                </h3>
+                <svg
+                  class="w-[48px] group-hover:translate-x-3 transition-all duration-300"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="43.594"
+                  height="21.64"
+                  viewBox="0 0 43.594 21.64"
+                >
+                  <defs>
+                    <clipPath id="a">
+                      <rect
+                        width="43.594"
+                        height="21.64"
+                        fill="none"
+                        stroke="#363636"
+                        stroke-width="2"></rect>
+                    </clipPath>
+                  </defs>
+                  <g clip-path="url(#a)">
+                    <path
+                      d="M41.1,1H0V-1H41.1Z"
+                      transform="translate(0 10.82)"
+                      fill="#363636"></path>
+                    <path
+                      d="M25.847,21.64h-2a9.96,9.96,0,0,1,1.172-4.677,11.986,11.986,0,0,1,3.142-3.753,14.925,14.925,0,0,1,4.3-2.39,14.926,14.926,0,0,1-4.3-2.39,11.986,11.986,0,0,1-3.142-3.753A9.958,9.958,0,0,1,23.847,0h2c0,5.414,5.587,9.819,12.455,9.819v2C31.434,11.819,25.847,16.225,25.847,21.64Z"
+                      transform="translate(5.292 0)"
+                      fill="#363636"></path>
+                  </g>
+                </svg>
+              </div>
+            </a>
+            <a
+              href="#"
+              class="bg-white hover:bg-lemon rounded-[3.125rem] p-10 flex lg:flex-row flex-col justify-between gap-10 row-span-2 group"
+            >
+              <div
+                class="flex lg:flex-col lg:flex-nowrap flex-wrap lg:gap-4 gap-2 items-start justify-between lg:w-[20%]"
+              >
+                <div class="tag group-hover:border-charcoal!">Category Tag</div>
+                <div class="date">14 September 2025</div>
+              </div>
+              <div
+                class="flex lg:flex-row flex-col gap-10 items-end justify-between lg:w-[80%]"
+              >
+                <h3
+                  class="text-3xl font-sans font-medium leading-[1.1] lg:w-[90%] w-full"
+                >
+                  A longer headline goes in this space here and might go over a
+                  few lines.
+                </h3>
+                <svg
+                  class="w-[48px] group-hover:translate-x-3 transition-all duration-300"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="43.594"
+                  height="21.64"
+                  viewBox="0 0 43.594 21.64"
+                >
+                  <defs>
+                    <clipPath id="a">
+                      <rect
+                        width="43.594"
+                        height="21.64"
+                        fill="none"
+                        stroke="#363636"
+                        stroke-width="2"></rect>
+                    </clipPath>
+                  </defs>
+                  <g clip-path="url(#a)">
+                    <path
+                      d="M41.1,1H0V-1H41.1Z"
+                      transform="translate(0 10.82)"
+                      fill="#363636"></path>
+                    <path
+                      d="M25.847,21.64h-2a9.96,9.96,0,0,1,1.172-4.677,11.986,11.986,0,0,1,3.142-3.753,14.925,14.925,0,0,1,4.3-2.39,14.926,14.926,0,0,1-4.3-2.39,11.986,11.986,0,0,1-3.142-3.753A9.958,9.958,0,0,1,23.847,0h2c0,5.414,5.587,9.819,12.455,9.819v2C31.434,11.819,25.847,16.225,25.847,21.64Z"
+                      transform="translate(5.292 0)"
+                      fill="#363636"></path>
+                  </g>
+                </svg>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <!-- Main scripts (will be added in Phase 5) -->
+  <script src="/src/scripts/animations.js"></script>
+</Base>
