@@ -1,0 +1,435 @@
+---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Base from "../layouts/Base.astro";
+
+// TODO: Edit schemaData
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  additionalType: "ExhibitionEvent",
+  url: "https://2026.pycon.org.au/",
+  name: "PyCon AU 2026",
+  description:
+    "PyCon AU is Australia's national conference for everyone using the Python programming language and is a must-attend event for hundreds of technologists worldwide.",
+  startDate: "2026-08-26",
+  endDate: "2026-08-30",
+  about: {
+    "@type": "ComputerLanguage",
+    name: "Python",
+    url: "https://www.python.org/",
+  },
+  location: {
+    "@type": "Place",
+    name: "Sofitel Brisbane Central",
+    url: "https://www.sofitelbrisbane.com.au/",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "249 Turbot Street",
+      addressLocality: "Brisbane City",
+      postalCode: "4000",
+      addressRegion: "QLD",
+      addressCountry: "AU",
+    },
+  },
+  eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode",
+  inLanguage: "en-AU",
+  offers: [
+    {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      url: "https://pretix.eu/pyconau/2026/",
+    },
+  ],
+  superEvent: {
+    "@type": "EventSeries",
+    name: "PyCon AU",
+    url: "https://pycon.org.au/",
+    organizer: {
+      "@id": "#organization",
+    },
+    sameAs: "https://www.wikidata.org/wiki/Q134350078",
+  },
+  organizer: {
+    "@id": "#organization",
+    "@type": "Organization",
+    name: "PyCon AU",
+    url: "https://pycon.org.au/",
+    sameAs: [
+      "https://mastodon.pycon.org.au/@pyconau",
+      "https://bsky.app/profile/pyconau.bsky.social",
+      "https://www.linkedin.com/company/pyconau/",
+    ],
+  },
+  sameAs: ["https://www.wikidata.org/wiki/Q136290798"],
+};
+---
+
+<Base title="PyCon AU 2026" schemaData={schemaData}>
+  <Header dark={true} />
+
+  <section class="bg-charcoal pt-[98px] pb-20 overflow-hidden">
+    <div class="container relative">
+      <img
+        src="images/star-lemon.svg"
+        class="absolute left-0 bottom-0 hidden lg:block"
+        alt=""
+      />
+      <div class="lg:w-[85%] w-full mx-auto">
+        <div class="breadcrumb pt-14">
+          <ul
+            class="flex items-center gap-2 text-emerald font-sans font-extrabold text-10pt uppercase tracking-[0.12em]"
+          >
+            <li><a href="#">Home</a></li>
+            <li><span>></span></li>
+          </ul>
+        </div>
+        <div class="flex flex-col lg:flex-row justify-between relative pt-10">
+          <div
+            class="flex flex-col lg:gap-0 gap-14 items-start justify-between lg:w-[45%] w-full relative"
+          >
+            <div class="space-y-14">
+              <div
+                class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em]"
+              >
+                <h1 class="text-lime">Tickets</h1>
+              </div>
+              <div class="lg:hidden flex justify-center">
+                <img
+                  src="images/tickets-pycon.svg"
+                  class="lg:w-auto w-[190px]"
+                  alt="pycon"
+                  class="w-auto"
+                />
+              </div>
+              <p
+                class="text-stone font-sans font-base tracking-[0.01em] leading-normal lg:w-[454px]"
+              >
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut nd dolore. Ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                nd dolore.
+              </p>
+            </div>
+
+            <a
+              href="#"
+              onclick="event.preventDefault(); window.scrollToSection('ticket-section'); return false;"
+              class="btn btn--emerald btn-arrow--down"
+              ><span>Buy Tickets</span></a
+            >
+          </div>
+          <div class="lg:w-1/2 w-full">
+            <div class="group flex justify-end relative">
+              <img
+                src="images/tickets-pycon.svg"
+                alt="pycon"
+                class="lg:block hidden"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-charcoal pt-20 ticket-section">
+    <div class="container">
+      <div class="lg:w-[85%] w-full mx-auto">
+        <div class="grid lg:grid-cols-2 grid-cols-1 gap-5">
+          <div class="bg-[#383838] py-14">
+            <div
+              class="lg:w-[426px] w-full lg:px-0 px-5 h-full mx-auto flex flex-col gap-16 justify-between"
+            >
+              <div class="space-y-10">
+                <div
+                  class="flex lg:flex-row flex-col gap-5 lg:gap-0 justify-between"
+                >
+                  <div class="space-y-2">
+                    <h3 class="text-lime font-sans font-semibold text-4xl">
+                      Professional
+                    </h3>
+                    <h3 class="text-stone font-sans font-semibold text-4xl">
+                      $750 Early Bird
+                    </h3>
+                  </div>
+                  <div class="price">
+                    <span class="text-stone/25 text-4xl font-semibold font-sans"
+                      >$550</span
+                    >
+                  </div>
+                </div>
+                <p class="text-stone">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt.
+                </p>
+                <ul class="space-y-5 text-lime">
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-lime.svg" alt="tick" />
+                    <span>3-day Conference Pass <sup>1</sup></span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-lime.svg" alt="tick" />
+                    <span>Conference Tee</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-lime.svg" alt="tick" />
+                    <span>Catered Meal Breaks</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-lime.svg" alt="tick" />
+                    <span>All Day Tea & Coffee</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-lime.svg" alt="tick" />
+                    <span>Organisation/Company on Lanyard</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-lime.svg" alt="tick" />
+                    <span>Optional Workshops <sup>2</sup></span>
+                  </li>
+                </ul>
+              </div>
+              <div class="space-y-3">
+                <p class="text-stone">Optional Add-On</p>
+                <ul class="text-lavender">
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-violet.svg" alt="tick" />
+                    <span>Development Sprints</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="space-y-7">
+                <a
+                  href="#"
+                  class="btn-arrow btn-arrow--emerald rounded-[3.125rem]! hover:rounded-none! justify-between py-5!"
+                  ><span>Buy Tickets</span></a
+                >
+                <div>
+                  <span
+                    class="text-sm text-stone font-sans tracking-[0.01em] block leading-normal"
+                    ><sup>1</sup> Single day passes will be available at a later
+                    stage.</span
+                  >
+                  <span
+                    class="text-sm text-stone font-sans tracking-[0.01em] block leading-normal"
+                    ><sup>2</sup> Seperate registration required</span
+                  >
+                </div>
+                <div class="lg:flex hidden flex-wrap lg:flex-nowrap">
+                  <div class="w-[142px] h-[142px] bg-lime rounded-full"></div>
+                  <div class="w-[142px] h-[142px] bg-lime rounded-full"></div>
+                  <div class="w-[142px] h-[142px] bg-lime rounded-full"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-[#383838] py-14">
+            <div
+              class="lg:w-[426px] w-full lg:px-0 px-5 h-full mx-auto flex flex-col gap-16 justify-between"
+            >
+              <div class="space-y-10">
+                <div class="flex flex-col lg:flex-row justify-between">
+                  <div class="space-y-2">
+                    <h3 class="text-lavender font-sans font-semibold text-4xl">
+                      Enthusiast
+                    </h3>
+                    <h3 class="text-stone font-sans font-semibold text-4xl">
+                      $450 Early Bird
+                    </h3>
+                  </div>
+                  <div class="price">
+                    <span class="text-stone/25 text-4xl font-semibold font-sans"
+                      >$550</span
+                    >
+                  </div>
+                </div>
+                <p class="text-stone">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt.
+                </p>
+                <ul class="space-y-5 text-lavender">
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-violet.svg" alt="tick" />
+                    <span>3-day Conference Pass <sup>1</sup></span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-violet.svg" alt="tick" />
+                    <span>Conference Tee</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-violet.svg" alt="tick" />
+                    <span>Catered Meal Breaks</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-violet.svg" alt="tick" />
+                    <span>All Day Tea & Coffee</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-violet.svg" alt="tick" />
+                    <span>Optional Workshops <sup>2</sup></span>
+                  </li>
+                </ul>
+              </div>
+              <div class="space-y-3">
+                <p class="text-stone">Optional Add-On</p>
+                <ul class="text-lavender">
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-violet.svg" alt="tick" />
+                    <span>Development Sprints</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="space-y-7">
+                <a
+                  href="#"
+                  class="btn-arrow btn-arrow--violet rounded-[3.125rem]! hover:rounded-none! justify-between py-5!"
+                  ><span>Buy Tickets</span></a
+                >
+                <div>
+                  <span
+                    class="text-sm text-stone font-sans tracking-[0.01em] block leading-normal"
+                    ><sup>1</sup> Single day passes will be available at a later
+                    stage.</span
+                  >
+                  <span
+                    class="text-sm text-stone font-sans tracking-[0.01em] block leading-normal"
+                    ><sup>2</sup> Seperate registration required</span
+                  >
+                </div>
+                <div class="lg:flex hidden">
+                  <img src="images/star-big.svg" alt="star" />
+                  <img src="images/star-big.svg" alt="star" />
+                  <img src="images/star-big.svg" alt="star" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="bg-charcoal bg-[url('images/bg-pattern-2.svg')] bg-no-repeat bg-cover bg-center pt-10 pb-32"
+  >
+    <div class="container">
+      <div class="lg:w-[85%] w-full mx-auto">
+        <h2
+          class="text-stone font-serif lg:text-6xl text-4xl text-center pt-40 pb-20"
+        >
+          Other available passes
+        </h2>
+        <div class="grid lg:grid-cols-2 grid-cols-1 gap-5">
+          <div class="bg-[#383838] py-14">
+            <div
+              class="lg:w-[426px] w-full lg:px-0 px-5 h-full mx-auto flex flex-col gap-16 justify-between"
+            >
+              <div class="space-y-10">
+                <div
+                  class="flex lg:flex-row flex-col justify-between lg:gap-0 gap-3"
+                >
+                  <div class="space-y-2">
+                    <h3 class="text-lemon font-sans font-semibold text-4xl">
+                      Contributor
+                    </h3>
+                  </div>
+                  <div class="price">
+                    <span class="text-stone text-4xl font-semibold font-sans"
+                      >$1500</span
+                    >
+                  </div>
+                </div>
+                <div class="rich-text">
+                  <p class="text-stone">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt.
+                  </p>
+                  <p class="text-stone">
+                    All inclusions as per Professional Pass, plus lorem ipsum nd
+                    dolore:
+                  </p>
+                </div>
+                <ul class="space-y-5 text-lemon">
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-lemon.svg" alt="tick" />
+                    <span>Additional benefit</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-lemon.svg" alt="tick" />
+                    <span>Another benefit goes here</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="space-y-7">
+                <a
+                  href="#"
+                  class="btn-arrow btn-arrow--lemon rounded-[3.125rem]! hover:rounded-none! justify-between py-5!"
+                  ><span>Buy Tickets</span></a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="bg-[#383838] py-14">
+            <div
+              class="lg:w-[426px] w-full lg:px-0 px-5 h-full mx-auto flex flex-col gap-16 justify-between"
+            >
+              <div class="space-y-10">
+                <div
+                  class="flex lg:flex-row flex-col justify-between lg:gap-0 gap-3"
+                >
+                  <div class="space-y-2">
+                    <h3 class="text-[#FF7963] font-sans font-semibold text-4xl">
+                      Student
+                    </h3>
+                  </div>
+                  <div class="price">
+                    <span class="text-stone text-4xl font-semibold font-sans"
+                      >TBA</span
+                    >
+                  </div>
+                </div>
+                <div class="rich-text">
+                  <p class="text-stone">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt.
+                  </p>
+                  <p class="text-stone">
+                    All inclusions as per Professional Pass, plus lorem ipsum nd
+                    dolore:
+                  </p>
+                </div>
+                <div class="space-y-5">
+                  <p class="text-stone">Optional Add-Ons</p>
+                  <ul class="space-y-5 text-[#FF7963]">
+                    <li class="flex items-center gap-3">
+                      <img src="images/tick-coral.svg" alt="tick" />
+                      <span>Additional benefit</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                      <img src="images/tick-coral.svg" alt="tick" />
+                      <span>Another benefit goes here</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="space-y-7">
+                <a
+                  href="#"
+                  class="btn-arrow btn-arrow--coral rounded-[3.125rem]! hover:rounded-none! justify-between py-5!"
+                  ><span>Buy Tickets</span></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <!-- Main scripts (will be added in Phase 5) -->
+  <script src="/src/scripts/animations.js"></script>
+</Base>
