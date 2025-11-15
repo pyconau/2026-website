@@ -1,0 +1,611 @@
+---
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import Base from "../../layouts/Base.astro";
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  additionalType: "ExhibitionEvent",
+  url: "https://2026.pycon.org.au/",
+  name: "PyCon AU 2026",
+  description:
+    "PyCon AU is Australia's national conference for everyone using the Python programming language and is a must-attend event for hundreds of technologists worldwide.",
+  startDate: "2026-08-26",
+  endDate: "2026-08-30",
+  about: {
+    "@type": "ComputerLanguage",
+    name: "Python",
+    url: "https://www.python.org/",
+  },
+  location: {
+    "@type": "Place",
+    name: "Sofitel Brisbane Central",
+    url: "https://www.sofitelbrisbane.com.au/",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "249 Turbot Street",
+      addressLocality: "Brisbane City",
+      postalCode: "4000",
+      addressRegion: "QLD",
+      addressCountry: "AU",
+    },
+  },
+  eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode",
+  inLanguage: "en-AU",
+  offers: [
+    {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      url: "https://pretix.eu/pyconau/2026/",
+    },
+  ],
+  superEvent: {
+    "@type": "EventSeries",
+    name: "PyCon AU",
+    url: "https://pycon.org.au/",
+    organizer: {
+      "@id": "#organization",
+    },
+    sameAs: "https://www.wikidata.org/wiki/Q134350078",
+  },
+  organizer: {
+    "@id": "#organization",
+    "@type": "Organization",
+    name: "PyCon AU",
+    url: "https://pycon.org.au/",
+    sameAs: [
+      "https://mastodon.pycon.org.au/@pyconau",
+      "https://bsky.app/profile/pyconau.bsky.social",
+      "https://www.linkedin.com/company/pyconau/",
+    ],
+  },
+  sameAs: ["https://www.wikidata.org/wiki/Q136290798"],
+};
+---
+
+<Base title="PyCon AU 2026" schemaData={schemaData}>
+  <Header dark={true} />
+
+  <section class="bg-charcoal pt-[98px] pb-20 overflow-hidden">
+    <div class="container relative">
+      <img
+        src="/images/star-lavender.svg"
+        class="spin absolute left-0 top-32 hidden lg:block"
+        alt=""
+      />
+      <div class="lg:w-[85%] w-full mx-auto">
+        <div class="breadcrumb pt-14 fadeInUp">
+          <ul
+            class="flex items-center gap-2 text-lemon font-sans font-extrabold text-10pt uppercase tracking-[0.12em]"
+          >
+            <li><a href="#">Home</a></li>
+            <li><span>></span></li>
+            <li><a href="#">About</a></li>
+          </ul>
+        </div>
+        <div
+          class="flex flex-col lg:flex-row justify-between items-center relative pt-10"
+        >
+          <div class="space-y-20 lg:w-[45%] w-full relative fadeInUp">
+            <div
+              class="font-serif text-8xl text-[3.625rem] -tracking-[0.022em]"
+            >
+              <h1 class="text-lemon">About</h1>
+              <h2 class="text-white">PyconAU</h2>
+            </div>
+            <p
+              class="hidden lg:block text-stone font-sans font-base tracking-[0.01em] leading-normal lg:w-[454px]"
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut nd dolore. Ipsum dolor sit amet,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+              nd dolore.
+            </p>
+            <img
+              src="/images/star-coral.svg"
+              class="spin absolute -right-10 bottom-0 hidden lg:block"
+              alt=""
+            />
+          </div>
+          <div class="lg:w-1/2 w-full fadeInUp">
+            <div class="group flex justify-center relative">
+              <img
+                src="/images/about-pycon.svg"
+                alt="pycon"
+                class="lg:absolute top-1/2 lg:-translate-y-1/2 left-1/2 lg:-translate-x-1/2 lg:pb-0 pb-14"
+              />
+              <!-- <img src="/images/about-banner.png" class="w-[408px] mx-auto group-hover:visible invisible group-hover:opacity-100 opacity-0 transition-all duration-300" alt="About Banner"> -->
+            </div>
+            <p
+              class="lg:hidden block text-stone font-sans font-base tracking-[0.01em] leading-normal lg:w-[454px]"
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut nd dolore. Ipsum dolor sit amet,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+              nd dolore.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="header-divider"></div>
+
+    <div class="bg-stone pt-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <div
+            class="fadeInUp flex flex-col lg:flex-row gap-y-10 lg:gap-y-0 justify-between items-start"
+          >
+            <p class="text-intro font-medium w-full text-charcoal lg:w-[506px]">
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+              quae ab illo inventore.
+            </p>
+            <div>
+              <a
+                href="#"
+                class="btn-arrow btn-arrow--emerald gap-20! hover:gap-24!"
+                >CTA Link</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section
+    id="custom-bg"
+    class="pt-20 relative after:content-[''] after:absolute after:z-10 after:top-[25%] after:left-0 after:w-full after:h-full after:bg-[url('/images/bg-pattern.svg')] after:bg-cover after:bg-center after:bg-no-repeat"
+  >
+    <div class="container relative z-20">
+      <div class="grid lg:grid-cols-3 grid-cols-1 gap-5">
+        <a
+          href="#"
+          class="fadeInUp rounded-t-[3.125rem] block overflow-hidden group hover:rounded-b-[3.125rem] transition-all duration-300"
+        >
+          <div class="bg-violet">
+            <img
+              src="/images/about-thumb-1.png"
+              class="rounded-b-[3.125rem]"
+              alt="thumbnail"
+            />
+          </div>
+          <div
+            class="flex items-center justify-between pt-5 pb-7 px-7 bg-violet group-hover:px-10 transition-all duration-300"
+          >
+            <h3 class="text-2xl font-sans font-medium text-white">
+              The Conference
+            </h3>
+            <svg
+              class="fill-white"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              width="48.229"
+              height="29.772"
+              viewBox="0 0 48.229 29.772"
+            >
+              <defs>
+                <clipPath id="a">
+                  <rect
+                    width="48.229"
+                    height="29.772"
+                    fill="none"
+                    stroke="#fff"
+                    stroke-width="3"></rect>
+                </clipPath>
+              </defs>
+              <g clip-path="url(#a)">
+                <path
+                  d="M45.469,1.5H0v-3H45.469Z"
+                  transform="translate(0 14.886)"
+                  fill="#fff"></path>
+                <path
+                  d="M26.347,29.772h-3a16.4,16.4,0,0,1,9.528-14.887,16.328,16.328,0,0,1-4.728-3.3,16.328,16.328,0,0,1-3.511-5.208A16.284,16.284,0,0,1,23.347,0h3a13.3,13.3,0,0,0,3.92,9.465,13.3,13.3,0,0,0,9.465,3.92v3A13.385,13.385,0,0,0,26.347,29.772Z"
+                  transform="translate(8.497 0.001)"></path>
+              </g>
+            </svg>
+          </div>
+        </a>
+        <a
+          href="#"
+          class="fadeInUp lg:translate-y-10! rounded-t-[3.125rem] block overflow-hidden group hover:rounded-b-[3.125rem] transition-all duration-300"
+        >
+          <div class="bg-lavender">
+            <img
+              src="/images/about-thumb-2.png"
+              class="rounded-b-[3.125rem]"
+              alt="thumbnail"
+            />
+          </div>
+          <div
+            class="flex items-center justify-between pt-5 pb-7 px-7 bg-lavender group-hover:px-10 transition-all duration-300"
+          >
+            <h3 class="text-2xl font-sans font-medium text-white">
+              Culture & Community
+            </h3>
+            <svg
+              class="fill-white"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              width="48.229"
+              height="29.772"
+              viewBox="0 0 48.229 29.772"
+            >
+              <defs>
+                <clipPath id="a">
+                  <rect
+                    width="48.229"
+                    height="29.772"
+                    fill="none"
+                    stroke="#fff"
+                    stroke-width="3"></rect>
+                </clipPath>
+              </defs>
+              <g clip-path="url(#a)">
+                <path
+                  d="M45.469,1.5H0v-3H45.469Z"
+                  transform="translate(0 14.886)"
+                  fill="#fff"></path>
+                <path
+                  d="M26.347,29.772h-3a16.4,16.4,0,0,1,9.528-14.887,16.328,16.328,0,0,1-4.728-3.3,16.328,16.328,0,0,1-3.511-5.208A16.284,16.284,0,0,1,23.347,0h3a13.3,13.3,0,0,0,3.92,9.465,13.3,13.3,0,0,0,9.465,3.92v3A13.385,13.385,0,0,0,26.347,29.772Z"
+                  transform="translate(8.497 0.001)"></path>
+              </g>
+            </svg>
+          </div>
+        </a>
+        <a
+          href="#"
+          class="fadeInUp rounded-t-[3.125rem] block overflow-hidden group hover:rounded-b-[3.125rem] transition-all duration-300"
+        >
+          <div class="bg-violet">
+            <img
+              src="/images/about-thumb-3.png"
+              class="rounded-b-[3.125rem]"
+              alt="thumbnail"
+            />
+          </div>
+          <div
+            class="flex items-center justify-between pt-5 pb-7 px-7 bg-violet group-hover:px-10 transition-all duration-300"
+          >
+            <h3 class="text-2xl font-sans font-medium text-white">Our Team</h3>
+            <svg
+              class="fill-white"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              width="48.229"
+              height="29.772"
+              viewBox="0 0 48.229 29.772"
+            >
+              <defs>
+                <clipPath id="a">
+                  <rect
+                    width="48.229"
+                    height="29.772"
+                    fill="none"
+                    stroke="#fff"
+                    stroke-width="3"></rect>
+                </clipPath>
+              </defs>
+              <g clip-path="url(#a)">
+                <path
+                  d="M45.469,1.5H0v-3H45.469Z"
+                  transform="translate(0 14.886)"
+                  fill="#fff"></path>
+                <path
+                  d="M26.347,29.772h-3a16.4,16.4,0,0,1,9.528-14.887,16.328,16.328,0,0,1-4.728-3.3,16.328,16.328,0,0,1-3.511-5.208A16.284,16.284,0,0,1,23.347,0h3a13.3,13.3,0,0,0,3.92,9.465,13.3,13.3,0,0,0,9.465,3.92v3A13.385,13.385,0,0,0,26.347,29.772Z"
+                  transform="translate(8.497 0.001)"></path>
+              </g>
+            </svg>
+          </div>
+        </a>
+      </div>
+
+      <div class="fadeInUp grid lg:grid-cols-2 grid-cols-1 gap-5 pt-32">
+        <a href="#" class="btn-arrow btn-arrow--emerald btn-arrow--2col"
+          ><span>Attendee Information</span></a
+        >
+        <a href="#" class="btn-arrow btn-arrow--emerald btn-arrow--2col"
+          ><span>Code of Conduct</span></a
+        >
+      </div>
+
+      <div class="bg-lavender text-white py-14 rounded-[3.125rem] gap-14 mt-20">
+        <div
+          class="fadeInUp flex flex-col lg:flex-row gap-10 justify-between w-[85%] mx-auto"
+        >
+          <div class="lg:w-1/2 w-full">
+            <h3
+              class="text-5xl font-serif font-regular -tracking-[0.02em] leading-[1.2]"
+            >
+              Get involved and volunteer at PyCon AU 2026
+            </h3>
+          </div>
+          <div class="lg:w-[45%] w-full space-y-10">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut nd dolore. Lorem ipsum dolor sit
+              amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut nd dolore.
+            </p>
+            <div><a href="#" class="btn btn--lime">Learn more</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-violet pt-32 pb-20">
+    <div class="container relative z-20">
+      <div class="lg:w-[85%] w-full mx-auto">
+        <div class="relative">
+          <h2
+            class="fadeInUp lg:text-6xl text-[3.125rem] leading-none font-serif -tracking-[0.03em] text-lavender text-center"
+          >
+            Latest news & updates
+          </h2>
+          <img
+            src="/images/star.svg"
+            alt="star"
+            class="spin lg:block hidden absolute top-1/2 right-0 -translate-y-1/2"
+          />
+        </div>
+        <div class="fadeInUp flex justify-center mt-7">
+          <a href="#" class="btn px-3 py-3 btn--lavender">Browse All</a>
+        </div>
+        <div class="grid lg:grid-cols-2 grid-cols-1 grid-rows-2 gap-7 mt-20">
+          <a
+            href="#"
+            class="fadeInUp bg-white rounded-[3.125rem] p-10 flex flex-col justify-between gap-20 row-span-2 group hover:bg-white/95"
+          >
+            <div
+              class="flex flex-wrap lg:flex-nowrap gap-2 lg:gap-0 items-center justify-between"
+            >
+              <div class="tag">Category Tag</div>
+              <div class="date">14 September 2025</div>
+            </div>
+            <div class="flex gap-10 items-end justify-between">
+              <div class="lg:w-[78%] w-full lg:space-y-10">
+                <h3 class="text-3xl font-sans font-medium leading-[1.1]">
+                  A longer headline goes in this space here and might go over a
+                  few lines.
+                </h3>
+                <p class="hidden lg:block">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut nd dolore. Lorem ipsum dolor
+                  sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                  incididunt ut nd dolore.
+                </p>
+              </div>
+              <svg
+                class="w-[48px] group-hover:translate-x-3 transition-all duration-300"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                width="43.594"
+                height="21.64"
+                viewBox="0 0 43.594 21.64"
+              >
+                <defs>
+                  <clipPath id="a">
+                    <rect
+                      width="43.594"
+                      height="21.64"
+                      fill="none"
+                      stroke="#363636"
+                      stroke-width="2"></rect>
+                  </clipPath>
+                </defs>
+                <g clip-path="url(#a)">
+                  <path
+                    d="M41.1,1H0V-1H41.1Z"
+                    transform="translate(0 10.82)"
+                    fill="#363636"></path>
+                  <path
+                    d="M25.847,21.64h-2a9.96,9.96,0,0,1,1.172-4.677,11.986,11.986,0,0,1,3.142-3.753,14.925,14.925,0,0,1,4.3-2.39,14.926,14.926,0,0,1-4.3-2.39,11.986,11.986,0,0,1-3.142-3.753A9.958,9.958,0,0,1,23.847,0h2c0,5.414,5.587,9.819,12.455,9.819v2C31.434,11.819,25.847,16.225,25.847,21.64Z"
+                    transform="translate(5.292 0)"
+                    fill="#363636"></path>
+                </g>
+              </svg>
+            </div>
+          </a>
+          <a
+            href="#"
+            class="fadeInUp lg:flex hidden bg-white rounded-[3.125rem] p-10 flex-col justify-between gap-20 group hover:bg-white/95"
+          >
+            <div class="flex items-center justify-between">
+              <div class="tag">Category Tag</div>
+              <div class="date">14 September 2025</div>
+            </div>
+            <div class="flex gap-10 items-end justify-between">
+              <div class="w-[78%] space-y-10">
+                <h3 class="text-3xl font-sans font-medium leading-[1.1]">
+                  A longer headline goes in this space here and might go over a
+                  few lines.
+                </h3>
+              </div>
+              <svg
+                class="w-[48px] group-hover:translate-x-3 transition-all duration-300"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                width="43.594"
+                height="21.64"
+                viewBox="0 0 43.594 21.64"
+              >
+                <defs>
+                  <clipPath id="a">
+                    <rect
+                      width="43.594"
+                      height="21.64"
+                      fill="none"
+                      stroke="#363636"
+                      stroke-width="2"></rect>
+                  </clipPath>
+                </defs>
+                <g clip-path="url(#a)">
+                  <path
+                    d="M41.1,1H0V-1H41.1Z"
+                    transform="translate(0 10.82)"
+                    fill="#363636"></path>
+                  <path
+                    d="M25.847,21.64h-2a9.96,9.96,0,0,1,1.172-4.677,11.986,11.986,0,0,1,3.142-3.753,14.925,14.925,0,0,1,4.3-2.39,14.926,14.926,0,0,1-4.3-2.39,11.986,11.986,0,0,1-3.142-3.753A9.958,9.958,0,0,1,23.847,0h2c0,5.414,5.587,9.819,12.455,9.819v2C31.434,11.819,25.847,16.225,25.847,21.64Z"
+                    transform="translate(5.292 0)"
+                    fill="#363636"></path>
+                </g>
+              </svg>
+            </div>
+          </a>
+          <a
+            href="#"
+            class="fadeInUp lg:flex hidden bg-white rounded-[3.125rem] p-10 flex-col justify-between gap-20 group hover:bg-white/95"
+          >
+            <div class="flex items-center justify-between">
+              <div class="tag">Category Tag</div>
+              <div class="date">14 September 2025</div>
+            </div>
+            <div class="flex gap-10 items-end justify-between">
+              <div class="w-[78%] space-y-10">
+                <h3 class="text-3xl font-sans font-medium leading-[1.1]">
+                  A longer headline goes in this space here and might go over a
+                  few lines.
+                </h3>
+              </div>
+              <svg
+                class="w-[48px] group-hover:translate-x-3 transition-all duration-300"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                width="43.594"
+                height="21.64"
+                viewBox="0 0 43.594 21.64"
+              >
+                <defs>
+                  <clipPath id="a">
+                    <rect
+                      width="43.594"
+                      height="21.64"
+                      fill="none"
+                      stroke="#363636"
+                      stroke-width="2"></rect>
+                  </clipPath>
+                </defs>
+                <g clip-path="url(#a)">
+                  <path
+                    d="M41.1,1H0V-1H41.1Z"
+                    transform="translate(0 10.82)"
+                    fill="#363636"></path>
+                  <path
+                    d="M25.847,21.64h-2a9.96,9.96,0,0,1,1.172-4.677,11.986,11.986,0,0,1,3.142-3.753,14.925,14.925,0,0,1,4.3-2.39,14.926,14.926,0,0,1-4.3-2.39,11.986,11.986,0,0,1-3.142-3.753A9.958,9.958,0,0,1,23.847,0h2c0,5.414,5.587,9.819,12.455,9.819v2C31.434,11.819,25.847,16.225,25.847,21.64Z"
+                    transform="translate(5.292 0)"
+                    fill="#363636"></path>
+                </g>
+              </svg>
+            </div>
+          </a>
+        </div>
+        <div class="fadeInUp mt-7">
+          <a href="#" class="btn-arrow btn-arrow--lime btn-arrow--large"
+            ><span>Sign up for latest news & updates</span></a
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#313131]">
+    <div class="footer-divider"></div>
+    <div class="container">
+      <div class="grid lg:grid-cols-3 grid-cols-1 gap-5 pt-20 pb-32">
+        <div
+          class="fadeInUp bg-emerald text-white rounded-[3.125rem] text-center p-10 flex justify-center"
+        >
+          <div
+            class="flex flex-col lg:w-[80%] w-full gap-7 justify-between h-full"
+          >
+            <div class="space-y-4">
+              <h3
+                class="text-5xl font-serif font-normal -tracking-[0.02em] leading-[1.1]"
+              >
+                Connect
+              </h3>
+              <p class="mx-auto font-sans leading-tight">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </p>
+            </div>
+            <div class="flex gap-3 justify-center">
+              <a
+                href="#"
+                class="bg-white p-1 rounded-lg w-[63px] hover:rounded-none transition-all duration-300 h-[63px] flex justify-center items-center text-[40px] text-emerald"
+                ><i class="fa-brands fa-linkedin-in"></i></a
+              >
+              <a
+                href="#"
+                class="bg-white p-1 rounded-lg w-[63px] hover:rounded-none transition-all duration-300 h-[63px] flex justify-center items-center text-[35px] text-emerald"
+                ><i class="fa-brands fa-bluesky"></i></a
+              >
+              <a
+                href="#"
+                class="bg-white p-1 rounded-lg w-[63px] hover:rounded-none transition-all duration-300 h-[63px] flex justify-center items-center text-[40px] text-emerald"
+                ><i class="fa-brands fa-mastodon"></i></a
+              >
+              <a
+                href="#"
+                class="bg-white p-1 rounded-lg w-[63px] hover:rounded-none transition-all duration-300 h-[63px] flex justify-center items-center text-[40px] text-emerald"
+                ><i class="fa-brands fa-youtube"></i></a
+              >
+            </div>
+          </div>
+        </div>
+        <div
+          class="fadeInUp lg:translate-y-7! bg-violet text-white rounded-[3.125rem] text-center p-10 flex justify-center"
+        >
+          <div
+            class="flex flex-col lg:gap-0 gap-10 lg:w-[67%] w-full justify-between h-full"
+          >
+            <div class="space-y-4">
+              <h3
+                class="text-5xl font-serif font-normal -tracking-[0.02em] leading-[1.1]"
+              >
+                Subscribe
+              </h3>
+              <p class="mx-auto font-sans leading-tight">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </p>
+            </div>
+            <a href="#" class="btn btn--stone">Sign Up</a>
+          </div>
+        </div>
+        <div
+          class="fadeInUp bg-lavender text-white rounded-[3.125rem] text-center p-10 flex justify-center"
+        >
+          <div
+            class="flex flex-col lg:gap-0 gap-10 lg:w-[80%] w-full justify-between h-full"
+          >
+            <div class="space-y-4">
+              <h3
+                class="text-5xl font-serif font-normal -tracking-[0.02em] leading-[1.1]"
+              >
+                Get in touch
+              </h3>
+              <p class="mx-auto font-sans leading-tight">
+                Sed eiusmod tempor incididunt lorem ipsum dolor sit amet.
+              </p>
+            </div>
+            <a
+              href="#"
+              class="underline text-lg font-sans hover:text-lime transition-all duration-300"
+              >contact@pycon.org.au</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <!-- Main scripts (will be added in Phase 5) -->
+  <script src="/src/scripts/animations.js"></script>
+</Base>

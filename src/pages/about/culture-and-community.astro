@@ -1,0 +1,296 @@
+---
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import Base from "../../layouts/Base.astro";
+
+// TODO: Edit schemaData
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  additionalType: "ExhibitionEvent",
+  url: "https://2026.pycon.org.au/",
+  name: "PyCon AU 2026",
+  description:
+    "PyCon AU is Australia's national conference for everyone using the Python programming language and is a must-attend event for hundreds of technologists worldwide.",
+  startDate: "2026-08-26",
+  endDate: "2026-08-30",
+  about: {
+    "@type": "ComputerLanguage",
+    name: "Python",
+    url: "https://www.python.org/",
+  },
+  location: {
+    "@type": "Place",
+    name: "Sofitel Brisbane Central",
+    url: "https://www.sofitelbrisbane.com.au/",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "249 Turbot Street",
+      addressLocality: "Brisbane City",
+      postalCode: "4000",
+      addressRegion: "QLD",
+      addressCountry: "AU",
+    },
+  },
+  eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode",
+  inLanguage: "en-AU",
+  offers: [
+    {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      url: "https://pretix.eu/pyconau/2026/",
+    },
+  ],
+  superEvent: {
+    "@type": "EventSeries",
+    name: "PyCon AU",
+    url: "https://pycon.org.au/",
+    organizer: {
+      "@id": "#organization",
+    },
+    sameAs: "https://www.wikidata.org/wiki/Q134350078",
+  },
+  organizer: {
+    "@id": "#organization",
+    "@type": "Organization",
+    name: "PyCon AU",
+    url: "https://pycon.org.au/",
+    sameAs: [
+      "https://mastodon.pycon.org.au/@pyconau",
+      "https://bsky.app/profile/pyconau.bsky.social",
+      "https://www.linkedin.com/company/pyconau/",
+    ],
+  },
+  sameAs: ["https://www.wikidata.org/wiki/Q136290798"],
+};
+---
+
+<Base title="PyCon AU 2026" schemaData={schemaData}>
+  <Header dark={true} />
+
+  <section class="bg-charcoal pt-[98px] pb-20 overflow-hidden">
+    <div class="container relative">
+      <img
+        src="/images/star-violet.svg"
+        class="spin hidden lg:block absolute left-0 top-32"
+        alt=""
+      />
+      <div class="w-[85%] mx-auto">
+        <div class="breadcrumb pt-14">
+          <ul
+            class="flex items-center gap-2 text-lavender font-sans font-extrabold text-10pt uppercase tracking-[0.12em]"
+          >
+            <li class="flex items-center gap-2">
+              <a href="#">Home</a><span>></span>
+            </li>
+          </ul>
+        </div>
+        <div class="flex justify-between items-center relative pt-10">
+          <div class="space-y-20 lg:w-[45%] relative">
+            <div
+              class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em] leading-none"
+            >
+              <h1 class="text-lavender">
+                Culture & <br class="hidden lg:block" />Community
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="header-divider header-divider--lavender"></div>
+
+    <div class="bg-stone py-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <div
+            class="flex flex-col lg:flex-row justify-between items-start gap-14"
+          >
+            <div class="lg:w-[80%] w-full rich-text">
+              <p class="text-intro font-medium text-charcoal">
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+                quae ab illo inventore.
+              </p>
+              <p>
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+                quae ab illo inventore veritatis et quasi architecto beatae
+                vitae.
+              </p>
+
+              <p>
+                Dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas
+                sit aspernatur aut odit aut fugit, sed quia consequuntur magni
+                dolores eos qui ratione voluptatem sequi nesciunt.
+              </p>
+
+              <p>
+                Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
+                consectetur, adipisci velit, sed quia non numquam eius modi
+                tempora incidunt ut labore et dolore magnam aliquam quaerat
+                voluptatem. Ut enim ad minima veniam, quis nostrum
+                exercitationem ullam corporis suscipit laboriosam, nisi ut
+                aliquid ex ea commodi consequatur? Quis autem vel eum iure
+                reprehenderit qui in ea voluptate velit esse quam nihil
+                molestiae consequatur, vel illum qui dolorem eum fugiat quo
+                voluptas nulla pariatur?
+              </p>
+
+              <img
+                src="/images/conference.png"
+                alt="conference"
+                class="w-full"
+              />
+
+              <p>
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+                quae ab illo inventore veritatis et quasi architecto beatae
+                vitae.
+              </p>
+
+              <ul>
+                <li>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
+                  blanditiis quo perspiciatis quam asperiores at, cupiditate
+                  corporis nemo voluptas distinctio assumenda sunt et autem
+                  error quibusdam in saepe nihil ratione?
+                </li>
+                <li>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
+                  blanditiis quo perspiciatis quam asperiores at, cupiditate
+                  corporis nemo voluptas distinctio assumenda sunt et autem
+                  error quibusdam in saepe nihil ratione?
+                </li>
+                <li>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
+                  blanditiis quo perspiciatis quam asperiores at, cupiditate
+                  corporis nemo voluptas distinctio assumenda sunt et autem
+                  error quibusdam in saepe nihil ratione?
+                </li>
+              </ul>
+
+              <h1>h1 heading</h1>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
+                blanditiis quo perspiciatis quam asperiores at, cupiditate
+                corporis nemo voluptas distinctio assumenda sunt et autem error
+                quibusdam in saepe nihil ratione?
+              </p>
+              <h2>h2 heading</h2>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
+                blanditiis quo perspiciatis quam asperiores at, cupiditate
+                corporis nemo voluptas distinctio assumenda sunt et autem error
+                quibusdam in saepe nihil ratione?
+              </p>
+              <h3>h3 heading</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
+                blanditiis quo perspiciatis quam asperiores at, cupiditate
+                corporis nemo voluptas distinctio assumenda sunt et autem error
+                quibusdam in saepe nihil ratione?
+              </p>
+              <h4>h4 heading</h4>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
+                blanditiis quo perspiciatis quam asperiores at, cupiditate
+                corporis nemo voluptas distinctio assumenda sunt et autem error
+                quibusdam in saepe nihil ratione?
+              </p>
+              <h5>h5 heading</h5>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
+                blanditiis quo perspiciatis quam asperiores at, cupiditate
+                corporis nemo voluptas distinctio assumenda sunt et autem error
+                quibusdam in saepe nihil ratione?
+              </p>
+              <h6>h6 heading</h6>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
+                blanditiis quo perspiciatis quam asperiores at, cupiditate
+                corporis nemo voluptas distinctio assumenda sunt et autem error
+                quibusdam in saepe nihil ratione?
+              </p>
+            </div>
+
+            <!-- TODO: Make this a component -->
+            <div class="lg:w-[308px] w-full">
+              <div class="bg-emerald rounded-[3.125rem]">
+                <div
+                  class="side-nav bg-lime rounded-[3.125rem] p-10 -translate-y-5"
+                >
+                  <a href="/about/">
+                    <h3 class="text-intro font-semibold">About</h3>
+                  </a>
+                  <ul
+                    class="font-medium font-sans text-charcoal space-y-4 mt-8"
+                  >
+                    <li>
+                      <a
+                        href="#"
+                        class="hover:text-emerald transition-all duration-300"
+                        >The Conference</a
+                      >
+                    </li>
+                    <li class="active-page">
+                      <a
+                        href="/about/culture-and-community"
+                        class="hover:text-emerald transition-all duration-300"
+                        >Culture & Community</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="hover:text-emerald transition-all duration-300"
+                        >Our Team</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="hover:text-emerald transition-all duration-300"
+                        >News & Updates</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="hover:text-emerald transition-all duration-300"
+                        >Volunteer</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-lime pt-20">
+    <div class="container">
+      <div class="grid lg:grid-cols-2 grid-cols-1 gap-5 pb-20">
+        <a href="#" class="btn-arrow btn-arrow--emerald btn-arrow--2col"
+          ><span>Call to Action Link</span></a
+        >
+        <a href="#" class="btn-arrow btn-arrow--emerald btn-arrow--2col"
+          ><span>Call to Action Link</span></a
+        >
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <!-- Main scripts (will be added in Phase 5) -->
+  <script src="/src/scripts/animations.js"></script>
+</Base>

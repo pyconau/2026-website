@@ -1,3 +1,4 @@
+// import "../styles/style.css";
 import Alpine from "alpinejs";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -100,42 +101,43 @@ function initReadMore() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const fadeInUpElements = gsap.utils.toArray(".fadeInUp");
+// document.addEventListener("DOMContentLoaded", () => {
+const fadeInUpElements = gsap.utils.toArray(".fadeInUp");
 
-  fadeInUpElements.forEach((element) => {
-    gsap.from(element, {
-      opacity: 0,
-      y: 40,
-      duration: 0.8,
+fadeInUpElements.forEach((element) => {
+  console.log("fadeInUpElements", element);
+  gsap.from(element, {
+    opacity: 0,
+    y: 40,
+    duration: 0.8,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: element,
+      start: "top 85%",
+      toggleActions: "play none none reverse",
+    },
+  });
+});
+
+const spinElements = gsap.utils.toArray(".spin");
+
+spinElements.forEach((element) => {
+  gsap.fromTo(
+    element,
+    { rotate: 0 },
+    {
+      rotate: 360,
+      duration: 1.1,
       ease: "power2.out",
       scrollTrigger: {
         trigger: element,
         start: "top 85%",
-        toggleActions: "play none none reverse",
+        toggleActions: "restart none none reverse",
       },
-    });
-  });
-
-  const spinElements = gsap.utils.toArray(".spin");
-
-  spinElements.forEach((element) => {
-    gsap.fromTo(
-      element,
-      { rotate: 0 },
-      {
-        rotate: 360,
-        duration: 1.1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: element,
-          start: "top 85%",
-          toggleActions: "restart none none reverse",
-        },
-      },
-    );
-  });
-
-  // Initialize read more functionality
-  initReadMore();
+    },
+  );
 });
+
+// Initialize read more functionality
+initReadMore();
+// });
