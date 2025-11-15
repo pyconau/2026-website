@@ -12,12 +12,16 @@
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.12",
+    "@tailwindcss/vite": "^4.1.16",
     "alpinejs": "^3.15.0",
-    "gsap": "^3.13.0"
+    "clsx": "^2.1.1",
+    "gsap": "^3.13.0",
+    "tailwind-merge": "^3.4.0",
+    "tailwindcss": "^4.1.16"
   },
   "devDependencies": {
     "@astrojs/mdx": "^4.3.7",
-    "@astrojs/tailwind": "^6.0.2",
+    "@tailwindcss/postcss": "^4.1.17",
     "@tailwindcss/typography": "^0.5.19",
     "astro": "^5.14.4",
     "autoprefixer": "^10.4.21",
@@ -25,7 +29,6 @@
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
     "sass": "^1.93.2",
-    "tailwindcss": "^3.4.18",
     "typescript": "^5.9.3"
   }
 }
