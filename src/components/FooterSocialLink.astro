@@ -1,0 +1,15 @@
+---
+interface Props {
+  href: string;
+  special?: boolean;
+}
+
+const { href, special = false } = Astro.props;
+---
+
+<a
+  href={href}
+  class={special ? "text-lime" : "underline hover:text-lime transition-all duration-300"}
+>
+  <slot />
+</a>
