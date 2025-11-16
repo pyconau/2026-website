@@ -2,9 +2,10 @@
 title: "Behind the scenes: selecting Brisbane!"
 published: 2025-10-19T17:03:00+10:00
 category: "directors-desk"
+previewText: "You’ve probably seen the news, or perhaps saw the announcement on stage at the 2025 conference close. PyCon AU 2026 will run 26-30 August 2026 at the Sofitel Brisbane Central… in Brisbane!"
 ---
-_Welcome to the directors desk! This is a more informal series of posts written predominantly by PyCon AU 2026 conference director, Jack Skinner. These posts are intended to be a little off-the-cuff, a little behind the scenes, and a little long form essay. All in an effort to be more open and transparent about how we make decisions at PyCon AU, and to share what the team is focusing on over the next 11 months as we plan PyCon AU 2026._
 
+_Welcome to the directors desk! This is a more informal series of posts written predominantly by PyCon AU 2026 conference director, Jack Skinner. These posts are intended to be a little off-the-cuff, a little behind the scenes, and a little long form essay. All in an effort to be more open and transparent about how we make decisions at PyCon AU, and to share what the team is focusing on over the next 11 months as we plan PyCon AU 2026._
 
 You’ve probably seen the news, or perhaps saw the announcement on stage at the 2025 conference close. **PyCon AU 2026 will run 26-30 August 2026 at the Sofitel Brisbane Central**… in Brisbane!
 
@@ -14,7 +15,7 @@ In more ways than one, our vision for 2026 was to break the short cycle of recen
 
 “But Jack”, I heard people exclaim, “Don’t you live in Sydney!?”
 
-Indeed, most folks thought I was about to announce a Sydney venue. We had in fact considered several Sydney locations, along with Melbourne, Brisbane and potentially even Canberra. 
+Indeed, most folks thought I was about to announce a Sydney venue. We had in fact considered several Sydney locations, along with Melbourne, Brisbane and potentially even Canberra.
 
 However a given city, even Sydney or Brisbane, was never our specific goal.
 
@@ -31,7 +32,7 @@ There are surprisingly few venues that can accommodate a ‘small but wide’ co
 Venue evaluations considered a broad array of criteria. Capacity, catering, equipment, facilities, floor plan/layout, foyer & exhibition space, public transport, accessibility, atmosphere/vibe and more. The spreadsheet we had for evaluation grew wider and taller with every passing week.
 
 We eventually shortlisted 12 locations, and visited ~8 sites in Brisbane, Sydney and Melbourne. Having an open
- mind to the city allowed us to focus on the attendee experience and the operational complexity of each venue.
+mind to the city allowed us to focus on the attendee experience and the operational complexity of each venue.
 
 And I mean it - we conducted several site visits and inspected rooms inside and out. Walked several tens-of-thousands of steps through convention centers, hotel hallways, and even inspected hotel rooms to evaluate options. We did so with a 'secret shopper' mindset - staying at several potential venues and nearby hotels (that attendees were likely to choose) to get the inside experience.
 
@@ -40,6 +41,7 @@ And I mean it - we conducted several site visits and inspected rooms inside and 
 In the end, we shortlisted two venues, coincidentally both in Brisbane. Ultimately, the Sofitel Brisbane Central was the right balance of physical conference space, available dates & city location for a PyCon AU.
 
 ## With the support of a city
+
 Finding the right physical venue was only half the vision for PyCon AU 2026. Part of the criteria above was proximity to other transport and services that attendees commonly enjoy.
 
 Affordable transport options make access to the conference easier for everyone. Proximity to restaurants and bars make socialising easier every day. And having a lively city location means the community is more likely to travel before, and after and enjoy the ‘shoulder days’ of attending a conference.
@@ -62,7 +64,7 @@ To start with, several venues told us in February that they were almost complete
 
 Typically, PyCon AU runs in the second half of the calendar year. Too close to 1 July and sponsors haven’t finalised their marketing budgets to commit to the conference. Too close to the end of the year and its office party season. October marks the HSC period for teachers and any parents with teenagers. And the school holidays prior to that make travel expensive and difficult.
 
-And as a conference we serve a broad range of industries and specialty areas, and each niche has its own events, meetups, conferences, camps and days.  We also keep in touch with our kiwi friends across the Tasman, since they’ve run in August or September in previous years too. All of these communities and events tend to change dates, but I tend to keep an eye on about 6 or 7 headline events. For example, even if our attendees aren’t typically attending a .NET conference, our sponsors usually have a quarterly budget allocated to ‘community’ events and being aware of various industry activities help us avoid staffing conflicts so sponsors can support both events… so long as they don’t run at the same time!
+And as a conference we serve a broad range of industries and specialty areas, and each niche has its own events, meetups, conferences, camps and days. We also keep in touch with our kiwi friends across the Tasman, since they’ve run in August or September in previous years too. All of these communities and events tend to change dates, but I tend to keep an eye on about 6 or 7 headline events. For example, even if our attendees aren’t typically attending a .NET conference, our sponsors usually have a quarterly budget allocated to ‘community’ events and being aware of various industry activities help us avoid staffing conflicts so sponsors can support both events… so long as they don’t run at the same time!
 
 Oh, and in Brisbane we must contend with the Ekka (formally the Royal Queensland Show), which means some venue options aren’t available for the entirety of August.
 
@@ -77,5 +79,3 @@ So there you have it folks. We first started evaluating venues in January 2025�
 If you enjoyed this post and would like to see behind the scenes more, why not get involved? Email us at contact@pycon.org.au to join the core organising team! Is there a topic you’d like to see written about? That same email address is where to send your suggestions.
 
 </aside>
-
-

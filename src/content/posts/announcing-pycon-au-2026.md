@@ -1,6 +1,7 @@
 ---
 title: "Announcing PyCon AU 2026"
 published: 2025-09-14T17:00:00+10:00
+previewText: "We’re excited to announce that PyCon AU will return in 2026, and we’re headed somewhere slightly warmer… to Brisbane!"
 category: "news"
 ---
 

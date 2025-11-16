@@ -1,9 +1,12 @@
 ---
+import { getCollection } from "astro:content";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import Base from "../layouts/Base.astro";
+import DetailArrow from "../components/DetailArrow.astro";
 
 // TODO: Edit schemaData
+// TODO: Page shows category as is (e.g. DIRECTORS-DESK), should map to strings
 
 const schemaData = {
   "@context": "https://schema.org",
@@ -64,6 +67,12 @@ const schemaData = {
   },
   sameAs: ["https://www.wikidata.org/wiki/Q136290798"],
 };
+
+const [firstPost, ...morePosts] = (await getCollection("posts")).sort(
+  (a, b) => b.data.published.valueOf() - a.data.published.valueOf()
+);
+
+const df = new Intl.DateTimeFormat("en-AU", { dateStyle: "long" });
 ---
 
 <Base title="PyCon AU 2026" schemaData={schemaData}>
@@ -103,14 +112,16 @@ const schemaData = {
         <div class="lg:w-[85%] w-full mx-auto">
           <div class="space-y-5">
             <a
-              href="#"
+              href={`/posts/${firstPost.slug}`}
               class="bg-white hover:bg-lemon rounded-[3.125rem] p-10 flex flex-col justify-between gap-20 row-span-2 group"
             >
               <div
                 class="flex lg:flex-nowrap flex-wrap lg:gap-0 gap-2 items-center justify-between"
               >
-                <div class="tag group-hover:border-charcoal!">Category Tag</div>
-                <div class="date">14 September 2025</div>
+                <div class="tag group-hover:border-charcoal!">
+                  {firstPost.data.category}
+                </div>
+                <div class="date">{df.format(firstPost.data.published)}</div>
               </div>
               <div
                 class="flex lg:flex-row flex-col gap-10 items-end justify-between"
@@ -119,247 +130,38 @@ const schemaData = {
                   <h3
                     class="text-3xl font-sans font-medium leading-[1.1] lg:w-[45%] w-full"
                   >
-                    A longer headline goes in this space here and might go over
-                    a few lines.
+                    {firstPost.data.title}
                   </h3>
                   <p class="lg:w-[50%] w-full">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut nd dolore. Lorem ipsum dolor
-                    sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut nd dolore.
+                    {firstPost.data.previewText}
                   </p>
                 </div>
-                <svg
-                  class="w-[48px] group-hover:translate-x-3 transition-all duration-300"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                  width="43.594"
-                  height="21.64"
-                  viewBox="0 0 43.594 21.64"
-                >
-                  <defs>
-                    <clipPath id="a">
-                      <rect
-                        width="43.594"
-                        height="21.64"
-                        fill="none"
-                        stroke="#363636"
-                        stroke-width="2"></rect>
-                    </clipPath>
-                  </defs>
-                  <g clip-path="url(#a)">
-                    <path
-                      d="M41.1,1H0V-1H41.1Z"
-                      transform="translate(0 10.82)"
-                      fill="#363636"></path>
-                    <path
-                      d="M25.847,21.64h-2a9.96,9.96,0,0,1,1.172-4.677,11.986,11.986,0,0,1,3.142-3.753,14.925,14.925,0,0,1,4.3-2.39,14.926,14.926,0,0,1-4.3-2.39,11.986,11.986,0,0,1-3.142-3.753A9.958,9.958,0,0,1,23.847,0h2c0,5.414,5.587,9.819,12.455,9.819v2C31.434,11.819,25.847,16.225,25.847,21.64Z"
-                      transform="translate(5.292 0)"
-                      fill="#363636"></path>
-                  </g>
-                </svg>
+                <DetailArrow />
               </div>
             </a>
-            <a
-              href="#"
-              class="bg-white hover:bg-lemon rounded-[3.125rem] p-10 flex lg:flex-row flex-col justify-between gap-10 row-span-2 group"
-            >
-              <div
-                class="flex lg:flex-col lg:flex-nowrap flex-wrap lg:gap-4 gap-2 items-start justify-between lg:w-[20%]"
-              >
-                <div class="tag group-hover:border-charcoal!">Category Tag</div>
-                <div class="date">14 September 2025</div>
-              </div>
-              <div
-                class="flex lg:flex-row flex-col gap-10 items-end justify-between lg:w-[80%]"
-              >
-                <h3
-                  class="text-3xl font-sans font-medium leading-[1.1] lg:w-[90%] w-full"
-                >
-                  A longer headline goes in this space here and might go over a
-                  few lines.
-                </h3>
-                <svg
-                  class="w-[48px] group-hover:translate-x-3 transition-all duration-300"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                  width="43.594"
-                  height="21.64"
-                  viewBox="0 0 43.594 21.64"
-                >
-                  <defs>
-                    <clipPath id="a">
-                      <rect
-                        width="43.594"
-                        height="21.64"
-                        fill="none"
-                        stroke="#363636"
-                        stroke-width="2"></rect>
-                    </clipPath>
-                  </defs>
-                  <g clip-path="url(#a)">
-                    <path
-                      d="M41.1,1H0V-1H41.1Z"
-                      transform="translate(0 10.82)"
-                      fill="#363636"></path>
-                    <path
-                      d="M25.847,21.64h-2a9.96,9.96,0,0,1,1.172-4.677,11.986,11.986,0,0,1,3.142-3.753,14.925,14.925,0,0,1,4.3-2.39,14.926,14.926,0,0,1-4.3-2.39,11.986,11.986,0,0,1-3.142-3.753A9.958,9.958,0,0,1,23.847,0h2c0,5.414,5.587,9.819,12.455,9.819v2C31.434,11.819,25.847,16.225,25.847,21.64Z"
-                      transform="translate(5.292 0)"
-                      fill="#363636"></path>
-                  </g>
-                </svg>
-              </div>
-            </a>
-            <a
-              href="#"
-              class="bg-white hover:bg-lemon rounded-[3.125rem] p-10 flex lg:flex-row flex-col justify-between gap-10 row-span-2 group"
-            >
-              <div
-                class="flex lg:flex-col lg:flex-nowrap flex-wrap lg:gap-4 gap-2 items-start justify-between lg:w-[20%]"
-              >
-                <div class="tag group-hover:border-charcoal!">Category Tag</div>
-                <div class="date">14 September 2025</div>
-              </div>
-              <div
-                class="flex lg:flex-row flex-col gap-10 items-end justify-between lg:w-[80%]"
-              >
-                <h3
-                  class="text-3xl font-sans font-medium leading-[1.1] lg:w-[90%] w-full"
-                >
-                  A longer headline goes in this space here and might go over a
-                  few lines.
-                </h3>
-                <svg
-                  class="w-[48px] group-hover:translate-x-3 transition-all duration-300"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                  width="43.594"
-                  height="21.64"
-                  viewBox="0 0 43.594 21.64"
-                >
-                  <defs>
-                    <clipPath id="a">
-                      <rect
-                        width="43.594"
-                        height="21.64"
-                        fill="none"
-                        stroke="#363636"
-                        stroke-width="2"></rect>
-                    </clipPath>
-                  </defs>
-                  <g clip-path="url(#a)">
-                    <path
-                      d="M41.1,1H0V-1H41.1Z"
-                      transform="translate(0 10.82)"
-                      fill="#363636"></path>
-                    <path
-                      d="M25.847,21.64h-2a9.96,9.96,0,0,1,1.172-4.677,11.986,11.986,0,0,1,3.142-3.753,14.925,14.925,0,0,1,4.3-2.39,14.926,14.926,0,0,1-4.3-2.39,11.986,11.986,0,0,1-3.142-3.753A9.958,9.958,0,0,1,23.847,0h2c0,5.414,5.587,9.819,12.455,9.819v2C31.434,11.819,25.847,16.225,25.847,21.64Z"
-                      transform="translate(5.292 0)"
-                      fill="#363636"></path>
-                  </g>
-                </svg>
-              </div>
-            </a>
-            <a
-              href="#"
-              class="bg-white hover:bg-lemon rounded-[3.125rem] p-10 flex lg:flex-row flex-col justify-between gap-10 row-span-2 group"
-            >
-              <div
-                class="flex lg:flex-col lg:flex-nowrap flex-wrap lg:gap-4 gap-2 items-start justify-between lg:w-[20%]"
-              >
-                <div class="tag group-hover:border-charcoal!">Category Tag</div>
-                <div class="date">14 September 2025</div>
-              </div>
-              <div
-                class="flex lg:flex-row flex-col gap-10 items-end justify-between lg:w-[80%]"
-              >
-                <h3
-                  class="text-3xl font-sans font-medium leading-[1.1] lg:w-[90%] w-full"
-                >
-                  A longer headline goes in this space here and might go over a
-                  few lines.
-                </h3>
-                <svg
-                  class="w-[48px] group-hover:translate-x-3 transition-all duration-300"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                  width="43.594"
-                  height="21.64"
-                  viewBox="0 0 43.594 21.64"
-                >
-                  <defs>
-                    <clipPath id="a">
-                      <rect
-                        width="43.594"
-                        height="21.64"
-                        fill="none"
-                        stroke="#363636"
-                        stroke-width="2"></rect>
-                    </clipPath>
-                  </defs>
-                  <g clip-path="url(#a)">
-                    <path
-                      d="M41.1,1H0V-1H41.1Z"
-                      transform="translate(0 10.82)"
-                      fill="#363636"></path>
-                    <path
-                      d="M25.847,21.64h-2a9.96,9.96,0,0,1,1.172-4.677,11.986,11.986,0,0,1,3.142-3.753,14.925,14.925,0,0,1,4.3-2.39,14.926,14.926,0,0,1-4.3-2.39,11.986,11.986,0,0,1-3.142-3.753A9.958,9.958,0,0,1,23.847,0h2c0,5.414,5.587,9.819,12.455,9.819v2C31.434,11.819,25.847,16.225,25.847,21.64Z"
-                      transform="translate(5.292 0)"
-                      fill="#363636"></path>
-                  </g>
-                </svg>
-              </div>
-            </a>
-            <a
-              href="#"
-              class="bg-white hover:bg-lemon rounded-[3.125rem] p-10 flex lg:flex-row flex-col justify-between gap-10 row-span-2 group"
-            >
-              <div
-                class="flex lg:flex-col lg:flex-nowrap flex-wrap lg:gap-4 gap-2 items-start justify-between lg:w-[20%]"
-              >
-                <div class="tag group-hover:border-charcoal!">Category Tag</div>
-                <div class="date">14 September 2025</div>
-              </div>
-              <div
-                class="flex lg:flex-row flex-col gap-10 items-end justify-between lg:w-[80%]"
-              >
-                <h3
-                  class="text-3xl font-sans font-medium leading-[1.1] lg:w-[90%] w-full"
-                >
-                  A longer headline goes in this space here and might go over a
-                  few lines.
-                </h3>
-                <svg
-                  class="w-[48px] group-hover:translate-x-3 transition-all duration-300"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                  width="43.594"
-                  height="21.64"
-                  viewBox="0 0 43.594 21.64"
-                >
-                  <defs>
-                    <clipPath id="a">
-                      <rect
-                        width="43.594"
-                        height="21.64"
-                        fill="none"
-                        stroke="#363636"
-                        stroke-width="2"></rect>
-                    </clipPath>
-                  </defs>
-                  <g clip-path="url(#a)">
-                    <path
-                      d="M41.1,1H0V-1H41.1Z"
-                      transform="translate(0 10.82)"
-                      fill="#363636"></path>
-                    <path
-                      d="M25.847,21.64h-2a9.96,9.96,0,0,1,1.172-4.677,11.986,11.986,0,0,1,3.142-3.753,14.925,14.925,0,0,1,4.3-2.39,14.926,14.926,0,0,1-4.3-2.39,11.986,11.986,0,0,1-3.142-3.753A9.958,9.958,0,0,1,23.847,0h2c0,5.414,5.587,9.819,12.455,9.819v2C31.434,11.819,25.847,16.225,25.847,21.64Z"
-                      transform="translate(5.292 0)"
-                      fill="#363636"></path>
-                  </g>
-                </svg>
-              </div>
-            </a>
+            {
+              morePosts.map((post) => (
+                <>
+                  <a
+                    href={`/posts/${post.slug}`}
+                    class="bg-white hover:bg-lemon rounded-[3.125rem] p-10 flex lg:flex-row flex-col justify-between gap-10 row-span-2 group"
+                  >
+                    <div class="flex lg:flex-col lg:flex-nowrap flex-wrap lg:gap-4 gap-2 items-start justify-between lg:w-[20%]">
+                      <div class="tag group-hover:border-charcoal!">
+                        {post.data.category}
+                      </div>
+                      <div class="date">{df.format(post.data.published)}</div>
+                    </div>
+                    <div class="flex lg:flex-row flex-col gap-10 items-end justify-between lg:w-[80%]">
+                      <h3 class="text-3xl font-sans font-medium leading-[1.1] lg:w-[90%] w-full">
+                        {post.data.title}
+                      </h3>
+                      <DetailArrow />
+                    </div>
+                  </a>
+                </>
+              ))
+            }
           </div>
         </div>
       </div>
