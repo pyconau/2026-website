@@ -1,0 +1,13 @@
+---
+const df = new Intl.DateTimeFormat("en-AU", { dateStyle: "long" });
+
+interface Props {
+  src: string;
+  alt: string;
+  title: string;
+}
+
+const { src, alt, title } = Astro.props;
+---
+
+<img src={src} class="w-[90%] mx-auto object-cover" alt={alt} title={title} />

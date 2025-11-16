@@ -1,10 +1,76 @@
 ---
-import { getCollection } from 'astro:content';
-import type { CollectionEntry } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import Base from "../../layouts/Base.astro";
+import LongDate from "../../components/typography/LongDate.astro";
+import DetailArrow from "../../components/DetailArrow.astro";
+
+// TODO: Edit schemaData
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  additionalType: "ExhibitionEvent",
+  url: "https://2026.pycon.org.au/",
+  name: "PyCon AU 2026",
+  description:
+    "PyCon AU is Australia's national conference for everyone using the Python programming language and is a must-attend event for hundreds of technologists worldwide.",
+  startDate: "2026-08-26",
+  endDate: "2026-08-30",
+  about: {
+    "@type": "ComputerLanguage",
+    name: "Python",
+    url: "https://www.python.org/",
+  },
+  location: {
+    "@type": "Place",
+    name: "Sofitel Brisbane Central",
+    url: "https://www.sofitelbrisbane.com.au/",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "249 Turbot Street",
+      addressLocality: "Brisbane City",
+      postalCode: "4000",
+      addressRegion: "QLD",
+      addressCountry: "AU",
+    },
+  },
+  eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode",
+  inLanguage: "en-AU",
+  offers: [
+    {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      url: "https://pretix.eu/pyconau/2026/",
+    },
+  ],
+  superEvent: {
+    "@type": "EventSeries",
+    name: "PyCon AU",
+    url: "https://pycon.org.au/",
+    organizer: {
+      "@id": "#organization",
+    },
+    sameAs: "https://www.wikidata.org/wiki/Q134350078",
+  },
+  organizer: {
+    "@id": "#organization",
+    "@type": "Organization",
+    name: "PyCon AU",
+    url: "https://pycon.org.au/",
+    sameAs: [
+      "https://mastodon.pycon.org.au/@pyconau",
+      "https://bsky.app/profile/pyconau.bsky.social",
+      "https://www.linkedin.com/company/pyconau/",
+    ],
+  },
+  sameAs: ["https://www.wikidata.org/wiki/Q136290798"],
+};
 
 export async function getStaticPaths() {
-  const posts = await getCollection('posts');
+  const posts = await getCollection("posts");
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },
@@ -12,17 +78,104 @@ export async function getStaticPaths() {
 }
 
 type Props = {
-  post: CollectionEntry<'posts'>;
+  post: CollectionEntry<"posts">;
 };
 
 const { post } = Astro.props;
 const { Content } = await post.render();
+
+// TODO: Page shows category as is (e.g. DIRECTORS-DESK), should map to strings
+// TODO: Color-ise the category
+// TODO: Other news & updates
 ---
 
-<BlogPost
-  title={post.data.title}
-  published={post.data.published}
-  category={post.data.category}
->
-  <Content />
-</BlogPost>
+<Base title="PyCon AU 2026" schemaData={schemaData}>
+  <Header dark={false} />
+
+  <section class="bg-stone pt-[98px] pb-20 overflow-hidden">
+    <div class="container relative">
+      <div class="w-[85%] mx-auto">
+        <div class="breadcrumb pt-14">
+          <ul class="flex items-center gap-2 text-charcoal">
+            <li class="flex items-center gap-2">
+              <a href="/">Home</a><span>></span>
+            </li>
+            <li class="flex items-center gap-2">
+              <a href="/news">News & Updates</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="bg-stone pb-20">
+      <div class="container">
+        <div class="lg:w-[824px] mx-auto">
+          <div class="flex justify-center">
+            <div class="tag group-hover:border-charcoal!">
+              {post.data.category}
+            </div>
+          </div>
+          <h1
+            class="text-5xl font-serif font-medium tracking-[-0.02em] text-center w-[90%] mx-auto pt-5"
+          >
+            {post.data.title}
+          </h1>
+          <span
+            class="font-sans text-sm tracking-[0.01em] text-center block pt-5 text-emerald"
+            >Posted <LongDate date={post.data.published} /></span
+          >
+
+          <div class="rich-text pt-20">
+            <Content />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-violet pt-20">
+    <div class="container">
+      <div class="lg:w-[85%] w-full mx-auto">
+        <div
+          class="flex flex-col lg:flex-row lg:gap-0 gap-10 lg:items-center items-start justify-between"
+        >
+          <h3
+            class="text-5xl font-serif font-medium tracking-[-0.02em] text-white"
+          >
+            Other news & updates
+          </h3>
+          <a href="/news" class="btn btn--lime">Browse All</a>
+        </div>
+        <div class="grid lg:grid-cols-2 grid-cols-1 gap-5 pt-10 pb-32">
+          <a
+            href="#"
+            class="bg-white rounded-[3.125rem] p-10 flex flex-col justify-between gap-20 group hover:bg-white/95"
+          >
+            <div class="flex items-center justify-between">
+              <div class="tag">Category Tag</div>
+              <div class="date">14 September 2025</div>
+            </div>
+            <div
+              class="flex lg:flex-row flex-col gap-10 items-end justify-between"
+            >
+              <div class="lg:w-[78%] w-full space-y-10">
+                <h3 class="text-3xl font-sans font-medium leading-[1.1]">
+                  A longer headline goes in this space here and might go over a
+                  few lines.
+                </h3>
+              </div>
+              <DetailArrow />
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <Footer />
+
+  <!-- Main scripts (will be added in Phase 5) -->
+  <script src="/src/scripts/animations.js"></script>
+</Base>

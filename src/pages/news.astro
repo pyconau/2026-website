@@ -69,6 +69,7 @@ const schemaData = {
 };
 
 // TODO: Page shows category as is (e.g. DIRECTORS-DESK), should map to strings
+// TODO: Color-ise the category
 const [firstPost, ...morePosts] = (await getCollection("posts")).sort(
   (a, b) => b.data.published.valueOf() - a.data.published.valueOf()
 );
