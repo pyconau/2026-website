@@ -4,9 +4,9 @@ import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import Base from "../layouts/Base.astro";
 import DetailArrow from "../components/DetailArrow.astro";
+import LongDate from "../components/typography/LongDate.astro";
 
 // TODO: Edit schemaData
-// TODO: Page shows category as is (e.g. DIRECTORS-DESK), should map to strings
 
 const schemaData = {
   "@context": "https://schema.org",
@@ -68,11 +68,10 @@ const schemaData = {
   sameAs: ["https://www.wikidata.org/wiki/Q136290798"],
 };
 
+// TODO: Page shows category as is (e.g. DIRECTORS-DESK), should map to strings
 const [firstPost, ...morePosts] = (await getCollection("posts")).sort(
   (a, b) => b.data.published.valueOf() - a.data.published.valueOf()
 );
-
-const df = new Intl.DateTimeFormat("en-AU", { dateStyle: "long" });
 ---
 
 <Base title="PyCon AU 2026" schemaData={schemaData}>
@@ -121,7 +120,9 @@ const df = new Intl.DateTimeFormat("en-AU", { dateStyle: "long" });
                 <div class="tag group-hover:border-charcoal!">
                   {firstPost.data.category}
                 </div>
-                <div class="date">{df.format(firstPost.data.published)}</div>
+                <div class="date">
+                  <LongDate date={firstPost.data.published} />
+                </div>
               </div>
               <div
                 class="flex lg:flex-row flex-col gap-10 items-end justify-between"
@@ -150,7 +151,9 @@ const df = new Intl.DateTimeFormat("en-AU", { dateStyle: "long" });
                       <div class="tag group-hover:border-charcoal!">
                         {post.data.category}
                       </div>
-                      <div class="date">{df.format(post.data.published)}</div>
+                      <div class="date">
+                        <LongDate date={post.data.published} />
+                      </div>
                     </div>
                     <div class="flex lg:flex-row flex-col gap-10 items-end justify-between lg:w-[80%]">
                       <h3 class="text-3xl font-sans font-medium leading-[1.1] lg:w-[90%] w-full">
