@@ -11,6 +11,7 @@ export default defineConfig({
   },
   integrations: [mdx()],
   redirects: {
+    "/conduct": "/attend/conduct",
     // Add any necessary redirects here
   },
   vite: {

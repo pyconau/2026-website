@@ -1,0 +1,387 @@
+---
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import TypographyLink from "../../components/typography/TypographyLink.astro";
+import Base from "../../layouts/Base.astro";
+
+// TODO: Edit schemaData
+// TODO: In page sidebar should pull from Attendee Guide
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  additionalType: "ExhibitionEvent",
+  url: "https://2026.pycon.org.au/",
+  name: "PyCon AU 2026",
+  description:
+    "PyCon AU is Australia's national conference for everyone using the Python programming language and is a must-attend event for hundreds of technologists worldwide.",
+  startDate: "2026-08-26",
+  endDate: "2026-08-30",
+  about: {
+    "@type": "ComputerLanguage",
+    name: "Python",
+    url: "https://www.python.org/",
+  },
+  location: {
+    "@type": "Place",
+    name: "Sofitel Brisbane Central",
+    url: "https://www.sofitelbrisbane.com.au/",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "249 Turbot Street",
+      addressLocality: "Brisbane City",
+      postalCode: "4000",
+      addressRegion: "QLD",
+      addressCountry: "AU",
+    },
+  },
+  eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode",
+  inLanguage: "en-AU",
+  offers: [
+    {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      url: "https://pretix.eu/pyconau/2026/",
+    },
+  ],
+  superEvent: {
+    "@type": "EventSeries",
+    name: "PyCon AU",
+    url: "https://pycon.org.au/",
+    organizer: {
+      "@id": "#organization",
+    },
+    sameAs: "https://www.wikidata.org/wiki/Q134350078",
+  },
+  organizer: {
+    "@id": "#organization",
+    "@type": "Organization",
+    name: "PyCon AU",
+    url: "https://pycon.org.au/",
+    sameAs: [
+      "https://mastodon.pycon.org.au/@pyconau",
+      "https://bsky.app/profile/pyconau.bsky.social",
+      "https://www.linkedin.com/company/pyconau/",
+    ],
+  },
+  sameAs: ["https://www.wikidata.org/wiki/Q136290798"],
+};
+---
+
+<Base title="PyCon AU 2026" schemaData={schemaData}>
+  <Header dark={true} />
+
+  <section class="bg-charcoal pt-[98px] pb-20 overflow-hidden">
+    <div class="container relative">
+      <img
+        src="/images/star-violet.svg"
+        class="spin hidden lg:block absolute left-0 top-32"
+        alt=""
+      />
+      <div class="w-[85%] mx-auto">
+        <div class="breadcrumb pt-14">
+          <ul
+            class="flex items-center gap-2 text-lavender font-sans font-extrabold text-10pt uppercase tracking-[0.12em]"
+          >
+            <li class="flex items-center gap-2">
+              <a href="/">Home</a><span>></span>
+              <a href="/attend/">Attendee Guide</a><span>></span>
+            </li>
+          </ul>
+        </div>
+        <div class="flex justify-between items-center relative pt-10">
+          <div class="space-y-20 lg:w-[45%] relative">
+            <div
+              class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em] leading-none"
+            >
+              <h1 class="text-lavender">Code of Conduct</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="header-divider header-divider--lavender"></div>
+
+    <div class="bg-stone py-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <div
+            class="flex flex-col lg:flex-row justify-between items-start gap-14"
+          >
+            <div class="lg:w-[80%] w-full rich-text">
+              <p>
+                All attendees of PyCon AU agree to be bound by the Linux
+                Australia code of conduct.
+              </p>
+              <p>
+                All Linux Australia events are intended to be environments where
+                delegates can get together to learn from and be inspired by each
+                other about all things Free and Open Source. Linux Australia
+                aims to foster an atmosphere of trust, openness, candour and
+                safety where all delegates respect the diversity of each other’s
+                talents, abilities and experiences and value the input of
+                others.
+              </p>
+              <p>
+                Linux Australia is committed to the ideals expressed in our <TypographyLink
+                  href="http://linux.org.au/values"
+                  >Values Statement</TypographyLink
+                > and ask all our members, speakers, volunteers, attendees and guests
+                to adopt these principles. We are a diverse community. Sometimes
+                this means we need to work harder to ensure we’re creating an environment
+                of trust and respect where all who come to participate feel comfortable
+                and included.
+              </p>
+              <p>
+                We value your participation and appreciate your help in
+                realising this goal.
+              </p>
+              <h2 id="contacting-the-safety-team">
+                Contacting the safety team
+              </h2>
+
+              <p>
+                If you see or experience inappropriate or exclusionary
+                behaviour, get in touch with our safety team.
+              </p>
+
+              <p>
+                The conference will update this page closer to the event with a
+                phone number and email address, as well as the names of team
+                members.
+              </p>
+
+              <p>
+                Members of the team will also be wearing specific conference
+                badges.
+              </p>
+
+              {
+                /* 
+              <p>
+                You can contact the safety team via phone on <TypographyLink
+                  href="tel:+61431597233">+61 4 31 597 233</TypographyLink
+                > (0431 59 SAFE), or email <TypographyLink href="mailto:safety@pycon.org.au" class="font-bold">safety@pycon.org.au</TypographyLink
+                  >
+                >.
+              </p>
+              <p>The PyConAU 2025 safety team is:</p>
+              <ul>
+                <li>name</li>
+              </ul>*/
+              }
+
+              <h2 id="be-respectful">Be respectful</h2>
+
+              <p>
+                Respect yourself, and respect others. Be courteous to those
+                around you. If someone indicates they don’t wish to be
+                photographed, respect that wish. If someone indicates they would
+                like to be left alone, let them be. Our event venues and online
+                spaces may be shared with members of the public; please be
+                considerate to all patrons of these locations.
+              </p>
+
+              <h2 id="be-inclusive">Be inclusive</h2>
+
+              <p>
+                All presentation material should be suitable for people aged 12
+                and above.
+              </p>
+
+              <p>
+                Any public presentation or communication which is part of any
+                event and/or other spaces associated with the conference, is
+                subject to this code of conduct and thus may not contain:
+              </p>
+              <ul>
+                <li>sexual or violent imagery;</li>
+                <li>exclusionary language;</li>
+                <li>insults or ad-hominem attacks.</li>
+              </ul>
+
+              <p>
+                Presenters are asked to avoid language which is not appropriate
+                for an all-ages audience as much as possible.
+              </p>
+
+              <p>
+                If the subject matter of the presentation cannot be presented
+                adequately without including language that could be considered
+                offensive, this should be pointed out in advance, at the
+                beginning of the talk and in the schedule.
+              </p>
+
+              <p>
+                If presenters are unsure whether their material is suitable,
+                they are encouraged to show it to the conference’s speaker
+                liaison or mailing list/forum moderators before their session.
+              </p>
+
+              <h2 id="be-aware">Be aware</h2>
+
+              <p>
+                We ask everyone to be aware that we will not tolerate
+                intimidation, harassment, or any abusive, discriminatory or
+                derogatory behaviour by anyone at any event or online.
+              </p>
+
+              <p>
+                Complaints can be made to the organisers by contacting the
+                registration desk or mailing list/forum moderators by contacting
+                the relevant email addresses. All complaints made to event
+                organisers will remain confidential and be taken seriously. The
+                complaint will be treated appropriately with discretion. Should
+                event organisers or moderators consider it appropriate, measures
+                they may take include:
+              </p>
+
+              <ul>
+                <li>the individuals may be told to apologise</li>
+                <li>
+                  the individuals may be told to stop/modify their behaviour
+                  appropriately
+                </li>
+                <li>
+                  the individuals may be warned that enforcement action may be
+                  taken if the behaviour continues
+                </li>
+                <li>
+                  the individuals may be asked to immediately leave the venue
+                  and/or will be prohibited from continuing to attend the event
+                </li>
+                <li>
+                  the incident may be reported to the appropriate authorities
+                </li>
+              </ul>
+
+              <h2 id="what-does-that-mean-for-me">
+                What does that mean for me?
+              </h2>
+
+              <p>
+                All participants, including event attendees and speakers must
+                not engage in any intimidation, harassment, or abusive or
+                discriminatory behaviour.
+              </p>
+
+              <p>
+                Here are some examples of behaviours that have occurred at past
+                events which are not appropriate:
+              </p>
+
+              <ul>
+                <li>
+                  offensive verbal or written remarks related but not limited to
+                  age, gender, gender identity, gender expression, sex
+                  characteristics, sexual orientation, disability, physical
+                  appearance, body size, race or religion;
+                </li>
+                <li>
+                  sexual or violent images in public spaces (including
+                  presentation slides);
+                </li>
+                <li>deliberate intimidation;</li>
+                <li>stalking or following;</li>
+                <li>unwanted photography or recording;</li>
+                <li>sustained disruption of talks or other events;</li>
+                <li>intoxication at an event venue;</li>
+                <li>inappropriate physical contact;</li>
+                <li>unwelcome sexual attention;</li>
+                <li>sexist, racist, or other exclusionary jokes;</li>
+                <li>
+                  unwarranted exclusion from conference or related events based
+                  on attributes such as (but not limited to) age, gender, gender
+                  identity, gender expression, sex characteristics, sexual
+                  orientation, disability, physical appearance, body size, race,
+                  religion;
+                </li>
+              </ul>
+
+              <p>We want everyone to have a good time at our events.</p>
+
+              <h2 id="questions">Questions?</h2>
+
+              <p>
+                If you’re not sure about anything you’ve just read please
+                contact the organisers or the Linux Australia Council at <TypographyLink
+                  href="mailto:council@linux.org.au"
+                  class="font-bold">council@linux.org.au</TypographyLink
+                >.
+              </p>
+
+              <p>
+                This document is available to be re-used or modified under the
+                terms of the Creative Commons Attribution-ShareAlike 3.0
+                Australia licence, available from <TypographyLink
+                  href="https://creativecommons.org/licenses/by-sa/3.0/au/"
+                  >https://creativecommons.org/licenses/by-sa/3.0/au/</TypographyLink
+                >
+              </p>
+            </div>
+
+            <!-- TODO: Make this a component -->
+            <div class="lg:w-[308px] w-full">
+              <div class="bg-emerald rounded-[3.125rem]">
+                <div
+                  class="side-nav bg-lime rounded-[3.125rem] p-10 -translate-y-5"
+                >
+                  <a href="/about/">
+                    <h3 class="text-intro font-semibold">About</h3>
+                  </a>
+                  <ul
+                    class="font-medium font-sans text-charcoal space-y-4 mt-8"
+                  >
+                    <li>
+                      <a
+                        href="/about/the-conference"
+                        class="hover:text-emerald transition-all duration-300"
+                        >The Conference</a
+                      >
+                    </li>
+                    <li class="active-page">
+                      <a
+                        href="/about/culture-and-community"
+                        class="hover:text-emerald transition-all duration-300"
+                        >Culture & Community</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="/about/our-team"
+                        class="hover:text-emerald transition-all duration-300"
+                        >Our Team</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="/news"
+                        class="hover:text-emerald transition-all duration-300"
+                        >News & Updates</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="/about/volunteer"
+                        class="hover:text-emerald transition-all duration-300"
+                        >Volunteer</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <!-- Main scripts (will be added in Phase 5) -->
+  <script src="/src/scripts/animations.js"></script>
+</Base>
