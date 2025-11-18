@@ -86,14 +86,14 @@ const [firstPost, ...morePosts] = (await getCollection("posts")).sort(
         alt=""
       />
       <div class="w-[85%] mx-auto">
-        <div class="breadcrumb pt-14">
+        <div class="breadcrumb pt-14 fadeInUp">
           <ul class="flex items-center gap-2 text-charcoal">
             <li class="flex items-center gap-2">
               <a href="#">Home</a><span>></span>
             </li>
           </ul>
         </div>
-        <div class="flex justify-between items-center relative pt-10">
+        <div class="flex justify-between items-center relative pt-10 fadeInUp">
           <div class="space-y-20 relative">
             <div
               class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em] leading-none"
@@ -113,12 +113,12 @@ const [firstPost, ...morePosts] = (await getCollection("posts")).sort(
           <div class="space-y-5">
             <a
               href={`/posts/${firstPost.slug}`}
-              class="bg-white hover:bg-lemon rounded-[3.125rem] p-10 flex flex-col justify-between gap-20 row-span-2 group"
+              class="fadeInUp bg-white hover:bg-lemon rounded-[3.125rem] p-10 flex flex-col justify-between gap-20 row-span-2 group"
             >
               <div
                 class="flex lg:flex-nowrap flex-wrap lg:gap-0 gap-2 items-center justify-between"
               >
-                <div class="tag group-hover:border-charcoal!">
+                <div class="tag group-hover:border-charcoal! fadeInUp">
                   {firstPost.data.category}
                 </div>
                 <div class="date">
@@ -146,10 +146,10 @@ const [firstPost, ...morePosts] = (await getCollection("posts")).sort(
                 <>
                   <a
                     href={`/posts/${post.slug}`}
-                    class="bg-white hover:bg-lemon rounded-[3.125rem] p-10 flex lg:flex-row flex-col justify-between gap-10 row-span-2 group"
+                    class="fadeInUp bg-white hover:bg-lemon rounded-[3.125rem] p-10 flex lg:flex-row flex-col justify-between gap-10 row-span-2 group"
                   >
                     <div class="flex lg:flex-col lg:flex-nowrap flex-wrap lg:gap-4 gap-2 items-start justify-between lg:w-[20%]">
-                      <div class="tag group-hover:border-charcoal!">
+                      <div class="tag group-hover:border-charcoal! fadeInUp">
                         {post.data.category}
                       </div>
                       <div class="date">

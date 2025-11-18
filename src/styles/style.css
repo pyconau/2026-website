@@ -457,7 +457,7 @@ ul.sub-menu {
 
 .schedule-title {
   /* @apply grid grid-cols-13 mt-20 gap-3; */
-  @apply grid grid-cols-18 mt-20 gap-3;
+  @apply lg:grid hidden grid-cols-18 mt-20 gap-3;
 }
 .schedule-title div:first-child {
   @apply col-span-2;
@@ -468,22 +468,33 @@ ul.sub-menu {
 }
 
 .schedule {
-  /* @apply  grid grid-cols-13 gap-x-6 border-y border-stone mt-5; */
-  @apply grid grid-cols-18 gap-x-6 border-y border-[#DBDBDB] mt-5;
+  @apply lg:grid hidden;
 }
 
-.schedule .time {
+.schedule-mobile {
+  @apply lg:hidden grid;
+}
+.schedule,
+.schedule-mobile {
+  /* @apply  grid grid-cols-13 gap-x-6 border-y border-stone mt-5; */
+  @apply lg:grid-cols-18 grid-cols-6 gap-x-6 border-y border-[#DBDBDB] mt-5;
+}
+
+.schedule .time,
+.schedule-mobile .time {
   /* @apply text-charcoal font-semibold tracking-[0.01rem] pl-3 pt-2; */
   @apply col-span-2 text-charcoal font-semibold tracking-[0.01rem] pl-3 pt-2;
 }
 
-.schedule .column {
+.schedule .column,
+.schedule-mobile .column {
   @apply col-span-4 relative min-h-[160px];
 }
 
-.schedule .new-row {
+.schedule .new-row,
+.schedule-mobile .new-row {
   /* @apply col-span-13 border-b border-stone; */
-  @apply col-span-18 border-b border-[#DBDBDB];
+  @apply lg:col-span-18 col-span-6 border-b border-[#DBDBDB];
 }
 
 /* Four columns */
@@ -491,13 +502,16 @@ ul.sub-menu {
 /* .schedule-four-cols .time {
   @apply col-span-2;
 } */
-.schedule .column-span-2 {
+.schedule .column-span-2,
+.schedule-mobile .column-span-2 {
   @apply col-span-8;
 }
-.schedule .column-span-3 {
+.schedule .column-span-3,
+.schedule-mobile .column-span-3 {
   @apply col-span-12;
 }
-.schedule .column-span-4 {
+.schedule .column-span-4,
+.schedule-mobile .column-span-4 {
   @apply col-span-16;
 }
 

@@ -95,7 +95,7 @@ const { Content } = await post.render();
   <section class="bg-stone pt-[98px] pb-20 overflow-hidden">
     <div class="container relative">
       <div class="w-[85%] mx-auto">
-        <div class="breadcrumb pt-14">
+        <div class="breadcrumb pt-14 fadeInUp">
           <ul class="flex items-center gap-2 text-charcoal">
             <li class="flex items-center gap-2">
               <a href="/">Home</a><span>></span>
@@ -114,21 +114,21 @@ const { Content } = await post.render();
       <div class="container">
         <div class="lg:w-[824px] mx-auto">
           <div class="flex justify-center">
-            <div class="tag group-hover:border-charcoal!">
+            <div class="tag group-hover:border-charcoal! fadeInUp">
               {post.data.category}
             </div>
           </div>
           <h1
-            class="text-5xl font-serif font-medium tracking-[-0.02em] text-center w-[90%] mx-auto pt-5"
+            class="fadeInUp text-5xl font-serif font-medium tracking-[-0.02em] text-center w-[90%] mx-auto pt-5"
           >
             {post.data.title}
           </h1>
           <span
-            class="font-sans text-sm tracking-[0.01em] text-center block pt-5 text-emerald"
+            class="fadeInUp font-sans text-sm tracking-[0.01em] text-center block pt-5 text-emerald"
             >Posted <LongDate date={post.data.published} /></span
           >
 
-          <div class="rich-text pt-20">
+          <div class="rich-text pt-20 fadeInUp">
             <Content />
           </div>
         </div>
@@ -143,7 +143,7 @@ const { Content } = await post.render();
           class="flex flex-col lg:flex-row lg:gap-0 gap-10 lg:items-center items-start justify-between"
         >
           <h3
-            class="text-5xl font-serif font-medium tracking-[-0.02em] text-white"
+            class="fadeInUp text-5xl font-serif font-medium tracking-[-0.02em] text-white"
           >
             Other news & updates
           </h3>
@@ -152,7 +152,7 @@ const { Content } = await post.render();
         <div class="grid lg:grid-cols-2 grid-cols-1 gap-5 pt-10 pb-32">
           <a
             href="#"
-            class="bg-white rounded-[3.125rem] p-10 flex flex-col justify-between gap-20 group hover:bg-white/95"
+            class="fadeInUp bg-white rounded-[3.125rem] p-10 flex flex-col justify-between gap-20 group hover:bg-white/95"
           >
             <div class="flex items-center justify-between">
               <div class="tag">Category Tag</div>

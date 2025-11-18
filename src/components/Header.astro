@@ -7,9 +7,13 @@ export interface Props {
 }
 
 const { dark } = Astro.props;
+
+/* TODO: Mobile menu links */
 ---
 
 <header
+  x-data="{ isMobileMenuOpen: false, subMenuOpen: false }"
+  :class="{ 'fixed bg-white h-screen': isMobileMenuOpen }"
   class={clsx(dark && "header-dark", "absolute top-0 left-0 w-full z-20")}
 >
   <div class="header-bg"></div>
@@ -120,24 +124,83 @@ const { dark } = Astro.props;
       <a href="#" class="btn block lg:hidden py-1! px-3!">Get Tickets</a>
       <a href="#" class="lg:hidden block">
         <svg
+          @click="isMobileMenuOpen = !isMobileMenuOpen"
           class="mobile-menu"
           xmlns="http://www.w3.org/2000/svg"
           width="31"
           height="24.17"
           viewBox="0 0 31 24.17"
           ><g transform="translate(-329.5 -52)"
-            ><path
-              d="M31,1.5H0v-3H31Z"
-              transform="translate(329.5 53.5)"
-              fill="#282828"></path><path
+            ><path d="M31,1.5H0v-3H31Z" transform="translate(329.5 53.5)"
+            ></path><path
               d="M19,1.5H0v-3H19Z"
-              transform="translate(329.5 64.085)"
-              fill="#282828"></path><path
+              transform="translate(329.5 64.085)"></path><path
               d="M31,1.5H0v-3H31Z"
               transform="translate(329.5 74.67)"></path></g
           ></svg
         >
       </a>
+    </div>
+    <div x-show="isMobileMenuOpen" class="mobile-menu">
+      <ul class="flex flex-col gap-10">
+        <li>
+          <a href="#" class="font-sans font-semibold hover:text-emerald"
+            >Program</a
+          >
+        </li>
+        <li>
+          <a href="#" class="font-sans font-semibold hover:text-emerald"
+            >Attendee Guide</a
+          >
+        </li>
+        <li>
+          <a href="#" class="font-sans font-semibold hover:text-emerald"
+            >Sponsors</a
+          >
+        </li>
+        <li>
+          <a href="#" class="font-sans font-semibold hover:text-emerald"
+            >News & Updates</a
+          >
+        </li>
+        <li class="relative group">
+          <a
+            @click="subMenuOpen = !subMenuOpen"
+            href="#"
+            class="font-sans font-semibold hover:text-emerald">About</a
+          >
+          <ul x-show="subMenuOpen" class="flex flex-col gap-3 py-5 px-5">
+            <li>
+              <a
+                href="#"
+                class="text-sm font-semibold font-sans hover:text-emerald"
+                >The Conference</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="text-sm font-semibold font-sans hover:text-emerald"
+                >Culture & Community</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="text-sm font-semibold font-sans hover:text-emerald"
+                >Our Team</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="text-sm font-semibold font-sans hover:text-emerald"
+                >Volunteer</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
   </div>
 </header>
