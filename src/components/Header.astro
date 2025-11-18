@@ -14,7 +14,7 @@ const { dark } = Astro.props;
 
 <header
   x-data="{ isMobileMenuOpen: false, subMenuOpen: false }"
-  :class={`{ 'fixed bg-charcoal text-stone h-screen': isMobileMenuOpen }`}
+  :class="{ 'fixed bg-charcoal text-stone h-screen': isMobileMenuOpen }"
   class={clsx(dark && "header-dark", "absolute top-0 left-0 w-full z-20")}
 >
   <div class="header-bg"></div>
@@ -25,7 +25,7 @@ const { dark } = Astro.props;
         <a href="/">
           <svg
             class="logo"
-            :class={"{ 'fill-stone!': isMobileMenuOpen }"}
+            :class="{ 'fill-stone!': isMobileMenuOpen }"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             width="130"
@@ -63,13 +63,11 @@ const { dark } = Astro.props;
         <ul class="lg:flex hidden items-center gap-10 main-menu">
           {
             /*<li>
-            <HeaderTopNavItem href="/program">Program</HeaderTopNavItem>
-          </li> */
+             <HeaderTopNavItem href="/program">Program</HeaderTopNavItem> 
+          </li>*/
           }
           <li>
-            <HeaderTopNavItem href="/attendee-guide"
-              >Attendee Guide</HeaderTopNavItem
-            >
+            <HeaderTopNavItem href="/attend">Attendee Guide</HeaderTopNavItem>
           </li>
           <li>
             <HeaderTopNavItem href="/sponsors">Sponsors</HeaderTopNavItem>
@@ -79,40 +77,36 @@ const { dark } = Astro.props;
       <div class="lg:flex hidden items-center gap-7">
         <ul class="flex items-center gap-7 main-menu">
           <li>
-            <a href="/news" class="font-sans font-semibold hover:text-emerald"
-              >News & Updates</a
-            >
+            <HeaderTopNavItem href="/news">News &amp; Updates</HeaderTopNavItem>
           </li>
           <li class="relative group">
-            <a href="/about/" class="font-sans font-semibold hover:text-emerald"
-              >About</a
-            >
+            <HeaderTopNavItem href="/about">Program</HeaderTopNavItem>
 
             <ul class="sub-menu">
               <li>
                 <a
-                  href="/about/the-conference"
+                  href="#"
                   class="text-sm font-semibold font-sans hover:text-emerald"
                   >The Conference</a
                 >
               </li>
               <li>
                 <a
-                  href="/about/culture-and-community"
+                  href="#"
                   class="text-sm font-semibold font-sans hover:text-emerald"
                   >Culture & Community</a
                 >
               </li>
               <li>
                 <a
-                  href="/about/our-team"
+                  href="#"
                   class="text-sm font-semibold font-sans hover:text-emerald"
                   >Our Team</a
                 >
               </li>
               <li>
                 <a
-                  href="/about/volunteer"
+                  href="#"
                   class="text-sm font-semibold font-sans hover:text-emerald"
                   >Volunteer</a
                 >
@@ -120,7 +114,7 @@ const { dark } = Astro.props;
             </ul>
           </li>
         </ul>
-        <a href="/tickets" class="btn">Get Tickets</a>
+        <a href="#" class="btn">Get Tickets</a>
       </div>
 
       <a href="#" class="btn block lg:hidden py-1! px-3!">Get Tickets</a>
@@ -194,70 +188,77 @@ const { dark } = Astro.props;
           </ul>
         </li>
         <li x-show="openSubMenu === null">
-          <a href="#"><span></span>Attendee Guide</a>
+          <a href="#"><span>Attendee Guide</span></a>
+        </li>
+        <li x-show="openSubMenu === null">
+          <a href="#"><span>Sponsors</span></a>
+        </li>
+        <li x-show="openSubMenu === null">
+          <a href="#"><span>News & Updates</span></a>
+        </li>
+        <li
+          x-show="openSubMenu === null || openSubMenu === 'about'"
+          :class="{ 'sub-menu-open': openSubMenu === 'about' }"
+        >
+          <a
+            @click="openSubMenu = openSubMenu === 'about' ? null : 'about'"
+            href="#"
+            class="has-child"
+          >
+            <span>About</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="15.966"
+              height="28.934"
+              viewBox="0 0 15.966 28.934"
+              ><g transform="translate(-30.906 0)"
+                ><g transform="translate(0 0)"
+                  ><path
+                    d="M26.347,28.934h-3a16.009,16.009,0,0,1,9.19-14.468,15.977,15.977,0,0,1-4.514-3.176A15.862,15.862,0,0,1,23.347,0h3a12.882,12.882,0,0,0,3.8,9.169,12.882,12.882,0,0,0,9.169,3.8v3A12.967,12.967,0,0,0,26.347,28.934Z"
+                    transform="translate(7.559)"></path></g
+                ></g
+              >
+            </svg>
+          </a>
+          <ul class="flex flex-col gap-3 py-5 w-full">
+            <li>
+              <a
+                href="#"
+                class="font-semibold text-2xl font-sans hover:text-emerald"
+                >The Conference</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="font-semibold text-2xl font-sans hover:text-emerald"
+                >Culture & Community</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="font-semibold text-2xl font-sans hover:text-emerald"
+                >Our Team</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="font-semibold text-2xl font-sans hover:text-emerald"
+                >Volunteer</a
+              >
+            </li>
+          </ul>
         </li>
       </ul>
-      <li x-show="openSubMenu === null">
-        <a href="#"><span></span>Sponsors</a>
-      </li>
+
+      <div class="flex flex-col gap-4">
+        <a href="#" class="btn text-center">Get Tickets</a>
+        <a href="#" class="btn btn--lavender text-charcoal! text-center"
+          >Become a Sponsor</a
+        >
+      </div>
     </div>
-    <li x-show="openSubMenu === null">
-      <a href="#"><span>News & Updates</span></a>
-    </li>
-    <li
-      x-show="openSubMenu === null || openSubMenu === 'about'"
-      :class="{ 'sub-menu-open': openSubMenu === 'about' }"
-    >
-      <a
-        @click="openSubMenu = openSubMenu === 'about' ? null : 'about'"
-        href="#"
-        class="has-child"
-      >
-        <span>About</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="15.966"
-          height="28.934"
-          viewBox="0 0 15.966 28.934"
-          ><g transform="translate(-30.906 0)"
-            ><g transform="translate(0 0)"
-              ><path
-                d="M26.347,28.934h-3a16.009,16.009,0,0,1,9.19-14.468,15.977,15.977,0,0,1-4.514-3.176A15.862,15.862,0,0,1,23.347,0h3a12.882,12.882,0,0,0,3.8,9.169,12.882,12.882,0,0,0,9.169,3.8v3A12.967,12.967,0,0,0,26.347,28.934Z"
-                transform="translate(7.559)"></path></g
-            ></g
-          >
-        </svg>
-      </a>
-      <ul class="flex flex-col gap-3 py-5 w-full">
-        <li>
-          <a
-            href="#"
-            class="font-semibold text-2xl font-sans hover:text-emerald"
-            >The Conference</a
-          >
-        </li>
-        <li>
-          <a
-            href="#"
-            class="font-semibold text-2xl font-sans hover:text-emerald"
-            >Culture & Community</a
-          >
-        </li>
-        <li>
-          <a
-            href="#"
-            class="font-semibold text-2xl font-sans hover:text-emerald"
-            >Our Team</a
-          >
-        </li>
-        <li>
-          <a
-            href="#"
-            class="font-semibold text-2xl font-sans hover:text-emerald"
-            >Volunteer</a
-          >
-        </li>
-      </ul>
-    </li>
   </div>
 </header>
