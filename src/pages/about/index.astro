@@ -1,7 +1,11 @@
 ---
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
+import TypographyLink from "../../components/typography/TypographyLink.astro";
 import Base from "../../layouts/Base.astro";
+
+// TODO: Update schemaData
+// TODO: Make the header a component so we can't forget to update the mobile version of the content
 
 const schemaData = {
   "@context": "https://schema.org",
@@ -79,9 +83,9 @@ const schemaData = {
           <ul
             class="flex items-center gap-2 text-lemon font-sans font-extrabold text-10pt uppercase tracking-[0.12em]"
           >
-            <li><a href="#">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><span>></span></li>
-            <li><a href="#">About</a></li>
+            <li><a href="/about/">About</a></li>
           </ul>
         </div>
         <div
@@ -92,15 +96,14 @@ const schemaData = {
               class="font-serif text-8xl text-[3.625rem] -tracking-[0.022em]"
             >
               <h1 class="text-lemon">About</h1>
-              <h2 class="text-white">PyconAU</h2>
+              <h2 class="text-white">PyCon AU</h2>
             </div>
             <p
               class="hidden lg:block text-stone font-sans font-base tracking-[0.01em] leading-normal lg:w-[454px]"
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut nd dolore. Ipsum dolor sit amet,
-              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              nd dolore.
+              The PyCon AU community prides itself on being warm, inclusive and
+              welcoming to everyone, at any level of experience. Our speakers
+              range from industry veterans, to first-time speakers.
             </p>
             <img
               src="/images/star-coral.svg"
@@ -120,10 +123,9 @@ const schemaData = {
             <p
               class="lg:hidden block text-stone font-sans font-base tracking-[0.01em] leading-normal lg:w-[454px]"
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut nd dolore. Ipsum dolor sit amet,
-              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              nd dolore.
+              The PyCon AU community prides itself on being warm, inclusive and
+              welcoming to everyone, at any level of experience. Our speakers
+              range from industry veterans, to first-time speakers.
             </p>
           </div>
         </div>
@@ -141,15 +143,18 @@ const schemaData = {
             class="fadeInUp flex flex-col lg:flex-row gap-y-10 lg:gap-y-0 justify-between items-start"
           >
             <p class="text-intro font-medium w-full text-charcoal lg:w-[506px]">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-              quae ab illo inventore.
+              PyCon AU is a labour of love, run independently by an
+              all-volunteer team. The legal and financial structure is provided
+              by <TypographyLink href="https://linux.org.au/"
+                >Linux Australia Inc.</TypographyLink
+              >, a not-for-profit body registered under the Associations
+              Incorporation Act (NSW) 2009.
             </p>
             <div>
               <a
-                href="#"
+                href="/tickets"
                 class="btn-arrow btn-arrow--emerald gap-20! hover:gap-24!"
-                >CTA Link</a
+                >Early-Bird Tickets</a
               >
             </div>
           </div>
@@ -165,7 +170,7 @@ const schemaData = {
     <div class="container relative z-20">
       <div class="grid lg:grid-cols-3 grid-cols-1 gap-5">
         <a
-          href="#"
+          href="/about/the-conference"
           class="fadeInUp rounded-t-[3.125rem] block overflow-hidden group hover:rounded-b-[3.125rem] transition-all duration-300"
         >
           <div class="bg-violet">
@@ -212,7 +217,7 @@ const schemaData = {
           </div>
         </a>
         <a
-          href="#"
+          href="/about/culture-and-community"
           class="fadeInUp lg:translate-y-10! rounded-t-[3.125rem] block overflow-hidden group hover:rounded-b-[3.125rem] transition-all duration-300"
         >
           <div class="bg-lavender">
@@ -259,7 +264,7 @@ const schemaData = {
           </div>
         </a>
         <a
-          href="#"
+          href="/about/our-team"
           class="fadeInUp rounded-t-[3.125rem] block overflow-hidden group hover:rounded-b-[3.125rem] transition-all duration-300"
         >
           <div class="bg-violet">
@@ -306,10 +311,12 @@ const schemaData = {
       </div>
 
       <div class="fadeInUp grid lg:grid-cols-2 grid-cols-1 gap-5 pt-32">
-        <a href="#" class="btn-arrow btn-arrow--emerald btn-arrow--2col"
-          ><span>Attendee Information</span></a
+        <a href="/attend/" class="btn-arrow btn-arrow--emerald btn-arrow--2col"
+          ><span>Attendee Guide</span></a
         >
-        <a href="#" class="btn-arrow btn-arrow--emerald btn-arrow--2col"
+        <a
+          href="/attend/conduct"
+          class="btn-arrow btn-arrow--emerald btn-arrow--2col"
           ><span>Code of Conduct</span></a
         >
       </div>
@@ -327,12 +334,12 @@ const schemaData = {
           </div>
           <div class="lg:w-[45%] w-full space-y-10">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut nd dolore. Lorem ipsum dolor sit
-              amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut nd dolore.
+              PyCon AU is a grass-roots, community-driven event. It needs
+              bright, enthusiastic people - like you - to make it a success!
             </p>
-            <div><a href="#" class="btn btn--lime">Learn more</a></div>
+            <div>
+              <a href="/attend/volunteer" class="btn btn--lime">Learn more</a>
+            </div>
           </div>
         </div>
       </div>
