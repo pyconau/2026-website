@@ -1,0 +1,91 @@
+---
+import { clsx } from "clsx";
+
+export interface Props {
+  name: string;
+  title: string;
+  pronouns: string;
+  photo: string;
+  website?: string;
+  linkedin?: string;
+  bluesky?: string;
+  mastodon?: string;
+}
+
+const { name, title, pronouns, photo, website, linkedin, bluesky, mastodon } =
+  Astro.props;
+---
+
+<div class="relative pt-10 mt-10 lg:mt-0 fadeInUp">
+  <div
+    class="lg:bg-[url('/images/bg-shape.svg')] bg-[url('/images/bg-shape--mobile.svg')] bg-cover bg-no-repeat relative min-h-[420px] lg:flex flex-row items-center gap-10 w-full pb-12.5 pt-18 px-5 lg:pt-10 lg:pl-14 lg:pr-20 z-20"
+  >
+    <img
+      src={photo}
+      class="lg:w-[238px] w-[91px] lg:static absolute top-[-30px] left-0 rounded-full"
+      alt={name}
+    />
+    <div class="flex flex-col gap-5 justify-between py-2 w-full">
+      <div class="flex flex-col lg:flex-row justify-between">
+        <div class="lg:space-y-1">
+          <h3 class="lg:text-3xl text-lg font-bold text-charcoal">
+            {name}
+          </h3>
+          <h4 class="lg:text-3xl text-lg font-bold text-emerald">
+            {title}
+          </h4>
+        </div>
+        <span class="lg:text-3xl text-lg font-normal text-emerald"
+          >{pronouns}</span
+        >
+      </div>
+      <div class="space-y-4">
+        <span class="block w-[95%] text-sm! lg:text-base!"><slot /></span>
+        <div class="flex flex-col lg:flex-row justify-between">
+          {
+            website && (
+              <a
+                href={website}
+                class="font-semibold font-sans tet-charcoal hover:text-lemon transition-colors duration-300"
+              >
+                {website.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+              </a>
+            )
+          }
+          <div class="flex gap-3 font-sans font-medium text-sm! lg:text-base!">
+            {
+              linkedin && (
+                <a
+                  href={linkedin}
+                  class="underline hover:text-lemon transition-colors duration-300"
+                >
+                  Linkedin
+                </a>
+              )
+            }
+            {
+              bluesky && (
+                <a
+                  href={bluesky}
+                  class="underline hover:text-lemon transition-colors duration-300"
+                >
+                  Bluesky
+                </a>
+              )
+            }
+            {
+              mastodon && (
+                <a
+                  href={mastodon}
+                  class="underline hover:text-lemon transition-colors duration-300"
+                >
+                  Mastodon
+                </a>
+              )
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
