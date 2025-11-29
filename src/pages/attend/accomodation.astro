@@ -1,0 +1,145 @@
+---
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import Base from "../../layouts/Base.astro";
+import HotelCard from "../../components/attend/accomodation/HotelCard.astro";
+import InfoBox from "../../components/attend/accomodation/InfoBox.astro";
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "Accommodation - PyCon AU 2026",
+  description: "Accommodation options for PyCon AU 2026 attendees.",
+  url: "https://2026.pycon.org.au/attend/accomodation",
+};
+---
+
+<Base title="Accommodation - PyCon AU 2026" schemaData={schemaData}>
+  <Header dark={true} />
+
+  <section class="bg-charcoal pt-[98px] pb-20 overflow-hidden">
+    <div class="container relative">
+      <img
+        src="/images/star-violet.svg"
+        class="spin hidden lg:block absolute left-0 top-32"
+        alt=""
+      />
+      <div class="w-[85%] mx-auto">
+        <div class="breadcrumb pt-14 fadeInUp">
+          <ul
+            class="flex items-center gap-2 text-lavender font-sans font-extrabold text-10pt uppercase tracking-[0.12em]"
+          >
+            <li class="flex items-center gap-2">
+              <a href="/">Home</a><span>></span>
+              <a href="/attend/">Attendee Guide</a><span>></span>
+            </li>
+          </ul>
+        </div>
+        <div class="flex justify-between items-center relative pt-10 fadeInUp">
+          <div class="space-y-20 lg:w-[45%] relative">
+            <div
+              class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em] leading-none"
+            >
+              <h1 class="text-lavender">Accommodation</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="header-divider header-divider--lavender"></div>
+
+    <div class="bg-stone py-20">
+      <div class="container">
+        <div class="lg:w-[85%] mx-auto">
+          <div class="fadeInUp">
+            <InfoBox />
+          </div>
+
+          <div class="mb-20 fadeInUp">
+            <h2 class="font-sans font-bold text-2xl text-charcoal mb-8">
+              Conference Hotel
+            </h2>
+
+            <HotelCard
+              name="Sofitel Brisbane Central"
+              description="Stay at the conference venue for maximum convenience. The Sofitel Brisbane Central has a dedicated offer for PyCon AU delegates."
+              image="/images/thumb-1.png"
+              distance="0 minute walk"
+              link="#"
+              linkText="Book Now"
+              isMain={false}
+            >
+              <p>
+                Stay at the conference venue for maximum convenience. The
+                Sofitel Brisbane Central has a dedicated offer for PyCon AU
+                delegates.
+              </p>
+              <p>Book directly with the hotel.</p>
+            </HotelCard>
+          </div>
+
+          <div class="fadeInUp">
+            <h2 class="font-sans font-bold text-2xl text-charcoal mb-8">
+              Nearby offers
+            </h2>
+
+            <div class="space-y-8">
+              <HotelCard
+                name="Voco Hotel by IHG"
+                description=""
+                image="/images/thumb-2.png"
+                priceLevel="$$"
+                distance="10 minute walk"
+                link="#"
+              >
+                <p>
+                  A short walk away, Voco Hotels by IHG has offered PyCon AU
+                  delegates complimentary breakfast on stays of 3 nights or more
+                  or something. Lorem Ipsum etc.
+                </p>
+                <p>Book directly with the hotel.</p>
+              </HotelCard>
+
+              <HotelCard
+                name="The Johnson - Artseries"
+                description=""
+                image="/images/thumb-3.png"
+                priceLevel="$$"
+                distance="15 minute walk"
+                link="#"
+              >
+                <p>
+                  I dunno, some third property might offer something memorably
+                  different than the others.
+                </p>
+                <p>Book directly with the hotel.</p>
+              </HotelCard>
+
+              <HotelCard
+                name="Cllix Apartments"
+                description=""
+                image="/images/thumb-1.png"
+                priceLevel="$"
+                distance="10-30 minutes travel"
+                link="#"
+              >
+                <p>
+                  Multiple Cllix properties around Brisbane are available for
+                  PyCon AU delegates.
+                </p>
+                <p>Book directly with the hotel.</p>
+              </HotelCard>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <script src="/src/scripts/animations.js"></script>
+</Base>
