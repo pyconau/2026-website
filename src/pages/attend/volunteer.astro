@@ -1,0 +1,221 @@
+---
+import AttendNav from "../../components/attend/AttendNav.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import Base from "../../layouts/Base.astro";
+
+// TODO: Edit schemaData
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  additionalType: "ExhibitionEvent",
+  url: "https://2026.pycon.org.au/",
+  name: "PyCon AU 2026",
+  description:
+    "PyCon AU is Australia's national conference for everyone using the Python programming language and is a must-attend event for hundreds of technologists worldwide.",
+  startDate: "2026-08-26",
+  endDate: "2026-08-30",
+  about: {
+    "@type": "ComputerLanguage",
+    name: "Python",
+    url: "https://www.python.org/",
+  },
+  location: {
+    "@type": "Place",
+    name: "Sofitel Brisbane Central",
+    url: "https://www.sofitelbrisbane.com.au/",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "249 Turbot Street",
+      addressLocality: "Brisbane City",
+      postalCode: "4000",
+      addressRegion: "QLD",
+      addressCountry: "AU",
+    },
+  },
+  eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode",
+  inLanguage: "en-AU",
+  offers: [
+    {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      url: "https://pretix.eu/pyconau/2026/",
+    },
+  ],
+  superEvent: {
+    "@type": "EventSeries",
+    name: "PyCon AU",
+    url: "https://pycon.org.au/",
+    organizer: {
+      "@id": "#organization",
+    },
+    sameAs: "https://www.wikidata.org/wiki/Q134350078",
+  },
+  organizer: {
+    "@id": "#organization",
+    "@type": "Organization",
+    name: "PyCon AU",
+    url: "https://pycon.org.au/",
+    sameAs: [
+      "https://mastodon.pycon.org.au/@pyconau",
+      "https://bsky.app/profile/pyconau.bsky.social",
+      "https://www.linkedin.com/company/pyconau/",
+    ],
+  },
+  sameAs: ["https://www.wikidata.org/wiki/Q136290798"],
+};
+---
+
+<Base title="PyCon AU 2026" schemaData={schemaData}>
+  <Header dark={true} />
+
+  <section class="bg-charcoal pt-[98px] pb-20 overflow-hidden">
+    <div class="container relative">
+      <img
+        src="/images/star-violet.svg"
+        class="spin hidden lg:block absolute left-0 top-32"
+        alt=""
+      />
+      <div class="w-[85%] mx-auto">
+        <div class="breadcrumb pt-14 fadeInUp">
+          <ul
+            class="flex items-center gap-2 text-lavender font-sans font-extrabold text-10pt uppercase tracking-[0.12em]"
+          >
+            <li class="flex items-center gap-2">
+              <a href="/">Home</a><span>></span>
+              <a href="/attend/">Attendee Guide</a><span>></span>
+            </li>
+          </ul>
+        </div>
+        <div class="flex justify-between items-center relative pt-10 fadeInUp">
+          <div class="space-y-20 lg:w-[45%] relative">
+            <div
+              class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em] leading-none"
+            >
+              <h1 class="text-lavender">Volunteer</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="header-divider header-divider--lavender"></div>
+
+    <div class="bg-stone py-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <div
+            class="flex flex-col lg:flex-row justify-between items-start gap-14"
+          >
+            <div class="lg:w-[80%] w-full rich-text">
+              {
+                /*
+              <p class="text-intro font-medium text-charcoal fadeInUp">
+                Our call for volunteers will open in mid-2026
+              </p>
+              */
+              }
+
+              <h2 id="not-open-yet">
+                Our call for volunteers will open in mid-2026
+              </h2>
+              <p>
+                Our call for volunteers is not open yet. We will announce
+                details about how to volunteer at PyCon AU 2026 closer to the
+                conference.
+              </p>
+              {/* TODO: add Join the mailing list CTA Here */}
+
+              <h2 id="about-volunteering-for-pycon-au">
+                About volunteering for PyCon AU
+              </h2>
+              <p>
+                PyCon AU is a grass-roots, community-driven event. It needs
+                bright, enthusiastic people - like you - to make it a success!
+              </p>
+              <p>
+                Volunteering at PyCon AU is a great opportunity, and can be
+                deeply rewarding. On a more practical note, volunteering at
+                PyCon AU can add to your professional portfolio in many ways -
+                making this an ideal opportunity for students or recent
+                graduates.
+              </p>
+              <h2 id="you-will">You will…</h2>
+              <ul>
+                <li>
+                  Meet exceptional people - many of whom are recognised experts
+                  in their field and industry luminaries
+                </li>
+                <li>
+                  Get great networking opportunities with people working in the
+                  Python and open source community
+                </li>
+                <li>
+                  Gain practical, hands-on experience and skills in event
+                  management, customer liaison, public relations and operation
+                  of audio visual equipment - which are invaluable to future
+                  employers
+                </li>
+              </ul>
+              <h2 id="whats-required-of-me">What’s required of me?</h2>
+              <p>We’re looking for</p>
+              <ul>
+                <li>
+                  people who can help out for a majority of the conference,
+                  working in roles such as AV or the Registration desk, in
+                  exchange for a free ticket to the event
+                </li>
+                <li>
+                  people who can help out only a little for ad-hoc tasks, but
+                  understand that they need to have their own ticket for the
+                  event.
+                </li>
+              </ul>
+              <h2 id="whats-in-it-for-me">What’s in it for me?</h2>
+              <p>
+                If you can help out for a majority of the conference, we’ll give
+                you a volunteer ticket!
+              </p>
+              <p>Aside from that, all volunteers get:</p>
+              <ul>
+                <li>Warm and fuzzy feelings</li>
+                <li>
+                  A hearty round of applause at the conference close as we
+                  invite you on stage to thank you for your efforts
+                </li>
+                <li>
+                  Written reference covering your experience and duties - useful
+                  for job interviews!
+                </li>
+                <li>
+                  Refunds of expenses you incur in the course of volunteering
+                  (e.g. parking costs if asked to help logistically, etc)
+                </li>
+              </ul>
+              <h2 id="what-you-need-to-know">What you need to know.</h2>
+              <p>
+                PyCon AU operates under a clear <a href="/safety"
+                  >Code of Conduct</a
+                > and we ask that all volunteers exemplify this during their time
+                volunteering during the conference. All attendees (including volunteers,
+                organisers, speakers and attendees) are bound by this Code of Conduct
+                as part of registering to attend.
+              </p>
+            </div>
+
+            <!-- TODO: Make this a component -->
+            <AttendNav />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <!-- Main scripts (will be added in Phase 5) -->
+  <script src="/src/scripts/animations.js"></script>
+</Base>
