@@ -1,0 +1,284 @@
+---
+import AttendNav from "../../components/attend/AttendNav.astro";
+import FAQCategory from "../../components/attend/faq/FAQCategory.astro";
+import FAQEntry from "../../components/attend/faq/FAQEntry.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import TypographyLink from "../../components/typography/TypographyLink.astro";
+import Base from "../../layouts/Base.astro";
+
+// TODO: Edit schemaData
+// TODO: In page sidebar should pull from Attendee Guide
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  additionalType: "ExhibitionEvent",
+  url: "https://2026.pycon.org.au/",
+  name: "PyCon AU 2026",
+  description:
+    "PyCon AU is Australia's national conference for everyone using the Python programming language and is a must-attend event for hundreds of technologists worldwide.",
+  startDate: "2026-08-26",
+  endDate: "2026-08-30",
+  about: {
+    "@type": "ComputerLanguage",
+    name: "Python",
+    url: "https://www.python.org/",
+  },
+  location: {
+    "@type": "Place",
+    name: "Sofitel Brisbane Central",
+    url: "https://www.sofitelbrisbane.com.au/",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "249 Turbot Street",
+      addressLocality: "Brisbane City",
+      postalCode: "4000",
+      addressRegion: "QLD",
+      addressCountry: "AU",
+    },
+  },
+  eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode",
+  inLanguage: "en-AU",
+  offers: [
+    {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      url: "https://pretix.eu/pyconau/2026/",
+    },
+  ],
+  superEvent: {
+    "@type": "EventSeries",
+    name: "PyCon AU",
+    url: "https://pycon.org.au/",
+    organizer: {
+      "@id": "#organization",
+    },
+    sameAs: "https://www.wikidata.org/wiki/Q134350078",
+  },
+  organizer: {
+    "@id": "#organization",
+    "@type": "Organization",
+    name: "PyCon AU",
+    url: "https://pycon.org.au/",
+    sameAs: [
+      "https://mastodon.pycon.org.au/@pyconau",
+      "https://bsky.app/profile/pyconau.bsky.social",
+      "https://www.linkedin.com/company/pyconau/",
+    ],
+  },
+  sameAs: ["https://www.wikidata.org/wiki/Q136290798"],
+};
+---
+
+<Base title="PyCon AU 2026" schemaData={schemaData}>
+  <Header dark={true} />
+
+  <section class="bg-charcoal pt-[98px] pb-20 overflow-hidden">
+    <div class="container relative">
+      <img
+        src="/images/star-violet.svg"
+        class="spin hidden lg:block absolute left-0 top-32"
+        alt=""
+      />
+      <div class="w-[85%] mx-auto">
+        <div class="breadcrumb pt-14 fadeInUp">
+          <ul
+            class="flex items-center gap-2 text-lavender font-sans font-extrabold text-10pt uppercase tracking-[0.12em]"
+          >
+            <li class="flex items-center gap-2">
+              <a href="/">Home</a><span>></span>
+              <a href="/attend/">Attendee Guide</a><span>></span>
+            </li>
+          </ul>
+        </div>
+        <div class="flex justify-between items-center relative pt-10 fadeInUp">
+          <div class="space-y-20 lg:w-[45%] relative">
+            <div
+              class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em] leading-none"
+            >
+              <h1 class="text-lavender">Frequently Asked Questions</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="header-divider header-divider--lavender"></div>
+
+    <div class="bg-stone py-20">
+      <div class="container">
+        <div class="lg:w-[824px] mx-auto">
+          <p class="text-intro font-medium text-charcoal fadeInUp">
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore.
+          </p>
+
+          <FAQCategory title="Program & Schedule">
+            <FAQEntry title="When can I submit to speak at PyCon AU?">
+              <p>
+                Our call for proposals (CFP) will open in early 2026. We run a
+                combined CFP across all specialist tracks and the main
+                conference. The CFP will be announced on social media and to the
+                mailing list.
+              </p>
+            </FAQEntry>
+            <FAQEntry title="When will the schedule be published?">
+              <p>
+                We typically take 4-6 weeks after CFP closes to review and
+                finalise the conference program. We're aiming for approximately
+                May ... but stay tuned for news and details!
+              </p>
+            </FAQEntry>
+            <FAQEntry title="What workshops will run in 2026?">
+              <p>
+                Workshops will be announced throughout 2026 in partnership with
+                our sponsors. If you would like to run a workshop, or would like
+                to attend a workshop on a particular topic, please reach out to
+                sponsor@pycon.org.au with introductions or suggestions!
+              </p>
+            </FAQEntry>
+            <FAQEntry title="Will PyCon AU 2026 be streamed online?">
+              <p>
+                PyCon AU 2026 has not announced details for streaming... yet.
+              </p>
+              <p>
+                We appreciate that streaming is an important aspect of the
+                conference for some attendees who cannot make it in person. We
+                are evaluating streaming options, including our dependency on
+                early sponsorship commitments.
+              </p>
+            </FAQEntry>
+          </FAQCategory>
+
+          <FAQCategory title="Tickets & Registration">
+            <FAQEntry title="Can I bring children to PyCon AU?">
+              <p>
+                You are welcome to bring children under 12 to the event;
+                however, a (free) ticket is required for each child under 12 who
+                is attending.
+              </p>
+              <p>
+                This ticket is an add-on to an existing ticket purchase and is
+                required for tracking venue capacity.
+              </p>
+              <p>
+                Children must be accompanied and supervised by an adult guardian
+                at all times. A Student ticket is required for children aged 12
+                or over.
+              </p>
+            </FAQEntry>
+            <FAQEntry title="Will PyCon AU 2026 be streamed online?">
+              <p>
+                PyCon AU 2026 has not announced details for streaming... yet.
+              </p>
+              <p>
+                We appreciate that streaming is an important aspect of the
+                conference for some attendees who cannot make it in person. We
+                are evaluating streaming options, including our dependency on
+                early sponsorship commitments.
+              </p>
+            </FAQEntry>
+            <FAQEntry title="Can I transfer my ticket?">
+              <p>
+                Yes! Please use the link in the order email to update
+                information such as name, attendee email and t-shirt size (up to
+                certain deadlines).
+              </p>
+              <p>
+                For order support, please contact us at contact@pycon.org.au for
+                assistance, and don't forget to include your order ID.
+              </p>
+            </FAQEntry>
+          </FAQCategory>
+
+          <FAQCategory title="Orders & Payments">
+            <FAQEntry title="Can I get a tax invoice for my purchase?">
+              <p>
+                Absolutely. Once paid for, the order confirmation email will
+                contain a link to manage your order. You can download a copy of
+                your GST invoice from this page.
+              </p>
+              <p>
+                Note: Linux Australia Ltd is an Australian based organisation.
+                Invoices will not include VAT or other tax registrations outside
+                Australia.
+              </p>
+            </FAQEntry>
+            <FAQEntry title="Can I get a refund?">
+              <p>
+                In some circumstances, PyCon AU 2026 will refund a portion of
+                your registration price. Please read the refunds policy for full
+                details.
+              </p>
+            </FAQEntry>
+            <FAQEntry title="I'm outside Australia - how can I pay?">
+              <p>
+                At present, international orders must be paid via Bank Transfer
+                or PayPal.
+              </p>
+              <p>
+                When ordering, you'll be offered an option to choose your
+                payment method. Orders must be paid within 14 days or your
+                tickets will be released from hold.
+              </p>
+              <p>
+                Please contact us at contact@pycon.org.au for support paying for
+                your order.
+              </p>
+              <p>
+                Note: We're working on expanding and simplifying our payment
+                options for attendees outside Australia.
+              </p>
+            </FAQEntry>
+          </FAQCategory>
+
+          <FAQCategory title="International Travel">
+            <FAQEntry
+              title="Can the conference provide a visa invitation letter?"
+            >
+              <p>
+                If you are speaking at PyCon AU, the conference can provide you
+                a letter of invitation, confirming that you have been invited to
+                present at the conference.
+              </p>
+              <p>
+                For all other visitors, we will announce other more relevant
+                information for attendees requiring visas in early 2026.
+              </p>
+            </FAQEntry>
+          </FAQCategory>
+
+          <FAQCategory title="Financial Assistance">
+            <FAQEntry
+              title="Will there be a financial assistance program in 2026?"
+            >
+              <p>
+                We intend to offer a financial assistance program to support
+                attendees who face financial difficulties attending the
+                conference. Inforimation about eligibility, applications &
+                deadlines will be published in early 2026.
+              </p>
+            </FAQEntry>
+          </FAQCategory>
+        </div>
+
+        <div class="flex justify-center group pt-20 fadeInUp">
+          <img
+            src="/images/snake.svg"
+            alt="snake"
+            class="group-hover:rotate-y-180 transition-all duration-300"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <!-- Main scripts (will be added in Phase 5) -->
+  <script src="/src/scripts/animations.js"></script>
+</Base>

@@ -1,0 +1,29 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div
+  x-data="{ open: false }"
+  @click="open = !open"
+  :class="{ 'bg-lime!': open }"
+  class="bg-white lg:px-14 px-8 lg:pt-1 pb-5 rounded-[3.125rem] transition-colors"
+>
+  <div
+    class="cursor-pointer flex lg:items-center items-start justify-between lg:pt-0 pt-5"
+  >
+    <span
+      class="font-semibold font-sans lg:text-lg text-[1.25rem] font-charcoal leading-normal lg:pt-3 w-[80%]"
+      >{title}</span
+    >
+    <span
+      class="text-[2.75rem] font-light font-sans text-charcoal leading-[26px]"
+      x-text="open ? '-' : '+'"></span>
+  </div>
+  <div x-show="open" x-transition class="w-[95%] mt-5">
+    <slot />
+  </div>
+</div>
