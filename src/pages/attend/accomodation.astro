@@ -63,17 +63,18 @@ const schemaData = {
           </div>
 
           <div class="mb-20 fadeInUp">
-            <h2 class="font-sans font-bold text-2xl text-charcoal mb-8">
+            <h2 class="fadeInUp text-5xl font-serif font-medium -tracking-[0.02em] mb-10" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;">
               Conference Hotel
             </h2>
+
 
             <HotelCard
               name="Sofitel Brisbane Central"
               description="Stay at the conference venue for maximum convenience. The Sofitel Brisbane Central has a dedicated offer for PyCon AU delegates."
-              image="/images/thumb-1.png"
+              image="/images/accomodation/sofitel.jpg"
               distance="0 minute walk"
-              link="#"
-              linkText="Book Now"
+              link="https://www.idem.events/r/pycon-au-2026"
+              linkText="View Rates"
               isMain={false}
             >
               <p>
@@ -86,13 +87,14 @@ const schemaData = {
           </div>
 
           <div class="fadeInUp">
-            <h2 class="font-sans font-bold text-2xl text-charcoal mb-8">
-              Nearby offers
+            <h2 class="fadeInUp text-5xl font-serif font-medium -tracking-[0.02em] mb-10" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;">
+              Nearby Offers
             </h2>
 
             <div class="space-y-8">
+              {/*
               <HotelCard
-                name="Voco Hotel by IHG"
+                name="Sample Hotel"
                 description=""
                 image="/images/thumb-2.png"
                 priceLevel="$$"
@@ -100,42 +102,25 @@ const schemaData = {
                 link="#"
               >
                 <p>
-                  A short walk away, Voco Hotels by IHG has offered PyCon AU
-                  delegates complimentary breakfast on stays of 3 nights or more
-                  or something. Lorem Ipsum etc.
+                  A sample hotel tbc.
                 </p>
                 <p>Book directly with the hotel.</p>
               </HotelCard>
+              */}
 
-              <HotelCard
-                name="The Johnson - Artseries"
-                description=""
-                image="/images/thumb-3.png"
-                priceLevel="$$"
-                distance="15 minute walk"
-                link="#"
-              >
-                <p>
-                  I dunno, some third property might offer something memorably
-                  different than the others.
-                </p>
-                <p>Book directly with the hotel.</p>
-              </HotelCard>
+              {/* Placeholder for future hotel options */}
+              <div class="flex w-full flex-row justify-center relative pt-10 mt-10 lg:mt-0 fadeInUp">
+                <div
+                  class="bg-[url('/images/bg-shape--white.svg')] bg-contain bg-no-repeat relative min-h-[420px] lg:flex flex-row items-center gap-10  pb-12.5 pt-18 px-5 lg:pt-10 lg:pl-14 lg:pr-20"
+                >
+                  <div class=" flex flex-col md:gap-y-10 md:py-5 gap-y-1 py-0">
+                    <h3 class="font-serif text-3xl mb-4 text-charcoal">Watch this space</h3>
+                    <p>We're working on bringing you more options and offers from nearby hotels in early 2026.</p>
+                  </div>
+                </div>
+              </div>
+              
 
-              <HotelCard
-                name="Cllix Apartments"
-                description=""
-                image="/images/thumb-1.png"
-                priceLevel="$"
-                distance="10-30 minutes travel"
-                link="#"
-              >
-                <p>
-                  Multiple Cllix properties around Brisbane are available for
-                  PyCon AU delegates.
-                </p>
-                <p>Book directly with the hotel.</p>
-              </HotelCard>
             </div>
           </div>
         </div>

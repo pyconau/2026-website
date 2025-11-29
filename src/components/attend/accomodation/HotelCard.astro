@@ -17,7 +17,7 @@ const {
   priceLevel,
   distance,
   link,
-  linkText = "Visit Hotel Website >",
+  linkText = "Visit Hotel Website",
   isMain = false,
 } = Astro.props;
 ---
@@ -70,19 +70,23 @@ const {
         isMain ? (
           <a
             href={link}
-            class="inline-block bg-[#A3E8B8] hover:bg-[#8CD9A3] text-charcoal font-medium px-8 py-3 rounded-full transition-colors text-center"
+            class="flex items-center gap-x-2 bg-[#A3E8B8] hover:bg-[#8CD9A3] text-charcoal font-medium px-8 py-3 rounded-full transition-colors text-center"
           >
             {linkText}
+            <img class="h-3" src="/images/arrow-small.svg" alt="down arrow">
           </a>
         ) : (
           <a
             href={link}
-            class="text-[#8B5CF6] font-bold hover:text-[#7C3AED] transition-colors text-sm uppercase tracking-wide"
+            class="flex items-center gap-x-2 text-[#8B5CF6] font-bold hover:text-[#7C3AED] transition-colors text-sm uppercase tracking-wide"
           >
             {linkText}
+            <img class="h-3" src="/images/arrow-small.svg" alt="down arrow">
           </a>
         )
       }
+
+
     </div>
   </div>
 </div>
