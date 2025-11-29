@@ -1,0 +1,206 @@
+---
+import AttendNav from "../../components/attend/AttendNav.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import TypographyLink from "../../components/typography/TypographyLink.astro";
+import Base from "../../layouts/Base.astro";
+
+// TODO: Edit schemaData
+// TODO: Add a "arriving on foot" section
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  additionalType: "ExhibitionEvent",
+  url: "https://2026.pycon.org.au/",
+  name: "PyCon AU 2026",
+  description:
+    "PyCon AU is Australia's national conference for everyone using the Python programming language and is a must-attend event for hundreds of technologists worldwide.",
+  startDate: "2026-08-26",
+  endDate: "2026-08-30",
+  about: {
+    "@type": "ComputerLanguage",
+    name: "Python",
+    url: "https://www.python.org/",
+  },
+  location: {
+    "@type": "Place",
+    name: "Sofitel Brisbane Central",
+    url: "https://www.sofitelbrisbane.com.au/",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "249 Turbot Street",
+      addressLocality: "Brisbane City",
+      postalCode: "4000",
+      addressRegion: "QLD",
+      addressCountry: "AU",
+    },
+  },
+  eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode",
+  inLanguage: "en-AU",
+  offers: [
+    {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      url: "https://pretix.eu/pyconau/2026/",
+    },
+  ],
+  superEvent: {
+    "@type": "EventSeries",
+    name: "PyCon AU",
+    url: "https://pycon.org.au/",
+    organizer: {
+      "@id": "#organization",
+    },
+    sameAs: "https://www.wikidata.org/wiki/Q134350078",
+  },
+  organizer: {
+    "@id": "#organization",
+    "@type": "Organization",
+    name: "PyCon AU",
+    url: "https://pycon.org.au/",
+    sameAs: [
+      "https://mastodon.pycon.org.au/@pyconau",
+      "https://bsky.app/profile/pyconau.bsky.social",
+      "https://www.linkedin.com/company/pyconau/",
+    ],
+  },
+  sameAs: ["https://www.wikidata.org/wiki/Q136290798"],
+};
+---
+
+<Base title="PyCon AU 2026" schemaData={schemaData}>
+  <Header dark={true} />
+
+  <section class="bg-charcoal pt-[98px] pb-20 overflow-hidden">
+    <div class="container relative">
+      <img
+        src="/images/star-violet.svg"
+        class="spin hidden lg:block absolute left-0 top-32"
+        alt=""
+      />
+      <div class="w-[85%] mx-auto">
+        <div class="breadcrumb pt-14 fadeInUp">
+          <ul
+            class="flex items-center gap-2 text-lavender font-sans font-extrabold text-10pt uppercase tracking-[0.12em]"
+          >
+            <li class="flex items-center gap-2">
+              <a href="/">Home</a><span>></span>
+              <a href="/attend/">Attendee Guide</a><span>></span>
+            </li>
+          </ul>
+        </div>
+        <div class="flex justify-between items-center relative pt-10 fadeInUp">
+          <div class="space-y-20 lg:w-[45%] relative">
+            <div
+              class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em] leading-none"
+            >
+              <h1 class="text-lavender">
+                Travel to <span class="text-nowrap">PyCon AU</span>
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="header-divider header-divider--lavender"></div>
+
+    <div class="bg-stone py-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <div
+            class="flex flex-col lg:flex-row justify-between items-start gap-14"
+          >
+            <div class="lg:w-[80%] w-full rich-text">
+              <p class="text-intro font-medium text-charcoal fadeInUp">
+                This year's conference is held on Level 2 of the Sofitel
+                Brisbane Central, 249 Turbot St, Brisbane City QLD 4000.
+              </p>
+              <p>
+                The conference will be well signposted from the hotel foyer -
+                you can't miss it!
+              </p>
+              <p>
+                ✨ <strong>Tip:</strong> There's another entrance via 280 Ann Street,
+                Brisbane - we recommend this entrance if arriving via bus, train,
+                or walking from the Brisbane CBD.
+              </p>
+
+              <h3 id="via-plane">via Plane</h3>
+              <p>
+                Book your flights to Brisbane International Airport (BNE) and
+                consider transport options (including discounted AirTrain
+                fares). More details on airport connections & offers on this
+                page.
+              </p>
+
+              <h3 id="via-bus">via Bus</h3>
+              <p>
+                Most bus services will operate via nearby Adelaide, Anne or
+                Queen Streets and are approximately a 5-10 minute walk away from
+                the venue. We recommend using the Ann street entrance noted
+                suggested above.
+              </p>
+
+              <h3 id="via-train">via Train</h3>
+              <p>
+                If arriving by train, alight at Central Station, and exit to the
+                south towards Ann St exits. There is an entrance to the Sofitel
+                Brisbane Central just outside the ticket barriers.
+              </p>
+
+              <h3 id="via-long-distance-train">via Long Distance Train</h3>
+              <p>
+                Long distance train services (including interstate services from
+                Sydney) arrive and terminate at Roma Street Station. You can
+                connect to Central station via local train services, or walk
+                approximately 10-15 minutes.
+              </p>
+
+              <h3 id="via-ferry">via Ferry</h3>
+              <p>
+                The nearest ferry wharf is Riverside Ferry Terminal - about 15
+                minutes walk away from the Ann St entrance to the hotel.
+              </p>
+
+              <h3 id="via-car-or-ride-share">via Car or Ride share</h3>
+              <p>
+                Ride share can drop you at the Sofitel Brisbane Central main
+                entrance at 249 Turbot St, Brisbane.
+              </p>
+              <p>
+                Parking is available, see the
+                <TypographyLink
+                  href="https://www.sofitelbrisbane.com.au/parking"
+                  >Sofitel Brisbane Central website</TypographyLink
+                > for details. Alternatively, the Wickham Terrace Car Park is right
+                next door, see
+                <TypographyLink
+                  href="https://www.brisbane.qld.gov.au/transport-and-parking/parking/council-car-parks#wickham"
+                  >website for details</TypographyLink
+                >.
+              </p>
+
+              <h3 id="via-scooter">via Scooter</h3>
+              <p>
+                Brisbane has an e-mobility program that supports multiple shared
+                e-scooter hire companies to operate in the CBD area. Just pick
+                your provider of choice, and ride safe!
+              </p>
+            </div>
+
+            <AttendNav />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <!-- Main scripts (will be added in Phase 5) -->
+  <script src="/src/scripts/animations.js"></script>
+</Base>
