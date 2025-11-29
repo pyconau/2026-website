@@ -23,7 +23,7 @@ const { title } = Astro.props;
       class="text-[2.75rem] font-light font-sans text-charcoal leading-[26px]"
       x-text="open ? '-' : '+'"></span>
   </div>
-  <div x-show="open" x-transition class="w-[95%] mt-5">
+  <div x-show="open" x-transition class="w-[95%] mt-5 rich-text">
     <slot />
   </div>
 </div>
