@@ -1,0 +1,35 @@
+---
+import { twMerge } from "tailwind-merge";
+import Crumb from "./Crumb.astro";
+
+interface Props {
+  class?: string;
+  colour: "charcoal" | "lavender" | "lemon" | "lime" | "violet";
+}
+
+const { class: className, colour } = Astro.props;
+---
+
+<div class={twMerge("breadcrumb pt-14 fadeInUp", `text-${colour}`, className)}>
+  <ul
+    class="flex items-center gap-2 font-sans font-extrabold text-10pt uppercase tracking-[0.12em]"
+  >
+    <li><a href="/">Home</a></li>
+    <li><span>></span></li>
+    <slot />
+  </ul>
+</div>
+
+{
+  /*
+
+Could also do as 
+
+            <li class="flex items-center gap-2">
+              <a href="/">Home</a><span>></span>
+              <a href="/attend/">Attendee Guide</a><span>></span>
+            </li>
+
+
+*/
+}

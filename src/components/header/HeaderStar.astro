@@ -1,0 +1,17 @@
+---
+import { twMerge } from "tailwind-merge";
+
+interface Props {
+  class?: string;
+  colour: "coral" | "lavender" | "lemon" | "lime" | "violet";
+}
+
+const { class: className, colour } = Astro.props;
+---
+
+<img
+  src={`/images/star-${colour}.svg`}
+  class={twMerge("spin hidden lg:block absolute left-0 top-32", className)}
+  alt=""
+  aria-hidden="true"
+/>

@@ -1,6 +1,8 @@
 ---
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
+import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
+import HeaderStar from "../../components/header/HeaderStar.astro";
 import Base from "../../layouts/Base.astro";
 
 // TODO: Edit schemaData
@@ -70,19 +72,9 @@ const schemaData = {
   <Header dark={true} />
   <section class="bg-charcoal pt-[98px] pb-20 overflow-hidden">
     <div class="container relative">
-      <img
-        src="/images/star-lime.svg"
-        class="spin hidden lg:block absolute left-0 top-32"
-        alt=""
-      />
+      <HeaderStar colour="lime" />
       <div class="lg:w-[85%] w-full mx-auto">
-        <div class="breadcrumb pt-14 fadeInUp">
-          <ul class="flex items-center gap-2 text-lavender">
-            <li class="flex items-center gap-2">
-              <a href="#">Home</a><span>></span>
-            </li>
-          </ul>
-        </div>
+        <HeaderBreadcrumbs colour="lavender" />
         <div class="flex justify-between items-center relative pt-10 fadeInUp">
           <div class="space-y-20 w-[45%] relative">
             <div

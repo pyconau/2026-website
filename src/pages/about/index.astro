@@ -1,6 +1,8 @@
 ---
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
+import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
+import HeaderStar from "../../components/header/HeaderStar.astro";
 import TypographyLink from "../../components/typography/TypographyLink.astro";
 import Base from "../../layouts/Base.astro";
 
@@ -73,20 +75,10 @@ const schemaData = {
 
   <section class="bg-charcoal pt-[98px] pb-20 overflow-hidden">
     <div class="container relative">
-      <img
-        src="/images/star-lavender.svg"
-        class="spin absolute left-0 top-32 hidden lg:block"
-        alt=""
-      />
+      <HeaderStar colour="lavender" />
+
       <div class="lg:w-[85%] w-full mx-auto">
-        <div class="breadcrumb pt-14 fadeInUp">
-          <ul
-            class="flex items-center gap-2 text-lemon font-sans font-extrabold text-10pt uppercase tracking-[0.12em]"
-          >
-            <li><a href="/">Home</a></li>
-            <li><span>></span></li>
-          </ul>
-        </div>
+        <HeaderBreadcrumbs colour="lemon" />
         <div
           class="flex flex-col lg:flex-row justify-between items-center relative pt-10"
         >

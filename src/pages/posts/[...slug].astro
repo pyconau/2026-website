@@ -6,6 +6,8 @@ import Header from "../../components/Header.astro";
 import Base from "../../layouts/Base.astro";
 import LongDate from "../../components/typography/LongDate.astro";
 import DetailArrow from "../../components/DetailArrow.astro";
+import Crumb from "../../components/header/Crumb.astro";
+import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
 
 // TODO: Edit schemaData
 
@@ -95,16 +97,9 @@ const { Content } = await post.render();
   <section class="bg-stone pt-[98px] pb-20 overflow-hidden">
     <div class="container relative">
       <div class="w-[85%] mx-auto">
-        <div class="breadcrumb pt-14 fadeInUp">
-          <ul class="flex items-center gap-2 text-charcoal">
-            <li class="flex items-center gap-2">
-              <a href="/">Home</a><span>></span>
-            </li>
-            <li class="flex items-center gap-2">
-              <a href="/news">News & Updates</a>
-            </li>
-          </ul>
-        </div>
+        <HeaderBreadcrumbs colour="charcoal">
+          <Crumb href="/news">News & Updates</Crumb>
+        </HeaderBreadcrumbs>
       </div>
     </div>
   </section>

@@ -4,6 +4,9 @@ import Header from "../../components/Header.astro";
 import Base from "../../layouts/Base.astro";
 import HotelCard from "../../components/attend/accomodation/HotelCard.astro";
 import InfoBox from "../../components/attend/accomodation/InfoBox.astro";
+import HeaderStar from "../../components/header/HeaderStar.astro";
+import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
+import Crumb from "../../components/header/Crumb.astro";
 
 // TODO: schema data
 // TODO: The design mockup shows the image floating above the info card (so the white box isn't the full height of the image).
@@ -23,22 +26,11 @@ const schemaData = {
 
   <section class="bg-charcoal pt-[98px] pb-20 overflow-hidden">
     <div class="container relative">
-      <img
-        src="/images/star-violet.svg"
-        class="spin hidden lg:block absolute left-0 top-32"
-        alt=""
-      />
+      <HeaderStar colour="violet" />
       <div class="w-[85%] mx-auto">
-        <div class="breadcrumb pt-14 fadeInUp">
-          <ul
-            class="flex items-center gap-2 text-lavender font-sans font-extrabold text-10pt uppercase tracking-[0.12em]"
-          >
-            <li class="flex items-center gap-2">
-              <a href="/">Home</a><span>></span>
-              <a href="/attend/">Attendee Guide</a><span>></span>
-            </li>
-          </ul>
-        </div>
+        <HeaderBreadcrumbs colour="lavender">
+          <Crumb href="/attend/">Attendee Guide</Crumb>
+        </HeaderBreadcrumbs>
         <div class="flex justify-between items-center relative pt-10 fadeInUp">
           <div class="space-y-20 lg:w-[45%] relative">
             <div
@@ -63,10 +55,12 @@ const schemaData = {
           </div>
 
           <div class="mb-20 fadeInUp">
-            <h2 class="fadeInUp text-5xl font-serif font-medium -tracking-[0.02em] mb-10" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;">
+            <h2
+              class="fadeInUp text-5xl font-serif font-medium -tracking-[0.02em] mb-10"
+              style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;"
+            >
               Conference Hotel
             </h2>
-
 
             <HotelCard
               name="Sofitel Brisbane Central"
@@ -87,12 +81,16 @@ const schemaData = {
           </div>
 
           <div class="fadeInUp">
-            <h2 class="fadeInUp text-5xl font-serif font-medium -tracking-[0.02em] mb-10" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;">
+            <h2
+              class="fadeInUp text-5xl font-serif font-medium -tracking-[0.02em] mb-10"
+              style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;"
+            >
               Nearby Offers
             </h2>
 
             <div class="space-y-8">
-              {/*
+              {
+                /*
               <HotelCard
                 name="Sample Hotel"
                 description=""
@@ -106,21 +104,27 @@ const schemaData = {
                 </p>
                 <p>Book directly with the hotel.</p>
               </HotelCard>
-              */}
+              */
+              }
 
               {/* Placeholder for future hotel options */}
-              <div class="flex w-full flex-row justify-center relative pt-10 mt-10 lg:mt-0 fadeInUp">
+              <div
+                class="flex w-full flex-row justify-center relative pt-10 mt-10 lg:mt-0 fadeInUp"
+              >
                 <div
-                  class="bg-[url('/images/bg-shape--white.svg')] bg-contain bg-no-repeat relative min-h-[420px] lg:flex flex-row items-center gap-10  pb-12.5 pt-18 px-5 lg:pt-10 lg:pl-14 lg:pr-20"
+                  class="bg-[url('/images/bg-shape--white.svg')] bg-contain bg-no-repeat relative min-h-[420px] lg:flex flex-row items-center gap-10 pb-12.5 pt-18 px-5 lg:pt-10 lg:pl-14 lg:pr-20"
                 >
-                  <div class=" flex flex-col md:gap-y-10 md:py-5 gap-y-1 py-0">
-                    <h3 class="font-serif text-3xl mb-4 text-charcoal">Watch this space</h3>
-                    <p>We're working on bringing you more options and offers from nearby hotels in early 2026.</p>
+                  <div class="flex flex-col md:gap-y-10 md:py-5 gap-y-1 py-0">
+                    <h3 class="font-serif text-3xl mb-4 text-charcoal">
+                      Watch this space
+                    </h3>
+                    <p>
+                      We're working on bringing you more options and offers from
+                      nearby hotels in early 2026.
+                    </p>
                   </div>
                 </div>
               </div>
-              
-
             </div>
           </div>
         </div>
