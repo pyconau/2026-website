@@ -3,6 +3,7 @@ import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
 import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
 import HeaderStar from "../../components/header/HeaderStar.astro";
+import PageHeader from "../../components/header/PageHeader.astro";
 import TypographyLink from "../../components/typography/TypographyLink.astro";
 import Base from "../../layouts/Base.astro";
 
@@ -71,57 +72,48 @@ const schemaData = {
 ---
 
 <Base title="PyCon AU 2026" schemaData={schemaData}>
-  <Header dark={true} />
-
-  <section class="bg-charcoal pt-[98px] pb-20 overflow-hidden">
-    <div class="container relative">
-      <HeaderStar colour="lavender" />
-      <div class="lg:w-[85%] w-full mx-auto">
-        <HeaderBreadcrumbs colour="lemon" />
-        <div
-          class="flex flex-col lg:flex-row justify-between items-center relative pt-10"
-        >
-          <div class="space-y-20 lg:w-[45%] w-full relative fadeInUp">
-            <div
-              class="font-serif text-8xl text-[3.625rem] -tracking-[0.022em]"
-            >
-              <h1 class="text-lemon">Attendee Guide to</h1>
-              <h2 class="text-white">PyCon AU</h2>
-            </div>
-            <p
-              class="hidden lg:block text-stone font-sans font-base tracking-[0.01em] leading-normal lg:w-[454px]"
-            >
-              The PyCon AU community prides itself on being warm, inclusive and
-              welcoming to everyone, at any level of experience. Our speakers
-              range from industry veterans, to first-time speakers.
-            </p>
-            <img
-              src="/images/star-coral.svg"
-              class="spin absolute -right-10 bottom-0 hidden lg:block"
-              alt=""
-            />
-          </div>
-          <div class="lg:w-1/2 w-full fadeInUp">
-            <div class="group flex justify-center relative">
-              <img
-                src="/images/about-pycon.svg"
-                alt="pycon"
-                class="lg:absolute top-1/2 lg:-translate-y-1/2 left-1/2 lg:-translate-x-1/2 lg:pb-0 pb-14"
-              />
-              <!-- <img src="/images/about-banner.png" class="w-[408px] mx-auto group-hover:visible invisible group-hover:opacity-100 opacity-0 transition-all duration-300" alt="About Banner"> -->
-            </div>
-            <p
-              class="lg:hidden block text-stone font-sans font-base tracking-[0.01em] leading-normal lg:w-[454px]"
-            >
-              The PyCon AU community prides itself on being warm, inclusive and
-              welcoming to everyone, at any level of experience. Our speakers
-              range from industry veterans, to first-time speakers.
-            </p>
-          </div>
+  <PageHeader dark={true} starColour="lavender">
+    <HeaderBreadcrumbs colour="lemon" />
+    <div
+      class="flex flex-col lg:flex-row justify-between items-center relative pt-10"
+    >
+      <div class="space-y-20 lg:w-[45%] w-full relative fadeInUp">
+        <div class="font-serif text-8xl text-[3.625rem] -tracking-[0.022em]">
+          <h1 class="text-lemon">Attendee Guide to</h1>
+          <h2 class="text-white">PyCon AU</h2>
         </div>
+        <p
+          class="hidden lg:block text-stone font-sans font-base tracking-[0.01em] leading-normal lg:w-[454px]"
+        >
+          The PyCon AU community prides itself on being warm, inclusive and
+          welcoming to everyone, at any level of experience. Our speakers range
+          from industry veterans, to first-time speakers.
+        </p>
+        <img
+          src="/images/star-coral.svg"
+          class="spin absolute -right-10 bottom-0 hidden lg:block"
+          alt=""
+        />
+      </div>
+      <div class="lg:w-1/2 w-full fadeInUp">
+        <div class="group flex justify-center relative">
+          <img
+            src="/images/about-pycon.svg"
+            alt="pycon"
+            class="lg:absolute top-1/2 lg:-translate-y-1/2 left-1/2 lg:-translate-x-1/2 lg:pb-0 pb-14"
+          />
+          <!-- <img src="/images/about-banner.png" class="w-[408px] mx-auto group-hover:visible invisible group-hover:opacity-100 opacity-0 transition-all duration-300" alt="About Banner"> -->
+        </div>
+        <p
+          class="lg:hidden block text-stone font-sans font-base tracking-[0.01em] leading-normal lg:w-[454px]"
+        >
+          The PyCon AU community prides itself on being warm, inclusive and
+          welcoming to everyone, at any level of experience. Our speakers range
+          from industry veterans, to first-time speakers.
+        </p>
       </div>
     </div>
-  </section>
+  </PageHeader>
 
   <section>
     <div class="header-divider"></div>

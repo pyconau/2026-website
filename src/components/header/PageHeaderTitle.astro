@@ -1,0 +1,25 @@
+---
+import { twMerge } from "tailwind-merge";
+
+interface Props {
+  class?: string;
+  fullWidthTitle?: boolean;
+  textColour: "charcoal" | "coral" | "lavender" | "lemon" | "lime" | "violet";
+}
+
+const { class: className, fullWidthTitle, textColour } = Astro.props;
+---
+
+<div class="flex justify-between items-center relative pt-10 fadeInUp">
+  <div class={twMerge("space-y-20 relative", !fullWidthTitle && "lg:w-[45%]")}>
+    <div
+      class={twMerge(
+        "font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em] leading-none",
+        `text-${textColour}`,
+        className
+      )}
+    >
+      <slot />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+---
+import { twMerge } from "tailwind-merge";
+import HeaderStar, { type HeaderStarColour } from "./HeaderStar.astro";
+import Header from "../Header.astro";
+
+interface Props {
+  class?: string;
+  dark: boolean;
+  starColour?: HeaderStarColour;
+  colour?: "coral" | "lavender" | "lemon" | "lime" | "violet";
+}
+
+const { class: className, dark, starColour, colour } = Astro.props;
+---
+
+<Header dark={dark} />
+
+<section
+  class={twMerge(
+    " pt-[98px] pb-20 overflow-hidden",
+    (dark && "bg-charcoal") || "bg-stone",
+    className
+  )}
+>
+  <div class="container relative">
+    {starColour && <HeaderStar colour={starColour} />}
+    <div class="w-[85%] mx-auto">
+      <slot />
+
+      <!-- <div
+        class="flex flex-col lg:flex-row justify-between items-center relative pt-10"
+      >
+        <div class="space-y-20 lg:w-[45%] w-full relative fadeInUp">
+          <div class="font-serif text-8xl text-[3.625rem] -tracking-[0.022em]">
+            <h1 class="text-lemon">Attendee Guide to</h1>
+            <h2 class="text-white">PyCon AU</h2>
+          </div>
+          <p
+            class="hidden lg:block text-stone font-sans font-base tracking-[0.01em] leading-normal lg:w-[454px]"
+          >
+            The PyCon AU community prides itself on being warm, inclusive and
+            welcoming to everyone, at any level of experience. Our speakers
+            range from industry veterans, to first-time speakers.
+          </p>
+          <img
+            src="/images/star-coral.svg"
+            class="spin absolute -right-10 bottom-0 hidden lg:block"
+            alt=""
+          />
+        </div>
+        <div class="lg:w-1/2 w-full fadeInUp">
+          <div class="group flex justify-center relative">
+            <img
+              src="/images/about-pycon.svg"
+              alt="pycon"
+              class="lg:absolute top-1/2 lg:-translate-y-1/2 left-1/2 lg:-translate-x-1/2 lg:pb-0 pb-14"
+            />
+          </div>
+          <p
+            class="lg:hidden block text-stone font-sans font-base tracking-[0.01em] leading-normal lg:w-[454px]"
+          >
+            The PyCon AU community prides itself on being warm, inclusive and
+            welcoming to everyone, at any level of experience. Our speakers
+            range from industry veterans, to first-time speakers.
+          </p>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</section>

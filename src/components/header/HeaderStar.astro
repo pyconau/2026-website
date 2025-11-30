@@ -1,9 +1,12 @@
 ---
 import { twMerge } from "tailwind-merge";
 
+export type C1 = "coral" | "lavender" | "lemon" | "lime";
+export type HeaderStarColour = C1 | "violet";
+
 interface Props {
   class?: string;
-  colour: "coral" | "lavender" | "lemon" | "lime" | "violet";
+  colour: HeaderStarColour;
 }
 
 const { class: className, colour } = Astro.props;

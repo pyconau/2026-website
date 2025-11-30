@@ -8,6 +8,8 @@ import LongDate from "../../components/typography/LongDate.astro";
 import DetailArrow from "../../components/DetailArrow.astro";
 import Crumb from "../../components/header/Crumb.astro";
 import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
+import PageHeader from "../../components/header/PageHeader.astro";
+import PageHeaderTitle from "../../components/header/PageHeaderTitle.astro";
 
 // TODO: Edit schemaData
 
@@ -92,17 +94,11 @@ const { Content } = await post.render();
 ---
 
 <Base title="PyCon AU 2026" schemaData={schemaData}>
-  <Header dark={false} />
-
-  <section class="bg-stone pt-[98px] pb-20 overflow-hidden">
-    <div class="container relative">
-      <div class="w-[85%] mx-auto">
-        <HeaderBreadcrumbs colour="charcoal">
-          <Crumb href="/news">News & Updates</Crumb>
-        </HeaderBreadcrumbs>
-      </div>
-    </div>
-  </section>
+  <PageHeader dark={false}>
+    <HeaderBreadcrumbs colour="charcoal">
+      <Crumb href="/news">News & Updates</Crumb>
+    </HeaderBreadcrumbs>
+  </PageHeader>
 
   <section>
     <div class="bg-stone pb-20">

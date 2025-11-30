@@ -1,6 +1,9 @@
 ---
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import Crumb from "../components/header/Crumb.astro";
+import HeaderBreadcrumbs from "../components/header/HeaderBreadcrumbs.astro";
+import PageHeader from "../components/header/PageHeader.astro";
 import Base from "../layouts/Base.astro";
 
 // TODO: Edit schemaData
@@ -67,72 +70,54 @@ const schemaData = {
 ---
 
 <Base title="PyCon AU 2026" schemaData={schemaData}>
-  <Header dark={true} />
+  <PageHeader dark={true} starColour="lemon">
+    <HeaderBreadcrumbs colour="emerald" />
 
-  <section class="bg-charcoal pt-[98px] pb-20 overflow-hidden">
-    <div class="container relative">
-      <img
-        src="images/star-lemon.svg"
-        class="absolute left-0 bottom-0 hidden lg:block"
-        alt=""
-      />
-      <div class="lg:w-[85%] w-full mx-auto">
-        <div class="breadcrumb pt-14 fadeInUp">
-          <ul
-            class="flex items-center gap-2 text-emerald font-sans font-extrabold text-10pt uppercase tracking-[0.12em]"
-          >
-            <li><a href="#">Home</a></li>
-            <li><span>></span></li>
-          </ul>
-        </div>
-        <div class="flex flex-col lg:flex-row justify-between relative pt-10">
+    <div class="flex flex-col lg:flex-row justify-between relative pt-10">
+      <div
+        class="fadeInUp flex flex-col lg:gap-0 gap-14 items-start justify-between lg:w-[45%] w-full relative"
+      >
+        <div class="space-y-14">
           <div
-            class="fadeInUp flex flex-col lg:gap-0 gap-14 items-start justify-between lg:w-[45%] w-full relative"
+            class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em]"
           >
-            <div class="space-y-14">
-              <div
-                class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em]"
-              >
-                <h1 class="text-lime">Tickets</h1>
-              </div>
-              <div class="lg:hidden flex justify-center">
-                <img
-                  src="images/tickets-pycon.svg"
-                  class="lg:w-auto w-[190px]"
-                  alt="pycon"
-                  class="w-auto"
-                />
-              </div>
-              <p
-                class="text-stone font-sans font-base tracking-[0.01em] leading-normal lg:w-[454px]"
-              >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut nd dolore. Ipsum dolor sit amet,
-                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                nd dolore.
-              </p>
-            </div>
+            <h1 class="text-lime">Tickets</h1>
+          </div>
+          <div class="lg:hidden flex justify-center">
+            <img
+              src="images/tickets-pycon.svg"
+              class="lg:w-auto w-[190px]"
+              alt="pycon"
+              class="w-auto"
+            />
+          </div>
+          <p
+            class="text-stone font-sans font-base tracking-[0.01em] leading-normal lg:w-[454px]"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut nd dolore. Ipsum dolor sit amet,
+            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut nd
+            dolore.
+          </p>
+        </div>
 
-            <a
-              href="#"
-              onclick="event.preventDefault(); window.scrollToSection('ticket-section'); return false;"
-              class="btn btn--emerald btn-arrow--down"
-              ><span>Buy Tickets</span></a
-            >
-          </div>
-          <div class="fadeInUp lg:w-1/2 w-full">
-            <div class="group flex justify-end relative">
-              <img
-                src="images/tickets-pycon.svg"
-                alt="pycon"
-                class="lg:block hidden"
-              />
-            </div>
-          </div>
+        <a
+          href="#"
+          onclick="event.preventDefault(); window.scrollToSection('ticket-section'); return false;"
+          class="btn btn--emerald btn-arrow--down"><span>Buy Tickets</span></a
+        >
+      </div>
+      <div class="fadeInUp lg:w-1/2 w-full">
+        <div class="group flex justify-end relative">
+          <img
+            src="images/tickets-pycon.svg"
+            alt="pycon"
+            class="lg:block hidden"
+          />
         </div>
       </div>
     </div>
-  </section>
+  </PageHeader>
 
   <section class="bg-charcoal pt-20 ticket-section">
     <div class="container">
@@ -225,9 +210,9 @@ const schemaData = {
               </div>
             </div>
           </div>
-          <div class="bg-[#383838] py-14">
+          <div class="fadeInUp bg-[#383838] py-14">
             <div
-              class="fadeInUp lg:w-[426px] w-full lg:px-0 px-5 h-full mx-auto flex flex-col gap-16 justify-between"
+              class="lg:w-[426px] w-full lg:px-0 px-5 h-full mx-auto flex flex-col gap-16 justify-between"
             >
               <div class="space-y-10">
                 <div class="flex flex-col lg:flex-row justify-between">

@@ -1,12 +1,12 @@
 ---
 import { getCollection } from "astro:content";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
-import Base from "../layouts/Base.astro";
 import DetailArrow from "../components/DetailArrow.astro";
-import LongDate from "../components/typography/LongDate.astro";
-import HeaderStar from "../components/header/HeaderStar.astro";
+import Footer from "../components/Footer.astro";
 import HeaderBreadcrumbs from "../components/header/HeaderBreadcrumbs.astro";
+import PageHeader from "../components/header/PageHeader.astro";
+import PageHeaderTitle from "../components/header/PageHeaderTitle.astro";
+import LongDate from "../components/typography/LongDate.astro";
+import Base from "../layouts/Base.astro";
 
 // TODO: Edit schemaData
 
@@ -78,25 +78,15 @@ const [firstPost, ...morePosts] = (await getCollection("posts")).sort(
 ---
 
 <Base title="PyCon AU 2026" schemaData={schemaData}>
-  <Header dark={false} />
-
-  <section class="bg-stone pt-[98px] pb-20 overflow-hidden">
-    <div class="container relative">
-      <HeaderStar colour="lavender" />
-      <div class="w-[85%] mx-auto">
-        <HeaderBreadcrumbs colour="charcoal" />
-        <div class="flex justify-between items-center relative pt-10 fadeInUp">
-          <div class="space-y-20 relative">
-            <div
-              class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em] leading-none"
-            >
-              <h1 class="text-charcoal">News & Updates</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  {
+    /* TODO: in lemonnades version there's no lg:w-[45%] on the middle div in PageHeaderTitle - maybe make this optional? */
+  }
+  <PageHeader dark={false} starColour="lavender">
+    <HeaderBreadcrumbs colour="charcoal" />
+    <PageHeaderTitle textColour="charcoal" fullWidthTitle={true}>
+      <h1>News & Updates</h1>
+    </PageHeaderTitle>
+  </PageHeader>
 
   <section>
     <div class="bg-stone pt-10 pb-20">

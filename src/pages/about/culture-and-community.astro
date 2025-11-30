@@ -4,6 +4,8 @@ import Header from "../../components/Header.astro";
 import Crumb from "../../components/header/Crumb.astro";
 import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
 import HeaderStar from "../../components/header/HeaderStar.astro";
+import PageHeader from "../../components/header/PageHeader.astro";
+import PageHeaderTitle from "../../components/header/PageHeaderTitle.astro";
 import TypographyLink from "../../components/typography/TypographyLink.astro";
 import Base from "../../layouts/Base.astro";
 
@@ -74,29 +76,14 @@ const schemaData = {
 ---
 
 <Base title="PyCon AU 2026" schemaData={schemaData}>
-  <Header dark={true} />
-
-  <section class="bg-charcoal pt-[98px] pb-20 overflow-hidden">
-    <div class="container relative">
-      <HeaderStar colour="violet" />
-      <div class="w-[85%] mx-auto">
-        <HeaderBreadcrumbs colour="lavender">
-          <Crumb href="/about/">About</Crumb>
-        </HeaderBreadcrumbs>
-        <div class="flex justify-between items-center relative pt-10 fadeInUp">
-          <div class="space-y-20 lg:w-[45%] relative">
-            <div
-              class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em] leading-none"
-            >
-              <h1 class="text-lavender">
-                Culture & <br class="hidden lg:block" />Community
-              </h1>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <PageHeader dark={true} starColour="violet">
+    <HeaderBreadcrumbs colour="lavender">
+      <Crumb href="/about/">About</Crumb>
+    </HeaderBreadcrumbs>
+    <PageHeaderTitle textColour="lavender">
+      <h1><span class="text-nowrap">Culture &</span> Community</h1>
+    </PageHeaderTitle>
+  </PageHeader>
 
   <section>
     <div class="header-divider header-divider--lavender"></div>
