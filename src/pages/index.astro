@@ -9,6 +9,7 @@ import LongDate from "../components/typography/LongDate.astro";
 import DetailArrow from "../components/DetailArrow.astro";
 import HomePageArrow from "../components/HomePageArrow.astro";
 import ImageCard from "../components/typography/ImageCard.astro";
+import NewsItemsWidget from "../components/NewsItemsWidget.astro";
 
 const schemaData = {
   "@context": "https://schema.org",
@@ -69,15 +70,6 @@ const schemaData = {
   },
   sameAs: ["https://www.wikidata.org/wiki/Q136290798"],
 };
-
-// TODO: Page shows category as is (e.g. DIRECTORS-DESK), should map to strings
-// TODO: Color-ise the category
-
-const [firstPost, ...morePosts] = (await getCollection("posts"))
-  .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf())
-  .slice(0, 3);
-
-const df = new Intl.DateTimeFormat("en-AU", { dateStyle: "long" });
 ---
 
 <Base title="PyCon AU 2026" schemaData={schemaData}>
@@ -254,81 +246,7 @@ const df = new Intl.DateTimeFormat("en-AU", { dateStyle: "long" });
     </div>
   </section>
 
-  <section class="bg-violet pt-32 pb-20">
-    <div class="container">
-      <div class="lg:w-[85%] w-full mx-auto">
-        <div class="relative">
-          <h2
-            class="fadeInUp lg:text-6xl text-5xl font-serif -tracking-[0.03em] text-lavender text-center"
-          >
-            Latest news & updates
-          </h2>
-          <img
-            src="images/star.svg"
-            alt="star"
-            class="lg:block hidden absolute top-1/2 right-0 -translate-y-1/2"
-          />
-        </div>
-        <div class="fadeInUp flex justify-center mt-7">
-          <a href="/news" class="btn px-3 py-3 btn--lavender">Browse All</a>
-        </div>
-        <div class="grid lg:grid-cols-2 grid-cols-1 grid-rows-2 gap-7 mt-20">
-          <a
-            href={`/posts/${firstPost.slug}`}
-            class="fadeInUp bg-white rounded-[3.125rem] lg:p-10 p-7 flex flex-col justify-between gap-20 row-span-2 group hover:bg-white/95"
-          >
-            <div class="flex items-center justify-between">
-              <div class="tag">{firstPost.data.category}</div>
-              <div class="date">
-                <LongDate date={firstPost.data.published} />
-              </div>
-            </div>
-            <div class="flex lg:gap-10 items-end justify-between">
-              <div class="lg:w-[78%] w-[90%] lg:space-y-10">
-                <h3 class="text-3xl font-sans font-medium leading-[1.1]">
-                  {firstPost.data.title}
-                </h3>
-                <p class="lg:block hidden">
-                  {firstPost.data.previewText}
-                </p>
-              </div>
-              <DetailArrow />
-            </div>
-          </a>
-          {
-            morePosts.map((post) => (
-              <a
-                href={`/posts/${post.slug}`}
-                class="fadeInUp bg-white rounded-[3.125rem] p-10 lg:flex hidden flex-col justify-between gap-20 group hover:bg-white/95"
-              >
-                <div class="flex items-center justify-between">
-                  <div class="tag">{post.data.category}</div>
-                  <div class="date">
-                    <LongDate date={post.data.published} />
-                  </div>
-                </div>
-                <div class="flex gap-10 items-end justify-between">
-                  <div class="w-[78%] space-y-10">
-                    <h3 class="text-3xl font-sans font-medium leading-[1.1]">
-                      {post.data.title}
-                    </h3>
-                  </div>
-                  <DetailArrow />
-                </div>
-              </a>
-            ))
-          }
-        </div>
-        <div class="mt-7 fadeInUp">
-          <a
-            href="#"
-            class="btn-arrow btn-arrow--lime btn-arrow--large lg:after:block after:hidden"
-            ><span>Sign up for latest news & updates</span></a
-          >
-        </div>
-      </div>
-    </div>
-  </section>
+  <NewsItemsWidget />
 
   <section class="bg-violet pt-10 pb-32 mt-[-1px]">
     <div class="container">
