@@ -1,5 +1,5 @@
 ---
-import AboutNavItem from "./AboutNavItem.astro";
+import SideNavItem from "../SideNavItem.astro";
 ---
 
 <div class="lg:w-[308px] w-full">
@@ -9,15 +9,13 @@ import AboutNavItem from "./AboutNavItem.astro";
         <h3 class="text-intro font-semibold">About</h3>
       </a>
       <ul class="font-medium font-sans text-charcoal space-y-4 mt-8">
-        <AboutNavItem href="/about/the-conference">
-          The Conference
-        </AboutNavItem>
-        <AboutNavItem href="/about/culture-and-community">
+        <SideNavItem href="/about/the-conference"> The Conference </SideNavItem>
+        <SideNavItem href="/about/culture-and-community">
           Culture & Community
-        </AboutNavItem>
-        <AboutNavItem href="/about/our-team"> Our Team </AboutNavItem>
-        <AboutNavItem href="/news"> News & Updates </AboutNavItem>
-        <AboutNavItem href="/attend/volunteer"> Volunteer </AboutNavItem>
+        </SideNavItem>
+        <SideNavItem href="/about/our-team"> Our Team </SideNavItem>
+        <SideNavItem href="/news"> News & Updates </SideNavItem>
+        <SideNavItem href="/attend/volunteer"> Volunteer </SideNavItem>
       </ul>
     </div>
   </div>

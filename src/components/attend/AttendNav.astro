@@ -1,3 +1,7 @@
+---
+import SideNavItem from "../SideNavItem.astro";
+---
+
 <div class="lg:w-[308px] w-full">
   <div class="bg-emerald rounded-[3.125rem]">
     <div class="side-nav bg-lime rounded-[3.125rem] p-10 -translate-y-5">
@@ -5,60 +9,16 @@
         <h3 class="text-intro font-semibold">Attendee Guide</h3>
       </a>
       <ul class="font-medium font-sans text-charcoal space-y-4 mt-8">
-        <li>
-          {/* TODO: add  class="active-page" to active page */}
-          <a
-            href="/attend/conduct"
-            class="hover:text-emerald transition-all duration-300"
-            >Code of Conduct</a
-          >
-        </li>
-        <li>
-          <a
-            href="/attend/refunds"
-            class="hover:text-emerald transition-all duration-300">Refunds</a
-          >
-        </li>
-        <li>
-          <a
-            href="/attend/bof"
-            class="hover:text-emerald transition-all duration-300"
-            >Birds of a Feather</a
-          >
-        </li>
-        <li>
-          <a
-            href="/attend/faq"
-            class="hover:text-emerald transition-all duration-300">FAQ</a
-          >
-        </li>
-        <li>
-          <a
-            href="/attend/volunteer"
-            class="hover:text-emerald transition-all duration-300">Volunteer</a
-          >
-        </li>
-        <li>
-          <a
-            href="/attend/travel"
-            class="hover:text-emerald transition-all duration-300"
-            >Travel to PyCon AU</a
-          >
-        </li>
-        <li>
-          <a
-            href="/attend/transport"
-            class="hover:text-emerald transition-all duration-300"
-            >Brisbane Transport</a
-          >
-        </li>
-        <li>
-          <a
-            href="/attend/international-visitors"
-            class="hover:text-emerald transition-all duration-300"
-            >International Visitors</a
-          >
-        </li>
+        <SideNavItem href="/attend/conduct">Code of Conduct</SideNavItem>
+        <SideNavItem href="/attend/refunds">Refunds</SideNavItem>
+        <SideNavItem href="/attend/bof">Birds of a Feather</SideNavItem>
+        <SideNavItem href="/attend/faq">FAQ</SideNavItem>
+        <SideNavItem href="/attend/volunteer">Volunteer</SideNavItem>
+        <SideNavItem href="/attend/travel">Travel to PyCon AU</SideNavItem>
+        <SideNavItem href="/attend/transport">Brisbane Transport</SideNavItem>
+        <SideNavItem href="/attend/international-visitors">
+          International Visitors
+        </SideNavItem>
       </ul>
     </div>
   </div>
