@@ -14,10 +14,10 @@ import FooterSocialLink from "./FooterSocialLink.astro";
         style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;"
       >
         <div class="flex lg:flex-row flex-col lg:gap-36 gap-14">
-          <a href="#" class="hidden lg:block"
+          <a href="/" class="hidden lg:block"
             ><img src="/images/footer-logo.svg" alt="logo" /></a
           >
-          <a href="#" class="block lg:hidden"
+          <a href="/" class="block lg:hidden"
             ><img src="/images/footer-logo-mobile.svg" alt="logo" /></a
           >
           <div class="lg:flex hidden gap-10">
@@ -40,44 +40,57 @@ import FooterSocialLink from "./FooterSocialLink.astro";
             }
             <ul class="space-y-2">
               <li>
-                <a href="#" class="text-lime font-medium">Attendee Guide</a>
+                <a href="/attend/" class="text-lime font-medium"
+                  >Attendee Guide</a
+                >
               </li>
               <li>
-                <a href="#" class="hover:text-lime transition-all duration-300"
+                <a
+                  href="/attend/accomodation"
+                  class="hover:text-lime transition-all duration-300"
                   >Accommodation</a
                 >
               </li>
               <li>
-                <a href="#" class="hover:text-lime transition-all duration-300"
+                <a
+                  href="/attend/transport"
+                  class="hover:text-lime transition-all duration-300"
                   >Transport</a
                 >
               </li>
-              <li><a href="#">International Visitors</a></li>
               <li>
-                <a href="#" class="hover:text-lime transition-all duration-300"
-                  >Birds of a Feather</a
+                <a href="/attend/international-visitors"
+                  >International Visitors</a
                 >
               </li>
               <li>
-                <a href="#" class="hover:text-lime transition-all duration-300"
-                  >Financial Assistance</a
+                <a
+                  href="/attend/bof"
+                  class="hover:text-lime transition-all duration-300"
+                  >Birds of a Feather</a
                 >
               </li>
             </ul>
             <ul class="space-y-2">
-              <li><a href="#" class="text-lime font-medium">About</a></li>
+              <li><a href="/about/" class="text-lime font-medium">About</a></li>
               <li>
-                <a href="#" class="hover:text-lime transition-all duration-300"
+                <a
+                  href="/about/the-conference"
+                  class="hover:text-lime transition-all duration-300"
                   >The Conference</a
                 >
               </li>
               <li>
-                <a href="#" class="hover:text-lime transition-all duration-300"
+                <a
+                  href="/about/culture-and-community"
+                  class="hover:text-lime transition-all duration-300"
                   >Culture &amp; Community</a
                 >
               </li>
               <li>
-                <a href="#" class="hover:text-lime transition-all duration-300"
+                <a
+                  href="/about/our-team"
+                  class="hover:text-lime transition-all duration-300"
                   >Our Team</a
                 >
               </li>
@@ -86,37 +99,38 @@ import FooterSocialLink from "./FooterSocialLink.astro";
         </div>
         <div class="lg:block flex justify-between lg:mt-0 mt-14">
           <ul class="space-y-3 flex flex-col lg:hidden">
-            <li><a href="#" class="text-lime font-medium">Program</a></li>
+            <!-- <li><a href="#" class="text-lime font-medium">Program</a></li> -->
             <li>
-              <a href="#" class="text-lime font-medium">Attendee Guide</a>
+              <a href="/attend/" class="text-lime font-medium">Attendee Guide</a
+              >
             </li>
-            <li><a href="#" class="text-lime font-medium">About</a></li>
+            <li><a href="/about/" " class="text-lime font-medium">About</a></li>
           </ul>
           <ul class="space-y-3">
             <li>
               <a
-                href="#"
+                href="/sponsors/"
                 class="text-lavender hover:text-lemon transition-all duration-300 font-semibold"
                 >Become a Sponsor</a
               >
             </li>
             <li>
               <a
-                href="#"
+                href="/attend/volunteer"
                 class="text-lavender hover:text-lemon transition-all duration-300 font-semibold"
                 >Volunteer</a
               >
             </li>
             <li>
               <a
-                href="#"
+                href="/news"
                 class="text-lavender hover:text-lemon transition-all duration-300 font-semibold"
                 >News &amp; Updates</a
               >
             </li>
             <li>
               <a
-                href="#"
+                href="/attend/faq"
                 class="text-lavender hover:text-lemon transition-all duration-300 font-semibold"
                 >FAQs</a
               >

@@ -137,7 +137,7 @@ const { dark } = Astro.props;
       class="mobile-menu"
     >
       <ul class="flex flex-col gap-10">
-        <li
+        <!-- <li
           x-show="openSubMenu === null || openSubMenu === 'program'"
           :class="{ 'sub-menu-open': openSubMenu === 'program' }"
         >
@@ -187,15 +187,15 @@ const { dark } = Astro.props;
               >
             </li>
           </ul>
+        </li> -->
+        <li x-show="openSubMenu === null">
+          <a href="/attend/"><span>Attendee Guide</span></a>
         </li>
         <li x-show="openSubMenu === null">
-          <a href="#"><span>Attendee Guide</span></a>
+          <a href="/sponsors/"><span>Sponsors</span></a>
         </li>
         <li x-show="openSubMenu === null">
-          <a href="#"><span>Sponsors</span></a>
-        </li>
-        <li x-show="openSubMenu === null">
-          <a href="#"><span>News & Updates</span></a>
+          <a href="/news/"><span>News & Updates</span></a>
         </li>
         <li
           x-show="openSubMenu === null || openSubMenu === 'about'"
