@@ -8,72 +8,10 @@ import PageHeaderTitle from "../../components/header/PageHeaderTitle.astro";
 import TypographyLink from "../../components/typography/TypographyLink.astro";
 import Base from "../../layouts/Base.astro";
 
-// TODO: Edit schemaData
 // TODO: Add correct country name next to Brisbane (Yuggera?)
-// TODO: Specialist tracks refer to "first day"
-
-const schemaData = {
-  "@context": "https://schema.org",
-  "@type": "Event",
-  additionalType: "ExhibitionEvent",
-  url: "https://2026.pycon.org.au/",
-  name: "PyCon AU 2026",
-  description:
-    "PyCon AU is Australia's national conference for everyone using the Python programming language and is a must-attend event for hundreds of technologists worldwide.",
-  startDate: "2026-08-26",
-  endDate: "2026-08-30",
-  about: {
-    "@type": "ComputerLanguage",
-    name: "Python",
-    url: "https://www.python.org/",
-  },
-  location: {
-    "@type": "Place",
-    name: "Sofitel Brisbane Central",
-    url: "https://www.sofitelbrisbane.com.au/",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "249 Turbot Street",
-      addressLocality: "Brisbane City",
-      postalCode: "4000",
-      addressRegion: "QLD",
-      addressCountry: "AU",
-    },
-  },
-  eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode",
-  inLanguage: "en-AU",
-  offers: [
-    {
-      "@type": "Offer",
-      availability: "https://schema.org/InStock",
-      url: "https://pretix.eu/pyconau/2026/",
-    },
-  ],
-  superEvent: {
-    "@type": "EventSeries",
-    name: "PyCon AU",
-    url: "https://pycon.org.au/",
-    organizer: {
-      "@id": "#organization",
-    },
-    sameAs: "https://www.wikidata.org/wiki/Q134350078",
-  },
-  organizer: {
-    "@id": "#organization",
-    "@type": "Organization",
-    name: "PyCon AU",
-    url: "https://pycon.org.au/",
-    sameAs: [
-      "https://mastodon.pycon.org.au/@pyconau",
-      "https://bsky.app/profile/pyconau.bsky.social",
-      "https://www.linkedin.com/company/pyconau/",
-    ],
-  },
-  sameAs: ["https://www.wikidata.org/wiki/Q136290798"],
-};
 ---
 
-<Base title="PyCon AU 2026" schemaData={schemaData}>
+<Base title="The Conference">
   <PageHeader dark={true} starColour="violet">
     <HeaderBreadcrumbs colour="lavender">
       <Crumb href="/about/">About</Crumb>

@@ -1,15 +1,11 @@
 ---
-import { getCollection } from "astro:content";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import HomeSectionDivider from "../components/home/HomeSectionDivider.astro";
-import Bold from "../components/typography/Bold.astro";
-import Base from "../layouts/Base.astro";
-import LongDate from "../components/typography/LongDate.astro";
-import DetailArrow from "../components/DetailArrow.astro";
-import HomePageArrow from "../components/HomePageArrow.astro";
-import ImageCard from "../components/typography/ImageCard.astro";
 import NewsItemsWidget from "../components/NewsItemsWidget.astro";
+import Bold from "../components/typography/Bold.astro";
+import ImageCard from "../components/typography/ImageCard.astro";
+import Base from "../layouts/Base.astro";
 
 const schemaData = {
   "@context": "https://schema.org",
@@ -72,7 +68,7 @@ const schemaData = {
 };
 ---
 
-<Base title="PyCon AU 2026" schemaData={schemaData}>
+<Base title="PyCon AU 2026" appendSiteTitle={false} schemaData={schemaData}>
   <Header dark={false} />
 
   <section class="bg-stone fadeInUp h-[calc(100vh-210px)] pt-[98px]">

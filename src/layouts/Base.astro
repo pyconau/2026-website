@@ -3,12 +3,19 @@ import "../styles/style.css";
 
 export interface Props {
   title: string;
+  appendSiteTitle?: boolean;
   description?: string;
   ogImage?: string;
   schemaData?: object;
 }
 
-const { title, description, ogImage, schemaData } = Astro.props;
+const {
+  title,
+  appendSiteTitle = true,
+  description,
+  ogImage,
+  schemaData,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -17,7 +24,7 @@ const { title, description, ogImage, schemaData } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon2.svg" />
-    <title>{title}</title>
+    <title>{title}{appendSiteTitle && " — PyCon AU 2026"}</title>
     {description && <meta name="description" content={description} />}
 
     <!-- Font preconnects and stylesheets -->

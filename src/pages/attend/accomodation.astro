@@ -7,21 +7,9 @@ import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
 import PageHeader from "../../components/header/PageHeader.astro";
 import PageHeaderTitle from "../../components/header/PageHeaderTitle.astro";
 import Base from "../../layouts/Base.astro";
-
-// TODO: schema data
-// TODO: The design mockup shows the image floating above the info card (so the white box isn't the full height of the image).
-// TODO: Hotel images
-
-const schemaData = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  name: "Accommodation - PyCon AU 2026",
-  description: "Accommodation options for PyCon AU 2026 attendees.",
-  url: "https://2026.pycon.org.au/attend/accomodation",
-};
 ---
 
-<Base title="Accommodation - PyCon AU 2026" schemaData={schemaData}>
+<Base title="Accommodation">
   <PageHeader dark={true} starColour="violet">
     <HeaderBreadcrumbs colour="lavender">
       <Crumb href="/attend/">Attendee Guide</Crumb>
