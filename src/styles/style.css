@@ -438,7 +438,6 @@ ul.sub-menu {
     from-50% 
     to-stone 
     to-50%
-    w-screen
     h-[132px]
     overflow-hidden
     after:content-[''] 
