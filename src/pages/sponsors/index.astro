@@ -5,8 +5,29 @@ import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
 import PageHeader from "../../components/header/PageHeader.astro";
 import PageHeaderTitle from "../../components/header/PageHeaderTitle.astro";
 import Base from "../../layouts/Base.astro";
+import { getCollection } from "astro:content";
 
-// TODO: The sponsor page!
+const sponsors = await getCollection("sponsors", ({ id }) => {
+  return !id.startsWith("_");
+});
+
+const tierOrder = ["diamond", "platinum", "gold", "standard", "in-kind"];
+const sponsorsByTier = sponsors.reduce((acc, sponsor) => {
+  const tier = sponsor.data.tier;
+  if (!acc[tier]) {
+    acc[tier] = [];
+  }
+  acc[tier].push(sponsor);
+  return acc;
+}, {} as Record<string, typeof sponsors>);
+
+const tierLabels: Record<string, string> = {
+  diamond: "Diamond Sponsors",
+  platinum: "Platinum Sponsor",
+  gold: "Gold Sponsors",
+  standard: "Sponsors",
+  "in-kind": "In-Kind Sponsors",
+};
 ---
 
 <Base title="Sponsors">
@@ -42,203 +63,92 @@ import Base from "../../layouts/Base.astro";
             the conference possible.
           </p>
 
-          <div class="space-y-7 pt-24">
-            <h2
-              class="lg:text-6xl text-5xl font-serif -tracking-[0.04em] text-center pb-7"
-            >
-              Platinum Sponsor
-            </h2>
-            <div class="space-y-5">
-              <div
-                class="fadeInUp bg-white flex lg:flex-row flex-col rounded-[3.125rem] lg:p-14 p-10 gap-14"
-              >
-                <img
-                  src="/images/sponsor-valkey.svg"
-                  class="lg:w-auto w-[190px]"
-                  alt="Valkey"
-                />
-                <div class="space-y-5 lg:w-[50%]">
-                  <h3 class="text-3xl font-semibold text-charcoal">Valkey</h3>
-                  <p
-                    class="text-sm font-medium leading-normal tracking-[0.01em]"
-                  >
-                    Sed ut perspiciatis unde omnis iste natus error sit
-                    voluptatem accusantium doloremque laudantium, totam rem
-                    aperiam, eaque ipsa quae ab illo inventore.
-                  </p>
-                  <a
-                    href="#"
-                    class="text-base font-medium font-sans leading-[1.2]"
-                    >website.com.au</a
-                  >
-                </div>
+          {tierOrder.map((tier) => {
+            let tierSponsors = sponsorsByTier[tier];
+
+            // Combine standard and digital sponsors
+            if (tier === "standard") {
+              const standardSponsors = sponsorsByTier["standard"] || [];
+              const digitalSponsors = sponsorsByTier["digital"] || [];
+              tierSponsors = [...standardSponsors, ...digitalSponsors];
+            }
+
+            if (!tierSponsors || tierSponsors.length === 0) return null;
+
+            const isPremium = tier === "diamond" || tier === "platinum" || tier === "gold";
+
+            return (
+              <div class="space-y-7 pt-24">
+                <h2 class="fadeInUp lg:text-6xl text-5xl font-serif -tracking-[0.04em] text-center pb-7">
+                  {tierLabels[tier]}
+                </h2>
+
+                {isPremium ? (
+                  <div class="space-y-5">
+                    {tierSponsors.map(async (sponsor) => {
+                      const { Content } = await sponsor.render();
+                      return (
+                        <div class="fadeInUp bg-white flex lg:flex-row flex-col rounded-[3.125rem] lg:p-14 p-10 gap-14">
+                          <img
+                            src={`/images/sponsors/${sponsor.data.logo}`}
+                            class="lg:w-auto w-[190px]"
+                            alt={sponsor.data.name}
+                          />
+                          <div class="space-y-5 lg:w-[50%]">
+                            <h3 class="text-3xl font-semibold text-charcoal">
+                              {sponsor.data.name}
+                            </h3>
+                            <div class="text-sm font-medium leading-normal tracking-[0.01em]">
+                              <Content />
+                            </div>
+                            {sponsor.data.website && (
+                              <a
+                                href={sponsor.data.website}
+                                class="text-base font-medium font-sans leading-[1.2]"
+                              >
+                                {new URL(sponsor.data.website).hostname}
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div class="grid lg:grid-cols-2 grid-cols-1 gap-x-5 gap-y-10">
+                    {tierSponsors.map(async (sponsor) => {
+                      const { Content } = await sponsor.render();
+                      return (
+                        <div class="fadeInUp bg-white flex flex-col items-center rounded-[3.125rem] lg:p-14 p-10 gap-14">
+                          <img
+                            src={`/images/sponsors/${sponsor.data.logo}`}
+                            class="lg:w-auto w-[190px]"
+                            alt={sponsor.data.name}
+                          />
+                          <div class="space-y-5">
+                            <h3 class="text-3xl font-semibold text-charcoal">
+                              {sponsor.data.name}
+                            </h3>
+                            <div class="text-sm font-medium leading-normal tracking-[0.01em]">
+                              <Content />
+                            </div>
+                            {sponsor.data.website && (
+                              <a
+                                href={sponsor.data.website}
+                                class="text-base font-medium font-sans leading-[1.2]"
+                              >
+                                {new URL(sponsor.data.website).hostname}
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
-            </div>
-          </div>
-          <div class="space-y-7 pt-24">
-            <h2
-              class="fadeInUp lg:text-6xl text-5xl font-serif -tracking-[0.04em] text-center pb-7"
-            >
-              Gold Sponsors
-            </h2>
-            <div class="space-y-5">
-              <div
-                class="fadeInUp bg-white flex lg:flex-row flex-col rounded-[3.125rem] lg:p-14 p-10 gap-14"
-              >
-                <img
-                  src="/images/sponsor-valkey.svg"
-                  class="lg:w-auto w-[190px]"
-                  alt="Valkey"
-                />
-                <div class="space-y-5 lg:w-[50%]">
-                  <h3 class="text-3xl font-semibold text-charcoal">Python</h3>
-                  <p
-                    class="text-sm font-medium leading-normal tracking-[0.01em]"
-                  >
-                    Sed ut perspiciatis unde omnis iste natus error sit
-                    voluptatem accusantium doloremque laudantium, totam rem
-                    aperiam, eaque ipsa quae ab illo inventore.
-                  </p>
-                  <a
-                    href="#"
-                    class="text-base font-medium font-sans leading-[1.2]"
-                    >website.com.au</a
-                  >
-                </div>
-              </div>
-              <div
-                class="fadeInUp bg-white flex lg:flex-row flex-col rounded-[3.125rem] lg:p-14 p-10 gap-14"
-              >
-                <img
-                  src="/images/sponsor-valkey.svg"
-                  class="lg:w-auto w-[190px]"
-                  alt="Valkey"
-                />
-                <div class="space-y-5 lg:w-[50%]">
-                  <h3 class="text-3xl font-semibold text-charcoal">
-                    Snowflake
-                  </h3>
-                  <p
-                    class="text-sm font-medium leading-normal tracking-[0.01em]"
-                  >
-                    Sed ut perspiciatis unde omnis iste natus error sit
-                    voluptatem accusantium doloremque laudantium, totam rem
-                    aperiam, eaque ipsa quae ab illo inventore.
-                  </p>
-                  <a
-                    href="#"
-                    class="text-base font-medium font-sans leading-[1.2]"
-                    >website.com.au</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="space-y-7 pt-24">
-            <h2
-              class="fadeInUp lg:text-6xl text-5xl font-serif -tracking-[0.04em] text-center pb-7"
-            >
-              Other Sponsors
-            </h2>
-            <div class="grid lg:grid-cols-2 grid-cols-1 gap-x-5 gap-y-10">
-              <div
-                class="fadeInUp bg-white flex flex-col items-center rounded-[3.125rem] lg:p-14 p-10 gap-14"
-              >
-                <img
-                  src="/images/sponsor-valkey.svg"
-                  class="lg:w-auto w-[190px]"
-                  alt="Valkey"
-                />
-                <div class="space-y-5">
-                  <h3 class="text-3xl font-semibold text-charcoal">Python</h3>
-                  <p
-                    class="text-sm font-medium leading-normal tracking-[0.01em]"
-                  >
-                    Sed ut perspiciatis unde omnis iste natus error sit
-                    voluptatem accusantium doloremque laudantium, totam rem
-                    aperiam, eaque ipsa quae ab illo inventore.
-                  </p>
-                  <a
-                    href="#"
-                    class="text-base font-medium font-sans leading-[1.2]"
-                    >website.com.au</a
-                  >
-                </div>
-              </div>
-              <div
-                class="fadeInUp bg-white flex flex-col items-center rounded-[3.125rem] lg:p-14 p-10 gap-14"
-              >
-                <img
-                  src="/images/sponsor-valkey.svg"
-                  class="lg:w-auto w-[190px]"
-                  alt="Valkey"
-                />
-                <div class="space-y-5">
-                  <h3 class="text-3xl font-semibold text-charcoal">Python</h3>
-                  <p
-                    class="text-sm font-medium leading-normal tracking-[0.01em]"
-                  >
-                    Sed ut perspiciatis unde omnis iste natus error sit
-                    voluptatem accusantium doloremque laudantium, totam rem
-                    aperiam, eaque ipsa quae ab illo inventore.
-                  </p>
-                  <a
-                    href="#"
-                    class="text-base font-medium font-sans leading-[1.2]"
-                    >website.com.au</a
-                  >
-                </div>
-              </div>
-              <div
-                class="fadeInUp bg-white flex flex-col items-center rounded-[3.125rem] lg:p-14 p-10 gap-14"
-              >
-                <img
-                  src="/images/sponsor-valkey.svg"
-                  class="lg:w-auto w-[190px]"
-                  alt="Valkey"
-                />
-                <div class="space-y-5">
-                  <h3 class="text-3xl font-semibold text-charcoal">Python</h3>
-                  <p
-                    class="text-sm font-medium leading-normal tracking-[0.01em]"
-                  >
-                    Sed ut perspiciatis unde omnis iste natus error sit
-                    voluptatem accusantium doloremque laudantium, totam rem
-                    aperiam, eaque ipsa quae ab illo inventore.
-                  </p>
-                  <a
-                    href="#"
-                    class="text-base font-medium font-sans leading-[1.2]"
-                    >website.com.au</a
-                  >
-                </div>
-              </div>
-              <div
-                class="fadeInUp bg-white flex flex-col items-center rounded-[3.125rem] lg:p-14 p-10 gap-14"
-              >
-                <img
-                  src="/images/sponsor-valkey.svg"
-                  class="lg:w-auto w-[190px]"
-                  alt="Valkey"
-                />
-                <div class="space-y-5">
-                  <h3 class="text-3xl font-semibold text-charcoal">Python</h3>
-                  <p
-                    class="text-sm font-medium leading-normal tracking-[0.01em]"
-                  >
-                    Sed ut perspiciatis unde omnis iste natus error sit
-                    voluptatem accusantium doloremque laudantium, totam rem
-                    aperiam, eaque ipsa quae ab illo inventore.
-                  </p>
-                  <a
-                    href="#"
-                    class="text-base font-medium font-sans leading-[1.2]"
-                    >website.com.au</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
 
