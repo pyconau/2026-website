@@ -8,6 +8,8 @@ const { href, special = false } = Astro.props;
 ---
 
 <a
+  rel="me"
+  target="_blank"
   href={href}
   class={special ? "text-lime" : "underline hover:text-lime transition-all duration-300"}
 >
