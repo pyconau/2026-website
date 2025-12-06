@@ -1,11 +1,18 @@
 ---
+import { getCollection } from "astro:content";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import HomeSectionDivider from "../components/home/HomeSectionDivider.astro";
+import SponsorBubbles from "../components/home/SponsorBubbles.astro";
 import NewsItemsWidget from "../components/NewsItemsWidget.astro";
 import Bold from "../components/typography/Bold.astro";
 import ImageCard from "../components/typography/ImageCard.astro";
 import Base from "../layouts/Base.astro";
+import { previousSponsors } from "../data/previousSponsors";
+
+// Check if we have current sponsors
+const currentSponsors = await getCollection("sponsors", ({ id }) => !id.startsWith("_"));
+const hasCurrentSponsors = currentSponsors.length > 0;
 
 const schemaData = {
   "@context": "https://schema.org",
@@ -252,7 +259,7 @@ const schemaData = {
   <section class="bg-violet pt-10 pb-32 mt-[-1px]">
     <div class="container">
       <div class="fadeInUp text-center space-y-10 text-white">
-        <h3 class="lg:text-5xl text-4xl font-serif">Meet our sponsors</h3>
+        <h3 class="lg:text-5xl text-4xl font-serif">Sponsor PyCon AU today!</h3>
         <p class="text-center font-sans leading-[1.55] lg:w-[40%] mx-auto">
           The conference could not run without the generous support of our
           sponsors. We thank them for their financial commitment, and ongoing
@@ -261,112 +268,35 @@ const schemaData = {
         </p>
       </div>
 
-      <div class="fadeInUp flex flex-wrap lg:flex-nowrap justify-center mt-20">
-        <a
-          href="#"
-          class="lg:flex hidden bg-white lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full items-center justify-center group"
-          ><img src="/images/sponsors/navicat_landscape.svg" alt="navicat" class="w-[80%]" /></a
-        >
-        <a
-          href="#"
-          class="lg:flex hidden bg-emerald lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full items-center justify-center group"
-        ></a>
-        <a
-          href="#"
-          class="lg:flex hidden bg-lemon lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full items-center justify-center group"
-        ></a>
-        <a
-          href="#"
-          class="lg:flex hidden bg-coral lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full items-center justify-center group"
-        ></a>
-        <a
-          href="#"
-          class="lg:flex hidden bg-white lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full items-center justify-center group"
-          ><img src="/images/sponsors/navicat_landscape.svg" alt="navicat" class="w-[80%]" /></a
-        >
-        <a
-          href="#"
-          class="lg:flex hidden bg-lemon lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full items-center justify-center group"
-        ></a>
-        <a
-          href="#"
-          class="lg:flex hidden bg-lime lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full items-center justify-center group"
-        ></a>
-      </div>
-      <div
-        class="fadeInUp flex flex-wrap lg:flex-nowrap justify-center lg:-mt-5"
-      >
-        <a
-          href="#"
-          class="lg:hidden flex bg-white lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full items-center justify-center group"
-          ><img src="/images/sponsors/navicat_landscape.svg" alt="navicat" class="w-[80%]" /></a
-        >
-        <a
-          href="#"
-          class="lg:hidden flex bg-emerald lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full items-center justify-center group"
-        ></a>
-        <a
-          href="#"
-          class="lg:hidden flex bg-lemon lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full items-center justify-center group"
-        ></a>
-        <a
-          href="#"
-          class="lg:hidden flex bg-coral lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full items-center justify-center group"
-        ></a>
-        <a
-          href="#"
-          class="lg:hidden flex bg-white lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full items-center justify-center group"
-          ><img src="/images/sponsors/navicat_landscape.svg" alt="navicat" class="w-[80%]" /></a
-        >
-        <a
-          href="#"
-          class="lg:hidden flex bg-lemon lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full items-center justify-center group"
-        ></a>
-        <a
-          href="#"
-          class="lg:hidden flex bg-lime lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full items-center justify-center group"
-        ></a>
+      {hasCurrentSponsors ? (
+        <>
+          <!-- Current sponsors from markdown collection -->
+          <SponsorBubbles />
 
-        <a
-          href="#"
-          class="bg-lime lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full flex items-center justify-center group"
-        ></a>
-        <a
-          href="#"
-          class="bg-lavender lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full flex items-center justify-center group"
-        ></a>
-        <a
-          href="#"
-          class="bg-coral lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full flex items-center justify-center group"
-        ></a>
-        <a
-          href="#"
-          class="bg-white lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full flex items-center justify-center group"
-          ><img src="/images/sponsors/navicat_landscape.svg" alt="navicat" class="w-[80%]" /></a
-        >
-        <a
-          href="#"
-          class="bg-lime lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full flex items-center justify-center group"
-        ></a>
-        <a
-          href="#"
-          class="bg-emerald lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full flex items-center justify-center group"
-        ></a>
-        <a
-          href="#"
-          class="bg-lavender lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full flex items-center justify-center group"
-        ></a>
-        <a
-          href="#"
-          class="bg-emerald lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full flex items-center justify-center group"
-        ></a>
-      </div>
+          <div class="fadeInUp h-[81px] flex justify-center mt-14 mx-auto">
+            <a href="/sponsors" class="btn-arrow btn-arrow--lemon btn-arrow--medium"
+              ><span>Sponsor PyCon AU today!</span></a
+            >
+          </div>
+        </>
+      ) : (
+        <>
+          <div class="fadeInUp h-[81px] flex justify-center mt-14 mx-auto">
+            <a href="/sponsors" class="btn-arrow btn-arrow--lemon btn-arrow--medium"
+              ><span>Sponsor PyCon AU today!</span></a
+            >
+          </div>
 
-      <div class="fadeInUp h-[81px] flex justify-center mt-14 mx-auto">
-        <a href="/sponsors" class="btn-arrow btn-arrow--lemon btn-arrow--medium"
-          ><span>Sponsor PyCon AU today!</span></a
-        >
-      </div>
+          <div class="fadeInUp text-center mt-15 text-white">
+            <h5 class="lg:text-3xl text-2xl font-serif">Previously sponsored by</h5>
+          </div>
+
+          <!-- Previous sponsors -->
+          <SponsorBubbles staticLogos={previousSponsors} />
+        </>
+      )}
+
+
     </div>
   </section>
 

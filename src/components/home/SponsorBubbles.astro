@@ -1,0 +1,184 @@
+---
+import { getCollection } from "astro:content";
+
+export interface Props {
+  staticLogos?: Array<{
+    logo: string;
+    alt: string;
+    tier?: string;
+  }>;
+}
+
+const { staticLogos = [] } = Astro.props;
+
+// Fetch sponsors from collection or use static data
+let sortedSponsors: Array<{
+  data: {
+    name: string;
+    tier?: string;
+    logo: string;
+    website?: string;
+  };
+}> = [];
+
+// Define tier order for sorting
+const tierOrder = ["diamond", "platinum", "gold", "standard", "digital", "in-kind"];
+
+// Determine mode based on whether staticLogos is provided
+const isStaticMode = staticLogos.length > 0;
+
+if (!isStaticMode) {
+  // Fetch all sponsors from collection, excluding entries starting with underscore
+  const allSponsors = await getCollection("sponsors", ({ id }) => !id.startsWith("_"));
+
+  // Sort sponsors by tier
+  sortedSponsors = allSponsors.sort((a, b) => {
+    return tierOrder.indexOf(a.data.tier) - tierOrder.indexOf(b.data.tier);
+  });
+} else {
+  // Use static logos (with optional tiers)
+  sortedSponsors = staticLogos.map((logo) => ({
+    data: {
+      name: logo.alt,
+      logo: logo.logo,
+      tier: logo.tier,
+    },
+  }));
+
+  // Sort static logos by tier if provided
+  sortedSponsors.sort((a, b) => {
+    const aTier = a.data.tier || "";
+    const bTier = b.data.tier || "";
+    const aIndex = aTier ? tierOrder.indexOf(aTier) : 999;
+    const bIndex = bTier ? tierOrder.indexOf(bTier) : 999;
+    return aIndex - bIndex;
+  });
+}
+
+// Available colors for bubbles (excluding white which is for logos)
+const colors = ["emerald", "lemon", "coral", "lime", "lavender"];
+
+// Initialize 15 bubbles (positions 1-15)
+type Bubble = {
+  position: number;
+  type: "stone" | "sponsor" | "color";
+  color?: string;
+  sponsor?: typeof sortedSponsors[0];
+};
+
+const bubbles: Bubble[] = [];
+
+// Initialize all bubbles with colored backgrounds
+for (let i = 1; i <= 15; i++) {
+  bubbles.push({ position: i, type: "color", color: colors[(i - 1) % colors.length] });
+}
+
+// Rule: If 3 or fewer sponsors, fill positions 5, 11, then 1 first (prominence)
+if (sortedSponsors.length <= 3) {
+  const priorityPositions = [5, 11, 1];
+  sortedSponsors.forEach((sponsor, index) => {
+    const pos = priorityPositions[index];
+    const bubbleIndex = bubbles.findIndex(b => b.position === pos);
+    if (bubbleIndex !== -1) {
+      bubbles[bubbleIndex] = { position: pos, type: "sponsor", sponsor };
+    }
+  });
+} else {
+  // More than 3 sponsors: Place sponsors in order, with colored bubbles between tiers and within large tiers
+  let sponsorIndex = 0;
+  let currentTier = sortedSponsors[0]?.data.tier;
+  let sponsorsInCurrentTier = 0;
+  let useThreeInterval = true; // Alternate between 3 and 4
+
+  // Count sponsors per tier
+  const tierCounts = new Map<string, number>();
+  sortedSponsors.forEach(sponsor => {
+    const tier = sponsor.data.tier || "none";
+    tierCounts.set(tier, (tierCounts.get(tier) || 0) + 1);
+  });
+
+  // Use all positions for more than 3 sponsors
+  for (let i = 1; i <= 15 && sponsorIndex < sortedSponsors.length; i++) {
+    const bubbleIndex = bubbles.findIndex(b => b.position === i);
+
+    if (sponsorIndex < sortedSponsors.length) {
+      const sponsor = sortedSponsors[sponsorIndex];
+      const sponsorTier = sponsor.data.tier || "none";
+      const tierCount = tierCounts.get(sponsorTier) || 0;
+
+      // If tier changed, add a colored bubble between tiers
+      if (sponsorTier !== currentTier && i > 1) {
+        currentTier = sponsorTier;
+        sponsorsInCurrentTier = 0;
+        useThreeInterval = true; // Reset interval pattern for new tier
+        // Keep this position as colored, move to next position
+        continue;
+      }
+
+      // Check if we need a break within this tier (only if tier has more than 3 sponsors)
+      if (tierCount > 3 && sponsorsInCurrentTier > 0) {
+        const interval = useThreeInterval ? 3 : 4;
+        if (sponsorsInCurrentTier % interval === 0) {
+          // Add a colored bubble break
+          useThreeInterval = !useThreeInterval; // Alternate for next break
+          // Keep this position as colored, move to next position
+          continue;
+        }
+      }
+
+      // Place sponsor
+      bubbles[bubbleIndex] = { position: i, type: "sponsor", sponsor };
+      sponsorIndex++;
+      sponsorsInCurrentTier++;
+    }
+  }
+}
+
+// Split bubbles into two rows
+const firstRow = bubbles.filter(b => b.position <= 7);
+const secondRow = bubbles.filter(b => b.position > 7);
+
+// Helper to render a bubble
+const renderBubble = (bubble: Bubble, rowClass: string) => {
+  // Map color names to full Tailwind classes (required for Tailwind JIT to include them)
+  const colorClassMap: Record<string, string> = {
+    emerald: "bg-emerald",
+    lemon: "bg-lemon",
+    coral: "bg-coral",
+    lime: "bg-lime",
+    lavender: "bg-lavender",
+    stone: "bg-stone",
+    white: "bg-white",
+  };
+
+  const bgClass = bubble.type === "sponsor" ? "bg-white" : (colorClassMap[bubble.color || "stone"] || "bg-stone");
+  const baseClass = `${rowClass} ${bgClass} lg:w-[159px] lg:h-[159px] w-[107px] h-[107px] rounded-full flex items-center justify-center group`;
+
+  if (bubble.type === "sponsor" && bubble.sponsor) {
+    const logoImg = `<img src="/images/sponsors/${bubble.sponsor.data.logo}" alt="${bubble.sponsor.data.name}" class="w-[80%]" />`;
+
+    // In static mode, or if no website is provided, render as div (no link)
+    if (isStaticMode || !bubble.sponsor.data.website) {
+      return `<div class="${baseClass}">${logoImg}</div>`;
+    } else {
+      // In collection mode with website, render as link
+      return `<a href="${bubble.sponsor.data.website}" class="${baseClass}">${logoImg}</a>`;
+    }
+  } else {
+    return `<div class="${baseClass}"></div>`;
+  }
+};
+---
+
+<div class="fadeInUp flex flex-wrap lg:flex-nowrap justify-center mt-20">
+  {firstRow.map(bubble => (
+    <Fragment set:html={renderBubble(bubble, "lg:flex hidden")} />
+  ))}
+</div>
+<div class="fadeInUp flex flex-wrap lg:flex-nowrap justify-center lg:-mt-5">
+  {firstRow.map(bubble => (
+    <Fragment set:html={renderBubble(bubble, "lg:hidden flex")} />
+  ))}
+  {secondRow.map(bubble => (
+    <Fragment set:html={renderBubble(bubble, "flex")} />
+  ))}
