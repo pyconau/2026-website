@@ -3,6 +3,7 @@ import Footer from "../components/Footer.astro";
 import HeaderBreadcrumbs from "../components/header/HeaderBreadcrumbs.astro";
 import PageHeader from "../components/header/PageHeader.astro";
 import Base from "../layouts/Base.astro";
+import { TICKETING_URL } from "../constants";
 ---
 
 <Base title="Tickets">
@@ -30,10 +31,7 @@ import Base from "../layouts/Base.astro";
           <p
             class="text-stone font-sans font-base tracking-[0.01em] leading-normal lg:w-[454px]"
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut nd dolore. Ipsum dolor sit amet,
-            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut nd
-            dolore.
+           PyCon AU offers four types of tickets to attend. Discounted early bird tickets are available for a limited time, until sold out!
           </p>
         </div>
 
@@ -76,14 +74,13 @@ import Base from "../layouts/Base.astro";
                     </h3>
                   </div>
                   <div class="price">
-                    <span class="text-stone/25 text-4xl font-semibold font-sans"
-                      >$550</span
+                    <span class="line-through text-stone/25 text-4xl font-semibold font-sans"
+                      >$850</span
                     >
                   </div>
                 </div>
                 <p class="text-stone">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt.
+                  The standard ticket for people who use Python professionally and who are either being paid to attend PyCon AU by their employer or are able to claim the cost of a PyCon AU ticket as a work related tax deduction.
                 </p>
                 <ul class="space-y-5 text-lime">
                   <li class="flex items-center gap-3">
@@ -123,7 +120,7 @@ import Base from "../layouts/Base.astro";
               </div>
               <div class="space-y-7">
                 <a
-                  href="#"
+                  href={TICKETING_URL}
                   class="btn-arrow btn-arrow--emerald rounded-[3.125rem]! hover:rounded-none! justify-between py-5!"
                   ><span>Buy Tickets</span></a
                 >
@@ -161,14 +158,13 @@ import Base from "../layouts/Base.astro";
                     </h3>
                   </div>
                   <div class="price">
-                    <span class="text-stone/25 text-4xl font-semibold font-sans"
+                    <span class="line-through text-stone/25 text-4xl font-semibold font-sans"
                       >$550</span
                     >
                   </div>
                 </div>
                 <p class="text-stone">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt.
+                  A discounted option for Python enthusiasts who are paying for a ticket out of their own pocket and would otherwise find it difficult to attend.
                 </p>
                 <ul class="space-y-5 text-lavender">
                   <li class="flex items-center gap-3">
@@ -204,7 +200,7 @@ import Base from "../layouts/Base.astro";
               </div>
               <div class="space-y-7">
                 <a
-                  href="#"
+                  href={TICKETING_URL}
                   class="btn-arrow btn-arrow--violet rounded-[3.125rem]! hover:rounded-none! justify-between py-5!"
                   ><span>Buy Tickets</span></a
                 >
@@ -240,7 +236,7 @@ import Base from "../layouts/Base.astro";
         <h2
           class="fadeInUp text-stone font-serif lg:text-6xl text-4xl text-center pt-40 pb-20"
         >
-          Other available passes
+          More ticket options
         </h2>
         <div class="grid lg:grid-cols-2 grid-cols-1 gap-5">
           <div class="fadeInUp bg-[#383838] py-14">
@@ -264,28 +260,26 @@ import Base from "../layouts/Base.astro";
                 </div>
                 <div class="rich-text">
                   <p class="text-stone">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt.
+                    These tickets are for the superstars of PyCon AU, who would like to go above and beyond to support the conference.
                   </p>
                   <p class="text-stone">
-                    All inclusions as per Professional Pass, plus lorem ipsum nd
-                    dolore:
+                    All inclusions of the <span class="text-emerald font-bold">Professional</span> ticket, as well as:
                   </p>
                 </div>
                 <ul class="space-y-5 text-lemon">
                   <li class="flex items-center gap-3">
                     <img src="images/tick-lemon.svg" alt="tick" />
-                    <span>Additional benefit</span>
+                    <span>Recognition as a minor sponsor</span>
                   </li>
                   <li class="flex items-center gap-3">
                     <img src="images/tick-lemon.svg" alt="tick" />
-                    <span>Another benefit goes here</span>
+                    <span>Warm fuzzy feelings!</span>
                   </li>
                 </ul>
               </div>
               <div class="space-y-7">
                 <a
-                  href="#"
+                  href={TICKETING_URL}
                   class="btn-arrow btn-arrow--lemon rounded-[3.125rem]! hover:rounded-none! justify-between py-5!"
                   ><span>Buy Tickets</span></a
                 >
@@ -311,16 +305,18 @@ import Base from "../layouts/Base.astro";
                     >
                   </div>
                 </div>
-                <div class="rich-text">
-                  <p class="text-stone">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt.
+                <div class="rich-text text-stone">
+                  <p>
+                    A limited number of subsidised tickets are available to students who hold a government issued student concession ID.
                   </p>
                   <p class="text-stone">
-                    All inclusions as per Professional Pass, plus lorem ipsum nd
-                    dolore:
+                    All inclusions of the <span class="text-lavender font-bold">Enthusiast</span> ticket, as well as:
+                  </p>
+                  <p>
+                    Student tickets will be made available later in 2026.
                   </p>
                 </div>
+                {/* 
                 <div class="space-y-5">
                   <p class="text-stone">Optional Add-Ons</p>
                   <ul class="space-y-5 text-[#FF7963]">
@@ -334,7 +330,9 @@ import Base from "../layouts/Base.astro";
                     </li>
                   </ul>
                 </div>
+                */}
               </div>
+              {/* 
               <div class="space-y-7">
                 <a
                   href="#"
@@ -342,6 +340,7 @@ import Base from "../layouts/Base.astro";
                   ><span>Buy Tickets</span></a
                 >
               </div>
+               */}
             </div>
           </div>
         </div>
