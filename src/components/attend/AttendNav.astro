@@ -1,5 +1,27 @@
 ---
 import SideNavItem from "../SideNavItem.astro";
+
+// Import all attend pages with their metadata
+const pages = import.meta.glob('../../pages/attend/*.astro', { eager: true });
+
+// Extract nav metadata and sort by order
+const navItems = Object.entries(pages)
+  .filter(([path, mod]) => {
+    // Filter out index page and pages without nav metadata
+    return !path.includes('index.astro') && mod.nav;
+  })
+  .map(([path, mod]) => {
+    // Extract the slug from the file path
+    const slug = path.match(/\/attend\/(.+)\.astro$/)?.[1];
+    return {
+      href: `/attend/${slug}`,
+      title: mod.nav.title,
+      order: mod.nav.order,
+      tile: mod.nav.tile !== undefined ? mod.nav.tile : true,
+      image: mod.nav.image
+    };
+  })
+  .sort((a, b) => a.order - b.order);
 ---
 
 <div class="lg:w-[308px] w-full">
@@ -9,16 +31,9 @@ import SideNavItem from "../SideNavItem.astro";
         <h3 class="text-intro font-semibold">Attendee Guide</h3>
       </a>
       <ul class="font-medium font-sans text-charcoal space-y-4 mt-8">
-        <SideNavItem href="/attend/travel">Travel to PyCon AU</SideNavItem>
-        <SideNavItem href="/attend/transport">Brisbane Transport</SideNavItem>
-        <SideNavItem href="/attend/international-visitors">
-          International Visitors
-        </SideNavItem>
-        <SideNavItem href="/attend/bof">Birds of a Feather</SideNavItem>
-        <SideNavItem href="/attend/volunteer">Volunteer</SideNavItem>
-        <SideNavItem href="/attend/faq">FAQ</SideNavItem>
-        <SideNavItem href="/attend/refunds">Refunds</SideNavItem>
-        <SideNavItem href="/attend/conduct">Code of Conduct</SideNavItem>
+        {navItems.map((item) => (
+          <SideNavItem href={item.href}>{item.title}</SideNavItem>
+        ))}
       </ul>
     </div>
   </div>

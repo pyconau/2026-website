@@ -105,7 +105,7 @@ function initReadMore() {
 const fadeInUpElements = gsap.utils.toArray(".fadeInUp");
 
 fadeInUpElements.forEach((element) => {
-  console.log("fadeInUpElements", element);
+  // console.log("fadeInUpElements", element);
   gsap.from(element, {
     opacity: 0,
     y: 40,
