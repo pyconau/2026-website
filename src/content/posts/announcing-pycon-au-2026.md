@@ -7,7 +7,7 @@ category: "news"
 
 We’re excited to announce that PyCon AU will return in 2026, and we’re headed somewhere slightly warmer… to Brisbane!
 
-Join us in Queensland’s “river city”, **26-30 August 2026 at the Brisbane Sofitel Central**!
+Join us in Queensland’s “river city”, **26-30 August 2026 at the Sofitel Brisbane Central**!
 
 Importantly, these dates signal a few changes to the traditional PyCon AU schedule.
 
