@@ -24,9 +24,15 @@ type Props = {
 const { post } = Astro.props;
 const { Content } = await post.render();
 
+// Get the two most recent posts, excluding the current one
+const allPosts = await getCollection("posts");
+const recentPosts = allPosts
+  .filter((p) => p.slug !== post.slug)
+  .sort((a, b) => b.data.published.getTime() - a.data.published.getTime())
+  .slice(0, 2);
+
 // TODO: Page shows category as is (e.g. DIRECTORS-DESK), should map to strings
 // TODO: Color-ise the category
-// TODO: Other news & updates
 ---
 
 <Base title={post.data.title}>
@@ -77,26 +83,29 @@ const { Content } = await post.render();
           <a href="/news" class="btn btn--lime">Browse All</a>
         </div>
         <div class="grid lg:grid-cols-2 grid-cols-1 gap-5 pt-10 pb-32">
-          <a
-            href="#"
-            class="fadeInUp bg-white rounded-[3.125rem] p-10 flex flex-col justify-between gap-20 group hover:bg-white/95"
-          >
-            <div class="flex items-center justify-between">
-              <div class="tag">Category Tag</div>
-              <div class="date">14 September 2025</div>
-            </div>
-            <div
-              class="flex lg:flex-row flex-col gap-10 items-end justify-between"
-            >
-              <div class="lg:w-[78%] w-full space-y-10">
-                <h3 class="text-3xl font-sans font-medium leading-[1.1]">
-                  A longer headline goes in this space here and might go over a
-                  few lines.
-                </h3>
-              </div>
-              <DetailArrow />
-            </div>
-          </a>
+          {
+            recentPosts.map((recentPost) => (
+              <a
+                href={`/posts/${recentPost.slug}`}
+                class="fadeInUp bg-white rounded-[3.125rem] p-10 flex flex-col justify-between gap-20 group hover:bg-white/95"
+              >
+                <div class="flex items-center justify-between">
+                  <div class="tag">{recentPost.data.category}</div>
+                  <div class="date">
+                    <LongDate date={recentPost.data.published} />
+                  </div>
+                </div>
+                <div class="flex lg:flex-row flex-col gap-10 items-end justify-between">
+                  <div class="lg:w-[78%] w-full space-y-10">
+                    <h3 class="text-3xl font-sans font-medium leading-[1.1]">
+                      {recentPost.data.title}
+                    </h3>
+                  </div>
+                  <DetailArrow />
+                </div>
+              </a>
+            ))
+          }
         </div>
       </div>
     </div>
