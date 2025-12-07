@@ -1,6 +1,7 @@
 ---
 title: "The 2026 conference roadmap"
 published: 2025-11-20T09:09:00+10:00
+previewText: "We’re excited to share the 2026 conference roadmap"
 category: "news"
 ---
 Today we’re excited to share our conference roadmap!
