@@ -185,6 +185,13 @@ footer ul li a {
 .rich-text {
   @apply space-y-7;
 }
+
+.rich-text a {
+  @apply text-violet font-semibold underline;
+}
+.rich-text strong {
+  @apply font-semibold;
+}
 .rich-text img {
   @apply pt-7;
 }
