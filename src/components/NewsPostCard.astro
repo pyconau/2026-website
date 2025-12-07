@@ -1,0 +1,73 @@
+---
+import { getCollection } from "astro:content";
+import DetailArrow from "./DetailArrow.astro";
+import LongDate from "./typography/LongDate.astro";
+
+interface Props {
+  slug: string;
+  highlight?: boolean;
+  featured?: boolean;
+}
+
+const { slug, highlight = false, featured = false } = Astro.props;
+
+const posts = await getCollection("posts");
+const post = posts.find((p) => p.slug === slug);
+
+if (!post) {
+  throw new Error(`Post with slug "${slug}" not found`);
+}
+
+const bgClasses = highlight
+  ? "bg-lemon hover:bg-slate"
+  : "bg-white hover:bg-lemon";
+---
+
+{
+  featured ? (
+    <a
+      href={`/posts/${post.slug}`}
+      class={`fadeInUp ${bgClasses} rounded-[3.125rem] p-10 flex flex-col justify-between gap-20 row-span-2 group`}
+    >
+      <div class="flex lg:flex-nowrap flex-wrap lg:gap-0 gap-2 items-center justify-between">
+        <div class="tag group-hover:border-charcoal! fadeInUp">
+          {post.data.category}
+        </div>
+        <div class="date">
+          <LongDate date={post.data.published} />
+        </div>
+      </div>
+      <div class="flex lg:flex-row flex-col gap-10 items-end justify-between">
+        <div class="lg:w-[90%] w-full flex lg:flex-row flex-col gap-10">
+          <h3 class="text-3xl font-sans font-medium leading-[1.1] lg:w-[45%] w-full">
+            {post.data.title}
+          </h3>
+          <p class="lg:w-[50%] w-full">
+            {post.data.previewText}
+          </p>
+        </div>
+        <DetailArrow />
+      </div>
+    </a>
+  ) : (
+    <a
+      href={`/posts/${post.slug}`}
+      class={`fadeInUp ${bgClasses} rounded-[3.125rem] p-10 flex lg:flex-row flex-col justify-between gap-10 row-span-2 group`}
+    >
+      <div class="flex lg:flex-col lg:flex-nowrap flex-wrap lg:gap-4 gap-2 items-start justify-between lg:w-[20%]">
+        <div class="tag group-hover:border-charcoal! fadeInUp">
+          {post.data.category}
+        </div>
+        <div class="date">
+          <LongDate date={post.data.published} />
+        </div>
+      </div>
+      <div class="flex lg:flex-row flex-col gap-10 items-end justify-between lg:w-[80%]">
+        <h3 class="text-3xl font-sans font-medium leading-[1.1] lg:w-[90%] w-full">
+          {post.data.title}
+        </h3>
+        <DetailArrow />
+      </div>
+    </a>
+  )
+}

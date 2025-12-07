@@ -15,7 +15,7 @@ To learn more about running a specialist track in 2026, please visit the [specia
 
 We’re also hosting two office hours calls:
 * Tuesday 16 December 2025 at 6pm AEDT
-* Tuesday 16 January2026 at 6pm AEDT
+* Thursday 15 January 2026 at 6pm AEDT
 
 These are open discussion forums where you can bring your ideas or questions and the organising team will help offer advice or feedback.
 
