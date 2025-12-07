@@ -67,9 +67,9 @@
 }
 
 .container {
-  @apply mx-auto px-6.5 lg:px-0;
+  @apply mx-auto px-6.5 w-full;
 }
-@media (max-width: 1030px) and (min-width: 1010px) {
+/* @media (max-width: 1030px) and (min-width: 1010px) {
   .container {
     @apply px-6.5!;
   }
@@ -80,9 +80,15 @@
   }
 }
 
+@media (max-width: 1600px) and (min-width: 1536px) {
+  .container {
+    @apply px-6.5!;
+  }
+} */
+
 p,
 ul li {
-  @apply font-sans text-base font-normal tracking-[0.01em] leading-normal;
+  @apply font-sans text-base font-light tracking-[0.01em] leading-normal;
 }
 
 header svg.logo {
@@ -127,7 +133,7 @@ header.header-dark ul.main-menu > li > a {
 }
 
 .mobile-menu {
-  @apply flex flex-col justify-between h-[calc(100vh-151px)] lg:hidden;
+  @apply flex flex-col justify-between h-[calc(100vh-151px)] xl:hidden;
 }
 
 .mobile-menu ul li {
@@ -264,7 +270,7 @@ footer ul li a {
     flex
     gap-6
     items-center
-    hover:gap-10
+    /* hover:gap-10 */
     hover:rounded-none    
     transition-all
     duration-300
@@ -370,16 +376,16 @@ ul.sub-menu {
     after:absolute 
     after:bottom-0 
     after:-left-7
-    lg:after:left-1/2
-    lg:after:-translate-x-1/2
-    lg:after:bg-[url('/images/top-header-bg.svg')]
+    md:after:left-1/2
+    md:after:-translate-x-1/2
+    md:after:bg-[url('/images/top-header-bg.svg')]
     after:bg-[url('/images/top-header-bg--mobile.svg')]
     after:bg-contain
     after:bg-center
     after:bg-no-repeat
-    lg:after:w-[4137px]
+    md:after:w-[4137px]
     after:w-[767.26px]
-    lg:after:h-[58.2px]
+    md:after:h-[58.2px]
     after:h-[21.71px];
 }
 
@@ -447,9 +453,11 @@ ul.sub-menu {
     after:bg-[url('/images/header-divider.svg')]
     after:bg-contain
     after:bg-center
+    after:bg-no-repeat
     after:w-[1613px]
-    after:h-[132px]
-    -mt-px; /* for small gap on chrome mobile simular */
+    after:h-full
+    -mt-px /* for small gap on chrome mobile simular */
+    -mb-px; /* for small gap on chrome mobile simular */
 }
 
 .header-divider--lavender {
@@ -476,6 +484,7 @@ ul.sub-menu {
     after:bg-[url('/images/footer-divider.svg')]
     after:bg-contain
     after:bg-center
+    after:bg-no-repeat
     after:w-[2819px]
     after:h-[123px];
 }
@@ -517,7 +526,7 @@ ul.sub-menu {
 }
 
 .schedule-title {
-  @apply grid lg:grid-cols-18 grid-cols-13 mt-20 gap-3 lg:w-auto w-[1380px];
+  @apply grid lg:grid-cols-18 grid-cols-13 mt-20 gap-3 lg:w-auto w-[1380px] px-5;
 }
 .schedule-title .space-for-time-column {
   @apply lg:col-span-2 col-span-1 sticky left-0 z-30 bg-stone;
@@ -528,11 +537,11 @@ ul.sub-menu {
 }
 
 .schedule {
-  @apply grid lg:grid-cols-18 grid-cols-13 gap-x-6 border-y border-[#DBDBDB] mt-5 lg:w-auto w-[1380px];
+  @apply grid lg:grid-cols-18 grid-cols-13 gap-x-6 border-y border-[#DBDBDB] mt-5 lg:w-auto w-[1380px] px-5;
 }
 
 .schedule .time {
-  @apply lg:col-span-2 col-span-1 text-charcoal font-semibold tracking-[0.01rem] pl-3 pt-2 min-h-[160px];
+  @apply lg:col-span-2 col-span-1 text-charcoal font-semibold tracking-[0.01rem] pt-2 min-h-[160px];
   @apply sticky left-0 z-30 bg-stone;
 }
 

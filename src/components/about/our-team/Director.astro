@@ -17,12 +17,12 @@ const { name, title, pronouns, photo, website, linkedin, bluesky, mastodon } =
 ---
 
 <div class="relative pt-10 mt-10 lg:mt-0 fadeInUp">
-  <div
-    class="lg:bg-[url('/images/bg-shape.svg')] bg-[url('/images/bg-shape--mobile.svg')] bg-cover bg-no-repeat relative min-h-[420px] lg:flex flex-row items-center gap-10 w-full pb-12.5 pt-18 px-5 lg:pt-10 lg:pl-14 lg:pr-20 z-20"
-  >
+
+  <img src="/images/scallop-top.svg" class="" alt="">
+  <div class="bg-lime bg-cover bg-no-repeat relative lg:flex flex-row items-center gap-10 w-full px-5 py-4 lg:pl-14 lg:pr-20 z-20">
     <img
       src={photo}
-      class="lg:w-[238px] w-[91px] lg:static absolute top-[-30px] left-0 rounded-full"
+      class="lg:w-[238px] w-[91px] lg:static absolute top-[-80px] left-0 rounded-full"
       alt={name}
     />
     <div class="flex flex-col gap-5 justify-between py-2 w-full">
@@ -92,4 +92,5 @@ const { name, title, pronouns, photo, website, linkedin, bluesky, mastodon } =
       </div>
     </div>
   </div>
+  <img src="/images/scallop-bottom.svg" class="" alt="">
 </div>

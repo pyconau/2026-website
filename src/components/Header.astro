@@ -80,7 +80,7 @@ const attendeeGuidePages = Object.entries(pages)
             ></svg
           >
         </a>
-        <ul class="lg:flex hidden items-center gap-10 main-menu">
+        <ul class="xl:flex hidden items-center gap-10 main-menu">
           {
             /*<li>
              <HeaderTopNavItem href="/program">Program</HeaderTopNavItem>
@@ -107,7 +107,7 @@ const attendeeGuidePages = Object.entries(pages)
           </li>
         </ul>
       </div>
-      <div class="lg:flex hidden items-center gap-7">
+      <div class="xl:flex hidden items-center gap-7">
         <ul class="flex items-center gap-7 main-menu">
           <li>
             <HeaderTopNavItem href="/news/">News &amp; Updates</HeaderTopNavItem
@@ -151,8 +151,8 @@ const attendeeGuidePages = Object.entries(pages)
         <a href="/tickets" class="btn">Get Tickets</a>
       </div>
 
-      <a href="/tickets" class="btn block lg:hidden py-1! px-3!">Get Tickets</a>
-      <a href="#" class="lg:hidden block">
+      <a href="/tickets" class="btn block xl:hidden py-1! px-3!">Get Tickets</a>
+      <a href="#" class="xl:hidden block">
         <div
           @click="isMobileMenuOpen = !isMobileMenuOpen"
           :class="{ 'is-active': isMobileMenuOpen }"
@@ -175,12 +175,12 @@ const attendeeGuidePages = Object.entries(pages)
           :class="{ 'sub-menu-open': openSubMenu === 'program' }"
         >
           <a
-            @click="openSubMenu = openSubMenu === 'program' ? null : 'program'"
-            href="#"
+            href="/program"
             class="has-child"
           >
             <span>Program</span>
             <svg
+              @click="openSubMenu = openSubMenu === 'program' ? null : 'program'"
               xmlns="http://www.w3.org/2000/svg"
               width="15.966"
               height="28.934"
@@ -226,12 +226,12 @@ const attendeeGuidePages = Object.entries(pages)
           :class="{ 'sub-menu-open': openSubMenu === 'attendee' }"
         >
           <a
-            @click="openSubMenu = openSubMenu === 'attendee' ? null : 'attendee'"
-            href="#"
+            href="/attend"
             class="has-child"
           >
             <span>Attendee Guide</span>
             <svg
+              @click="openSubMenu = openSubMenu === 'attendee' ? null : 'attendee'"
               xmlns="http://www.w3.org/2000/svg"
               width="15.966"
               height="28.934"
@@ -269,12 +269,12 @@ const attendeeGuidePages = Object.entries(pages)
           :class="{ 'sub-menu-open': openSubMenu === 'about' }"
         >
           <a
-            @click="openSubMenu = openSubMenu === 'about' ? null : 'about'"
-            href="#"
+            href="/about"
             class="has-child"
           >
             <span>About</span>
             <svg
+              @click="openSubMenu = openSubMenu === 'about' ? null : 'about'"
               xmlns="http://www.w3.org/2000/svg"
               width="15.966"
               height="28.934"
