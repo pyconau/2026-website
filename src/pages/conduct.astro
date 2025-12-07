@@ -1,25 +1,14 @@
 ---
-import AttendNav from "../../components/attend/AttendNav.astro";
-import Footer from "../../components/Footer.astro";
-import Crumb from "../../components/header/Crumb.astro";
-import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
-import PageHeader from "../../components/header/PageHeader.astro";
-import PageHeaderTitle from "../../components/header/PageHeaderTitle.astro";
-import TypographyLink from "../../components/typography/TypographyLink.astro";
-import Base from "../../layouts/Base.astro";
-
-export const nav = {
-  order: 8,
-  title: "Code of Conduct",
-  tile: false
-};
+import PoliciesNav from "../components/policies/PoliciesNav.astro";
+import Footer from "../components/Footer.astro";
+import PageHeader from "../components/header/PageHeader.astro";
+import PageHeaderTitle from "../components/header/PageHeaderTitle.astro";
+import TypographyLink from "../components/typography/TypographyLink.astro";
+import Base from "../layouts/Base.astro";
 ---
 
 <Base title="Code of Conduct">
   <PageHeader dark={true} starColour="violet">
-    <HeaderBreadcrumbs colour="lavender">
-      <Crumb href="/attend/">Attendee Guide</Crumb>
-    </HeaderBreadcrumbs>
     <PageHeaderTitle textColour="lavender">
       <h1>Code of Conduct</h1>
     </PageHeaderTitle>
@@ -44,7 +33,7 @@ export const nav = {
                 delegates can get together to learn from and be inspired by each
                 other about all things Free and Open Source. Linux Australia
                 aims to foster an atmosphere of trust, openness, candour and
-                safety where all delegates respect the diversity of each other’s
+                safety where all delegates respect the diversity of each other's
                 talents, abilities and experiences and value the input of
                 others.
               </p>
@@ -54,7 +43,7 @@ export const nav = {
                   >Values Statement</TypographyLink
                 > and ask all our members, speakers, volunteers, attendees and guests
                 to adopt these principles. We are a diverse community. Sometimes
-                this means we need to work harder to ensure we’re creating an environment
+                this means we need to work harder to ensure we're creating an environment
                 of trust and respect where all who come to participate feel comfortable
                 and included.
               </p>
@@ -83,7 +72,7 @@ export const nav = {
               </p>
 
               {
-                /* 
+                /*
               <p>
                 You can contact the safety team via phone on <TypographyLink
                   href="tel:+61431597233">+61 4 31 597 233</TypographyLink
@@ -101,7 +90,7 @@ export const nav = {
 
               <p>
                 Respect yourself, and respect others. Be courteous to those
-                around you. If someone indicates they don’t wish to be
+                around you. If someone indicates they don't wish to be
                 photographed, respect that wish. If someone indicates they would
                 like to be left alone, let them be. Our event venues and online
                 spaces may be shared with members of the public; please be
@@ -140,7 +129,7 @@ export const nav = {
 
               <p>
                 If presenters are unsure whether their material is suitable,
-                they are encouraged to show it to the conference’s speaker
+                they are encouraged to show it to the conference's speaker
                 liaison or mailing list/forum moderators before their session.
               </p>
 
@@ -229,7 +218,7 @@ export const nav = {
               <h2 id="questions">Questions?</h2>
 
               <p>
-                If you’re not sure about anything you’ve just read please
+                If you're not sure about anything you've just read please
                 contact the organisers or the Linux Australia Council at <TypographyLink
                   href="mailto:council@linux.org.au"
                   class="font-bold">council@linux.org.au</TypographyLink
@@ -246,7 +235,7 @@ export const nav = {
               </p>
             </div>
 
-            <AttendNav />
+            <PoliciesNav />
           </div>
         </div>
       </div>

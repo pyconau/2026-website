@@ -1,25 +1,14 @@
 ---
-import AttendNav from "../../components/attend/AttendNav.astro";
-import Footer from "../../components/Footer.astro";
-import Crumb from "../../components/header/Crumb.astro";
-import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
-import PageHeader from "../../components/header/PageHeader.astro";
-import PageHeaderTitle from "../../components/header/PageHeaderTitle.astro";
-import TypographyLink from "../../components/typography/TypographyLink.astro";
-import Base from "../../layouts/Base.astro";
-
-export const nav = {
-  order: 7,
-  title: "Refunds",
-  tile: false
-};
+import PoliciesNav from "../components/policies/PoliciesNav.astro";
+import Footer from "../components/Footer.astro";
+import PageHeader from "../components/header/PageHeader.astro";
+import PageHeaderTitle from "../components/header/PageHeaderTitle.astro";
+import TypographyLink from "../components/typography/TypographyLink.astro";
+import Base from "../layouts/Base.astro";
 ---
 
 <Base title="Refunds">
   <PageHeader dark={true} starColour="violet">
-    <HeaderBreadcrumbs colour="lavender">
-      <Crumb href="/attend/">Attendee Guide</Crumb>
-    </HeaderBreadcrumbs>
     <PageHeaderTitle textColour="lavender">
       <h1>Refunds</h1>
     </PageHeaderTitle>
@@ -106,7 +95,7 @@ export const nav = {
               </p>
             </div>
 
-            <AttendNav />
+            <PoliciesNav />
           </div>
         </div>
       </div>

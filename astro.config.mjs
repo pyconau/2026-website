@@ -12,7 +12,7 @@ export default defineConfig({
   },
   integrations: [mdx(), sitemap()],
   redirects: {
-    "/conduct": "/attend/conduct",
+    // "/conduct": "/attend/conduct",
     // Add any necessary redirects here
   },
   vite: {
