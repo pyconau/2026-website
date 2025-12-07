@@ -8,9 +8,28 @@ export interface Props {
 
 const { dark } = Astro.props;
 
+// Import all attend pages with their metadata
+const pages = import.meta.glob('../pages/attend/*.astro', { eager: true });
+
+// Extract nav metadata and sort by order
+const attendeeGuidePages = Object.entries(pages)
+  .filter(([path, mod]) => {
+    // Filter out index page and pages without nav metadata
+    return !path.includes('index.astro') && mod.nav;
+  })
+  .map(([path, mod]) => {
+    // Extract the slug from the file path
+    const slug = path.match(/\/attend\/(.+)\.astro$/)?.[1];
+    return {
+      href: `/attend/${slug}`,
+      title: mod.nav.title,
+      order: mod.nav.order,
+    };
+  })
+  .sort((a, b) => a.order - b.order);
+
 /* TODO: Mobile menu links */
 /* TODO: Mobile menu is broken, will review once up to date */
-/* TODO: Add a menu to Attendee Guide */
 ---
 
 <header
@@ -64,11 +83,24 @@ const { dark } = Astro.props;
         <ul class="lg:flex hidden items-center gap-10 main-menu">
           {
             /*<li>
-             <HeaderTopNavItem href="/program">Program</HeaderTopNavItem> 
+             <HeaderTopNavItem href="/program">Program</HeaderTopNavItem>
           </li>*/
           }
-          <li>
+          <li class="relative group">
             <HeaderTopNavItem href="/attend/">Attendee Guide</HeaderTopNavItem>
+
+            <ul class="sub-menu">
+              {attendeeGuidePages.map((page) => (
+                <li>
+                  <a
+                    href={page.href}
+                    class="text-sm font-semibold font-sans hover:text-emerald"
+                  >
+                    {page.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </li>
           <li>
             <HeaderTopNavItem href="/sponsors/">Sponsors</HeaderTopNavItem>
@@ -189,8 +221,42 @@ const { dark } = Astro.props;
             </li>
           </ul>
         </li> -->
-        <li x-show="openSubMenu === null">
-          <a href="/attend/"><span>Attendee Guide</span></a>
+        <li
+          x-show="openSubMenu === null || openSubMenu === 'attendee'"
+          :class="{ 'sub-menu-open': openSubMenu === 'attendee' }"
+        >
+          <a
+            @click="openSubMenu = openSubMenu === 'attendee' ? null : 'attendee'"
+            href="#"
+            class="has-child"
+          >
+            <span>Attendee Guide</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="15.966"
+              height="28.934"
+              viewBox="0 0 15.966 28.934"
+              ><g transform="translate(-30.906 0)"
+                ><g transform="translate(0 0)"
+                  ><path
+                    d="M26.347,28.934h-3a16.009,16.009,0,0,1,9.19-14.468,15.977,15.977,0,0,1-4.514-3.176A15.862,15.862,0,0,1,23.347,0h3a12.882,12.882,0,0,0,3.8,9.169,12.882,12.882,0,0,0,9.169,3.8v3A12.967,12.967,0,0,0,26.347,28.934Z"
+                    transform="translate(7.559)"></path></g
+                ></g
+              >
+            </svg>
+          </a>
+          <ul class="flex flex-col gap-3 py-5 w-full">
+            {attendeeGuidePages.map((page) => (
+              <li>
+                <a
+                  href={page.href}
+                  class="font-semibold text-2xl font-sans hover:text-emerald"
+                >
+                  {page.title}
+                </a>
+              </li>
+            ))}
+          </ul>
         </li>
         <li x-show="openSubMenu === null">
           <a href="/sponsors/"><span>Sponsors</span></a>
