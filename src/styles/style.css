@@ -358,7 +358,7 @@ ul.main-menu > li {
 }
 
 ul.sub-menu {
-  @apply before:content-[''] before:absolute before:-top-[6px] before:rounded-full before:left-1/2 before:-translate-x-1/2 before:w-[12px] before:h-[12px] before:bg-emerald bg-white rounded-[3.125rem] px-10 py-4 space-y-2 w-[250px] absolute top-full left-1/2 -translate-x-1/2 text-center opacity-0 group-hover:opacity-100 transition-all duration-300;
+  @apply before:content-[''] before:absolute before:-top-[6px] before:rounded-full before:left-1/2 before:-translate-x-1/2 before:w-[12px] before:h-[12px] before:bg-emerald bg-white rounded-[3.125rem] px-10 py-4 space-y-2 w-[250px] absolute top-full left-1/2 -translate-x-1/2 text-center opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300;
 }
 
 .header-bg {
