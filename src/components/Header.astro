@@ -225,17 +225,18 @@ const attendeeGuidePages = Object.entries(pages)
           x-show="openSubMenu === null || openSubMenu === 'attendee'"
           :class="{ 'sub-menu-open': openSubMenu === 'attendee' }"
         >
-          <a
-            href="/attend"
-            class="has-child"
-          >
-            <span>Attendee Guide</span>
+          <div class="has-child">
+            <a href="/attend" >
+              <span>Attendee Guide</span>
+            </a>
             <svg
               @click="openSubMenu = openSubMenu === 'attendee' ? null : 'attendee'"
               xmlns="http://www.w3.org/2000/svg"
               width="15.966"
               height="28.934"
               viewBox="0 0 15.966 28.934"
+              :class="{ 'rotate-90': openSubMenu === 'attendee' }"
+              class=" transition-transform duration-100 ease-in-out"
               ><g transform="translate(-30.906 0)"
                 ><g transform="translate(0 0)"
                   ><path
@@ -244,10 +245,10 @@ const attendeeGuidePages = Object.entries(pages)
                 ></g
               >
             </svg>
-          </a>
-          <ul class="flex flex-col gap-3 py-5 w-full">
+          </div>
+          <ul class="flex flex-col gap-3 py-5 w-full transition-all duration-500 ease-in-out text-black bg-stone rounded-xl">
             {attendeeGuidePages.map((page) => (
-              <li>
+              <li class="px-4">
                 <a
                   href={page.href}
                   class="font-semibold text-2xl font-sans hover:text-emerald"
@@ -268,17 +269,18 @@ const attendeeGuidePages = Object.entries(pages)
           x-show="openSubMenu === null || openSubMenu === 'about'"
           :class="{ 'sub-menu-open': openSubMenu === 'about' }"
         >
-          <a
-            href="/about"
-            class="has-child"
-          >
-            <span>About</span>
+          <div class="has-child">
+            <a href="/about" >
+              <span>About</span>
+            </a>
             <svg
               @click="openSubMenu = openSubMenu === 'about' ? null : 'about'"
               xmlns="http://www.w3.org/2000/svg"
               width="15.966"
               height="28.934"
               viewBox="0 0 15.966 28.934"
+              :class="{ 'rotate-90': openSubMenu === 'about' }"
+              class=" transition-transform duration-100 ease-in-out"
               ><g transform="translate(-30.906 0)"
                 ><g transform="translate(0 0)"
                   ><path
@@ -287,30 +289,30 @@ const attendeeGuidePages = Object.entries(pages)
                 ></g
               >
             </svg>
-          </a>
-          <ul class="flex flex-col gap-3 py-5 w-full">
-            <li>
+          </div>
+          <ul class="flex flex-col gap-3 py-5 w-full transition-all duration-500 ease-in-out text-black bg-stone rounded-xl">
+            <li class="px-4">
               <a
                 href="/about/the-conference"
                 class="font-semibold text-2xl font-sans hover:text-emerald"
                 >The Conference</a
               >
             </li>
-            <li>
+            <li class="px-4">
               <a
                 href="/about/culture-and-community"
                 class="font-semibold text-2xl font-sans hover:text-emerald"
                 >Culture & Community</a
               >
             </li>
-            <li>
+            <li class="px-4">
               <a
                 href="/about/our-team"
                 class="font-semibold text-2xl font-sans hover:text-emerald"
                 >Our Team</a
               >
             </li>
-            <li>
+            <li class="px-4">
               <a
                 href="/about/volunteer"
                 class="font-semibold text-2xl font-sans hover:text-emerald"
