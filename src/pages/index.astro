@@ -9,6 +9,7 @@ import Bold from "../components/typography/Bold.astro";
 import ImageCard from "../components/typography/ImageCard.astro";
 import Base from "../layouts/Base.astro";
 import { previousSponsors } from "../data/previousSponsors";
+import ConnectSubscribeGetInTouchCards from "../components/ConnectSubscribeGetInTouchCards.astro";
 
 // Check if we have current sponsors
 const currentSponsors = await getCollection("sponsors", ({ id }) => !id.startsWith("_"));
@@ -303,94 +304,7 @@ const schemaData = {
   <section class="bg-[#313131]">
     <div class="footer-divider"></div>
     <div class="container">
-      <div class="grid lg:grid-cols-3 grid-cols-1 gap-5 pt-20 pb-32">
-        <div
-          class="fadeInUp bg-emerald text-white rounded-[3.125rem] text-center p-10 flex justify-center"
-        >
-          <div
-            class="flex flex-col lg:w-[80%] w-full gap-7 justify-between h-full"
-          >
-            <div class="space-y-4">
-              <h3
-                class="text-5xl font-serif font-normal -tracking-[0.02em] leading-[1.1]"
-              >
-                Connect
-              </h3>
-              <p class="mx-auto font-sans leading-tight">
-                Follow us on social media for updates!
-              </p>
-            </div>
-            <div class="flex gap-3 justify-center">
-              <a
-                href="https://linkedin.com/company/pyconau"
-                target="_blank"
-                class="bg-white p-1 rounded-lg w-[63px] hover:rounded-none transition-all duration-300 h-[63px] flex justify-center items-center text-[40px] text-emerald"
-                ><i class="fa-brands fa-linkedin-in"></i></a
-              >
-              <a
-                href="https://bsky.app/profile/pyconau.bsky.social"
-                target="_blank"
-                class="bg-white p-1 rounded-lg w-[63px] hover:rounded-none transition-all duration-300 h-[63px] flex justify-center items-center text-[35px] text-emerald"
-                ><i class="fa-brands fa-bluesky"></i></a
-              >
-              <a
-                href="https://mastodon.pycon.org.au/@pyconau"
-                target="_blank"
-                class="bg-white p-1 rounded-lg w-[63px] hover:rounded-none transition-all duration-300 h-[63px] flex justify-center items-center text-[40px] text-emerald"
-                ><i class="fa-brands fa-mastodon"></i></a
-              >
-              <a
-                href="https://youtube.com/pyconau"
-                target="_blank"
-                class="bg-white p-1 rounded-lg w-[63px] hover:rounded-none transition-all duration-300 h-[63px] flex justify-center items-center text-[40px] text-emerald"
-                ><i class="fa-brands fa-youtube"></i></a
-              >
-            </div>
-          </div>
-        </div>
-        <div
-          class="fadeInUp lg:translate-y-7 bg-violet text-white rounded-[3.125rem] text-center p-10 flex justify-center"
-        >
-          <div
-            class="flex flex-col lg:gap-0 gap-10 lg:w-[67%] w-full justify-between h-full"
-          >
-            <div class="space-y-4">
-              <h3
-                class="text-5xl font-serif font-normal -tracking-[0.02em] leading-[1.1]"
-              >
-                Subscribe
-              </h3>
-              <p class="mx-auto font-sans leading-tight">
-                Join the mailing list for major news and announcements.
-              </p>
-            </div>
-            <a href="#subscribe" class="btn btn--stone">Sign Up</a>
-          </div>
-        </div>
-        <div
-          class="fadeInUp bg-lavender text-white rounded-[3.125rem] text-center p-10 flex justify-center"
-        >
-          <div
-            class="flex flex-col lg:gap-0 gap-10 lg:w-[80%] w-full justify-between h-full"
-          >
-            <div class="space-y-4">
-              <h3
-                class="text-5xl font-serif font-normal -tracking-[0.02em] leading-[1.1]"
-              >
-                Get in touch
-              </h3>
-              <p class="mx-auto font-sans leading-tight">
-                Reach us by email for help and support.
-              </p>
-            </div>
-            <a
-              href="mailto:contact@pycon.org.au"
-              class="underline text-lg font-sans hover:text-lime transition-all duration-300"
-              >contact@pycon.org.au</a
-            >
-          </div>
-        </div>
-      </div>
+      <ConnectSubscribeGetInTouchCards />
     </div>
   </section>
 
