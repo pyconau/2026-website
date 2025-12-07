@@ -1,5 +1,6 @@
 ---
 import FooterSocialLink from "./FooterSocialLink.astro";
+import SubscribeModal from "./SubscribeModal.astro";
 
 // TODO: Privacy link is #
 ---
@@ -104,7 +105,7 @@ import FooterSocialLink from "./FooterSocialLink.astro";
               <a href="/attend/" class="text-lime font-medium">Attendee Guide</a
               >
             </li>
-            <li><a href="/about/" " class="text-lime font-medium">About</a></li>
+            <li><a href="/about/" class="text-lime font-medium">About</a></li>
           </ul>
           <ul class="space-y-3">
             <li>
@@ -168,10 +169,13 @@ import FooterSocialLink from "./FooterSocialLink.astro";
           class="text-white flex flex-wrap lg:flex-nowrap justify-center lg:justify-start lg:gap-7 gap-x-4"
         >
           <li class="lg:w-auto w-full lg:text-left text-center">
-            {/* TODO: SUBSCRIBE FOR UPDATES LINK */}
-            <FooterSocialLink href="#" special
-              >Subscribe for Updates</FooterSocialLink
+            <a
+              id="open-subscribe-modal"
+              href="#"
+              class="text-lime cursor-pointer hover:text-lemon transition-all duration-300"
             >
+              Subscribe for announcements
+            </a>
           </li>
           <li>
             <FooterSocialLink href="https://linkedin.com/company/pyconau">LinkedIn</FooterSocialLink>
@@ -250,4 +254,5 @@ import FooterSocialLink from "./FooterSocialLink.astro";
       >
     </div>
   </div>
+  <SubscribeModal />
 </footer>
