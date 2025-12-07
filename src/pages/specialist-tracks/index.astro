@@ -7,7 +7,10 @@ import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
 import HeaderStar from "../../components/header/HeaderStar.astro";
 import NewsItemsWidget from "../../components/NewsItemsWidget.astro";
 import NewsPostCard from "../../components/NewsPostCard.astro";
+import Deadline from "../../components/Deadline.astro";
 import Base from "../../layouts/Base.astro";
+
+const SUBMISSION_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSdgeD8HWGmIgxpKNM9DfVevogm96l9cA4wrVZV-D6fH1mgYEg/viewform?usp=header";
 ---
 
 <Base title="Specialist Tracks">
@@ -74,7 +77,6 @@ import Base from "../../layouts/Base.astro";
           >
             <div class="rich-text">
               <h2>Track Organiser Companion Guide</h2>
-              {/* TODO: remove excess padding/margin above this h2  */}
               <p
                 class="text-intro font-medium w-full text-charcoal lg:w-[570px]"
               >
@@ -85,15 +87,16 @@ import Base from "../../layouts/Base.astro";
                 outlines everything a track organiser needs to know, including
                 how to submit a track proposal before 23 January 2026.
               </p>
-              <p>
+              <Deadline deadline="2026-01-23T23:59:59+11:00" countdown={true}>
                 <div class="flex">
                   <a
-                    href="#"
+                    href={SUBMISSION_LINK}
+                    target="_blank"
                     class="btn-arrow btn-arrow--violet text-stone! no-underline!"
                     >Submit your proposal today</a
                   >
                 </div>
-              </p>
+              </Deadline>
             </div>
             <div class="">
               <a
