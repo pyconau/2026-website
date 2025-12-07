@@ -1,0 +1,119 @@
+---
+---
+
+<div
+  id="subscribe-modal"
+  class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50 p-4"
+  style="display: none;"
+>
+  <div class="bg-stone rounded-lg w-full max-w-4xl max-h-[80vh] flex flex-col relative">
+    <div class="flex justify-end p-4">
+      
+      <button
+        id="close-modal"
+        class="text-charcoal hover:text-coral transition-all duration-300 text-3xl leading-none"
+        aria-label="Close modal"
+      >
+        &times;
+      </button>
+    </div>
+    <div class="flex-1 overflow-hidden m-10">
+      <h2 class="text-2xl font-semibold text-charcoal">Subscribe for News &amp; Announcements</h2>
+      <p class="py-5">We send a few announcements a year with key dates and details regarding PyCon AU. We never sell your email address or contact information.</p>    
+      
+      {/*
+      <!-- START PROPOSED IFRAME -->
+      <div
+        class="flex flex-col lg:flex-row justify-between items-center bg-violet lg:py-0 py-5 gap-5 lg:gap-0 lg:pl-10 lg:h-[82px] lg:rounded-r-[89px]"
+        style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;">
+        <input
+          type="email"
+          placeholder="person@email.com"
+          class="lg:text-left text-center text-lg font-sans leading-[1.3] font-semibold text-stone px-5 lg:px-0 bg-transparent border-0 outline-none focus:outline-none placeholder:text-stone focus:placeholder:opacity-0 flex-1"
+        />
+        <input type="submit" value="Subscribe" class="btn-arrow btn-arrow--lavender h-full rounded-[89px]! hover:rounded-none! cursor-pointer" />
+      </div>
+      <!-- END PROPOSED IFRAME -->
+       */}
+
+
+      <iframe
+        src="https://lists.linux.org.au/mailman/listinfo/pycon-au-announce"
+        class="w-full h-15 border-0"
+        title="Subscribe to PyConAU Announcements"
+        
+      ></iframe>
+
+      <p class="py-5 place-self-end">
+        This mailing list is provided by Linux Australia. Read
+        <a href="https://lists.linux.org.au/pipermail/pycon-au-announce/" class="text-violet underline" target="_blank">the archives</a>
+        .
+      </p>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('subscribe-modal');
+  const closeButton = document.getElementById('close-modal');
+  const openButton = document.getElementById('open-subscribe-modal');
+
+  function openModal() {
+    if (modal) {
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      window.location.hash = 'subscribe';
+    }
+  }
+
+  function closeModal() {
+    if (modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+      // Remove hash from URL without adding to history
+      if (window.location.hash === '#subscribe') {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+    }
+  }
+
+  // Check if URL has #subscribe on page load
+  if (window.location.hash === '#subscribe') {
+    openModal();
+  }
+
+  // Listen for hash changes (browser back/forward)
+  window.addEventListener('hashchange', () => {
+    if (window.location.hash === '#subscribe') {
+      openModal();
+    } else if (modal && modal.style.display === 'flex') {
+      closeModal();
+    }
+  });
+
+  if (openButton) {
+    openButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    });
+  }
+
+  if (closeButton) {
+    closeButton.addEventListener('click', closeModal);
+  }
+
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && modal.style.display === 'flex') {
+      closeModal();
+    }
+  });
+</script>

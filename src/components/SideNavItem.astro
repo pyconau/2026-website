@@ -1,0 +1,16 @@
+---
+export interface Props {
+  href: string;
+  routePattern?: string;
+}
+
+const { href, routePattern } = Astro.props;
+---
+
+<li
+  class={(Astro.routePattern === (routePattern || href) && "active-page") || ""}
+>
+  <a href={href} class="hover:text-emerald transition-all duration-300"
+    ><slot /></a
+  >
+</li>

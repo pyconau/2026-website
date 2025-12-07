@@ -1,0 +1,648 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-charcoal: #282828;
+  --color-stone: #eaeaea;
+  --color-lemon: #f2bf36;
+  --color-lime: #bdf462;
+  --color-coral: #ef553c;
+  --color-lime: #bdf462;
+  --color-emerald: #249f4f;
+  --color-lavender: #b380ff;
+  --color-violet: #511fe5;
+
+  /* Font Families */
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+  --font-serif: "Roboto Slab", serif;
+
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Font Sizes with Line Heights */
+  --text-xs: 0.875rem; /* 14px */
+  --text-xs--line-height: 1.25; /* 20px */
+
+  --text-sm: 1rem; /* 16px */
+  --text-sm--line-height: 1.625; /* 26px */
+
+  --text-base: 1.125rem; /* 18px */
+  --text-base--line-height: 1.5555555556; /* 28px */
+
+  --text-lg: 1.375rem; /* 22px */
+  --text-lg--line-height: 1.4545454545; /* 32px */
+
+  --text-xl: 1.5rem; /* 24px */
+  --text-xl--line-height: 1.2083333333; /* 29px */
+
+  --text-2xl: 1.625rem; /* 26px */
+  --text-2xl--line-height: 1.25; /* 32px */
+
+  --text-3xl: 1.75rem; /* 28px */
+  --text-3xl--line-height: 1.1071428571; /* 31px */
+  --text-3xl--letter-spacing: 0.02em;
+
+  --text-4xl: 2.25rem; /* 36px */
+  --text-4xl--line-height: 1; /* 36px */
+
+  --text-5xl: 2.625rem; /* 42px */
+  --text-5xl--line-height: 1.1904761905; /* 50px */
+
+  --text-6xl: 4.375rem; /* 70px */
+  --text-6xl--line-height: 0.9714285714; /* 68px */
+  --text-6xl--letter-spacing: -0.022em;
+
+  --text-7xl: 5.5rem; /* 88px */
+  --text-7xl--line-height: 1.0625; /* 96px */
+
+  --text-8xl: 6.25rem; /* 100px */
+  --text-8xl--line-height: 1; /* 100px */
+
+  --text-10pt: 0.625rem; /* 10px */
+  --text-10pt--line-height: 1; /* 10px */
+}
+
+.container {
+  @apply mx-auto px-6.5 w-full;
+}
+/* @media (max-width: 1030px) and (min-width: 1010px) {
+  .container {
+    @apply px-6.5!;
+  }
+}
+@media (max-width: 1365px) and (min-width: 1280px) {
+  .container {
+    @apply px-6.5!;
+  }
+}
+
+@media (max-width: 1600px) and (min-width: 1536px) {
+  .container {
+    @apply px-6.5!;
+  }
+} */
+
+p,
+ul li {
+  @apply font-sans text-base font-light tracking-[0.01em] leading-normal;
+}
+
+header svg.logo {
+  @apply fill-charcoal;
+}
+header.header-dark svg.logo {
+  @apply fill-stone;
+}
+header.header-dark .line {
+  @apply bg-stone;
+}
+header.header-dark ul.main-menu > li > a {
+  @apply text-white;
+}
+
+.hamburger .line {
+  @apply bg-charcoal w-[30px] h-[3px] block my-[8px] mx-0 transition-all duration-300 ease-in-out;
+}
+
+.hamburger .line-2 {
+  @apply w-[19px];
+}
+
+.hamburger:hover {
+  @apply cursor-pointer;
+}
+
+.hamburger.is-active .line {
+  @apply bg-stone;
+}
+
+.hamburger.is-active .line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.is-active .line:nth-child(1) {
+  @apply translate-y-[13px] rotate-45;
+}
+
+.hamburger.is-active .line:nth-child(3) {
+  @apply translate-y-[-9px] -rotate-45;
+}
+
+.mobile-menu {
+  @apply flex flex-col justify-between h-[calc(100vh-151px)] xl:hidden;
+}
+
+.mobile-menu ul li {
+  @apply text-2xl font-sans font-semibold flex flex-wrap justify-between items-center gap-5;
+}
+
+.mobile-menu ul > li > ul {
+  @apply hidden space-y-10;
+}
+
+.mobile-menu ul > li > .has-child {
+  @apply flex justify-between gap-5 items-center w-full;
+}
+.mobile-menu ul > li > .has-child svg {
+  @apply fill-stone;
+}
+
+.mobile-menu ul li.sub-menu-open a.has-child {
+  @apply justify-start;
+}
+
+.mobile-menu ul li.sub-menu-open a.has-child span {
+  @apply order-2 text-lime;
+}
+
+.mobile-menu ul li.sub-menu-open a.has-child svg {
+  @apply rotate-180 fill-lime;
+}
+
+.mobile-menu ul li.sub-menu-open ul {
+  @apply flex;
+}
+
+footer ul li a {
+  @apply text-sm;
+}
+
+.footer-secondary-links ul li a {
+  @apply text-xs;
+}
+
+.text-intro {
+  @apply font-sans text-lg tracking-[0.01em] leading-[1.45];
+}
+
+.rich-text p.text-intro + p {
+  @apply mt-14;
+}
+.rich-text {
+  @apply space-y-7;
+}
+.rich-text img {
+  @apply pt-7;
+}
+.rich-text .aspect-video {
+  @apply mb-14;
+}
+
+.rich-text h1 {
+  @apply font-serif lg:text-6xl text-5xl font-medium tracking-[-0.02em] leading-[1.3] mt-10;
+}
+.rich-text h2 {
+  @apply font-serif lg:text-5xl text-4xl font-medium tracking-[-0.02em] leading-[1.3] mt-10;
+}
+.rich-text h3 {
+  @apply font-serif lg:text-4xl text-3xl font-medium tracking-[-0.02em] leading-[1.3] mt-10;
+}
+.rich-text h4 {
+  @apply font-serif lg:text-2xl text-xl font-medium tracking-[-0.02em] leading-[1.8] mt-10;
+}
+.rich-text h5 {
+  @apply font-serif lg:text-xl text-lg font-medium tracking-[-0.02em] leading-[1.8] mt-10;
+}
+.rich-text h6 {
+  @apply font-serif lg:text-lg text-base font-medium tracking-[-0.02em] leading-[1.8] mt-10;
+}
+
+.rich-text ul li {
+  @apply list-disc list-outside ml-4 pl-2 pb-4 font-sans text-base font-normal tracking-[0.01em] leading-normal;
+}
+
+.rich-text h1 + p,
+.rich-text h2 + p,
+.rich-text h3 + p,
+.rich-text h4 + p,
+.rich-text h5 + p,
+.rich-text h6 + p,
+.rich-text ul + p {
+  @apply mt-7;
+}
+
+.rich-text h4 {
+  @apply font-serif text-3xl font-medium tracking-[-0.02em] leading-[1.8] mt-10;
+}
+
+.btn {
+  @apply bg-lime
+  text-black
+    rounded-[1.25rem]
+    px-10
+    py-2
+    font-sans
+    lg:text-base
+    text-sm
+    font-semibold
+    hover:rounded-none
+    transition-all
+    duration-300;
+}
+
+.btn--lavender {
+  @apply bg-lavender text-stone;
+}
+.btn--emerald {
+  @apply bg-emerald text-charcoal;
+}
+.btn--stone {
+  @apply bg-stone text-charcoal;
+}
+
+.btn-arrow--down {
+  @apply font-sans text-[1.25rem] rounded-[3.125rem] flex items-center gap-6 pl-10 after:inline-block after:content-[''] after:w-[22px] after:h-[18px] after:bg-[url('/images/arrow-down.svg')] after:bg-contain after:bg-center after:bg-no-repeat;
+}
+
+.btn-arrow {
+  @apply bg-violet 
+    rounded-[26px] 
+    px-10 
+    py-2.5
+    text-base 
+    font-sans
+    font-semibold 
+    text-stone
+    flex
+    gap-6
+    items-center
+    /* hover:gap-10 */
+    hover:rounded-none    
+    transition-all
+    duration-300
+    after:content-['']
+    after:w-[33px]
+    after:h-[20px]
+    after:bg-[url('/images/arrow-btn.svg')]
+    lg:after:block
+    after:hidden
+    lg:text-left
+    text-center
+    after:bg-contain
+    after:bg-center
+    after:bg-no-repeat;
+}
+
+.btn-arrow--large,
+.btn-arrow--2col {
+  @apply lg:text-4xl
+    text-[30px]
+    font-regular
+    text-charcoal
+    lg:text-left 
+    text-center
+    font-serif
+    leading-none
+    rounded-[59px]
+    w-full
+    h-full
+    justify-between
+    hover:border-none
+    lg:px-20
+    lg:py-10
+    py-7
+    hover:px-12
+    after:w-[98px]
+    after:h-[35px]
+    after:bg-[url('/images/arrow-big.svg')]
+    after:bg-contain
+    after:bg-center
+    after:bg-no-repeat;
+}
+
+.btn-arrow--2col {
+  @apply after:bg-[url('/images/arrow-medium.svg')]
+    px-7
+    hover:px-5;
+}
+
+.btn-arrow--medium {
+  @apply lg:text-xl
+    text-lg
+    font-semibold
+    rounded-[89px]
+    after:w-[48px]
+    after:h-[29px];
+}
+
+.btn-arrow--large span,
+.btn-arrow--2col span {
+  @apply lg:w-[80%] w-full;
+}
+
+.btn-arrow--emerald {
+  @apply bg-emerald text-stone after:bg-[url('/images/arrow-medium--stone.svg')];
+}
+.btn-arrow--lime {
+  @apply bg-lime text-charcoal after:bg-[url('/images/arrow-medium.svg')];
+}
+.btn-arrow--lemon {
+  @apply bg-lemon text-charcoal after:bg-[url('/images/arrow-medium--lemon.svg')];
+}
+.btn-arrow--lavender {
+  @apply bg-lavender text-charcoal after:bg-[url('/images/arrow-medium.svg')];
+}
+.btn-arrow--coral {
+  @apply bg-coral text-charcoal after:bg-[url('/images/arrow-medium.svg')];
+}
+
+.breadcrumb a,
+.breadcrumb span {
+  @apply font-sans font-extrabold text-10pt uppercase tracking-[0.12em];
+}
+
+.tag {
+  @apply text-10pt font-sans font-extrabold tracking-[0.12em] uppercase rounded-[4.375rem] border-emerald border py-2 px-4;
+}
+
+ul.main-menu > li {
+  padding: 20px 0;
+}
+
+ul.sub-menu {
+  @apply before:content-[''] before:absolute before:-top-[6px] before:rounded-full before:left-1/2 before:-translate-x-1/2 before:w-[12px] before:h-[12px] before:bg-emerald bg-white rounded-[3.125rem] px-10 py-4 space-y-2 w-[250px] absolute top-full left-1/2 -translate-x-1/2 text-center opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300;
+}
+
+.header-bg {
+  @apply relative
+    lg:h-[13px]
+    h-[10px]
+    overflow-hidden
+    after:content-[''] 
+    after:absolute 
+    after:bottom-0 
+    after:-left-7
+    md:after:left-1/2
+    md:after:-translate-x-1/2
+    md:after:bg-[url('/images/top-header-bg.svg')]
+    after:bg-[url('/images/top-header-bg--mobile.svg')]
+    after:bg-contain
+    after:bg-center
+    after:bg-no-repeat
+    md:after:w-[4137px]
+    after:w-[767.26px]
+    md:after:h-[58.2px]
+    after:h-[21.71px];
+}
+
+#custom-bg {
+  @apply bg-gradient-to-b 
+    from-stone 
+    from-95% 
+    to-violet 
+    to-5%;
+}
+
+.section-divider {
+  @apply relative
+    bg-gradient-to-b 
+    from-stone 
+    from-50% 
+    to-charcoal 
+    to-50%
+    lg:h-[337.67px]
+    h-[268.08px]
+    overflow-hidden
+    /* after:content-[''] 
+    after:absolute 
+    after:top-0 
+    lg:after:left-1/2
+    lg:after:-translate-x-1/2
+    after:-left-[126%]
+    lg:after:bg-[url('/images/section-divider-v2.svg')]
+    after:bg-[url('/images/section-divider-mobile.svg')]
+    after:bg-contain
+    after:bg-center
+    after:bg-no-repeat
+    lg:after:w-[2604.28px]
+    lg:after:h-[337.67px]
+    after:w-[2067.6px]
+    after:h-[268.08px] */;
+}
+
+.section-divider svg {
+  @apply lg:w-[2604.28px]
+    lg:h-[337.67px]
+    w-[2067.6px]
+    h-[268.08px]
+    absolute
+    top-0
+    lg:left-1/2
+    -left-[126%]
+    lg:-translate-x-1/2;
+}
+
+.header-divider {
+  @apply relative
+    bg-gradient-to-b 
+    from-charcoal 
+    from-50% 
+    to-stone 
+    to-50%
+    h-[132px]
+    overflow-hidden
+    after:content-[''] 
+    after:absolute 
+    after:bottom-0 
+    after:left-1/2
+    after:-translate-x-1/2
+    after:bg-[url('/images/header-divider.svg')]
+    after:bg-contain
+    after:bg-center
+    after:bg-no-repeat
+    after:w-[1613px]
+    after:h-full
+    -mt-px /* for small gap on chrome mobile simular */
+    -mb-px; /* for small gap on chrome mobile simular */
+}
+
+.header-divider--lavender {
+  @apply after:bg-[url('/images/header-divider--lavender.svg')];
+}
+.header-divider--lime {
+  @apply after:bg-[url('/images/header-divider--lime.svg')];
+}
+
+.footer-divider {
+  @apply relative
+    bg-gradient-to-b 
+    from-violet 
+    from-50% 
+    to-[#313131] 
+    to-50%
+    h-[123px]
+    overflow-hidden
+    after:content-[''] 
+    after:absolute 
+    after:bottom-0 
+    after:left-1/2
+    after:-translate-x-1/2
+    after:bg-[url('/images/footer-divider.svg')]
+    after:bg-contain
+    after:bg-center
+    after:bg-no-repeat
+    after:w-[2819px]
+    after:h-[123px];
+}
+
+.footer-divider--coral {
+  @apply after:bg-[url('/images/footer-divider--coral.svg')];
+}
+
+.footer-divider--violet {
+  @apply after:bg-[url('/images/footer-divider--violet.svg')];
+}
+
+.footer-divider--lemon {
+  @apply after:bg-[url('/images/footer-divider--lemon.svg')];
+}
+
+/* .slider {
+  position: relative;
+}
+
+.slider .slick-slide {
+  &:nth-child(2n+1) {
+    img {
+      @apply rounded-[3.125rem] transition-all duration-300;
+    }
+  }
+}
+
+.slider .slick-list {
+  @apply overflow-visible lg:-ml-[8%];
+}
+
+.slider .slick-slide {
+  @apply lg:py-0 px-[5px] p-0;
+} */
+
+.schedule-wrapper {
+  @apply lg:overflow-auto overflow-scroll;
+}
+
+.schedule-title {
+  @apply grid lg:grid-cols-18 grid-cols-13 mt-20 gap-3 lg:w-auto w-[1380px] px-5;
+}
+.schedule-title .space-for-time-column {
+  @apply lg:col-span-2 col-span-1 sticky left-0 z-30 bg-stone;
+}
+
+.schedule-title__room {
+  @apply lg:col-span-4 col-span-3 border-b-2 border-[#313131] text-[#313131] text-center px-4 py-2;
+}
+
+.schedule {
+  @apply grid lg:grid-cols-18 grid-cols-13 gap-x-6 border-y border-[#DBDBDB] mt-5 lg:w-auto w-[1380px] px-5;
+}
+
+.schedule .time {
+  @apply lg:col-span-2 col-span-1 text-charcoal font-semibold tracking-[0.01rem] pt-2 min-h-[160px];
+  @apply sticky left-0 z-30 bg-stone;
+}
+
+.schedule .column {
+  @apply lg:col-span-4 col-span-3 relative min-h-[160px];
+}
+
+.schedule .new-row {
+  @apply lg:col-span-18 col-span-13 border-b border-[#DBDBDB];
+}
+
+/* Four columns */
+
+/* .schedule-four-cols .time {
+  @apply col-span-2;
+} */
+.schedule .column-span-2 {
+  @apply lg:col-span-8 col-span-6;
+}
+.schedule .column-span-3 {
+  @apply lg:col-span-12 col-span-9;
+}
+.schedule .column-span-4 {
+  @apply lg:col-span-16 col-span-12;
+}
+
+.schedule-event-wrapper {
+  @apply absolute left-0 right-0 z-10;
+  /* Top position will be set via inline styles */
+  border-bottom: 1px solid transparent;
+}
+
+.schedule-event-track-header {
+  @apply absolute left-0 right-0;
+  @apply flex items-center gap-2;
+  @apply text-stone font-sans font-semibold text-sm;
+  @apply -top-10 z-20;
+}
+
+.schedule-track-icon {
+  @apply flex-shrink-0;
+  width: 17.935px;
+  height: 17.936px;
+}
+
+.schedule-track-name {
+  @apply font-semibold text-[#747474];
+}
+
+.schedule-event {
+  @apply relative left-0 right-0;
+  @apply bg-white text-charcoal font-sans font-medium text-xs px-4 py-2 rounded-[1.25rem] flex flex-col justify-between items-start;
+  /* Height and background color will be set via inline styles based on track */
+  /* Text color will be white when track color is present, dark when background is white */
+  /* For events spanning multiple rows, add the border height (1px) per additional row */
+}
+
+.schedule-event-time {
+  @apply block font-extrabold;
+}
+.schedule-event-topic {
+  @apply block font-extrabold;
+}
+.schedule-event-presenter {
+  @apply block;
+}
+
+.side-nav .active-page {
+  @apply relative before:content-[''] before:absolute before:-left-[calc(40px+9px)] before:top-1 before:w-[18px] before:h-[18px] before:bg-lavender before:rounded-full;
+}
+
+/* Marquee styles */
+.marquee-container {
+  width: 100%;
+}
+
+.marquee {
+  @apply flex gap-5 w-fit;
+  animation: marquee 20s linear infinite;
+}
+
+.marquee:hover {
+  animation-play-state: paused;
+}
+
+.marquee-content {
+  @apply flex gap-5 shrink-0;
+}
+
+.marquee-content img {
+  @apply w-auto lg:h-[404px] h-[323px] shrink-0 object-cover;
+}
+.marquee-content img:nth-child(2n + 1) {
+  @apply rounded-[3.125rem];
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

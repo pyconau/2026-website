@@ -1,0 +1,158 @@
+---
+import AttendNav from "../../components/attend/AttendNav.astro";
+import Footer from "../../components/Footer.astro";
+import Crumb from "../../components/header/Crumb.astro";
+import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
+import PageHeader from "../../components/header/PageHeader.astro";
+import PageHeaderTitle from "../../components/header/PageHeaderTitle.astro";
+import Base from "../../layouts/Base.astro";
+
+export const nav = {
+  order: 4,
+  title: "Birds of a Feather",
+  image: "/images/attend/bof.jpg",
+};
+---
+
+<Base title="Birds of a Feather sessions">
+  <PageHeader dark={true} starColour="violet">
+    <HeaderBreadcrumbs colour="lavender">
+      <Crumb href="/attend/">Attendee Guide</Crumb>
+    </HeaderBreadcrumbs>
+    <PageHeaderTitle textColour="lavender">
+      <h1>Birds of a Feather sessions</h1>
+    </PageHeaderTitle>
+  </PageHeader>
+
+  <section>
+    <div class="header-divider header-divider--lavender"></div>
+
+    <div class="bg-stone py-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <div
+            class="flex flex-col lg:flex-row justify-between items-start gap-14"
+          >
+            <div class="lg:w-[80%] w-full rich-text">
+              <p>
+                Birds of a Feather sessions (“BoFs”) are a way for conference
+                attendees to self-organise around shared topics and interests.
+                These sessions often run for half an hour to an hour, and can
+                cover topics as broad as LGBTQIA+ meet-and-greets, microPython
+                enthusiasm, Python in games, or sewing pockets into clothing.
+                You are limited only by your imagination!
+              </p>
+              <p>
+                BoFs are usually held in the hallways of the conference venue,
+                or occasionally in a lecture room if there are no active talks
+                at that time (e.g. during lunch breaks). Note that lecture halls
+                may not be available during lunch breaks for operational
+                reasons—check with our team first.
+              </p>
+              <h2 id="how-do-i-run-a-bof">How do I run a BoF?</h2>
+              <p>Organising a BoF is as simple as three easy steps.</p>
+              <h3 id="choose-your-time-and-location">
+                Choose your time and location
+              </h3>
+              <p>
+                Choose a place in the conference venue where 10-20 people could
+                comfortably gather and hold a discussion without disturbing
+                others. We are the only event on level 1 of Pullman Melbourne on
+                the Park on Saturday and Sunday, so you are welcome to pick
+                anywhere in the foyer.
+              </p>
+              <p>
+                Downstairs in the foyer or bar area is also a good place for
+                BoFs.
+              </p>
+              <h3 id="list-your-bof">List your BoF</h3>
+              <p>
+                We have a board near the registration desk where you can write
+                the topic/theme and location, and pin it to a time on the board.
+                It’s helpful to put your name, Discord alias or social media
+                handle so that people can contact you with questions (but you
+                don’t have to do all three).
+              </p>
+              <p>
+                You can also use this board to check what other BoFs are
+                running, and you might find you want to merge communities or
+                schedule around other sessions.
+              </p>
+              <h3 id="announce-your-bof">Announce your BoF!</h3>
+              <p>
+                Share your BoF in the attendee Discord. You can also post about
+                your BoF using the #PyConAU hashtag. While careful not to spam
+                everyone, it can be helpful to announce your BoF once when
+                listing it, and again shortly before gathering (as a friendly
+                reminder to anyone who has forgotten or missed your first
+                announcement).
+              </p>
+              <h2 id="bof-etiquette">BoF etiquette</h2>
+              <p>
+                Please make a note of what other BoFs are running at the same
+                time as yours, and try to choose a time and place that does not
+                conflict with another BoF. To best include people as they arrive
+                we recommend using the <a
+                  href="http://ericholscher.com/blog/2017/aug/2/pacman-rule-conferences/"
+                  >Pacman method</a
+                >, which involves leaving a person-sized gap in your standing or
+                seating arrangements to give the new person an obvious place to
+                be included.
+              </p>
+              <p>
+                Don’t gatekeep - if someone decides to turn up to your BoF, they
+                are allowed to be there!
+              </p>
+              <p>
+                Stick to the pre-announced time and place of your BoF. If things
+                change (i.e. you discover the space is not available, or you are
+                running late), please announce this clearly in the attendee
+                Discord and the #PyConAU hashtag.
+              </p>
+              <h2 id="dinners-breakfasts-and-drinks">
+                Dinners, Breakfasts, and Drinks
+              </h2>
+              <p>
+                If you would like to organise a dinner with other conference
+                attendees, you can do so in the #food-and-drink channel on
+                Discord. You can also post about your plans with the #PyConAU
+                hashtag.
+              </p>
+              <p>
+                Conferences are a great chance to meet new people! When using
+                the conference hashtag or Discord to promote events like
+                dinners, breakfasts, or drinks, please make sure to include
+                PyCon AU newcomers or people from outside your group of friends
+                to the event. If you only want to have a gathering with your
+                friends, <strong>please organise this privately</strong>. The
+                assumption is that if you use the conference hashtag or Discord
+                to talk about your event, it is open to all conference
+                attendees.
+              </p>
+              <h2 id="conduct-expectations">Conduct Expectations</h2>
+              <p>
+                Please be aware that the PyCon AU <a href="/conduct"
+                  >Code of Conduct</a
+                > applies to all BoFs and conference-adjacent events. Be mindful
+                of your behaviour around other conference attendees, particularly
+                if alcohol is being served.
+              </p>
+              <p>
+                Any issues at these events can be reported to the PyCon AU Code
+                of Conduct committee and will be treated with the same gravity
+                as if they had happened in the conference venue.
+              </p>
+            </div>
+
+            <AttendNav />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <!-- Main scripts (will be added in Phase 5) -->
+  <script src="/src/scripts/animations.js"></script>
+</Base>

@@ -1,0 +1,316 @@
+---
+import AttendNav from "../../components/attend/AttendNav.astro";
+import Footer from "../../components/Footer.astro";
+import Crumb from "../../components/header/Crumb.astro";
+import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
+import PageHeader from "../../components/header/PageHeader.astro";
+import PageHeaderTitle from "../../components/header/PageHeaderTitle.astro";
+import TypographyLink from "../../components/typography/TypographyLink.astro";
+import Base from "../../layouts/Base.astro";
+
+export const nav = {
+  order: 3,
+  title: "International Visitors",
+  image: "/images/attend/beda-airport.jpeg",
+};
+---
+
+<Base title="International Visitors">
+  <PageHeader dark={true} starColour="violet">
+    <HeaderBreadcrumbs colour="lavender">
+      <Crumb href="/attend/">Attendee Guide</Crumb>
+    </HeaderBreadcrumbs>
+    <PageHeaderTitle textColour="lavender" fullWidthTitle={true}>
+      <h1 class="text-balance">
+        {/* TODO: Consider if all titles should do this? */}
+        Attending PyCon AU as an International Visitor
+      </h1>
+    </PageHeaderTitle>
+  </PageHeader>
+
+  <section>
+    <div class="header-divider header-divider--lavender"></div>
+
+    <div class="bg-stone py-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <div
+            class="flex flex-col lg:flex-row justify-between items-start gap-14"
+          >
+            <div class="lg:w-[80%] w-full rich-text">
+              <p class="text-intro font-medium text-charcoal fadeInUp">
+                PyCon AU is an event that welcomes international visitors,
+                including speakers, attendees, and exhibitors. If you are
+                planning to attend PyCon AU from outside Australia, you will
+                need to apply for a visa to enter the country.
+              </p>
+              <p></p>
+              <p>
+                We are registered with the International Event Coordinator
+                Network (IECN) of the Department of Home Affairs.
+              </p>
+              <p>
+                The following information is provided to assist you in
+                understanding the visa options available for attending PyCon AU.
+                Please note that this information is general in nature and may
+                not cover all individual circumstances. It is recommended that
+                you consult the official website of the Department of Home
+                Affairs or seek professional advice for your specific situation.
+              </p>
+              <h2 id="how-pycon-au-can-assist">How PyCon AU can assist</h2>
+              <h3 id="international-speakers">International speakers</h3>
+              <p>
+                If your talk has been accepted to PyCon AU, you will be sent a
+                speaker registration voucher to register your ticket. When you
+                register using that voucher you can request a letter of
+                invitation to assist with your visa application. This letter
+                will confirm your participation as a speaker and provide details
+                about the event.
+              </p>
+              <p>
+                We also recommend speakers apply for their visa as soon as
+                possible after receiving the letter of support, as visa
+                processing times can vary.
+              </p>
+              <p>
+                <em
+                  >PyCon AU cannot guarantee that you will be granted a visa</em
+                >, but we hope the letter of invitation supports your
+                application.
+              </p>
+              <h3 id="international-attendees">International attendees</h3>
+              <p>
+                If you are registering to attend PyCon AU, you can indicate
+                during registration that you will be attending from outside
+                Australia. The details you provide are then shared with the
+                Department of Home Affairs (via our IECN participation).
+              </p>
+              <p>
+                <em
+                  >PyCon AU cannot guarantee that you will be granted a visa</em
+                >, but we hope this process assists with your application.
+              </p>
+              <h2 id="visa-options">Visa Options</h2>
+              <p>
+                Participants, attendees and speakers that <strong
+                  >will not be working, performing or otherwise be paid to
+                  contribute at the event</strong
+                > may be eligible to apply for the following visa options:
+              </p>
+              <ul>
+                <li>
+                  <p>
+                    <strong>Visitor (subclass 600) Business stream visa</strong
+                    >. For more information see: <TypographyLink
+                      href="https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/visitor-600/business-visitor-stream"
+                      >https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/visitor-600/business-visitor-stream</TypographyLink
+                    >
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <strong
+                      >Electronic Travel Authority – ETA (subclass 601)</strong
+                    >. For eligible passport holders and more information see: <TypographyLink
+                      href="https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/electronic-travel-authority-601"
+                      >https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/electronic-travel-authority-601</TypographyLink
+                    >
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <strong>eVisitor (subclass 651) Business stream visa</strong
+                    >. For eligible passport holders and more information see: <TypographyLink
+                      href="https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/evisitor-651"
+                      >https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/evisitor-651</TypographyLink
+                    >
+                  </p>
+                </li>
+              </ul>
+              <p>
+                <strong
+                  >Eligibility for an eVisitor visa and ETA will be determined
+                  by the country of passport that the applicant holds.</strong
+                >
+              </p>
+              <p>
+                Visitor (subclass 600) Business visa applicants should include
+                as much information as possible to support their visa
+                applications (see: <TypographyLink
+                  href="https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/visitor-600/business-visitor-stream#HowTo"
+                  >https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/visitor-600/business-visitor-stream#HowTo</TypographyLink
+                >). In addition, visa applicants should include the following
+                information:
+              </p>
+              <ul>
+                <li>
+                  evidence of any international travel outside of their own
+                  country (for example, copies of visas and passport pages
+                  containing entry and departure stamps)
+                </li>
+                <li>
+                  information and evidence of attendance at similar events of
+                  this type/nature.
+                </li>
+              </ul>
+              <p>
+                <strong>NB</strong>: Electronic Travel Authority – ETA (subclass
+                601) applicants from Malaysia should note that there may be
+                additional information and documentary requirements. For more
+                information please see: <TypographyLink
+                  href="https://malaysia.highcommission.gov.au/klpr/Visas_and_Migration.html"
+                  >https://malaysia.highcommission.gov.au/klpr/Visas_and_Migration.html</TypographyLink
+                >
+              </p>
+              <p>
+                A speaker, presenter, exhibitor, or other contributor <strong
+                  >that will be working, or otherwise be paid to contribute at
+                  the event</strong
+                > may be eligible to apply for one of the following visa options:
+              </p>
+              <ul>
+                <li>
+                  <strong>Temporary Activity (subclass 408)</strong> Invited participant
+                  visa (where there is an inviting Australian organisation). For
+                  more information see: <TypographyLink
+                    href="https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/temporary-activity-408/invited-for-other-social-and-cultural-activity"
+                    >https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/temporary-activity-408/invited-for-other-social-and-cultural-activity</TypographyLink
+                  >
+                </li>
+              </ul>
+              <p>
+                Please note that a the letter of support from an Australian
+                organisation is a legislative requirement for the <strong
+                  >Temporary Activity (subclass 408) Invited participant visa</strong
+                >.
+              </p>
+              <ul>
+                <li>
+                  <strong>Temporary Work (subclass 400)</strong> Short Stay Specialist
+                  visa (where there is no inviting Australian organisation). For
+                  more information see: <TypographyLink
+                    href="https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/temporary-work-400"
+                    >https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/temporary-work-400</TypographyLink
+                  >
+                </li>
+              </ul>
+              <p>
+                <strong>NB</strong>: These are the visa options available
+                presently but the Department reserves the right to change
+                regulations.
+              </p>
+              <h2 id="biometrics">Biometrics</h2>
+              <p>
+                Visa applicants outside of Australia will need to provide
+                biometrics when they apply for a visa that is part of the
+                Australian biometrics program, or where they are from a country,
+                or located in a country at time of application that is part of
+                the Australian biometrics program. For information regarding
+                Australia’s biometric program including visas and countries that
+                are part of the program, please see: <TypographyLink
+                  href="https://immi.homeaffairs.gov.au/help-support/meeting-our-requirements/biometrics"
+                  >https://immi.homeaffairs.gov.au/help-support/meeting-our-requirements/biometrics</TypographyLink
+                >
+              </p>
+              <h2 id="health-and-character-requirements">
+                Health and Character Requirements
+              </h2>
+              <p>
+                Most visa applicants must meet minimum health standards before
+                they can be granted ​a visa, and the department may assess your
+                health as part of the visa application process. This is referred
+                to as ‘meeting the health requirement’. For more information
+                regarding health requirements please see: <TypographyLink
+                  href="https://immi.homeaffairs.gov.au/help-support/meeting-our-requirements/health"
+                  >https://immi.homeaffairs.gov.au/help-support/meeting-our-requirements/health</TypographyLink
+                >
+              </p>
+              <p>
+                Applicants must be of good character to visa Australia, and must
+                meet the character requirements in order to be granted ​a visa.
+                For further information regarding character requirements please
+                see: <TypographyLink
+                  href="https://immi.homeaffairs.gov.au/help-support/meeting-our-requirements/character"
+                  >https://immi.homeaffairs.gov.au/help-support/meeting-our-requirements/character</TypographyLink
+                >
+              </p>
+              <h2 id="visa-application-process-and-processing-times">
+                Visa Application Process and Processing Times
+              </h2>
+              <p>
+                Visa applications are assessed on a case-by-case basis, and
+                actual processing times can vary due to individual circumstances
+                including:
+              </p>
+              <ul>
+                <li>
+                  whether the applicant has lodged a complete application,
+                  including all necessary supporting documents and paid
+                  associated visa application charges
+                </li>
+                <li>
+                  how promptly the applicant responds to any requests for
+                  additional information
+                </li>
+                <li>
+                  how long it takes to perform required checks on the supporting
+                  information provided
+                </li>
+                <li>
+                  how long it takes to receive information from external
+                  agencies, particularly in relation to health, character, and
+                  national security requirements
+                </li>
+                <li>
+                  when the application is lodged taking the current global visa
+                  processing times into account
+                </li>
+              </ul>
+              <p>
+                Processing times are impacted each month by cases that are
+                complex, changes to volume of applications and changes to
+                Ministerial Directions. More information about visa processing
+                times please see: <TypographyLink
+                  href="https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-processing-times/overview"
+                  >https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-processing-times/overview</TypographyLink
+                >. For this reason, we would advise that visa applications be
+                lodged at least 6 to 8 weeks prior to a person’s intended date
+                of travel.
+              </p>
+              <p>
+                <em
+                  ><strong
+                    >NB: IECN assistance will NOT guarantee a visa grant. Visa
+                    applicants must demonstrate that they meet all the
+                    legislative requirements for an Australian visa.</strong
+                  ></em
+                >
+              </p>
+              <p>
+                <strong>NB</strong>: In accordance with Australia’s Privacy Act
+                1988, any information an event organiser or participant provides
+                to the IECN will only be used to facilitate visa processing with
+                the relevant Australian visa office overseas.
+              </p>
+              <p>
+                Travellers should familiarise themselves with Australia’s border
+                and entry requirements. For further information, see ‘Entering
+                and leaving Australia’ at: <TypographyLink
+                  href="https://immi.homeaffairs.gov.au/entering-and-leaving-australia/entering-australia"
+                  >https://immi.homeaffairs.gov.au/entering-and-leaving-australia/entering-australia</TypographyLink
+                >
+              </p>
+            </div>
+
+            <AttendNav />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <!-- Main scripts (will be added in Phase 5) -->
+  <script src="/src/scripts/animations.js"></script>
+</Base>

@@ -1,0 +1,372 @@
+---
+import Footer from "../components/Footer.astro";
+import HeaderBreadcrumbs from "../components/header/HeaderBreadcrumbs.astro";
+import PageHeader from "../components/header/PageHeader.astro";
+import Base from "../layouts/Base.astro";
+import { TICKETING_URL } from "../constants";
+---
+
+<Base title="Tickets">
+  <PageHeader dark={true} starColour="lemon">
+    <HeaderBreadcrumbs colour="emerald" />
+
+    <div class="flex flex-col lg:flex-row justify-between relative pt-10">
+      <div
+        class="fadeInUp flex flex-col lg:gap-0 gap-14 items-start justify-between lg:w-[45%] w-full relative"
+      >
+        <div class="space-y-14">
+          <div
+            class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em]"
+          >
+            <h1 class="text-lime">Tickets</h1>
+          </div>
+          <div class="lg:hidden flex justify-center">
+            <img
+              src="images/tickets-pycon.svg"
+              class="lg:w-auto w-[190px]"
+              alt="pycon"
+              class="w-auto"
+            />
+          </div>
+          <p
+            class="text-stone font-sans font-base tracking-[0.01em] leading-normal lg:w-[454px]"
+          >
+           PyCon AU offers four types of tickets to attend. Discounted early bird tickets are available for a limited time, until sold out!
+          </p>
+        </div>
+
+        <a
+          href="#"
+          onclick="event.preventDefault(); window.scrollToSection('ticket-section'); return false;"
+          class="btn btn--emerald btn-arrow--down"><span>Buy Tickets</span></a
+        >
+      </div>
+      <div class="fadeInUp lg:w-1/2 w-full">
+        <div class="group flex justify-end relative">
+          <img
+            src="images/tickets-pycon.svg"
+            alt="pycon"
+            class="lg:block hidden"
+          />
+        </div>
+      </div>
+    </div>
+  </PageHeader>
+
+  <section class="bg-charcoal pt-20 ticket-section">
+    <div class="container">
+      <div class="lg:w-[85%] w-full mx-auto">
+        <div class="grid lg:grid-cols-2 grid-cols-1 gap-5">
+          <div class="fadeInUp bg-[#383838] py-14">
+            <div
+              class="lg:w-[426px] w-full lg:px-0 px-5 h-full mx-auto flex flex-col gap-16 justify-between"
+            >
+              <div class="space-y-10">
+                <div
+                  class="flex lg:flex-row flex-col gap-5 lg:gap-0 justify-between"
+                >
+                  <div class="space-y-2">
+                    <h3 class="text-lime font-sans font-semibold text-4xl">
+                      Professional
+                    </h3>
+                    <h3 class="text-stone font-sans font-semibold text-4xl">
+                      $750 Early Bird
+                    </h3>
+                  </div>
+                  <div class="price">
+                    <span class="line-through text-stone/25 text-4xl font-semibold font-sans"
+                      >$850</span
+                    >
+                  </div>
+                </div>
+                <p class="text-stone">
+                  The standard ticket for people who use Python professionally and who are either being paid to attend PyCon AU by their employer or are able to claim the cost of a PyCon AU ticket as a work related tax deduction.
+                </p>
+                <ul class="space-y-5 text-lime">
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-lime.svg" alt="tick" />
+                    <span>3-day Conference Pass <sup>1</sup></span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-lime.svg" alt="tick" />
+                    <span>Conference Tee</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-lime.svg" alt="tick" />
+                    <span>Catered Meal Breaks</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-lime.svg" alt="tick" />
+                    <span>All Day Tea & Coffee</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-lime.svg" alt="tick" />
+                    <span>Organisation/Company on Lanyard</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-lime.svg" alt="tick" />
+                    <span>Optional Workshops <sup>2</sup></span>
+                  </li>
+                </ul>
+              </div>
+              <div class="space-y-3">
+                <p class="text-stone">Optional Add-On</p>
+                <ul class="text-lavender">
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-violet.svg" alt="tick" />
+                    <span>Development Sprints</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="space-y-7">
+                <a
+                  href={TICKETING_URL}
+                  class="btn-arrow btn-arrow--emerald rounded-[3.125rem]! hover:rounded-none! justify-between py-5!"
+                  ><span>Buy Tickets</span></a
+                >
+                <div>
+                  <span
+                    class="text-sm text-stone font-sans tracking-[0.01em] block leading-normal"
+                    ><sup>1</sup> Single day passes will be available at a later
+                    stage.</span
+                  >
+                  <span
+                    class="text-sm text-stone font-sans tracking-[0.01em] block leading-normal"
+                    ><sup>2</sup> Seperate registration required</span
+                  >
+                </div>
+                <div class="lg:flex hidden flex-wrap lg:flex-nowrap">
+                  <div class="w-[142px] h-[142px] bg-lime rounded-full"></div>
+                  <div class="w-[142px] h-[142px] bg-lime rounded-full"></div>
+                  <div class="w-[142px] h-[142px] bg-lime rounded-full"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="fadeInUp bg-[#383838] py-14">
+            <div
+              class="lg:w-[426px] w-full lg:px-0 px-5 h-full mx-auto flex flex-col gap-16 justify-between"
+            >
+              <div class="space-y-10">
+                <div class="flex flex-col lg:flex-row justify-between">
+                  <div class="space-y-2">
+                    <h3 class="text-lavender font-sans font-semibold text-4xl">
+                      Enthusiast
+                    </h3>
+                    <h3 class="text-stone font-sans font-semibold text-4xl">
+                      $450 Early Bird
+                    </h3>
+                  </div>
+                  <div class="price">
+                    <span class="line-through text-stone/25 text-4xl font-semibold font-sans"
+                      >$550</span
+                    >
+                  </div>
+                </div>
+                <p class="text-stone">
+                  A discounted option for Python enthusiasts who are paying for a ticket out of their own pocket and would otherwise find it difficult to attend.
+                </p>
+                <ul class="space-y-5 text-lavender">
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-violet.svg" alt="tick" />
+                    <span>3-day Conference Pass <sup>1</sup></span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-violet.svg" alt="tick" />
+                    <span>Conference Tee</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-violet.svg" alt="tick" />
+                    <span>Catered Meal Breaks</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-violet.svg" alt="tick" />
+                    <span>All Day Tea & Coffee</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-violet.svg" alt="tick" />
+                    <span>Optional Workshops <sup>2</sup></span>
+                  </li>
+                </ul>
+              </div>
+              <div class="space-y-3">
+                <p class="text-stone">Optional Add-On</p>
+                <ul class="text-lavender">
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-violet.svg" alt="tick" />
+                    <span>Development Sprints</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="space-y-7">
+                <a
+                  href={TICKETING_URL}
+                  class="btn-arrow btn-arrow--violet rounded-[3.125rem]! hover:rounded-none! justify-between py-5!"
+                  ><span>Buy Tickets</span></a
+                >
+                <div>
+                  <span
+                    class="text-sm text-stone font-sans tracking-[0.01em] block leading-normal"
+                    ><sup>1</sup> Single day passes will be available at a later
+                    stage.</span
+                  >
+                  <span
+                    class="text-sm text-stone font-sans tracking-[0.01em] block leading-normal"
+                    ><sup>2</sup> Seperate registration required</span
+                  >
+                </div>
+                <div class="lg:flex hidden">
+                  <img src="images/star-big.svg" alt="star" />
+                  <img src="images/star-big.svg" alt="star" />
+                  <img src="images/star-big.svg" alt="star" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="bg-charcoal bg-[url('images/bg-pattern-2.svg')] bg-no-repeat bg-cover bg-center pt-10 pb-32"
+  >
+    <div class="container">
+      <div class="lg:w-[85%] w-full mx-auto">
+        <h2
+          class="fadeInUp text-stone font-serif lg:text-6xl text-4xl text-center pt-40 pb-20"
+        >
+          More ticket options
+        </h2>
+        <div class="grid lg:grid-cols-2 grid-cols-1 gap-5">
+          <div class="fadeInUp bg-[#383838] py-14">
+            <div
+              class="lg:w-[426px] w-full lg:px-0 px-5 h-full mx-auto flex flex-col gap-16 justify-between"
+            >
+              <div class="space-y-10">
+                <div
+                  class="flex lg:flex-row flex-col justify-between lg:gap-0 gap-3"
+                >
+                  <div class="space-y-2">
+                    <h3 class="text-lemon font-sans font-semibold text-4xl">
+                      Contributor
+                    </h3>
+                  </div>
+                  <div class="price">
+                    <span class="text-stone text-4xl font-semibold font-sans"
+                      >$1500</span
+                    >
+                  </div>
+                </div>
+                <div class="rich-text">
+                  <p class="text-stone">
+                    These tickets are for the superstars of PyCon AU, who would like to go above and beyond to support the conference.
+                  </p>
+                  <p class="text-stone">
+                    All inclusions of the <span class="text-emerald font-bold">Professional</span> ticket, as well as:
+                  </p>
+                </div>
+                <ul class="space-y-5 text-lemon">
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-lemon.svg" alt="tick" />
+                    <span>Recognition as a minor sponsor</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <img src="images/tick-lemon.svg" alt="tick" />
+                    <span>Warm fuzzy feelings!</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="space-y-7">
+                <a
+                  href={TICKETING_URL}
+                  class="btn-arrow btn-arrow--lemon rounded-[3.125rem]! hover:rounded-none! justify-between py-5!"
+                  ><span>Buy Tickets</span></a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="fadeInUp bg-[#383838] py-14">
+            <div
+              class="lg:w-[426px] w-full lg:px-0 px-5 h-full mx-auto flex flex-col gap-16 justify-between"
+            >
+              <div class="space-y-10">
+                <div
+                  class="flex lg:flex-row flex-col justify-between lg:gap-0 gap-3"
+                >
+                  <div class="space-y-2">
+                    <h3 class="text-[#FF7963] font-sans font-semibold text-4xl">
+                      Student
+                    </h3>
+                  </div>
+                  <div class="price">
+                    <span class="text-stone text-4xl font-semibold font-sans"
+                      >TBA</span
+                    >
+                  </div>
+                </div>
+                <div class="rich-text text-stone">
+                  <p>
+                    A limited number of subsidised tickets are available to students who hold a government issued student concession ID.
+                  </p>
+                  <p class="text-stone">
+                    All inclusions of the <span class="text-lavender font-bold">Enthusiast</span> ticket, as well as:
+                  </p>
+                  <p>
+                    Student tickets will be made available later in 2026.
+                  </p>
+                </div>
+                {/* 
+                <div class="space-y-5">
+                  <p class="text-stone">Optional Add-Ons</p>
+                  <ul class="space-y-5 text-[#FF7963]">
+                    <li class="flex items-center gap-3">
+                      <img src="images/tick-coral.svg" alt="tick" />
+                      <span>Additional benefit</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                      <img src="images/tick-coral.svg" alt="tick" />
+                      <span>Another benefit goes here</span>
+                    </li>
+                  </ul>
+                </div>
+                */}
+              </div>
+              {/* 
+              <div class="space-y-7">
+                <a
+                  href="#"
+                  class="btn-arrow btn-arrow--coral rounded-[3.125rem]! hover:rounded-none! justify-between py-5!"
+                  ><span>Buy Tickets</span></a
+                >
+              </div>
+               */}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-lime pt-20">
+    <div class="container">
+      <div class="grid lg:grid-cols-2 gap-5 pb-20">
+        <a
+          href="/conduct"
+          class="btn-arrow btn-arrow--emerald btn-arrow--2col fadeInUp"
+          ><span>Code of Conduct</span></a
+        >
+        <a
+          href="/refunds"
+          class="btn-arrow btn-arrow--emerald btn-arrow--2col fadeInUp"
+          ><span>Refunds</span></a
+        >
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <!-- Main scripts (will be added in Phase 5) -->
+  <script src="/src/scripts/animations.js"></script>
+</Base>

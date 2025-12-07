@@ -1,0 +1,246 @@
+---
+import AboutNav from "../../components/about/AboutNav.astro";
+import Footer from "../../components/Footer.astro";
+import Crumb from "../../components/header/Crumb.astro";
+import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
+import PageHeader from "../../components/header/PageHeader.astro";
+import PageHeaderTitle from "../../components/header/PageHeaderTitle.astro";
+import TypographyLink from "../../components/typography/TypographyLink.astro";
+import Base from "../../layouts/Base.astro";
+
+// TODO: curlyboi should include a picture & add update/entry for our updated version
+---
+
+<Base title="Culture and Community">
+  <PageHeader dark={true} starColour="violet">
+    <HeaderBreadcrumbs colour="lavender">
+      <Crumb href="/about/">About</Crumb>
+    </HeaderBreadcrumbs>
+    <PageHeaderTitle textColour="lavender">
+      <h1><span class="text-nowrap">Culture &</span> Community</h1>
+    </PageHeaderTitle>
+  </PageHeader>
+
+  <section>
+    <div class="header-divider header-divider--lavender"></div>
+
+    <div class="bg-stone py-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <div
+            class="flex flex-col lg:flex-row justify-between items-start gap-14"
+          >
+            <div class="lg:w-[80%] w-full rich-text">
+              <p class="text-intro font-medium text-charcoal fadeInUp">
+                If you haven’t joined us for a PyCon AU before, attending PyCon
+                AU may seem a bit different to other conferences.
+              </p>
+
+              <h2 id="we-have-an-enforced-code-of-conduct">
+                We have an enforced code of conduct.
+              </h2>
+              <p>
+                It's not taken lightly. It provides a framework in which our
+                event operates, and all attendees must observe and adhere to it. <TypographyLink
+                  href="/conduct"
+                  >Read our code of conduct.</TypographyLink
+                >
+              </p>
+              <h2 id="everyone-is-welcome-️">Everyone is welcome 🏳️‍🌈</h2>
+              <p>
+                All members of society are welcome at our event. We respect
+                pronouns and preferred names. We use <TypographyLink
+                  href="https://heyguys.cc/"
+                  >gender-neutral greetings</TypographyLink
+                >. We appreciate all backgrounds, and understand that not
+                everyone is a Python programmer. This conference is still for
+                you.
+              </p>
+              <h2 id="we-are-a-programming-conference-not-a-hackercon">
+                We are a programming conference, not a hackercon.
+              </h2>
+              <p>
+                For multiple years we have hosted the Security and Privacy
+                specialist track. While we host content and speakers that may
+                also be at home at a ‘hackercon’, we are not a hacker
+                conference.
+              </p>
+              <p>
+                Speakers and attendees are reminded not to attack or pentest the
+                conference networks, conference infrastructure, conference
+                processes, or the conference attendees in any way.
+              </p>
+              <h2 id="we-have-some-unusual-references">
+                We have some unusual references.
+              </h2>
+              <p>
+                If you’re new to Python or PyCon AU, here’s some things we will
+                probably mention without specifically stating their origin.
+              </p>
+              <p>The may include, but are not limited to:</p>
+              <h3 id="lines-from-the-zen-of-python">
+                Lines from the “Zen of Python”
+              </h3>
+              <p>
+                This is an easter egg in Python itself, where if you type
+                “import this” you get “The Zen of Python, by Tim Peters”. <TypographyLink
+                  href="https://www.python.org/dev/peps/pep-0020/"
+                  >Read more about PEP 20</TypographyLink
+                >
+              </p>
+              <h3 id="curlyboi">curlyboi</h3>
+              <p>
+                curlyboi is our multicoloured snake graphic, lovingly designed
+                by <TypographyLink href="http://taniawalker.com/pyconau/"
+                  >Tania Walker</TypographyLink
+                > as part of our conference branding redesign in 2018. The name originates
+                from the meme: “Who would win: (computer reference) or one curly
+                boi (a right parenthesis)”.
+              </p>
+              <p>In 2026, the curlyboi received a glow up as part of the new conference brand. curlyboi classic might still be spotted in a few easter egg locations.</p>
+              <h3 id="lightning-talk-references">Lightning talk references</h3>
+              <p>
+                The lightning talks from 2018 and 2019 yielded many amazing
+                talks that fed into each other during the event. Some notable
+                references:
+              </p>
+              <ul>
+                <li>
+                  flip flop operator, or the flipfloperator: referenced
+                  non-verbally in a <TypographyLink
+                    href="https://youtu.be/9E3qhqWFJ2c?t=1169"
+                    >2018 invited speaker presentation</TypographyLink
+                  >, then expanded upon in a lightning talk, this refers to a
+                  now defunct operator in Ruby. Watch more: <TypographyLink
+                    href="https://youtu.be/BmWLhVMWC9I?t=783"
+                    >First lightning talk</TypographyLink
+                  >, <TypographyLink href="https://youtu.be/rNkbmu4e3MA?t=2667"
+                    >Second lightning talk</TypographyLink
+                  >. (2019 update: the deprecation of the flip-flop operator in
+                  ruby was <TypographyLink
+                    href="https://github.com/ruby/ruby/commit/4e038a7e"
+                    >reverted</TypographyLink
+                  >.)
+                </li>
+                <li>
+                  Woolworths: reference to the lightning talk <TypographyLink
+                    href="https://youtu.be/AJqcxEzRdSY?t=1117"
+                    >“History and Politics”</TypographyLink
+                  >, and <TypographyLink
+                    href="https://youtu.be/q2VmIUaOS9o?t=3623"
+                    >reprise</TypographyLink
+                  >.
+                </li>
+                <li>
+                  Tim has too many projects: a recurring talk by <TypographyLink
+                    href="https://twitter.com/mithro">Tim Ansell</TypographyLink
+                  > in which he invites community contributions to his many projects,
+                  including but not limited to some of the hardware used by Next
+                  Day Video, the AV team contracted by PyCon AU (<TypographyLink
+                    href="https://youtu.be/BmWLhVMWC9I?t=482"
+                    >sample lightning talk</TypographyLink
+                  >).
+                </li>
+                <li>
+                  “One minute!”: when lightning talks are run in person, our
+                  affectionately named ‘Lightning Talk Czar’ <TypographyLink
+                    href="https://social.coop/@chrisjrn"
+                    >Christopher Neugebauer</TypographyLink
+                  > uses <TypographyLink href="http://lightningtimer.io/"
+                    >lightningtimer.io</TypographyLink
+                  > to ensure talks are 5 minutes long. When 60 seconds remain, he
+                  often helps the speaker with a verbal queue, an ominous “One minute!”.
+                </li>
+              </ul>
+              <h3 id="what-is-dunder-what-are-magic-methods">
+                What is ‘dunder’? What are ‘magic methods’?
+              </h3>
+              <p>
+                In Python, many features are implemented using ‘magic methods’
+                or ‘dunder methods’. ‘Dunder’ here is actually a portmanteau of
+                ‘double’ and ‘under’, and describes what ‘magic methods’ look
+                like, for example, <code>__str__</code> is one that can be added
+                to an object to customise what an object looks like when you <code
+                  >print(...)</code
+                > it out. For more information and a better explanation, watch Josh
+                Cannon’s <TypographyLink
+                  href="https://youtube.com/watch?v=CSpzTx-S8B0"
+                  >“Oh the (Methods) You Can (Make): By Dunder Seuss”</TypographyLink
+                > from North Bay Python 2023.
+              </p>
+              <h2 id="we-dont-do-that-here">We don’t do that here.</h2>
+              <p>
+                In-jokes create a sense of community, play a part in setting its
+                tone, as well as being a bit of fun.
+              </p>
+              <p>
+                While there are many in-jokes, there are some that are actively
+                problematic that we do not use.
+              </p>
+              <h3 id="belittling-other-programming-languages">
+                Belittling other programming languages
+              </h3>
+              <p>
+                This event is designed for developers, users, and practitioners
+                of the Python programming language, but we do not put down other
+                languages to lift ourselves up. This includes putdowns of users
+                of other programming languages purely based on the fact they
+                don’t use Python.
+              </p>
+              <p>
+                DjangoCon AU, a recurring specialist track at PyCon AU, has
+                often invited programmers specifically outside of Python and
+                Django to share insights from their language or framework of
+                choice. Indeed it was one of these very speakers that brought us
+                flipfloperator.
+              </p>
+              <h3 id="monty-python">Monty Python</h3>
+              <p>
+                Monty Python has deep roots in the Python programming community,
+                but references to comedy films that are now 37+ years old can
+                leave younger Pythonistas feeling left out.
+              </p>
+              <p>
+                We also acknowledge that the humour used in this series is not
+                the most inclusive, and so we avoid using such reference where
+                more inclusive and modern references can be made that have the
+                same effect.
+              </p>
+              <h2 id="if-you-dont-get-a-reference-ask">
+                If you don’t get a reference, ask!
+              </h2>
+              <p>
+                If there’s an in-joke or reference you don’t get, <TypographyLink
+                  href="https://github.com/pyconau/2026-website/issues/new?assignees=&labels=documentation-request&template=documentation-request.md&title=I+have+a+question"
+                  >ask for it to be added to this list</TypographyLink
+                >!
+              </p>
+            </div>
+
+            <AboutNav />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {
+    /* <section class="bg-lime pt-20">
+    <div class="container">
+      <div class="grid lg:grid-cols-2 grid-cols-1 gap-5 pb-20">
+        <a href="#" class="btn-arrow btn-arrow--emerald btn-arrow--2col"
+          ><span>Call to Action Link</span></a
+        >
+        <a href="#" class="btn-arrow btn-arrow--emerald btn-arrow--2col"
+          ><span>Call to Action Link</span></a
+        >
+      </div>
+    </div>
+  </section>*/
+  }
+
+  <Footer />
+
+  <!-- Main scripts (will be added in Phase 5) -->
+  <script src="/src/scripts/animations.js"></script>
+</Base>

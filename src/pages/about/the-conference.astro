@@ -1,0 +1,225 @@
+---
+import AboutNav from "../../components/about/AboutNav.astro";
+import Footer from "../../components/Footer.astro";
+import Crumb from "../../components/header/Crumb.astro";
+import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
+import PageHeader from "../../components/header/PageHeader.astro";
+import PageHeaderTitle from "../../components/header/PageHeaderTitle.astro";
+import TypographyLink from "../../components/typography/TypographyLink.astro";
+import Base from "../../layouts/Base.astro";
+
+// TODO: Add correct country name next to Brisbane (Yuggera?)
+---
+
+<Base title="The Conference">
+  <PageHeader dark={true} starColour="violet">
+    <HeaderBreadcrumbs colour="lavender">
+      <Crumb href="/about/">About</Crumb>
+    </HeaderBreadcrumbs>
+    <PageHeaderTitle textColour="lavender">
+      <h1>The Conference</h1>
+    </PageHeaderTitle>
+  </PageHeader>
+
+  <section>
+    <div class="header-divider header-divider--lavender"></div>
+
+    <div class="bg-stone py-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <div
+            class="flex flex-col lg:flex-row justify-between items-start gap-14"
+          >
+            <div class="lg:w-[80%] w-full rich-text">
+              <p class="text-intro font-medium text-charcoal fadeInUp">
+                PyCon AU 2026 will be held Wednesday 26th to Sunday 30th August
+                at Sofitel Brisbane Central, in Brisbane, Queensland, Australia.
+              </p>
+              <p>
+                If you’re new to our event, you might also want to read about <TypographyLink
+                  href="/about/culture-and-community"
+                  >the culture of PyCon AU</TypographyLink
+                >.
+              </p>
+              <h2 id="specialist-tracks">Specialist tracks</h2>
+              <p>
+                The first day of PyCon AU will be dedicated to specialist
+                tracks. These tracks, also known as ‘miniconfs’, are curated by
+                smaller specialist groups within Python community, and allowed
+                for more in-depth talks on the subject.
+              </p>
+              <p>
+                PyCon AU kicks off with a day for attendees interested in
+                specialist fields. It runs just like a main conference day, any
+                attendees on this day are welcome to attend talks from any or
+                all of the tracks, you can pick and choose and the talk
+                schedules will line up nicely to let you do that.
+              </p>
+              <p>
+                Each track is organised by specialists in their field, the talks
+                are selected by the track organisers in coordination with the
+                program committee.
+              </p>
+              <h2 id="conference-main-track">Conference main track</h2>
+              <p>
+                This is the core of PyCon AU, as each day kicks off one of our
+                amazing keynote speakers, followed by breakout tracks of talks
+                on a diverse range of Python related topics. There will be a mix
+                of beginner friendly and advanced talks on both technical and
+                non-technical topics, and with multiple tracks there’ll always
+                be something you’re interested to see.
+              </p>
+              <p>
+                The end of the day brings everyone together again for a
+                hilarious and informative round of lightning talks (submission
+                of lightning talks topics will be open during the conference).
+              </p>
+              <h2 id="development-sprints-and-social-events">
+                Development sprints and social events
+              </h2>
+              <p>
+                Python wouldn’t have gotten to where it is without a welcoming
+                community of developers building cool things together. The
+                development sprints are an open space for people to work on
+                projects with a particular focus on open source projects.
+              </p>
+              <p>
+                The sprints are a place for everyone, from experienced open
+                source contributors, to interested first-time contributors, and
+                anyone really! Maybe you want to hang out and try out an idea
+                you have, maybe you’d like to find collaborators for a project
+                you want to start, maybe you’d like someone to help you through
+                your first attempts at open source. We’ll provide tables,
+                chairs, wifi, power and a community of supportive developers.
+              </p>
+              <h2 id="about-pycon-au">About PyCon AU</h2>
+              <p>
+                PyCon AU is the national conference for the Python programming
+                community, bringing together professional, student and
+                enthusiast developers, sysadmins and operations folk, students,
+                educators, scientists, statisticians, and many others besides,
+                all with a love for working with Python.
+              </p>
+              <p>
+                PyCon AU informs the country’s Python developers with
+                presentations, tutorials and panel sessions by experts and core
+                developers of Python, as well as the libraries and frameworks
+                that they rely on.
+              </p>
+              <h2 id="we-are-independent-and-not-for-profit">
+                We are independent and not-for-profit
+              </h2>
+              <p>
+                PyCon AU is a labour of love, run independently of commercial
+                interests by an all-volunteer team. The legal and financial
+                structure is provided by Linux Australia Inc., a not-for-profit
+                body registered under the <em
+                  >Associations Incorporation Act (NSW) 2009</em
+                >.
+              </p>
+              <p>
+                We also operate our program selection and sponsorship processes
+                with a clear “editorial firewall”. Sponsors and other commercial
+                organisations don’t get a say in what talks we select or other
+                editorial decisions we make and anything that happens on our
+                stages that <em>does</em> come from a sponsor is clearly communicated
+                as such.
+              </p>
+              <p>
+                All of this lets us run an engaging, high-quality event, while
+                offering ticket prices far more accessible than many other
+                commercial events of a similar size.
+              </p>
+              <h2 id="past-pycons-au">Past PyCons AU</h2>
+              <p>
+                PyCon AU is typically held in two year blocks at the same city,
+                with some variation in 2020–2023 due to the COVID-19 pandemic.
+              </p>
+              <ul>
+                <li>2010, 2011: Sydney, NSW</li>
+                <li>
+                  <TypographyLink href="https://2012.pycon-au.org"
+                    >2012</TypographyLink
+                  >, <TypographyLink href="https://2013.pycon-au.org"
+                    >2013</TypographyLink
+                  >: Hobart, TAS
+                </li>
+                <li>
+                  <TypographyLink href="https://2014.pycon-au.org"
+                    >2014</TypographyLink
+                  >, <TypographyLink href="https://2015.pycon-au.org"
+                    >2015</TypographyLink
+                  >: Brisbane, QLD
+                </li>
+                <li>
+                  <TypographyLink href="https://2016.pycon-au.org"
+                    >2016</TypographyLink
+                  >, <TypographyLink href="https://2017.pycon-au.org"
+                    >2017</TypographyLink
+                  >: Melbourne, VIC
+                </li>
+                <li>
+                  <TypographyLink href="https://2018.pycon-au.org"
+                    >2018</TypographyLink
+                  >, <TypographyLink href="https://2019.pycon-au.org"
+                    >2019</TypographyLink
+                  >: Sydney, NSW
+                </li>
+                <li>
+                  <TypographyLink href="https://2020.pycon.org.au"
+                    >2020</TypographyLink
+                  >, <TypographyLink href="https://2021.pycon.org.au"
+                    >2021</TypographyLink
+                  >: The Internet
+                </li>
+                <li>(PyCon AU was not held in 2022)</li>
+                <li>
+                  <TypographyLink href="https://2023.pycon.org.au"
+                    >2023</TypographyLink
+                  >: Tarntanya/Adelaide, SA
+                </li>
+                <li>
+                  <TypographyLink href="https://2024.pycon.org.au"
+                    >2024</TypographyLink
+                  >, <TypographyLink href="https://2025.pycon.org.au"
+                    >2025</TypographyLink
+                  >: Narrm/Melbourne, VIC
+                </li>
+              </ul>
+              <p>
+                Videos from previous years can be watched on the <TypographyLink
+                  href="https://www.youtube.com/user/PyConAU"
+                  >PyConAU YouTube channel</TypographyLink
+                >.
+              </p>
+            </div>
+
+            <AboutNav />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {
+    /*
+  <section class="bg-lime pt-20">
+    <div class="container">
+      <div class="grid lg:grid-cols-2 grid-cols-1 gap-5 pb-20">
+        <a href="#" class="btn-arrow btn-arrow--emerald btn-arrow--2col"
+          ><span>Call to Action Link</span></a
+        >
+        <a href="#" class="btn-arrow btn-arrow--emerald btn-arrow--2col"
+          ><span>Call to Action Link</span></a
+        >
+      </div>
+    </div>
+  </section>
+  */
+  }
+
+  <Footer />
+
+  <!-- Main scripts (will be added in Phase 5) -->
+  <script src="/src/scripts/animations.js"></script>
+</Base>

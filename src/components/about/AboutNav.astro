@@ -1,0 +1,22 @@
+---
+import SideNavItem from "../SideNavItem.astro";
+---
+
+<div class="lg:w-[308px] w-full">
+  <div class="bg-emerald rounded-[3.125rem]">
+    <div class="side-nav bg-lime rounded-[3.125rem] p-10 -translate-y-5">
+      <a href="/about/">
+        <h3 class="text-intro font-semibold">About</h3>
+      </a>
+      <ul class="font-medium font-sans text-charcoal space-y-4 mt-8">
+        <SideNavItem href="/about/the-conference"> The Conference </SideNavItem>
+        <SideNavItem href="/about/culture-and-community">
+          Culture & Community
+        </SideNavItem>
+        <SideNavItem href="/about/our-team"> Our Team </SideNavItem>
+        <SideNavItem href="/news"> News & Updates </SideNavItem>
+        <SideNavItem href="/about/volunteer"> Volunteer </SideNavItem>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -46,3 +46,9 @@ A simple Vite-based website for PyCon events.
 - Tailwind CSS (styling)
 - Alpine.js (JavaScript framework)
 - GSAP (animations)
+
+## Media / Credits
+* [Brisbane City at Sunset](/public/images/attend/beda-sunset.jpeg) Credit: @brizzy.pix, supplied by Brisbane Economic Development Agency
+* [Brisbane Cyclists](/public/images/attend/beda-cyclists) Credit: Tourism Australia, supplied by Brisbane Economic Development Agency
+* [Brisbane Airport](/public/images/attend/beda-airport.jpeg) Credit: Jen Dainer, supplied by Brisbane Economic Development Agency
+* Other photography by [Jack Skinner](https://jackskinner.com.au) used with permission.

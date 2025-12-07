@@ -1,0 +1,512 @@
+---
+import Director from "../../components/about/our-team/Director.astro";
+import OrgTeamMember from "../../components/about/our-team/OrgTeamMember.astro";
+import Footer from "../../components/Footer.astro";
+import Crumb from "../../components/header/Crumb.astro";
+import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
+import PageHeader from "../../components/header/PageHeader.astro";
+import PageHeaderTitle from "../../components/header/PageHeaderTitle.astro";
+import Base from "../../layouts/Base.astro";
+---
+
+<Base title="Our Team">
+  <PageHeader dark={true} starColour="violet">
+    <HeaderBreadcrumbs colour="lavender">
+      <Crumb href="/about/">About</Crumb>
+    </HeaderBreadcrumbs>
+    <PageHeaderTitle textColour="lavender">
+      <h1>Our Team</h1>
+    </PageHeaderTitle>
+  </PageHeader>
+
+  <section>
+    <div class="header-divider header-divider--lavender"></div>
+
+    <div class="bg-stone py-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <p class="text-intro font-medium text-charcoal fadeInUp">
+            PyCon AU is run independently by an all-volunteer team. The
+            organising team come from all walks of life and professional
+            experience, representing the diversity of the PyCon AU community.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="bg-stone py-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <h2
+            class="font-serif text-6xl -tracking-[0.04em] text-center fadeInUp"
+          >
+            Directors
+          </h2>
+
+          {/* TODO: pt-10 then pt-5, should do this with space-y instead */}
+
+          <div class="pt-10 space-y-5">
+            <Director
+              name="Jack Skinner"
+              title="Conference Director"
+              pronouns="He/Him"
+              photo="/images/about/our-team/jack-skinner.png"
+              website="https://jackskinner.com.au/"
+              linkedin="https://www.linkedin.com/in/gdayitsjack/"
+              bluesky="https://bsky.app/profile/gdayitsjack.bsky.social"
+              mastodon="https://tech.lgbt/@gdayitsjack"
+              >A full-'snack'-CTO, founder and engineering leader. Jack is an
+              independent consultant working with small and medium software
+              engineering teams. His puppy Gizmo joins planning calls to oversee
+              everything.</Director
+            >
+            <Director
+              name="Nic Crouch"
+              title="Co-Director, Treasurer"
+              pronouns="He/Him"
+              photo="/images/about/our-team/nic-crouch.jpeg"
+              linkedin="https://www.linkedin.com/in/nicholascrouch/"
+            >
+              Nic is a Staff Performance Engineer in Snowflake’s Applied
+              Performance Group, specifically working on Snowpark. He
+              collaborates closely with engineers developing in Python, Java,
+              Scala and JavaScript.
+            </Director>
+
+            <Director
+              name="Sophie Quinn-Graham"
+              title="Co-Director"
+              pronouns="She/Her"
+              photo="/images/about/our-team/mystery.png"
+              website="https://thisisme.nz/"
+              bluesky="https://bsky.app/profile/thisisme.nz"
+              mastodon="https://cloudisland.nz/@thisisme"
+            >
+              Sophie empowers people to design and build reliable, secure and
+              scalable systems: a micro service, an internal platform, a team, a
+              confernece, achieving and retaining multiple compliance standards
+              (incl PCI DSS 4 and SOC 2 Type 2).
+            </Director>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="bg-stone py-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <h2
+            class="font-serif lg:text-6xl text-5xl -tracking-[0.04em] text-center fadeInUp"
+          >
+            Organising Team
+          </h2>
+
+          <div class="pt-10 space-y-5">
+            <OrgTeamMember
+              name="Rhydwyn McGuire"
+              title="Program Chair"
+              pronouns="He/Him"
+              photo="/images/about/our-team/rhydwyn-mcguire.jpeg"
+              linkedin="https://www.linkedin.com/in/rhydwynmcguire"
+            >
+              <!-- A short bio -->
+               Rhydwyn is a biostatistician who currently leads an analytics team. His academic background is in computer science and mathematics, and he has completed a Master of Biostatistics, supported by NSW Health. His professional experience spans infectious diseases, environmental health, and open data, with his current focus on accident epidemiology. He has a particular interest in the development of robust data systems and the advancement of research utilising administrative data, and a keen interest in open source.
+            </OrgTeamMember>
+            <OrgTeamMember
+              name="John Band"
+              title="Communications & Marketing"
+              pronouns="He/Him"
+              photo="/images/about/our-team/john-band.jpeg"
+              linkedin="https://www.linkedin.com/in/johnband/"
+            >
+              Digital marketing expert, strategy consultant, analyst & writer.
+            </OrgTeamMember>
+            <OrgTeamMember
+              name="Izy Hogan"
+              title="Volunteer Coordinator"
+              pronouns="She/Her"
+              photo="/images/about/our-team/izy-hogan.jpeg"
+              linkedin="https://www.linkedin.com/in/isabella-hogan-0a7481234/"
+            >
+              <!-- A short bio  -->
+               Uni student and aspiring web/cyber security dev.
+            </OrgTeamMember>
+            <OrgTeamMember
+              name="Chelsea Finnie"
+              title="Community & culture"
+              pronouns="She/Her/They/Them"
+              photo="/images/about/our-team/chelsea-finnie.jpg"
+              linkedin="https://www.linkedin.com/in/chelseafinnie/"
+            >
+              Chelsea builds communities and technical systems that people genuinely want to be part of. They currently serve as Chairperson of Python NZ and directed Kiwi PyCon 2025. Chelsea has joined the PyCon AU core team to help shape a welcoming, inclusive, and delightfully chaotic conference culture where everyone feels they belong.
+            </OrgTeamMember>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {
+    /* 
+  <section class="bg-stone pt-14">
+    <div class="container pb-32">
+      <div class="lg:w-[85%] w-full mx-auto">
+        <h3
+          class="text-5xl font-serif font-medium -tracking-[0.02em] text-center fadeInUp"
+        >
+          Specialist Tracks & Summits
+        </h3>
+        <h4
+          class="text-3xl font-bold font-sans text-emerald pt-14 text-center lg:text-left fadeInUp"
+        >
+          Specialist Track A
+        </h4>
+        <div class="grid lg:grid-cols-2 grid-cols-1 gap-4 pt-5">
+          <div
+            class="fadeInUp bg-emerald px-8 py-6 rounded-[3.125rem] flex flex-col lg:flex-row items-center gap-7"
+          >
+            <img
+              src="images/john-brown.png"
+              class="lg:w-[140px] w-[99px]"
+              alt="John Brown"
+            />
+            <div class="flex flex-col gap-7 justify-between lg:w-[55%] w-full">
+              <div
+                class="flex flex-col lg:flex-row justify-between lg:text-left text-center"
+              >
+                <div class="space-y-1">
+                  <h5
+                    class="text-stone text-[1.25rem] leading-none font-semibold font-sans"
+                  >
+                    John Brown
+                  </h5>
+                  <h5
+                    class="text-lime text-[1.25rem] leading-none font-semibold font-sans"
+                  >
+                    Creative Director
+                  </h5>
+                  <h5
+                    class="text-lime text-[1.25rem] leading-none font-semibold font-sans"
+                  >
+                    Company Name
+                  </h5>
+                </div>
+                <span class="text-stone/50 text-[1.25rem] font-medium font-sans"
+                  >He/Him</span
+                >
+              </div>
+              <ul class="hidden lg:flex gap-3 font-sans font-medium text-sm">
+                <li>
+                  <a
+                    href="#"
+                    class="underline text-stone hover:text-violet transition-colors duration-300"
+                    >Linkedin</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="underline text-stone hover:text-violet transition-colors duration-300"
+                    >Bluesky</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="underline text-stone hover:text-violet transition-colors duration-300"
+                    >Mastodon</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <ul
+              class="lg:hidden flex gap-3 font-sans font-medium text-sm w-full"
+            >
+              <li>
+                <a
+                  href="#"
+                  class="underline text-stone hover:text-violet transition-colors duration-300"
+                  >Linkedin</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="underline text-stone hover:text-violet transition-colors duration-300"
+                  >Bluesky</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="underline text-stone hover:text-violet transition-colors duration-300"
+                  >Mastodon</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div
+            class="fadeInUp bg-emerald px-8 py-6 rounded-[3.125rem] flex flex-col lg:flex-row items-center gap-7"
+          >
+            <img
+              src="images/john-brown.png"
+              class="lg:w-[140px] w-[99px]"
+              alt="John Brown"
+            />
+            <div class="flex flex-col gap-7 justify-between lg:w-[55%] w-full">
+              <div
+                class="flex flex-col lg:flex-row justify-between lg:text-left text-center"
+              >
+                <div class="space-y-1">
+                  <h5
+                    class="text-stone text-[1.25rem] leading-none font-semibold font-sans"
+                  >
+                    John Brown
+                  </h5>
+                  <h5
+                    class="text-lime text-[1.25rem] leading-none font-semibold font-sans"
+                  >
+                    Creative Director
+                  </h5>
+                  <h5
+                    class="text-lime text-[1.25rem] leading-none font-semibold font-sans"
+                  >
+                    Company Name
+                  </h5>
+                </div>
+                <span class="text-stone/50 text-[1.25rem] font-medium font-sans"
+                  >He/Him</span
+                >
+              </div>
+              <ul class="hidden lg:flex gap-3 font-sans font-medium text-sm">
+                <li>
+                  <a
+                    href="#"
+                    class="underline text-stone hover:text-violet transition-colors duration-300"
+                    >Linkedin</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="underline text-stone hover:text-violet transition-colors duration-300"
+                    >Bluesky</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="underline text-stone hover:text-violet transition-colors duration-300"
+                    >Mastodon</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <ul
+              class="lg:hidden flex gap-3 font-sans font-medium text-sm w-full"
+            >
+              <li>
+                <a
+                  href="#"
+                  class="underline text-stone hover:text-violet transition-colors duration-300"
+                  >Linkedin</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="underline text-stone hover:text-violet transition-colors duration-300"
+                  >Bluesky</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="underline text-stone hover:text-violet transition-colors duration-300"
+                  >Mastodon</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div
+            class="fadeInUp bg-emerald px-8 py-6 rounded-[3.125rem] flex flex-col lg:flex-row items-center gap-7"
+          >
+            <img
+              src="images/john-brown.png"
+              class="lg:w-[140px] w-[99px]"
+              alt="John Brown"
+            />
+            <div class="flex flex-col gap-7 justify-between lg:w-[55%] w-full">
+              <div
+                class="flex flex-col lg:flex-row justify-between lg:text-left text-center"
+              >
+                <div class="space-y-1">
+                  <h5
+                    class="text-stone text-[1.25rem] leading-none font-semibold font-sans"
+                  >
+                    John Brown
+                  </h5>
+                  <h5
+                    class="text-lime text-[1.25rem] leading-none font-semibold font-sans"
+                  >
+                    Creative Director
+                  </h5>
+                  <h5
+                    class="text-lime text-[1.25rem] leading-none font-semibold font-sans"
+                  >
+                    Company Name
+                  </h5>
+                </div>
+                <span class="text-stone/50 text-[1.25rem] font-medium font-sans"
+                  >He/Him</span
+                >
+              </div>
+              <ul class="hidden lg:flex gap-3 font-sans font-medium text-sm">
+                <li>
+                  <a
+                    href="#"
+                    class="underline text-stone hover:text-violet transition-colors duration-300"
+                    >Linkedin</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="underline text-stone hover:text-violet transition-colors duration-300"
+                    >Bluesky</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="underline text-stone hover:text-violet transition-colors duration-300"
+                    >Mastodon</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <ul
+              class="lg:hidden flex gap-3 font-sans font-medium text-sm w-full"
+            >
+              <li>
+                <a
+                  href="#"
+                  class="underline text-stone hover:text-violet transition-colors duration-300"
+                  >Linkedin</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="underline text-stone hover:text-violet transition-colors duration-300"
+                  >Bluesky</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="underline text-stone hover:text-violet transition-colors duration-300"
+                  >Mastodon</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div
+            class="fadeInUp bg-emerald px-8 py-6 rounded-[3.125rem] flex flex-col lg:flex-row items-center gap-7"
+          >
+            <img
+              src="images/john-brown.png"
+              class="lg:w-[140px] w-[99px]"
+              alt="John Brown"
+            />
+            <div class="flex flex-col gap-7 justify-between lg:w-[55%] w-full">
+              <div
+                class="flex flex-col lg:flex-row justify-between lg:text-left text-center"
+              >
+                <div class="space-y-1">
+                  <h5
+                    class="text-stone text-[1.25rem] leading-none font-semibold font-sans"
+                  >
+                    John Brown
+                  </h5>
+                  <h5
+                    class="text-lime text-[1.25rem] leading-none font-semibold font-sans"
+                  >
+                    Creative Director
+                  </h5>
+                  <h5
+                    class="text-lime text-[1.25rem] leading-none font-semibold font-sans"
+                  >
+                    Company Name
+                  </h5>
+                </div>
+                <span class="text-stone/50 text-[1.25rem] font-medium font-sans"
+                  >He/Him</span
+                >
+              </div>
+              <ul class="hidden lg:flex gap-3 font-sans font-medium text-sm">
+                <li>
+                  <a
+                    href="#"
+                    class="underline text-stone hover:text-violet transition-colors duration-300"
+                    >Linkedin</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="underline text-stone hover:text-violet transition-colors duration-300"
+                    >Bluesky</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="underline text-stone hover:text-violet transition-colors duration-300"
+                    >Mastodon</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <ul
+              class="lg:hidden flex gap-3 font-sans font-medium text-sm w-full"
+            >
+              <li>
+                <a
+                  href="#"
+                  class="underline text-stone hover:text-violet transition-colors duration-300"
+                  >Linkedin</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="underline text-stone hover:text-violet transition-colors duration-300"
+                  >Bluesky</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="underline text-stone hover:text-violet transition-colors duration-300"
+                  >Mastodon</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  */
+  }
+
+  <Footer />
+
+  <!-- Main scripts (will be added in Phase 5) -->
+  <script src="/src/scripts/animations.js"></script>
+</Base>

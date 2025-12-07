@@ -1,0 +1,119 @@
+---
+import HotelCard from "../../components/attend/accomodation/HotelCard.astro";
+import InfoBox from "../../components/attend/accomodation/InfoBox.astro";
+import Footer from "../../components/Footer.astro";
+import Crumb from "../../components/header/Crumb.astro";
+import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
+import PageHeader from "../../components/header/PageHeader.astro";
+import PageHeaderTitle from "../../components/header/PageHeaderTitle.astro";
+import Base from "../../layouts/Base.astro";
+
+export const nav = {
+  order: 0,
+  title: "Accomodation",
+  image: "/images/attend/accomodation/sofitel.jpg",
+};
+---
+
+<Base title="Accommodation">
+  <PageHeader dark={true} starColour="violet">
+    <HeaderBreadcrumbs colour="lavender">
+      <Crumb href="/attend/">Attendee Guide</Crumb>
+    </HeaderBreadcrumbs>
+    <PageHeaderTitle textColour="lavender">
+      <h1>Accommodation</h1>
+    </PageHeaderTitle>
+  </PageHeader>
+
+  <section>
+    <div class="header-divider header-divider--lavender"></div>
+
+    <div class="bg-stone py-20">
+      <div class="container">
+        <div class="lg:w-[85%] mx-auto">
+          <div class="fadeInUp">
+            <InfoBox />
+          </div>
+
+          <div class="mb-20 fadeInUp">
+            <h2
+              class="fadeInUp text-5xl font-serif font-medium -tracking-[0.02em] mb-10"
+              style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;"
+            >
+              Conference Hotel
+            </h2>
+
+            <HotelCard
+              name="Sofitel Brisbane Central"
+              description="Stay at the conference venue for maximum convenience. The Sofitel Brisbane Central has a dedicated offer for PyCon AU delegates."
+              image="/images/attend/accomodation/sofitel.jpg"
+              distance="0 minute walk"
+              link="https://www.idem.events/r/pycon-au-2026"
+              linkText="View Rates"
+              isMain={false}
+            >
+              <p>
+                Stay at the conference venue for maximum convenience. The
+                Sofitel Brisbane Central has a dedicated offer for PyCon AU
+                delegates.
+              </p>
+              <p>Book directly with the hotel before <strong>26 July 2026</strong>.</p>
+            </HotelCard>
+          </div>
+
+          <div class="fadeInUp">
+            <h2
+              class="fadeInUp text-5xl font-serif font-medium -tracking-[0.02em] mb-10"
+              style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;"
+            >
+              Nearby Offers
+            </h2>
+
+            <div class="space-y-8">
+              {
+                /*
+              <HotelCard
+                name="Sample Hotel"
+                description=""
+                image="/images/thumb-2.png"
+                priceLevel="$$"
+                distance="10 minute walk"
+                link="#"
+              >
+                <p>
+                  A sample hotel tbc.
+                </p>
+                <p>Book directly with the hotel.</p>
+              </HotelCard>
+              */
+              }
+
+              {/* Placeholder for future hotel options */}
+              <div
+                class="flex w-full flex-row justify-center relative pt-10 mt-10 lg:mt-0 fadeInUp"
+              >
+                <div
+                  class="bg-[url('/images/bg-shape--white.svg')] bg-contain bg-no-repeat relative min-h-[420px] lg:flex flex-row items-center gap-10 pb-12.5 pt-18 px-5 lg:pt-10 lg:pl-14 lg:pr-20"
+                >
+                  <div class="flex flex-col md:gap-y-10 md:py-5 gap-y-1 py-0">
+                    <h3 class="font-serif text-3xl mb-4 text-charcoal">
+                      Watch this space
+                    </h3>
+                    <p>
+                      We're working on bringing you more options and offers from
+                      nearby hotels in early 2026.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <script src="/src/scripts/animations.js"></script>
+</Base>

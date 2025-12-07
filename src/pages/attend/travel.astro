@@ -1,0 +1,128 @@
+---
+import AttendNav from "../../components/attend/AttendNav.astro";
+import Footer from "../../components/Footer.astro";
+import Crumb from "../../components/header/Crumb.astro";
+import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
+import PageHeader from "../../components/header/PageHeader.astro";
+import PageHeaderTitle from "../../components/header/PageHeaderTitle.astro";
+import TypographyLink from "../../components/typography/TypographyLink.astro";
+import Base from "../../layouts/Base.astro";
+
+export const nav = {
+  order: 1,
+  title: "Travel to PyCon AU",
+  image: "/images/attend/beda-sunset.jpeg",
+};
+
+// TODO: Add a "arriving on foot" section
+---
+
+<Base title="Travel to PyCon Au">
+  <PageHeader dark={true} starColour="violet">
+    <HeaderBreadcrumbs colour="lavender">
+      <Crumb href="/attend/">Attendee Guide</Crumb>
+    </HeaderBreadcrumbs>
+    <PageHeaderTitle textColour="lavender">
+      <h1>Travel to <span class="text-nowrap">PyCon AU</span></h1>
+    </PageHeaderTitle>
+  </PageHeader>
+
+  <section>
+    <div class="header-divider header-divider--lavender"></div>
+
+    <div class="bg-stone py-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <div
+            class="flex flex-col lg:flex-row justify-between items-start gap-14"
+          >
+            <div class="lg:w-[80%] w-full rich-text">
+              <p class="text-intro font-medium text-charcoal fadeInUp">
+                This year's conference is held on Level 2 of the Sofitel
+                Brisbane Central, 249 Turbot St, Brisbane City QLD 4000.
+              </p>
+              <p>
+                The conference will be well signposted from the hotel foyer -
+                you can't miss it!
+              </p>
+              <p>
+                ✨ <strong>Tip:</strong> There's another entrance via 280 Ann Street,
+                Brisbane - we recommend this entrance if arriving via bus, train,
+                or walking from the Brisbane CBD.
+              </p>
+
+              <h3 id="via-plane">via Plane</h3>
+              <p>
+                Book your flights to Brisbane International Airport (BNE) and
+                consider transport options (including discounted AirTrain
+                fares). More details on airport connections & offers on this
+                page.
+              </p>
+
+              <h3 id="via-bus">via Bus</h3>
+              <p>
+                Most bus services will operate via nearby Adelaide, Anne or
+                Queen Streets and are approximately a 5-10 minute walk away from
+                the venue. We recommend using the Ann street entrance noted
+                suggested above.
+              </p>
+
+              <h3 id="via-train">via Train</h3>
+              <p>
+                If arriving by train, alight at Central Station, and exit to the
+                south towards Ann St exits. There is an entrance to the Sofitel
+                Brisbane Central just outside the ticket barriers.
+              </p>
+
+              <h3 id="via-long-distance-train">via Long Distance Train</h3>
+              <p>
+                Long distance train services (including interstate services from
+                Sydney) arrive and terminate at Roma Street Station. You can
+                connect to Central station via local train services, or walk
+                approximately 10-15 minutes.
+              </p>
+
+              <h3 id="via-ferry">via Ferry</h3>
+              <p>
+                The nearest ferry wharf is Riverside Ferry Terminal - about 15
+                minutes walk away from the Ann St entrance to the hotel.
+              </p>
+
+              <h3 id="via-car-or-ride-share">via Car or Ride share</h3>
+              <p>
+                Ride share can drop you at the Sofitel Brisbane Central main
+                entrance at 249 Turbot St, Brisbane.
+              </p>
+              <p>
+                Parking is available, see the
+                <TypographyLink
+                  href="https://www.sofitelbrisbane.com.au/parking"
+                  >Sofitel Brisbane Central website</TypographyLink
+                > for details. Alternatively, the Wickham Terrace Car Park is right
+                next door, see
+                <TypographyLink
+                  href="https://www.brisbane.qld.gov.au/transport-and-parking/parking/council-car-parks#wickham"
+                  >website for details</TypographyLink
+                >.
+              </p>
+
+              <h3 id="via-scooter">via Scooter</h3>
+              <p>
+                Brisbane has an e-mobility program that supports multiple shared
+                e-scooter hire companies to operate in the CBD area. Just pick
+                your provider of choice, and ride safe!
+              </p>
+            </div>
+
+            <AttendNav />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <!-- Main scripts (will be added in Phase 5) -->
+  <script src="/src/scripts/animations.js"></script>
+</Base>

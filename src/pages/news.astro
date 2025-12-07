@@ -1,0 +1,99 @@
+---
+import { getCollection } from "astro:content";
+import DetailArrow from "../components/DetailArrow.astro";
+import Footer from "../components/Footer.astro";
+import HeaderBreadcrumbs from "../components/header/HeaderBreadcrumbs.astro";
+import PageHeader from "../components/header/PageHeader.astro";
+import PageHeaderTitle from "../components/header/PageHeaderTitle.astro";
+import LongDate from "../components/typography/LongDate.astro";
+import Base from "../layouts/Base.astro";
+
+// TODO: Page shows category as is (e.g. DIRECTORS-DESK), should map to strings
+// TODO: Color-ise the category
+const [firstPost, ...morePosts] = (await getCollection("posts")).sort(
+  (a, b) => b.data.published.valueOf() - a.data.published.valueOf()
+);
+---
+
+<Base title="News & Updates">
+  {
+    /* TODO: in lemonnades version there's no lg:w-[45%] on the middle div in PageHeaderTitle - maybe make this optional? */
+  }
+  <PageHeader dark={false} starColour="lavender">
+    <HeaderBreadcrumbs colour="charcoal" />
+    <PageHeaderTitle textColour="charcoal" fullWidthTitle={true}>
+      <h1>News & Updates</h1>
+    </PageHeaderTitle>
+  </PageHeader>
+
+  <section>
+    <div class="bg-stone pt-10 pb-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <div class="space-y-5">
+            <a
+              href={`/posts/${firstPost.slug}`}
+              class="fadeInUp bg-white hover:bg-lemon rounded-[3.125rem] p-10 flex flex-col justify-between gap-20 row-span-2 group"
+            >
+              <div
+                class="flex lg:flex-nowrap flex-wrap lg:gap-0 gap-2 items-center justify-between"
+              >
+                <div class="tag group-hover:border-charcoal! fadeInUp">
+                  {firstPost.data.category}
+                </div>
+                <div class="date">
+                  <LongDate date={firstPost.data.published} />
+                </div>
+              </div>
+              <div
+                class="flex lg:flex-row flex-col gap-10 items-end justify-between"
+              >
+                <div class="lg:w-[90%] w-full flex lg:flex-row flex-col gap-10">
+                  <h3
+                    class="text-3xl font-sans font-medium leading-[1.1] lg:w-[45%] w-full"
+                  >
+                    {firstPost.data.title}
+                  </h3>
+                  <p class="lg:w-[50%] w-full">
+                    {firstPost.data.previewText}
+                  </p>
+                </div>
+                <DetailArrow />
+              </div>
+            </a>
+            {
+              morePosts.map((post) => (
+                <>
+                  <a
+                    href={`/posts/${post.slug}`}
+                    class="fadeInUp bg-white hover:bg-lemon rounded-[3.125rem] p-10 flex lg:flex-row flex-col justify-between gap-10 row-span-2 group"
+                  >
+                    <div class="flex lg:flex-col lg:flex-nowrap flex-wrap lg:gap-4 gap-2 items-start justify-between lg:w-[20%]">
+                      <div class="tag group-hover:border-charcoal! fadeInUp">
+                        {post.data.category}
+                      </div>
+                      <div class="date">
+                        <LongDate date={post.data.published} />
+                      </div>
+                    </div>
+                    <div class="flex lg:flex-row flex-col gap-10 items-end justify-between lg:w-[80%]">
+                      <h3 class="text-3xl font-sans font-medium leading-[1.1] lg:w-[90%] w-full">
+                        {post.data.title}
+                      </h3>
+                      <DetailArrow />
+                    </div>
+                  </a>
+                </>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <!-- Main scripts (will be added in Phase 5) -->
+  <script src="/src/scripts/animations.js"></script>
+</Base>

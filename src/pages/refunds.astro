@@ -1,0 +1,114 @@
+---
+import PoliciesNav from "../components/policies/PoliciesNav.astro";
+import Footer from "../components/Footer.astro";
+import PageHeader from "../components/header/PageHeader.astro";
+import PageHeaderTitle from "../components/header/PageHeaderTitle.astro";
+import TypographyLink from "../components/typography/TypographyLink.astro";
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Refunds">
+  <PageHeader dark={true} starColour="violet">
+    <PageHeaderTitle textColour="lavender">
+      <h1>Refunds</h1>
+    </PageHeaderTitle>
+  </PageHeader>
+
+  <section>
+    <div class="header-divider header-divider--lavender"></div>
+
+    <div class="bg-stone py-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <div
+            class="flex flex-col lg:flex-row justify-between items-start gap-14"
+          >
+            <div class="lg:w-[80%] w-full rich-text">
+              <h1 id="ticket-transfers">Ticket transfers</h1>
+              <p>
+                PyCon AU tickets are transferable. Use the link in your order
+                email to update the order details, or email us at <TypographyLink
+                  href="mailto:contact@pycon.org.au"
+                  >contact@pycon.org.au</TypographyLink
+                > for assistance.
+              </p>
+              <p>
+                Transfers made after <strong>22 July 2026</strong> (5 weeks prior to the
+                conference) may be limited to name changes only. Included
+                benefits such as t-shirts and certain dietary requirements may
+                depend on supplier deadlines.
+              </p>
+              <h1 id="refunds">Refunds</h1>
+              <p>
+                Email your order code to <TypographyLink
+                  href="mailto:contact@pycon.org.au"
+                  >contact@pycon.org.au</TypographyLink
+                > to request a refund.
+              </p>
+              <h2 id="partial-refunds">Partial refunds</h2>
+              <p>
+                We will give you a no questions asked partial refund on ticket
+                purchases up until the following dates:
+              </p>
+
+              <table class="w-full">
+                <thead>
+                  <tr>
+                    <th class="text-left">Date</th>
+                    <th></th>
+                    <th class="text-left">Refund amount</th
+                    ></tr
+                  ></thead
+                >
+                <tbody>
+                  <tr>
+                    <td>15 July 2026</td>
+                    <td>6 weeks before PyCon AU</td>
+                    <td>90% of sale price</td
+                    >
+                  </tr>
+                  <tr>
+                    <td>22 August 2026</td>
+                    <td>3 weeks before PyCon AU</td>
+                    <td>50% of sale price</td
+                    ></tr
+                  ></tbody
+                >
+              </table>
+              <h2 id="full-refunds">Full refunds</h2>
+              <p>
+                We will give you a 100% refund in the following circumstances:
+              </p>
+              <ul>
+                <li>
+                  You become eligible for a free ticket, e.g. by having your
+                  talk proposal or volunteer application accepted
+                </li>
+                <li>
+                  You test positive for, or display symptoms of, a communicable
+                  disease such as COVID-19 after the 12 August 2026 (14 days
+                  prior to PyCon AU)
+                </li>
+                <li>
+                  On compassionate grounds, at the discretion of the conference
+                  director
+                </li>
+              </ul>
+              <p>
+                For a 100% refund you will need to tell us which circumstance
+                applies to you and we may ask you to supply proof.
+              </p>
+            </div>
+
+            <PoliciesNav />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <!-- Main scripts (will be added in Phase 5) -->
+  <script src="/src/scripts/animations.js"></script>
+</Base>
