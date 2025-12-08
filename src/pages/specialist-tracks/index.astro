@@ -6,7 +6,11 @@ import Header from "../../components/Header.astro";
 import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
 import HeaderStar from "../../components/header/HeaderStar.astro";
 import NewsItemsWidget from "../../components/NewsItemsWidget.astro";
+import NewsPostCard from "../../components/NewsPostCard.astro";
+import Deadline from "../../components/Deadline.astro";
 import Base from "../../layouts/Base.astro";
+
+const SUBMISSION_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSdgeD8HWGmIgxpKNM9DfVevogm96l9cA4wrVZV-D6fH1mgYEg/viewform?usp=header";
 ---
 
 <Base title="Specialist Tracks">
@@ -73,20 +77,30 @@ import Base from "../../layouts/Base.astro";
           >
             <div class="rich-text">
               <h2>Track Organiser Companion Guide</h2>
-              {/* TODO: remove excess padding/margin above this h2  */}
               <p
-                class="text-intro font-medium w-full text-charcoal lg:w-[506px]"
+                class="text-intro font-medium w-full text-charcoal lg:w-[570px]"
               >
-                Track organisers help curate the conference program as the face
-                of their community, technology or field. The companion guide
+                Track organisers help curate the conference program as specialists
+                in their community, technology or field.
+                
+                The companion guide
                 outlines everything a track organiser needs to know, including
                 how to submit a track proposal before 23 January 2026.
               </p>
-              <p>Submit your specialist track proposals today!</p>
+              <Deadline deadline="2026-01-23T23:59:59+11:00" countdown={true}>
+                <div class="flex">
+                  <a
+                    href={SUBMISSION_LINK}
+                    target="_blank"
+                    class="btn-arrow btn-arrow--violet text-stone! no-underline!"
+                    >Submit your proposal today</a
+                  >
+                </div>
+              </Deadline>
             </div>
             <div class="">
               <a
-                href="/tickets"
+                href="/files/Specialist Track - Companion Guide.pdf"
                 class="btn-arrow btn-arrow--emerald"
                 >Grab the guide</a
               >
@@ -98,7 +112,20 @@ import Base from "../../layouts/Base.astro";
   </section>
 
   <section>
-    <div class="bg-stone pt-20">
+    <div class="bg-stone pt-10 pb-20">      
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto ">
+          <div class="rich-text pb-10">
+            <h2>Read the announcement</h2>
+          </div>
+          <NewsPostCard slug="call-for-specialist-tracks" highlight={true} featured={false} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="bg-stone pt-10">
       <div class="container">
         <div class="lg:w-[824px] mx-auto">
           <div class="rich-text">
@@ -141,9 +168,14 @@ import Base from "../../layouts/Base.astro";
             <FAQEntry title="When are office hours to learn more?">
               <p>We have two office hours sessions scheduled.</p>
               <ul>
-                <li>6pm Tuesday 16 December 2025</li>
-                <li>6pm Friday 16 January 2026.</li>
+                <li>Tuesday 16 December 2025 at 6pm AEDT</li>
+                <li>Thursday 15 January 2026 at 6pm AEDT</li>
               </ul>
+            </FAQEntry>
+            <FAQEntry title="How do I join the office hours calls?">
+              <p>We're hosting office hours in the Python Australia Community Discord server.</p>
+              <p>Head on over to <a href="https://www.pythonaustralia.org/">pythonaustralia.org</a> and click the big "Join the Python Australia Discord" button. We recommend joining the server a few days before the office hours - but the mods will be available for quick approvals if you're joining last minute.</p>
+
             </FAQEntry>
             <FAQEntry title="I have a talk idea, can I submit now?">
               <p>

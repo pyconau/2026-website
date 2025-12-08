@@ -1,0 +1,71 @@
+---
+export interface Props {
+  deadline: string;
+  closed?: string;
+  countdown?: boolean;
+}
+
+const {
+  deadline,
+  closed = "The deadline for submissions has now passed.",
+  countdown = false
+} = Astro.props;
+
+---
+
+<div
+  x-data={`{
+    deadline: '${deadline}',
+    closed: '${closed}',
+    countdown: ${countdown},
+    isFuture: false,
+    timeLeft: '',
+    updateCountdown() {
+      const deadlineDate = new Date(this.deadline);
+      const now = new Date();
+      this.isFuture = now < deadlineDate;
+
+      if (this.isFuture) {
+        const diffMs = deadlineDate - now;
+        const weeks = Math.floor(diffMs / (1000 * 60 * 60 * 24 * 7));
+        const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(diffMs / (1000 * 60 * 60));
+        const minutes = Math.floor(diffMs / (1000 * 60));
+        const seconds = Math.floor(diffMs / 1000);
+
+        if (weeks > 0) {
+          this.timeLeft = weeks + (weeks === 1 ? ' week left' : ' weeks left');
+        } else if (days > 0) {
+          this.timeLeft = days + (days === 1 ? ' day left' : ' days left');
+        } else if (hours > 0) {
+          this.timeLeft = hours + (hours === 1 ? ' hour left' : ' hours left');
+        } else if (minutes > 0) {
+          this.timeLeft = minutes + (minutes === 1 ? ' minute left' : ' minutes left');
+        } else {
+          this.timeLeft = seconds + (seconds === 1 ? ' second left' : ' seconds left');
+        }
+      }
+    }
+  }`}
+  x-init="
+    updateCountdown();
+    if (countdown && isFuture) {
+      setInterval(() => updateCountdown(), 1000);
+    }
+  "
+>
+  <div x-show="isFuture" class="flex flex-col items-center bg-white rounded-3xl p-4 md:p-5 lg:p-7">
+    <div x-show="countdown" class="mb-5">
+      <div class="flex flex-col items-center gap-y-3">
+        
+        <span x-text="timeLeft" class="text-xl"></span> until 
+        <span x-text="'' + new Date(deadline).toLocaleString('en-AU', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' })" class="text-xl"></span>
+        
+      </div>
+    </div>
+  
+    <slot />
+  
+  </div>
+  <div x-show="!isFuture" x-text="closed" class="font-bold"></div>
+</div>
