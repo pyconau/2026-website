@@ -619,7 +619,7 @@ ul.sub-menu {
 }
 
 .marquee {
-  @apply flex gap-5 w-fit;
+  @apply flex gap-5 w-max;
   animation: marquee 20s linear infinite;
 }
 
