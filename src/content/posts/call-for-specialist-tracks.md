@@ -14,10 +14,10 @@ While we’d love existing tracks to return (and several will), we’re also loo
 To learn more about running a specialist track in 2026, please visit the [specialist tracks](/specialist-tracks) page and download our track organiser companion guide PDF.
 
 We’re also hosting two office hours calls:
-* Tuesday 16 December 2025 at 6pm AEDT
-* Thursday 15 January 2026 at 6pm AEDT
+* Tuesday 16 December 2025 at 6pm AEDT ([ics](/files/track-office-hours-december.ics))
+* Thursday 15 January 2026 at 6pm AEDT ([ics](/files/track-office-hours-january.ics))
 
-These are open discussion forums where you can bring your ideas or questions and the organising team will help offer advice or feedback.
+These are open discussion forums where you can bring your ideas or questions and the organising team will help offer advice or feedback. Office hours will be hosted in the Python Austalia Community Discord - you can join that community via [pythonaustralia.org](https://pythonaustralia.org)
 
 Our call for tracks closes **11:59pm AEDT 23 January 2026**.
 

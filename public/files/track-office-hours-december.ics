@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+BEGIN:VEVENT
+UID:41ecdd87-60a4-40d7-ae81-b8d488fb7970
+SEQUENCE:0
+DTSTAMP:20251208T023604Z
+DTSTART:20251216T070000Z
+DTEND:20251216T073000Z
+SUMMARY:PyCon AU - Specialist Tracks Office Hours
+LOCATION:Discord: Python Australia Community Server server\, community-eve
+ nts
+DESCRIPTION:An open discussion / Q&A forum for anyone curious about co-org
+ anising a specialist track at PyCon AU 2026. Learn more at https://2026.py
+ con.org.au/specialist-tracks
+END:VEVENT
+END:VCALENDAR
