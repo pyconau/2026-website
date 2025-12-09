@@ -17,7 +17,7 @@ Importantly, these dates signal a few changes to the traditional PyCon AU schedu
 
 ![Conference schedule overview](/files/2026_conference_outline.png)
 
-It’s too far out to announce specific schedule details, including the ‘arrangement’ of specialist tracks within that three day block. We are, however, signaling that we’re open to changes for how specialist tracks run. Depending on what specialist tracks run, and our overall program (via CFP), Specialist tracks may all run on one day (as per previous PyCon’s AU), or they may be scheduled across several days. The latter would allow attendees to attend more than one specialist track which has not previously been easy to achieve.
+It’s too far out to announce specific schedule details, including the ‘arrangement’ of specialist tracks within that three day block. We are, however, signalling that we’re open to changes for how specialist tracks run. Depending on what specialist tracks run, and our overall program (via CFP), Specialist tracks may all run on one day (as per previous PyCon’s AU), or they may be scheduled across several days. The latter would allow attendees to attend more than one specialist track which has not previously been easy to achieve.
 
 Alongside our dates & venue announcement, [a limited number of early bird tickets are also available today](/posts/early-bird-tickets-available) for full-conference Contributors, Professional and Enthusiast ticket types.
 
