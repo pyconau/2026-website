@@ -6,7 +6,7 @@ category: "news"
 ---
 Today we’re excited to open our call for Specialist Tracks!
 
-A specialist track is a one day focused mini-conference run as part of the overall PyCon AU program. A track typically focuses on a more niche or specialist topic within the broader Python ecosystem and industry. It can be a particular tool or framework (like Djangocon in 2019, 2023), a particular field (like Scientific Python in 2024, 2025) or a particular industry (like Education, 2015-2025).
+A specialist track is a one day focused mini-conference run as part of the overall PyCon AU program. A track typically focuses on a more niche or specialist topic within the broader Python ecosystem and industry. It can be a particular tool or framework (like DjangoCon in 2019, 2023), a particular field (like Scientific Python in 2024, 2025) or a particular industry (like Education, 2015-2025).
 
 While we’d love existing tracks to return (and several will), we’re also looking for new topics and themes. If you’ve never run a track before, the 2026 conference team is ready and raring to help you bring your track idea to life.
 
