@@ -8,6 +8,7 @@ import HeaderStar from "../../components/header/HeaderStar.astro";
 import NewsItemsWidget from "../../components/NewsItemsWidget.astro";
 import NewsPostCard from "../../components/NewsPostCard.astro";
 import Deadline from "../../components/Deadline.astro";
+import ConnectSubscribeGetInTouchCards from "../../components/ConnectSubscribeGetInTouchCards.astro";
 import Base from "../../layouts/Base.astro";
 
 const SUBMISSION_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSdgeD8HWGmIgxpKNM9DfVevogm96l9cA4wrVZV-D6fH1mgYEg/viewform?usp=header";
@@ -430,90 +431,7 @@ const SUBMISSION_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSdgeD8HWGmIgxp
   <section class="bg-[#313131]">
     <div class="footer-divider"></div>
     <div class="container">
-      <div class="grid lg:grid-cols-3 grid-cols-1 gap-5 pt-20 pb-32">
-        <div
-          class="fadeInUp bg-emerald text-white rounded-[3.125rem] text-center p-10 flex justify-center"
-        >
-          <div
-            class="flex flex-col lg:w-[80%] w-full gap-7 justify-between h-full"
-          >
-            <div class="space-y-4">
-              <h3
-                class="text-5xl font-serif font-normal -tracking-[0.02em] leading-[1.1]"
-              >
-                Connect
-              </h3>
-              <p class="mx-auto font-sans leading-tight">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </p>
-            </div>
-            <div class="flex gap-3 justify-center">
-              <a
-                href="#"
-                class="bg-white p-1 rounded-lg w-[63px] hover:rounded-none transition-all duration-300 h-[63px] flex justify-center items-center text-[40px] text-emerald"
-                ><i class="fa-brands fa-linkedin-in"></i></a
-              >
-              <a
-                href="#"
-                class="bg-white p-1 rounded-lg w-[63px] hover:rounded-none transition-all duration-300 h-[63px] flex justify-center items-center text-[35px] text-emerald"
-                ><i class="fa-brands fa-bluesky"></i></a
-              >
-              <a
-                href="#"
-                class="bg-white p-1 rounded-lg w-[63px] hover:rounded-none transition-all duration-300 h-[63px] flex justify-center items-center text-[40px] text-emerald"
-                ><i class="fa-brands fa-mastodon"></i></a
-              >
-              <a
-                href="#"
-                class="bg-white p-1 rounded-lg w-[63px] hover:rounded-none transition-all duration-300 h-[63px] flex justify-center items-center text-[40px] text-emerald"
-                ><i class="fa-brands fa-youtube"></i></a
-              >
-            </div>
-          </div>
-        </div>
-        <div
-          class="fadeInUp lg:translate-y-7! bg-violet text-white rounded-[3.125rem] text-center p-10 flex justify-center"
-        >
-          <div
-            class="flex flex-col lg:gap-0 gap-10 lg:w-[67%] w-full justify-between h-full"
-          >
-            <div class="space-y-4">
-              <h3
-                class="text-5xl font-serif font-normal -tracking-[0.02em] leading-[1.1]"
-              >
-                Subscribe
-              </h3>
-              <p class="mx-auto font-sans leading-tight">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </p>
-            </div>
-            <a href="#" class="btn btn--stone">Sign Up</a>
-          </div>
-        </div>
-        <div
-          class="fadeInUp bg-lavender text-white rounded-[3.125rem] text-center p-10 flex justify-center"
-        >
-          <div
-            class="flex flex-col lg:gap-0 gap-10 lg:w-[80%] w-full justify-between h-full"
-          >
-            <div class="space-y-4">
-              <h3
-                class="text-5xl font-serif font-normal -tracking-[0.02em] leading-[1.1]"
-              >
-                Get in touch
-              </h3>
-              <p class="mx-auto font-sans leading-tight">
-                Sed eiusmod tempor incididunt lorem ipsum dolor sit amet.
-              </p>
-            </div>
-            <a
-              href="#"
-              class="underline text-lg font-sans hover:text-lime transition-all duration-300"
-              >contact@pycon.org.au</a
-            >
-          </div>
-        </div>
-      </div>
+      <ConnectSubscribeGetInTouchCards />
     </div>
   </section>
 
