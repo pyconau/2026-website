@@ -8,12 +8,12 @@ import Base from "../../layouts/Base.astro";
 import ConnectSubscribeGetInTouchCards from "../../components/ConnectSubscribeGetInTouchCards.astro";
 
 // Import all attend pages with their metadata
-const pages = import.meta.glob('./*.astro', { eager: true });
+const pages = import.meta.glob("./*.astro", { eager: true });
 
 // Extract nav metadata for tiles (pages with tile !== false)
 const tileItems = Object.entries(pages)
   .filter(([path, mod]) => {
-    return !path.includes('index.astro') && mod.nav && mod.nav.tile !== false;
+    return !path.includes("index.astro") && mod.nav && mod.nav.tile !== false;
   })
   .map(([path, mod]) => {
     const slug = path.match(/\/([^/]+)\.astro$/)?.[1];
@@ -21,14 +21,18 @@ const tileItems = Object.entries(pages)
       href: `/attend/${slug}`,
       title: mod.nav.title,
       order: mod.nav.order,
-      image: mod.nav.image
+      image: mod.nav.image,
     };
   })
   .sort((a, b) => a.order - b.order)
   .map((item, index) => {
     // If no image is specified, use alternating fallback images
     if (!item.image) {
-      const fallbackImages = ["/images/about-thumb-1.png", "/images/about-thumb-2.png", "/images/about-thumb-3.png"];
+      const fallbackImages = [
+        "/images/about-thumb-1.png",
+        "/images/about-thumb-2.png",
+        "/images/about-thumb-3.png",
+      ];
       item.image = fallbackImages[index % fallbackImages.length];
     }
     return item;
@@ -93,13 +97,13 @@ const bgColors = ["bg-violet", "bg-lavender"];
             class="fadeInUp flex flex-col lg:flex-row gap-y-10 lg:gap-y-0 justify-between items-start"
           >
             <p class="text-intro font-medium w-full text-charcoal lg:w-[506px]">
-              Travelling to Brisbane? We recommend arriving <strong>before 5pm on Wednesday</strong> 26 August 2026, and departing after 5pm on Sunday.
+              Travelling to Brisbane? We recommend arriving <strong
+                >before 5pm on Wednesday</strong
+              > 26 August 2026, and departing after 5pm on Sunday.
             </p>
             <div>
-              <a
-                href="/tickets"
-                class="btn-arrow btn-arrow--emerald"
-                >Early-Bird Tickets</a
+              <a href="/tickets" class="btn-arrow btn-arrow--emerald"
+                >Blind-Bird Tickets</a
               >
             </div>
           </div>
@@ -114,71 +118,72 @@ const bgColors = ["bg-violet", "bg-lavender"];
   >
     <div class="container relative z-20">
       <div class="grid lg:grid-cols-3 grid-cols-1 gap-x-5 gap-y-15">
-        {tileItems.map((item, index) => {
-          const bgColor = bgColors[index % bgColors.length];
-          const translateClass = index % 2 === 1 ? "lg:translate-y-10!" : "";
+        {
+          tileItems.map((item, index) => {
+            const bgColor = bgColors[index % bgColors.length];
+            const translateClass = index % 2 === 1 ? "lg:translate-y-10!" : "";
 
-          return (
-            <a
-              href={item.href}
-              class={`fadeInUp ${translateClass} rounded-t-[3.125rem] block overflow-hidden group hover:rounded-b-[3.125rem] transition-all duration-300`}
-            >
-              <div class={bgColor}>
-                <img
-                  src={item.image}
-                  class="rounded-b-[3.125rem] aspect-[44/25] object-cover w-full"
-                  alt={item.title}
-                />
-              </div>
-              <div
-                class={`flex items-center justify-between pt-5 pb-7 px-7 ${bgColor} group-hover:px-10 transition-all duration-300`}
+            return (
+              <a
+                href={item.href}
+                class={`fadeInUp ${translateClass} rounded-t-[3.125rem] block overflow-hidden group hover:rounded-b-[3.125rem] transition-all duration-300`}
               >
-                <h3 class="text-2xl font-sans font-medium text-white">
-                  {item.title}
-                </h3>
-                <svg
-                  class="fill-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                  width="48.229"
-                  height="29.772"
-                  viewBox="0 0 48.229 29.772"
+                <div class={bgColor}>
+                  <img
+                    src={item.image}
+                    class="rounded-b-[3.125rem] aspect-[44/25] object-cover w-full"
+                    alt={item.title}
+                  />
+                </div>
+                <div
+                  class={`flex items-center justify-between pt-5 pb-7 px-7 ${bgColor} group-hover:px-10 transition-all duration-300`}
                 >
-                  <defs>
-                    <clipPath id="a">
-                      <rect
-                        width="48.229"
-                        height="29.772"
-                        fill="none"
-                        stroke="#fff"
-                        stroke-width="3"></rect>
-                    </clipPath>
-                  </defs>
-                  <g clip-path="url(#a)">
-                    <path
-                      d="M45.469,1.5H0v-3H45.469Z"
-                      transform="translate(0 14.886)"
-                      fill="#fff"></path>
-                    <path
-                      d="M26.347,29.772h-3a16.4,16.4,0,0,1,9.528-14.887,16.328,16.328,0,0,1-4.728-3.3,16.328,16.328,0,0,1-3.511-5.208A16.284,16.284,0,0,1,23.347,0h3a13.3,13.3,0,0,0,3.92,9.465,13.3,13.3,0,0,0,9.465,3.92v3A13.385,13.385,0,0,0,26.347,29.772Z"
-                      transform="translate(8.497 0.001)"></path>
-                  </g>
-                </svg>
-              </div>
-            </a>
-          );
-        })}
+                  <h3 class="text-2xl font-sans font-medium text-white">
+                    {item.title}
+                  </h3>
+                  <svg
+                    class="fill-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    width="48.229"
+                    height="29.772"
+                    viewBox="0 0 48.229 29.772"
+                  >
+                    <defs>
+                      <clipPath id="a">
+                        <rect
+                          width="48.229"
+                          height="29.772"
+                          fill="none"
+                          stroke="#fff"
+                          stroke-width="3"
+                        />
+                      </clipPath>
+                    </defs>
+                    <g clip-path="url(#a)">
+                      <path
+                        d="M45.469,1.5H0v-3H45.469Z"
+                        transform="translate(0 14.886)"
+                        fill="#fff"
+                      />
+                      <path
+                        d="M26.347,29.772h-3a16.4,16.4,0,0,1,9.528-14.887,16.328,16.328,0,0,1-4.728-3.3,16.328,16.328,0,0,1-3.511-5.208A16.284,16.284,0,0,1,23.347,0h3a13.3,13.3,0,0,0,3.92,9.465,13.3,13.3,0,0,0,9.465,3.92v3A13.385,13.385,0,0,0,26.347,29.772Z"
+                        transform="translate(8.497 0.001)"
+                      />
+                    </g>
+                  </svg>
+                </div>
+              </a>
+            );
+          })
+        }
       </div>
 
       <div class="fadeInUp grid lg:grid-cols-2 grid-cols-1 gap-5 pt-32">
-        <a
-          href="/conduct"
-          class="btn-arrow btn-arrow--emerald btn-arrow--2col"
+        <a href="/conduct" class="btn-arrow btn-arrow--emerald btn-arrow--2col"
           ><span>Code of Conduct</span></a
         >
-        <a
-          href="/refunds"
-          class="btn-arrow btn-arrow--emerald btn-arrow--2col"
+        <a href="/refunds" class="btn-arrow btn-arrow--emerald btn-arrow--2col"
           ><span>Refunds</span></a
         >
       </div>
