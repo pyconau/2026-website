@@ -17,6 +17,10 @@ jobs:
     name: Publish preview to Vercel
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.11.0"
       - run: npm install
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
