@@ -264,6 +264,9 @@ footer ul li a {
 .btn--stone {
   @apply bg-stone text-charcoal;
 }
+.btn--violet {
+  @apply bg-violet text-stone;
+}
 
 .btn-arrow--down {
   @apply font-sans text-[1.25rem] rounded-[3.125rem] flex items-center gap-6 pl-10 after:inline-block after:content-[''] after:w-[22px] after:h-[18px] after:bg-[url('/images/arrow-down.svg')] after:bg-contain after:bg-center after:bg-no-repeat;

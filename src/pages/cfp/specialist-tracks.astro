@@ -9,8 +9,18 @@ import PageHeader from "../../components/header/PageHeader.astro";
 import PageHeaderTitle from "../../components/header/PageHeaderTitle.astro";
 import Base from "../../layouts/Base.astro";
 import Callout from "../../components/cfp/Callout.astro";
+import TypographyLink from "../../components/typography/TypographyLink.astro";
 
 const tracks = (await getCollection("specialist-tracks")).sort((a, b) => a.id.localeCompare(b.id));
+
+const buttonOrder = [
+  // 'education',
+  // 'data-ai',
+  // 'devrel',
+  // 'cybersecurity',
+  // 'platform-engineering',
+  // 'research-software-engineering',
+];
 
 export const nav = {
   order: 2,
@@ -43,7 +53,7 @@ export const nav = {
   <section>
     <div class="header-divider header-divider--lemon"></div>
 
-    <div class="bg-stone py-20">
+    <div class="bg-stone pt-20 pb-10">
       <div class="container">
         <div class="lg:w-[85%] w-full mx-auto">
           <div
@@ -70,6 +80,34 @@ export const nav = {
       </div>
     </div>
   </section>
+  <section class="bg-stone py-10 pb-20">
+    <div class="container">
+      <div class="lg:w-[85%] w-full mx-auto">
+        <div class="rich-text">
+          <h2 class="rich-text">Meet the specialist tracks</h2>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-6 mt-10">
+          {
+            [...tracks].sort((a, b) => buttonOrder.indexOf(a.slug) - buttonOrder.indexOf(b.slug)).map((track) => (
+              <div class="flex justify-center flex-wrap">
+                <a href={`#${track.slug}-section`}
+                  onclick={`event.preventDefault(); window.scrollToSection('${track.slug}-section'); return false;`}
+                  class="flex btn btn--emerald btn-arrow--down ">
+                  <span>{track.data.title}</span>
+                </a>
+              </div>
+            ))
+          }
+          <!-- <a class="btn-arrow btn-arrow--down no-underline! text-lg font-semibold" href={`#${track.data.title}`} >
+            {track.data.title}
+            {/* <img src="/images/icons/arrow-down.svg" alt="" class="text-violet" /> */}
+          </a> -->
+        </div>
+      </div>
+    </div>
+
+  </section>
 
   <section>
     <div class="bg-stone pb-20">
@@ -81,6 +119,7 @@ export const nav = {
               return (
                 <SpecialistTrack
                   title={track.data.title}
+                  slug={track.slug}
                   shortDescription={track.data.shortDescription}
                   organisers={track.data.organisers}
                 >

@@ -11,14 +11,15 @@ export interface Organiser {
 
 export interface Props {
   title: string;
+  slug: string;
   shortDescription: string;
   organisers: Organiser[];
 }
 
-const { title, shortDescription, organisers } = Astro.props;
+const { title, slug, shortDescription, organisers } = Astro.props;
 ---
 
-<div class="specialist-track mb-16">
+<div class={`specialist-track mb-16 ${slug}-section`} id={`${slug}-section`}>
   <h2
     class="text-3xl font-bold font-sans text-emerald pt-14 pb-4 text-center lg:text-left fadeInUp"
   >
