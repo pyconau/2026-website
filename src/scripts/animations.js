@@ -140,4 +140,20 @@ spinElements.forEach((element) => {
 
 // Initialize read more functionality
 initReadMore();
+
+// Handle hash navigation on page load (after animations settle)
+if (window.location.hash) {
+  // Disable native scroll restoration
+  history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
+
+  // Scroll to target after short delay for layout to settle
+  setTimeout(() => {
+    const hash = window.location.hash.substring(1);
+    const target = document.getElementById(hash);
+    if (target) {
+      scrollToSection(`#${hash}`);
+    }
+  }, 100);
+}
 // });
