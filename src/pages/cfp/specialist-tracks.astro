@@ -87,22 +87,18 @@ export const nav = {
           <h2 class="rich-text">Meet the specialist tracks</h2>
         </div>
         
-        <div class="grid grid-cols-2 gap-6 mt-10">
+        <div class="flex flex-wrap justify-center gap-4 mt-10">
           {
             [...tracks].sort((a, b) => buttonOrder.indexOf(a.slug) - buttonOrder.indexOf(b.slug)).map((track) => (
-              <div class="flex justify-center flex-wrap">
-                <a href={`#${track.slug}`}
-                  onclick={`event.preventDefault(); window.scrollToSection('${track.slug}'); return false;`}
-                  class="flex btn btn--emerald btn-arrow--down ">
-                  <span>{track.data.title}</span>
-                </a>
-              </div>
+              <a href={`#${track.slug}`}
+                class="flex items-center gap-4 bg-white rounded-2xl px-6 py-4 shadow-sm hover:shadow-md transition-shadow duration-200 no-underline group">
+                <h3 class="text-lg font-medium text-charcoal group-hover:text-emerald transition-colors duration-200 m-0">
+                  {track.data.title}
+                </h3>
+                <img src="/images/arrow-down.svg" alt="" class="w-4 h-4" />
+              </a>
             ))
           }
-          <!-- <a class="btn-arrow btn-arrow--down no-underline! text-lg font-semibold" href={`#${track.data.title}`} >
-            {track.data.title}
-            {/* <img src="/images/icons/arrow-down.svg" alt="" class="text-violet" /> */}
-          </a> -->
         </div>
       </div>
     </div>
