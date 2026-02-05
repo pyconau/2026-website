@@ -91,8 +91,8 @@ export const nav = {
           {
             [...tracks].sort((a, b) => buttonOrder.indexOf(a.slug) - buttonOrder.indexOf(b.slug)).map((track) => (
               <div class="flex justify-center flex-wrap">
-                <a href={`#${track.slug}-section`}
-                  onclick={`event.preventDefault(); window.scrollToSection('${track.slug}-section'); return false;`}
+                <a href={`#${track.slug}`}
+                  onclick={`event.preventDefault(); window.scrollToSection('${track.slug}'); return false;`}
                   class="flex btn btn--emerald btn-arrow--down ">
                   <span>{track.data.title}</span>
                 </a>

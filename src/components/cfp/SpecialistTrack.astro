@@ -19,7 +19,7 @@ export interface Props {
 const { title, slug, shortDescription, organisers } = Astro.props;
 ---
 
-<div class={`specialist-track mb-16 ${slug}-section`} id={`${slug}-section`}>
+<div class={`specialist-track mb-16 ${slug}-section`} id={slug}>
   <h2
     class="text-3xl font-bold font-sans text-emerald pt-14 pb-4 text-center lg:text-left fadeInUp"
   >
