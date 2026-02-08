@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scroll margin for anchor targets to account for fixed headers */
+.specialist-track {
+  scroll-margin-top: 2rem;
+}
+
 @theme {
   /* Colors */
   --color-charcoal: #282828;
@@ -263,6 +272,9 @@ footer ul li a {
 }
 .btn--stone {
   @apply bg-stone text-charcoal;
+}
+.btn--violet {
+  @apply bg-violet text-stone;
 }
 
 .btn-arrow--down {
