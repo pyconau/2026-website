@@ -8,17 +8,17 @@ export interface Workshop {
 
 export const workshops: Workshop[] = [
   {
-    location: "Online",
-    date: "19 February",
-    time: "6pm - 7pm AEDT",
-    description: "Hosted by PyCon AU via **Python Australia Community Server** on discord. Join us online for a hands-on remote workshop."
-  },
-  {
     location: "Sydney",
     date: "26 February",
     time: "6pm - 7:00pm AEDT",
     description: "Hosted by **Sydney Python Community**.",
     rsvpUrl: "https://luma.com/5plwd5oh"
+  },
+  {
+    location: "Online",
+    date: "TBA Early March",
+    time: "6pm - 7pm AEDT",
+    description: "Hosted by PyCon AU via **Python Australia Community Server** on discord. Join us online for a hands-on remote workshop."
   },
   {
     location: "Canberra",
@@ -29,7 +29,8 @@ export const workshops: Workshop[] = [
   },
   {
     location: "Melbourne",
-    date: "TBA Mid March",
+    date: "19 March",
+    time: "From 6pm AEDT",
     description: "Details to be announced soon."
   },
   {
