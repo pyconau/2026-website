@@ -1,0 +1,197 @@
+---
+import CfpNav from "../../components/cfp/CfpNav.astro";
+import Deadline from "../../components/Deadline.astro";
+import Footer from "../../components/Footer.astro";
+import Crumb from "../../components/header/Crumb.astro";
+import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
+import PageHeader from "../../components/header/PageHeader.astro";
+import PageHeaderTitle from "../../components/header/PageHeaderTitle.astro";
+import Base from "../../layouts/Base.astro";
+
+export const nav = {
+  order: 7,
+  title: "Student Showcase",
+  image: "/images/cfp/speaking_4.jpg",
+};
+---
+
+<Base title="Student Showcase">
+  <PageHeader dark={true} starColour="violet">
+    <HeaderBreadcrumbs colour="lemon">
+      <Crumb href="/cfp/">Call for Proposals</Crumb>
+    </HeaderBreadcrumbs>
+    <div class="flex flex-col lg:flex-row justify-between items-center relative pt-10">
+      <PageHeaderTitle textColour="lemon">
+        <h1>Student Showcase</h1>
+      </PageHeaderTitle>
+      <div class="lg:w-1/2 w-full fadeInUp">
+        <div class="group flex justify-end relative">
+          <img
+            src="/images/cfp/speaking_showcase.jpg"
+            alt="Student Showcase"
+            class="lg:pb-0 pb-14 rounded-4xl max-h-96"
+          />
+        </div>
+      </div>
+    </div>
+  </PageHeader>
+
+  <section>
+    <div class="header-divider header-divider--lemon"></div>
+
+    <div class="bg-stone pt-20 pb-5">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <div class="flex flex-col-reverse lg:flex-row justify-between items-start gap-14">
+            <div class="flex flex-col gap-10 shrink">
+              <div class="lg:w-[80%] w-full shrink rich-text">
+                <p>
+                  We're happy to announce that the PyConAU '<em>Education Track</em>' in 2026 will again have a dedicated session for student presentations.
+                </p>
+                <p>
+                  We are calling for proposals from Australian high school students who are using Python in a project, class assignment or who are hacking on something cool. All levels of experience are welcome from complete novices to Python pros.
+                </p>
+                <p>
+                  The PyCon AU Conference Education Track is a dedicated one day mini-conference that focuses on the use of Python for teaching beginner programmers at high school. The student showcase is an opportunity for your students to exhibit their projects and tell the story of how they were made, and the problems they had to solve.
+                </p>
+                <p>
+                  We are accepting 10 minute talks, both live/in-person and remotely via pre-recorded video, from students year 7 to 12. The proposals don't need the full talk - just a few sentences about the project!
+                </p>
+              </div>
+            </div>
+
+            <CfpNav />
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="bg-stone py-10">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto rich-text [&_p,&_ul]:max-w-[85%]">
+          <h2>Important Dates</h2>
+          <table class="w-full max-w-[85%]">
+            <thead>
+              <tr>
+                <th class="text-left py-3 pr-4">Date</th>
+                <th class="text-left py-3">Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 pr-4 align-top whitespace-nowrap">29 March</td>
+                <td class="py-2">Call For Proposals for Education Track (teachers, educators, friends!) closes.</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 align-top whitespace-nowrap">29 March</td>
+                <td class="py-2">Apply for Financial Assistance. Applications will continue to be assessed until budget is exhausted.</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 align-top whitespace-nowrap">4 July</td>
+                <td class="py-2"><strong>Submissions for Student Showcase closes.</strong> (End of Term 2)</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 align-top whitespace-nowrap">Mid-July</td>
+                <td class="py-2">Notification of whether proposals have been accepted, not accepted, or waitlisted (early Term 3)</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 align-top whitespace-nowrap">22 July</td>
+                <td class="py-2">Accepted students must register for the conference.</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 align-top whitespace-nowrap">19 August</td>
+                <td class="py-2">Accepted students' videos due</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 align-top whitespace-nowrap">27-29 August</td>
+                <td class="py-2">PyCon AU invites students to attend the full conference (Thursday - Saturday).</td>
+              </tr>
+              <tr class="font-semibold">
+                <td class="py-2 pr-4 align-top whitespace-nowrap">28 August</td>
+                <td class="py-2">The Student Showcase runs after 3pm on Friday.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <img
+            src="/images/cfp/previous_showcase.jpg"
+            alt="Previous Student Showcase"
+            class="w-full rounded-[3rem] my-10 pt-0!"
+          />
+
+          <h2>Speaker Benefits</h2>
+          <p>
+            Accepted students will have the opportunity to present their work in front of interested and supportive industry professionals and teachers from other schools. They will be provided with free registration for the specialist events day and both days of the conference main track. Should a student also wish to attend the sprints (Sunday) and workshops (Wednesday) these will attract a small charge.
+          </p>
+          <p>
+            Parents/guardians and teachers/chaperones are invited to attend the student showcase as a guest of the conference (for free). Separate conference registration is required and will be arranged once students are accepted to present.
+          </p>
+
+          <h2>Financial Assistance</h2>
+          <p>
+            If the cost of attending in person in Brisbane is prohibitive, we encourage you to apply for financial assistance. <strong>You must apply separately to your talk submission.</strong> To learn more about financial assistance, visit the <a href="/attend/financial-assistance/">financial assistance program page</a> and follow the "Apply Today" button.
+          </p>
+          <p>
+            When submitting proposals to the student showcase, please indicate whether or not your attendance in-person is dependent upon financial assistance, as well as whether or not you will be able to submit a video recording as a fallback option.
+          </p>
+          <p>
+            Financial Assistance is open until the budget runs out, and we recommend applying before <strong>29&nbsp;March&nbsp;2026</strong> so that your application can be considered along with all other speaking proposals to the conference CFP.
+          </p>
+
+          <h2>Code of Conduct</h2>
+          <p>
+            PyCon Australia has a <a href="https://2026.pycon.org.au/conduct/">Code of Conduct</a> which outlines expectations of behaviour and appropriate presentation content. The goal of the code of conduct is to facilitate a safe, welcoming and inclusive environment. Presenters are required to be familiar with and abide by the code of conduct. If you have any questions about the suitability of any aspect of your proposed talk or require any additional information, please email us at <a href="mailto:program@pycon.org.au">program@pycon.org.au</a>.
+          </p>
+
+          <h2>Presentation Length</h2>
+          <p>
+            The length for talks is 10 minutes.
+          </p>
+
+          <h2>How to Submit</h2>
+          <div class="w-full lg:w-[60%]">
+            <Deadline deadline="2026-07-04T23:59:59+10:00" countdown={true}>
+              <div class="flex">
+                <a
+                  href="https://forms.gle/mjurVc3qJwaHsymu6"
+                  target="_blank"
+                  class="btn-arrow btn-arrow--violet text-stone! no-underline!"
+                >Submit your proposal</a>
+              </div>
+            </Deadline>
+          </div>
+          <p>
+            Unfortunately, sometimes we have to decline awesome submissions because we have a limited number of slots available - please don't take a declined submission as a rejection of how awesome your learning journey has been.
+          </p>
+
+          <p>
+            We aim to let everyone know the outcomes of their proposal (accept or decline) by mid-July in early Term 3.
+          </p>
+          <p>
+            <strong><em>If accepted, you will need to register for the conference promptly by 22 July 2026</em></strong>.
+          </p>
+
+          <h2>If you would like feedback on your proposal</h2>
+          <p>
+            If you would like feedback on an idea or proposal, please email <a href="mailto:program@pycon.org.au">program@pycon.org.au</a> and mention you are submitting to the student showcase.
+          </p>
+          <p>
+            We encourage you to get feedback early as there can often be a rush at the last minute.
+          </p>
+
+          <h2>Questions, Clarifications and Comments</h2>
+          <p>
+            If you have any questions, are unsure of anything, or need more information, please don't hesitate to email <a href="mailto:program@pycon.org.au">program@pycon.org.au</a> and we will happily do our best to help you out. Please mention specifically that you are enquiring about the student showcase.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <script src="/src/scripts/animations.js"></script>
+</Base>
