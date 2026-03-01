@@ -12,8 +12,7 @@ export default defineConfig({
   },
   integrations: [mdx(), sitemap()],
   redirects: {
-    // "/conduct": "/attend/conduct",
-    // Add any necessary redirects here
+    "/student-showcase": "/cfp/student-showcase",
   },
   vite: {
     plugins: [tailwindcss()],
