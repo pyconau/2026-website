@@ -12,6 +12,7 @@ import ConnectSubscribeGetInTouchCards from "../../components/ConnectSubscribeGe
 import Base from "../../layouts/Base.astro";
 import CfpNav from "../../components/cfp/CfpNav.astro";
 import WorkshopCard from "../../components/cfp/WorkshopCard.astro";
+import WorkshopRsvpModal from "../../components/cfp/WorkshopRsvpModal.astro";
 import { workshops } from "../../data/workshops";
 
 const PRETALX_URL = "https://pretalx.com/pycon-au-2026/cfp";
@@ -325,6 +326,8 @@ const PRETALX_URL = "https://pretalx.com/pycon-au-2026/cfp";
   </section>
 
   <Footer />
+
+  <WorkshopRsvpModal />
 
   <!-- Main scripts (will be added in Phase 5) -->
   <script src="/src/scripts/animations.js"></script>
