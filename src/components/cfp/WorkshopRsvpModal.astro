@@ -1,0 +1,91 @@
+---
+import TypographyLink from "../typography/TypographyLink.astro";
+
+---
+
+<div
+  id="workshop-rsvp-modal"
+  class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50 p-4"
+  style="display: none;"
+>
+  <div class="bg-stone rounded-lg w-full max-w-4xl max-h-[80vh] flex flex-col relative">
+    <div class="flex justify-end p-4">
+      <button
+        id="close-workshop-modal"
+        class="text-charcoal hover:text-coral transition-all duration-300 text-3xl leading-none"
+        aria-label="Close modal"
+      >
+        &times;
+      </button>
+    </div>
+    <div class="flex-1 overflow-hidden m-10 mt-0 rich-text">
+      <h2 class="text-2xl font-semibold text-charcoal mt-0!">RSVP for Online Workshop</h2>
+
+      <p>
+        Online workshops are hosted in the Python Australia Community Discord. While you don't have to RSVP, it can help to make sure you've joined the server ahead of time.
+      </p>
+      <p>
+        Visit <TypographyLink href="https://pythonaustralia.org" target="_blank">Python Australia</TypographyLink> to join the server. When prompted, mention you're attending the "PyCon AU CFP workshop". Applications to join are typically processed within a day or two.
+      </p>
+
+      <p>
+        Once you're in the server, look out for the "Event" in the top left hand column. You can RSVP and download an .isc or google calendar invite from there. On the day, simply join the relevant voice channel in discord.
+      </p>
+
+      <p>
+        We'll have extra moderators online during the workshop to help with any latecoming attendees. If you encouter trouble, you can email program@pycon.org.au where we'll be monitoring for support as well.
+      </p>
+
+      <div class="flex justify-end mt-4">
+        <a href="https://pythonaustralia.org" target="_blank" rel="noopener noreferrer" class="text-violet font-semibold hover:underline inline-flex items-center gap-2 group">
+          Visit Python Australia
+          <img
+            src="/images/arrow-small--violet.svg"
+            alt=""
+            class="h-3 group-hover:translate-x-1 transition-all duration-300 pt-0!"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const workshopModal = document.getElementById('workshop-rsvp-modal');
+  const closeWorkshopButton = document.getElementById('close-workshop-modal');
+
+  function openWorkshopModal() {
+    if (workshopModal) {
+      workshopModal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeWorkshopModal() {
+    if (workshopModal) {
+      workshopModal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  }
+
+  // Expose the open function globally so WorkshopCard buttons can call it
+  (window as any).openWorkshopRsvpModal = openWorkshopModal;
+
+  if (closeWorkshopButton) {
+    closeWorkshopButton.addEventListener('click', closeWorkshopModal);
+  }
+
+  if (workshopModal) {
+    workshopModal.addEventListener('click', (e) => {
+      if (e.target === workshopModal) {
+        closeWorkshopModal();
+      }
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && workshopModal && workshopModal.style.display === 'flex') {
+      closeWorkshopModal();
+    }
+  });
+</script>
