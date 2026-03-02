@@ -23,7 +23,20 @@ const processMarkdown = (text: string) =>
   </div>
   <div class="flex justify-between items-center mt-4">
     <span class="text-sm text-charcoal">{time}</span>
-    {rsvpUrl ? (
+    {rsvpUrl === "python-australia-discord" ? (
+      <button
+        type="button"
+        onclick="window.openWorkshopRsvpModal()"
+        class="text-violet font-semibold hover:underline flex items-center gap-2 group cursor-pointer"
+      >
+        RSVP
+        <img
+          src="/images/arrow-small--violet.svg"
+          alt=""
+          class="h-3 group-hover:translate-x-1 transition-all duration-300"
+        />
+      </button>
+    ) : rsvpUrl ? (
       <a href={rsvpUrl} target="_blank" rel="noopener noreferrer" class="text-violet font-semibold hover:underline flex items-center gap-2 group">
         RSVP
         <img

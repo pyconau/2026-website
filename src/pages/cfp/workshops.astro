@@ -1,6 +1,7 @@
 ---
 import CfpNav from "../../components/cfp/CfpNav.astro";
 import WorkshopCard from "../../components/cfp/WorkshopCard.astro";
+import WorkshopRsvpModal from "../../components/cfp/WorkshopRsvpModal.astro";
 import Footer from "../../components/Footer.astro";
 import Crumb from "../../components/header/Crumb.astro";
 import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
@@ -11,7 +12,7 @@ import { workshops } from "../../data/workshops";
 import TypographyLink from "../../components/typography/TypographyLink.astro";
 
 export const nav = {
-  order: 7,
+  order: 6,
   title: "Attend a CFP Workshop",
   image: "/images/cfp/speaking_4.jpg",
 };
@@ -119,7 +120,7 @@ export const nav = {
               Our workshop is open source, and published with a train-the-trainer model in mind. If you'd like to run a workshop with your local community, club or group, we'd love to help you make it happen.
             </p>
             <p>
-              The workshop slides, presenters notes, and event resources (agenda + template graphic for promotion) will be progressively published to <TypographyLink href="https://github.com/pyconau/cfp-workshops" target="_blank">this repository on GitHub</TypographyLink>, soon&trade;.
+              The workshop slides, presenters notes, and event resources (agenda + template graphic for promotion) are available in <TypographyLink href="https://github.com/pyconau/cfp-workshops" target="_blank">this repository on GitHub</TypographyLink>.
             </p>
             <h4>Plan ahead & get in touch</h4>
             <p>
@@ -144,6 +145,8 @@ export const nav = {
   </section>
 
   <Footer />
+
+  <WorkshopRsvpModal />
 
   <script src="/src/scripts/animations.js"></script>
 </Base>

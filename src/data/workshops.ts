@@ -15,17 +15,18 @@ export const workshops: Workshop[] = [
     rsvpUrl: "https://luma.com/5plwd5oh"
   },
   {
-    location: "Online",
-    date: "TBA Early March",
-    time: "6pm - 7pm AEDT",
-    description: "Hosted by PyCon AU via **Python Australia Community Server** on discord. Join us online for a hands-on remote workshop."
-  },
-  {
     location: "Canberra",
     date: "5 March",
     time: "6pm - 7:30pm AEDT",
     description: "With the **Canberra Python User Group** hosted at ANU.",
     rsvpUrl: "https://www.meetup.com/canberra-python-meetup-group/events/313087616/"
+  },
+  {
+    location: "Online",
+    date: "12 March",
+    time: "6pm - 7pm AEDT",
+    description: "Hosted by PyCon AU via **Python Australia Community Server** on discord. Join us online for a hands-on remote workshop.",
+    rsvpUrl: "python-australia-discord"
   },
   {
     location: "Melbourne",
@@ -35,8 +36,10 @@ export const workshops: Workshop[] = [
   },
   {
     location: "Online",
-    date: "TBA Mid March",
-    description: "Hosted by PyCon AU via **Python Australia Community Server** on discord. Join us online for a hands-on remote workshop."
+    date: "24 March",
+    time: "6pm - 7pm AEDT",
+    description: "Hosted by PyCon AU via **Python Australia Community Server** on discord. Join us online for a hands-on remote workshop.",
+    rsvpUrl: "python-australia-discord"
   },
   {
     location: "Brisbane",
