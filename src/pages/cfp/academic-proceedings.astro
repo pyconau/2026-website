@@ -1,0 +1,242 @@
+---
+import FAQCategory from "../../components/attend/faq/FAQCategory.astro";
+import FAQEntry from "../../components/attend/faq/FAQEntry.astro";
+import CfpNav from "../../components/cfp/CfpNav.astro";
+import TrackOrganiser from "../../components/cfp/TrackOrganiser.astro";
+import Deadline from "../../components/Deadline.astro";
+import Footer from "../../components/Footer.astro";
+import Crumb from "../../components/header/Crumb.astro";
+import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
+import PageHeader from "../../components/header/PageHeader.astro";
+import PageHeaderTitle from "../../components/header/PageHeaderTitle.astro";
+import TypographyLink from "../../components/typography/TypographyLink.astro";
+import Base from "../../layouts/Base.astro";
+
+export const nav = {
+  order: 4,
+  title: "Academic Proceedings",
+  image: "/images/cfp/speaking_4.jpg",
+};
+
+const PRETALX_URL = "https://pretalx.com/pycon-au-2026/cfp";
+---
+
+<Base title="Academic Proceedings">
+  <PageHeader dark={true} starColour="violet">
+    <HeaderBreadcrumbs colour="lemon">
+      <Crumb href="/cfp/">Call for Proposals</Crumb>
+    </HeaderBreadcrumbs>
+    <div class="flex flex-col lg:flex-row justify-between items-center relative pt-10">
+      <PageHeaderTitle textColour="lemon">
+        <h1>Academic Proceedings</h1>
+      </PageHeaderTitle>
+      <div class="lg:w-1/2 w-full fadeInUp">
+        <div class="group flex justify-end relative">
+          <img
+            src="/images/cfp/speaking_8.jpg"
+            alt="Academic Proceedings"
+            class="lg:pb-0 pb-14 rounded-4xl max-h-96"
+          />
+        </div>
+      </div>
+    </div>
+  </PageHeader>
+
+  <section>
+    <div class="header-divider header-divider--lemon"></div>
+
+    <div class="bg-stone pt-20 pb-5">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <div class="flex flex-col-reverse lg:flex-row justify-between items-start gap-14">
+            <div class="flex flex-col gap-10 shrink">
+              <div class="lg:w-[80%] w-full shrink rich-text">
+                <p>
+                  We're excited that this year PyConAU will be offering publication in a formal academic proceedings. Any talk or poster accepted to the conference is eligible to opt-in for peer review and to be included in the formal PyConAU Academic Proceedings.
+                </p>
+                <p>
+                  Any talk or poster which is submitted can be considered for the academic proceedings, including sessions presented at specialist tracks. We've simplified the submission and publication process by publishing the abstracts submitted during CFP, without requiring full papers or separate submissions.
+                </p>
+                <p>
+                  <strong>In order to be considered for publication, select the checkbox titled "Submit to the Academic Proceedings" when submitting your proposal in Pretalx.</strong>
+                </p>
+                <div class="flex my-6">
+                  <a
+                    href={PRETALX_URL}
+                    target="_blank"
+                    class="btn-arrow btn-arrow--violet text-stone! no-underline!"
+                  >Submit your academic proposal now</a>
+                </div>
+                <p>
+                  All abstracts in the proceedings will be published on <TypographyLink href="https://zenodo.org/" target="_blank">Zenodo</TypographyLink> and given its own DOI to ensure findability and citability in the future. After the conference, the academic editors will be in touch to ask about including academic references, your affiliations, and your <TypographyLink href="https://orcid.org" target="_blank">ORCiD</TypographyLink>.
+                </p>
+              </div>
+            </div>
+
+            <CfpNav />
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="bg-stone py-10">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <div class="flex flex-col lg:flex-row gap-10 items-start">
+            <div class="lg:w-1/2 w-full rich-text">
+              <h2>Parallel Peer-Review</h2>
+              <p>
+                Once CFP closes on 29 March 2026 AOE, submissions that have elected to be part of the academic proceedings will be independently peer-reviewed in parallel to the regular proposal review selection. To be included in academic proceedings, your proposed talk or posters session must:
+              </p>
+              <ol>
+                <li>Be accepted to the conference through the regular review process. Please take note of the <a href="/cfp/anonymity-guidelines">anonymity guidelines</a>.</li>
+                <li>Also pass academic peer review (this step is opt-in).</li>
+              </ol>
+              <p>
+                Talks that pass academic peer review but do not get accepted to the conference will not be included in the academic proceedings. We may however reach out to such proposals to see whether or not a posters session may be an appropriate alternative.
+              </p>
+            </div>
+            <div class="lg:w-1/2 w-full">
+              <img
+                src="/images/cfp/peer_review_chart.png"
+                alt="Peer Review Process Chart"
+                class="w-full rounded-4xl"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="bg-stone py-10">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <div class="rich-text mb-6">
+            <h2>Meet the Editors</h2>
+          </div>
+          <div class="grid lg:grid-cols-2 grid-cols-1 gap-4">
+            <TrackOrganiser
+              name="Richard Littauer"
+              title="Open Source Community Manager and PhD Student"
+              pronouns="he/him"
+              photo="/images/specialist-tracks/richard-littauer.jpg"
+              social={{
+                "Mastodon": "https://mastodon.social/@richlitt",
+                "LinkedIn": "https://www.linkedin.com/in/richard-littauer-130026138/",
+                "Website": "https://burntfen.com"
+              }}
+            />
+            <TrackOrganiser
+              name="Alan Rubin"
+              title="Group Leader"
+              pronouns="he/him"
+              photo="/images/specialist-tracks/alan-rubin.jpg"
+              social={{
+                "LinkedIn": "https://www.linkedin.com/in/alan-rubin-10129487/",
+                "Website": "https://findanexpert.unimelb.edu.au/profile/668094-alan-rubin"
+              }}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="bg-stone py-10">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <FAQCategory title="Academic Proceedings FAQs">
+            <FAQEntry title="Do you accept posters or talks?">
+              <p>
+                Both! All proposals for 30 minute talks and posters are eligible for publication in the academic proceedings.
+              </p>
+            </FAQEntry>
+            <FAQEntry title="What license will the abstracts be published under?">
+              <p>
+                When you submit a talk, you agree to allow PyConAU to publish your work under a <TypographyLink href="https://creativecommons.org/licenses/by/4.0/deed.en" target="_blank">Creative Commons CC-BY 4.0 International</TypographyLink> license, which will allow others to use and reuse your work, as long as they reference you first. This will also allow academic publishers to use your work, which may be necessary for some institutions to store abstracts in their institutional archives and comply with open access policies.
+              </p>
+            </FAQEntry>
+            <FAQEntry title="Will the work be peer-reviewed separately from the other talks?">
+              <p>
+                Yes. Proposals that request consideration for inclusion in academic proceedings will receive a second, parallel peer review. This is independent from the regular PyCon AU selection process. Remember, your talks will also need to be interesting to the wider audience. Sessions that pass both academic peer-review and are also accepted into the conference will be included in the program as academic talks / posters and also in the conference proceedings.
+              </p>
+              <p>
+                We may suggest to the normal PyConAU reviewers that some academic proposals be included as posters if they do not make it into the program as talks. We want you to be able to present your work!
+              </p>
+              <p>
+                You will not be penalised in any way for checking the box asking to be included in academic proceedings.
+              </p>
+            </FAQEntry>
+            <FAQEntry title="When will I know if my proposal has passed peer review?">
+              <p>
+                We intend on including this information alongside the regular conference review and acceptance timelines. Typically this is 4-6 weeks after CFP closes. We expect all submissions to hear back from the conference by mid-to-late May.
+              </p>
+            </FAQEntry>
+            <FAQEntry title="Do proposals have to be formatted differently?">
+              <p>
+                No! You can submit through the standard process. We're aware that PyConAU proposals are sometimes more fun or informal than 'boring' academic English. That's OK. In order to pass the academic peer-review, we'll focus on the content of your abstract - but it does need to appeal to a broader audience, too.
+              </p>
+              <p>
+                If, after being accepted into the conference proceedings, you would like to rework your content to have a more scholarly tone, we are happy to accommodate this.
+              </p>
+            </FAQEntry>
+            <FAQEntry title="I don't need peer-review. Should I click the box anyway?">
+              <p>
+                Please don't. Peer review takes some work! If there's no benefit for you to have your work in a proceedings, just submit normally. Best of luck to you, either way.
+              </p>
+            </FAQEntry>
+            <FAQEntry title="What will the proceedings look like?">
+              <p>
+                The abstracts will be collated into a PDF and put on Zenodo. This will be the final product. The talks will not be affiliated with a journal, and will only be conference proceedings. Each abstract will also get its own DOI through this process with its own authors (you!) and citation that can be referenced in future scholarly works.
+              </p>
+              <p>
+                PyCon AU 2026 will follow a similar process to academic proceedings as Kiwi PyCon 2025. You can see their proceedings here: <TypographyLink href="https://zenodo.org/records/18516794" target="_blank">https://zenodo.org/records/18516794</TypographyLink>.
+              </p>
+            </FAQEntry>
+            <FAQEntry title="I don't see a slot to add my references or affiliations in the process!">
+              <p>
+                That's by design! We'll ask for this afterwards. If you want to include citations, please use the "Notes" field, as these notes are intended for reviewers (and not published in the conference program), but make sure you remain mindful of the anonymity guidelines.
+              </p>
+              <p>
+                We'll ask for the full references later on, after submissions have been selected.
+              </p>
+            </FAQEntry>
+            <FAQEntry title="Can I edit my proposal after it is accepted?">
+              <p>
+                After the review process the academic editors will reach out about editing for the final proceedings (including adding references and affiliations). However, typically speaking you will not be able to edit your proposal for the conference itself.
+              </p>
+              <p>
+                We want you to publish your best work, while keeping the process simple and straightforward.
+              </p>
+            </FAQEntry>
+            <FAQEntry title="Will there be scholarships for students or accepted academic talks?">
+              <p>
+                PyCon AU 2026 has a limited financial assistance program. Everyone attending the conference is eligible to apply, but budgets are limited and heavily dependent on sponsorship. We recommend submitting your financial assistance application before 29 March 2026 to be considered along with talk proposals.
+              </p>
+            </FAQEntry>
+            <FAQEntry title="Who is this for?">
+              <p>
+                It's for you! One of our goals is to allow students and early career researchers (or later) to be able to get scholarships from their schools for attendance, as presenting your work is part of being an academic. We're interested in allowing different types of people to attend PyConAU, which includes academics.
+              </p>
+            </FAQEntry>
+            <FAQEntry title="Is this just for Research Software Engineering?">
+              <p>
+                No! Everyone is welcome to apply to be included in academic proceedings. We also realise many members of the RSE community may wish to participate in both aspects of PyCon AU (RSE track and academic proceedings).
+              </p>
+            </FAQEntry>
+          </FAQCategory>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <script src="/src/scripts/animations.js"></script>
+</Base>
