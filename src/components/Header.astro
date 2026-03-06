@@ -28,6 +28,26 @@ const attendeeGuidePages = Object.entries(pages)
   })
   .sort((a, b) => a.order - b.order);
 
+// Import all CFP pages with their metadata
+const cfpPages = import.meta.glob('../pages/cfp/*.astro', { eager: true });
+
+// Extract nav metadata and sort by order
+const callForProposalsPages = Object.entries(cfpPages)
+  .filter(([path, mod]) => {
+    // Filter out index page and pages without nav metadata
+    return !path.includes('index.astro') && mod.nav;
+  })
+  .map(([path, mod]) => {
+    // Extract the slug from the file path
+    const slug = path.match(/\/cfp\/(.+)\.astro$/)?.[1];
+    return {
+      href: `/cfp/${slug}`,
+      title: mod.nav.title,
+      order: mod.nav.order,
+    };
+  })
+  .sort((a, b) => a.order - b.order);
+
 /* TODO: Mobile menu links */
 /* TODO: Mobile menu is broken, will review once up to date */
 ---
@@ -105,7 +125,7 @@ const attendeeGuidePages = Object.entries(pages)
           <li>
             <HeaderTopNavItem href="/sponsor">Sponsors</HeaderTopNavItem>
           </li>
-          <li>
+          <li class="relative group">
             <HeaderTopNavItem href="/cfp">
               <span class="relative inline-block">
                 Call For Proposals
@@ -116,6 +136,19 @@ const attendeeGuidePages = Object.entries(pages)
                 />
               </span>
             </HeaderTopNavItem>
+
+            <ul class="sub-menu">
+              {callForProposalsPages.map((page) => (
+                <li>
+                  <a
+                    href={page.href}
+                    class="text-sm font-semibold font-sans hover:text-emerald"
+                  >
+                    {page.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </li>
         </ul>
       </div>
@@ -258,7 +291,7 @@ const attendeeGuidePages = Object.entries(pages)
               >
             </svg>
           </div>
-          <ul class="flex flex-col gap-3 py-5 w-full transition-all duration-500 ease-in-out text-black bg-stone rounded-xl">
+          <ul class="flex flex-col gap-3 py-5 mb-4 w-full transition-all duration-500 ease-in-out text-black bg-stone rounded-xl">
             {attendeeGuidePages.map((page) => (
               <li class="px-4">
                 <a
@@ -274,17 +307,50 @@ const attendeeGuidePages = Object.entries(pages)
         <li x-show="openSubMenu === null">
           <a href="/sponsor"><span>Sponsors</span></a>
         </li>
-        <li x-show="openSubMenu === null">
-          <a href="/cfp">
-            <span class="relative inline-block">
-              Call For Proposals
-              <img
-                src="/images/flourish.svg"
-                alt=""
-                class="absolute -top-3 -right-4 w-7 h-7"
-              />
-            </span>
-          </a>
+        <li
+          x-show="openSubMenu === null || openSubMenu === 'cfp'"
+          :class="{ 'sub-menu-open': openSubMenu === 'cfp' }"
+        >
+          <div class="has-child">
+            <a href="/cfp">
+              <span class="relative inline-block">
+                Call For Proposals
+                <img
+                  src="/images/flourish.svg"
+                  alt=""
+                  class="absolute -top-3 -right-4 w-7 h-7"
+                />
+              </span>
+            </a>
+            <svg
+              @click="openSubMenu = openSubMenu === 'cfp' ? null : 'cfp'"
+              xmlns="http://www.w3.org/2000/svg"
+              width="15.966"
+              height="28.934"
+              viewBox="0 0 15.966 28.934"
+              :class="{ 'rotate-90': openSubMenu === 'cfp' }"
+              class=" transition-transform duration-100 ease-in-out"
+              ><g transform="translate(-30.906 0)"
+                ><g transform="translate(0 0)"
+                  ><path
+                    d="M26.347,28.934h-3a16.009,16.009,0,0,1,9.19-14.468,15.977,15.977,0,0,1-4.514-3.176A15.862,15.862,0,0,1,23.347,0h3a12.882,12.882,0,0,0,3.8,9.169,12.882,12.882,0,0,0,9.169,3.8v3A12.967,12.967,0,0,0,26.347,28.934Z"
+                    transform="translate(7.559)"></path></g
+                ></g
+              >
+            </svg>
+          </div>
+          <ul class="flex flex-col gap-3 py-5 mb-4 w-full transition-all duration-500 ease-in-out text-black bg-stone rounded-xl">
+            {callForProposalsPages.map((page) => (
+              <li class="px-4">
+                <a
+                  href={page.href}
+                  class="font-semibold text-2xl font-sans hover:text-emerald"
+                >
+                  {page.title}
+                </a>
+              </li>
+            ))}
+          </ul>
         </li>
         <li x-show="openSubMenu === null">
           <a href="/news/"><span>News & Updates</span></a>
@@ -314,7 +380,7 @@ const attendeeGuidePages = Object.entries(pages)
               >
             </svg>
           </div>
-          <ul class="flex flex-col gap-3 py-5 w-full transition-all duration-500 ease-in-out text-black bg-stone rounded-xl">
+          <ul class="flex flex-col gap-3 py-5 mb-4 w-full transition-all duration-500 ease-in-out text-black bg-stone rounded-xl">
             <li class="px-4">
               <a
                 href="/about/the-conference"
