@@ -9,6 +9,27 @@ html {
   scroll-margin-top: 2rem;
 }
 
+/* Sponsor card highlight when navigated via anchor */
+.sponsor-card {
+  scroll-margin-top: 2rem;
+}
+
+.sponsor-card:target {
+  animation: highlight-fade 3s ease-out forwards;
+}
+
+@keyframes highlight-fade {
+  0% {
+    box-shadow: 0 0 0 4px var(--color-violet);
+  }
+  70% {
+    box-shadow: 0 0 0 4px var(--color-violet);
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+
 @theme {
   /* Colors */
   --color-charcoal: #282828;
