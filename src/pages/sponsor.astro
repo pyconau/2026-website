@@ -13,7 +13,7 @@ const sponsors = await getCollection("sponsors", ({ id }) => {
   return !id.startsWith("_");
 });
 
-const tierOrder = ["diamond", "platinum", "gold", "standard", "in-kind"];
+const tierOrder = ["diamond", "platinum", "gold", "standard", "in-kind", "supporting"];
 const sponsorsByTier = sponsors.reduce((acc, sponsor) => {
   const tier = sponsor.data.tier;
   if (!acc[tier]) {
@@ -29,6 +29,7 @@ const tierLabels: Record<string, string> = {
   gold: "Gold Sponsors",
   standard: "Sponsors",
   "in-kind": "In-Kind Sponsors",
+  supporting: "Supporting Organisations",
 };
 
 const prospectusUrl = "/files/PyCon AU 2026 Sponsorship Prospectus v3.pdf";
@@ -81,9 +82,10 @@ const prospectusUrl = "/files/PyCon AU 2026 Sponsorship Prospectus v3.pdf";
             if (!tierSponsors || tierSponsors.length === 0) return null;
 
             const isPremium = tier === "diamond" || tier === "platinum" || tier === "gold";
+            const isSupporting = tier === "supporting";
 
             return (
-              <div class="space-y-7 pt-24">
+              <div class="space-y-7 pt-24" id={tier}>
                 <h2 class="fadeInUp lg:text-6xl text-5xl font-serif -tracking-[0.04em] text-center pb-7">
                   {tierLabels[tier]}
                 </h2>
@@ -92,8 +94,9 @@ const prospectusUrl = "/files/PyCon AU 2026 Sponsorship Prospectus v3.pdf";
                   <div class="space-y-5">
                     {tierSponsors.map(async (sponsor) => {
                       const { Content } = await sponsor.render();
+                      const sponsorSlug = sponsor.id.replace(/\.md$/, "");
                       return (
-                        <div class="fadeInUp bg-white flex lg:flex-row flex-col rounded-[3.125rem] lg:p-14 p-10 gap-14">
+                        <div id={sponsorSlug} class="sponsor-card fadeInUp bg-white flex lg:flex-row flex-col rounded-[3.125rem] lg:p-14 p-10 gap-14">
                           <img
                             src={`/images/sponsors/${sponsor.data.logo}`}
                             class="lg:w-auto w-[190px]"
@@ -109,7 +112,43 @@ const prospectusUrl = "/files/PyCon AU 2026 Sponsorship Prospectus v3.pdf";
                             {sponsor.data.website && (
                               <a
                                 href={sponsor.data.website}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 class="text-base font-medium font-sans leading-[1.2]"
+                              >
+                                {new URL(sponsor.data.website).hostname}
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : isSupporting ? (
+                  <div class="flex flex-wrap justify-center gap-5">
+                    {tierSponsors.map(async (sponsor) => {
+                      const { Content } = await sponsor.render();
+                      const sponsorSlug = sponsor.id.replace(/\.md$/, "");
+                      return (
+                        <div id={sponsorSlug} class="sponsor-card fadeInUp bg-white flex flex-col rounded-[2rem] p-8 gap-6 lg:w-[calc(33.333%-1rem)] w-full">
+                          <img
+                            src={`/images/sponsors/${sponsor.data.logo}`}
+                            class="w-full h-auto object-contain max-h-24"
+                            alt={sponsor.data.name}
+                          />
+                          <div class="space-y-3">
+                            <h3 class="text-xl font-semibold text-charcoal">
+                              {sponsor.data.name}
+                            </h3>
+                            <div class="text-sm font-medium leading-normal tracking-[0.01em]">
+                              <Content />
+                            </div>
+                            {sponsor.data.website && (
+                              <a
+                                href={sponsor.data.website}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-sm font-medium font-sans leading-[1.2]"
                               >
                                 {new URL(sponsor.data.website).hostname}
                               </a>
@@ -123,8 +162,9 @@ const prospectusUrl = "/files/PyCon AU 2026 Sponsorship Prospectus v3.pdf";
                   <div class={tierSponsors.length === 1 ? "flex justify-center" : "grid lg:grid-cols-2 grid-cols-1 gap-x-5 gap-y-10"}>
                     {tierSponsors.map(async (sponsor) => {
                       const { Content } = await sponsor.render();
+                      const sponsorSlug = sponsor.id.replace(/\.md$/, "");
                       return (
-                        <div class={`fadeInUp bg-white flex flex-col items-center rounded-[3.125rem] lg:p-14 p-10 gap-14 ${tierSponsors.length === 1 ? "lg:w-[50%]" : ""}`}>
+                        <div id={sponsorSlug} class={`sponsor-card fadeInUp bg-white flex flex-col items-center rounded-[3.125rem] lg:p-14 p-10 gap-14 ${tierSponsors.length === 1 ? "lg:w-[50%]" : ""}`}>
                           <img
                             src={`/images/sponsors/${sponsor.data.logo}`}
                             class="lg:w-auto w-[190px]"
@@ -140,6 +180,8 @@ const prospectusUrl = "/files/PyCon AU 2026 Sponsorship Prospectus v3.pdf";
                             {sponsor.data.website && (
                               <a
                                 href={sponsor.data.website}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 class="text-base font-medium font-sans leading-[1.2]"
                               >
                                 {new URL(sponsor.data.website).hostname}
