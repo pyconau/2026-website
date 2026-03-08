@@ -44,6 +44,8 @@ export const workshops: Workshop[] = [
   {
     location: "Brisbane",
     date: "26 March",
-    description: "Hosted by the local **Brisbane Python** community."
+    time: "6pm - 8:00pm AEST",
+    description: "Hosted by the local **Brisbane Python** community.",
+    rsvpUrl: "https://luma.com/7h0i45bq"
   },
 ];
