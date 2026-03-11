@@ -31,8 +31,9 @@ export const workshops: Workshop[] = [
   {
     location: "Melbourne",
     date: "19 March",
-    time: "From 6pm AEDT",
-    description: "Details to be announced soon."
+    time: "6:45 – 7:45 PM AEDT",
+    description: "Hosted by **Melbourne Python**.",
+    rsvpUrl: "https://www.meetup.com/en-au/melbourne-python-user-group/events/313646012/"
   },
   {
     location: "Online",
