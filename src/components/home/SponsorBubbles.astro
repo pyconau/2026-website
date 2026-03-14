@@ -74,11 +74,11 @@ for (let i = 1; i <= 15; i++) {
   bubbles.push({ position: i, type: "color", color: colors[(i - 1) % colors.length] });
 }
 
-// Position 2 is always "Your logo here" CTA (only in collection mode)
+// Position 9 is always "Your logo here" CTA (only in collection mode)
 if (!isStaticMode) {
-  const ctaIndex = bubbles.findIndex(b => b.position === 2);
+  const ctaIndex = bubbles.findIndex(b => b.position === 9);
   if (ctaIndex !== -1) {
-    bubbles[ctaIndex] = { position: 2, type: "cta" };
+    bubbles[ctaIndex] = { position: 9, type: "cta" };
   }
 }
 
@@ -109,54 +109,64 @@ if (sortedSponsors.length <= 3) {
     }
   });
 } else {
-  // More than 3 sponsors: Place sponsors in order, with colored bubbles between tiers and within large tiers
-  let sponsorIndex = 0;
-  let currentTier = sortedSponsors[0]?.data.tier;
-  let sponsorsInCurrentTier = 0;
-  let useThreeInterval = true; // Alternate between 3 and 4
+  // More than 3 sponsors: Place non-supporting sponsors from start, supporting sponsors from end of row 2
+  const nonSupportingSponsors = sortedSponsors.filter(s => s.data.tier !== "supporting");
+  const supportingSponsors = sortedSponsors.filter(s => s.data.tier === "supporting");
 
-  // Count sponsors per tier
+  // Count sponsors per tier for spacing logic
   const tierCounts = new Map<string, number>();
-  sortedSponsors.forEach(sponsor => {
+  nonSupportingSponsors.forEach(sponsor => {
     const tier = sponsor.data.tier || "none";
     tierCounts.set(tier, (tierCounts.get(tier) || 0) + 1);
   });
 
-  // Use all positions for more than 3 sponsors
-  for (let i = 1; i <= 15 && sponsorIndex < sortedSponsors.length; i++) {
+  // Place non-supporting sponsors from position 2 onwards (offset by 1 so first bubble is always coloured)
+  let sponsorIndex = 0;
+  let currentTier = nonSupportingSponsors[0]?.data.tier;
+  let sponsorsInCurrentTier = 0;
+  let useThreeInterval = true;
+
+  for (let i = 2; i <= 15 && sponsorIndex < nonSupportingSponsors.length; i++) {
     const bubbleIndex = bubbles.findIndex(b => b.position === i);
 
-    if (sponsorIndex < sortedSponsors.length) {
-      const sponsor = sortedSponsors[sponsorIndex];
-      const sponsorTier = sponsor.data.tier || "none";
-      const tierCount = tierCounts.get(sponsorTier) || 0;
+    const sponsor = nonSupportingSponsors[sponsorIndex];
+    const sponsorTier = sponsor.data.tier || "none";
+    const tierCount = tierCounts.get(sponsorTier) || 0;
 
-      // If tier changed, add a colored bubble between tiers
-      if (sponsorTier !== currentTier && i > 1) {
-        currentTier = sponsorTier;
-        sponsorsInCurrentTier = 0;
-        useThreeInterval = true; // Reset interval pattern for new tier
-        // Keep this position as colored, move to next position
+    // If tier changed, add a colored bubble between tiers
+    if (sponsorTier !== currentTier && i > 1) {
+      currentTier = sponsorTier;
+      sponsorsInCurrentTier = 0;
+      useThreeInterval = true;
+      continue;
+    }
+
+    // Check if we need a break within this tier (only if tier has more than 3 sponsors)
+    if (tierCount > 3 && sponsorsInCurrentTier > 0) {
+      const interval = useThreeInterval ? 3 : 4;
+      if (sponsorsInCurrentTier % interval === 0) {
+        useThreeInterval = !useThreeInterval;
         continue;
       }
-
-      // Check if we need a break within this tier (only if tier has more than 3 sponsors)
-      if (tierCount > 3 && sponsorsInCurrentTier > 0) {
-        const interval = useThreeInterval ? 3 : 4;
-        if (sponsorsInCurrentTier % interval === 0) {
-          // Add a colored bubble break
-          useThreeInterval = !useThreeInterval; // Alternate for next break
-          // Keep this position as colored, move to next position
-          continue;
-        }
-      }
-
-      // Place sponsor
-      bubbles[bubbleIndex] = { position: i, type: "sponsor", sponsor };
-      sponsorIndex++;
-      sponsorsInCurrentTier++;
     }
+
+    // Place sponsor
+    bubbles[bubbleIndex] = { position: i, type: "sponsor", sponsor };
+    sponsorIndex++;
+    sponsorsInCurrentTier++;
   }
+
+  // Place supporting sponsors at end of row 2, offset by 1 (positions 14, 13, 12, ...)
+  const supportingPositions = [14, 13, 12, 11, 10, 9, 8]; // Offset -1 from end (15), going backwards
+  supportingSponsors.forEach((sponsor, index) => {
+    if (index < supportingPositions.length) {
+      const pos = supportingPositions[index];
+      const bubbleIndex = bubbles.findIndex(b => b.position === pos);
+      if (bubbleIndex !== -1) {
+        bubbles[bubbleIndex] = { position: pos, type: "sponsor", sponsor };
+      }
+    }
+  });
 }
 
 // Split bubbles into two rows
