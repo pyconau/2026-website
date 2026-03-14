@@ -81,7 +81,7 @@ const prospectusUrl = "/files/PyCon AU 2026 Sponsorship Prospectus v4.pdf";
 
             if (!tierSponsors || tierSponsors.length === 0) return null;
 
-            const isPremium = tier === "diamond" || tier === "platinum" || tier === "gold";
+            const isPremium = tier === "diamond" || tier === "platinum";
             const isSupporting = tier === "supporting";
 
             return (
