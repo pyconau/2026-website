@@ -454,6 +454,100 @@ export async function getDayDate(dayName: string): Promise<string | null> {
 // Height of a 30-minute slot in pixels
 const SLOT_HEIGHT_PX = 160;
 
+// Room order for column spanning logic
+const ROOM_ORDER = ["Ballroom 1", "Ballroom 2", "Ballroom 3", "Stradbroke Room"];
+
+/**
+ * Internal type for session data before positioning
+ */
+interface SessionDataItem {
+  session: Session;
+  slotIndex: number;
+  topPercent: number;
+  heightPx: number;
+  room: string;
+  showTrackHeader: boolean;
+  isFullWidth: boolean;
+  colSpan: number;
+  startColumn: number;
+  isBreak: boolean;
+}
+
+/**
+ * Merge adjacent breaks that occur at the same time.
+ * Breaks with the same start/end time and title in adjacent rooms are merged
+ * into a single entry that spans multiple columns.
+ */
+function mergeAdjacentBreaks(
+  sessionData: SessionDataItem[],
+  rooms: string[]
+): SessionDataItem[] {
+  const breaks = sessionData.filter((s) => s.isBreak);
+  if (breaks.length === 0) return [];
+
+  // Group breaks by (start time, end time, title)
+  const groups = new Map<string, SessionDataItem[]>();
+
+  for (const brk of breaks) {
+    const startTime = brk.session.data.start?.getTime() ?? 0;
+    const endTime = brk.session.data.end?.getTime() ?? 0;
+    const title = brk.session.data.title;
+    const key = `${startTime}-${endTime}-${title}`;
+
+    if (!groups.has(key)) {
+      groups.set(key, []);
+    }
+    groups.get(key)!.push(brk);
+  }
+
+  const merged: SessionDataItem[] = [];
+
+  for (const [, groupBreaks] of groups) {
+    // Get room indices in the defined order
+    const roomIndices = groupBreaks
+      .map((b) => rooms.indexOf(b.room))
+      .filter((i) => i !== -1)
+      .sort((a, b) => a - b);
+
+    if (roomIndices.length === 0) continue;
+
+    // Find contiguous ranges of adjacent rooms
+    let rangeStart = roomIndices[0];
+    let rangeEnd = roomIndices[0];
+
+    const emitRange = () => {
+      // Find a break from this range to use as template
+      const templateBreak = groupBreaks.find(
+        (b) => rooms.indexOf(b.room) >= rangeStart && rooms.indexOf(b.room) <= rangeEnd
+      );
+      if (!templateBreak) return;
+
+      merged.push({
+        ...templateBreak,
+        colSpan: rangeEnd - rangeStart + 1,
+        startColumn: rangeStart,
+      });
+    };
+
+    for (let i = 1; i < roomIndices.length; i++) {
+      if (roomIndices[i] === rangeEnd + 1) {
+        // Adjacent, extend range
+        rangeEnd = roomIndices[i];
+      } else {
+        // Gap - emit current range and start new one
+        emitRange();
+        rangeStart = roomIndices[i];
+        rangeEnd = roomIndices[i];
+      }
+    }
+
+    // Emit final range
+    emitRange();
+  }
+
+  return merged;
+}
+
 /**
  * A positioned session within a time slot
  */
@@ -464,6 +558,8 @@ export interface PositionedSession {
   showTrackHeader: boolean;
   isFullWidth: boolean;
   colSpan: number; // Number of room columns to span
+  startColumn: number; // 0-indexed starting column position (for breaks)
+  isBreak: boolean; // Flag to style breaks differently
 }
 
 /**
@@ -518,20 +614,12 @@ export async function getScheduleForGrid(dayName: string): Promise<{
 
   const gridStartTime = gridStart.getTime();
 
-  // Track which sessions have a preceding session in the same room
-  const sessionEndTimes = new Map<string, number[]>();
+  // Track which non-break sessions have a preceding non-break session in the same room
+  // Breaks don't count as "preceding" for track header display purposes
+  const nonBreakEndTimes = new Map<string, number[]>();
 
   // Process sessions and assign to slots
-  const sessionData: Array<{
-    session: Session;
-    slotIndex: number;
-    topPercent: number;
-    heightPx: number;
-    room: string;
-    showTrackHeader: boolean;
-    isFullWidth: boolean;
-    colSpan: number;
-  }> = [];
+  const sessionData: SessionDataItem[] = [];
 
   sessions.forEach((session) => {
     if (!session.data.start || !session.data.end || !session.data.room) return;
@@ -555,10 +643,12 @@ export async function getScheduleForGrid(dayName: string): Promise<{
     const sessionType = session.data.type;
     const isFullWidth = sessionType === "keynote" || sessionType === "plenary";
     const colSpan = isFullWidth ? rooms.length : 1;
+    const isBreak = sessionType === "break";
 
     // Check for track header display and back-to-back sessions
-    const roomEndTimes = sessionEndTimes.get(room) || [];
-    const hasPrecedingSession = roomEndTimes.includes(startTime);
+    // Only non-break sessions count as "preceding" - sessions after breaks should show track headers
+    const roomEndTimes = nonBreakEndTimes.get(room) || [];
+    const hasPrecedingSession = !isBreak && roomEndTimes.includes(startTime);
     const trackName = session.data.trackName;
     const isSpecialistTrack = !!trackName && trackName !== "Main Conference";
     const showTrackHeader = isSpecialistTrack && !hasPrecedingSession;
@@ -567,11 +657,16 @@ export async function getScheduleForGrid(dayName: string): Promise<{
     const gapPercent = hasPrecedingSession ? 18 : 0;
     const topPercent = Math.round((topPercentRaw + gapPercent) * 100) / 100;
 
-    // Record this session's end time
-    if (!sessionEndTimes.has(room)) {
-      sessionEndTimes.set(room, []);
+    // Record this session's end time (only for non-break sessions)
+    if (!isBreak) {
+      if (!nonBreakEndTimes.has(room)) {
+        nonBreakEndTimes.set(room, []);
+      }
+      nonBreakEndTimes.get(room)!.push(endTime);
     }
-    sessionEndTimes.get(room)!.push(endTime);
+
+    const roomIndex = rooms.indexOf(room);
+    const startColumn = roomIndex >= 0 ? roomIndex : 0;
 
     sessionData.push({
       session,
@@ -582,8 +677,18 @@ export async function getScheduleForGrid(dayName: string): Promise<{
       showTrackHeader,
       isFullWidth,
       colSpan,
+      startColumn,
+      isBreak,
     });
   });
+
+  // Merge adjacent breaks that occur at the same time
+  // Group breaks by (start time, end time, title) and find contiguous room ranges
+  const mergedBreaks = mergeAdjacentBreaks(sessionData, rooms);
+
+  // Replace individual break entries with merged versions
+  const nonBreakSessions = sessionData.filter((s) => !s.isBreak);
+  const finalSessionData = [...nonBreakSessions, ...mergedBreaks];
 
   // Generate time slots
   const rows: ScheduleRow[] = [];
@@ -595,7 +700,7 @@ export async function getScheduleForGrid(dayName: string): Promise<{
     rooms.forEach((room) => sessionsByRoom.set(room, []));
 
     // Find sessions that start in this slot
-    const slotSessions = sessionData.filter((s) => s.slotIndex === slotIndex);
+    const slotSessions = finalSessionData.filter((s) => s.slotIndex === slotIndex);
 
     slotSessions.forEach((s) => {
       const positioned: PositionedSession = {
@@ -605,11 +710,19 @@ export async function getScheduleForGrid(dayName: string): Promise<{
         showTrackHeader: s.showTrackHeader,
         isFullWidth: s.isFullWidth,
         colSpan: s.colSpan,
+        startColumn: s.startColumn,
+        isBreak: s.isBreak,
       };
 
       // For full-width sessions, add to first room only (rendering will handle colspan)
       if (s.isFullWidth) {
         sessionsByRoom.get(rooms[0])?.push(positioned);
+      } else if (s.isBreak && s.colSpan > 1) {
+        // For merged breaks, add to the first room in their span
+        const startRoom = rooms[s.startColumn];
+        if (startRoom) {
+          sessionsByRoom.get(startRoom)?.push(positioned);
+        }
       } else {
         sessionsByRoom.get(s.room)?.push(positioned);
       }

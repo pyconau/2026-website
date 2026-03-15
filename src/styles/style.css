@@ -625,11 +625,26 @@ ul.sub-menu {
   width: calc(300% + 3rem);
 }
 
+.schedule-event-wrapper--span-2 {
+  /* Span 2 columns + 1 gap */
+  z-index: 15;
+  width: calc(200% + 1.5rem);
+}
+
+.schedule-event-wrapper--span-3 {
+  /* Span 3 columns + 2 gaps */
+  z-index: 15;
+  width: calc(300% + 3rem);
+}
+
 .schedule-event-track-header {
   @apply flex items-center gap-2;
   @apply text-stone font-sans font-semibold text-sm;
-  @apply mb-1;
+  @apply absolute;
   height: 24px;
+  /* Position above the session card */
+  top: -24px;
+  left: 0;
 }
 
 .schedule-track-icon {
@@ -658,6 +673,28 @@ ul.sub-menu {
 }
 .schedule-event-presenter {
   @apply block;
+}
+
+/* Break styling */
+.schedule-break-wrapper {
+  z-index: 15;
+}
+
+.schedule-break {
+  @apply relative left-0 right-0;
+  @apply bg-[#f5f5f5] text-charcoal font-sans text-xs px-4 py-2 rounded-[1.25rem];
+  @apply flex flex-col items-center justify-center text-center;
+  @apply border border-dashed border-[#ccc];
+  /* Center vertically: 24px top margin (half of 48px total reduction) */
+  margin-top: 24px;
+}
+
+.schedule-break-title {
+  @apply block font-extrabold text-charcoal;
+}
+
+.schedule-break-time {
+  @apply block text-charcoal;
 }
 
 .side-nav .active-page {

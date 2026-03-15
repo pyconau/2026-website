@@ -101,20 +101,27 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
         <!-- Schedule Rows -->
         <div class="schedule">
           {rows.map((row, rowIndex) => {
-            // Get all sessions in this row, separating full-width from regular
+            // Get all sessions in this row, separating by type
             const allSessionsInRow = Array.from(row.sessionsByRoom.values()).flat();
             const fullWidthSessions = allSessionsInRow.filter(ps => ps.isFullWidth);
+            const breakSessions = allSessionsInRow.filter(ps => ps.isBreak && ps.colSpan > 1);
 
             return (
               <>
                 {rowIndex > 0 && <div class="new-row"></div>}
                 <div class="time">{row.label}</div>
 
-                {/* Render room columns - each column renders both full-width and regular sessions */}
+                {/* Render room columns - each column renders sessions for that room */}
                 {rooms.map((room, roomIdx) => {
-                  const roomSessions = (row.sessionsByRoom.get(room) || []).filter(ps => !ps.isFullWidth);
+                  // Get regular sessions and single-column breaks for this room
+                  const roomSessions = (row.sessionsByRoom.get(room) || []).filter(ps => !ps.isFullWidth && !ps.isBreak);
+                  const singleColumnBreaks = (row.sessionsByRoom.get(room) || []).filter(ps => ps.isBreak && ps.colSpan === 1);
+
                   // Only render full-width sessions in the first room column
                   const fullWidthInThisColumn = roomIdx === 0 ? fullWidthSessions : [];
+
+                  // Render spanning breaks only in the first column of their span
+                  const spanningBreaksInThisColumn = breakSessions.filter(ps => ps.startColumn === roomIdx);
 
                   return (
                     <div class="column">
@@ -145,6 +152,53 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
                                 )}
                               </div>
                             </a>
+                          </div>
+                        );
+                      })}
+
+                      {/* Spanning breaks (rendered at their start column) */}
+                      {spanningBreaksInThisColumn.map((ps) => {
+                        const timeStr = ps.session.data.start && ps.session.data.end
+                          ? formatSessionTime(ps.session.data.start, ps.session.data.end)
+                          : "";
+                        // Calculate width based on colSpan (each column + gaps between them)
+                        const spanClass = ps.colSpan === 2 ? "schedule-event-wrapper--span-2"
+                          : ps.colSpan === 3 ? "schedule-event-wrapper--span-3"
+                          : ps.colSpan >= 4 ? "schedule-event-wrapper--fullwidth"
+                          : "";
+                        // Reduce height by 3x track header height (72px) for vertical buffer
+                        const breakHeightPx = ps.heightPx - 72;
+
+                        return (
+                          <div class={`schedule-event-wrapper schedule-break-wrapper ${spanClass}`} style={`top: ${ps.topPercent}%;`}>
+                            <div
+                              class="schedule-break"
+                              style={`height: ${breakHeightPx}px;`}
+                            >
+                              <span class="schedule-break-title">{ps.session.data.title}</span>
+                              <span class="schedule-break-time">{timeStr}</span>
+                            </div>
+                          </div>
+                        );
+                      })}
+
+                      {/* Single-column breaks */}
+                      {singleColumnBreaks.map((ps) => {
+                        const timeStr = ps.session.data.start && ps.session.data.end
+                          ? formatSessionTime(ps.session.data.start, ps.session.data.end)
+                          : "";
+                        // Reduce height by 3x track header height (72px) for vertical buffer
+                        const breakHeightPx = ps.heightPx - 72;
+
+                        return (
+                          <div class="schedule-event-wrapper schedule-break-wrapper" style={`top: ${ps.topPercent}%;`}>
+                            <div
+                              class="schedule-break"
+                              style={`height: ${breakHeightPx}px;`}
+                            >
+                              <span class="schedule-break-title">{ps.session.data.title}</span>
+                              <span class="schedule-break-time">{timeStr}</span>
+                            </div>
                           </div>
                         );
                       })}
