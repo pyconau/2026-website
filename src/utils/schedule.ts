@@ -654,10 +654,9 @@ export async function getScheduleForGrid(dayName: string): Promise<{
     const isSpecialistTrack = !!trackName && trackName !== "Main Conference";
     const showTrackHeader = isSpecialistTrack && !hasPrecedingSession;
 
-    // Add vertical gap for back-to-back sessions (mimics hidden track header spacing)
-    // Only apply to non-full-width sessions (keynotes/plenaries don't need this gap)
-    const gapPercent = hasPrecedingSession && !isFullWidth ? 18 : 0;
-    const topPercent = Math.round((topPercentRaw + gapPercent) * 100) / 100;
+    // Track headers are absolutely positioned above session cards (top: -24px),
+    // so they don't affect vertical spacing. No gap compensation needed.
+    const topPercent = Math.round(topPercentRaw * 100) / 100;
 
     // Record this session's end time (only for non-break sessions)
     if (!isBreak) {
