@@ -1,0 +1,122 @@
+---
+import { getCollection } from "astro:content";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import HeaderStar from "../../components/header/HeaderStar.astro";
+import Base from "../../layouts/Base.astro";
+import { getConferenceDays } from "../../utils/schedule";
+
+const sessions = await getCollection("sessions");
+const tracks = await getCollection("specialist-tracks");
+const days = await getConferenceDays();
+---
+
+<Base title="Program">
+  <Header dark={true} />
+
+  <section class="bg-charcoal pt-[98px] pb-20 overflow-hidden">
+    <div class="container relative">
+      <HeaderStar colour="lime" />
+
+      <div class="lg:w-[85%] w-full mx-auto">
+        <div class="fadeInUp breadcrumb pt-14">
+          <ul class="flex items-center gap-2 text-lime font-sans font-extrabold text-10pt uppercase tracking-[0.12em]">
+            <li class="flex items-center gap-2">
+              <a href="/">Home</a>
+            </li>
+          </ul>
+        </div>
+        <div class="fadeInUp flex justify-between items-center relative pt-10">
+          <div class="space-y-20 lg:w-full w-full relative">
+            <div class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em] leading-none">
+              <h1 class="text-lime">Program</h1>
+            </div>
+            <p class="text-stone font-sans font-base tracking-[0.01em] leading-normal lg:w-[600px]">
+              Explore the PyCon AU 2026 program including specialist tracks,
+              talks, workshops, and more.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="header-divider header-divider--lime"></div>
+
+    <div class="bg-stone pt-20 pb-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          {days.length > 0 && (
+            <div class="mb-16">
+              <h2 class="fadeInUp text-4xl font-serif font-medium -tracking-[0.02em] mb-8">
+                Schedule by Day
+              </h2>
+              <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-4">
+                {days.map((day) => (
+                  <a
+                    href={`/program/${day}`}
+                    class="fadeInUp bg-white hover:bg-lemon p-6 rounded-lg group transition-all duration-300 text-center"
+                  >
+                    <h3 class="text-2xl font-serif font-medium text-charcoal group-hover:text-emerald transition-colors duration-300 capitalize">
+                      {day}
+                    </h3>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div class="mb-16">
+            <h2 class="fadeInUp text-4xl font-serif font-medium -tracking-[0.02em] mb-8">
+              Specialist Tracks
+            </h2>
+            <div class="grid lg:grid-cols-2 gap-6">
+              {tracks.map((track) => (
+                <a
+                  href={`/program/specialist-tracks/${track.slug}`}
+                  class="fadeInUp bg-white hover:bg-lemon p-6 rounded-lg group transition-all duration-300"
+                >
+                  <h3 class="text-xl font-serif font-medium text-charcoal group-hover:text-emerald transition-colors duration-300 mb-2">
+                    {track.data.title}
+                  </h3>
+                  <p class="text-charcoal/70 text-sm">
+                    {track.data.shortDescription}
+                  </p>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div class="fadeInUp bg-emerald/10 border-l-4 border-emerald p-6 rounded-r-lg">
+            <p class="text-charcoal">
+              <strong>{sessions.length} sessions</strong> from{" "}
+              <strong>{tracks.length} specialist tracks</strong> have been
+              announced so far.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-lime pt-20">
+    <div class="container">
+      <div class="grid lg:grid-cols-2 grid-cols-1 gap-5 pb-20 fadeInUp">
+        <a
+          href="/program/specialist-tracks"
+          class="btn-arrow btn-arrow--emerald btn-arrow--2col"
+        >
+          <span>All Specialist Tracks</span>
+        </a>
+        <a href="/cfp" class="btn-arrow btn-arrow--emerald btn-arrow--2col">
+          <span>Submit a Talk</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer topColour="lime" />
+
+  <script src="/src/scripts/animations.js"></script>
+</Base>

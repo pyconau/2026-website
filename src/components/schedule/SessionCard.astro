@@ -1,0 +1,57 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getPeopleByCode, formatSessionTime } from "../../utils/schedule";
+
+interface Props {
+  session: CollectionEntry<"sessions">;
+  showTrack?: boolean;
+}
+
+const { session, showTrack = false } = Astro.props;
+const { title, code, start, end, room, track, type, speakers } = session.data;
+
+// Get speaker names
+const speakerData = await getPeopleByCode(speakers);
+const speakerNames = speakerData.map((s) => s.data.name).join(", ");
+
+// Format time
+const timeString = start && end ? formatSessionTime(start, end) : null;
+---
+
+<a
+  href={`/program/${code}`}
+  class="fadeInUp block bg-white rounded-[1.5rem] p-6 hover:shadow-lg transition-all duration-300 group"
+>
+  <div class="flex flex-col gap-3">
+    <div class="flex items-start justify-between gap-4">
+      <h3 class="text-xl font-serif font-medium text-charcoal group-hover:text-emerald transition-colors duration-300">
+        {title}
+      </h3>
+      <svg
+        class="fill-charcoal group-hover:fill-emerald transition-colors duration-300 shrink-0 w-6 h-6"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+      >
+        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
+      </svg>
+    </div>
+
+    {speakerNames && (
+      <p class="text-emerald font-semibold text-sm">{speakerNames}</p>
+    )}
+
+    <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-charcoal/70">
+      {timeString && <span>{timeString}</span>}
+      {room && <span>{room}</span>}
+      {showTrack && track && (
+        <span class="text-emerald">{track}</span>
+      )}
+    </div>
+
+    {type !== "talk" && (
+      <span class="inline-block bg-lavender/20 text-lavender px-3 py-1 rounded-full text-xs font-semibold w-fit capitalize">
+        {type}
+      </span>
+    )}
+  </div>
+</a>

@@ -1,5 +1,6 @@
 ---
 title: "Education"
+pretalxTrack: "Education"
 shortDescription: "Teachers using python in the classroom 👍"
 organisers:
   - name: Nicky Ringland

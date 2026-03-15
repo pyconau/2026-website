@@ -1,0 +1,70 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  person: CollectionEntry<"people">;
+}
+
+const { person } = Astro.props;
+const { name, pronouns, bluesky, fediverse, hasAvatar, code } = person.data;
+const { Content } = await person.render();
+
+const avatarSrc = hasAvatar ? `/images/people/${code}.jpg` : "/images/default-avatar.svg";
+---
+
+<div class="fadeInUp relative mt-32">
+  <img src="/images/scallop-top--white.svg" class="" alt="" />
+  <div class="bg-white flex items-center gap-10 w-full lg:pt-7 pt-4 pb-4 px-14 z-20">
+    <img
+      src={avatarSrc}
+      class="lg:w-[129px] lg:h-[129px] w-[91px] h-[91px] rounded-full object-cover absolute lg:top-[-70px] -top-[60px] left-12"
+      alt={name}
+    />
+    <div class="flex flex-col gap-7 justify-between py-2">
+      <div class="flex justify-between items-end">
+        <div class="space-y-1">
+          <h3 class="text-3xl font-bold text-emerald">{name}</h3>
+        </div>
+        {pronouns && (
+          <span class="text-base font-normal text-charcoal">{pronouns}</span>
+        )}
+      </div>
+      <div class="read-more space-y-4 prose prose-p:my-2">
+        <Content />
+      </div>
+      {(bluesky || fediverse) && (
+        <div class="flex gap-5">
+          <ul class="flex gap-3 font-sans font-medium">
+            {bluesky && (
+              <li>
+                <a
+                  href={bluesky.startsWith("@") ? `https://bsky.app/profile/${bluesky.slice(1)}` : bluesky}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="bg-charcoal text-stone p-1 rounded-lg w-[26px] h-[26px] hover:rounded-none transition-all duration-300 flex justify-center items-center text-sm"
+                  title="Bluesky"
+                >
+                  <i class="fa-brands fa-bluesky"></i>
+                </a>
+              </li>
+            )}
+            {fediverse && (
+              <li>
+                <a
+                  href={fediverse.startsWith("@") ? `https://${fediverse.split("@")[2]}/@${fediverse.split("@")[1]}` : fediverse}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="bg-charcoal text-stone p-1 rounded-lg w-[26px] h-[26px] hover:rounded-none transition-all duration-300 flex justify-center items-center text-base"
+                  title="Mastodon/Fediverse"
+                >
+                  <i class="fa-brands fa-mastodon"></i>
+                </a>
+              </li>
+            )}
+          </ul>
+        </div>
+      )}
+    </div>
+  </div>
+  <img src="/images/scallop-bottom--white.svg" class="" alt="" />
+</div>

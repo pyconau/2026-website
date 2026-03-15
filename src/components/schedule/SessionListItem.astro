@@ -1,0 +1,71 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getPeopleByCode } from "../../utils/schedule";
+
+interface Props {
+  session: CollectionEntry<"sessions">;
+}
+
+const { session } = Astro.props;
+const { title, code, speakers } = session.data;
+
+// Get speaker names
+const speakerData = await getPeopleByCode(speakers);
+const speakerNames = speakerData.map((s) => s.data.name).join(", ");
+
+// Get first speaker avatar for thumbnail
+const firstSpeaker = speakerData[0];
+const avatarSrc = firstSpeaker?.data.hasAvatar
+  ? `/images/people/${firstSpeaker.data.code}.jpg`
+  : "/images/default-avatar.svg";
+---
+
+<a
+  href={`/program/${code}`}
+  class="fadeInUp bg-white hover:bg-lemon p-10 flex justify-between gap-10 row-span-2 group"
+>
+  <div class="flex flex-col lg:flex-row justify-between lg:items-start items-end w-full">
+    <div class="flex flex-col lg:flex-row gap-10 lg:items-center items-start justify-between lg:w-[90%] w-full">
+      <img
+        src={avatarSrc}
+        class="rounded-full lg:w-[138px] w-[100px] lg:h-[138px] h-[100px] object-cover"
+        alt="Session Thumbnail"
+      />
+      <div class="space-y-4">
+        <h3 class="lg:text-3xl text-2xl font-sans font-bold leading-tight w-[90%]">
+          {title}
+        </h3>
+        {speakerNames && <p>by {speakerNames}</p>}
+      </div>
+    </div>
+    <svg
+      class="w-[43px] group-hover:translate-x-3 transition-all duration-300 mt-3 shrink-0"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      width="43.594"
+      height="21.64"
+      viewBox="0 0 43.594 21.64"
+    >
+      <defs>
+        <clipPath id="a">
+          <rect
+            width="43.594"
+            height="21.64"
+            fill="none"
+            stroke="#363636"
+            stroke-width="2"></rect>
+        </clipPath>
+      </defs>
+      <g clip-path="url(#a)">
+        <path
+          d="M41.1,1H0V-1H41.1Z"
+          transform="translate(0 10.82)"
+          fill="#363636"></path>
+        <path
+          d="M25.847,21.64h-2a9.96,9.96,0,0,1,1.172-4.677,11.986,11.986,0,0,1,3.142-3.753,14.925,14.925,0,0,1,4.3-2.39,14.926,14.926,0,0,1-4.3-2.39,11.986,11.986,0,0,1-3.142-3.753A9.958,9.958,0,0,1,23.847,0h2c0,5.414,5.587,9.819,12.455,9.819v2C31.434,11.819,25.847,16.225,25.847,21.64Z"
+          transform="translate(5.292 0)"
+          fill="#363636"></path>
+      </g>
+    </svg>
+  </div>
+</a>

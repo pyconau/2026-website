@@ -1,0 +1,103 @@
+---
+import { getCollection } from "astro:content";
+import Footer from "../../../components/Footer.astro";
+import Header from "../../../components/Header.astro";
+import HeaderStar from "../../../components/header/HeaderStar.astro";
+import Base from "../../../layouts/Base.astro";
+import { getSessionsForSpecialistTrack } from "../../../utils/schedule";
+
+const tracks = await getCollection("specialist-tracks");
+
+// Get session counts for each track
+const tracksWithCounts = await Promise.all(
+  tracks.map(async (track) => {
+    const sessions = await getSessionsForSpecialistTrack(track);
+    return {
+      ...track,
+      sessionCount: sessions.length,
+    };
+  })
+);
+---
+
+<Base title="Specialist Tracks">
+  <Header dark={true} />
+
+  <section class="bg-charcoal pt-[98px] pb-20 overflow-hidden">
+    <div class="container relative">
+      <HeaderStar colour="lime" />
+
+      <div class="lg:w-[85%] w-full mx-auto">
+        <div class="fadeInUp breadcrumb pt-14">
+          <ul class="flex items-center gap-2 text-lime font-sans font-extrabold text-10pt uppercase tracking-[0.12em]">
+            <li class="flex items-center gap-2">
+              <a href="/">Home</a><span>&gt;</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <a href="/program">Program</a>
+            </li>
+          </ul>
+        </div>
+        <div class="fadeInUp flex justify-between items-center relative pt-10">
+          <div class="space-y-20 lg:w-full w-full relative">
+            <div class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em] leading-none">
+              <h1 class="text-white">
+                <span class="text-lavender">Specialist</span> Tracks
+              </h1>
+            </div>
+            <p class="text-stone font-sans font-base tracking-[0.01em] leading-normal lg:w-[454px]">
+              Specialist tracks are one day mini-conferences focused on specific
+              niches, fields or industries.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="header-divider header-divider--lime"></div>
+
+    <div class="bg-stone pt-20 pb-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <div class="grid lg:grid-cols-2 gap-8">
+            {tracksWithCounts.map((track) => (
+              <a
+                href={`/program/specialist-tracks/${track.slug}`}
+                class="fadeInUp bg-white hover:bg-lemon p-8 rounded-lg group transition-all duration-300"
+              >
+                <h3 class="text-2xl font-serif font-medium text-charcoal group-hover:text-emerald transition-colors duration-300 mb-3">
+                  {track.data.title}
+                </h3>
+                <p class="text-charcoal/70 mb-4">{track.data.shortDescription}</p>
+                {track.sessionCount > 0 && (
+                  <span class="text-emerald font-semibold text-sm">
+                    {track.sessionCount} session{track.sessionCount !== 1 ? "s" : ""}
+                  </span>
+                )}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-lime pt-20">
+    <div class="container">
+      <div class="grid lg:grid-cols-2 grid-cols-1 gap-5 pb-20 fadeInUp">
+        <a href="/program" class="btn-arrow btn-arrow--emerald btn-arrow--2col">
+          <span>Full Program</span>
+        </a>
+        <a href="/cfp" class="btn-arrow btn-arrow--emerald btn-arrow--2col">
+          <span>Submit a Talk</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer topColour="lime" />
+
+  <script src="/src/scripts/animations.js"></script>
+</Base>

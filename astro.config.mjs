@@ -13,6 +13,13 @@ export default defineConfig({
   integrations: [mdx(), sitemap()],
   redirects: {
     "/student-showcase": "/cfp/student-showcase",
+    // Specialist track shortcuts
+    "/data-and-ai": "/program/specialist-tracks/data-and-ai",
+    "/education": "/program/specialist-tracks/education",
+    "/cybersecurity": "/program/specialist-tracks/cybersecurity",
+    "/devrel": "/program/specialist-tracks/devrel",
+    "/platform-engineering": "/program/specialist-tracks/platform-engineering",
+    "/research-software-engineering": "/program/specialist-tracks/research-software-engineering",
   },
   vite: {
     plugins: [tailwindcss()],
