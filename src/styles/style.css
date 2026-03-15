@@ -620,9 +620,9 @@ ul.sub-menu {
 
 .schedule-event-wrapper--fullwidth {
   /* Full-width sessions span across all room columns */
-  /* Calculate width based on number of columns (3 rooms = ~300% width) */
+  /* 3 columns at 100% each + 2 gaps at 1.5rem (gap-x-6) = 300% + 3rem */
   @apply z-20;
-  width: calc(300% + 1.5rem); /* 3 columns plus gaps */
+  width: calc(300% + 3rem);
 }
 
 .schedule-event-track-header {
