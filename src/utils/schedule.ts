@@ -547,7 +547,7 @@ export async function getScheduleForGrid(dayName: string): Promise<{
 
     // Calculate position within the slot as percentage
     const minutesIntoSlot = minutesFromStart % 30;
-    const topPercent = (minutesIntoSlot / 30) * 100;
+    const topPercentRaw = (minutesIntoSlot / 30) * 100;
 
     // Calculate height based on duration
     const heightPx = (durationMinutes / 30) * SLOT_HEIGHT_PX;
@@ -556,12 +556,16 @@ export async function getScheduleForGrid(dayName: string): Promise<{
     const isFullWidth = sessionType === "keynote" || sessionType === "plenary";
     const colSpan = isFullWidth ? rooms.length : 1;
 
-    // Check for track header display
+    // Check for track header display and back-to-back sessions
     const roomEndTimes = sessionEndTimes.get(room) || [];
     const hasPrecedingSession = roomEndTimes.includes(startTime);
     const trackName = session.data.trackName;
     const isSpecialistTrack = !!trackName && trackName !== "Main Conference";
     const showTrackHeader = isSpecialistTrack && !hasPrecedingSession;
+
+    // Add vertical gap for back-to-back sessions (mimics hidden track header spacing)
+    const gapPercent = hasPrecedingSession ? 18 : 0;
+    const topPercent = Math.round((topPercentRaw + gapPercent) * 100) / 100;
 
     // Record this session's end time
     if (!sessionEndTimes.has(room)) {

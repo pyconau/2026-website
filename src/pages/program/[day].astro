@@ -101,109 +101,108 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
         <!-- Schedule Rows -->
         <div class="schedule">
           {rows.map((row, rowIndex) => {
-            // Check if any room has a full-width session in this row
-            const fullWidthSession = Array.from(row.sessionsByRoom.values())
-              .flat()
-              .find(ps => ps.isFullWidth);
+            // Get all sessions in this row, separating full-width from regular
+            const allSessionsInRow = Array.from(row.sessionsByRoom.values()).flat();
+            const fullWidthSessions = allSessionsInRow.filter(ps => ps.isFullWidth);
 
             return (
               <>
                 {rowIndex > 0 && <div class="new-row"></div>}
                 <div class="time">{row.label}</div>
 
-                {fullWidthSession ? (
-                  // Full-width session spans all rooms
-                  <>
-                    <div class={`column column-span-${rooms.length}`}>
-                      <div class="schedule-event-wrapper" style={`top: ${fullWidthSession.topPercent}%;`}>
-                        <a
-                          href={`/program/${fullWidthSession.session.data.code}`}
-                          class="schedule-event"
-                          style={`height: ${fullWidthSession.heightPx}px; background-color: white; color: #282828;`}
-                        >
-                          <div>
-                            <span class="schedule-event-time">
-                              {fullWidthSession.session.data.start && fullWidthSession.session.data.end
-                                ? formatSessionTime(fullWidthSession.session.data.start, fullWidthSession.session.data.end)
-                                : ""}
-                            </span>
-                          </div>
-                          <div>
-                            <span class="schedule-event-topic">{fullWidthSession.session.data.title}</span>
-                            {(() => {
-                              const speakers = (fullWidthSession.session.data.speakers || [])
-                                .map((code: string) => speakerMap.get(code))
-                                .filter(Boolean);
-                              const speakerNames = speakers.map((s: any) => s.data.name).join(", ");
-                              return speakerNames ? (
-                                <span class="schedule-event-presenter">{speakerNames}</span>
-                              ) : null;
-                            })()}
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  // Regular columns for each room
-                  rooms.map((room) => {
-                    const roomSessions = row.sessionsByRoom.get(room) || [];
-                    return (
-                      <div class="column">
-                        {roomSessions.map((ps) => {
-                          const trackColor = getTrackColor(ps.session.data.track);
-                          const speakers = (ps.session.data.speakers || [])
-                            .map((code: string) => speakerMap.get(code))
-                            .filter(Boolean);
-                          const speakerNames = speakers.map((s: any) => s.data.name).join(", ");
-                          const timeStr = ps.session.data.start && ps.session.data.end
-                            ? formatSessionTime(ps.session.data.start, ps.session.data.end)
-                            : "";
-                          const trackName = ps.session.data.trackName;
+                {/* Render room columns - each column renders both full-width and regular sessions */}
+                {rooms.map((room, roomIdx) => {
+                  const roomSessions = (row.sessionsByRoom.get(room) || []).filter(ps => !ps.isFullWidth);
+                  // Only render full-width sessions in the first room column
+                  const fullWidthInThisColumn = roomIdx === 0 ? fullWidthSessions : [];
 
-                          return (
-                            <div class="schedule-event-wrapper" style={`top: ${ps.topPercent}%;`}>
-                              {ps.showTrackHeader && (
-                                <div class="schedule-event-track-header">
-                                  <svg
-                                    class="schedule-track-icon"
-                                    style={`fill: ${trackColor.bg};`}
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="17.935"
-                                    height="17.936"
-                                    viewBox="0 0 17.935 17.936"
-                                  >
-                                    <g transform="translate(0 10)">
-                                      <g transform="translate(0 -10)">
-                                        <path d="M8.968,17.936h0A8.968,8.968,0,0,0,0,8.968,8.968,8.968,0,0,0,8.968,0a8.968,8.968,0,0,0,8.968,8.968,8.968,8.968,0,0,0-8.968,8.968"/>
-                                      </g>
+                  return (
+                    <div class="column">
+                      {/* Full-width sessions (only in first column, will visually span via CSS) */}
+                      {fullWidthInThisColumn.map((ps) => {
+                        const speakers = (ps.session.data.speakers || [])
+                          .map((code: string) => speakerMap.get(code))
+                          .filter(Boolean);
+                        const speakerNames = speakers.map((s: any) => s.data.name).join(", ");
+                        const timeStr = ps.session.data.start && ps.session.data.end
+                          ? formatSessionTime(ps.session.data.start, ps.session.data.end)
+                          : "";
+
+                        return (
+                          <div class="schedule-event-wrapper schedule-event-wrapper--fullwidth" style={`top: ${ps.topPercent}%;`}>
+                            <a
+                              href={`/program/${ps.session.data.code}`}
+                              class="schedule-event"
+                              style={`height: ${ps.heightPx}px; background-color: white; color: #282828;`}
+                            >
+                              <div>
+                                <span class="schedule-event-time">{timeStr}</span>
+                              </div>
+                              <div>
+                                <span class="schedule-event-topic">{ps.session.data.title}</span>
+                                {speakerNames && (
+                                  <span class="schedule-event-presenter">{speakerNames}</span>
+                                )}
+                              </div>
+                            </a>
+                          </div>
+                        );
+                      })}
+
+                      {/* Regular sessions */}
+                      {roomSessions.map((ps) => {
+                        const trackColor = getTrackColor(ps.session.data.track);
+                        const speakers = (ps.session.data.speakers || [])
+                          .map((code: string) => speakerMap.get(code))
+                          .filter(Boolean);
+                        const speakerNames = speakers.map((s: any) => s.data.name).join(", ");
+                        const timeStr = ps.session.data.start && ps.session.data.end
+                          ? formatSessionTime(ps.session.data.start, ps.session.data.end)
+                          : "";
+                        const trackName = ps.session.data.trackName;
+
+                        return (
+                          <div class="schedule-event-wrapper" style={`top: ${ps.topPercent}%;`}>
+                            {ps.showTrackHeader && (
+                              <div class="schedule-event-track-header">
+                                <svg
+                                  class="schedule-track-icon"
+                                  style={`fill: ${trackColor.bg};`}
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="17.935"
+                                  height="17.936"
+                                  viewBox="0 0 17.935 17.936"
+                                >
+                                  <g transform="translate(0 10)">
+                                    <g transform="translate(0 -10)">
+                                      <path d="M8.968,17.936h0A8.968,8.968,0,0,0,0,8.968,8.968,8.968,0,0,0,8.968,0a8.968,8.968,0,0,0,8.968,8.968,8.968,8.968,0,0,0-8.968,8.968"/>
                                     </g>
-                                  </svg>
-                                  <span class="schedule-track-name">{trackName}</span>
-                                </div>
-                              )}
-                              <a
-                                href={`/program/${ps.session.data.code}`}
-                                class="schedule-event"
-                                style={`height: ${ps.heightPx}px; background-color: ${trackColor.bg}; color: ${trackColor.text};`}
-                              >
-                                <div>
-                                  <span class="schedule-event-time">{timeStr}</span>
-                                </div>
-                                <div>
-                                  <span class="schedule-event-topic">{ps.session.data.title}</span>
-                                  {speakerNames && (
-                                    <span class="schedule-event-presenter">{speakerNames}</span>
-                                  )}
-                                </div>
-                              </a>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    );
-                  })
-                )}
+                                  </g>
+                                </svg>
+                                <span class="schedule-track-name">{trackName}</span>
+                              </div>
+                            )}
+                            <a
+                              href={`/program/${ps.session.data.code}`}
+                              class="schedule-event"
+                              style={`height: ${ps.heightPx}px; background-color: ${trackColor.bg}; color: ${trackColor.text};`}
+                            >
+                              <div>
+                                <span class="schedule-event-time">{timeStr}</span>
+                              </div>
+                              <div>
+                                <span class="schedule-event-topic">{ps.session.data.title}</span>
+                                {speakerNames && (
+                                  <span class="schedule-event-presenter">{speakerNames}</span>
+                                )}
+                              </div>
+                            </a>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
               </>
             );
           })}
