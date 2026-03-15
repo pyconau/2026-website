@@ -34,13 +34,23 @@ export async function getSessionsByTrack(trackSlug: string): Promise<Session[]> 
 }
 
 /**
+ * Check if a date is valid (not null, undefined, or Unix epoch from invalid parsing)
+ */
+function isValidSessionDate(date: Date | null | undefined): date is Date {
+  if (!date) return false;
+  // Check for Unix epoch (invalid date parsing) - year 1970
+  if (date.getFullYear() < 2000) return false;
+  return !isNaN(date.getTime());
+}
+
+/**
  * Get sessions for a specific day
  */
 export async function getSessionsByDay(dayName: string): Promise<Session[]> {
   const sessions = await getCollection("sessions");
   return sessions
     .filter((session) => {
-      if (!session.data.start) return false;
+      if (!isValidSessionDate(session.data.start)) return false;
       const day = session.data.start.toLocaleDateString("en-AU", {
         weekday: "long",
         timeZone: CONFERENCE_TIMEZONE,
@@ -55,35 +65,34 @@ export async function getSessionsByDay(dayName: string): Promise<Session[]> {
 }
 
 /**
- * Get unique conference days from session data
+ * Get unique conference days from session data, sorted by actual date.
+ * Only returns days that have sessions scheduled.
  */
 export async function getConferenceDays(): Promise<string[]> {
   const sessions = await getCollection("sessions");
-  const days = new Set<string>();
+
+  // Map day names to their earliest date for sorting
+  const dayDates = new Map<string, Date>();
 
   sessions.forEach((session) => {
-    if (session.data.start) {
+    if (isValidSessionDate(session.data.start)) {
       const day = session.data.start.toLocaleDateString("en-AU", {
         weekday: "long",
         timeZone: CONFERENCE_TIMEZONE,
-      });
-      days.add(day.toLowerCase());
+      }).toLowerCase();
+
+      // Keep track of the earliest date for each day name
+      const existingDate = dayDates.get(day);
+      if (!existingDate || session.data.start < existingDate) {
+        dayDates.set(day, session.data.start);
+      }
     }
   });
 
-  // Sort by typical conference order
-  const dayOrder = [
-    "monday",
-    "tuesday",
-    "wednesday",
-    "thursday",
-    "friday",
-    "saturday",
-    "sunday",
-  ];
-  return Array.from(days).sort(
-    (a, b) => dayOrder.indexOf(a) - dayOrder.indexOf(b)
-  );
+  // Sort by actual date order
+  return Array.from(dayDates.entries())
+    .sort((a, b) => a[1].getTime() - b[1].getTime())
+    .map(([dayName]) => dayName);
 }
 
 /**
