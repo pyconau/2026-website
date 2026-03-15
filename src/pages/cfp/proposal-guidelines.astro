@@ -83,7 +83,7 @@ export const nav = {
     <div class="bg-stone pt-10 pb-4">
       <div class="container">
         <div class="lg:w-[85%] w-full mx-auto rich-text">
-          <h2>What to submit?</h2>
+          <h2 id="what-to-submit"><a href="#what-to-submit" class="!no-underline !text-inherit !font-inherit">What to submit?</a></h2>
           <p class="text-intro font-medium w-full text-charcoal">
             We're looking for a range of different sessions this year.
           </p>
@@ -97,16 +97,16 @@ export const nav = {
     <div class="bg-stone py-4">
       <div class="container">
         <div class="lg:w-[85%] w-full mx-auto">
-          <div class="flex flex-col lg:flex-row gap-8 items-center">
-            <div class="lg:w-1/3 w-full">
+          <div class="flex flex-col md:flex-row gap-8 items-center">
+            <div class="md:w-1/3 w-full order-2 md:order-0">
               <img
                 src="/images/cfp/talks_thumb.jpg"
                 alt="Speaker presenting at PyCon AU"
                 class="rounded-4xl w-full object-cover aspect-4/3"
               />
             </div>
-            <div class="lg:w-2/3 w-full rich-text">
-              <h4>Talks</h4>
+            <div class="md:w-2/3 w-full rich-text order-1 md:order-0">
+              <h4 id="talks"><a href="#talks" class="!no-underline !text-inherit !font-inherit">Talks</a></h4>
               <p>
                 These are the 'bread and butter' sessions at PyCon AU. Talks slots run for 30 minutes. Q&A is optional, but most speakers allow for about 5 minutes of questions after a 25 minute talk.
               </p>
@@ -122,16 +122,16 @@ export const nav = {
     <div class="bg-stone py-4">
       <div class="container">
         <div class="lg:w-[85%] w-full mx-auto">
-          <div class="flex flex-col lg:flex-row-reverse gap-8 items-center">
-            <div class="lg:w-1/3 w-full">
+          <div class="flex flex-col md:flex-row-reverse gap-8 items-center">
+            <div class="md:w-1/3 w-full order-2 md:order-0">
               <img
                 src="/images/cfp/workshops_thumb.jpg"
                 alt="Workshop session at PyCon AU"
                 class="rounded-4xl w-full object-cover aspect-4/3"
               />
             </div>
-            <div class="lg:w-2/3 w-full rich-text">
-              <h4>Workshops</h4>
+            <div class="md:w-2/3 w-full rich-text order-1 md:order-0">
+              <h4 id="workshops"><a href="#workshops" class="!no-underline !text-inherit !font-inherit">Workshops</a></h4>
               <p>
                 Workshops are longer, hands-on sessions intended to teach practical take-home skills. Previously hosted by our sponsors, this year we're looking for community led workshops as well.
               </p>
@@ -147,8 +147,8 @@ export const nav = {
     <div class="bg-stone py-4">
       <div class="container">
         <div class="lg:w-[85%] w-full mx-auto">
-          <div class="flex flex-col lg:flex-row gap-8 items-center">
-            <div class="lg:w-1/3 w-full">
+          <div class="flex flex-col md:flex-row gap-8 items-center">
+            <div class="md:w-1/3 w-full order-2 md:order-0">
               <a href="https://www.youtube.com/watch?v=Q16T5wsKdCM" target="_blank" class="block relative group">
                 <img
                   src="/images/cfp/pyconau_fair_thumb.jpg"
@@ -164,8 +164,8 @@ export const nav = {
                 </div>
               </a>
             </div>
-            <div class="lg:w-2/3 w-full rich-text">
-              <h4>Posters</h4>
+            <div class="md:w-2/3 w-full rich-text order-1 md:order-0">
+              <h4 id="posters"><a href="#posters" class="!no-underline !text-inherit !font-inherit">Posters</a></h4>
               <p>
                 We're bringing back the PyCon AU Fair! Posters are informal, conversational... well, posters! Bring your own A0 printed poster about your project and meet the PyCon AU community in the hallway. <a href="https://www.youtube.com/watch?v=Q16T5wsKdCM" target="_blank">See the PyCon AU Fair from 2023</a>.
               </p>
@@ -292,4 +292,5 @@ Learning from my experience doing remote output monitoring as part of a leading 
   <Footer />
 
   <script src="/src/scripts/animations.js"></script>
+
 </Base>
