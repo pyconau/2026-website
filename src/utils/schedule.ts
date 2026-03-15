@@ -1,6 +1,20 @@
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
+// ============================================================================
+// Configuration
+// ============================================================================
+
+/**
+ * Conference timezone - used for all date/time formatting and calculations.
+ * Change this when setting up a conference in a different location.
+ */
+export const CONFERENCE_TIMEZONE = "Australia/Melbourne";
+
+// ============================================================================
+// Types
+// ============================================================================
+
 export type Session = CollectionEntry<"sessions">;
 export type Person = CollectionEntry<"people">;
 export type SpecialistTrack = CollectionEntry<"specialist-tracks">;
@@ -29,7 +43,7 @@ export async function getSessionsByDay(dayName: string): Promise<Session[]> {
       if (!session.data.start) return false;
       const day = session.data.start.toLocaleDateString("en-AU", {
         weekday: "long",
-        timeZone: "Australia/Melbourne",
+        timeZone: CONFERENCE_TIMEZONE,
       });
       return day.toLowerCase() === dayName.toLowerCase();
     })
@@ -51,7 +65,7 @@ export async function getConferenceDays(): Promise<string[]> {
     if (session.data.start) {
       const day = session.data.start.toLocaleDateString("en-AU", {
         weekday: "long",
-        timeZone: "Australia/Melbourne",
+        timeZone: CONFERENCE_TIMEZONE,
       });
       days.add(day.toLowerCase());
     }
@@ -80,7 +94,7 @@ export function formatSessionTime(start: Date, end: Date): string {
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-    timeZone: "Australia/Melbourne",
+    timeZone: CONFERENCE_TIMEZONE,
   };
 
   const startTime = start.toLocaleTimeString("en-AU", options);
@@ -97,7 +111,7 @@ export function formatSessionDate(date: Date): string {
     weekday: "long",
     day: "numeric",
     month: "long",
-    timeZone: "Australia/Melbourne",
+    timeZone: CONFERENCE_TIMEZONE,
   });
 }
 
@@ -262,7 +276,7 @@ export async function getTimeSlotsForDay(dayName: string): Promise<TimeSlot[]> {
         hour: "numeric",
         minute: "2-digit",
         hour12: true,
-        timeZone: "Australia/Melbourne",
+        timeZone: CONFERENCE_TIMEZONE,
       }),
     });
     current.setMinutes(current.getMinutes() + 30);
@@ -444,7 +458,7 @@ export async function getDayDate(dayName: string): Promise<string | null> {
     day: "numeric",
     month: "long",
     year: "numeric",
-    timeZone: "Australia/Melbourne",
+    timeZone: CONFERENCE_TIMEZONE,
   });
 }
 
@@ -770,7 +784,7 @@ export async function getScheduleForGrid(
         hour: "numeric",
         minute: "2-digit",
         hour12: true,
-        timeZone: "Australia/Melbourne",
+        timeZone: CONFERENCE_TIMEZONE,
       }),
       sessionsByRoom,
     });
