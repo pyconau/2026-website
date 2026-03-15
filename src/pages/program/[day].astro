@@ -1,0 +1,239 @@
+---
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import Base from "../../layouts/Base.astro";
+import {
+  getConferenceDays,
+  getSessionsByDay,
+  getScheduleForGrid,
+  getDayDate,
+  getTrackColor,
+  getPeopleByCode,
+  formatSessionTime,
+} from "../../utils/schedule";
+
+export async function getStaticPaths() {
+  const days = await getConferenceDays();
+  return days.map((day) => ({
+    params: { day: day.toLowerCase() },
+  }));
+}
+
+const { day } = Astro.params;
+const dayCapitalized = day.charAt(0).toUpperCase() + day.slice(1);
+
+// Get sessions for grid layout
+const { rooms, rows } = await getScheduleForGrid(day);
+const dateString = await getDayDate(day);
+const allDays = await getConferenceDays();
+
+// Pre-fetch all speakers for this day's sessions
+const allSessions = await getSessionsByDay(day);
+const allSpeakerCodes = allSessions.flatMap((s) => s.data.speakers || []);
+const allSpeakers = await getPeopleByCode([...new Set(allSpeakerCodes)]);
+const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
+---
+
+<Base title={`${dayCapitalized} Schedule - Program`}>
+  <Header dark={false} />
+
+  <section class="bg-stone pt-[98px] pb-20 overflow-hidden">
+    <div class="container relative">
+      <img src="/images/star-violet.svg" class="spin lg:block hidden absolute left-0 top-32" alt="">
+      <div class="lg:w-[85%] w-full mx-auto">
+        <div class="fadeInUp breadcrumb pt-14">
+          <ul class="flex items-center gap-2 text-violet font-sans font-extrabold text-10pt uppercase tracking-[0.12em]">
+            <li class="flex items-center gap-2"><a href="/">Home</a><span>&gt;</span></li>
+            <li class="flex items-center gap-2"><a href="/program">Program</a><span>&gt;</span></li>
+            <li class="flex items-center gap-2"><span>{dayCapitalized}</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="lg:w-[85%] w-full mx-auto relative pt-10">
+        <div class="fadeInUp w-full lg:w-[45%] relative">
+          <div class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em]">
+            <h1 class="text-violet">Schedule</h1>
+          </div>
+          {dateString && (
+            <p class="text-charcoal text-lg mt-2">{dateString}</p>
+          )}
+        </div>
+
+        <!-- Day Tabs -->
+        <div class="fadeInUp flex lg:flex-nowrap flex-wrap lg:gap-0 gap-3 mt-10">
+          {allDays.map((d) => {
+            const isActive = d.toLowerCase() === day.toLowerCase();
+            const dayLabel = d.charAt(0).toUpperCase() + d.slice(1);
+            return (
+              <a
+                href={`/program/${d.toLowerCase()}`}
+                class:list={[
+                  "grid place-items-center border border-charcoal rounded-[3.125rem] lg:w-[174px] w-[45%] h-[38px] transition-all duration-300 cursor-pointer",
+                  isActive
+                    ? "bg-charcoal text-stone hover:border-charcoal"
+                    : "text-charcoal hover:bg-charcoal hover:text-stone hover:border-charcoal"
+                ]}
+              >
+                {dayLabel}
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+
+    <!-- Schedule Grid -->
+    {rows.length > 0 && (
+      <div class="fadeInUp schedule-wrapper">
+        <!-- Room Headers -->
+        <div class="schedule-title">
+          <div class="space-for-time-column"></div>
+          {rooms.map((room) => (
+            <div class="schedule-title__room">
+              <span class="font-semibold font-serif">{room}</span>
+            </div>
+          ))}
+        </div>
+
+        <!-- Schedule Rows -->
+        <div class="schedule">
+          {rows.map((row, rowIndex) => {
+            // Check if any room has a full-width session in this row
+            const fullWidthSession = Array.from(row.sessionsByRoom.values())
+              .flat()
+              .find(ps => ps.isFullWidth);
+
+            return (
+              <>
+                {rowIndex > 0 && <div class="new-row"></div>}
+                <div class="time">{row.label}</div>
+
+                {fullWidthSession ? (
+                  // Full-width session spans all rooms
+                  <>
+                    <div class={`column column-span-${rooms.length}`}>
+                      <div class="schedule-event-wrapper" style={`top: ${fullWidthSession.topPercent}%;`}>
+                        <a
+                          href={`/program/${fullWidthSession.session.data.code}`}
+                          class="schedule-event"
+                          style={`height: ${fullWidthSession.heightPx}px; background-color: white; color: #282828;`}
+                        >
+                          <div>
+                            <span class="schedule-event-time">
+                              {fullWidthSession.session.data.start && fullWidthSession.session.data.end
+                                ? formatSessionTime(fullWidthSession.session.data.start, fullWidthSession.session.data.end)
+                                : ""}
+                            </span>
+                          </div>
+                          <div>
+                            <span class="schedule-event-topic">{fullWidthSession.session.data.title}</span>
+                            {(() => {
+                              const speakers = (fullWidthSession.session.data.speakers || [])
+                                .map((code: string) => speakerMap.get(code))
+                                .filter(Boolean);
+                              const speakerNames = speakers.map((s: any) => s.data.name).join(", ");
+                              return speakerNames ? (
+                                <span class="schedule-event-presenter">{speakerNames}</span>
+                              ) : null;
+                            })()}
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  // Regular columns for each room
+                  rooms.map((room) => {
+                    const roomSessions = row.sessionsByRoom.get(room) || [];
+                    return (
+                      <div class="column">
+                        {roomSessions.map((ps) => {
+                          const trackColor = getTrackColor(ps.session.data.track);
+                          const speakers = (ps.session.data.speakers || [])
+                            .map((code: string) => speakerMap.get(code))
+                            .filter(Boolean);
+                          const speakerNames = speakers.map((s: any) => s.data.name).join(", ");
+                          const timeStr = ps.session.data.start && ps.session.data.end
+                            ? formatSessionTime(ps.session.data.start, ps.session.data.end)
+                            : "";
+                          const trackName = ps.session.data.trackName;
+
+                          return (
+                            <div class="schedule-event-wrapper" style={`top: ${ps.topPercent}%;`}>
+                              {ps.showTrackHeader && (
+                                <div class="schedule-event-track-header">
+                                  <svg
+                                    class="schedule-track-icon"
+                                    style={`fill: ${trackColor.bg};`}
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="17.935"
+                                    height="17.936"
+                                    viewBox="0 0 17.935 17.936"
+                                  >
+                                    <g transform="translate(0 10)">
+                                      <g transform="translate(0 -10)">
+                                        <path d="M8.968,17.936h0A8.968,8.968,0,0,0,0,8.968,8.968,8.968,0,0,0,8.968,0a8.968,8.968,0,0,0,8.968,8.968,8.968,8.968,0,0,0-8.968,8.968"/>
+                                      </g>
+                                    </g>
+                                  </svg>
+                                  <span class="schedule-track-name">{trackName}</span>
+                                </div>
+                              )}
+                              <a
+                                href={`/program/${ps.session.data.code}`}
+                                class="schedule-event"
+                                style={`height: ${ps.heightPx}px; background-color: ${trackColor.bg}; color: ${trackColor.text};`}
+                              >
+                                <div>
+                                  <span class="schedule-event-time">{timeStr}</span>
+                                </div>
+                                <div>
+                                  <span class="schedule-event-topic">{ps.session.data.title}</span>
+                                  {speakerNames && (
+                                    <span class="schedule-event-presenter">{speakerNames}</span>
+                                  )}
+                                </div>
+                              </a>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  })
+                )}
+              </>
+            );
+          })}
+        </div>
+      </div>
+    )}
+
+    {rows.length === 0 && (
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto py-20 text-center">
+          <p class="text-charcoal text-lg">No sessions scheduled for {dayCapitalized}.</p>
+        </div>
+      </div>
+    )}
+  </section>
+
+  <section class="bg-lime pt-20">
+    <div class="container">
+      <div class="grid lg:grid-cols-2 grid-cols-1 gap-5 pb-20 fadeInUp">
+        <a href="/program/specialist-tracks" class="btn-arrow btn-arrow--emerald btn-arrow--2col">
+          <span>Specialist Tracks</span>
+        </a>
+        <a href="/program" class="btn-arrow btn-arrow--emerald btn-arrow--2col">
+          <span>Full Program</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <script src="/src/scripts/animations.js"></script>
+</Base>

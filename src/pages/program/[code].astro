@@ -1,0 +1,149 @@
+---
+import { getCollection } from "astro:content";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import Base from "../../layouts/Base.astro";
+import SpeakerCard from "../../components/schedule/SpeakerCard.astro";
+import {
+  getPeopleByCode,
+  getTrackBySlug,
+  formatSessionTime,
+  formatSessionDate,
+} from "../../utils/schedule";
+
+export async function getStaticPaths() {
+  const sessions = await getCollection("sessions");
+  return sessions.map((session) => ({
+    params: { code: session.data.code },
+    props: { session },
+  }));
+}
+
+const { session } = Astro.props;
+const { title, code, start, end, room, track, trackName, type, speakers, sponsor, contentWarning } =
+  session.data;
+const { Content } = await session.render();
+
+// Get speaker data
+const speakerData = await getPeopleByCode(speakers);
+
+// Get track metadata if this is a specialist track session
+const trackData = track ? await getTrackBySlug(track) : null;
+
+// Use trackName from Pretalx if available, otherwise fall back to local track title
+const displayTrackName = trackName || trackData?.data.title;
+
+// Format time and date
+const timeString = start && end ? formatSessionTime(start, end) : null;
+const dateString = start ? formatSessionDate(start) : null;
+
+// Build breadcrumb
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Program", href: "/program" },
+];
+if (trackData) {
+  breadcrumbs.push({
+    label: trackData.data.title,
+    href: `/program/specialist-tracks/${track}`,
+  });
+}
+---
+
+<Base title={title}>
+  <Header dark={false} />
+
+  <section class="bg-stone pt-[98px] pb-20 overflow-hidden">
+    <div class="container relative">
+      <div class="lg:w-[85%] w-full mx-auto">
+        <div class="breadcrumb pt-14">
+          <ul class="flex items-center gap-2 text-emerald flex-wrap">
+            {breadcrumbs.map((crumb, i) => (
+              <li class="flex items-center gap-2">
+                <a href={crumb.href}>{crumb.label}</a>
+                {i < breadcrumbs.length - 1 && <span>&gt;</span>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="bg-stone pb-20">
+      <div class="container">
+        <div class="lg:w-[824px] mx-auto">
+          <div class="fadeInUp flex flex-col items-center">
+            {speakerData.length > 0 && (
+              <span class="text-emerald text-sm font-semibold">
+                By {speakerData.map((s) => s.data.name).join(", ")}
+              </span>
+            )}
+            {sponsor && (
+              <span class="text-[#747474] text-sm font-semibold">
+                Sponsored by {sponsor}
+              </span>
+            )}
+          </div>
+
+          <h1 class="fadeInUp text-5xl font-serif font-normal tracking-[-0.02em] text-center w-[95%] mx-auto pt-5">
+            {title}
+          </h1>
+
+          <div class="fadeInUp flex flex-wrap lg:flex-nowrap items-center justify-between border-t-2 border-emerald text-sm font-semibold text-emerald mt-7 pt-1 gap-2">
+            {displayTrackName && <span>{displayTrackName}</span>}
+            {room && <span>{room}</span>}
+            {dateString && timeString && (
+              <span>{dateString} {timeString}</span>
+            )}
+          </div>
+
+          {contentWarning && (
+            <div class="fadeInUp bg-coral/20 border-l-4 border-coral p-4 mt-7">
+              <p class="text-charcoal font-semibold">Content Warning</p>
+              <p class="text-charcoal">{contentWarning}</p>
+            </div>
+          )}
+
+          <div class="rich-text pt-24 fadeInUp prose prose-lg max-w-none">
+            <Content />
+          </div>
+
+          {speakerData.map((speaker) => (
+            <SpeakerCard person={speaker} />
+          ))}
+
+          {sponsor && (
+            <div class="fadeInUp flex justify-between items-center bg-white rounded-[3.125rem] py-5 px-14 mt-14">
+              <div>
+                <span class="block text-sm tracking-[0.01em] text-charcoal">
+                  This talk is presented by
+                </span>
+                <h3 class="text-3xl font-semibold text-charcoal">{sponsor}</h3>
+              </div>
+            </div>
+          )}
+
+          <div class="fadeInUp flex flex-col lg:flex-row justify-center gap-5 mt-7">
+            {trackData && (
+              <a
+                href={`/program/specialist-tracks/${track}`}
+                class="btn-arrow btn-arrow--emerald justify-center"
+              >
+                All {trackData.data.title} Talks
+              </a>
+            )}
+            <a href="/program" class="btn-arrow btn-arrow--lime justify-center">
+              Program
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <script src="/src/scripts/animations.js"></script>
+</Base>

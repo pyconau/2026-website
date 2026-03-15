@@ -101,11 +101,20 @@ const callForProposalsPages = Object.entries(cfpPages)
           >
         </a>
         <ul class="xl:flex hidden items-center gap-10 main-menu">
-          {
-            /*<li>
-             <HeaderTopNavItem href="/program">Program</HeaderTopNavItem>
-          </li>*/
-          }
+          <li class="relative group">
+            <HeaderTopNavItem href="/program">Program</HeaderTopNavItem>
+
+            <ul class="sub-menu">
+              <li>
+                <a
+                  href="/program/specialist-tracks"
+                  class="text-sm font-semibold font-sans hover:text-emerald"
+                >
+                  Specialist Tracks
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="relative group">
             <HeaderTopNavItem href="/attend/">Attendee Guide</HeaderTopNavItem>
 

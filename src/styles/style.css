@@ -615,15 +615,14 @@ ul.sub-menu {
 
 .schedule-event-wrapper {
   @apply absolute left-0 right-0 z-10;
-  /* Top position will be set via inline styles */
-  border-bottom: 1px solid transparent;
+  /* Top position will be set via inline styles (in px) */
 }
 
 .schedule-event-track-header {
-  @apply absolute left-0 right-0;
   @apply flex items-center gap-2;
   @apply text-stone font-sans font-semibold text-sm;
-  @apply -top-10 z-20;
+  @apply mb-1;
+  height: 24px;
 }
 
 .schedule-track-icon {
