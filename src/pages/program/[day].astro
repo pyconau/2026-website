@@ -23,7 +23,7 @@ const { day } = Astro.params;
 const dayCapitalized = day.charAt(0).toUpperCase() + day.slice(1);
 
 // Get sessions for grid layout
-const { rooms, rows } = await getScheduleForGrid(day);
+const { rooms, rows, layout } = await getScheduleForGrid(day);
 const dateString = await getDayDate(day);
 const allDays = await getConferenceDays();
 
@@ -87,7 +87,12 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
 
     <!-- Schedule Grid -->
     {rows.length > 0 && (
-      <div class="fadeInUp schedule-wrapper">
+      <div
+        class="fadeInUp schedule-wrapper"
+        style={`--schedule-room-count: ${rooms.length};`}
+        data-rooms={rooms.length}
+        data-layout={layout}
+      >
         <!-- Room Headers -->
         <div class="schedule-title">
           <div class="space-for-time-column"></div>
@@ -161,10 +166,11 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
                         const timeStr = ps.session.data.start && ps.session.data.end
                           ? formatSessionTime(ps.session.data.start, ps.session.data.end)
                           : "";
-                        // Calculate width based on colSpan (each column + gaps between them)
-                        const spanClass = ps.colSpan === 2 ? "schedule-event-wrapper--span-2"
+                        // Calculate width based on colSpan - if spans all rooms, use fullwidth
+                        const spanClass = ps.colSpan >= rooms.length ? "schedule-event-wrapper--fullwidth"
+                          : ps.colSpan === 4 ? "schedule-event-wrapper--span-4"
                           : ps.colSpan === 3 ? "schedule-event-wrapper--span-3"
-                          : ps.colSpan >= 4 ? "schedule-event-wrapper--fullwidth"
+                          : ps.colSpan === 2 ? "schedule-event-wrapper--span-2"
                           : "";
                         // Reduce height by 3x track header height (72px) for vertical buffer
                         const breakHeightPx = ps.heightPx - 72;

@@ -566,51 +566,107 @@ ul.sub-menu {
   @apply lg:py-0 px-[5px] p-0;
 } */
 
+/* Schedule grid with dynamic room count via CSS custom properties */
+/* --schedule-room-count is set inline on .schedule-wrapper */
+/* Default to 4 rooms if not specified */
+
 .schedule-wrapper {
   @apply lg:overflow-auto overflow-scroll;
+  --schedule-room-count: 4;
+  --schedule-slot-height: 160px;
+  /* Calculate min-width based on room count for mobile scrolling */
+  --schedule-mobile-width: calc(80px + (var(--schedule-room-count) * 320px));
+}
+
+/* Simple layout: 60-minute slots with shorter height */
+.schedule-wrapper[data-layout="simple"] {
+  --schedule-slot-height: 100px;
+}
+
+/* Container that controls overall schedule width */
+.schedule-container {
+  @apply mx-auto px-5;
+  /* For 2 rooms or fewer, constrain to page column width */
+  /* For 3+ rooms, allow wider content */
+}
+
+.schedule-wrapper[data-rooms="2"] .schedule-container {
+  @apply lg:w-[85%] w-full mx-auto;
 }
 
 .schedule-title {
-  @apply grid lg:grid-cols-18 grid-cols-13 mt-20 gap-3 lg:w-auto w-[1380px] px-5;
+  @apply grid mt-20 gap-3 px-5;
+  /* Desktop: time column (80px) + flexible room columns */
+  grid-template-columns: 80px repeat(var(--schedule-room-count), 1fr);
+  /* Mobile: fixed widths for scrolling */
+  @apply lg:w-auto;
+  width: var(--schedule-mobile-width);
 }
+
+@media (min-width: 1024px) {
+  .schedule-title {
+    width: auto;
+    min-width: min(100%, 1200px);
+  }
+
+  /* For days with fewer rooms, constrain max-width to keep columns reasonable */
+  .schedule-wrapper[data-rooms="2"] .schedule-title {
+    max-width: 800px;
+  }
+
+  .schedule-wrapper[data-rooms="3"] .schedule-title {
+    max-width: 1000px;
+  }
+}
+
 .schedule-title .space-for-time-column {
-  @apply lg:col-span-2 col-span-1 sticky left-0 z-30 bg-stone;
-}
-
-.schedule-title__room {
-  @apply lg:col-span-4 col-span-3 border-b-2 border-[#313131] text-[#313131] text-center px-4 py-2;
-}
-
-.schedule {
-  @apply grid lg:grid-cols-18 grid-cols-13 gap-x-6 border-y border-[#DBDBDB] mt-5 lg:w-auto w-[1380px] px-5;
-}
-
-.schedule .time {
-  @apply lg:col-span-2 col-span-1 text-charcoal font-semibold tracking-[0.01rem] pt-2 min-h-[160px];
   @apply sticky left-0 z-30 bg-stone;
 }
 
+.schedule-title__room {
+  @apply border-b-2 border-[#313131] text-[#313131] text-center px-4 py-2;
+}
+
+.schedule {
+  @apply grid gap-x-6 border-y border-[#DBDBDB] mt-10 px-5;
+  /* Desktop: time column (80px) + flexible room columns */
+  grid-template-columns: 80px repeat(var(--schedule-room-count), 1fr);
+  /* Mobile: fixed widths for scrolling */
+  @apply lg:w-auto;
+  width: var(--schedule-mobile-width);
+}
+
+@media (min-width: 1024px) {
+  .schedule {
+    width: auto;
+    min-width: min(100%, 1200px);
+  }
+
+  /* For days with fewer rooms, constrain max-width to keep columns reasonable */
+  .schedule-wrapper[data-rooms="2"] .schedule {
+    max-width: 800px;
+  }
+
+  .schedule-wrapper[data-rooms="3"] .schedule {
+    max-width: 1000px;
+  }
+}
+
+.schedule .time {
+  @apply text-charcoal font-semibold tracking-[0.01rem] pt-2;
+  @apply sticky left-0 z-30 bg-stone;
+  min-height: var(--schedule-slot-height);
+}
+
 .schedule .column {
-  @apply lg:col-span-4 col-span-3 relative min-h-[160px];
+  @apply relative;
+  min-height: var(--schedule-slot-height);
 }
 
 .schedule .new-row {
-  @apply lg:col-span-18 col-span-13 border-b border-[#DBDBDB];
-}
-
-/* Four columns */
-
-/* .schedule-four-cols .time {
-  @apply col-span-2;
-} */
-.schedule .column-span-2 {
-  @apply lg:col-span-8 col-span-6;
-}
-.schedule .column-span-3 {
-  @apply lg:col-span-12 col-span-9;
-}
-.schedule .column-span-4 {
-  @apply lg:col-span-16 col-span-12;
+  @apply border-b border-[#DBDBDB];
+  /* Span all columns: time + rooms */
+  grid-column: 1 / -1;
 }
 
 .schedule-event-wrapper {
@@ -620,9 +676,9 @@ ul.sub-menu {
 
 .schedule-event-wrapper--fullwidth {
   /* Full-width sessions span across all room columns */
-  /* 3 columns at 100% each + 2 gaps at 1.5rem (gap-x-6) = 300% + 3rem */
+  /* Width = (roomCount * 100%) + ((roomCount - 1) * gap) */
   @apply z-20;
-  width: calc(300% + 3rem);
+  width: calc(var(--schedule-room-count) * 100% + (var(--schedule-room-count) - 1) * 1.5rem);
 }
 
 .schedule-event-wrapper--span-2 {
@@ -635,6 +691,12 @@ ul.sub-menu {
   /* Span 3 columns + 2 gaps */
   z-index: 15;
   width: calc(300% + 3rem);
+}
+
+.schedule-event-wrapper--span-4 {
+  /* Span 4 columns + 3 gaps */
+  z-index: 15;
+  width: calc(400% + 4.5rem);
 }
 
 .schedule-event-track-header {

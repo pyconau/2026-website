@@ -198,6 +198,7 @@ export async function getRoomsForDay(dayName: string): Promise<string[]> {
     "Ballroom 2",
     "Ballroom 3",
     "Stradbroke Room",
+    "Junior Ballroom",
   ];
   return Array.from(rooms).sort((a, b) => {
     const aIdx = roomOrder.indexOf(a);
@@ -451,11 +452,39 @@ export async function getDayDate(dayName: string): Promise<string | null> {
 // Grid-based schedule layout (matching static template structure)
 // ============================================================================
 
-// Height of a 30-minute slot in pixels
-const SLOT_HEIGHT_PX = 160;
+/**
+ * Schedule layout types:
+ * - "detailed": 30-minute slots, 160px height - for busy days with many sessions
+ * - "simple": 60-minute slots, 100px height - for quieter days with longer sessions
+ */
+export type ScheduleLayout = "detailed" | "simple";
+
+// Layout configuration
+const LAYOUT_CONFIG = {
+  detailed: {
+    slotMinutes: 30,
+    slotHeightPx: 160,
+  },
+  simple: {
+    slotMinutes: 60,
+    slotHeightPx: 100,
+  },
+} as const;
+
+/**
+ * Get the recommended layout for a given day
+ */
+export function getScheduleLayout(dayName: string): ScheduleLayout {
+  // Monday uses simple layout (fewer, longer sessions)
+  if (dayName.toLowerCase() === "monday") {
+    return "simple";
+  }
+  // Friday, Saturday, Sunday use detailed layout
+  return "detailed";
+}
 
 // Room order for column spanning logic
-const ROOM_ORDER = ["Ballroom 1", "Ballroom 2", "Ballroom 3", "Stradbroke Room"];
+const ROOM_ORDER = ["Ballroom 1", "Ballroom 2", "Ballroom 3", "Stradbroke Room", "Junior Ballroom"];
 
 /**
  * Internal type for session data before positioning
@@ -574,15 +603,21 @@ export interface ScheduleRow {
 /**
  * Get schedule data organized for the static template layout
  */
-export async function getScheduleForGrid(dayName: string): Promise<{
+export async function getScheduleForGrid(
+  dayName: string,
+  layout?: ScheduleLayout
+): Promise<{
   rooms: string[];
   rows: ScheduleRow[];
+  layout: ScheduleLayout;
 }> {
   const sessions = await getSessionsByDay(dayName);
   const rooms = await getRoomsForDay(dayName);
+  const scheduleLayout = layout ?? getScheduleLayout(dayName);
+  const { slotMinutes, slotHeightPx } = LAYOUT_CONFIG[scheduleLayout];
 
   if (sessions.length === 0) {
-    return { rooms: [], rows: [] };
+    return { rooms: [], rows: [], layout: scheduleLayout };
   }
 
   // Find earliest and latest times
@@ -599,17 +634,17 @@ export async function getScheduleForGrid(dayName: string): Promise<{
   });
 
   if (!earliest || !latest) {
-    return { rooms: [], rows: [] };
+    return { rooms: [], rows: [], layout: scheduleLayout };
   }
 
-  // Round down to nearest 30 minutes for start
+  // Round down to nearest slot boundary for start
   const gridStart = new Date(earliest);
-  gridStart.setMinutes(Math.floor(gridStart.getMinutes() / 30) * 30, 0, 0);
+  gridStart.setMinutes(Math.floor(gridStart.getMinutes() / slotMinutes) * slotMinutes, 0, 0);
 
-  // Round up to nearest 30 minutes for end
+  // Round up to nearest slot boundary for end
   const gridEnd = new Date(latest);
-  if (gridEnd.getMinutes() % 30 !== 0) {
-    gridEnd.setMinutes(Math.ceil(gridEnd.getMinutes() / 30) * 30, 0, 0);
+  if (gridEnd.getMinutes() % slotMinutes !== 0) {
+    gridEnd.setMinutes(Math.ceil(gridEnd.getMinutes() / slotMinutes) * slotMinutes, 0, 0);
   }
 
   const gridStartTime = gridStart.getTime();
@@ -629,17 +664,17 @@ export async function getScheduleForGrid(dayName: string): Promise<{
     const durationMinutes = (endTime - startTime) / (1000 * 60);
     const room = session.data.room;
 
-    // Calculate which 30-minute slot this session starts in
+    // Calculate which slot this session starts in
     const minutesFromStart = (startTime - gridStartTime) / (1000 * 60);
-    const slotIndex = Math.floor(minutesFromStart / 30);
+    const slotIndex = Math.floor(minutesFromStart / slotMinutes);
 
     // Calculate position within the slot as percentage
-    const minutesIntoSlot = minutesFromStart % 30;
+    const minutesIntoSlot = minutesFromStart % slotMinutes;
     // Add 1% top offset for vertical gap between sessions
-    const topPercentRaw = (minutesIntoSlot / 30) * 100 + 1;
+    const topPercentRaw = (minutesIntoSlot / slotMinutes) * 100 + 1;
 
     // Calculate height based on duration (2% shorter for 1% top + 1% bottom gap)
-    const heightPx = (durationMinutes / 30) * SLOT_HEIGHT_PX * 0.98;
+    const heightPx = (durationMinutes / slotMinutes) * slotHeightPx * 0.98;
 
     const sessionType = session.data.type;
     const isFullWidth = sessionType === "keynote" || sessionType === "plenary";
@@ -740,9 +775,9 @@ export async function getScheduleForGrid(dayName: string): Promise<{
       sessionsByRoom,
     });
 
-    current.setMinutes(current.getMinutes() + 30);
+    current.setMinutes(current.getMinutes() + slotMinutes);
     slotIndex++;
   }
 
-  return { rooms, rows };
+  return { rooms, rows, layout: scheduleLayout };
 }
