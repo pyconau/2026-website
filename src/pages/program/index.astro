@@ -1,0 +1,220 @@
+---
+import { getCollection } from "astro:content";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import HeaderStar from "../../components/header/HeaderStar.astro";
+import Base from "../../layouts/Base.astro";
+
+const tracks = await getCollection("specialist-tracks");
+
+const days = ["Overview", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const currentDay = "Overview";
+---
+
+<Base title="Program">
+  <Header dark={true} />
+
+  <section class="bg-charcoal pt-[98px] pb-20 overflow-hidden">
+    <div class="container relative">
+      <HeaderStar colour="lime" />
+
+      <div class="lg:w-[85%] w-full mx-auto">
+        <div class="fadeInUp breadcrumb pt-14">
+          <ul class="flex items-center gap-2 text-lime font-sans font-extrabold text-10pt uppercase tracking-[0.12em]">
+            <li class="flex items-center gap-2">
+              <a href="/">Home</a>
+            </li>
+          </ul>
+        </div>
+        <div class="fadeInUp flex justify-between items-center relative pt-10">
+          <div class="space-y-20 lg:w-full w-full relative">
+            <div class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em] leading-none">
+              <h1 class="text-lime">Program</h1>
+            </div>
+            <p class="text-stone font-sans font-base tracking-[0.01em] leading-normal lg:w-[600px]">
+              The PyCon AU 2026 schedule will be published progressively over time. Expect updates in May as the main program and specialist tracks are published.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="header-divider header-divider--lime"></div>
+
+    <div class="bg-stone pt-10 pb-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <!-- Day tabs -->
+          <div class="fadeInUp mb-10">
+            <div class="flex flex-wrap justify-center gap-3">
+              {days.map((day) => (
+                <span
+                  class:list={[
+                    "grid place-items-center border border-charcoal rounded-[3.125rem] px-5 h-[38px] font-sans text-sm transition-all duration-300 relative group",
+                    day === currentDay
+                      ? "bg-charcoal text-stone"
+                      : "text-charcoal/40 cursor-default",
+                  ]}
+                >
+                  {day}
+                  {day !== currentDay && (
+                    <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-charcoal text-white text-xs rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                      The schedule has not been published for {day}
+                      <span class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-charcoal"></span>
+                    </span>
+                  )}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Schedule overview cards -->
+          <div class="space-y-4">
+            <!-- Workshops -->
+            <div class="fadeInUp block p-6 lg:p-8 rounded-2xl bg-violet">
+              <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                <div class="flex-1">
+                  <h2 class="text-2xl lg:text-3xl font-serif font-bold text-white mb-1">
+                    Workshops
+                  </h2>
+                  <p class="text-white/70 font-sans text-sm">
+                    Wednesday 26 August
+                  </p>
+                </div>
+                <div class="flex-1 lg:text-right">
+                  <p class="text-white font-sans mb-2">
+                    Workshops are free to attend but space is limited!
+                  </p>
+                  <p class="text-white font-sans font-bold">
+                    Ticketed Separately
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Specialist Tracks -->
+            <a
+              href="#specialist-tracks"
+              class="fadeInUp block p-6 lg:p-8 rounded-2xl bg-lime"
+            >
+              <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                <div class="flex-1">
+                  <h2 class="text-2xl lg:text-3xl font-serif font-bold text-charcoal mb-1">
+                    Specialist Tracks
+                  </h2>
+                  <p class="text-charcoal/70 font-sans text-sm">
+                    Thursday - Saturday 27-29 August
+                  </p>
+                </div>
+                <div class="flex-1 lg:text-right">
+                  <p class="text-charcoal font-sans">
+                    Curated by specialist groups within Python community with more in-depth talks.
+                  </p>
+                </div>
+                
+              </div>
+            </a>
+
+            <!-- Main Conference -->
+            <div class="fadeInUp block p-6 lg:p-8 rounded-2xl bg-lime">
+              <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                <div class="flex-1">
+                  <h2 class="text-2xl lg:text-3xl font-serif font-bold text-charcoal mb-1">
+                    Main Conference
+                  </h2>
+                  <p class="text-charcoal/70 font-sans text-sm">
+                    Thursday - Saturday 27-29 August
+                  </p>
+                </div>
+                <div class="flex-1 lg:text-right">
+                  <p class="text-charcoal font-sans">
+                    Three days of talks all about Python!
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sprints -->
+            <div class="fadeInUp block p-6 lg:p-8 rounded-2xl bg-lemon">
+              <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                <div class="flex-1">
+                  <h2 class="text-2xl lg:text-3xl font-serif font-bold text-charcoal mb-1">
+                    Development Sprints
+                  </h2>
+                  <p class="text-charcoal/70 font-sans text-sm">
+                    Sunday 30 August
+                  </p>
+                </div>
+                <div class="flex-1 lg:text-right">
+                  <p class="text-charcoal font-sans mb-2">
+                    Get hands on with open source!
+                  </p>
+                  <p class="text-charcoal font-sans font-bold">
+                    Ticketed Separately
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="specialist-tracks">
+    <div class="bg-stone pb-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <h2 class="fadeInUp text-4xl font-serif font-medium -tracking-[0.02em] mb-8">
+            Specialist Tracks
+          </h2>
+          <p class="fadeInUp text-charcoal/70 font-sans text-lg mb-10">
+            Specialist tracks are curated sessions focusing on specific topics within the Python ecosystem. Each track is organised by community members with deep expertise in their area.
+          </p>
+          <div class="grid lg:grid-cols-2 gap-6">
+            {tracks.map((track) => (
+              <div class="fadeInUp bg-white p-6 rounded-lg flex flex-col">
+                <h3 class="text-xl font-serif font-medium text-charcoal mb-2">
+                  {track.data.title}
+                </h3>
+                <p class="text-charcoal/70 text-sm flex-1">
+                  {track.data.shortDescription}
+                </p>
+                <div class="mt-3 text-right">
+                  {track.data.date ? (
+                    <span class="inline-block bg-lime text-charcoal text-xs font-sans px-3 py-1 rounded-full">
+                      {track.data.date.toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long" })}
+                    </span>
+                  ) : (
+                    <span class="text-charcoal/50 text-xs font-sans">
+                      Schedule to be announced
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-lime pt-20">
+    <div class="container">
+      <div class="grid lg:grid-cols-2 grid-cols-1 gap-5 pb-20 fadeInUp">
+        <a href="/attend" class="btn-arrow btn-arrow--emerald btn-arrow--2col">
+          <span>Attendee Guide</span>
+        </a>
+        <a href="/cfp" class="btn-arrow btn-arrow--emerald btn-arrow--2col">
+          <span>Submit a Talk</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer topColour="lime" />
+
+  <script src="/src/scripts/animations.js"></script>
+</Base>
