@@ -5,7 +5,25 @@ import Header from "../../components/Header.astro";
 import HeaderStar from "../../components/header/HeaderStar.astro";
 import Base from "../../layouts/Base.astro";
 
-const tracks = await getCollection("specialist-tracks");
+const allTracks = await getCollection("specialist-tracks");
+
+// Sort tracks: first by date (if present), then alphabetically by title
+const tracks = allTracks.sort((a, b) => {
+  // Both have dates - sort by date
+  if (a.data.date && b.data.date) {
+    return a.data.date.getTime() - b.data.date.getTime();
+  }
+  // Only a has date - a comes first
+  if (a.data.date && !b.data.date) {
+    return -1;
+  }
+  // Only b has date - b comes first
+  if (!a.data.date && b.data.date) {
+    return 1;
+  }
+  // Neither has date - sort alphabetically by title
+  return a.data.title.localeCompare(b.data.title);
+});
 
 const days = ["Overview", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 const currentDay = "Overview";
@@ -87,7 +105,7 @@ const currentDay = "Overview";
                   <p class="text-white font-sans mb-2">
                     Workshops are free to attend but space is limited!
                   </p>
-                  <p class="text-white font-sans font-bold">
+                  <p class="text-white font-sans font-bold!">
                     Ticketed Separately
                   </p>
                 </div>
@@ -104,7 +122,7 @@ const currentDay = "Overview";
                   <h2 class="text-2xl lg:text-3xl font-serif font-bold text-charcoal mb-1">
                     Specialist Tracks
                   </h2>
-                  <p class="text-charcoal/70 font-sans text-sm">
+                  <p class="text-charcoal font-sans text-sm">
                     Thursday - Saturday 27-29 August
                   </p>
                 </div>
@@ -124,7 +142,7 @@ const currentDay = "Overview";
                   <h2 class="text-2xl lg:text-3xl font-serif font-bold text-charcoal mb-1">
                     Main Conference
                   </h2>
-                  <p class="text-charcoal/70 font-sans text-sm">
+                  <p class="text-charcoal font-sans text-sm">
                     Thursday - Saturday 27-29 August
                   </p>
                 </div>
@@ -143,7 +161,7 @@ const currentDay = "Overview";
                   <h2 class="text-2xl lg:text-3xl font-serif font-bold text-charcoal mb-1">
                     Development Sprints
                   </h2>
-                  <p class="text-charcoal/70 font-sans text-sm">
+                  <p class="text-charcoal font-sans text-sm">
                     Sunday 30 August
                   </p>
                 </div>
@@ -151,7 +169,7 @@ const currentDay = "Overview";
                   <p class="text-charcoal font-sans mb-2">
                     Get hands on with open source!
                   </p>
-                  <p class="text-charcoal font-sans font-bold">
+                  <p class="text-charcoal font-sans font-bold!">
                     Ticketed Separately
                   </p>
                 </div>
@@ -170,7 +188,7 @@ const currentDay = "Overview";
           <h2 class="fadeInUp text-4xl font-serif font-medium -tracking-[0.02em] mb-8">
             Specialist Tracks
           </h2>
-          <p class="fadeInUp text-charcoal/70 font-sans text-lg mb-10">
+          <p class="fadeInUp text-charcoal font-sans text-lg mb-10">
             Specialist tracks are curated sessions focusing on specific topics within the Python ecosystem. Each track is organised by community members with deep expertise in their area.
           </p>
           <div class="grid lg:grid-cols-2 gap-6">
@@ -179,7 +197,7 @@ const currentDay = "Overview";
                 <h3 class="text-xl font-serif font-medium text-charcoal mb-2">
                   {track.data.title}
                 </h3>
-                <p class="text-charcoal/70 text-sm flex-1">
+                <p class="text-charcoal text-sm flex-1">
                   {track.data.shortDescription}
                 </p>
                 <div class="mt-3 text-right">
