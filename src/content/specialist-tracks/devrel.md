@@ -1,5 +1,6 @@
 ---
 title: "DevRel"
+pretalxTrack: "Education"
 shortDescription: "Learn about and share the craft of Developer Relations, the profession of technical product advocacy."
 organisers:
   - name: Katie McLaughlin

@@ -26,7 +26,9 @@ const specialistTracks = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
+    pretalxTrack: z.string().optional(),
     shortDescription: z.string(),
+    date: z.coerce.date().optional(),
     organisers: z
       .array(
         z.object({

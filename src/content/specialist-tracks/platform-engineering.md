@@ -1,5 +1,6 @@
 ---
 title: "Platform Engineering"
+pretalxTrack: "Education"
 shortDescription: "Share and explore how Platform Engineering ideas such as systems thinking, guardrails, and golden paths empower teams to get their code from commit to production quickly and safely!"
 organisers:
   - name: Evan Kohilas
