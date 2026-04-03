@@ -3,7 +3,7 @@
  * Set KIWIPYCON_ENABLED to true to activate "Kiwi PyCon | West Island" branding
  */
 
-export const KIWIPYCON_ENABLED = true;
+export const KIWIPYCON_ENABLED = false;
 
 export const siteConfig = {
   // Default branding
