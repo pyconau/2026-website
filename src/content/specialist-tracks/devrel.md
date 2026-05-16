@@ -1,7 +1,8 @@
 ---
 title: "DevRel"
-pretalxTrack: "Education"
+pretalxTrack: "DevRel"
 shortDescription: "Learn about and share the craft of Developer Relations, the profession of technical product advocacy."
+date: 2026-08-29
 organisers:
   - name: Katie McLaughlin
     title: "Senior Developer Relations Engineer"

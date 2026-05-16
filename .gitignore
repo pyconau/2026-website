@@ -6,6 +6,9 @@ dist/
 # dependencies
 node_modules/
 
+# python cache
+__pycache__/
+
 # synced content from pretalx (regenerated via scripts)
 src/content/people/
 src/content/sessions/

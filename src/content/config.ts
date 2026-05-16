@@ -8,7 +8,7 @@ const sessions = defineCollection({
     start: z.coerce.date(),
     end: z.coerce.date(),
     room: z.string(),
-    track: z.string().nullable(), // Local slug for linking
+    track: z.string().nullable().optional(), // Local slug for linking
     trackName: z.string().optional(), // Original Pretalx track name for display
     type: z
       .enum(["talk", "keynote", "break", "workshop", "lightning", "panel", "plenary"])

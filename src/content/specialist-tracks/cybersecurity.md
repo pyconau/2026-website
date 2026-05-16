@@ -1,7 +1,8 @@
 ---
 title: "Cybersecurity"
-pretalxTrack: "Security"
+pretalxTrack: "Cybersecurity"
 shortDescription: "The Cybersecurity track focuses on security awareness, knowledge and practice for software developers, IT operations people, and cybersecurity specialists."
+date: 2026-08-28
 organisers:
   - name: Fraser Tweedale
     title: "Principal Software Engineer"

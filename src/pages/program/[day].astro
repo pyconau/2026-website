@@ -1,6 +1,7 @@
 ---
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
+import DayTabs from "../../components/program/DayTabs.astro";
 import Base from "../../layouts/Base.astro";
 import {
   getConferenceDays,
@@ -63,24 +64,8 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
         </div>
 
         <!-- Day Tabs -->
-        <div class="fadeInUp flex lg:flex-nowrap flex-wrap lg:gap-0 gap-3 mt-10">
-          {allDays.map((d) => {
-            const isActive = d.toLowerCase() === day.toLowerCase();
-            const dayLabel = d.charAt(0).toUpperCase() + d.slice(1);
-            return (
-              <a
-                href={`/program/${d.toLowerCase()}`}
-                class:list={[
-                  "grid place-items-center border border-charcoal rounded-[3.125rem] lg:w-[174px] w-[45%] h-[38px] transition-all duration-300 cursor-pointer",
-                  isActive
-                    ? "bg-charcoal text-stone hover:border-charcoal"
-                    : "text-charcoal hover:bg-charcoal hover:text-stone hover:border-charcoal"
-                ]}
-              >
-                {dayLabel}
-              </a>
-            );
-          })}
+        <div class="fadeInUp mt-10">
+          <DayTabs currentDay={day} />
         </div>
       </div>
     </div>

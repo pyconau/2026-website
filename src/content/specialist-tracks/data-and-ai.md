@@ -2,6 +2,7 @@
 title: "Data & AI"
 pretalxTrack: "Data & AI"
 shortDescription: "Practitioners from across the areas of Data science, Data Analytics, Data engineering, ML engineering, AI engineering, Applied science. Both within industry and also researchers"
+date: 2026-08-27
 organisers:
   - name: Ned Letcher
     title: "Lead Data Science Engineer"

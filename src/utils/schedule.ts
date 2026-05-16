@@ -184,9 +184,9 @@ export async function getSessionsForSpecialistTrack(
 export const trackColors: Record<string, { bg: string; text: string }> = {
   "data-and-ai": { bg: "#F2BF36", text: "#282828" },
   "research-software-engineering": { bg: "#511FE5", text: "#FFFFFF" },
-  education: { bg: "#EF553C", text: "#FFFFFF" },
-  cybersecurity: { bg: "#10B981", text: "#FFFFFF" },
-  devrel: { bg: "#8B5CF6", text: "#FFFFFF" },
+  education: { bg: "#bdf462", text: "#282828" },
+  cybersecurity: { bg: "#8B5CF6", text: "#FFFFFF" },
+  devrel: { bg: "#EF553C", text: "#FFFFFF" },
   "platform-engineering": { bg: "#F97316", text: "#FFFFFF" },
   default: { bg: "#FFFFFF", text: "#282828" },
 };

@@ -2,6 +2,7 @@
 title: "Education"
 pretalxTrack: "Education"
 shortDescription: "Teachers using python in the classroom 👍"
+date: 2026-08-28
 organisers:
   - name: Nicky Ringland
     title: "Product Manager"

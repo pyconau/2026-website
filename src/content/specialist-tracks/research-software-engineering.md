@@ -1,7 +1,8 @@
 ---
 title: "Research Software Engineering"
-pretalxTrack: "Scientific Python"
+pretalxTrack: "Research Software Engineering"
 shortDescription: "Making research software more robust and reusable."
+date: 2026-08-29
 organisers:
   - name: Paul Leopardi
     title: "Research Software Engineer"
