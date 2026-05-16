@@ -781,13 +781,15 @@ export async function getScheduleForGrid(
   });
   const filteredRooms = rooms.filter((room) => roomsWithSessions.has(room));
 
-  // Merge adjacent breaks that occur at the same time, but only for rooms with sessions
+  // Merge adjacent breaks that occur at the same time using ALL rooms first
   // Group breaks by (start time, end time, title) and find contiguous room ranges
-  const breaksInFilteredRooms = sessionData.filter((s) => s.isBreak && s.room && roomsWithSessions.has(s.room));
-  const mergedBreaks = mergeAdjacentBreaks(breaksInFilteredRooms, filteredRooms);
+  const mergedBreaks = mergeAdjacentBreaks(sessionData, rooms);
 
-  // Combine non-break sessions with merged breaks
-  const finalSessionData = [...nonBreakSessions, ...mergedBreaks];
+  // Filter merged breaks to only include those in rooms with sessions
+  const filteredMergedBreaks = mergedBreaks.filter((s) => s.room && roomsWithSessions.has(s.room));
+
+  // Combine non-break sessions with filtered merged breaks
+  const finalSessionData = [...nonBreakSessions, ...filteredMergedBreaks];
 
   // Generate time slots
   const rows: ScheduleRow[] = [];
