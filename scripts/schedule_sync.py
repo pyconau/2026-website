@@ -173,8 +173,9 @@ def process_breaks(
     slots_data: list[dict],
     room_id_to_name: dict[int, str],
 ) -> list[dict]:
-    """Process Pretalx slots to extract break data."""
+    """Process Pretalx slots to extract break data, deduplicating by start/end/title/room."""
     breaks = []
+    seen_breaks = set()
 
     for slot in slots_data:
         # Breaks have no submission and slot_type == "break"
@@ -196,6 +197,12 @@ def process_breaks(
         # Get break title from description
         description = slot.get("description", {})
         title = description.get("en", "Break") if isinstance(description, dict) else "Break"
+
+        # Deduplicate: use (start, end, title, room) as unique key
+        break_key = (slot.get("start"), slot.get("end"), title, room_display)
+        if break_key in seen_breaks:
+            continue
+        seen_breaks.add(break_key)
 
         break_data = {
             "code": f"BREAK-{slot['id']}",  # Synthetic code for breaks
