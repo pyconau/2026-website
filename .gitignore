@@ -13,6 +13,9 @@ __pycache__/
 src/content/people/
 src/content/sessions/
 
+# downloaded avatars from pretalx (regenerated via scripts)
+public/images/people/
+
 # logs
 npm-debug.log*
 yarn-debug.log*
