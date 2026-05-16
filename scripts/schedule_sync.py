@@ -573,7 +573,14 @@ def main():
     # Write session files (sessions + breaks)
     sessions_dir = project_root / SESSIONS_OUTPUT_DIR
     all_sessions = sessions + breaks
-    print(f"\nWriting session files to {sessions_dir}...")
+
+    # Clean up old session files before writing new ones
+    print(f"\nCleaning up old session files in {sessions_dir}...")
+    if sessions_dir.exists():
+        for old_file in sessions_dir.glob("*.md"):
+            old_file.unlink()
+
+    print(f"Writing session files to {sessions_dir}...")
     for i, session in enumerate(all_sessions):
         write_session_file(session, sessions_dir)
         if (i + 1) % 20 == 0:
