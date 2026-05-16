@@ -571,7 +571,7 @@ ul.sub-menu {
 /* Default to 4 rooms if not specified */
 
 .schedule-wrapper {
-  @apply lg:overflow-auto overflow-scroll;
+  @apply lg:overflow-auto overflow-scroll mx-auto;
   --schedule-room-count: 4;
   --schedule-slot-height: 160px;
   /* Calculate min-width based on room count for mobile scrolling */
@@ -607,6 +607,8 @@ ul.sub-menu {
   .schedule-title {
     width: auto;
     min-width: min(100%, 1200px);
+    margin-left: auto;
+    margin-right: auto;
   }
 
   /* For days with fewer rooms, constrain max-width to keep columns reasonable */
@@ -640,6 +642,8 @@ ul.sub-menu {
   .schedule {
     width: auto;
     min-width: min(100%, 1200px);
+    margin-left: auto;
+    margin-right: auto;
   }
 
   /* For days with fewer rooms, constrain max-width to keep columns reasonable */

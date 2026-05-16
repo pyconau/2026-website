@@ -64,7 +64,7 @@ PLENARY_ROOMS = ["Ballroom 1", "Ballroom 2", "Ballroom 3"]
 
 # Room order for schedule display and break column spanning
 # Breaks that occur simultaneously in adjacent rooms will be merged
-ROOM_ORDER = ["Ballroom 1", "Ballroom 2", "Ballroom 3", "Stradbroke Room"]
+ROOM_ORDER = ["Ballroom 1", "Ballroom 2", "Ballroom 3", "Lyon"]
 
 # Output paths (relative to project root)
 SESSIONS_OUTPUT_DIR = "src/content/sessions"
