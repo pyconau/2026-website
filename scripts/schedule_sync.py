@@ -320,7 +320,7 @@ def process_speakers(speakers_data: list[dict], answers_by_speaker: dict[str, li
         if isinstance(biography, dict):
             biography = biography.get("en", str(biography))
 
-        avatar_url = speaker.get("avatar")
+        avatar_url = speaker.get("avatar_url")
 
         # Get answers for this speaker
         answers = answers_by_speaker.get(code, [])

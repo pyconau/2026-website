@@ -7,8 +7,7 @@ import SpeakerCard from "../../components/schedule/SpeakerCard.astro";
 import {
   getPeopleByCode,
   getTrackBySlug,
-  formatSessionTime,
-  formatSessionDate,
+  formatSessionDateTime,
 } from "../../utils/schedule";
 
 export async function getStaticPaths() {
@@ -33,9 +32,8 @@ const trackData = track ? await getTrackBySlug(track) : null;
 // Use trackName from Pretalx if available, otherwise fall back to local track title
 const displayTrackName = trackName || trackData?.data.title;
 
-// Format time and date
-const timeString = start && end ? formatSessionTime(start, end) : null;
-const dateString = start ? formatSessionDate(start) : null;
+// Format date and time
+const dateTimeString = start && end ? formatSessionDateTime(start, end) : null;
 
 // Build breadcrumb
 const breadcrumbs = [
@@ -94,8 +92,8 @@ if (trackData) {
           <div class="fadeInUp flex flex-wrap lg:flex-nowrap items-center justify-between border-t-2 border-emerald text-sm font-semibold text-emerald mt-7 pt-1 gap-2">
             {displayTrackName && <span>{displayTrackName}</span>}
             {room && <span>{room}</span>}
-            {dateString && timeString && (
-              <span>{dateString} {timeString}</span>
+            {dateTimeString && (
+              <span>{dateTimeString}</span>
             )}
           </div>
 

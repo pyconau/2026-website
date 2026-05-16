@@ -17,7 +17,7 @@ const speakerNames = speakerData.map((s) => s.data.name).join(", ");
 const firstSpeaker = speakerData[0];
 const avatarSrc = firstSpeaker?.data.hasAvatar
   ? `/images/people/${firstSpeaker.data.code}.jpg`
-  : "/images/default-avatar.svg";
+  : "/images/avatar-default.png";
 ---
 
 <a
@@ -25,14 +25,14 @@ const avatarSrc = firstSpeaker?.data.hasAvatar
   class="fadeInUp bg-white hover:bg-lemon p-10 flex justify-between gap-10 row-span-2 group"
 >
   <div class="flex flex-col lg:flex-row justify-between lg:items-start items-end w-full">
-    <div class="flex flex-col lg:flex-row gap-10 lg:items-center items-start justify-between lg:w-[90%] w-full">
+    <div class="flex flex-col lg:flex-row gap-10 lg:items-center items-start lg:w-[90%] w-full">
       <img
         src={avatarSrc}
         class="rounded-full lg:w-[138px] w-[100px] lg:h-[138px] h-[100px] object-cover"
         alt="Session Thumbnail"
       />
       <div class="space-y-4">
-        <h3 class="lg:text-3xl text-2xl font-sans font-bold leading-tight w-[90%]">
+        <h3 class="lg:text-3xl text-2xl font-sans font-bold leading-tight">
           {title}
         </h3>
         {speakerNames && <p>by {speakerNames}</p>}

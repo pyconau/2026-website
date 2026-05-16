@@ -9,10 +9,10 @@ const { person } = Astro.props;
 const { name, pronouns, bluesky, fediverse, hasAvatar, code } = person.data;
 const { Content } = await person.render();
 
-const avatarSrc = hasAvatar ? `/images/people/${code}.jpg` : "/images/default-avatar.svg";
+const avatarSrc = hasAvatar ? `/images/people/${code}.jpg` : "/images/avatar-default.png";
 ---
 
-<div class="fadeInUp relative mt-32">
+<div class="relative mt-32">
   <img src="/images/scallop-top--white.svg" class="" alt="" />
   <div class="bg-white flex items-center gap-10 w-full lg:pt-7 pt-4 pb-4 px-14 z-20">
     <img

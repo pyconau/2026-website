@@ -125,6 +125,32 @@ export function formatSessionDate(date: Date): string {
 }
 
 /**
+ * Format session date and time together: "Saturday at 11:20am - 11:50am"
+ */
+export function formatSessionDateTime(start: Date, end: Date): string {
+  const dayOfWeek = start.toLocaleDateString("en-AU", {
+    weekday: "long",
+    timeZone: CONFERENCE_TIMEZONE,
+  });
+
+  const timeOptions: Intl.DateTimeFormatOptions = {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: CONFERENCE_TIMEZONE,
+  };
+
+  const startTime = start.toLocaleTimeString("en-AU", timeOptions);
+  const endTime = end.toLocaleTimeString("en-AU", timeOptions);
+
+  // Remove spaces around "am"/"pm" to get "11:20am - 11:50am" format
+  const startTimeCompact = startTime.replace(/\s(am|pm)/i, "$1").toLowerCase();
+  const endTimeCompact = endTime.replace(/\s(am|pm)/i, "$1").toLowerCase();
+
+  return `${dayOfWeek} at ${startTimeCompact} - ${endTimeCompact}`;
+}
+
+/**
  * Get a speaker/person by their code
  */
 export async function getPersonByCode(code: string): Promise<Person | undefined> {
