@@ -124,9 +124,13 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
                         const timeStr = ps.session.data.start && ps.session.data.end
                           ? formatSessionTime(ps.session.data.start, ps.session.data.end)
                           : "";
+                        const spanClass = ps.colSpan === 4 ? "schedule-event-wrapper--span-4"
+                          : ps.colSpan === 3 ? "schedule-event-wrapper--span-3"
+                          : ps.colSpan === 2 ? "schedule-event-wrapper--span-2"
+                          : "schedule-event-wrapper--fullwidth";
 
                         return (
-                          <div class="schedule-event-wrapper schedule-event-wrapper--fullwidth" style={`top: ${ps.topPercent}%;`}>
+                          <div class={`schedule-event-wrapper ${spanClass}`} style={`top: ${ps.topPercent}%;`}>
                             <a
                               href={`/program/${ps.session.data.code}`}
                               class="schedule-event"
@@ -151,9 +155,8 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
                         const timeStr = ps.session.data.start && ps.session.data.end
                           ? formatSessionTime(ps.session.data.start, ps.session.data.end)
                           : "";
-                        // Calculate width based on colSpan - if spans all rooms, use fullwidth
-                        const spanClass = ps.colSpan >= rooms.length ? "schedule-event-wrapper--fullwidth"
-                          : ps.colSpan === 4 ? "schedule-event-wrapper--span-4"
+                        // Calculate width based on colSpan
+                        const spanClass = ps.colSpan === 4 ? "schedule-event-wrapper--span-4"
                           : ps.colSpan === 3 ? "schedule-event-wrapper--span-3"
                           : ps.colSpan === 2 ? "schedule-event-wrapper--span-2"
                           : "";
