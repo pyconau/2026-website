@@ -777,6 +777,15 @@ export async function getScheduleForGrid(
   const nonBreakSessions = sessionData.filter((s) => !s.isBreak);
   const finalSessionData = [...nonBreakSessions, ...mergedBreaks];
 
+  // Filter rooms to only include those with non-break sessions
+  const roomsWithSessions = new Set<string>();
+  nonBreakSessions.forEach((s) => {
+    if (s.room) {
+      roomsWithSessions.add(s.room);
+    }
+  });
+  const filteredRooms = rooms.filter((room) => roomsWithSessions.has(room));
+
   // Generate time slots
   const rows: ScheduleRow[] = [];
   const current = new Date(gridStart);
@@ -784,7 +793,7 @@ export async function getScheduleForGrid(
 
   while (current < gridEnd) {
     const sessionsByRoom = new Map<string, PositionedSession[]>();
-    rooms.forEach((room) => sessionsByRoom.set(room, []));
+    filteredRooms.forEach((room) => sessionsByRoom.set(room, []));
 
     // Find sessions that start in this slot
     const slotSessions = finalSessionData.filter((s) => s.slotIndex === slotIndex);
@@ -803,10 +812,10 @@ export async function getScheduleForGrid(
 
       // For full-width sessions, add to first room only (rendering will handle colspan)
       if (s.isFullWidth) {
-        sessionsByRoom.get(rooms[0])?.push(positioned);
+        sessionsByRoom.get(filteredRooms[0])?.push(positioned);
       } else if (s.isBreak && s.colSpan > 1) {
         // For merged breaks, add to the first room in their span
-        const startRoom = rooms[s.startColumn];
+        const startRoom = filteredRooms[s.startColumn];
         if (startRoom) {
           sessionsByRoom.get(startRoom)?.push(positioned);
         }
@@ -830,5 +839,5 @@ export async function getScheduleForGrid(
     slotIndex++;
   }
 
-  return { rooms, rows, layout: scheduleLayout };
+  return { rooms: filteredRooms, rows, layout: scheduleLayout };
 }
