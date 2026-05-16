@@ -46,8 +46,10 @@ SUBMISSION_TYPE_MAPPING: dict[int, str] = {
 # Session codes that should be marked as plenary (full-width in schedule)
 # These are conference-level openings/closings that span all rooms
 PLENARY_SESSION_CODES: set[str] = {
-    "W7W3VR",  # Conference Opening (Saturday)
-    "AMLK87",  # Conference Closing (Sunday)
+    "VQD3SG",  # Conference welcome & keynote (Thursday)
+    "3FQZVE",  # Keynote (Friday)
+    "9PXVYP",  # Keynote (Saturday)
+    "TGQGWT",  # Conference Closing (Saturday)
 }
 
 # Room labels (optional display name overrides)

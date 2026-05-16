@@ -727,7 +727,9 @@ export async function getScheduleForGrid(
 
     const sessionType = session.data.type;
     const isFullWidth = sessionType === "keynote" || sessionType === "plenary";
-    const colSpan = isFullWidth ? rooms.length : 1;
+    // Plenary sessions only span ballrooms (1, 2, 3), not Lyon
+    const plenaryRoomCount = 3;
+    const colSpan = isFullWidth ? plenaryRoomCount : 1;
     const isBreak = sessionType === "break";
 
     // Check for track header display and back-to-back sessions
