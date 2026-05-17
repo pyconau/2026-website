@@ -65,9 +65,13 @@ const sessions = await getSessionsForSpecialistTrack(track);
       <div class="container">
         <div class="fadeInUp lg:w-[85%] w-full mx-auto">
           <div class="flex lg:flex-row flex-col lg:gap-0 gap-10 justify-between items-start">
-            <div class="text-intro font-medium w-full text-charcoal lg:w-[646px] prose prose-lg">
-              <p>{shortDescription}</p>
-              <Content />
+            <div class="w-full lg:w-[646px]">
+              <p class="text-intro font-medium text-charcoal fadeInUp">
+                {shortDescription}
+              </p>
+              <div class="rich-text mt-6 fadeInUp">
+                <Content />
+              </div>
             </div>
             <div>
               <a href="/cfp" class="btn-arrow btn-arrow--emerald">
