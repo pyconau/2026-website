@@ -370,7 +370,7 @@ export async function getSessionsForFlexSchedule(
     const durationMinutes = (endTime - startTime) / (1000 * 60);
 
     const sessionType = session.data.type;
-    const isFullWidth = sessionType === "keynote" || sessionType === "plenary";
+    const isFullWidth = sessionType === "plenary";
 
     const heightPx = durationMinutes * PX_PER_MINUTE;
 
@@ -726,7 +726,7 @@ export async function getScheduleForGrid(
     const heightPx = (durationMinutes / slotMinutes) * slotHeightPx * 0.98;
 
     const sessionType = session.data.type;
-    const isFullWidth = sessionType === "keynote" || sessionType === "plenary";
+    const isFullWidth = sessionType === "plenary";
     // Plenary sessions only span ballrooms (1, 2, 3), not Lyon
     const plenaryRoomCount = 3;
     const colSpan = isFullWidth ? plenaryRoomCount : 1;

@@ -11,7 +11,7 @@ const sessions = defineCollection({
     track: z.string().nullable().optional(), // Local slug for linking
     trackName: z.string().optional(), // Original Pretalx track name for display
     type: z
-      .enum(["talk", "keynote", "break", "workshop", "lightning", "panel", "plenary"])
+      .enum(["talk", "break", "workshop", "plenary", "poster", "other"])
       .default("talk"),
     speakers: z.array(z.string()).default([]),
     sponsor: z.string().optional(),
