@@ -17,7 +17,7 @@ export const CONFERENCE_TIMEZONE = "Australia/Melbourne";
 
 export type Session = CollectionEntry<"sessions">;
 export type Person = CollectionEntry<"people">;
-export type SpecialistTrack = CollectionEntry<"specialist-tracks">;
+export type SpecialistTrack = CollectionEntry<"schedule-specialist-tracks">;
 
 /**
  * Get all sessions for a specific track slug
@@ -174,7 +174,7 @@ export async function getPeopleByCode(codes: string[]): Promise<Person[]> {
 export async function getTrackBySlug(
   slug: string
 ): Promise<SpecialistTrack | undefined> {
-  const tracks = await getCollection("specialist-tracks");
+  const tracks = await getCollection("schedule-specialist-tracks");
   return tracks.find((track) => track.slug === slug);
 }
 
@@ -189,7 +189,7 @@ export async function getSessionsForSpecialistTrack(
 
   // Find the slug that maps from this pretalxTrack
   // Sessions use the slug, not the pretalxTrack name
-  const allTracks = await getCollection("specialist-tracks");
+  const allTracks = await getCollection("schedule-specialist-tracks");
   const matchingSlugs = allTracks
     .filter((t) => t.data.pretalxTrack === pretalxTrack)
     .map((t) => t.slug);

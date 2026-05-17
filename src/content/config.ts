@@ -54,13 +54,11 @@ const sponsors = defineCollection({
   }),
 });
 
-const specialistTracks = defineCollection({
+const cfpSpecialistTracks = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
-    pretalxTrack: z.string().optional(),
     shortDescription: z.string(),
-    date: z.coerce.date().optional(),
     organisers: z
       .array(
         z.object({
@@ -76,10 +74,21 @@ const specialistTracks = defineCollection({
   }),
 });
 
+const scheduleSpecialistTracks = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    shortDescription: z.string(),
+    pretalxTrack: z.string().optional(),
+    date: z.coerce.date().optional(),
+  }),
+});
+
 export const collections = {
   sessions,
   people,
   posts,
   sponsors,
-  "specialist-tracks": specialistTracks,
+  "cfp-specialist-tracks": cfpSpecialistTracks,
+  "schedule-specialist-tracks": scheduleSpecialistTracks,
 };

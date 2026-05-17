@@ -8,7 +8,7 @@ import SessionListItem from "../../../components/schedule/SessionListItem.astro"
 import { getSessionsForSpecialistTrack } from "../../../utils/schedule";
 
 export async function getStaticPaths() {
-  const tracks = await getCollection("specialist-tracks");
+  const tracks = await getCollection("schedule-specialist-tracks");
   return tracks.map((track) => ({
     params: { slug: track.slug },
     props: { track },

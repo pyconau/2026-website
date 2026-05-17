@@ -6,7 +6,7 @@ import HeaderStar from "../../../components/header/HeaderStar.astro";
 import Base from "../../../layouts/Base.astro";
 import { getSessionsForSpecialistTrack } from "../../../utils/schedule";
 
-const tracks = await getCollection("specialist-tracks");
+const tracks = await getCollection("schedule-specialist-tracks");
 
 // Get session counts for each track
 const tracksWithCounts = await Promise.all(
