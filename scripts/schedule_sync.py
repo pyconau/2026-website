@@ -162,7 +162,13 @@ def determine_session_type(submission: dict) -> str:
         return "plenary"
 
     # Look up the submission type ID in the static mapping
-    submission_type_id = submission.get("submission_type")
+    submission_type = submission.get("submission_type")
+    submission_type_id = submission_type
+
+    # submission_type can be an int or a dict with an 'id' field
+    if isinstance(submission_type, dict):
+        submission_type_id = submission_type.get("id")
+
     if isinstance(submission_type_id, int):
         return SUBMISSION_TYPE_MAPPING.get(submission_type_id, "talk")
 

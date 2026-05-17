@@ -26,21 +26,24 @@ FEDIVERSE_QUESTION_ID = 5328
 # Submission type ID to session type mapping (discovered via pretalx_questions.py)
 # Maps Pretalx submission type IDs to our session types:
 #   talk, keynote, plenary, workshop, lightning, panel, break
+# Updated for PyCon AU 2026 event
 SUBMISSION_TYPE_MAPPING: dict[int, str] = {
-    5931: "talk",      # Waitlist
-    5932: "talk",      # Talk
-    5933: "talk",      # Opening/Closing (track openings - NOT plenary)
-    5934: "keynote",   # Education Keynote
-    5935: "keynote",   # Keynote
-    5936: "talk",      # Backup
-    5937: "talk",      # Sprints
-    5938: "workshop",  # Workshop (3h)
-    5939: "workshop",  # Workshop (2h)
-    5940: "talk",      # Sponsored talk
-    5941: "talk",      # Flash talk
-    5942: "talk",      # Education Showcase
-    5943: "lightning", # Lightning talks
-    6032: "talk",      # Other
+    7192: "talk",      # Flash talk
+    7193: "talk",      # Opening/Closing (track openings - NOT plenary)
+    7194: "keynote",   # Education Keynote
+    7195: "talk",      # Backup
+    7196: "talk",      # Waitlist
+    7197: "talk",      # Talk
+    7198: "talk",      # Sponsored talk
+    7199: "talk",      # Other
+    7200: "keynote",   # Keynote
+    7201: "lightning", # Lightning talks
+    7202: "talk",      # Education Showcase
+    7203: "workshop",  # Workshop (2h)
+    7204: "workshop",  # Workshop (3h)
+    7205: "talk",      # Sprints
+    7240: "talk",      # Poster Session
+    7264: "workshop",  # Workshop
 }
 
 # Session codes that should be marked as plenary (full-width in schedule)
