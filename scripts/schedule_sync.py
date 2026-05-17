@@ -93,12 +93,12 @@ def paginate_api(endpoint: str, params: dict | None = None) -> list[dict]:
 
 def load_track_mappings() -> dict[str, str]:
     """
-    Load track mappings from specialist-tracks markdown files.
+    Load track mappings from schedule-specialist-tracks markdown files.
 
     Returns a dict mapping Pretalx track names to file slugs.
     e.g., {"Data & AI": "data-and-ai", "Education": "education"}
     """
-    tracks_dir = get_project_root() / SPECIALIST_TRACKS_DIR
+    tracks_dir = get_project_root() / "src/content/schedule-specialist-tracks"
     mappings = {}
 
     if not tracks_dir.exists():
