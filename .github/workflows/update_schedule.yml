@@ -39,9 +39,9 @@ jobs:
         id: add-and-commit
         with:
           add: 'src/content/sessions src/content/people'
-          author_name: Robot
-          author_email: beep-boop@local
-          message: "Auto-update of schedule from Pretalx"
+          author_name: GitHub Actions
+          author_email: program@pycon.org.au
+          message: "Auto-update the schedule from Pretalx"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
