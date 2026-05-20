@@ -1,0 +1,53 @@
+name: Update schedule
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  schedule:
+    # Run hourly between 8am-midnight UTC
+    - cron: "0 8-23 * * *"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      build-required: ${{ steps.add-and-commit.outputs.pushed }}
+      build-sha: ${{ steps.add-and-commit.outputs.commit_long_sha }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v2
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Sync schedule
+        run: |
+          cd scripts
+          PRETALX_EVENT=pycon-au-2026 uv run schedule_sync.py
+        env:
+          PRETALX_TOKEN: ${{ secrets.PRETALX_TOKEN }}
+
+      - name: Show changes
+        run: git diff
+
+      - uses: EndBug/add-and-commit@v9
+        id: add-and-commit
+        with:
+          add: 'src/content/sessions src/content/people'
+          author_name: Robot
+          author_email: beep-boop@local
+          message: "Auto-update of schedule from Pretalx"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build:
+    needs: check
+    if: ${{ needs.check.outputs.build-required == 'true' }}
+    uses: ./.github/workflows/build.yml
+    with:
+      sha: ${{ needs.check.outputs.build-sha }}
