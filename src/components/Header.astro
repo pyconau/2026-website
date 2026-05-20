@@ -101,11 +101,20 @@ const callForProposalsPages = Object.entries(cfpPages)
           >
         </a>
         <ul class="xl:flex hidden items-center gap-10 main-menu">
-          {
-            /*<li>
-             <HeaderTopNavItem href="/program">Program</HeaderTopNavItem>
-          </li>*/
-          }
+          <li class="relative group">
+            <HeaderTopNavItem href="/schedule">Schedule</HeaderTopNavItem>
+
+            <ul class="sub-menu">
+              <li>
+                <a
+                  href="/schedule/specialist-tracks"
+                  class="text-sm font-semibold font-sans hover:text-emerald"
+                >
+                  Specialist Tracks
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="relative group">
             <HeaderTopNavItem href="/attend/">Attendee Guide</HeaderTopNavItem>
 
@@ -126,7 +135,7 @@ const callForProposalsPages = Object.entries(cfpPages)
             <HeaderTopNavItem href="/sponsor">Sponsors</HeaderTopNavItem>
           </li>
           <li>
-            <HeaderTopNavItem href="/program">Program</HeaderTopNavItem>
+            <HeaderTopNavItem href="/schedule">Schedule</HeaderTopNavItem>
           </li>
         </ul>
       </div>
@@ -198,7 +207,7 @@ const callForProposalsPages = Object.entries(cfpPages)
           :class="{ 'sub-menu-open': openSubMenu === 'program' }"
         >
           <a
-            href="/program"
+            href="/schedule"
             class="has-child"
           >
             <span>Program</span>
@@ -286,7 +295,7 @@ const callForProposalsPages = Object.entries(cfpPages)
           <a href="/sponsor"><span>Sponsors</span></a>
         </li>
         <li x-show="openSubMenu === null">
-          <a href="/program"><span>Program</span></a>
+          <a href="/schedule"><span>Schedule</span></a>
         </li>
         <li x-show="openSubMenu === null">
           <a href="/news/"><span>News & Updates</span></a>

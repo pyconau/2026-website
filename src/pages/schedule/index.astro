@@ -1,11 +1,13 @@
 ---
 import { getCollection } from "astro:content";
+import { getTrackColor } from "../../utils/schedule";
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
 import HeaderStar from "../../components/header/HeaderStar.astro";
+import DayTabs from "../../components/schedule/DayTabs.astro";
 import Base from "../../layouts/Base.astro";
 
-const allTracks = await getCollection("specialist-tracks");
+const allTracks = await getCollection("schedule-specialist-tracks");
 
 // Sort tracks: first by date (if present), then alphabetically by title
 const tracks = allTracks.sort((a, b) => {
@@ -25,11 +27,9 @@ const tracks = allTracks.sort((a, b) => {
   return a.data.title.localeCompare(b.data.title);
 });
 
-const days = ["Overview", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-const currentDay = "Overview";
 ---
 
-<Base title="Program">
+<Base title="Schedule">
   <Header dark={true} />
 
   <section class="bg-charcoal pt-[98px] pb-20 overflow-hidden">
@@ -47,7 +47,7 @@ const currentDay = "Overview";
         <div class="fadeInUp flex justify-between items-center relative pt-10">
           <div class="space-y-20 lg:w-full w-full relative">
             <div class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em] leading-none">
-              <h1 class="text-lime">Program</h1>
+              <h1 class="text-lime">Schedule</h1>
             </div>
             <p class="text-stone font-sans font-base tracking-[0.01em] leading-normal lg:w-[600px]">
               The PyCon AU 2026 schedule will be published progressively over time. Expect updates in May as the main program and specialist tracks are published.
@@ -66,26 +66,7 @@ const currentDay = "Overview";
         <div class="lg:w-[85%] w-full mx-auto">
           <!-- Day tabs -->
           <div class="fadeInUp mb-10">
-            <div class="flex flex-wrap justify-center gap-3">
-              {days.map((day) => (
-                <span
-                  class:list={[
-                    "grid place-items-center border border-charcoal rounded-[3.125rem] px-5 h-[38px] font-sans text-sm transition-all duration-300 relative group",
-                    day === currentDay
-                      ? "bg-charcoal text-stone"
-                      : "text-charcoal/40 cursor-default",
-                  ]}
-                >
-                  {day}
-                  {day !== currentDay && (
-                    <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-charcoal text-white text-xs rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                      The schedule has not been published for {day}
-                      <span class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-charcoal"></span>
-                    </span>
-                  )}
-                </span>
-              ))}
-            </div>
+            <DayTabs currentDay="overview" />
           </div>
 
           <!-- Schedule overview cards -->
@@ -131,7 +112,7 @@ const currentDay = "Overview";
                     Curated by specialist groups within Python community with more in-depth talks.
                   </p>
                 </div>
-                
+
               </div>
             </a>
 
@@ -193,7 +174,7 @@ const currentDay = "Overview";
           </p>
           <div class="grid lg:grid-cols-2 gap-6">
             {tracks.map((track) => (
-              <div class="fadeInUp bg-white p-6 rounded-lg flex flex-col">
+              <a href={`/schedule/specialist-tracks/${track.slug}`} class="fadeInUp bg-white hover:shadow-lg p-6 rounded-lg flex flex-col transition-shadow duration-300">
                 <h3 class="text-xl font-serif font-medium text-charcoal mb-2">
                   {track.data.title}
                 </h3>
@@ -202,16 +183,24 @@ const currentDay = "Overview";
                 </p>
                 <div class="mt-3 text-right">
                   {track.data.date ? (
-                    <span class="inline-block bg-lime text-charcoal text-xs font-sans px-3 py-1 rounded-full">
-                      {track.data.date.toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long" })}
-                    </span>
+                    (() => {
+                      const color = getTrackColor(track.slug);
+                      return (
+                        <span
+                          class="inline-block text-xs font-sans px-3 py-1 rounded-full"
+                          style={`background-color: ${color.bg}; color: ${color.text};`}
+                        >
+                          {track.data.date.toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long" })}
+                        </span>
+                      );
+                    })()
                   ) : (
                     <span class="text-charcoal/50 text-xs font-sans">
                       Schedule to be announced
                     </span>
                   )}
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>

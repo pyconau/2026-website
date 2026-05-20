@@ -1,6 +1,5 @@
 ---
 title: "Research Software Engineering"
-pretalxTrack: "Scientific Python"
 shortDescription: "Making research software more robust and reusable."
 organisers:
   - name: Paul Leopardi
@@ -9,6 +8,13 @@ organisers:
     photo: /images/specialist-tracks/paul-leopardi.jpg
     social: {
         "LinkedIn": "https://www.linkedin.com/in/paul-leopardi-964b862/"
+    }
+  - name: Jasmeen Kaur
+    title: "Research Software Engineer"
+    pronouns: "She/Her"
+    photo: /images/specialist-tracks/jasmeen-kuar.jpeg
+    social: {
+        "LinkedIn": "https://www.linkedin.com/in/kaur-jasmeen1/"
     }
 ---
 

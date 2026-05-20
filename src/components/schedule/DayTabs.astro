@@ -1,0 +1,50 @@
+---
+interface Props {
+  currentDay?: string;
+}
+
+const { currentDay } = Astro.props;
+const allDays = ["wednesday", "thursday", "friday", "saturday", "sunday"];
+const publishedDays = ["thursday", "friday", "saturday"];
+---
+
+<div class="flex flex-wrap justify-center gap-3">
+  <a
+    href="/schedule"
+    class:list={[
+      "grid place-items-center border border-charcoal rounded-[3.125rem] px-5 h-[38px] font-sans text-sm transition-all duration-300",
+      !currentDay || currentDay === "overview"
+        ? "bg-charcoal text-stone"
+        : "text-charcoal hover:bg-charcoal hover:text-stone",
+    ]}
+  >
+    Overview
+  </a>
+  {allDays.map((day) => {
+    const dayDisplay = day.charAt(0).toUpperCase() + day.slice(1);
+    const isActive = currentDay?.toLowerCase() === day.toLowerCase();
+    const isPublished = publishedDays.includes(day);
+
+    return isPublished ? (
+      <a
+        href={`/schedule/${day}`}
+        class:list={[
+          "grid place-items-center border border-charcoal rounded-[3.125rem] px-5 h-[38px] font-sans text-sm transition-all duration-300",
+          isActive
+            ? "bg-charcoal text-stone"
+            : "text-charcoal hover:bg-charcoal hover:text-stone",
+        ]}
+      >
+        {dayDisplay}
+      </a>
+    ) : (
+      <span class="grid place-items-center border border-charcoal rounded-[3.125rem] px-5 h-[38px] font-sans text-sm transition-all duration-300 text-charcoal/40 cursor-default relative group">
+        {dayDisplay}
+        <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-charcoal text-white text-xs rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+          The schedule has not been published for {dayDisplay}
+          <span class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-charcoal"></span>
+        </span>
+      </span>
+    );
+  })}
+</div>

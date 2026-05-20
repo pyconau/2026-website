@@ -1,0 +1,15 @@
+[project]
+name = "pyconau-schedule-sync"
+version = "0.1.0"
+description = "Sync Pretalx schedule data to PyCon AU website"
+requires-python = ">=3.11"
+dependencies = [
+    "requests>=2.31.0",
+    "ruamel-yaml>=0.18.0",
+    "python-dateutil>=2.8.0",
+    "Pillow>=10.0.0",
+    "python-dotenv>=1.0.0",
+]
+
+[tool.uv]
+dev-dependencies = []

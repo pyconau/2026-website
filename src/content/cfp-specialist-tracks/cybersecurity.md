@@ -1,6 +1,5 @@
 ---
 title: "Cybersecurity"
-pretalxTrack: "Security"
 shortDescription: "The Cybersecurity track focuses on security awareness, knowledge and practice for software developers, IT operations people, and cybersecurity specialists."
 organisers:
   - name: Fraser Tweedale
@@ -25,4 +24,3 @@ In today's cyber threat landscape, security cannot be an afterthought.  Develope
 **This track would be great for:** software developers, systems/infrastructure administrators, cybersecurity practitioners, and managers and CISO types who want to keep their finger on the pulse of cybersecurity.
 
 **This track would love talks from:** Red teamers, blue teamers, GRC folks, software developers, vulnerability researchers
-
