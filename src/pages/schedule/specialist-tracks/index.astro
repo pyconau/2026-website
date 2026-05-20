@@ -34,7 +34,7 @@ const tracksWithCounts = await Promise.all(
               <a href="/">Home</a><span>&gt;</span>
             </li>
             <li class="flex items-center gap-2">
-              <a href="/program">Program</a>
+              <a href="/schedule">Schedule</a>
             </li>
           </ul>
         </div>
@@ -64,7 +64,7 @@ const tracksWithCounts = await Promise.all(
           <div class="grid lg:grid-cols-2 gap-8">
             {tracksWithCounts.map((track) => (
               <a
-                href={`/program/specialist-tracks/${track.slug}`}
+                href={`/schedule/specialist-tracks/${track.slug}`}
                 class="fadeInUp bg-white hover:bg-lemon p-8 rounded-lg group transition-all duration-300"
               >
                 <h3 class="text-2xl font-serif font-medium text-charcoal group-hover:text-emerald transition-colors duration-300 mb-3">
@@ -87,8 +87,8 @@ const tracksWithCounts = await Promise.all(
   <section class="bg-lime pt-20">
     <div class="container">
       <div class="grid lg:grid-cols-2 grid-cols-1 gap-5 pb-20 fadeInUp">
-        <a href="/program" class="btn-arrow btn-arrow--emerald btn-arrow--2col">
-          <span>Full Program</span>
+        <a href="/schedule" class="btn-arrow btn-arrow--emerald btn-arrow--2col">
+          <span>Full Schedule</span>
         </a>
         <a href="/cfp" class="btn-arrow btn-arrow--emerald btn-arrow--2col">
           <span>Submit a Talk</span>

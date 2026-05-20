@@ -38,12 +38,12 @@ const dateTimeString = start && end ? formatSessionDateTime(start, end) : null;
 // Build breadcrumb
 const breadcrumbs = [
   { label: "Home", href: "/" },
-  { label: "Program", href: "/program" },
+  { label: "Schedule", href: "/schedule" },
 ];
 if (trackData) {
   breadcrumbs.push({
     label: trackData.data.title,
-    href: `/program/specialist-tracks/${track}`,
+    href: `/schedule/specialist-tracks/${track}`,
   });
 }
 ---
@@ -126,14 +126,14 @@ if (trackData) {
           <div class="fadeInUp flex flex-col lg:flex-row justify-center gap-5 mt-7">
             {trackData && (
               <a
-                href={`/program/specialist-tracks/${track}`}
+                href={`/schedule/specialist-tracks/${track}`}
                 class="btn-arrow btn-arrow--emerald justify-center"
               >
                 All {trackData.data.title} Talks
               </a>
             )}
-            <a href="/program" class="btn-arrow btn-arrow--emerald justify-center">
-              Program
+            <a href="/schedule" class="btn-arrow btn-arrow--emerald justify-center">
+              Schedule
             </a>
           </div>
         </div>

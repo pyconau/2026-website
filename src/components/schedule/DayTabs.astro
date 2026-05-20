@@ -10,7 +10,7 @@ const publishedDays = ["thursday", "friday", "saturday"];
 
 <div class="flex flex-wrap justify-center gap-3">
   <a
-    href="/program"
+    href="/schedule"
     class:list={[
       "grid place-items-center border border-charcoal rounded-[3.125rem] px-5 h-[38px] font-sans text-sm transition-all duration-300",
       !currentDay || currentDay === "overview"
@@ -27,7 +27,7 @@ const publishedDays = ["thursday", "friday", "saturday"];
 
     return isPublished ? (
       <a
-        href={`/program/${day}`}
+        href={`/schedule/${day}`}
         class:list={[
           "grid place-items-center border border-charcoal rounded-[3.125rem] px-5 h-[38px] font-sans text-sm transition-all duration-300",
           isActive
