@@ -8,7 +8,3 @@ date: 2026-08-27
 Are you passionate about empowering teams (or AI Agents) to get code from commit to production rapidly, on demand and with minimal cognitive load or interruption to the users of your platform? Do you find yourself thinking about how to systemically approach problems like security and scalability?
 
 Whether you call yourself a Developer, an SRE, a Systems Engineer, or a DevOps or Platform Engineer - join the Platform Engineering Specialist track to share and explore how these ideas intersect with Python to deliver our code to the world.
-
-**This track would be great for:** Any kind of engineer looking to be empowered, or who empower other teams through systems thinking.
-
-**This track would love talks from:** Any kind of engineer who has worked with systems or tooling to build golden paths and guard rails that support others, or has stories to tell of triumphs and troubles!
