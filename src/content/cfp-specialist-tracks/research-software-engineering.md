@@ -9,6 +9,13 @@ organisers:
     social: {
         "LinkedIn": "https://www.linkedin.com/in/paul-leopardi-964b862/"
     }
+  - name: Jasmeen Kaur
+    title: "Research Software Engineer"
+    pronouns: ""
+    photo: /images/specialist-tracks/jasmeen-kuar.jpeg
+    social: {
+        "LinkedIn": "https://www.linkedin.com/in/kaur-jasmeen1/"
+    }
 ---
 
 This track includes topics related to:
