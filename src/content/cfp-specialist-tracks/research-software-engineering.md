@@ -11,7 +11,7 @@ organisers:
     }
   - name: Jasmeen Kaur
     title: "Research Software Engineer"
-    pronouns: ""
+    pronouns: "She/Her"
     photo: /images/specialist-tracks/jasmeen-kuar.jpeg
     social: {
         "LinkedIn": "https://www.linkedin.com/in/kaur-jasmeen1/"
