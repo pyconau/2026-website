@@ -1,7 +1,7 @@
 ---
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
-import DayTabs from "../../components/program/DayTabs.astro";
+import DayTabs from "../../components/schedule/DayTabs.astro";
 import Base from "../../layouts/Base.astro";
 import {
   getConferenceDays,
@@ -35,7 +35,7 @@ const allSpeakers = await getPeopleByCode([...new Set(allSpeakerCodes)]);
 const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
 ---
 
-<Base title={`${dayCapitalized} Schedule - Program`}>
+<Base title={`${dayCapitalized} Schedule - Schedule`}>
   <Header dark={false} />
 
   <section class="bg-stone pt-[98px] pb-20 overflow-hidden">
@@ -45,7 +45,7 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
         <div class="fadeInUp breadcrumb pt-14">
           <ul class="flex items-center gap-2 text-violet font-sans font-extrabold text-10pt uppercase tracking-[0.12em]">
             <li class="flex items-center gap-2"><a href="/">Home</a><span>&gt;</span></li>
-            <li class="flex items-center gap-2"><a href="/program">Program</a><span>&gt;</span></li>
+            <li class="flex items-center gap-2"><a href="/schedule">Schedule</a><span>&gt;</span></li>
             <li class="flex items-center gap-2"><span>{dayCapitalized}</span></li>
           </ul>
         </div>
@@ -132,7 +132,7 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
                         return (
                           <div class={`schedule-event-wrapper ${spanClass}`} style={`top: ${ps.topPercent}%;`}>
                             <a
-                              href={`/program/${ps.session.data.code}`}
+                              href={`/schedule/${ps.session.data.code}`}
                               class="schedule-event"
                               style={`height: ${ps.heightPx}px; background-color: white; color: #282828;`}
                             >
@@ -231,7 +231,7 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
                               </div>
                             )}
                             <a
-                              href={`/program/${ps.session.data.code}`}
+                              href={`/schedule/${ps.session.data.code}`}
                               class="schedule-event"
                               style={`height: ${ps.heightPx}px; background-color: ${trackColor.bg}; color: ${trackColor.text};`}
                             >
@@ -270,11 +270,11 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
   <section class="bg-lime pt-20">
     <div class="container">
       <div class="grid lg:grid-cols-2 grid-cols-1 gap-5 pb-20 fadeInUp">
-        <a href="/program/specialist-tracks" class="btn-arrow btn-arrow--emerald btn-arrow--2col">
+        <a href="/schedule/specialist-tracks" class="btn-arrow btn-arrow--emerald btn-arrow--2col">
           <span>Specialist Tracks</span>
         </a>
-        <a href="/program" class="btn-arrow btn-arrow--emerald btn-arrow--2col">
-          <span>Full Program</span>
+        <a href="/schedule" class="btn-arrow btn-arrow--emerald btn-arrow--2col">
+          <span>Full Schedule</span>
         </a>
       </div>
     </div>

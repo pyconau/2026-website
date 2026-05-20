@@ -4,7 +4,7 @@ import { getTrackColor } from "../../utils/schedule";
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
 import HeaderStar from "../../components/header/HeaderStar.astro";
-import DayTabs from "../../components/program/DayTabs.astro";
+import DayTabs from "../../components/schedule/DayTabs.astro";
 import Base from "../../layouts/Base.astro";
 
 const allTracks = await getCollection("schedule-specialist-tracks");
@@ -29,7 +29,7 @@ const tracks = allTracks.sort((a, b) => {
 
 ---
 
-<Base title="Program">
+<Base title="Schedule">
   <Header dark={true} />
 
   <section class="bg-charcoal pt-[98px] pb-20 overflow-hidden">
@@ -47,7 +47,7 @@ const tracks = allTracks.sort((a, b) => {
         <div class="fadeInUp flex justify-between items-center relative pt-10">
           <div class="space-y-20 lg:w-full w-full relative">
             <div class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em] leading-none">
-              <h1 class="text-lime">Program</h1>
+              <h1 class="text-lime">Schedule</h1>
             </div>
             <p class="text-stone font-sans font-base tracking-[0.01em] leading-normal lg:w-[600px]">
               The PyCon AU 2026 schedule will be published progressively over time. Expect updates in May as the main program and specialist tracks are published.
@@ -174,7 +174,7 @@ const tracks = allTracks.sort((a, b) => {
           </p>
           <div class="grid lg:grid-cols-2 gap-6">
             {tracks.map((track) => (
-              <a href={`/program/specialist-tracks/${track.slug}`} class="fadeInUp bg-white hover:shadow-lg p-6 rounded-lg flex flex-col transition-shadow duration-300">
+              <a href={`/schedule/specialist-tracks/${track.slug}`} class="fadeInUp bg-white hover:shadow-lg p-6 rounded-lg flex flex-col transition-shadow duration-300">
                 <h3 class="text-xl font-serif font-medium text-charcoal mb-2">
                   {track.data.title}
                 </h3>
