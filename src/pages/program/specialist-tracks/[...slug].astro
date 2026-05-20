@@ -5,6 +5,7 @@ import Header from "../../../components/Header.astro";
 import HeaderStar from "../../../components/header/HeaderStar.astro";
 import Base from "../../../layouts/Base.astro";
 import SessionListItem from "../../../components/schedule/SessionListItem.astro";
+import TrackOrganiser from "../../../components/cfp/TrackOrganiser.astro";
 import { getSessionsForSpecialistTrack } from "../../../utils/schedule";
 
 export async function getStaticPaths() {
@@ -21,6 +22,11 @@ const { Content } = await track.render();
 
 // Get sessions for this track
 const sessions = await getSessionsForSpecialistTrack(track);
+
+// Get organizer data from CFP collection
+const cfpTracks = await getCollection("cfp-specialist-tracks");
+const cfpTrack = cfpTracks.find((t) => t.slug === track.slug);
+const organisers = cfpTrack?.data.organisers || [];
 ---
 
 <Base title={`${title} - Specialist Track`}>
@@ -100,6 +106,25 @@ const sessions = await getSessionsForSpecialistTrack(track);
                 Sessions for this track will be announced after the Call for
                 Proposals closes.
               </p>
+            </div>
+          )}
+
+          {organisers.length > 0 && (
+            <div class="pt-24">
+              <h3 class="fadeInUp text-5xl font-serif font-medium -tracking-[0.02em] mb-10">
+                Track Organisers
+              </h3>
+              <div class="grid lg:grid-cols-2 grid-cols-1 gap-4">
+                {organisers.map((organiser) => (
+                  <TrackOrganiser
+                    name={organiser.name}
+                    title={organiser.title}
+                    pronouns={organiser.pronouns}
+                    photo={organiser.photo}
+                    social={organiser.social}
+                  />
+                ))}
+              </div>
             </div>
           )}
         </div>
