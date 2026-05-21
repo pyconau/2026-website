@@ -213,7 +213,7 @@ export const trackColors: Record<string, { bg: string; text: string }> = {
   education: { bg: "#bdf462", text: "#282828" },
   cybersecurity: { bg: "#8B5CF6", text: "#FFFFFF" },
   devrel: { bg: "#EF553C", text: "#FFFFFF" },
-  "platform-engineering": { bg: "#F97316", text: "#FFFFFF" },
+  "platform-engineering": { bg: "#EF553C", text: "#FFFFFF" },
   default: { bg: "#FFFFFF", text: "#282828" },
 };
 
