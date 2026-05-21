@@ -102,7 +102,16 @@ const callForProposalsPages = Object.entries(cfpPages)
         </a>
         <ul class="xl:flex hidden items-center gap-10 main-menu">
           <li class="relative group">
-            <HeaderTopNavItem href="/schedule">Schedule</HeaderTopNavItem>
+            <HeaderTopNavItem href="/schedule">
+              <span class="relative inline-block">
+                Schedule
+                <img
+                  src="/images/flourish.svg"
+                  alt=""
+                  class="absolute -top-3 -right-4 w-7 h-7"
+                />
+              </span>
+            </HeaderTopNavItem>
 
             <ul class="sub-menu">
               <li>
@@ -133,9 +142,6 @@ const callForProposalsPages = Object.entries(cfpPages)
           </li>
           <li>
             <HeaderTopNavItem href="/sponsor">Sponsors</HeaderTopNavItem>
-          </li>
-          <li>
-            <HeaderTopNavItem href="/schedule">Schedule</HeaderTopNavItem>
           </li>
         </ul>
       </div>
@@ -295,7 +301,7 @@ const callForProposalsPages = Object.entries(cfpPages)
           <a href="/sponsor"><span>Sponsors</span></a>
         </li>
         <li x-show="openSubMenu === null">
-          <a href="/schedule"><span>Schedule</span></a>
+          <a href="/schedule"><span class="relative inline-block">Schedule<img src="/images/flourish.svg" alt="" class="absolute -top-3 -right-4 w-7 h-7" /></span></a>
         </li>
         <li x-show="openSubMenu === null">
           <a href="/news/"><span>News & Updates</span></a>
