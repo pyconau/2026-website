@@ -9,12 +9,6 @@ node_modules/
 # python cache
 __pycache__/
 
-# synced content from pretalx (regenerated via scripts)
-src/content/people/
-src/content/sessions/
-
-# downloaded avatars from pretalx (regenerated via scripts)
-public/images/people/
 
 # logs
 npm-debug.log*
