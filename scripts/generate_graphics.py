@@ -9,7 +9,9 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 from ruamel.yaml import YAML
-from graphics_config import LAYOUTS, get_layout
+from graphics_config import LAYOUTS, get_layout, AvatarRegion, TextRegion
+
+AVATAR_GAP = 12  # pixels between adjacent speaker avatars
 
 
 def get_project_root() -> Path:
@@ -81,7 +83,7 @@ def format_speakers(speaker_objects: list[dict]) -> str:
     """Format multiple speakers for display.
 
     2 speakers: "Speaker A\n& Speaker B"
-    3+ speakers: "Speaker A, Speaker B & Speaker C" (line wrap naturally)
+    3 speakers: "Speaker A,\nSpeaker B\n& Speaker C"
     """
     if not speaker_objects:
         return ""
@@ -94,8 +96,10 @@ def format_speakers(speaker_objects: list[dict]) -> str:
         return names[0]
     elif len(names) == 2:
         return f"{names[0]}\n& {names[1]}"
+    elif len(names) == 3:
+        return f"{names[0]},\n{names[1]}\n& {names[2]}"
     else:
-        # 3+ speakers: comma-separated with & before last
+        # 4+ speakers: comma-separated with & before last (fallback)
         return ", ".join(names[:-1]) + f" & {names[-1]}"
 
 
@@ -282,16 +286,87 @@ def generate_graphic(session_code: str, layout_name: str = "layout_1", font_size
     bg_path = Path(__file__).parent / layout.background_file
     img = Image.open(bg_path).convert("RGB")
 
-    # Paste first speaker avatar
-    if speaker_codes:
-        first_speaker = speaker_objects[0]
-        if first_speaker.get("hasAvatar"):
-            avatar_path = (
-                get_project_root() / "public/images/people" / f"{speaker_codes[0]}.jpg"
+    # Avatars and speaker name — support 1, 2, 3 speakers
+    speaker_text = format_speakers(speaker_objects)
+    num_speakers = min(len(speaker_codes), 3)
+
+    if num_speakers == 1:
+        # Single speaker: use existing layout
+        if speaker_codes:
+            first_speaker = speaker_objects[0]
+            if first_speaker.get("hasAvatar"):
+                avatar_path = (
+                    get_project_root() / "public/images/people" / f"{speaker_codes[0]}.jpg"
+                )
+            else:
+                avatar_path = get_project_root() / "public/images/avatar-default.png"
+            paste_avatar(img, str(avatar_path), layout.speaker_avatar)
+
+        speaker_name_region = layout.speaker_name
+    else:
+        # Multi-speaker: compute avatar and text positions
+        base = layout.speaker_avatar
+        d = base.diameter
+
+        # Paste each avatar
+        for i in range(num_speakers):
+            code = speaker_codes[i]
+            speaker = speaker_objects[i]
+            if speaker.get("hasAvatar"):
+                avatar_path = get_project_root() / "public/images/people" / f"{code}.jpg"
+            else:
+                avatar_path = get_project_root() / "public/images/avatar-default.png"
+
+            av_region = AvatarRegion(
+                x=base.x + i * (d + AVATAR_GAP),
+                y=base.y,
+                diameter=d,
             )
-        else:
-            avatar_path = get_project_root() / "public/images/avatar-default.png"
-        paste_avatar(img, str(avatar_path), layout.speaker_avatar)
+            paste_avatar(img, str(avatar_path), av_region)
+
+        # Compute text region geometry
+        group_right = base.x + num_speakers * d + (num_speakers - 1) * AVATAR_GAP
+        group_mid_y = base.y + d // 2
+
+        # Text region: right edge anchored at same position as 1-speaker layout
+        text_right = layout.speaker_name.x + layout.speaker_name.width
+        # Gap between avatar group and text: 26px for 2 speakers, 16px for 3 speakers
+        text_gap = 26 if num_speakers == 2 else 16
+        text_x = group_right + text_gap
+        text_width = text_right - text_x
+
+        # Reduce font size for 3 speakers (narrower column)
+        font_size = layout.speaker_name.font_size if num_speakers == 2 else 22
+
+        # Measure rendered text to compute vertical centering
+        measure_draw = ImageDraw.Draw(img)
+        fitted_font = shrink_font_to_fit(
+            speaker_text,
+            measure_draw,
+            str(Path(__file__).parent / layout.speaker_name.font_file),
+            font_size,
+            layout.speaker_name.min_font_size,
+            text_width,
+            d,
+            weight=layout.speaker_name.weight,
+        )
+        lines = wrap_text(speaker_text, measure_draw, fitted_font, text_width)
+        line_h = get_text_line_height(measure_draw, lines[0], fitted_font)
+        total_text_h = line_h * len(lines)
+        text_y = group_mid_y - total_text_h // 2
+
+        speaker_name_region = TextRegion(
+            x=text_x,
+            y=text_y,
+            width=text_width,
+            height=d,
+            font_file=layout.speaker_name.font_file,
+            font_size=font_size,
+            min_font_size=layout.speaker_name.min_font_size,
+            color=layout.speaker_name.color,
+            line_spacing=layout.speaker_name.line_spacing,
+            weight=layout.speaker_name.weight,
+        )
 
     # Draw text regions
     draw_text(
@@ -319,13 +394,13 @@ def generate_graphic(session_code: str, layout_name: str = "layout_1", font_size
 
     draw_text(
         img,
-        format_speakers(speaker_objects),
-        layout.speaker_name,
+        speaker_text,
+        speaker_name_region,
         Path(__file__).parent / layout.speaker_name.font_file,
-        layout.speaker_name.font_size,
-        layout.speaker_name.min_font_size,
-        layout.speaker_name.color,
-        weight=layout.speaker_name.weight,
+        speaker_name_region.font_size,
+        speaker_name_region.min_font_size,
+        speaker_name_region.color,
+        weight=speaker_name_region.weight,
     )
 
     draw_text(
