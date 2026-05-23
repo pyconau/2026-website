@@ -11,7 +11,7 @@ from PIL import Image, ImageDraw, ImageFont
 from ruamel.yaml import YAML
 from graphics_config import LAYOUTS, get_layout, AvatarRegion, TextRegion
 
-AVATAR_GAP = 12  # pixels between adjacent speaker avatars
+AVATAR_GAP = -25  # pixels between adjacent speaker avatars (negative = overlap)
 
 
 def get_project_root() -> Path:
