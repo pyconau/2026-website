@@ -286,11 +286,14 @@ def generate_graphic(session_code: str, layout_name: str = "layout_1", font_size
     bg_path = Path(__file__).parent / layout.background_file
     img = Image.open(bg_path).convert("RGB")
 
-    # Avatars and speaker name — support 1, 2, 3 speakers
+    # Avatars and speaker name — support 0, 1, 2, 3 speakers
     speaker_text = format_speakers(speaker_objects)
     num_speakers = min(len(speaker_codes), 3)
 
-    if num_speakers == 1:
+    if num_speakers == 0:
+        # No speakers: use existing layout with empty speaker name
+        speaker_name_region = layout.speaker_name
+    elif num_speakers == 1:
         # Single speaker: use existing layout
         if speaker_codes:
             first_speaker = speaker_objects[0]
