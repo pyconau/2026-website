@@ -372,9 +372,14 @@ def generate_graphic(session_code: str, layout_name: str = "layout_1", font_size
         )
 
     # Draw text regions
+    track_name = session.get("trackName", "")
+    # Don't show "Main Conference" track
+    if track_name == "Main Conference":
+        track_name = ""
+
     draw_text(
         img,
-        session.get("trackName", ""),
+        track_name,
         layout.track_name,
         Path(__file__).parent / layout.track_name.font_file,
         layout.track_name.font_size,
