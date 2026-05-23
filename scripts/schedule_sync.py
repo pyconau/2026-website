@@ -309,6 +309,7 @@ def process_sessions(
             "speakers": speakers,
             "contentWarning": content_warning,
             "body": body,
+            "layout": "layout_1",  # Default layout for graphics generation
         }
 
         if verbose and (i + 1) % 10 == 0:
