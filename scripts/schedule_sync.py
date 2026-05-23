@@ -545,6 +545,16 @@ def main():
     answers = paginate_api("answers/")
     print(f"  Found {len(answers)} answers")
 
+    # Build set of speaker codes from confirmed submissions
+    confirmed_speaker_codes: set[str] = set()
+    for sub in submissions:
+        raw_speakers = sub.get("speakers", [])
+        for s in raw_speakers:
+            # Speakers may be objects with 'code' field or strings
+            speaker_code = s.get("code") if isinstance(s, dict) else s
+            if speaker_code:
+                confirmed_speaker_codes.add(speaker_code)
+
     # Group answers by speaker code and submission code
     answers_by_speaker: dict[str, list[dict]] = {}
     answers_by_submission: dict[str, list[dict]] = {}
@@ -573,8 +583,10 @@ def main():
     print(f"  Processed {len(breaks)} breaks")
 
     print("\nProcessing speakers...")
-    people = process_speakers(speakers, answers_by_speaker)
-    print(f"  Processed {len(people)} speakers")
+    # Only process speakers who are associated with confirmed submissions
+    confirmed_speakers = [s for s in speakers if s.get("code") in confirmed_speaker_codes]
+    people = process_speakers(confirmed_speakers, answers_by_speaker)
+    print(f"  Processed {len(people)} speakers (filtered from {len(speakers)} total)")
 
     # Write session files (sessions + breaks)
     sessions_dir = project_root / SESSIONS_OUTPUT_DIR
