@@ -608,6 +608,20 @@ def main():
     # Download avatars and write speaker files
     people_dir = project_root / PEOPLE_OUTPUT_DIR
     avatars_dir = project_root / AVATARS_OUTPUT_DIR
+
+    # Clean up old people files
+    print(f"\nCleaning up old speaker files in {people_dir}...")
+    if people_dir.exists():
+        for old_file in people_dir.glob("*.md"):
+            old_file.unlink()
+
+    # Clean up old avatar files
+    print(f"Cleaning up old avatar files in {avatars_dir}...")
+    if avatars_dir.exists():
+        for old_file in avatars_dir.glob("*"):
+            if old_file.is_file():
+                old_file.unlink()
+
     print(f"\nProcessing speaker avatars and writing files...")
 
     avatar_count = 0
