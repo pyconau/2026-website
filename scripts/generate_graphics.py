@@ -77,24 +77,47 @@ def format_schedule(session: dict) -> str:
     return f"{room}, {time_str}".strip(", ")
 
 
+def format_speakers(speaker_objects: list[dict]) -> str:
+    """Format multiple speakers for display.
+
+    2 speakers: "Speaker A\n& Speaker B"
+    3+ speakers: "Speaker A, Speaker B & Speaker C" (line wrap naturally)
+    """
+    if not speaker_objects:
+        return ""
+
+    names = [s.get("name", "") for s in speaker_objects if s.get("name")]
+    if not names:
+        return ""
+
+    if len(names) == 1:
+        return names[0]
+    elif len(names) == 2:
+        return f"{names[0]}\n& {names[1]}"
+    else:
+        # 3+ speakers: comma-separated with & before last
+        return ", ".join(names[:-1]) + f" & {names[-1]}"
+
+
 def wrap_text(text: str, draw: ImageDraw.ImageDraw, font: ImageFont.FreeTypeFont, max_width: int) -> list[str]:
-    """Wrap text to fit within max_width."""
+    """Wrap text to fit within max_width. Preserves explicit newlines."""
     lines = []
-    current_line = ""
+    # First split by explicit newlines to preserve them
+    for paragraph in text.split('\n'):
+        current_line = ""
+        for word in paragraph.split():
+            test_line = current_line + (" " if current_line else "") + word
+            bbox = draw.textbbox((0, 0), test_line, font=font)
+            line_width = bbox[2] - bbox[0]
 
-    for word in text.split():
-        test_line = current_line + (" " if current_line else "") + word
-        bbox = draw.textbbox((0, 0), test_line, font=font)
-        line_width = bbox[2] - bbox[0]
+            if line_width > max_width and current_line:
+                lines.append(current_line)
+                current_line = word
+            else:
+                current_line = test_line
 
-        if line_width > max_width and current_line:
+        if current_line:
             lines.append(current_line)
-            current_line = word
-        else:
-            current_line = test_line
-
-    if current_line:
-        lines.append(current_line)
 
     return lines
 
@@ -252,18 +275,19 @@ def generate_graphic(session_code: str, layout_name: str = "layout_1", font_size
 
     # Load data
     session = load_session_data(session_code)
-    speakers = session.get("speakers", [])
-    speaker = load_speaker_data(speakers[0]) if speakers else {}
+    speaker_codes = session.get("speakers", [])
+    speaker_objects = [load_speaker_data(code) for code in speaker_codes]
 
     # Load background (includes star and "Session Announcement" text baked in)
     bg_path = Path(__file__).parent / layout.background_file
     img = Image.open(bg_path).convert("RGB")
 
-    # Paste speaker avatar
-    if speakers:
-        if speaker.get("hasAvatar"):
+    # Paste first speaker avatar
+    if speaker_codes:
+        first_speaker = speaker_objects[0]
+        if first_speaker.get("hasAvatar"):
             avatar_path = (
-                get_project_root() / "public/images/people" / f"{speakers[0]}.jpg"
+                get_project_root() / "public/images/people" / f"{speaker_codes[0]}.jpg"
             )
         else:
             avatar_path = get_project_root() / "public/images/avatar-default.png"
@@ -295,7 +319,7 @@ def generate_graphic(session_code: str, layout_name: str = "layout_1", font_size
 
     draw_text(
         img,
-        speaker.get("name", ""),
+        format_speakers(speaker_objects),
         layout.speaker_name,
         Path(__file__).parent / layout.speaker_name.font_file,
         layout.speaker_name.font_size,
