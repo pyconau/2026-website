@@ -17,6 +17,7 @@ class TextRegion:
     color: str = "#eaeaea"
     line_spacing: float = 1.0  # Multiplier for line height
     weight: int = 400  # Font weight (400 = normal, 700 = bold)
+    align: str = "left"  # "left" or "right" text alignment
 
 
 @dataclass
@@ -57,111 +58,223 @@ class Theme:
     schedule_info_color: str  # hex color for room + time
 
 
-PANEL_LAYOUTS: dict[str, PanelLayout] = {
-    "left": PanelLayout(
-        name="left",
-        width=1280,
-        height=780,
-        track_name=TextRegion(
-            x=61,
-            y=184,
-            width=400,
-            height=38,
-            font_file="fonts/RobotoSlab-VariableFont_wght.ttf",
-            font_size=31.0,
-            color="#b280ff",
+PANEL_LAYOUTS: dict[str, dict[str, PanelLayout]] = {
+    "left": {
+        "social": PanelLayout(
+            name="left",
+            width=1280,
+            height=780,
+            track_name=TextRegion(
+                x=61,
+                y=184,
+                width=400,
+                height=38,
+                font_file="fonts/RobotoSlab-VariableFont_wght.ttf",
+                font_size=31.0,
+                color="#b280ff",
+            ),
+            session_title=TextRegion(
+                x=54,
+                y=244,
+                width=600,
+                height=220,
+                font_file="fonts/RobotoSlab-VariableFont_wght.ttf",
+                font_size=53.0,
+                min_font_size=32,
+                color="#eaeaea",
+                line_spacing=1.2,
+            ),
+            speaker_avatar=AvatarRegion(
+                x=54,
+                y=513,
+                diameter=114,
+            ),
+            speaker_name=TextRegion(
+                x=194,
+                y=552,
+                width=545,
+                height=35,
+                font_file="fonts/PlusJakartaSans-VariableFont_wght.ttf",
+                font_size=28,
+                min_font_size=18,
+                color="#eaeaea",
+                weight=500,
+            ),
+            schedule_info=TextRegion(
+                x=236,
+                y=681,
+                width=400,
+                height=38,
+                font_file="fonts/PlusJakartaSans-VariableFont_wght.ttf",
+                font_size=30.5,
+                min_font_size=18,
+                color="#eaeaea",
+                weight=800,
+            ),
         ),
-        session_title=TextRegion(
-            x=54,
-            y=244,
-            width=600,
-            height=220,
-            font_file="fonts/RobotoSlab-VariableFont_wght.ttf",
-            font_size=53.0,
-            min_font_size=32,
-            color="#eaeaea",
-            line_spacing=1.2,
+        "og": PanelLayout(
+            name="left",
+            width=1200,
+            height=1200,
+            track_name=TextRegion(
+                x=108,
+                y=206,
+                width=400,
+                height=38,
+                font_file="fonts/RobotoSlab-VariableFont_wght.ttf",
+                font_size=31.0,
+                color="#b280ff",
+            ),
+            session_title=TextRegion(
+                x=108,
+                y=292,
+                width=714,
+                height=220,
+                font_file="fonts/RobotoSlab-VariableFont_wght.ttf",
+                font_size=53.0,
+                min_font_size=32,
+                color="#eaeaea",
+                line_spacing=1.2,
+            ),
+            speaker_avatar=AvatarRegion(
+                x=108,
+                y=569,
+                diameter=114,
+            ),
+            speaker_name=TextRegion(
+                x=111,
+                y=699,
+                width=352,
+                height=35,
+                font_file="fonts/PlusJakartaSans-VariableFont_wght.ttf",
+                font_size=28,
+                min_font_size=18,
+                color="#eaeaea",
+                weight=500,
+                align="left",
+            ),
+            schedule_info=TextRegion(
+                x=111,
+                y=843,
+                width=600,
+                height=38,
+                font_file="fonts/PlusJakartaSans-VariableFont_wght.ttf",
+                font_size=30.5,
+                min_font_size=18,
+                color="#eaeaea",
+                weight=800,
+                align="left",
+            ),
         ),
-        speaker_avatar=AvatarRegion(
-            x=54,
-            y=513,
-            diameter=114,
+    },
+    "right": {
+        "social": PanelLayout(
+            name="right",
+            width=1280,
+            height=780,
+            track_name=TextRegion(
+                x=616,
+                y=183,
+                width=321,
+                height=38,
+                font_file="fonts/RobotoSlab-VariableFont_wght.ttf",
+                font_size=31.0,
+                color="#b280ff",
+            ),
+            session_title=TextRegion(
+                x=609,
+                y=240,
+                width=625,
+                height=173,
+                font_file="fonts/RobotoSlab-VariableFont_wght.ttf",
+                font_size=53.0,
+                min_font_size=32,
+                color="#eaeaea",
+                line_spacing=1.2,
+            ),
+            speaker_avatar=AvatarRegion(
+                x=609,
+                y=513,
+                diameter=114,
+            ),
+            speaker_name=TextRegion(
+                x=749,
+                y=552,
+                width=490,
+                height=35,
+                font_file="fonts/PlusJakartaSans-VariableFont_wght.ttf",
+                font_size=28,
+                min_font_size=18,
+                color="#eaeaea",
+                weight=500,
+            ),
+            schedule_info=TextRegion(
+                x=788,
+                y=681,
+                width=450,
+                height=38,
+                font_file="fonts/PlusJakartaSans-VariableFont_wght.ttf",
+                font_size=30.5,
+                min_font_size=18,
+                color="#eaeaea",
+                weight=800,
+            ),
         ),
-        speaker_name=TextRegion(
-            x=194,
-            y=552,
-            width=545,
-            height=35,
-            font_file="fonts/PlusJakartaSans-VariableFont_wght.ttf",
-            font_size=28,
-            min_font_size=18,
-            color="#eaeaea",
-            weight=500,
+        "og": PanelLayout(
+            name="right",
+            width=1200,
+            height=1200,
+            track_name=TextRegion(
+                x=339,
+                y=210,
+                width=400,
+                height=38,
+                font_file="fonts/RobotoSlab-VariableFont_wght.ttf",
+                font_size=31.0,
+                color="#b280ff",
+            ),
+            session_title=TextRegion(
+                x=339,
+                y=292,
+                width=637,
+                height=220,
+                font_file="fonts/RobotoSlab-VariableFont_wght.ttf",
+                font_size=53.0,
+                min_font_size=32,
+                color="#eaeaea",
+                line_spacing=1.2,
+            ),
+            speaker_avatar=AvatarRegion(
+                x=858,
+                y=569,
+                diameter=114,
+            ),
+            speaker_name=TextRegion(
+                x=592,
+                y=699,
+                width=381,
+                height=35,
+                font_file="fonts/PlusJakartaSans-VariableFont_wght.ttf",
+                font_size=28,
+                min_font_size=18,
+                color="#eaeaea",
+                weight=500,
+                align="right",
+            ),
+            schedule_info=TextRegion(
+                x=741,
+                y=843,
+                width=231,
+                height=38,
+                font_file="fonts/PlusJakartaSans-VariableFont_wght.ttf",
+                font_size=30.5,
+                min_font_size=18,
+                color="#eaeaea",
+                weight=800,
+                align="right",
+            ),
         ),
-        schedule_info=TextRegion(
-            x=236,
-            y=681,
-            width=400,
-            height=38,
-            font_file="fonts/PlusJakartaSans-VariableFont_wght.ttf",
-            font_size=30.5,
-            min_font_size=18,
-            color="#eaeaea",
-            weight=800,
-        ),
-    ),
-    "right": PanelLayout(
-        name="right",
-        width=1280,
-        height=780,
-        track_name=TextRegion(
-            x=616,
-            y=183,
-            width=321,
-            height=38,
-            font_file="fonts/RobotoSlab-VariableFont_wght.ttf",
-            font_size=31.0,
-            color="#b280ff",
-        ),
-        session_title=TextRegion(
-            x=609,
-            y=240,
-            width=625,
-            height=173,
-            font_file="fonts/RobotoSlab-VariableFont_wght.ttf",
-            font_size=53.0,
-            min_font_size=32,
-            color="#eaeaea",
-            line_spacing=1.2,
-        ),
-        speaker_avatar=AvatarRegion(
-            x=609,
-            y=513,
-            diameter=114,
-        ),
-        speaker_name=TextRegion(
-            x=749,
-            y=552,
-            width=490,
-            height=35,
-            font_file="fonts/PlusJakartaSans-VariableFont_wght.ttf",
-            font_size=28,
-            min_font_size=18,
-            color="#eaeaea",
-            weight=500,
-        ),
-        schedule_info=TextRegion(
-            x=788,
-            y=681,
-            width=450,
-            height=38,
-            font_file="fonts/PlusJakartaSans-VariableFont_wght.ttf",
-            font_size=30.5,
-            min_font_size=18,
-            color="#eaeaea",
-            weight=800,
-        ),
-    ),
+    },
 }
 
 THEMES: dict[str, Theme] = {
@@ -278,11 +391,13 @@ TRACK_ACCENTS: dict[str | None, str] = {
 }
 
 
-def get_panel_layout(name: str) -> PanelLayout:
-    """Get a panel layout by name."""
+def get_panel_layout(name: str, output_type: str = "social") -> PanelLayout:
+    """Get a panel layout by name and output type."""
     if name not in PANEL_LAYOUTS:
         raise ValueError(f"Unknown layout: {name}. Available: {list(PANEL_LAYOUTS.keys())}")
-    return PANEL_LAYOUTS[name]
+    if output_type not in PANEL_LAYOUTS[name]:
+        raise ValueError(f"Unknown output type: {output_type} for layout {name}. Available: {list(PANEL_LAYOUTS[name].keys())}")
+    return PANEL_LAYOUTS[name][output_type]
 
 
 def get_theme(name: str) -> Theme:
@@ -292,11 +407,14 @@ def get_theme(name: str) -> Theme:
     return THEMES[name]
 
 
-def resolve_background_path(theme_name: str, layout_name: str) -> str:
-    """Returns e.g. 'layouts/accent_coral_left.png'. Raises ValueError if combo invalid."""
+def resolve_background_path(theme_name: str, layout_name: str, output_type: str = "social") -> str:
+    """Returns e.g. 'layouts/social/accent_coral_left.png' or 'layouts/og/accent_coral_left.png'.
+
+    Raises ValueError if combo invalid.
+    """
     if (theme_name, layout_name) not in VALID_COMBINATIONS:
         raise ValueError(f"No background for theme={theme_name!r}, layout={layout_name!r}")
-    return f"layouts/{theme_name}_{layout_name}.png"
+    return f"layouts/{output_type}/{theme_name}_{layout_name}.png"
 
 
 def resolve_theme_and_layout(

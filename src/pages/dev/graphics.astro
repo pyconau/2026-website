@@ -12,7 +12,6 @@ const sessionGraphics = sessions
     track: s.data.track,
     graphicsLayout: s.data.graphicsLayout,
     theme: s.data.theme,
-    path: `/graphics/sessions/${s.data.code}-social.png`,
   }))
   .sort((a, b) => a.code.localeCompare(b.code));
 
@@ -35,23 +34,37 @@ const tracks = [
         <h1 class="text-4xl font-bold text-white">
           Session Graphics Gallery
         </h1>
-        <div>
-          <label for="track-filter" class="block text-sm font-medium text-gray-300 mb-2">
-            Filter by track:
-          </label>
-          <select
-            id="track-filter"
-            class="bg-gray-800 text-white border border-gray-700 rounded px-3 py-2 text-sm"
-          >
-            <option value="">All Tracks ({sessionGraphics.length})</option>
-            {
-              tracks.map((track) => {
-                const trackValue = track.slug ?? "main";
-                const count = sessionGraphics.filter((g) => (g.track ?? "main") === trackValue).length;
-                return <option value={trackValue}>{track.label} ({count})</option>;
-              })
-            }
-          </select>
+        <div class="flex gap-4">
+          <div>
+            <label for="track-filter" class="block text-sm font-medium text-gray-300 mb-2">
+              Filter by track:
+            </label>
+            <select
+              id="track-filter"
+              class="bg-gray-800 text-white border border-gray-700 rounded px-3 py-2 text-sm"
+            >
+              <option value="">All Tracks ({sessionGraphics.length})</option>
+              {
+                tracks.map((track) => {
+                  const trackValue = track.slug ?? "main";
+                  const count = sessionGraphics.filter((g) => (g.track ?? "main") === trackValue).length;
+                  return <option value={trackValue}>{track.label} ({count})</option>;
+                })
+              }
+            </select>
+          </div>
+          <div>
+            <label for="output-type" class="block text-sm font-medium text-gray-300 mb-2">
+              Output type:
+            </label>
+            <select
+              id="output-type"
+              class="bg-gray-800 text-white border border-gray-700 rounded px-3 py-2 text-sm"
+            >
+              <option value="social">Social (1280×780)</option>
+              <option value="og">Open Graph (1080×1080)</option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -61,12 +74,12 @@ const tracks = [
             <div
               class="graphic-card cursor-pointer overflow-hidden rounded-lg bg-gray-800 shadow-lg transition-transform hover:scale-105"
               data-track={graphic.track ?? "main"}
-              onclick={`document.getElementById('modal').style.display = 'flex'; document.getElementById('modal-img').src = '${graphic.path}'; document.getElementById('modal-title').textContent = '${graphic.code}: ${graphic.title}';`}
+              data-code={graphic.code}
+              data-title={graphic.title}
             >
               <img
-                src={graphic.path}
+                class="card-img h-auto w-full"
                 alt={graphic.title}
-                class="h-auto w-full"
                 loading="lazy"
               />
               <div class="p-3">
@@ -84,16 +97,16 @@ const tracks = [
     <!-- Modal -->
     <div
       id="modal"
-      class="fixed inset-0 hidden flex-col items-center justify-center bg-black/80 p-4"
-      onclick="if(event.target === this) this.style.display = 'none'"
+      class="fixed inset-0 hidden flex items-center justify-center bg-black/80 p-4"
+      onclick="if(event.target === this) this.classList.add('hidden')"
     >
       <button
         class="absolute top-4 right-4 text-white text-2xl hover:text-gray-300"
-        onclick="document.getElementById('modal').style.display = 'none'"
+        onclick="document.getElementById('modal').classList.add('hidden')"
       >
         ✕
       </button>
-      <div class="max-h-[90vh] max-w-4xl overflow-auto rounded-lg bg-gray-900">
+      <div class="relative max-h-[90vh] max-w-4xl overflow-auto rounded-lg bg-gray-900">
         <img id="modal-img" src="" alt="" class="w-full" />
         <div class="p-4">
           <p id="modal-title" class="text-lg text-white"></p>
@@ -104,29 +117,81 @@ const tracks = [
 </Base>
 
 <script>
-  // Track filter functionality
-  const filterSelect = document.getElementById("track-filter") as HTMLSelectElement;
-  const gallery = document.getElementById("gallery");
+  function getImagePath(code: string, outputType: string): string {
+    return `/graphics/sessions/${code}-${outputType}.png`;
+  }
 
-  if (filterSelect && gallery) {
+  function updateAllImages(outputType: string): void {
+    const gallery = document.getElementById("gallery");
+    if (!gallery) return;
+
     const cards = gallery.querySelectorAll(".graphic-card");
-
-    filterSelect.addEventListener("change", (e) => {
-      const selectedTrack = (e.target as HTMLSelectElement).value;
-
-      cards.forEach((card) => {
-        const htmlCard = card as HTMLElement;
-        const cardTrack = htmlCard.dataset.track || "main";
-        const matches = selectedTrack === "" || cardTrack === selectedTrack;
-
-        htmlCard.style.display = matches ? "" : "none";
-      });
+    cards.forEach((card) => {
+      const htmlCard = card as HTMLElement;
+      const code = htmlCard.dataset.code;
+      const img = htmlCard.querySelector(".card-img") as HTMLImageElement;
+      if (code && img) {
+        img.src = getImagePath(code, outputType);
+      }
     });
   }
-</script>
 
-<style>
-  #modal {
-    display: none;
+  function openModal(code: string, title: string): void {
+    const modal = document.getElementById("modal") as HTMLElement;
+    const modalImg = document.getElementById("modal-img") as HTMLImageElement;
+    const modalTitle = document.getElementById("modal-title") as HTMLElement;
+    const outputTypeSelect = document.getElementById("output-type") as HTMLSelectElement;
+
+    if (modal && modalImg && modalTitle && outputTypeSelect) {
+      const outputType = outputTypeSelect.value;
+      modal.classList.remove("hidden");
+      modalImg.src = getImagePath(code, outputType);
+      modalTitle.textContent = `${code}: ${title}`;
+    }
   }
-</style>
+
+  // Track filter functionality
+  const filterSelect = document.getElementById("track-filter") as HTMLSelectElement;
+  const outputTypeSelect = document.getElementById("output-type") as HTMLSelectElement;
+  const gallery = document.getElementById("gallery");
+
+  if (gallery) {
+    const cards = gallery.querySelectorAll(".graphic-card");
+
+    // Initial load: set all image sources
+    updateAllImages("social");
+
+    // Add click handlers to cards
+    cards.forEach((card) => {
+      card.addEventListener("click", () => {
+        const htmlCard = card as HTMLElement;
+        const code = htmlCard.dataset.code;
+        const title = htmlCard.dataset.title;
+        if (code && title) {
+          openModal(code, title);
+        }
+      });
+    });
+
+    if (filterSelect) {
+      filterSelect.addEventListener("change", (e) => {
+        const selectedTrack = (e.target as HTMLSelectElement).value;
+
+        cards.forEach((card) => {
+          const htmlCard = card as HTMLElement;
+          const cardTrack = htmlCard.dataset.track || "main";
+          const matches = selectedTrack === "" || cardTrack === selectedTrack;
+
+          htmlCard.style.display = matches ? "" : "none";
+        });
+      });
+    }
+
+    if (outputTypeSelect) {
+      outputTypeSelect.addEventListener("change", (e) => {
+        const selectedType = (e.target as HTMLSelectElement).value;
+        updateAllImages(selectedType);
+      });
+    }
+  }
+</script>

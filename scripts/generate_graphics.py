@@ -263,8 +263,151 @@ def draw_text(
 
     y = region.y
     for line in lines:
-        draw.text((region.x, y), line, font=font, fill=color)
+        # Handle right-aligned text
+        if hasattr(region, 'align') and region.align == "right":
+            bbox = draw.textbbox((0, 0), line, font=font)
+            line_width = bbox[2] - bbox[0]
+            x = region.x + region.width - line_width
+        else:
+            x = region.x
+        draw.text((x, y), line, font=font, fill=color)
         y += line_height
+
+
+def _paste_speakers_og(
+    img: Image.Image,
+    num_speakers: int,
+    speaker_codes: list[str],
+    speaker_objects: list[dict],
+    panel_layout,
+    layout_name: str,
+) -> None:
+    """Paste speaker avatars for OG layouts using fixed bounding boxes (no offsets)."""
+    if num_speakers == 0:
+        return
+
+    base = panel_layout.speaker_avatar
+    d = base.diameter
+
+    # OG right: avatar right edge aligns with speaker name text box right edge, grows left
+    if layout_name == "right":
+        # Speaker name right edge = x + width
+        text_box_right = panel_layout.speaker_name.x + panel_layout.speaker_name.width
+        # First avatar's right edge at text_box_right, subsequent avatars extend leftward
+        avatar_x_positions = [text_box_right - d - i * (d + AVATAR_GAP) for i in range(num_speakers)]
+    else:
+        # OG left: avatar grows rightward (standard)
+        avatar_x_positions = [base.x + i * (d + AVATAR_GAP) for i in range(num_speakers)]
+
+    for i in range(num_speakers):
+        code = speaker_codes[i]
+        speaker = speaker_objects[i]
+        if speaker.get("hasAvatar"):
+            avatar_path = get_project_root() / "public/images/people" / f"{code}.jpg"
+        else:
+            avatar_path = get_project_root() / "public/images/avatar-default.png"
+
+        av_region = AvatarRegion(
+            x=avatar_x_positions[i],
+            y=base.y,
+            diameter=d,
+        )
+        paste_avatar(img, str(avatar_path), av_region)
+
+
+def _paste_speakers_social(
+    img: Image.Image,
+    num_speakers: int,
+    speaker_codes: list[str],
+    speaker_objects: list[dict],
+    panel_layout,
+) -> None:
+    """Paste speaker avatars for social layouts with dynamic offsets for multi-speaker."""
+    if num_speakers == 0:
+        return
+
+    if num_speakers == 1:
+        # Single speaker: use fixed layout
+        if speaker_codes:
+            first_speaker = speaker_objects[0]
+            if first_speaker.get("hasAvatar"):
+                avatar_path = get_project_root() / "public/images/people" / f"{speaker_codes[0]}.jpg"
+            else:
+                avatar_path = get_project_root() / "public/images/avatar-default.png"
+            paste_avatar(img, str(avatar_path), panel_layout.speaker_avatar)
+    else:
+        # Multi-speaker: compute avatar positions
+        base = panel_layout.speaker_avatar
+        d = base.diameter
+
+        avatar_x_positions = [base.x + i * (d + AVATAR_GAP) for i in range(num_speakers)]
+
+        for i in range(num_speakers):
+            code = speaker_codes[i]
+            speaker = speaker_objects[i]
+            if speaker.get("hasAvatar"):
+                avatar_path = get_project_root() / "public/images/people" / f"{code}.jpg"
+            else:
+                avatar_path = get_project_root() / "public/images/avatar-default.png"
+
+            av_region = AvatarRegion(
+                x=avatar_x_positions[i],
+                y=base.y,
+                diameter=d,
+            )
+            paste_avatar(img, str(avatar_path), av_region)
+
+
+def _compute_speaker_name_region_social(
+    panel_layout, speaker_text: str, num_speakers: int
+) -> TextRegion:
+    """Compute dynamic speaker name region for social layouts (handles multi-speaker offsets)."""
+    if num_speakers <= 1:
+        return panel_layout.speaker_name
+
+    # Multi-speaker: compute text region with dynamic offset
+    base = panel_layout.speaker_avatar
+    d = base.diameter
+    group_right = base.x + num_speakers * d + (num_speakers - 1) * AVATAR_GAP
+    group_mid_y = base.y + d // 2
+
+    text_right = panel_layout.speaker_name.x + panel_layout.speaker_name.width
+    text_gap = 26 if num_speakers == 2 else 16
+    text_x = group_right + text_gap
+    text_width = text_right - text_x
+
+    font_size = panel_layout.speaker_name.font_size if num_speakers == 2 else 22
+
+    # Measure rendered text to compute vertical centering
+    measure_draw = ImageDraw.Draw(Image.new("RGB", (1, 1)))
+    fitted_font = shrink_font_to_fit(
+        speaker_text,
+        measure_draw,
+        str(Path(__file__).parent / panel_layout.speaker_name.font_file),
+        font_size,
+        panel_layout.speaker_name.min_font_size,
+        text_width,
+        d,
+        weight=panel_layout.speaker_name.weight,
+    )
+    lines = wrap_text(speaker_text, measure_draw, fitted_font, text_width)
+    line_h = get_text_line_height(measure_draw, lines[0], fitted_font)
+    total_text_h = line_h * len(lines)
+    text_y = group_mid_y - total_text_h // 2
+
+    return TextRegion(
+        x=text_x,
+        y=text_y,
+        width=text_width,
+        height=d,
+        font_file=panel_layout.speaker_name.font_file,
+        font_size=font_size,
+        min_font_size=panel_layout.speaker_name.min_font_size,
+        color=panel_layout.speaker_name.color,
+        line_spacing=panel_layout.speaker_name.line_spacing,
+        weight=panel_layout.speaker_name.weight,
+        align=panel_layout.speaker_name.align,
+    )
 
 
 def generate_graphic(
@@ -273,13 +416,16 @@ def generate_graphic(
     theme_name: str | None = None,
     font_size_overrides: dict = None,
 ) -> Path:
-    """Generate PNG for a session.
+    """Generate PNG for a session (both social and og variants).
 
     Args:
         session_code: Session identifier
         panel_layout_name: Explicit layout override ("left" or "right")
         theme_name: Explicit theme override
         font_size_overrides: Dict mapping region names to font sizes to override
+
+    Returns:
+        Path to the first output (social); og is generated as well
     """
     # Load data
     session, session_file = load_session_data(session_code)
@@ -293,9 +439,63 @@ def generate_graphic(
         layout_override=panel_layout_name or session.get("graphicsLayout"),
     )
 
-    # Load config objects
-    panel_layout = get_panel_layout(resolved_layout_name)
     theme = get_theme(resolved_theme_name)
+
+    # Check cache for both output types; only generate if any missing or overridden
+    output_types = ["social", "og"]
+    output_paths = [
+        get_project_root() / "public/graphics/sessions" / f"{session_code}-{ot}.png"
+        for ot in output_types
+    ]
+
+    all_cached = (
+        not font_size_overrides
+        and all(
+            p.exists() and p.stat().st_mtime > session_file.stat().st_mtime
+            for p in output_paths
+        )
+    )
+
+    if all_cached:
+        print(f"  {session_code}: cached")
+        return output_paths[0]
+
+    print(f"  {session_code}: generating...")
+
+    # Generate both output types
+    for output_type in output_types:
+        _generate_graphic_for_output_type(
+            session_code,
+            session,
+            session_file,
+            resolved_theme_name,
+            resolved_layout_name,
+            theme,
+            output_type,
+            font_size_overrides,
+        )
+
+    # Write metadata after both are generated
+    write_graphics_metadata(session_file, resolved_layout_name, resolved_theme_name)
+
+    return output_paths[0]
+
+
+def _generate_graphic_for_output_type(
+    session_code: str,
+    session: dict,
+    session_file: Path,
+    resolved_theme_name: str,
+    resolved_layout_name: str,
+    theme,
+    output_type: str,
+    font_size_overrides: dict | None,
+) -> None:
+    """Generate PNG for a specific output type (social or og)."""
+    session_track = session.get("track")
+
+    # Load config for this output type
+    panel_layout = get_panel_layout(resolved_layout_name, output_type)
 
     # Apply font size overrides if provided
     if font_size_overrides:
@@ -311,19 +511,8 @@ def generate_graphic(
     output_path = (
         get_project_root()
         / "public/graphics/sessions"
-        / f"{session_code}-social.png"
+        / f"{session_code}-{output_type}.png"
     )
-
-    # Cache check: skip if output is newer than session file (unless overrides provided)
-    if (
-        not font_size_overrides
-        and output_path.exists()
-        and output_path.stat().st_mtime > session_file.stat().st_mtime
-    ):
-        print(f"  {session_code}: cached")
-        return output_path
-
-    print(f"  {session_code}: generating...")
 
     # Load speaker data
     speaker_codes = session.get("speakers", [])
@@ -331,7 +520,7 @@ def generate_graphic(
 
     # Load background image
     bg_path = Path(__file__).parent / resolve_background_path(
-        resolved_theme_name, resolved_layout_name
+        resolved_theme_name, resolved_layout_name, output_type
     )
     img = Image.open(bg_path).convert("RGB")
 
@@ -339,87 +528,20 @@ def generate_graphic(
     speaker_text = format_speakers(speaker_objects)
     num_speakers = min(len(speaker_codes), 3)
 
-    if num_speakers == 0:
-        # No speakers: use existing layout with empty speaker name
-        speaker_name_region = panel_layout.speaker_name
-    elif num_speakers == 1:
-        # Single speaker: use existing layout
-        if speaker_codes:
-            first_speaker = speaker_objects[0]
-            if first_speaker.get("hasAvatar"):
-                avatar_path = (
-                    get_project_root() / "public/images/people" / f"{speaker_codes[0]}.jpg"
-                )
-            else:
-                avatar_path = get_project_root() / "public/images/avatar-default.png"
-            paste_avatar(img, str(avatar_path), panel_layout.speaker_avatar)
-
+    # OG layouts use fixed bounding boxes; social layouts calculate offsets for multi-speaker
+    if output_type == "og":
+        # OG: use fixed layout for all speaker counts
+        _paste_speakers_og(
+            img, num_speakers, speaker_codes, speaker_objects, panel_layout, resolved_layout_name
+        )
         speaker_name_region = panel_layout.speaker_name
     else:
-        # Multi-speaker: compute avatar and text positions
-        base = panel_layout.speaker_avatar
-        d = base.diameter
-
-        # Paste each avatar
-        for i in range(num_speakers):
-            code = speaker_codes[i]
-            speaker = speaker_objects[i]
-            if speaker.get("hasAvatar"):
-                avatar_path = get_project_root() / "public/images/people" / f"{code}.jpg"
-            else:
-                avatar_path = get_project_root() / "public/images/avatar-default.png"
-
-            av_region = AvatarRegion(
-                x=base.x + i * (d + AVATAR_GAP),
-                y=base.y,
-                diameter=d,
-            )
-            paste_avatar(img, str(avatar_path), av_region)
-
-        # Compute text region geometry
-        group_right = base.x + num_speakers * d + (num_speakers - 1) * AVATAR_GAP
-        group_mid_y = base.y + d // 2
-
-        # Text region: right edge anchored at same position as 1-speaker layout
-        text_right = panel_layout.speaker_name.x + panel_layout.speaker_name.width
-        # Gap between avatar group and text: 26px for 2 speakers, 16px for 3 speakers
-        text_gap = 26 if num_speakers == 2 else 16
-        text_x = group_right + text_gap
-        text_width = text_right - text_x
-
-        # Reduce font size for 3 speakers (narrower column)
-        font_size = (
-            panel_layout.speaker_name.font_size if num_speakers == 2 else 22
+        # Social: calculate dynamic offsets for multi-speaker
+        _paste_speakers_social(
+            img, num_speakers, speaker_codes, speaker_objects, panel_layout
         )
-
-        # Measure rendered text to compute vertical centering
-        measure_draw = ImageDraw.Draw(img)
-        fitted_font = shrink_font_to_fit(
-            speaker_text,
-            measure_draw,
-            str(Path(__file__).parent / panel_layout.speaker_name.font_file),
-            font_size,
-            panel_layout.speaker_name.min_font_size,
-            text_width,
-            d,
-            weight=panel_layout.speaker_name.weight,
-        )
-        lines = wrap_text(speaker_text, measure_draw, fitted_font, text_width)
-        line_h = get_text_line_height(measure_draw, lines[0], fitted_font)
-        total_text_h = line_h * len(lines)
-        text_y = group_mid_y - total_text_h // 2
-
-        speaker_name_region = TextRegion(
-            x=text_x,
-            y=text_y,
-            width=text_width,
-            height=d,
-            font_file=panel_layout.speaker_name.font_file,
-            font_size=font_size,
-            min_font_size=panel_layout.speaker_name.min_font_size,
-            color=panel_layout.speaker_name.color,
-            line_spacing=panel_layout.speaker_name.line_spacing,
-            weight=panel_layout.speaker_name.weight,
+        speaker_name_region = _compute_speaker_name_region_social(
+            panel_layout, speaker_text, num_speakers
         )
 
     # Draw text regions
@@ -479,11 +601,6 @@ def generate_graphic(
     # Save
     output_path.parent.mkdir(parents=True, exist_ok=True)
     img.save(output_path, "PNG")
-
-    # Write-back resolved graphicsLayout + theme to session frontmatter
-    write_graphics_metadata(session_file, resolved_layout_name, resolved_theme_name)
-
-    return output_path
 
 
 def write_graphics_metadata(
