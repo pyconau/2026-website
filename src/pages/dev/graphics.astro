@@ -99,11 +99,11 @@ const tracks = [
     <div
       id="modal"
       class="fixed inset-0 hidden flex-col items-center justify-center bg-black/80 p-4"
-      onclick="if(event.target === this) this.style.display = 'none'"
+      onclick="if(event.target === this) this.classList.add('hidden')"
     >
       <button
         class="absolute top-4 right-4 text-white text-2xl hover:text-gray-300"
-        onclick="document.getElementById('modal').style.display = 'none'"
+        onclick="document.getElementById('modal').classList.add('hidden')"
       >
         ✕
       </button>
@@ -145,7 +145,7 @@ const tracks = [
 
     if (modal && modalImg && modalTitle && outputTypeSelect) {
       const outputType = outputTypeSelect.value;
-      modal.style.display = "flex";
+      modal.classList.remove("hidden");
       modalImg.src = getImagePath(code, outputType);
       modalTitle.textContent = `${code}: ${title}`;
     }
@@ -184,9 +184,3 @@ const tracks = [
     }
   }
 </script>
-
-<style>
-  #modal {
-    display: none;
-  }
-</style>
