@@ -1,13 +1,14 @@
 ---
 title: Cryptic crosswords, Code golf and Learning the rules of a language
 code: VSVXTJ
-start: '2026-08-27T15:10:00+10:00'
-end: '2026-08-27T15:40:00+10:00'
-room: Ballroom 2
+start: '2026-08-29T14:35:00+10:00'
+end: '2026-08-29T15:05:00+10:00'
+room: Ballroom 3
 track:
 type: talk
 speakers:
 - MDFERU
+layout: layout_2
 trackName: Main Conference
 graphicsLayout: left
 theme: accent_lime

@@ -8,6 +8,7 @@ track:
 type: talk
 speakers:
 - GMGTSH
+layout: layout_2
 trackName: Main Conference
 graphicsLayout: left
 theme: accent_violet

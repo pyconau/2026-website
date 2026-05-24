@@ -8,6 +8,7 @@ track:
 type: talk
 speakers:
 - ZJPT93
+layout: layout_2
 trackName: Main Conference
 graphicsLayout: right
 theme: stone_emerald

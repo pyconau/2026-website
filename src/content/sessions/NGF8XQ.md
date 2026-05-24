@@ -8,6 +8,7 @@ track:
 type: talk
 speakers:
 - N8RLSM
+layout: layout_2
 trackName: Main Conference
 graphicsLayout: left
 theme: charcoal

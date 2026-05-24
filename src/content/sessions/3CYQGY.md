@@ -1,16 +1,17 @@
 ---
 title: An Intro to Glue Work
 code: 3CYQGY
-start: '2026-08-29T14:35:00+10:00'
-end: '2026-08-29T15:05:00+10:00'
-room: Ballroom 3
+start: '2026-08-27T14:00:00+10:00'
+end: '2026-08-27T14:30:00+10:00'
+room: Ballroom 2
 track:
 type: talk
 speakers:
 - U7H7LA
+layout: layout_2
 trackName: Main Conference
-graphicsLayout: right
-theme: stone_emerald
+graphicsLayout: left
+theme: accent_coral
 ---
 
 Every team has at least one go-to person that gets others out of sticky situations!

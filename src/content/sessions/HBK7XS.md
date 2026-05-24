@@ -8,6 +8,7 @@ track: education
 type: talk
 speakers:
 - XCQ89F
+layout: layout_2
 trackName: Education
 graphicsLayout: left
 theme: accent_lime

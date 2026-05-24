@@ -8,6 +8,7 @@ track: education
 type: talk
 speakers:
 - YZGZ9W
+layout: layout_2
 trackName: Education
 graphicsLayout: right
 theme: accent_lime

@@ -1,13 +1,14 @@
 ---
 title: 'From COBOL to Copilots: Why “No-Code” Never Kills the Coder'
 code: K3B9LZ
-start: '2026-08-28T14:35:00+10:00'
-end: '2026-08-28T15:05:00+10:00'
-room: Ballroom 2
+start: '2026-08-28T16:10:00+10:00'
+end: '2026-08-28T16:40:00+10:00'
+room: Ballroom 1
 track:
 type: talk
 speakers:
 - GX9AZX
+layout: layout_2
 trackName: Main Conference
 graphicsLayout: right
 theme: accent_emerald

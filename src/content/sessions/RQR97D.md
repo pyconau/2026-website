@@ -9,6 +9,7 @@ type: talk
 speakers:
 - 3US9G9
 - TJVGUM
+layout: layout_2
 trackName: Cybersecurity
 graphicsLayout: left
 theme: accent_lavender

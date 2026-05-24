@@ -9,6 +9,7 @@ track: education
 type: talk
 speakers:
 - YZDUTX
+layout: layout_2
 trackName: Education
 graphicsLayout: right
 theme: accent_lime

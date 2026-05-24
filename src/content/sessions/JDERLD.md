@@ -8,6 +8,7 @@ track: data-and-ai
 type: talk
 speakers:
 - SNK8RV
+layout: layout_2
 trackName: Data & AI
 graphicsLayout: left
 theme: accent_lemon

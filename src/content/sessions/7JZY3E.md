@@ -8,6 +8,7 @@ track: platform-engineering
 type: talk
 speakers:
 - WGSFFL
+layout: layout_2
 trackName: Platform Engineering
 graphicsLayout: left
 theme: accent_coral

@@ -8,6 +8,7 @@ track: cybersecurity
 type: talk
 speakers:
 - KND8AG
+layout: layout_2
 trackName: Cybersecurity
 graphicsLayout: left
 theme: accent_lavender

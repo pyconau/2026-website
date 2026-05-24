@@ -10,6 +10,7 @@ speakers:
 - PB9BKD
 - H3PQDH
 - SLEHXC
+layout: layout_2
 graphicsLayout: left
 theme: accent_lemon
 ---

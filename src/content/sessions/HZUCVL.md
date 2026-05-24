@@ -1,13 +1,14 @@
 ---
 title: The Virtues of Being Lazy
 code: HZUCVL
-start: '2026-08-29T14:00:00+10:00'
-end: '2026-08-29T14:30:00+10:00'
-room: Ballroom 1
+start: '2026-08-29T11:20:00+10:00'
+end: '2026-08-29T11:50:00+10:00'
+room: Ballroom 3
 track:
 type: talk
 speakers:
 - WD9KCJ
+layout: layout_2
 trackName: Main Conference
 graphicsLayout: right
 theme: charcoal

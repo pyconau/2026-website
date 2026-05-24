@@ -10,6 +10,7 @@ speakers:
 - PB9BKD
 - SLEHXC
 - H3PQDH
+layout: layout_2
 graphicsLayout: left
 theme: accent_coral
 ---

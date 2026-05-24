@@ -1,13 +1,14 @@
 ---
 title: 'Adventures in FastAPI: A Choose-Your-Own PyCon Talk'
 code: XQ8VVL
-start: '2026-08-27T14:00:00+10:00'
-end: '2026-08-27T14:30:00+10:00'
+start: '2026-08-27T15:10:00+10:00'
+end: '2026-08-27T15:40:00+10:00'
 room: Ballroom 2
 track:
 type: talk
 speakers:
 - 3N73EX
+layout: layout_2
 trackName: Main Conference
 graphicsLayout: left
 theme: accent_emerald

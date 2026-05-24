@@ -8,6 +8,7 @@ track: cybersecurity
 type: talk
 speakers:
 - UMB3JY
+layout: layout_2
 trackName: Cybersecurity
 graphicsLayout: right
 theme: accent_lavender

@@ -3,11 +3,12 @@ title: 'From Jupyter Notebook to Eruption: Getting Geohazard Research into Produ
 code: QNHZNS
 start: '2026-08-29T15:10:00+10:00'
 end: '2026-08-29T15:40:00+10:00'
-room: Ballroom 2
+room: Ballroom 1
 track:
 type: talk
 speakers:
 - MJ9KTK
+layout: layout_2
 trackName: Main Conference
 graphicsLayout: right
 theme: accent_lavender

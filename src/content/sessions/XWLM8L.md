@@ -8,6 +8,7 @@ track: data-and-ai
 type: talk
 speakers:
 - ALM8CW
+layout: layout_2
 trackName: Data & AI
 graphicsLayout: left
 theme: charcoal_lemon

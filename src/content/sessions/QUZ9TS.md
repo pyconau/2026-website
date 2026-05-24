@@ -8,6 +8,7 @@ track:
 type: talk
 speakers:
 - 8SQRFW
+layout: layout_2
 trackName: Main Conference
 graphicsLayout: right
 theme: stone_emerald

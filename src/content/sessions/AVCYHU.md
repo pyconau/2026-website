@@ -8,6 +8,7 @@ track:
 type: talk
 speakers:
 - WGQRKJ
+layout: layout_2
 trackName: Main Conference
 graphicsLayout: right
 theme: accent_lemon

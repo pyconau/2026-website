@@ -3,11 +3,12 @@ title: Gerrymandering Australia
 code: ZJET3E
 start: '2026-08-29T14:00:00+10:00'
 end: '2026-08-29T14:30:00+10:00'
-room: Ballroom 2
+room: Ballroom 1
 track:
 type: talk
 speakers:
 - APHKDN
+layout: layout_2
 trackName: Main Conference
 graphicsLayout: left
 theme: accent_emerald

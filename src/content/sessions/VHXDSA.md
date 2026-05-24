@@ -9,6 +9,7 @@ type: talk
 speakers:
 - GLH9FZ
 - 38JMFR
+layout: layout_2
 trackName: Data & AI
 graphicsLayout: left
 theme: accent_lemon

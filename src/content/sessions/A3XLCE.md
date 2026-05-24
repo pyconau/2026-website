@@ -8,6 +8,7 @@ track: research-software-engineering
 type: talk
 speakers:
 - EQJWS9
+layout: layout_2
 trackName: Research Software Engineering
 graphicsLayout: right
 theme: accent_violet

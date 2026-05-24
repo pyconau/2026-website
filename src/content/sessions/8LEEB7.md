@@ -1,13 +1,14 @@
 ---
 title: 'The 20-Year Port: from PhD project to polished professional Python packaging'
 code: 8LEEB7
-start: '2026-08-28T16:10:00+10:00'
-end: '2026-08-28T16:40:00+10:00'
-room: Ballroom 2
+start: '2026-08-28T15:35:00+10:00'
+end: '2026-08-28T16:05:00+10:00'
+room: Ballroom 1
 track:
 type: talk
 speakers:
 - 9YWARS
+layout: layout_2
 trackName: Main Conference
 graphicsLayout: right
 theme: accent_violet

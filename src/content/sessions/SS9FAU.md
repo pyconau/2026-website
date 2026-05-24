@@ -9,6 +9,7 @@ type: talk
 speakers:
 - GQHDVE
 - WD7XBJ
+layout: layout_2
 trackName: Main Conference
 graphicsLayout: right
 theme: accent_emerald

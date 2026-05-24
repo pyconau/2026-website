@@ -3,11 +3,12 @@ title: "From Trauma ICU to InfoSec: A Nurse's Pivot into Cybersecurity"
 code: T3ALAS
 start: '2026-08-28T16:10:00+10:00'
 end: '2026-08-28T16:40:00+10:00'
-room: Ballroom 1
+room: Ballroom 2
 track: cybersecurity
 type: talk
 speakers:
 - B9EPFA
+layout: layout_2
 trackName: Cybersecurity
 graphicsLayout: right
 theme: accent_lavender

@@ -8,6 +8,7 @@ track: devrel
 type: talk
 speakers:
 - UFVRZL
+layout: layout_2
 trackName: DevRel
 graphicsLayout: right
 theme: accent_coral

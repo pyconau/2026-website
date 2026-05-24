@@ -1,13 +1,14 @@
 ---
 title: Just Enough Reliability
 code: V9UCGA
-start: '2026-08-27T14:00:00+10:00'
-end: '2026-08-27T14:30:00+10:00'
+start: '2026-08-27T15:10:00+10:00'
+end: '2026-08-27T15:40:00+10:00'
 room: Ballroom 1
 track: platform-engineering
 type: talk
 speakers:
 - QAG9KH
+layout: layout_2
 trackName: Platform Engineering
 graphicsLayout: right
 theme: accent_coral

@@ -7,6 +7,7 @@ room: Ballroom 3
 track:
 type: plenary
 speakers: []
+layout: layout_2
 graphicsLayout: right
 theme: accent_lavender
 ---

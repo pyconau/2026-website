@@ -8,6 +8,7 @@ track:
 type: talk
 speakers:
 - RJBY8Y
+layout: layout_2
 trackName: Main Conference
 graphicsLayout: left
 theme: accent_lemon

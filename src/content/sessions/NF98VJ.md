@@ -8,6 +8,7 @@ track: research-software-engineering
 type: talk
 speakers:
 - GVHZNZ
+layout: layout_2
 trackName: Research Software Engineering
 graphicsLayout: left
 theme: accent_violet

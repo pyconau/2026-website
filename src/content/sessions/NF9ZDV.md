@@ -8,6 +8,7 @@ track: cybersecurity
 type: talk
 speakers:
 - JF8RCR
+layout: layout_2
 trackName: Cybersecurity
 graphicsLayout: right
 theme: accent_lavender

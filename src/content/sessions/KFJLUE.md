@@ -8,6 +8,7 @@ track: cybersecurity
 type: talk
 speakers:
 - PAU3DM
+layout: layout_2
 trackName: Cybersecurity
 graphicsLayout: right
 theme: accent_lavender

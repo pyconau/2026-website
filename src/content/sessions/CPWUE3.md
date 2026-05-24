@@ -8,6 +8,7 @@ track:
 type: talk
 speakers:
 - GC3M8E
+layout: layout_2
 trackName: Main Conference
 graphicsLayout: left
 theme: accent_lime

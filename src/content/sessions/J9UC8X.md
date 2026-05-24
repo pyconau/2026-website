@@ -8,6 +8,7 @@ track: education
 type: talk
 speakers:
 - JSXAPB
+layout: layout_2
 trackName: Education
 graphicsLayout: right
 theme: accent_lime

@@ -1,13 +1,14 @@
 ---
 title: Is storing files in Slack emojis a bad idea? Maybe. Let’s do it anyway!
 code: Q7LCGQ
-start: '2026-08-29T11:20:00+10:00'
-end: '2026-08-29T11:50:00+10:00'
+start: '2026-08-29T11:55:00+10:00'
+end: '2026-08-29T12:25:00+10:00'
 room: Ballroom 3
 track:
 type: talk
 speakers:
 - AENJDR
+layout: layout_2
 trackName: Main Conference
 graphicsLayout: left
 theme: accent_lime

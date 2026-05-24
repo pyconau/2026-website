@@ -1,13 +1,14 @@
 ---
 title: What Happened in Production?! Instrumenting with OpenTelemetry
 code: 7GHUBT
-start: '2026-08-27T11:55:00+10:00'
-end: '2026-08-27T12:25:00+10:00'
+start: '2026-08-27T14:35:00+10:00'
+end: '2026-08-27T15:05:00+10:00'
 room: Ballroom 1
 track: platform-engineering
 type: talk
 speakers:
 - 9MPTPG
+layout: layout_2
 trackName: Platform Engineering
 graphicsLayout: right
 theme: accent_coral

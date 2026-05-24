@@ -9,6 +9,7 @@ track:
 type: talk
 speakers:
 - K8YDBG
+layout: layout_2
 trackName: Main Conference
 graphicsLayout: right
 theme: accent_coral

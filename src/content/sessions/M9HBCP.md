@@ -8,6 +8,7 @@ track: education
 type: talk
 speakers:
 - NWBHL9
+layout: layout_2
 trackName: Education
 graphicsLayout: right
 theme: accent_lime

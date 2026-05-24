@@ -1,13 +1,14 @@
 ---
 title: Why should I write software well?
 code: JK7XEF
-start: '2026-08-28T11:55:00+10:00'
-end: '2026-08-28T12:25:00+10:00'
+start: '2026-08-28T14:35:00+10:00'
+end: '2026-08-28T15:05:00+10:00'
 room: Ballroom 2
 track:
 type: talk
 speakers:
 - UKAHFT
+layout: layout_2
 trackName: Main Conference
 graphicsLayout: right
 theme: accent_violet

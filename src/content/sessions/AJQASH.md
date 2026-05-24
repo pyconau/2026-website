@@ -9,6 +9,7 @@ type: other
 speakers:
 - DQA3WM
 - 9LDURJ
+layout: layout_2
 trackName: DevRel
 graphicsLayout: left
 theme: accent_coral

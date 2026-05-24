@@ -8,6 +8,7 @@ track: devrel
 type: talk
 speakers:
 - PTEC7T
+layout: layout_2
 trackName: DevRel
 graphicsLayout: right
 theme: accent_coral

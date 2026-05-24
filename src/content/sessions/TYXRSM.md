@@ -8,6 +8,7 @@ track: data-and-ai
 type: talk
 speakers:
 - 8SBWWP
+layout: layout_2
 trackName: Data & AI
 graphicsLayout: right
 theme: accent_lemon

@@ -1,13 +1,14 @@
 ---
 title: From On-Prem to the Cloud and Back Again
 code: 8VSJFM
-start: '2026-08-27T12:30:00+10:00'
-end: '2026-08-27T13:00:00+10:00'
+start: '2026-08-27T14:00:00+10:00'
+end: '2026-08-27T14:30:00+10:00'
 room: Ballroom 1
 track: platform-engineering
 type: talk
 speakers:
 - FPL7YF
+layout: layout_2
 trackName: Platform Engineering
 graphicsLayout: right
 theme: accent_coral
