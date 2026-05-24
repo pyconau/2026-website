@@ -408,7 +408,7 @@ def get_theme(name: str) -> Theme:
 
 
 def resolve_background_path(theme_name: str, layout_name: str, output_type: str = "social") -> str:
-    """Returns e.g. 'layouts/social/accent_coral_left.png' or 'layouts/og/accent_coral_left.png'.
+    """Returns e.g. 'layouts/social/accent_coral_left.png' or 'layouts/square/accent_coral_left.png'.
 
     Raises ValueError if combo invalid.
     """

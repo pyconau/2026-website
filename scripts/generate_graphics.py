@@ -442,7 +442,7 @@ def generate_graphic(
     theme = get_theme(resolved_theme_name)
 
     # Check cache for both output types; only generate if any missing or overridden
-    output_types = ["social", "og"]
+    output_types = ["social", "square"]
     output_paths = [
         get_project_root() / "public/graphics/sessions" / f"{session_code}-{ot}.png"
         for ot in output_types
@@ -491,7 +491,7 @@ def _generate_graphic_for_output_type(
     output_type: str,
     font_size_overrides: dict | None,
 ) -> None:
-    """Generate PNG for a specific output type (social or og)."""
+    """Generate PNG for a specific output type (social or square)."""
     session_track = session.get("track")
 
     # Load config for this output type
@@ -528,8 +528,8 @@ def _generate_graphic_for_output_type(
     speaker_text = format_speakers(speaker_objects)
     num_speakers = min(len(speaker_codes), 3)
 
-    # OG layouts use fixed bounding boxes; social layouts calculate offsets for multi-speaker
-    if output_type == "og":
+    # Square layouts use fixed bounding boxes; social layouts calculate offsets for multi-speaker
+    if output_type == "square":
         # OG: use fixed layout for all speaker counts
         _paste_speakers_og(
             img, num_speakers, speaker_codes, speaker_objects, panel_layout, resolved_layout_name
