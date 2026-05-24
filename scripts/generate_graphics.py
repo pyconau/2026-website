@@ -289,10 +289,12 @@ def _paste_speakers_og(
     base = panel_layout.speaker_avatar
     d = base.diameter
 
-    # OG right: avatar anchors from right edge, grows left
+    # OG right: avatar right edge aligns with speaker name text box right edge, grows left
     if layout_name == "right":
-        # First avatar's right edge at base.x, subsequent avatars extend leftward
-        avatar_x_positions = [base.x - d - i * (d + AVATAR_GAP) for i in range(num_speakers)]
+        # Speaker name right edge = x + width
+        text_box_right = panel_layout.speaker_name.x + panel_layout.speaker_name.width
+        # First avatar's right edge at text_box_right, subsequent avatars extend leftward
+        avatar_x_positions = [text_box_right - d - i * (d + AVATAR_GAP) for i in range(num_speakers)]
     else:
         # OG left: avatar grows rightward (standard)
         avatar_x_positions = [base.x + i * (d + AVATAR_GAP) for i in range(num_speakers)]
