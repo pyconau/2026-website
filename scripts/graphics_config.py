@@ -115,6 +115,58 @@ PANEL_LAYOUTS: dict[str, dict[str, PanelLayout]] = {
         "og": PanelLayout(
             name="left",
             width=1200,
+            height=630,
+            track_name=TextRegion(
+                x=63,
+                y=134,
+                width=517,
+                height=30,
+                font_file="fonts/RobotoSlab-VariableFont_wght.ttf",
+                font_size=25.4,
+                color="#b280ff",
+            ),
+            session_title=TextRegion(
+                x=63,
+                y=172,
+                width=517,
+                height=180,
+                font_file="fonts/RobotoSlab-VariableFont_wght.ttf",
+                font_size=43.0,
+                min_font_size=26,
+                color="#eaeaea",
+                line_spacing=1.2,
+            ),
+            speaker_avatar=AvatarRegion(
+                x=63,
+                y=386,
+                diameter=91,
+            ),
+            speaker_name=TextRegion(
+                x=171,
+                y=411,
+                width=409,
+                height=28,
+                font_file="fonts/PlusJakartaSans-VariableFont_wght.ttf",
+                font_size=23,
+                min_font_size=14,
+                color="#eaeaea",
+                weight=500,
+            ),
+            schedule_info=TextRegion(
+                x=248,
+                y=527,
+                width=332,
+                height=30,
+                font_file="fonts/PlusJakartaSans-VariableFont_wght.ttf",
+                font_size=34.2,
+                min_font_size=14,
+                color="#eaeaea",
+                weight=800,
+            ),
+        ),
+        "square": PanelLayout(
+            name="left",
+            width=1200,
             height=1200,
             track_name=TextRegion(
                 x=108,
@@ -221,6 +273,58 @@ PANEL_LAYOUTS: dict[str, dict[str, PanelLayout]] = {
             ),
         ),
         "og": PanelLayout(
+            name="right",
+            width=1200,
+            height=630,
+            track_name=TextRegion(
+                x=510,
+                y=134,
+                width=689,
+                height=30,
+                font_file="fonts/RobotoSlab-VariableFont_wght.ttf",
+                font_size=25.4,
+                color="#b280ff",
+            ),
+            session_title=TextRegion(
+                x=510,
+                y=172,
+                width=517,
+                height=180,
+                font_file="fonts/RobotoSlab-VariableFont_wght.ttf",
+                font_size=43.0,
+                min_font_size=26,
+                color="#eaeaea",
+                line_spacing=1.2,
+            ),
+            speaker_avatar=AvatarRegion(
+                x=510,
+                y=386,
+                diameter=91,
+            ),
+            speaker_name=TextRegion(
+                x=619,
+                y=411,
+                width=580,
+                height=28,
+                font_file="fonts/PlusJakartaSans-VariableFont_wght.ttf",
+                font_size=23,
+                min_font_size=14,
+                color="#eaeaea",
+                weight=500,
+            ),
+            schedule_info=TextRegion(
+                x=695,
+                y=527,
+                width=504,
+                height=30,
+                font_file="fonts/PlusJakartaSans-VariableFont_wght.ttf",
+                font_size=32.3,
+                min_font_size=14,
+                color="#eaeaea",
+                weight=800,
+            ),
+        ),
+        "square": PanelLayout(
             name="right",
             width=1200,
             height=1200,
@@ -408,7 +512,7 @@ def get_theme(name: str) -> Theme:
 
 
 def resolve_background_path(theme_name: str, layout_name: str, output_type: str = "social") -> str:
-    """Returns e.g. 'layouts/social/accent_coral_left.png' or 'layouts/og/accent_coral_left.png'.
+    """Returns e.g. 'layouts/social/accent_coral_left.png' or 'layouts/square/accent_coral_left.png'.
 
     Raises ValueError if combo invalid.
     """
