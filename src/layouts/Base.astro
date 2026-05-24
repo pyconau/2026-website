@@ -18,10 +18,19 @@ const {
 } = Astro.props;
 
 // Convert relative OG image path to absolute URL
-// Use request origin for dev server, fallback to Astro.site for production
-const siteUrl = Astro.request?.url
-  ? new URL("/", Astro.request.url).toString()
-  : Astro.site?.toString();
+// Priority: request context (dev/ssr) > Astro.site (from config) > default to production
+let siteUrl: string | undefined;
+
+if (Astro.request?.url) {
+  // Dev server or SSR context - use actual request origin
+  siteUrl = new URL("/", Astro.request.url).toString();
+} else if (Astro.site) {
+  // Build time - use configured site URL from astro.config.mjs
+  siteUrl = Astro.site.toString();
+} else {
+  // Fallback (shouldn't happen)
+  siteUrl = "https://2026.pycon.org.au/";
+}
 
 const absoluteOgImage = ogImage && siteUrl
   ? new URL(ogImage, siteUrl).toString()
