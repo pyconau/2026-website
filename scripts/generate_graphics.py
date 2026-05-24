@@ -249,7 +249,7 @@ def draw_text(
         y += line_height
 
 
-def generate_graphic(session_code: str, layout_name: str = "layout_1", font_size_overrides: dict = None) -> Path:
+def generate_graphic(session_code: str, layout_name: str = "layout_2", font_size_overrides: dict = None) -> Path:
     """Generate PNG for a session.
 
     Args:
@@ -432,7 +432,7 @@ def generate_graphic(session_code: str, layout_name: str = "layout_1", font_size
 def main():
     parser = argparse.ArgumentParser(description="Generate session announcement graphics")
     parser.add_argument("--session", help="Generate single session by code")
-    parser.add_argument("--layout", default="layout_1", help="Layout name")
+    parser.add_argument("--layout", default="layout_2", help="Layout name")
     args = parser.parse_args()
 
     try:

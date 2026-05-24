@@ -416,6 +416,20 @@ def write_session_file(session: dict, output_dir: Path) -> None:
     code = session["code"]
     output_path = output_dir / f"{code}.md"
 
+    # Load existing frontmatter to preserve custom fields like layout
+    existing_layout = "layout_2"  # default layout
+    if output_path.exists():
+        try:
+            with open(output_path, "r", encoding="utf-8") as f:
+                content = f.read()
+                match = re.match(r'^---\n(.*?)\n---\n', content, re.DOTALL)
+                if match:
+                    existing_frontmatter = yaml.load(match.group(1)) or {}
+                    if "layout" in existing_frontmatter:
+                        existing_layout = existing_frontmatter["layout"]
+        except Exception:
+            pass  # If we can't read the file, just use the default layout
+
     frontmatter = {
         "title": session["title"],
         "code": session["code"],
@@ -425,6 +439,7 @@ def write_session_file(session: dict, output_dir: Path) -> None:
         "track": session["track"],
         "type": session["type"],
         "speakers": session["speakers"],
+        "layout": existing_layout,
     }
 
     # Add optional fields only if present
