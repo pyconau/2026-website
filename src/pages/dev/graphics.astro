@@ -76,7 +76,6 @@ const tracks = [
               data-track={graphic.track ?? "main"}
               data-code={graphic.code}
               data-title={graphic.title}
-              onclick={`openModal('${graphic.code}', '${graphic.title}')`}
             >
               <img
                 class="card-img h-auto w-full"
@@ -161,6 +160,18 @@ const tracks = [
 
     // Initial load: set all image sources
     updateAllImages("social");
+
+    // Add click handlers to cards
+    cards.forEach((card) => {
+      card.addEventListener("click", () => {
+        const htmlCard = card as HTMLElement;
+        const code = htmlCard.dataset.code;
+        const title = htmlCard.dataset.title;
+        if (code && title) {
+          openModal(code, title);
+        }
+      });
+    });
 
     if (filterSelect) {
       filterSelect.addEventListener("change", (e) => {
