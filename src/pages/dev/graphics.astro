@@ -62,6 +62,7 @@ const tracks = [
               class="bg-gray-800 text-white border border-gray-700 rounded px-3 py-2 text-sm"
             >
               <option value="social">Social (1280×780)</option>
+              <option value="og">OG (1200×630)</option>
               <option value="square">Square (1200×1200)</option>
             </select>
           </div>
@@ -97,12 +98,13 @@ const tracks = [
     <!-- Modal -->
     <div
       id="modal"
-      class="fixed inset-0 hidden flex items-center justify-center bg-black/80 p-4"
-      onclick="if(event.target === this) this.classList.add('hidden')"
+      class="fixed inset-0 items-center justify-center bg-black/80 p-4"
+      style="display:none"
+      onclick="if(event.target === this) this.style.display='none'"
     >
       <button
         class="absolute top-4 right-4 text-white text-2xl hover:text-gray-300"
-        onclick="document.getElementById('modal').classList.add('hidden')"
+        onclick="document.getElementById('modal').style.display='none'"
       >
         ✕
       </button>
@@ -144,7 +146,7 @@ const tracks = [
 
     if (modal && modalImg && modalTitle && outputTypeSelect) {
       const outputType = outputTypeSelect.value;
-      modal.classList.remove("hidden");
+      modal.style.display = "flex";
       modalImg.src = getImagePath(code, outputType);
       modalTitle.textContent = `${code}: ${title}`;
     }

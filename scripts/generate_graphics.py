@@ -442,7 +442,7 @@ def generate_graphic(
     theme = get_theme(resolved_theme_name)
 
     # Check cache for both output types; only generate if any missing or overridden
-    output_types = ["social", "square"]
+    output_types = ["social", "square", "og"]
     output_paths = [
         get_project_root() / "public/graphics/sessions" / f"{session_code}-{ot}.png"
         for ot in output_types
