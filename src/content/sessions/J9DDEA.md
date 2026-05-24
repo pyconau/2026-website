@@ -9,6 +9,8 @@ type: talk
 speakers:
 - QVSHY7
 trackName: Main Conference
+graphicsLayout: left
+theme: stone
 ---
 
 Python powers the world’s most critical research, yet the software behind the science often remains hidden and under supported. This talk distils four years of insights from Research Software Engineering Stories to explore the real world motivators of the people building Australia’s most impactful research tools. Attendees will be motivated to transition from fragile scripts to sustainable and citable reusable software infrastructure that endure long after the code is working for a specific use case.

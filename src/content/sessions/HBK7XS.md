@@ -9,6 +9,8 @@ type: talk
 speakers:
 - XCQ89F
 trackName: Education
+graphicsLayout: left
+theme: accent_lime
 ---
 
 When students can use AI to generate code, explain syntax, and accelerate routine development tasks, the challenge for teachers is no longer just how to assess coding. It is how to keep students genuinely engaged, how to value the design, judgment, communication, and reflection that sit around a software project, and how to structure complex project work so that students can succeed rather than stall at the end. In my dashboarding unit, these pressures came together in a large, project-based subject where students had to build a substantial data product over the semester.

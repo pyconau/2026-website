@@ -9,6 +9,8 @@ type: talk
 speakers:
 - PAU3DM
 trackName: Cybersecurity
+graphicsLayout: right
+theme: accent_lavender
 ---
 
 Sam built a great gateway. Users are authenticated, requests are validated, the front door is solid. Inside the cluster, services trust each other — because they're inside the cluster.

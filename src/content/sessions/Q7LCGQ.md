@@ -9,6 +9,8 @@ type: talk
 speakers:
 - AENJDR
 trackName: Main Conference
+graphicsLayout: left
+theme: accent_lime
 ---
 
 _Do you feel that hard drives and USBs aren’t keeping pace with your organisation’s "AI-first dynamic cloud-based SaaS B2B" technology strategy?_ 

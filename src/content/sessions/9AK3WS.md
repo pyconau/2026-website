@@ -10,6 +10,8 @@ type: talk
 speakers:
 - K8YDBG
 trackName: Main Conference
+graphicsLayout: right
+theme: accent_coral
 ---
 
 Many teams building AI products focus on parsing new context and editing prompts, without knowing if things are improving. They then learn that even a perfect model won't drive success if the product isn't easy to use, or people abandon it after one attempt. Getting the model right is necessary but on its own isn't sufficient.

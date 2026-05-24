@@ -9,6 +9,8 @@ type: talk
 speakers:
 - APHKDN
 trackName: Main Conference
+graphicsLayout: left
+theme: accent_emerald
 ---
 
 If Australia's electoral districts were drawn just a bit differently (or by a lot), how much would that change election results?

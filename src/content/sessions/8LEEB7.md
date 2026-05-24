@@ -9,6 +9,8 @@ type: talk
 speakers:
 - 9YWARS
 trackName: Main Conference
+graphicsLayout: right
+theme: accent_violet
 ---
 
 Porting a scientific software library from a proprietary language to Python can potentially increase its user base, but the porting process itself can be tedious and error prone, and therefore cries out for automation, such as the use of AI coding agents. At the same time, scientific software libraries must be accurate, performant, easy to use, and easy to maintain. An over-reliance on automated tools can result in the software porting equivalent of AI slop: code that is unreliable and unmaintainable. The application of Research Software Engineering principles to the porting of scientific code can complement AI coding agents in preserving both academic rigour and thorough testing throughout the porting process, resulting in a reliable, well-tested and well-documented library.

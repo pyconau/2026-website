@@ -9,6 +9,8 @@ type: talk
 speakers:
 - UMB3JY
 trackName: Cybersecurity
+graphicsLayout: right
+theme: accent_lavender
 ---
 
 Privacy regulations around the world impose strict requirements on how organisations handle personal data (such as Australia's Privacy Act, the EU's GDPR, US's HIPAA & CCPA, etc). Among the hardest to implement in a data pipeline are protecting sensitive data from breaches, and erasing an individual's personal data on request.Finding and deleting every copy of sensitive data is cumbersome, error-prone, and breaks referential integrity. Meanwhile, sensitive data sitting in plaintext is exposed the moment a breach occurs.

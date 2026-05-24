@@ -9,6 +9,8 @@ type: talk
 speakers:
 - UJYFNX
 trackName: Main Conference
+graphicsLayout: right
+theme: accent_emerald
 ---
 
 At the start of 2026 I decided I wanted to build my own Coding Agent. The goal was to build the tool that would let me do the work of a Software Engineer, but without reading the code. It's a Python codebase that I've never read, and I never intend to read. By building it I've learned some things about doing serious engineering, without reading code.

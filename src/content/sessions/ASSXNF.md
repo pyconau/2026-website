@@ -9,6 +9,8 @@ type: talk
 speakers:
 - PDH7TL
 trackName: DevRel
+graphicsLayout: right
+theme: accent_coral
 ---
 
 AI assistants can answer most technical questions in seconds now. So why would a developer sit through a guided workshop? Because reading an answer and building muscle memory are fundamentally different things. This talk looks at how to design interactive, hands-on developer education that stays relevant and engaging in a world where "just ask the AI" is the default. Drawing on experience building an open source training platform and creating and delivering workshops on it, the talk gets into the practical details of structuring workshop content, giving learners real environments to work in, keeping them engaged, and using AI behind the scenes to create that content faster without sacrificing the human judgement that makes it more than just AI slop.

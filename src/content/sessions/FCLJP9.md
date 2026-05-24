@@ -9,6 +9,8 @@ type: talk
 speakers:
 - ZJPT93
 trackName: Main Conference
+graphicsLayout: right
+theme: stone_emerald
 ---
 
 Breathing is something we all do, tens of thousands of times a day, without even thinking. Should be pretty straightforward to animate, right?

@@ -10,6 +10,8 @@ speakers:
 - PB9BKD
 - H3PQDH
 - SLEHXC
+graphicsLayout: right
+theme: accent_lavender
 ---
 
 Welcome to PyCon AU 2026!

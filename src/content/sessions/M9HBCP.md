@@ -9,6 +9,8 @@ type: talk
 speakers:
 - NWBHL9
 trackName: Education
+graphicsLayout: right
+theme: accent_lime
 ---
 
 Have you got neurodivergent kids who you’d like to teach coding to, but don’t know where to start? Finding a coding project that kids will enjoy is challenging enough as it is, but finding one that engages neurodivergent kids can be even harder. 

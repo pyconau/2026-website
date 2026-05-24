@@ -9,6 +9,8 @@ type: talk
 speakers:
 - WGQRKJ
 trackName: Main Conference
+graphicsLayout: right
+theme: accent_lemon
 ---
 
 You've written some Python code. It works great on your machine. Now you want someone else to use that code. How do you deliver your Python code to someone else so that they can run it? And how do you do that if the person who needs to use your code isn't a Python user themselves?

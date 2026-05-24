@@ -9,6 +9,8 @@ type: talk
 speakers:
 - SNSDVY
 trackName: Data & AI
+graphicsLayout: left
+theme: charcoal_lemon
 ---
 
 Improving in archery often goes beyond simply increasing your score; it also means building consistency, tightening groupings, and recognising patterns such as shots drifting off-centre.  However, tracking the final position of arrows after each shot is a slow, imprecise, and awkward process. 

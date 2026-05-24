@@ -7,6 +7,8 @@ room: Ballroom 3
 track:
 type: plenary
 speakers: []
+graphicsLayout: right
+theme: accent_lavender
 ---
 
 Like regular talks, but shorter! Anything could happen!

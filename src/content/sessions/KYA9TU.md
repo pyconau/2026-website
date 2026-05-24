@@ -9,6 +9,8 @@ type: talk
 speakers:
 - HHH7CS
 trackName: Education
+graphicsLayout: right
+theme: accent_lime
 ---
 
 With IDEs like VS Code wanting to autocomplete your entire file based on the first line, how on earth do we write assessment that actually tests the skill of our students, rather than the skills of Claude? This talk will explore what is being done in schools and universities across QLD, and offer suggestions for what you can try in your classroom.

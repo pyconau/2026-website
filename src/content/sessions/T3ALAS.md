@@ -9,6 +9,8 @@ type: talk
 speakers:
 - B9EPFA
 trackName: Cybersecurity
+graphicsLayout: right
+theme: accent_lavender
 ---
 
 What does a trauma ICU nurse have in common with an Information Security Officer? More than you'd think. This talk charts one nurse's unconventional path into cybersecurity, and the moment she realised the skills she'd spent years building were exactly what the industry needed. Beyond the personal story, it makes the case that the cybersecurity skills shortage won't be solved by fishing in the same pond. The people we need are already out there: in hospitals, in classrooms, in labs. This talk is for leaders who want teams that think differently, for hiring managers ready to consider cross-sector skill sets, and for anyone standing at a career crossroads wondering if security is even for them.

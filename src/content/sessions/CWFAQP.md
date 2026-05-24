@@ -9,6 +9,8 @@ type: talk
 speakers:
 - PTEC7T
 trackName: DevRel
+graphicsLayout: right
+theme: accent_coral
 ---
 
 Developer communities are more than just places to ask questions or share code. They are platforms where careers grow, ideas spark, and real impact happens. In this talk, I’ll draw on my experience building and contributing to global developer programs, including initiatives like GitHub Stars, Twilio Champions, and more to explore what makes a community truly thrive.

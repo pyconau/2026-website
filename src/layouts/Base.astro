@@ -28,6 +28,11 @@ const {
     <title>{title}{appendSiteTitle && " — PyCon AU 2026"}</title>
     {description && <meta name="description" content={description} />}
 
+    <!-- Open Graph metadata -->
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    {ogImage && <meta property="og:image" content={ogImage} />}
+
     <!-- Font preconnects and stylesheets -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

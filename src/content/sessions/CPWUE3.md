@@ -9,6 +9,8 @@ type: talk
 speakers:
 - GC3M8E
 trackName: Main Conference
+graphicsLayout: left
+theme: accent_lime
 ---
 
 The fourth wave of the industrial revolution has been seen by many as a very bad idea. Fortunately we’ll soon all be replaced by sentient machines ruled by tech oligarchs. 

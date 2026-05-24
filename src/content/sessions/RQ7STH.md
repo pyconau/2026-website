@@ -9,6 +9,8 @@ type: talk
 speakers:
 - GMGTSH
 trackName: Main Conference
+graphicsLayout: left
+theme: accent_violet
 ---
 
 Python 3.13 was the first Python version released with a free-threaded mode. Although the default interpreter still utilizes the GIL, it provides provisions that enable us to run a free-threaded version of the interpreter with the GIL disabled. 

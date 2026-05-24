@@ -17,7 +17,8 @@ const sessions = defineCollection({
     sponsor: z.string().optional(),
     contentWarning: z.string().optional(),
     youtubeSlug: z.string().optional(),
-    layout: z.string().optional(), // Graphics layout variant (layout_1, layout_2, etc)
+    graphicsLayout: z.enum(["left", "right"]).optional(), // Graphics panel layout (left or right)
+    theme: z.string().optional(), // Graphics theme (e.g. accent_coral, charcoal)
   }),
 });
 

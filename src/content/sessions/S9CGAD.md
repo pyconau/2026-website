@@ -9,6 +9,8 @@ type: talk
 speakers:
 - RJBY8Y
 trackName: Main Conference
+graphicsLayout: left
+theme: accent_lemon
 ---
 
 `import re`. `from pathlib import Path`. Python's import system is easy to take for granted, and most of the time we don't need to think about how the import statements we write actually work. Sometimes, however, things do go wrong, and knowing where to look for more information can mean the difference between scratching our heads in bafflement and quickly solving whatever problem we're facing.

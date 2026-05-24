@@ -9,6 +9,8 @@ type: talk
 speakers:
 - KND8AG
 trackName: Cybersecurity
+graphicsLayout: left
+theme: accent_lavender
 ---
 
 Authentication continues to fail not because users ignore security advice, but because our systems rely on humans managing reusable secrets. Despite password managers and multi-factor authentication, phishing and credential theft remain the most common causes of account compromise.

@@ -9,6 +9,8 @@ type: talk
 speakers:
 - 9MPTPG
 trackName: Platform Engineering
+graphicsLayout: right
+theme: accent_coral
 ---
 
 Every day at 2pm, our microservice crashed. Same traffic patterns, same infrastructure, same code - yet the database deadlocked and our SLA burned. Logs showed nothing. Metrics showed capacity. Something we couldn't see was destroying our system.

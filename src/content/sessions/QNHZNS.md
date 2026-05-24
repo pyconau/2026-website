@@ -9,6 +9,8 @@ type: talk
 speakers:
 - MJ9KTK
 trackName: Main Conference
+graphicsLayout: right
+theme: accent_lavender
 ---
 
 Geoscientists love Python and Jupyter Notebooks for prototyping their ideas. What they often don't like is dealing with containers, CI/CD, version control and long-term support.  Whether you are just into volcano photos from New Zealand or received a notebook called final_model_v3_ACTUAL_FINAL.ipynb and were asked to "just put it on the server" come along to see how Earth Sciences New Zealand bridges the gap between research and production.

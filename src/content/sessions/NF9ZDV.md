@@ -9,6 +9,8 @@ type: talk
 speakers:
 - JF8RCR
 trackName: Cybersecurity
+graphicsLayout: right
+theme: accent_lavender
 ---
 
 Application security is not getting easier. Despite better tools, more CVEs, and widespread “shift-left” adoption, vulnerabilities continue to scale with system complexity.

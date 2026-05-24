@@ -9,6 +9,8 @@ type: talk
 speakers:
 - JSXAPB
 trackName: Education
+graphicsLayout: right
+theme: accent_lime
 ---
 
 How do you get teenagers to care about what data they share online? How do you teach them how to make a safe password? How do you keep them engaged and maybe even teach them some python along the way?

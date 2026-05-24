@@ -3,6 +3,9 @@ dist/
 # generated types
 .astro/
 
+# generated session graphics
+public/graphics/sessions/
+
 # dependencies
 node_modules/
 

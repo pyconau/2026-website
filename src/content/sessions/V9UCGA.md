@@ -9,6 +9,8 @@ type: talk
 speakers:
 - QAG9KH
 trackName: Platform Engineering
+graphicsLayout: right
+theme: accent_coral
 ---
 
 SRE is all about simplicity. So why do so many of us have a copy of The Google Book sitting on our desk? So much of what we build seeks to emulate companies with millions (if not billions) of customers, while we have neither the scale to justify such effort, nor the runway to still be around when we’re finished. This talk asks - does my medium-sized scale up need Chaos Engineering, circuit breakers, and a 10 tier severity matrix… or does it need a spreadsheet?

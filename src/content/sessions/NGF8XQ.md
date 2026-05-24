@@ -9,6 +9,8 @@ type: talk
 speakers:
 - N8RLSM
 trackName: Main Conference
+graphicsLayout: left
+theme: charcoal
 ---
 
 At Atlassian, we take accessibility seriously enough that we have entire teams dedicated to it. There are experts on hand to provide feedback on designs, and answer questions about implementation details. There's a team that runs audits of new features before they're launched. It's honestly pretty good.

@@ -19,12 +19,12 @@ export async function getStaticPaths() {
 }
 
 const { session } = Astro.props;
-const { title, code, start, end, room, track, trackName, type, speakers, sponsor, contentWarning, layout } =
+const { title, code, start, end, room, track, trackName, type, speakers, sponsor, contentWarning } =
   session.data;
 const { Content } = await session.render();
 
-// Generate OG image path if layout is defined and not a break
-const ogImage = layout && type !== "break" ? `/graphics/sessions/${code}-${layout}.png` : undefined;
+// Generate OG image path if graphicsLayout and theme are defined and not a break
+const ogImage = type !== "break" ? `/graphics/sessions/${code}-social.png` : undefined;
 
 // Get speaker data
 const speakerData = await getPeopleByCode(speakers);
@@ -37,6 +37,18 @@ const displayTrackName = trackName || trackData?.data.title;
 
 // Format date and time
 const dateTimeString = start && end ? formatSessionDateTime(start, end) : null;
+
+// Build OG description: title + speakers + track (if not main conf) + date + CTA
+const dateOnly = start ? new Date(start).toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : null;
+const ogDescription = [
+  title,
+  speakers.length > 0 ? `By ${speakerData.map((s) => s.data.name).join(", ")}` : null,
+  track && track !== "main-conference" ? displayTrackName : null,
+  dateOnly,
+  "Tickets available now!",
+]
+  .filter(Boolean)
+  .join(" • ");
 
 // Build breadcrumb
 const breadcrumbs = [
@@ -51,7 +63,7 @@ if (trackData) {
 }
 ---
 
-<Base title={title} ogImage={ogImage}>
+<Base title={title} ogImage={ogImage} description={ogDescription}>
   <Header dark={false} />
 
   <section class="bg-stone pt-[98px] pb-20 overflow-hidden">

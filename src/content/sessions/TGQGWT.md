@@ -10,6 +10,8 @@ speakers:
 - PB9BKD
 - SLEHXC
 - H3PQDH
+graphicsLayout: left
+theme: accent_coral
 ---
 
 We conclude PyCon AU 2026 together for closing remarks as we reflect on what was, and look forward to what will be (sprints!)

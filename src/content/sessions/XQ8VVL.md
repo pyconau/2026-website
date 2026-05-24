@@ -9,6 +9,8 @@ type: talk
 speakers:
 - 3N73EX
 trackName: Main Conference
+graphicsLayout: left
+theme: accent_emerald
 ---
 
 Do you ever go to a talk and find that the speaker doesn't talk about quite what you expected? Do you ever wish you could tell them, mid-talk, to talk about something else?

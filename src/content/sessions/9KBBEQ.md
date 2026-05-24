@@ -9,6 +9,8 @@ type: talk
 speakers:
 - GRFBNL
 trackName: Main Conference
+graphicsLayout: right
+theme: accent_violet
 ---
 
 I'm not joking. In 2025 and 2026 our university rocketry team launched several high-powered 12ft tall competition rockets with a custom Python-based process manager framework that controlled all of their rocket telemetry and ground control systems. We called it the Ground Control Station, or GCS for short. 

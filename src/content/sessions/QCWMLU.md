@@ -10,6 +10,8 @@ type: talk
 speakers:
 - YZDUTX
 trackName: Education
+graphicsLayout: right
+theme: accent_lime
 ---
 
 Python has become a standard for many (although not all) secondary schools teaching Digital Technologies in Queensland and Australia more broadly. Yet challenges remain in bridging the gap between technical skills that schools are expected to teach and the expertise that industry requires.

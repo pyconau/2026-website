@@ -9,6 +9,8 @@ type: talk
 speakers:
 - DXQWZN
 trackName: Main Conference
+graphicsLayout: right
+theme: accent_lime
 ---
 
 The tech industry is notoriously fixated on solving things. All products are "solutions", all problems are fixable, all friction is anti-productive waste that deserves to be eliminated. We've hacked our workflows and our homes and our lives, automated the boring stuff, and Gotten Things Done. Throwing LLMs into the mix has only amped up this rhetoric.

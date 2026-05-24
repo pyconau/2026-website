@@ -9,6 +9,8 @@ type: talk
 speakers:
 - ALM8CW
 trackName: Data & AI
+graphicsLayout: left
+theme: charcoal_lemon
 ---
 
 RAG applications come in many shapes. Some start as simple keyword searches over historical records. Others layer on semantic embeddings, hybrid retrieval (semantic + keyword/lexical searches), reranking, and increasingly sophisticated prompting. But regardless of where your system sits on that spectrum, the question is the same: how do you know it actually works?

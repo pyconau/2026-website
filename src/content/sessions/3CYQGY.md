@@ -9,6 +9,8 @@ type: talk
 speakers:
 - U7H7LA
 trackName: Main Conference
+graphicsLayout: right
+theme: stone_emerald
 ---
 
 Every team has at least one go-to person that gets others out of sticky situations!

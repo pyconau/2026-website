@@ -9,6 +9,8 @@ type: talk
 speakers:
 - FQRHB7
 trackName: Platform Engineering
+graphicsLayout: left
+theme: accent_coral
 ---
 
 Changes are scary. Changes in production are scarier, especially if you haven’t done them before. Ideally, you’d have pipelines and staging environments, and everything just gets handled automatically.

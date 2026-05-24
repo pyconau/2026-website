@@ -10,6 +10,8 @@ speakers:
 - GLH9FZ
 - 38JMFR
 trackName: Data & AI
+graphicsLayout: left
+theme: accent_lemon
 ---
 
 We needed to produce 25 years of gap-free half-hourly weather data in just two days. The output had to be continuous, reproducible, and ready for production use. We achieved that speed by combining domain knowledge, Python, dbt, and AI-assisted coding, with detailed prompting and a few tight loops of refinement rather than a zero-shot approach. In this talk, we’ll show how we used Python, dbt, and the Chronos-2 time-series foundation model to build a practical weather gap-filling pipeline for variables such as temperature, humidity, and wind speed.

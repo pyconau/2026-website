@@ -9,6 +9,8 @@ type: talk
 speakers:
 - EQJWS9
 trackName: Research Software Engineering
+graphicsLayout: right
+theme: accent_violet
 ---
 
 I regularly enjoy performance that I absolutely did not earn. That’s because NumPy quietly handles an alarming number of hard problems on my behalf. In this talk, we’ll pop the hood on NumPy and look at what it’s actually doing to make Python fast. We’ll even glance at the source code, gently, and without expecting anyone to be an expert in C. 

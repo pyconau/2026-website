@@ -9,7 +9,17 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 from ruamel.yaml import YAML
-from graphics_config import LAYOUTS, get_layout, AvatarRegion, TextRegion
+from graphics_config import (
+    PANEL_LAYOUTS,
+    THEMES,
+    TRACK_ACCENTS,
+    get_panel_layout,
+    get_theme,
+    resolve_background_path,
+    resolve_theme_and_layout,
+    AvatarRegion,
+    TextRegion,
+)
 
 AVATAR_GAP = -17  # pixels between adjacent speaker avatars (negative = overlap)
 
@@ -19,8 +29,12 @@ def get_project_root() -> Path:
     return Path(__file__).parent.parent
 
 
-def load_session_data(session_code: str) -> dict:
-    """Load session frontmatter from markdown file."""
+def load_session_data(session_code: str) -> tuple[dict, Path]:
+    """Load session frontmatter from markdown file.
+
+    Returns:
+        (metadata dict, session file path)
+    """
     session_file = get_project_root() / "src/content/sessions" / f"{session_code}.md"
 
     if not session_file.exists():
@@ -37,7 +51,7 @@ def load_session_data(session_code: str) -> dict:
     yaml = YAML()
     metadata = yaml.load(match.group(1))
 
-    return metadata
+    return metadata, session_file
 
 
 def load_speaker_data(speaker_code: str) -> dict:
@@ -63,6 +77,10 @@ def load_speaker_data(speaker_code: str) -> dict:
 
 def format_schedule(session: dict) -> str:
     """Format room and time for display."""
+    # If before Aug 1, 2026, show "Register Today!" instead of schedule
+    if datetime.now() < datetime(2026, 8, 1):
+        return "Register Today!"
+
     start = session.get("start")
     room = session.get("room", "")
 
@@ -249,41 +267,72 @@ def draw_text(
         y += line_height
 
 
-def generate_graphic(session_code: str, layout_name: str = "layout_2", font_size_overrides: dict = None) -> Path:
+def generate_graphic(
+    session_code: str,
+    panel_layout_name: str | None = None,
+    theme_name: str | None = None,
+    font_size_overrides: dict = None,
+) -> Path:
     """Generate PNG for a session.
 
     Args:
+        session_code: Session identifier
+        panel_layout_name: Explicit layout override ("left" or "right")
+        theme_name: Explicit theme override
         font_size_overrides: Dict mapping region names to font sizes to override
     """
-    layout = get_layout(layout_name)
+    # Load data
+    session, session_file = load_session_data(session_code)
+    session_track = session.get("track")
+
+    # Resolve theme + layout (fully deterministic from code hash + track)
+    resolved_theme_name, resolved_layout_name = resolve_theme_and_layout(
+        session_code,
+        session_track,
+        theme_override=theme_name or session.get("theme"),
+        layout_override=panel_layout_name or session.get("graphicsLayout"),
+    )
+
+    # Load config objects
+    panel_layout = get_panel_layout(resolved_layout_name)
+    theme = get_theme(resolved_theme_name)
 
     # Apply font size overrides if provided
     if font_size_overrides:
         if "track_name" in font_size_overrides:
-            layout.track_name.font_size = font_size_overrides["track_name"]
+            panel_layout.track_name.font_size = font_size_overrides["track_name"]
         if "session_title" in font_size_overrides:
-            layout.session_title.font_size = font_size_overrides["session_title"]
+            panel_layout.session_title.font_size = font_size_overrides["session_title"]
         if "speaker_name" in font_size_overrides:
-            layout.speaker_name.font_size = font_size_overrides["speaker_name"]
+            panel_layout.speaker_name.font_size = font_size_overrides["speaker_name"]
         if "schedule_info" in font_size_overrides:
-            layout.schedule_info.font_size = font_size_overrides["schedule_info"]
-    output_path = get_project_root() / "public/graphics/sessions" / f"{session_code}-{layout_name}.png"
-    session_file = get_project_root() / "src/content/sessions" / f"{session_code}.md"
+            panel_layout.schedule_info.font_size = font_size_overrides["schedule_info"]
+
+    output_path = (
+        get_project_root()
+        / "public/graphics/sessions"
+        / f"{session_code}-social.png"
+    )
 
     # Cache check: skip if output is newer than session file (unless overrides provided)
-    if not font_size_overrides and output_path.exists() and output_path.stat().st_mtime > session_file.stat().st_mtime:
+    if (
+        not font_size_overrides
+        and output_path.exists()
+        and output_path.stat().st_mtime > session_file.stat().st_mtime
+    ):
         print(f"  {session_code}: cached")
         return output_path
 
     print(f"  {session_code}: generating...")
 
-    # Load data
-    session = load_session_data(session_code)
+    # Load speaker data
     speaker_codes = session.get("speakers", [])
     speaker_objects = [load_speaker_data(code) for code in speaker_codes]
 
-    # Load background (includes star and "Session Announcement" text baked in)
-    bg_path = Path(__file__).parent / layout.background_file
+    # Load background image
+    bg_path = Path(__file__).parent / resolve_background_path(
+        resolved_theme_name, resolved_layout_name
+    )
     img = Image.open(bg_path).convert("RGB")
 
     # Avatars and speaker name — support 0, 1, 2, 3 speakers
@@ -292,7 +341,7 @@ def generate_graphic(session_code: str, layout_name: str = "layout_2", font_size
 
     if num_speakers == 0:
         # No speakers: use existing layout with empty speaker name
-        speaker_name_region = layout.speaker_name
+        speaker_name_region = panel_layout.speaker_name
     elif num_speakers == 1:
         # Single speaker: use existing layout
         if speaker_codes:
@@ -303,12 +352,12 @@ def generate_graphic(session_code: str, layout_name: str = "layout_2", font_size
                 )
             else:
                 avatar_path = get_project_root() / "public/images/avatar-default.png"
-            paste_avatar(img, str(avatar_path), layout.speaker_avatar)
+            paste_avatar(img, str(avatar_path), panel_layout.speaker_avatar)
 
-        speaker_name_region = layout.speaker_name
+        speaker_name_region = panel_layout.speaker_name
     else:
         # Multi-speaker: compute avatar and text positions
-        base = layout.speaker_avatar
+        base = panel_layout.speaker_avatar
         d = base.diameter
 
         # Paste each avatar
@@ -332,26 +381,28 @@ def generate_graphic(session_code: str, layout_name: str = "layout_2", font_size
         group_mid_y = base.y + d // 2
 
         # Text region: right edge anchored at same position as 1-speaker layout
-        text_right = layout.speaker_name.x + layout.speaker_name.width
+        text_right = panel_layout.speaker_name.x + panel_layout.speaker_name.width
         # Gap between avatar group and text: 26px for 2 speakers, 16px for 3 speakers
         text_gap = 26 if num_speakers == 2 else 16
         text_x = group_right + text_gap
         text_width = text_right - text_x
 
         # Reduce font size for 3 speakers (narrower column)
-        font_size = layout.speaker_name.font_size if num_speakers == 2 else 22
+        font_size = (
+            panel_layout.speaker_name.font_size if num_speakers == 2 else 22
+        )
 
         # Measure rendered text to compute vertical centering
         measure_draw = ImageDraw.Draw(img)
         fitted_font = shrink_font_to_fit(
             speaker_text,
             measure_draw,
-            str(Path(__file__).parent / layout.speaker_name.font_file),
+            str(Path(__file__).parent / panel_layout.speaker_name.font_file),
             font_size,
-            layout.speaker_name.min_font_size,
+            panel_layout.speaker_name.min_font_size,
             text_width,
             d,
-            weight=layout.speaker_name.weight,
+            weight=panel_layout.speaker_name.weight,
         )
         lines = wrap_text(speaker_text, measure_draw, fitted_font, text_width)
         line_h = get_text_line_height(measure_draw, lines[0], fitted_font)
@@ -363,12 +414,12 @@ def generate_graphic(session_code: str, layout_name: str = "layout_2", font_size
             y=text_y,
             width=text_width,
             height=d,
-            font_file=layout.speaker_name.font_file,
+            font_file=panel_layout.speaker_name.font_file,
             font_size=font_size,
-            min_font_size=layout.speaker_name.min_font_size,
-            color=layout.speaker_name.color,
-            line_spacing=layout.speaker_name.line_spacing,
-            weight=layout.speaker_name.weight,
+            min_font_size=panel_layout.speaker_name.min_font_size,
+            color=panel_layout.speaker_name.color,
+            line_spacing=panel_layout.speaker_name.line_spacing,
+            weight=panel_layout.speaker_name.weight,
         )
 
     # Draw text regions
@@ -377,67 +428,117 @@ def generate_graphic(session_code: str, layout_name: str = "layout_2", font_size
     if track_name == "Main Conference":
         track_name = ""
 
+    # Track accent color from track mapping (independent of theme)
+    track_accent_color = TRACK_ACCENTS.get(session_track, TRACK_ACCENTS[None])
+
     draw_text(
         img,
         track_name,
-        layout.track_name,
-        Path(__file__).parent / layout.track_name.font_file,
-        layout.track_name.font_size,
-        layout.track_name.min_font_size,
-        layout.track_name.color,
-        weight=layout.track_name.weight,
+        panel_layout.track_name,
+        Path(__file__).parent / panel_layout.track_name.font_file,
+        panel_layout.track_name.font_size,
+        panel_layout.track_name.min_font_size,
+        track_accent_color,
+        weight=panel_layout.track_name.weight,
     )
 
     draw_text(
         img,
         session.get("title", ""),
-        layout.session_title,
-        Path(__file__).parent / layout.session_title.font_file,
-        layout.session_title.font_size,
-        layout.session_title.min_font_size,
-        layout.session_title.color,
-        line_spacing=layout.session_title.line_spacing,
-        weight=layout.session_title.weight,
+        panel_layout.session_title,
+        Path(__file__).parent / panel_layout.session_title.font_file,
+        panel_layout.session_title.font_size,
+        panel_layout.session_title.min_font_size,
+        theme.session_title_color,
+        line_spacing=panel_layout.session_title.line_spacing,
+        weight=panel_layout.session_title.weight,
     )
 
     draw_text(
         img,
         speaker_text,
         speaker_name_region,
-        Path(__file__).parent / layout.speaker_name.font_file,
+        Path(__file__).parent / panel_layout.speaker_name.font_file,
         speaker_name_region.font_size,
         speaker_name_region.min_font_size,
-        speaker_name_region.color,
+        theme.speaker_name_color,
         weight=speaker_name_region.weight,
     )
 
     draw_text(
         img,
         format_schedule(session),
-        layout.schedule_info,
-        Path(__file__).parent / layout.schedule_info.font_file,
-        layout.schedule_info.font_size,
-        layout.schedule_info.min_font_size,
-        layout.schedule_info.color,
-        weight=layout.schedule_info.weight,
+        panel_layout.schedule_info,
+        Path(__file__).parent / panel_layout.schedule_info.font_file,
+        panel_layout.schedule_info.font_size,
+        panel_layout.schedule_info.min_font_size,
+        theme.schedule_info_color,
+        weight=panel_layout.schedule_info.weight,
     )
 
     # Save
     output_path.parent.mkdir(parents=True, exist_ok=True)
     img.save(output_path, "PNG")
 
+    # Write-back resolved graphicsLayout + theme to session frontmatter
+    write_graphics_metadata(session_file, resolved_layout_name, resolved_theme_name)
+
     return output_path
+
+
+def write_graphics_metadata(
+    session_file: Path, layout_name: str, theme_name: str
+) -> None:
+    """Update session frontmatter with resolved graphics layout + theme.
+
+    Uses round-trip YAML to preserve formatting.
+    """
+    with open(session_file) as f:
+        content = f.read()
+
+    # Parse frontmatter
+    match = re.match(r'^---\n(.*?)\n---\n(.*)', content, re.DOTALL)
+    if not match:
+        return
+
+    yaml = YAML()
+    yaml.preserve_quotes = True
+    yaml.default_flow_style = False
+    frontmatter = yaml.load(match.group(1))
+
+    # Update fields
+    if frontmatter is None:
+        frontmatter = {}
+    frontmatter["graphicsLayout"] = layout_name
+    frontmatter["theme"] = theme_name
+
+    # Write back
+    from io import StringIO
+
+    fp = StringIO()
+    yaml.dump(frontmatter, fp)
+    new_frontmatter = fp.getvalue()
+
+    new_content = f"---\n{new_frontmatter}---\n{match.group(2)}"
+
+    with open(session_file, "w") as f:
+        f.write(new_content)
 
 
 def main():
     parser = argparse.ArgumentParser(description="Generate session announcement graphics")
     parser.add_argument("--session", help="Generate single session by code")
-    parser.add_argument("--layout", default="layout_2", help="Layout name")
+    parser.add_argument(
+        "--layout", default=None, help="Panel layout: left, right (overrides auto-selection)"
+    )
+    parser.add_argument(
+        "--theme", default=None, help="Theme name (overrides track default)"
+    )
     args = parser.parse_args()
 
     try:
         if args.session:
-            generate_graphic(args.session, args.layout)
+            generate_graphic(args.session, args.layout, args.theme)
         else:
             # Generate all sessions
             sessions_dir = get_project_root() / "src/content/sessions"
@@ -448,7 +549,7 @@ def main():
                 # Skip breaks
                 if "break" in session_file.stem.lower():
                     continue
-                generate_graphic(session_file.stem, args.layout)
+                generate_graphic(session_file.stem, args.layout, args.theme)
 
             print("Done!")
 

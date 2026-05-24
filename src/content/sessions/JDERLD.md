@@ -9,6 +9,8 @@ type: talk
 speakers:
 - SNK8RV
 trackName: Data & AI
+graphicsLayout: left
+theme: accent_lemon
 ---
 
 AI-assisted screening tools for diabetic retinopathy (DR) are increasingly 

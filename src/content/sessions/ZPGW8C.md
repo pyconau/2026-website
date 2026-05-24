@@ -9,6 +9,8 @@ type: talk
 speakers:
 - RBDJUT
 trackName: Research Software Engineering
+graphicsLayout: left
+theme: accent_violet
 ---
 
 _You’ve shared your code. You’ve shared your data.…so why can’t anyone reproduce your results?_

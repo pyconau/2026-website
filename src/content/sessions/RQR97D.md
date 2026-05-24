@@ -10,6 +10,8 @@ speakers:
 - 3US9G9
 - TJVGUM
 trackName: Cybersecurity
+graphicsLayout: left
+theme: accent_lavender
 ---
 
 In the good ol' days, we worried about individual maintainers becoming overburdened, or ripple effects from surprise deletions in dependency graphs. Now, with the power of AI, we get to worry about these things on a much bigger scale: on repeat, across entire ecosystems!

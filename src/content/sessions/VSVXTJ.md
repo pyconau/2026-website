@@ -9,6 +9,8 @@ type: talk
 speakers:
 - MDFERU
 trackName: Main Conference
+graphicsLayout: left
+theme: accent_lime
 ---
 
 _Golf lessons beginning in month six for Tiger Woods (6)_

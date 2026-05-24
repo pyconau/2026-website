@@ -10,6 +10,8 @@ speakers:
 - GQHDVE
 - WD7XBJ
 trackName: Main Conference
+graphicsLayout: right
+theme: accent_emerald
 ---
 
 What does it mean to be productive? If you work in software development that generally means shipping code, or at least changes to code. There’s always been a tension in how to measure the output of a software developer though, and that’s partly due to the at least partially creative nature of the work we do.

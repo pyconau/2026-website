@@ -9,6 +9,8 @@ type: talk
 speakers:
 - GX9AZX
 trackName: Main Conference
+graphicsLayout: right
+theme: accent_emerald
 ---
 
 Every few years somebody swears the newest tool to magically avoid needing developers will boot developers out of a job. Yet here we are, still coding, still shipping. Come along for a quick tour from COBOL’s “English you can compile” to today’s LLM powered vibe coding agents and see why each wave of “code without coders” crashed on the same rocks. You’ll leave with a pocketful of history, a nose for hype, and concrete ways to pair AI helpers with your hard-won craft instead of handing the keys over.

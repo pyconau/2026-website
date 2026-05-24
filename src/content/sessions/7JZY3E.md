@@ -9,6 +9,8 @@ type: talk
 speakers:
 - WGSFFL
 trackName: Platform Engineering
+graphicsLayout: left
+theme: accent_coral
 ---
 
 Have you ever wondered what it actually takes to deploy your Python/Django or any application to Kubernetes - and build a platform around it? Or if you already have one, whether you'd build it the same way in 2026?

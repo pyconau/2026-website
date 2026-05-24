@@ -9,6 +9,8 @@ type: talk
 speakers:
 - GVHZNZ
 trackName: Research Software Engineering
+graphicsLayout: left
+theme: accent_violet
 ---
 
 Moving computationally intensive scientific algorithms from desktop applications to cloud-based services presents unique challenges: How do you maintain performance when your code runs on ephemeral serverless infrastructure? How do you process datasets with 40 million points when Lambda functions have memory limits? 

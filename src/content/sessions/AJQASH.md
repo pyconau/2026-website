@@ -10,6 +10,8 @@ speakers:
 - DQA3WM
 - 9LDURJ
 trackName: DevRel
+graphicsLayout: left
+theme: accent_coral
 ---
 
 We invite any conference attendee to this session. You do not need to have a job title associated to DevRel. Developer Relations is about the developer community of those who use technology and products, so please join us in discussions around this subject.

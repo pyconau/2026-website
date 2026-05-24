@@ -9,6 +9,8 @@ type: talk
 speakers:
 - FPL7YF
 trackName: Platform Engineering
+graphicsLayout: right
+theme: accent_coral
 ---
 
 Before the advent of Cloud Computing, owning all your servers and keeping them in a server room or a leased datacenter was the norm if not the only game in town. But despite The Cloud having turned into The Hyperscalers, owning your platform from the switch plane on up is still available... and it rocks!

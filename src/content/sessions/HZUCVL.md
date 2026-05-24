@@ -9,6 +9,8 @@ type: talk
 speakers:
 - WD9KCJ
 trackName: Main Conference
+graphicsLayout: right
+theme: charcoal
 ---
 
 Title: The Virtues of Being Lazy

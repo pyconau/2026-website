@@ -9,6 +9,8 @@ type: talk
 speakers:
 - UFVRZL
 trackName: DevRel
+graphicsLayout: right
+theme: accent_coral
 ---
 
 Tech demos can make or break a presentation, and sometimes even a company. When they're on a large stage and compressed into a handful of minutes, getting them right is harder than it looks. Especially when the features are coming in hot.
