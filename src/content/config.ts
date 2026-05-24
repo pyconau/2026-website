@@ -1,5 +1,39 @@
 import { defineCollection, z } from "astro:content";
 
+const sessions = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    code: z.string(),
+    start: z.coerce.date(),
+    end: z.coerce.date(),
+    room: z.string(),
+    track: z.string().nullable().optional(), // Local slug for linking
+    trackName: z.string().optional(), // Original Pretalx track name for display
+    type: z
+      .enum(["talk", "break", "workshop", "plenary", "poster", "other"])
+      .default("talk"),
+    speakers: z.array(z.string()).default([]),
+    sponsor: z.string().optional(),
+    contentWarning: z.string().optional(),
+    youtubeSlug: z.string().optional(),
+    graphicsLayout: z.enum(["left", "right"]).optional(), // Graphics panel layout (left or right)
+    theme: z.string().optional(), // Graphics theme (e.g. accent_coral, charcoal)
+  }),
+});
+
+const people = defineCollection({
+  type: "content",
+  schema: z.object({
+    name: z.string(),
+    code: z.string(),
+    pronouns: z.string().optional(),
+    bluesky: z.string().optional(),
+    fediverse: z.string().optional(),
+    hasAvatar: z.boolean().default(false),
+  }),
+});
+
 const posts = defineCollection({
   type: "content",
   schema: z.object({
@@ -22,13 +56,11 @@ const sponsors = defineCollection({
   }),
 });
 
-const specialistTracks = defineCollection({
+const cfpSpecialistTracks = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
-    pretalxTrack: z.string().optional(),
     shortDescription: z.string(),
-    date: z.coerce.date().optional(),
     organisers: z
       .array(
         z.object({
@@ -44,8 +76,21 @@ const specialistTracks = defineCollection({
   }),
 });
 
+const scheduleSpecialistTracks = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    shortDescription: z.string(),
+    pretalxTrack: z.string().optional(),
+    date: z.coerce.date().optional(),
+  }),
+});
+
 export const collections = {
+  sessions,
+  people,
   posts,
   sponsors,
-  "specialist-tracks": specialistTracks,
+  "cfp-specialist-tracks": cfpSpecialistTracks,
+  "schedule-specialist-tracks": scheduleSpecialistTracks,
 };

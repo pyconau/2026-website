@@ -1,0 +1,132 @@
+---
+// Dev page to view all generated session graphics
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+
+const sessions = await getCollection("sessions");
+const sessionGraphics = sessions
+  .filter((s) => s.data.type !== "break")
+  .map((s) => ({
+    code: s.data.code,
+    title: s.data.title,
+    track: s.data.track,
+    graphicsLayout: s.data.graphicsLayout,
+    theme: s.data.theme,
+    path: `/graphics/sessions/${s.data.code}-social.png`,
+  }))
+  .sort((a, b) => a.code.localeCompare(b.code));
+
+// Track list for filter dropdown
+const tracks = [
+  { slug: null, label: "Main Conference" },
+  { slug: "data-and-ai", label: "Data & AI" },
+  { slug: "cybersecurity", label: "Cybersecurity" },
+  { slug: "devrel", label: "DevRel" },
+  { slug: "education", label: "Education" },
+  { slug: "platform-engineering", label: "Platform Engineering" },
+  { slug: "research-software-engineering", label: "Research Software Engineering" },
+];
+---
+
+<Base title="Session Graphics Gallery">
+  <div class="min-h-screen bg-gray-900 p-8">
+    <div class="mx-auto max-w-full">
+      <div class="flex items-end justify-between gap-4 mb-8">
+        <h1 class="text-4xl font-bold text-white">
+          Session Graphics Gallery
+        </h1>
+        <div>
+          <label for="track-filter" class="block text-sm font-medium text-gray-300 mb-2">
+            Filter by track:
+          </label>
+          <select
+            id="track-filter"
+            class="bg-gray-800 text-white border border-gray-700 rounded px-3 py-2 text-sm"
+          >
+            <option value="">All Tracks ({sessionGraphics.length})</option>
+            {
+              tracks.map((track) => {
+                const trackValue = track.slug ?? "main";
+                const count = sessionGraphics.filter((g) => (g.track ?? "main") === trackValue).length;
+                return <option value={trackValue}>{track.label} ({count})</option>;
+              })
+            }
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" id="gallery">
+        {
+          sessionGraphics.map((graphic) => (
+            <div
+              class="graphic-card cursor-pointer overflow-hidden rounded-lg bg-gray-800 shadow-lg transition-transform hover:scale-105"
+              data-track={graphic.track ?? "main"}
+              onclick={`document.getElementById('modal').style.display = 'flex'; document.getElementById('modal-img').src = '${graphic.path}'; document.getElementById('modal-title').textContent = '${graphic.code}: ${graphic.title}';`}
+            >
+              <img
+                src={graphic.path}
+                alt={graphic.title}
+                class="h-auto w-full"
+                loading="lazy"
+              />
+              <div class="p-3">
+                <p class="truncate text-sm font-mono text-gray-300">
+                  {graphic.code}
+                </p>
+                <p class="truncate text-xs text-gray-400">{graphic.title}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      id="modal"
+      class="fixed inset-0 hidden flex-col items-center justify-center bg-black/80 p-4"
+      onclick="if(event.target === this) this.style.display = 'none'"
+    >
+      <button
+        class="absolute top-4 right-4 text-white text-2xl hover:text-gray-300"
+        onclick="document.getElementById('modal').style.display = 'none'"
+      >
+        ✕
+      </button>
+      <div class="max-h-[90vh] max-w-4xl overflow-auto rounded-lg bg-gray-900">
+        <img id="modal-img" src="" alt="" class="w-full" />
+        <div class="p-4">
+          <p id="modal-title" class="text-lg text-white"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<script>
+  // Track filter functionality
+  const filterSelect = document.getElementById("track-filter") as HTMLSelectElement;
+  const gallery = document.getElementById("gallery");
+
+  if (filterSelect && gallery) {
+    const cards = gallery.querySelectorAll(".graphic-card");
+
+    filterSelect.addEventListener("change", (e) => {
+      const selectedTrack = (e.target as HTMLSelectElement).value;
+
+      cards.forEach((card) => {
+        const htmlCard = card as HTMLElement;
+        const cardTrack = htmlCard.dataset.track || "main";
+        const matches = selectedTrack === "" || cardTrack === selectedTrack;
+
+        htmlCard.style.display = matches ? "" : "none";
+      });
+    });
+  }
+</script>
+
+<style>
+  #modal {
+    display: none;
+  }
+</style>

@@ -24,6 +24,15 @@ jobs:
         with:
           ref: ${{ inputs.sha }}
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         with:

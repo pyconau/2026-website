@@ -16,6 +16,25 @@ const {
   ogImage,
   schemaData,
 } = Astro.props;
+
+// Convert relative OG image path to absolute URL
+// Priority: request context (dev/ssr) > Astro.site (from config) > default to production
+let siteUrl: string | undefined;
+
+if (Astro.request?.url) {
+  // Dev server or SSR context - use actual request origin
+  siteUrl = new URL("/", Astro.request.url).toString();
+} else if (Astro.site) {
+  // Build time - use configured site URL from astro.config.mjs
+  siteUrl = Astro.site.toString();
+} else {
+  // Fallback (shouldn't happen)
+  siteUrl = "https://2026.pycon.org.au/";
+}
+
+const absoluteOgImage = ogImage && siteUrl
+  ? new URL(ogImage, siteUrl).toString()
+  : undefined;
 ---
 
 <!doctype html>
@@ -27,6 +46,11 @@ const {
     <link rel="sitemap" href="/sitemap-index.xml" />
     <title>{title}{appendSiteTitle && " — PyCon AU 2026"}</title>
     {description && <meta name="description" content={description} />}
+
+    <!-- Open Graph metadata -->
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    {absoluteOgImage && <meta property="og:image" content={absoluteOgImage} />}
 
     <!-- Font preconnects and stylesheets -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

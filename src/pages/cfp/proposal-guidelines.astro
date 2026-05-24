@@ -13,7 +13,7 @@ import PageHeaderTitle from "../../components/header/PageHeaderTitle.astro";
 import Base from "../../layouts/Base.astro";
 import TypographyLink from "../../components/typography/TypographyLink.astro";
 
-const tracks = (await getCollection("specialist-tracks")).sort((a, b) => a.id.localeCompare(b.id));
+const tracks = (await getCollection("cfp-specialist-tracks")).sort((a, b) => a.id.localeCompare(b.id));
 
 export const nav = {
   order: 1,
