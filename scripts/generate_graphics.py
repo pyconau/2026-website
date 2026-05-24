@@ -291,7 +291,8 @@ def _paste_speakers_og(
 
     # OG right: avatar anchors from right edge, grows left
     if layout_name == "right":
-        avatar_x_positions = [base.x - (i + 1) * (d + AVATAR_GAP) for i in range(num_speakers)]
+        # First avatar's right edge at base.x, subsequent avatars extend leftward
+        avatar_x_positions = [base.x - d - i * (d + AVATAR_GAP) for i in range(num_speakers)]
     else:
         # OG left: avatar grows rightward (standard)
         avatar_x_positions = [base.x + i * (d + AVATAR_GAP) for i in range(num_speakers)]
