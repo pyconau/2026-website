@@ -16,6 +16,16 @@ const {
   ogImage,
   schemaData,
 } = Astro.props;
+
+// Convert relative OG image path to absolute URL
+// Use request origin for dev server, fallback to Astro.site for production
+const siteUrl = Astro.request?.url
+  ? new URL("/", Astro.request.url).toString()
+  : Astro.site?.toString();
+
+const absoluteOgImage = ogImage && siteUrl
+  ? new URL(ogImage, siteUrl).toString()
+  : undefined;
 ---
 
 <!doctype html>
@@ -31,7 +41,7 @@ const {
     <!-- Open Graph metadata -->
     <meta property="og:title" content={title} />
     {description && <meta property="og:description" content={description} />}
-    {ogImage && <meta property="og:image" content={ogImage} />}
+    {absoluteOgImage && <meta property="og:image" content={absoluteOgImage} />}
 
     <!-- Font preconnects and stylesheets -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

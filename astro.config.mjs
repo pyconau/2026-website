@@ -4,9 +4,23 @@ import mdx from "@astrojs/mdx";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 
+// Determine site URL based on environment
+const getSiteUrl = () => {
+  // Vercel preview deployments
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  // Custom dev environment variable
+  if (process.env.SITE_URL) {
+    return process.env.SITE_URL;
+  }
+  // Default to production
+  return "https://2026.pycon.org.au";
+};
+
 // https://astro.build/config
 export default defineConfig({
-  site: "https://2026.pycon.org.au",
+  site: getSiteUrl(),
   markdown: {
     syntaxHighlight: "prism",
   },
