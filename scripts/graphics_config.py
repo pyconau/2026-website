@@ -138,12 +138,12 @@ PANEL_LAYOUTS: dict[str, dict[str, PanelLayout]] = {
             ),
             speaker_avatar=AvatarRegion(
                 x=108,
-                y=585,
+                y=569,
                 diameter=114,
             ),
             speaker_name=TextRegion(
                 x=111,
-                y=711,
+                y=699,
                 width=352,
                 height=35,
                 font_file="fonts/PlusJakartaSans-VariableFont_wght.ttf",
