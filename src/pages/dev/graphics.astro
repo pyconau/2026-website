@@ -9,8 +9,8 @@ const sessionGraphics = sessions
   .map((s) => ({
     code: s.data.code,
     title: s.data.title,
-    layout: s.data.layout || "layout_1",
-    path: `/graphics/sessions/${s.data.code}-${s.data.layout || "layout_1"}.png`,
+    layout: s.data.layout || "layout_2",
+    path: `/graphics/sessions/${s.data.code}-${s.data.layout || "layout_2"}.png`,
   }))
   .sort((a, b) => a.code.localeCompare(b.code));
 ---
