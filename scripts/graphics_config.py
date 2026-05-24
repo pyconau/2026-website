@@ -112,7 +112,7 @@ PANEL_LAYOUTS: dict[str, dict[str, PanelLayout]] = {
                 weight=800,
             ),
         ),
-        "og": PanelLayout(
+        "square": PanelLayout(
             name="left",
             width=1200,
             height=1200,
@@ -220,7 +220,7 @@ PANEL_LAYOUTS: dict[str, dict[str, PanelLayout]] = {
                 weight=800,
             ),
         ),
-        "og": PanelLayout(
+        "square": PanelLayout(
             name="right",
             width=1200,
             height=1200,
