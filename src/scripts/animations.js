@@ -75,15 +75,15 @@ function initReadMore() {
     if (!paragraph) return;
 
     // Temporarily add line-clamp to check if truncation is needed
-    paragraph.classList.add("line-clamp-4");
+    paragraph.classList.add("line-clamp-6");
     const needsTruncation = paragraph.scrollHeight > paragraph.clientHeight;
-    paragraph.classList.remove("line-clamp-4");
+    paragraph.classList.remove("line-clamp-6");
 
     // Only add functionality if content exceeds 4 lines
     if (!needsTruncation) return;
 
     // Add line-clamp class
-    paragraph.classList.add("line-clamp-4");
+    paragraph.classList.add("line-clamp-6");
 
     // Create read more button
     const button = document.createElement("button");
@@ -92,7 +92,7 @@ function initReadMore() {
     button.textContent = "Read more";
 
     button.addEventListener("click", () => {
-      paragraph.classList.remove("line-clamp-4");
+      paragraph.classList.remove("line-clamp-6");
       paragraph.classList.add("line-clamp-none");
       button.remove(); // Remove button after expanding
     });

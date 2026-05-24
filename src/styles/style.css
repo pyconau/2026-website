@@ -216,7 +216,8 @@ footer ul li a {
   @apply space-y-7;
 }
 
-.rich-text a {
+.rich-text a,
+.read-more a {
   @apply text-violet font-semibold underline;
 }
 .rich-text strong {
