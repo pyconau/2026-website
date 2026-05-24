@@ -97,7 +97,7 @@ const tracks = [
     <!-- Modal -->
     <div
       id="modal"
-      class="fixed inset-0 hidden flex-col items-center justify-center bg-black/80 p-4"
+      class="fixed inset-0 hidden flex items-center justify-center bg-black/80 p-4"
       onclick="if(event.target === this) this.classList.add('hidden')"
     >
       <button
@@ -106,7 +106,7 @@ const tracks = [
       >
         ✕
       </button>
-      <div class="max-h-[90vh] max-w-4xl overflow-auto rounded-lg bg-gray-900">
+      <div class="relative max-h-[90vh] max-w-4xl overflow-auto rounded-lg bg-gray-900">
         <img id="modal-img" src="" alt="" class="w-full" />
         <div class="p-4">
           <p id="modal-title" class="text-lg text-white"></p>
