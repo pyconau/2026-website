@@ -8,7 +8,6 @@ track:
 type: talk
 speakers:
 - QVSHY7
-layout: layout_2
 trackName: Main Conference
 abstract: Python powers the world’s most critical research, yet the software 
   behind the science often remains hidden and under supported. This talk distils

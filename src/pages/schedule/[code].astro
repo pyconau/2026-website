@@ -13,10 +13,12 @@ import { marked } from "marked";
 
 export async function getStaticPaths() {
   const sessions = await getCollection("sessions");
-  return sessions.map((session) => ({
-    params: { code: session.data.code },
-    props: { session },
-  }));
+  return sessions
+    .filter((session) => !session.data.tags?.includes("not-yet-announced"))
+    .map((session) => ({
+      params: { code: session.data.code },
+      props: { session },
+    }));
 }
 
 const { session } = Astro.props;

@@ -8,7 +8,6 @@ track: devrel
 type: talk
 speakers:
 - UFVRZL
-layout: layout_2
 trackName: DevRel
 abstract: "Tech demos can make or break a presentation, and sometimes even a company.
   When they're on a large stage and compressed into a handful of minutes, getting

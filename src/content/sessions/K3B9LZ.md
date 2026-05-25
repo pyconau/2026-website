@@ -8,7 +8,6 @@ track:
 type: talk
 speakers:
 - GX9AZX
-layout: layout_2
 trackName: Main Conference
 abstract: Every few years somebody swears the newest tool to magically avoid 
   needing developers will boot developers out of a job. Yet here we are, still 

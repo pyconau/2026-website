@@ -9,7 +9,6 @@ type: other
 speakers:
 - DQA3WM
 - 9LDURJ
-layout: layout_2
 trackName: DevRel
 abstract: We invite any conference attendee to this session. You do not need to 
   have a job title associated to DevRel. Developer Relations is about the 

@@ -8,7 +8,6 @@ track: research-software-engineering
 type: talk
 speakers:
 - EQJWS9
-layout: layout_2
 trackName: Research Software Engineering
 abstract: "I regularly enjoy performance that I absolutely did not earn. That’s because
   NumPy quietly handles an alarming number of hard problems on my behalf. In this

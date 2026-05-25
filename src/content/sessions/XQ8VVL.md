@@ -8,7 +8,6 @@ track:
 type: talk
 speakers:
 - 3N73EX
-layout: layout_2
 trackName: Main Conference
 abstract: "Do you ever go to a talk and find that the speaker doesn't talk about quite
   what you expected? Do you ever wish you could tell them, mid-talk, to talk about

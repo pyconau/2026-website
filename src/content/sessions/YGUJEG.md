@@ -8,7 +8,6 @@ track: data-and-ai
 type: talk
 speakers:
 - SNSDVY
-layout: layout_2
 trackName: Data & AI
 abstract: "Improving in archery often goes beyond simply increasing your score; it
   also means building consistency, tightening groupings, and recognising patterns

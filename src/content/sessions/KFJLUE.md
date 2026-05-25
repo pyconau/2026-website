@@ -8,7 +8,6 @@ track: cybersecurity
 type: talk
 speakers:
 - PAU3DM
-layout: layout_2
 trackName: Cybersecurity
 abstract: "Sam built a great gateway. Users are authenticated, requests are validated,
   the front door is solid. Inside the cluster, services trust each other — because

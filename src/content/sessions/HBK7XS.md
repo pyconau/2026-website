@@ -8,7 +8,6 @@ track: education
 type: talk
 speakers:
 - XCQ89F
-layout: layout_2
 trackName: Education
 abstract: "When students can use AI to generate code, explain syntax, and accelerate
   routine development tasks, the challenge for teachers is no longer just how to assess

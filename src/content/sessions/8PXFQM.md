@@ -8,7 +8,6 @@ track: research-software-engineering
 type: talk
 speakers:
 - SKY3HY
-layout: layout_2
 trackName: Research Software Engineering
 abstract: Software is widely used and produced in the course of research. Yet, 
   published works (e.g. journal papers and conference posters) do not always 

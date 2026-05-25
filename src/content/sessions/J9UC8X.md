@@ -8,7 +8,6 @@ track: education
 type: talk
 speakers:
 - JSXAPB
-layout: layout_2
 trackName: Education
 abstract: "How do you get teenagers to care about what data they share online? How
   do you teach them how to make a safe password? How do you keep them engaged and

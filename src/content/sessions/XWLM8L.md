@@ -8,7 +8,6 @@ track: data-and-ai
 type: talk
 speakers:
 - ALM8CW
-layout: layout_2
 trackName: Data & AI
 abstract: "RAG applications come in many shapes. Some start as simple keyword searches
   over historical records. Others layer on semantic embeddings, hybrid retrieval (semantic

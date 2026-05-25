@@ -8,7 +8,6 @@ track: data-and-ai
 type: talk
 speakers:
 - 8SBWWP
-layout: layout_2
 trackName: Data & AI
 abstract: "Dictionaries are one of the first tools Python developers reach for: fast,
   flexible, and easy to use when building something new. But when do they stop being

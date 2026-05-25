@@ -9,7 +9,6 @@ track: education
 type: talk
 speakers:
 - YZDUTX
-layout: layout_2
 trackName: Education
 abstract: Python has become a standard for many (although not all) secondary 
   schools teaching Digital Technologies in Queensland and Australia more 

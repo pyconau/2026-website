@@ -8,7 +8,7 @@ track:
 type: talk
 speakers:
 - GRFBNL
-layout: layout_2
+- HAUZCJ
 trackName: Main Conference
 abstract: "I'm not joking. In 2025 and 2026 our university rocketry team launched
   several high-powered 12ft tall competition rockets with a custom Python-based process

@@ -9,7 +9,6 @@ track:
 type: talk
 speakers:
 - K8YDBG
-layout: layout_2
 trackName: Main Conference
 abstract: "Many teams building AI products focus on parsing new context and editing
   prompts, without knowing if things are improving. They then learn that even a perfect

@@ -8,7 +8,6 @@ track: cybersecurity
 type: talk
 speakers:
 - KND8AG
-layout: layout_2
 trackName: Cybersecurity
 abstract: "Authentication continues to fail not because users ignore security advice,
   but because our systems rely on humans managing reusable secrets. Despite password

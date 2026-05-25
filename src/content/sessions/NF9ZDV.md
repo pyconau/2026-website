@@ -8,7 +8,6 @@ track: cybersecurity
 type: talk
 speakers:
 - JF8RCR
-layout: layout_2
 trackName: Cybersecurity
 abstract: "Application security is not getting easier. Despite better tools, more
   CVEs, and widespread “shift-left” adoption, vulnerabilities continue to scale with

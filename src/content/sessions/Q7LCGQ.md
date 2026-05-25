@@ -8,7 +8,6 @@ track:
 type: talk
 speakers:
 - AENJDR
-layout: layout_2
 trackName: Main Conference
 abstract: "_Do you feel that hard drives and USBs aren’t keeping pace with your organisation’s
   \"AI-first dynamic cloud-based SaaS B2B\" technology strategy?_ \r\n\r\nToday, I

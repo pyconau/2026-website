@@ -8,7 +8,6 @@ track:
 type: talk
 speakers:
 - MDFERU
-layout: layout_2
 trackName: Main Conference
 abstract: "_Golf lessons beginning in month six for Tiger Woods (6)_\r\nCode golf
   is terrible programming practice AND no one would want to read text written the

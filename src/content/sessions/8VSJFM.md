@@ -8,7 +8,6 @@ track: platform-engineering
 type: talk
 speakers:
 - FPL7YF
-layout: layout_2
 trackName: Platform Engineering
 abstract: Before the advent of Cloud Computing, owning all your servers and 
   keeping them in a server room or a leased datacenter was the norm if not the 

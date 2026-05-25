@@ -8,7 +8,6 @@ track:
 type: talk
 speakers:
 - U7H7LA
-layout: layout_2
 trackName: Main Conference
 abstract: "Every team has at least one go-to person that gets others out of sticky
   situations!\r\nAre they being recognised for contributions to building a cohesive

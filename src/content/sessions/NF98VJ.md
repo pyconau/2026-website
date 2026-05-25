@@ -8,7 +8,6 @@ track: research-software-engineering
 type: talk
 speakers:
 - GVHZNZ
-layout: layout_2
 trackName: Research Software Engineering
 abstract: "Moving computationally intensive scientific algorithms from desktop applications
   to cloud-based services presents unique challenges: How do you maintain performance

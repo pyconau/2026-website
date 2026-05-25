@@ -8,7 +8,6 @@ track: education
 type: talk
 speakers:
 - YZGZ9W
-layout: layout_2
 trackName: Education
 abstract: Girls don’t leave STEM once; they leave three times. First, in primary
   school when “I’m bad at maths” becomes a personality. Second, in high school 

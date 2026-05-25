@@ -8,7 +8,6 @@ track:
 type: talk
 speakers:
 - UJYFNX
-layout: layout_2
 trackName: Main Conference
 abstract: "At the start of 2026 I decided I wanted to build my own Coding Agent. The
   goal was to build the tool that would let me do the work of a Software Engineer,

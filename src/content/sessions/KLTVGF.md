@@ -8,7 +8,6 @@ track:
 type: talk
 speakers:
 - DXQWZN
-layout: layout_2
 trackName: Main Conference
 abstract: "The tech industry is notoriously fixated on solving things. All products
   are \"solutions\", all problems are fixable, all friction is anti-productive waste

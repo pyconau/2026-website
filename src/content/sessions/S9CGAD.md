@@ -8,7 +8,6 @@ track:
 type: talk
 speakers:
 - RJBY8Y
-layout: layout_2
 trackName: Main Conference
 abstract: "`import re`. `from pathlib import Path`. Python's import system is easy
   to take for granted, and most of the time we don't need to think about how the import

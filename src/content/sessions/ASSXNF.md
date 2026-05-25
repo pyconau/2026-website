@@ -8,7 +8,6 @@ track: devrel
 type: talk
 speakers:
 - PDH7TL
-layout: layout_2
 trackName: DevRel
 abstract: AI assistants can answer most technical questions in seconds now. So 
   why would a developer sit through a guided workshop? Because reading an answer

@@ -8,7 +8,6 @@ track:
 type: talk
 speakers:
 - ZJPT93
-layout: layout_2
 trackName: Main Conference
 abstract: "Breathing is something we all do, tens of thousands of times a day, without
   even thinking. Should be pretty straightforward to animate, right?\r\nTo answer

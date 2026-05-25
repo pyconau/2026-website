@@ -8,7 +8,6 @@ track:
 type: talk
 speakers:
 - GC3M8E
-layout: layout_2
 trackName: Main Conference
 abstract: "The fourth wave of the industrial revolution has been seen by many as a
   very bad idea. Fortunately we’ll soon all be replaced by sentient machines ruled

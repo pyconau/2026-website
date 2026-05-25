@@ -210,8 +210,18 @@ def process_breaks(
             continue
         seen_breaks.add(break_key)
 
+        # Stable code from start datetime + room slug, e.g. BREAK-202608261200-ballroom1
+        start_str = slot.get("start", "")
+        try:
+            start_dt = dateparser.parse(start_str)
+            start_part = start_dt.strftime("%Y%m%d%H%M")
+        except Exception:
+            start_part = re.sub(r"[^0-9]", "", start_str)[:12]
+        room_slug = re.sub(r"[^a-z0-9]+", "", room_display.lower())
+        break_code = f"BREAK-{start_part}-{room_slug}"
+
         break_data = {
-            "code": f"BREAK-{slot['id']}",  # Synthetic code for breaks
+            "code": break_code,
             "title": title,
             "start": slot.get("start"),
             "end": slot.get("end"),
@@ -233,6 +243,7 @@ def process_sessions(
     track_id_to_name: dict[int, str],
     slots_by_submission: dict[str, dict],
     answers_by_submission: dict[str, list[dict]],
+    tag_id_to_name: dict[int, str] | None = None,
     verbose: bool = True,
 ) -> list[dict]:
     """Process Pretalx submissions into session data."""
@@ -295,6 +306,11 @@ def process_sessions(
         submission_answers = answers_by_submission.get(code, [])
         content_warning = get_answer_for_question(submission_answers, CONTENT_WARNING_QUESTION_ID)
 
+        # Extract tags — Pretalx returns tag IDs (int), resolve to names via tag_id_to_name
+        raw_tags = sub.get("tags", []) or []
+        tag_map = tag_id_to_name or {}
+        tags = [tag_map[t] for t in raw_tags if isinstance(t, int) and t in tag_map]
+
         session = {
             "code": code,
             "title": title,
@@ -307,8 +323,8 @@ def process_sessions(
             "speakers": speakers,
             "abstract": abstract if abstract else None,
             "contentWarning": content_warning,
+            "tags": tags,
             "body": body,
-            "layout": "layout_1",  # Default layout for graphics generation
         }
 
         if verbose and (i + 1) % 10 == 0:
@@ -415,8 +431,8 @@ def write_session_file(session: dict, output_dir: Path) -> None:
     code = session["code"]
     output_path = output_dir / f"{code}.md"
 
-    # Load existing frontmatter to preserve custom fields like layout
-    existing_layout = "layout_2"  # default layout
+    # Preserve layout only if the existing file has it set
+    existing_layout = None
     if output_path.exists():
         try:
             with open(output_path, "r", encoding="utf-8") as f:
@@ -424,10 +440,9 @@ def write_session_file(session: dict, output_dir: Path) -> None:
                 match = re.match(r'^---\n(.*?)\n---\n', content, re.DOTALL)
                 if match:
                     existing_frontmatter = yaml.load(match.group(1)) or {}
-                    if "layout" in existing_frontmatter:
-                        existing_layout = existing_frontmatter["layout"]
+                    existing_layout = existing_frontmatter.get("layout")
         except Exception:
-            pass  # If we can't read the file, just use the default layout
+            pass
 
     frontmatter = {
         "title": session["title"],
@@ -438,8 +453,9 @@ def write_session_file(session: dict, output_dir: Path) -> None:
         "track": session["track"],
         "type": session["type"],
         "speakers": session["speakers"],
-        "layout": existing_layout,
     }
+    if existing_layout:
+        frontmatter["layout"] = existing_layout
 
     # Add optional fields only if present
     if session.get("trackName"):
@@ -450,6 +466,8 @@ def write_session_file(session: dict, output_dir: Path) -> None:
         frontmatter["contentWarning"] = session["contentWarning"]
     if session.get("sponsor"):
         frontmatter["sponsor"] = session["sponsor"]
+    if session.get("tags"):
+        frontmatter["tags"] = session["tags"]
 
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -523,6 +541,11 @@ def main():
         submission_types[st["id"]] = st_name
     print(f"  Found {len(submission_types)} submission types")
 
+    print("\nFetching tags from Pretalx...")
+    tags_data = paginate_api("tags/")
+    tag_id_to_name: dict[int, str] = {t["id"]: t["tag"] for t in tags_data}
+    print(f"  Found {len(tag_id_to_name)} tags")
+
     print("\nFetching submissions from Pretalx...")
     submissions = paginate_api("submissions/", params={"state": "confirmed"})
     print(f"  Found {len(submissions)} confirmed submissions")
@@ -592,7 +615,7 @@ def main():
 
     # Process data
     print("\nProcessing sessions...")
-    sessions = process_sessions(submissions, track_mappings, track_id_to_name, slots_by_submission, answers_by_submission)
+    sessions = process_sessions(submissions, track_mappings, track_id_to_name, slots_by_submission, answers_by_submission, tag_id_to_name)
     print(f"  Processed {len(sessions)} sessions")
 
     print("\nProcessing breaks...")
