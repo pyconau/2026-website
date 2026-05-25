@@ -233,6 +233,7 @@ def process_sessions(
     track_id_to_name: dict[int, str],
     slots_by_submission: dict[str, dict],
     answers_by_submission: dict[str, list[dict]],
+    tag_id_to_name: dict[int, str] | None = None,
     verbose: bool = True,
 ) -> list[dict]:
     """Process Pretalx submissions into session data."""
@@ -295,6 +296,11 @@ def process_sessions(
         submission_answers = answers_by_submission.get(code, [])
         content_warning = get_answer_for_question(submission_answers, CONTENT_WARNING_QUESTION_ID)
 
+        # Extract tags — Pretalx returns tag IDs (int), resolve to names via tag_id_to_name
+        raw_tags = sub.get("tags", []) or []
+        tag_map = tag_id_to_name or {}
+        tags = [tag_map[t] for t in raw_tags if isinstance(t, int) and t in tag_map]
+
         session = {
             "code": code,
             "title": title,
@@ -307,6 +313,7 @@ def process_sessions(
             "speakers": speakers,
             "abstract": abstract if abstract else None,
             "contentWarning": content_warning,
+            "tags": tags,
             "body": body,
             "layout": "layout_1",  # Default layout for graphics generation
         }
@@ -450,6 +457,8 @@ def write_session_file(session: dict, output_dir: Path) -> None:
         frontmatter["contentWarning"] = session["contentWarning"]
     if session.get("sponsor"):
         frontmatter["sponsor"] = session["sponsor"]
+    if session.get("tags"):
+        frontmatter["tags"] = session["tags"]
 
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -523,6 +532,11 @@ def main():
         submission_types[st["id"]] = st_name
     print(f"  Found {len(submission_types)} submission types")
 
+    print("\nFetching tags from Pretalx...")
+    tags_data = paginate_api("tags/")
+    tag_id_to_name: dict[int, str] = {t["id"]: t["tag"] for t in tags_data}
+    print(f"  Found {len(tag_id_to_name)} tags")
+
     print("\nFetching submissions from Pretalx...")
     submissions = paginate_api("submissions/", params={"state": "confirmed"})
     print(f"  Found {len(submissions)} confirmed submissions")
@@ -592,7 +606,7 @@ def main():
 
     # Process data
     print("\nProcessing sessions...")
-    sessions = process_sessions(submissions, track_mappings, track_id_to_name, slots_by_submission, answers_by_submission)
+    sessions = process_sessions(submissions, track_mappings, track_id_to_name, slots_by_submission, answers_by_submission, tag_id_to_name)
     print(f"  Processed {len(sessions)} sessions")
 
     print("\nProcessing breaks...")

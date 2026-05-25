@@ -18,6 +18,7 @@ const sessions = defineCollection({
     abstract: z.string().optional(),
     contentWarning: z.string().optional(),
     youtubeSlug: z.string().optional(),
+    tags: z.array(z.string()).default([]),
     graphicsLayout: z.enum(["left", "right"]).optional(), // Graphics panel layout (left or right)
     theme: z.string().optional(), // Graphics theme (e.g. accent_coral, charcoal)
   }),

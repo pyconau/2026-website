@@ -117,10 +117,11 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
                     <div class="column">
                       {/* Full-width sessions (only in first column, will visually span via CSS) */}
                       {fullWidthInThisColumn.map((ps) => {
+                        const isNotYetAnnounced = ps.session.data.tags?.includes("not-yet-announced");
                         const speakers = (ps.session.data.speakers || [])
                           .map((code: string) => speakerMap.get(code))
                           .filter(Boolean);
-                        const speakerNames = speakers.map((s: any) => s.data.name).join(", ");
+                        const speakerNames = !isNotYetAnnounced ? speakers.map((s: any) => s.data.name).join(", ") : "";
                         const timeStr = ps.session.data.start && ps.session.data.end
                           ? formatSessionTime(ps.session.data.start, ps.session.data.end)
                           : "";
@@ -129,10 +130,11 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
                           : ps.colSpan === 2 ? "schedule-event-wrapper--span-2"
                           : "schedule-event-wrapper--fullwidth";
 
+                        const EventTag = isNotYetAnnounced ? "div" : "a";
                         return (
                           <div class={`schedule-event-wrapper ${spanClass}`} style={`top: ${ps.topPercent}%;`}>
-                            <a
-                              href={`/schedule/${ps.session.data.code}`}
+                            <EventTag
+                              href={isNotYetAnnounced ? undefined : `/schedule/${ps.session.data.code}`}
                               class="schedule-event"
                               style={`height: ${ps.heightPx}px; background-color: white; color: #282828;`}
                             >
@@ -145,7 +147,7 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
                                   <span class="schedule-event-presenter">{speakerNames}</span>
                                 )}
                               </div>
-                            </a>
+                            </EventTag>
                           </div>
                         );
                       })}
@@ -199,16 +201,18 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
 
                       {/* Regular sessions */}
                       {roomSessions.map((ps) => {
+                        const isNotYetAnnounced = ps.session.data.tags?.includes("not-yet-announced");
                         const trackColor = getTrackColor(ps.session.data.track);
                         const speakers = (ps.session.data.speakers || [])
                           .map((code: string) => speakerMap.get(code))
                           .filter(Boolean);
-                        const speakerNames = speakers.map((s: any) => s.data.name).join(", ");
+                        const speakerNames = !isNotYetAnnounced ? speakers.map((s: any) => s.data.name).join(", ") : "";
                         const timeStr = ps.session.data.start && ps.session.data.end
                           ? formatSessionTime(ps.session.data.start, ps.session.data.end)
                           : "";
                         const trackName = ps.session.data.trackName;
 
+                        const EventTag = isNotYetAnnounced ? "div" : "a";
                         return (
                           <div class="schedule-event-wrapper" style={`top: ${ps.topPercent}%;`}>
                             {ps.showTrackHeader && (
@@ -230,8 +234,8 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
                                 <span class="schedule-track-name">{trackName}</span>
                               </div>
                             )}
-                            <a
-                              href={`/schedule/${ps.session.data.code}`}
+                            <EventTag
+                              href={isNotYetAnnounced ? undefined : `/schedule/${ps.session.data.code}`}
                               class="schedule-event"
                               style={`height: ${ps.heightPx}px; background-color: ${trackColor.bg}; color: ${trackColor.text};`}
                             >
@@ -244,7 +248,7 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
                                   <span class="schedule-event-presenter">{speakerNames}</span>
                                 )}
                               </div>
-                            </a>
+                            </EventTag>
                           </div>
                         );
                       })}
