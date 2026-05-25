@@ -10,13 +10,14 @@ speakers:
 - GMGTSH
 layout: layout_2
 trackName: Main Conference
-graphicsLayout: left
-theme: accent_violet
+abstract: "Python 3.13 was the first Python version released with a free-threaded
+  mode. Although the default interpreter still utilizes the GIL, it provides provisions
+  that enable us to run a free-threaded version of the interpreter with the GIL disabled.
+  \r\n\r\nThrough this talk, we’ll set up and run the free-threaded interpreter, benchmarking
+  it against the GIL-enabled version for various tasks. We'll assess the impact on
+  single-threaded vs multithreaded code and test the performance across CPU-bound
+  and I/O-bound tasks, aiming to identify scenarios where free-threaded Python excels."
 ---
-
-Python 3.13 was the first Python version released with a free-threaded mode. Although the default interpreter still utilizes the GIL, it provides provisions that enable us to run a free-threaded version of the interpreter with the GIL disabled. 
-
-Through this talk, we’ll set up and run the free-threaded interpreter, benchmarking it against the GIL-enabled version for various tasks. We'll assess the impact on single-threaded vs multithreaded code and test the performance across CPU-bound and I/O-bound tasks, aiming to identify scenarios where free-threaded Python excels.
 
 For decades, the Global Interpreter Lock (GIL) has been one of Python’s most debated design choices. It simplified memory management while limiting true parallelism. With Python 3.13, that story begins to change.
 

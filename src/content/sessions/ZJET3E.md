@@ -10,11 +10,9 @@ speakers:
 - APHKDN
 layout: layout_2
 trackName: Main Conference
-graphicsLayout: left
-theme: accent_emerald
+abstract: If Australia's electoral districts were drawn just a bit differently 
+  (or by a lot), how much would that change election results?
 ---
-
-If Australia's electoral districts were drawn just a bit differently (or by a lot), how much would that change election results?
 
 The Australian Electoral Commission (AEC) controls electoral boundaries in Australia - they do a fantastic job. They also provide us with voting data that shows us how different booths vote. Could we take this data and become the anti-AEC?
 

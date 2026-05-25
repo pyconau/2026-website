@@ -8,11 +8,8 @@ track:
 type: plenary
 speakers: []
 layout: layout_2
-graphicsLayout: right
-theme: accent_lavender
+abstract: Like regular talks, but shorter! Anything could happen!
 ---
-
-Like regular talks, but shorter! Anything could happen!
 
 Lightning talks are presented by YOU! Yes you! 🫵
 

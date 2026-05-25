@@ -10,17 +10,16 @@ speakers:
 - 3N73EX
 layout: layout_2
 trackName: Main Conference
-graphicsLayout: left
-theme: accent_emerald
+abstract: "Do you ever go to a talk and find that the speaker doesn't talk about quite
+  what you expected? Do you ever wish you could tell them, mid-talk, to talk about
+  something else?\r\n\r\nWell, this is your opportunity to guide me through my own
+  talk!\r\n\r\nI'm going to tell you all about FastAPI. Why it's my web framework
+  of choice, what makes it easy to use, develop and test. How it empowers you to focus
+  on the important stuff instead of spending loads of time on boilerplate.\r\n\r\n\
+  There's far too much in one framework to talk about it all in 30 minutes though,
+  so you'll get to vote on which topics I should focus on, which examples should get
+  more detail, and what matters to you."
 ---
-
-Do you ever go to a talk and find that the speaker doesn't talk about quite what you expected? Do you ever wish you could tell them, mid-talk, to talk about something else?
-
-Well, this is your opportunity to guide me through my own talk!
-
-I'm going to tell you all about FastAPI. Why it's my web framework of choice, what makes it easy to use, develop and test. How it empowers you to focus on the important stuff instead of spending loads of time on boilerplate.
-
-There's far too much in one framework to talk about it all in 30 minutes though, so you'll get to vote on which topics I should focus on, which examples should get more detail, and what matters to you.
 
 I've used a lot of web frameworks over the years. First I was a student and used Flask. Then I was a consultant and used Ruby on Rails. After that, I used Django at a startup. In Big Tech I used Java's Spring framework.
 

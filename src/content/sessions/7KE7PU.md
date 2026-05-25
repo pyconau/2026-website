@@ -10,11 +10,19 @@ speakers:
 - TX8ES3
 layout: layout_2
 trackName: Data & AI
-graphicsLayout: left
-theme: charcoal_lemon
+abstract: AI agents are changing how we build software. They have augmented our 
+  software engineering workflow and challenged us to practice a new discipline, 
+  Agentic Engineering. Central to this emerging discipline is the skill, a 
+  natural language markdown file that bundles workflows, tools, and domain 
+  knowledge into a new unit of work for defining what an agent can do. Adopted 
+  as an open standard across the industry, skills sit above programming 
+  languages, not within them. If you've ever written a runbook, a playbook, or 
+  an SOP, you already understand what a skill encodes. This talk explores what a
+  skill is, how skills compose through context rather than interfaces, and what 
+  breaks when your smallest unit of work is no longer deterministic. It is drawn
+  from real experience building an enterprise architect agent, with practical 
+  examples in Python.
 ---
-
-AI agents are changing how we build software. They have augmented our software engineering workflow and challenged us to practice a new discipline, Agentic Engineering. Central to this emerging discipline is the skill, a natural language markdown file that bundles workflows, tools, and domain knowledge into a new unit of work for defining what an agent can do. Adopted as an open standard across the industry, skills sit above programming languages, not within them. If you've ever written a runbook, a playbook, or an SOP, you already understand what a skill encodes. This talk explores what a skill is, how skills compose through context rather than interfaces, and what breaks when your smallest unit of work is no longer deterministic. It is drawn from real experience building an enterprise architect agent, with practical examples in Python.
 
 We've spent decades perfecting abstractions for code such as functions, classes, modules, services. Each one helped us manage complexity at increasing levels of codebase and team size. But AI agents have bent this model by introducing a new opportunity using natural language.
 

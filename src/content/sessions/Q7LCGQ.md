@@ -10,13 +10,13 @@ speakers:
 - AENJDR
 layout: layout_2
 trackName: Main Conference
-graphicsLayout: left
-theme: accent_lime
+abstract: "_Do you feel that hard drives and USBs aren’t keeping pace with your organisation’s
+  \"AI-first dynamic cloud-based SaaS B2B\" technology strategy?_ \r\n\r\nToday, I
+  present a novel (and potentially ill-advised) alternative: a file-system that uses
+  Slack Emojis as a storage device. We'll dive into how file systems work, how you
+  can use Python to turn Slack Emojis into infinite free file storage, and maybe find
+  out if this was secretly a terrible idea all along."
 ---
-
-_Do you feel that hard drives and USBs aren’t keeping pace with your organisation’s "AI-first dynamic cloud-based SaaS B2B" technology strategy?_ 
-
-Today, I present a novel (and potentially ill-advised) alternative: a file-system that uses Slack Emojis as a storage device. We'll dive into how file systems work, how you can use Python to turn Slack Emojis into infinite free file storage, and maybe find out if this was secretly a terrible idea all along.
 
 File Systems are an integral part of how modern computers work. They organise the bits and bytes on your hard drives and USB drives, turning them into files and folders that your computer can read.
 

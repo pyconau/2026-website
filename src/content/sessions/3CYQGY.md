@@ -10,12 +10,12 @@ speakers:
 - U7H7LA
 layout: layout_2
 trackName: Main Conference
-graphicsLayout: left
-theme: accent_coral
+abstract: "Every team has at least one go-to person that gets others out of sticky
+  situations!\r\nAre they being recognised for contributions to building a cohesive
+  team, or getting bogged down in work that isn’t part of their job description? Let’s
+  get stuck into the concept of glue work, and how handling it properly can help your
+  team bond."
 ---
-
-Every team has at least one go-to person that gets others out of sticky situations!
-Are they being recognised for contributions to building a cohesive team, or getting bogged down in work that isn’t part of their job description? Let’s get stuck into the concept of glue work, and how handling it properly can help your team bond.
 
 This talk is geared towards anyone who works with other people! 
 It’s a love letter to those engaging in tasks that often go unacknowledged, and an invitation to those who experience lots of focus time and visible credit.

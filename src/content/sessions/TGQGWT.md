@@ -11,8 +11,8 @@ speakers:
 - SLEHXC
 - H3PQDH
 layout: layout_2
-graphicsLayout: left
-theme: accent_coral
+abstract: We conclude PyCon AU 2026 together for closing remarks as we reflect 
+  on what was, and look forward to what will be (sprints!)
 ---
 
-We conclude PyCon AU 2026 together for closing remarks as we reflect on what was, and look forward to what will be (sprints!)
+

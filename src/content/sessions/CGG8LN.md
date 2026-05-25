@@ -10,11 +10,15 @@ speakers:
 - YZGZ9W
 layout: layout_2
 trackName: Education
-graphicsLayout: right
-theme: accent_lime
+abstract: Girls don’t leave STEM once; they leave three times. First, in primary
+  school when “I’m bad at maths” becomes a personality. Second, in high school 
+  when they drop senior tech for “something more cool.” Third, in first‑year 
+  engineering when the boyish culture and difficulty finally wear them down. I’m
+  a mechatronics engineer who is terrified of coding and still somehow convinces
+  girls to give it a chance. By being openly honest about my fear, connecting 
+  code to real hobbies, and normalising failure out loud, I turn anxiety into 
+  curiosity - and keep more girls in the room.
 ---
-
-Girls don’t leave STEM once; they leave three times. First, in primary school when “I’m bad at maths” becomes a personality. Second, in high school when they drop senior tech for “something more cool.” Third, in first‑year engineering when the boyish culture and difficulty finally wear them down. I’m a mechatronics engineer who is terrified of coding and still somehow convinces girls to give it a chance. By being openly honest about my fear, connecting code to real hobbies, and normalising failure out loud, I turn anxiety into curiosity - and keep more girls in the room.
 
 This talk is for Python educators, mentors, and community organisers who care about women in tech but keep watching girls disappear at every stage. I’ll share what I’ve seen as an educator and volunteer across schools and outreach programs: three crucial dropout points for girls - primary school, senior subject choices, and first‑year engineering - and how my “I’m terrified of coding” honesty weirdly helps.
 

@@ -10,18 +10,22 @@ speakers:
 - MDFERU
 layout: layout_2
 trackName: Main Conference
-graphicsLayout: left
-theme: accent_lime
+abstract: "_Golf lessons beginning in month six for Tiger Woods (6)_\r\nCode golf
+  is terrible programming practice AND no one would want to read text written the
+  same way as cryptic crossword clues. Neither makes any sense! But you can learn
+  from both and they tickle one's brain in a way that puzzles often do.\r\n\r\nThe
+  benefit of both Cryptic crossword clues and code golf is that they are motivating
+  ways to learn the rules of a thing. In Cryptic crosswords you essentially learn
+  the rules of cryptic crosswords while also learning a way to look at the English
+  language at its most flexible. Tiger Woods is the name of a golfer but without the
+  capitalisation it can also be used indicate the habitat of a tiger... not normal
+  woods, but the type of woods in which you'd find a tiger!\r\n\r\nLikewise code golf
+  can be a puzzle that helps you to learn the tricks of a language. Do you understand
+  the parsing rules of white space? You will when you want to remove one more character.
+  Do you use the walrus operator? It can save you a whole line!  Come along and learn
+  a bit about code golf and a bit about cryptic crosswords and probably get addicted
+  to one or the other.\r\n\r\n(The answer was _JUNGLE_ by the way)"
 ---
-
-_Golf lessons beginning in month six for Tiger Woods (6)_
-Code golf is terrible programming practice AND no one would want to read text written the same way as cryptic crossword clues. Neither makes any sense! But you can learn from both and they tickle one's brain in a way that puzzles often do.
-
-The benefit of both Cryptic crossword clues and code golf is that they are motivating ways to learn the rules of a thing. In Cryptic crosswords you essentially learn the rules of cryptic crosswords while also learning a way to look at the English language at its most flexible. Tiger Woods is the name of a golfer but without the capitalisation it can also be used indicate the habitat of a tiger... not normal woods, but the type of woods in which you'd find a tiger!
-
-Likewise code golf can be a puzzle that helps you to learn the tricks of a language. Do you understand the parsing rules of white space? You will when you want to remove one more character. Do you use the walrus operator? It can save you a whole line!  Come along and learn a bit about code golf and a bit about cryptic crosswords and probably get addicted to one or the other.
-
-(The answer was _JUNGLE_ by the way)
 
 "But how was anyone supposed to know that?!" is a phrase I hear often when I try to teach the rules of  cryptic crosswords
 

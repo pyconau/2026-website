@@ -10,22 +10,24 @@ speakers:
 - GVHZNZ
 layout: layout_2
 trackName: Research Software Engineering
-graphicsLayout: left
-theme: accent_violet
+abstract: "Moving computationally intensive scientific algorithms from desktop applications
+  to cloud-based services presents unique challenges: How do you maintain performance
+  when your code runs on ephemeral serverless infrastructure? How do you process datasets
+  with 40 million points when Lambda functions have memory limits? \r\n\r\n   This
+  talk shares our journey of migrating geological algorithms to a modern Python-based
+  cloud platform. We'll explore the performance optimization techniques that made
+  this possible, achieving 3–10× speedups through profiling-driven optimization across
+  Python, C++, SIMD, GPU acceleration, and cloud-native batch processing. \r\n\r\n\
+  \   This is not a talk about micro-optimizations or clever tricks. It's about building
+  a sustainable performance engineering practice: measure first, optimize second,
+  and automate the guardrails that prevent regression. Whether you're building ML
+  pipelines, scientific simulations, or data processing systems, these principles
+  will help you achieve high performance without sacrificing maintainability. \r\n\
+  \r\nAfter this talk, you will learn how to: \r\n\r\n- Decide when to optimize in
+  Python vs. when to reach for C++ \r\n- Use profiling tools to identify real bottlenecks—not
+  assumed ones \r\n- Apply quality guardrails that catch bugs and prevent performance
+  regressions \r\n- Design compute workloads for cloud-native horizontal scaling"
 ---
-
-Moving computationally intensive scientific algorithms from desktop applications to cloud-based services presents unique challenges: How do you maintain performance when your code runs on ephemeral serverless infrastructure? How do you process datasets with 40 million points when Lambda functions have memory limits? 
-
-   This talk shares our journey of migrating geological algorithms to a modern Python-based cloud platform. We'll explore the performance optimization techniques that made this possible, achieving 3–10× speedups through profiling-driven optimization across Python, C++, SIMD, GPU acceleration, and cloud-native batch processing. 
-
-   This is not a talk about micro-optimizations or clever tricks. It's about building a sustainable performance engineering practice: measure first, optimize second, and automate the guardrails that prevent regression. Whether you're building ML pipelines, scientific simulations, or data processing systems, these principles will help you achieve high performance without sacrificing maintainability. 
-
-After this talk, you will learn how to: 
-
-- Decide when to optimize in Python vs. when to reach for C++ 
-- Use profiling tools to identify real bottlenecks—not assumed ones 
-- Apply quality guardrails that catch bugs and prevent performance regressions 
-- Design compute workloads for cloud-native horizontal scaling
 
 Over the past 18 months, our team has migrated several battle-tested geological algorithms to a cloud-based Python platform. The work touched every layer: from designing high-level cloud-native architecture to low-level optimization and loop vectorization. Along the way, profiling repeatedly surprised us—the bottlenecks were not where we expected. 
 

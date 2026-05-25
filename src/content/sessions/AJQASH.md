@@ -11,11 +11,11 @@ speakers:
 - 9LDURJ
 layout: layout_2
 trackName: DevRel
-graphicsLayout: left
-theme: accent_coral
+abstract: We invite any conference attendee to this session. You do not need to 
+  have a job title associated to DevRel. Developer Relations is about the 
+  developer community of those who use technology and products, so please join 
+  us in discussions around this subject.
 ---
-
-We invite any conference attendee to this session. You do not need to have a job title associated to DevRel. Developer Relations is about the developer community of those who use technology and products, so please join us in discussions around this subject.
 
 Unconferences are created by the people who show up. We are holding this session in an "open space" format (see the [Open Space]([url](https://devopsdays.org/open-space-format/)) format description borrowed from another series of conferences). 
 

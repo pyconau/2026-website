@@ -10,13 +10,17 @@ speakers:
 - SNSDVY
 layout: layout_2
 trackName: Data & AI
-graphicsLayout: left
-theme: charcoal_lemon
+abstract: "Improving in archery often goes beyond simply increasing your score; it
+  also means building consistency, tightening groupings, and recognising patterns
+  such as shots drifting off-centre.  However, tracking the final position of arrows
+  after each shot is a slow, imprecise, and awkward process. \r\n\r\nIn this talk,
+  I show how I trained and validated a computer vision pipeline using oriented object
+  detection to infer arrow locations and scores directly from a target image. By deploying
+  this system on a Raspberry Pi, the process becomes simple enough to use during regular
+  practice, while also creating a record of shot placement that can be analysed over
+  time. This makes it possible to look beyond individual scores and start tracking
+  broader patterns in accuracy and consistency."
 ---
-
-Improving in archery often goes beyond simply increasing your score; it also means building consistency, tightening groupings, and recognising patterns such as shots drifting off-centre.  However, tracking the final position of arrows after each shot is a slow, imprecise, and awkward process. 
-
-In this talk, I show how I trained and validated a computer vision pipeline using oriented object detection to infer arrow locations and scores directly from a target image. By deploying this system on a Raspberry Pi, the process becomes simple enough to use during regular practice, while also creating a record of shot placement that can be analysed over time. This makes it possible to look beyond individual scores and start tracking broader patterns in accuracy and consistency.
 
 This talk goes beyond just detecting objects in an image: I cover the realities of hand annotating hundreds of training images, transforming model predictions into calibrated target co-ordinates, inferring scores from geometry, wrangling with validation, and making the whole thing usable in the field. 
 

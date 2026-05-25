@@ -11,13 +11,13 @@ speakers:
 - WD7XBJ
 layout: layout_2
 trackName: Main Conference
-graphicsLayout: right
-theme: accent_emerald
+abstract: "What does it mean to be productive? If you work in software development
+  that generally means shipping code, or at least changes to code. There’s always
+  been a tension in how to measure the output of a software developer though, and
+  that’s partly due to the at least partially creative nature of the work we do.\r\
+  \n\r\nSo when a tool comes along and promises to make you more productive, how do
+  you assess that?"
 ---
-
-What does it mean to be productive? If you work in software development that generally means shipping code, or at least changes to code. There’s always been a tension in how to measure the output of a software developer though, and that’s partly due to the at least partially creative nature of the work we do.
-
-So when a tool comes along and promises to make you more productive, how do you assess that?
 
 Yes, this is a talk about LLMs. It’s a talk about the effects of LLMs and what they mean for people in the software development industry. We feel like there’s a discussion to be had around what the role of a software developer was, what it is now, and what it could look like in the future.
 

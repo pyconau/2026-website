@@ -205,11 +205,13 @@ footer ul li a {
   @apply text-xs;
 }
 
-.text-intro {
-  @apply font-sans text-lg tracking-[0.01em] leading-[1.45];
+.text-intro,
+.text-intro p {
+  @apply font-sans text-xl tracking-[0.01em] leading-[1.45]!;
 }
 
-.rich-text p.text-intro + p {
+.rich-text p.text-intro + p,
+.rich-text div.text-intro + p {
   @apply mt-14;
 }
 .rich-text {

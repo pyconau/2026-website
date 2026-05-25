@@ -11,9 +11,8 @@ speakers:
 - H3PQDH
 - SLEHXC
 layout: layout_2
-graphicsLayout: right
-theme: accent_lavender
+abstract: "Welcome to PyCon AU 2026!\r\nJoin us for a short welcome address followed
+  by our first keynote (to be announced)."
 ---
 
-Welcome to PyCon AU 2026!
-Join us for a short welcome address followed by our first keynote (to be announced).
+

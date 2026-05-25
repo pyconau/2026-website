@@ -10,15 +10,18 @@ speakers:
 - JSXAPB
 layout: layout_2
 trackName: Education
-graphicsLayout: right
-theme: accent_lime
+abstract: "How do you get teenagers to care about what data they share online? How
+  do you teach them how to make a safe password? How do you keep them engaged and
+  maybe even teach them some python along the way?\r\n\r\nThese were the questions
+  I was asking myself when I created the latest cyber security project for our high-school
+  level workshops and it turns out, after a decade of running python workshops, I
+  might know the answers!\r\n\r\nCome along to see how I took a concept that I wanted
+  students to care about, and broke that down into hands-on activities, all designed
+  to get that “aha” moment in the classroom. Not only teaching python but using python
+  to facilitate teaching deeper computer and cyber literacy, by peeking behind the
+  curtain at what bad actors are actually doing, and how you can apply this technique
+  to other topics."
 ---
-
-How do you get teenagers to care about what data they share online? How do you teach them how to make a safe password? How do you keep them engaged and maybe even teach them some python along the way?
-
-These were the questions I was asking myself when I created the latest cyber security project for our high-school level workshops and it turns out, after a decade of running python workshops, I might know the answers!
-
-Come along to see how I took a concept that I wanted students to care about, and broke that down into hands-on activities, all designed to get that “aha” moment in the classroom. Not only teaching python but using python to facilitate teaching deeper computer and cyber literacy, by peeking behind the curtain at what bad actors are actually doing, and how you can apply this technique to other topics.
 
 Getting kids to think critically about their security online is pretty tricky. They get told what they should or shouldn't be doing on social media all the time, but is it really sinking in? 
 

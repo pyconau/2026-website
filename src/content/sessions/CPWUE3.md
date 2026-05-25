@@ -10,13 +10,11 @@ speakers:
 - GC3M8E
 layout: layout_2
 trackName: Main Conference
-graphicsLayout: left
-theme: accent_lime
+abstract: "The fourth wave of the industrial revolution has been seen by many as a
+  very bad idea. Fortunately we’ll soon all be replaced by sentient machines ruled
+  by tech oligarchs. \r\n\r\nDon't fear, there's some compelling parallels and lessons
+  from good old fashioned organised labour!"
 ---
-
-The fourth wave of the industrial revolution has been seen by many as a very bad idea. Fortunately we’ll soon all be replaced by sentient machines ruled by tech oligarchs. 
-
-Don't fear, there's some compelling parallels and lessons from good old fashioned organised labour!
 
 The new ways of working in our workplaces have many benefits - and many new challenges: burnout, tech debt, remote colleagues, rapid hiring/firing, and changing career trajectories. 
 
