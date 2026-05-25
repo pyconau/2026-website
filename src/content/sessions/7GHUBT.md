@@ -8,7 +8,6 @@ track: platform-engineering
 type: talk
 speakers:
 - 9MPTPG
-layout: layout_2
 trackName: Platform Engineering
 abstract: "Every day at 2pm, our microservice crashed. Same traffic patterns, same
   infrastructure, same code - yet the database deadlocked and our SLA burned. Logs

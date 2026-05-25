@@ -8,7 +8,6 @@ track: cybersecurity
 type: talk
 speakers:
 - B9EPFA
-layout: layout_2
 trackName: Cybersecurity
 abstract: "What does a trauma ICU nurse have in common with an Information Security
   Officer? More than you'd think. This talk charts one nurse's unconventional path

@@ -6,8 +6,9 @@ end: '2026-08-29T17:15:00+10:00'
 room: Ballroom 3
 track:
 type: plenary
-speakers: []
-layout: layout_2
+speakers:
+- SLEHXC
+- WD7XBJ
 abstract: Like regular talks, but shorter! Anything could happen!
 ---
 

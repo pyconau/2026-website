@@ -8,7 +8,6 @@ track: devrel
 type: talk
 speakers:
 - SYHVWJ
-layout: layout_2
 trackName: DevRel
 abstract: GenAI, aka LLMs, have thrown a monkey wrench into the role of DevRel. 
   What does it mean to create educational materials when someone can just ask 

@@ -8,7 +8,6 @@ track: education
 type: talk
 speakers:
 - HHH7CS
-layout: layout_2
 trackName: Education
 abstract: With IDEs like VS Code wanting to autocomplete your entire file based 
   on the first line, how on earth do we write assessment that actually tests the

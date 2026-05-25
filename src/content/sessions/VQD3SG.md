@@ -10,7 +10,6 @@ speakers:
 - PB9BKD
 - H3PQDH
 - SLEHXC
-layout: layout_2
 abstract: "Welcome to PyCon AU 2026!\r\nJoin us for a short welcome address followed
   by our second keynote (to be announced)."
 ---

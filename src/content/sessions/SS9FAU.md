@@ -9,7 +9,6 @@ type: talk
 speakers:
 - GQHDVE
 - WD7XBJ
-layout: layout_2
 trackName: Main Conference
 abstract: "What does it mean to be productive? If you work in software development
   that generally means shipping code, or at least changes to code. There’s always

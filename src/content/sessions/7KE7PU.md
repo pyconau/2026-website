@@ -8,7 +8,6 @@ track: data-and-ai
 type: talk
 speakers:
 - TX8ES3
-layout: layout_2
 trackName: Data & AI
 abstract: AI agents are changing how we build software. They have augmented our 
   software engineering workflow and challenged us to practice a new discipline, 

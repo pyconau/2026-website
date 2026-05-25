@@ -8,7 +8,6 @@ track: research-software-engineering
 type: talk
 speakers:
 - RBDJUT
-layout: layout_2
 trackName: Research Software Engineering
 abstract: "_You’ve shared your code. You’ve shared your data.…so why can’t anyone
   reproduce your results?_\r\n\r\nIn real-world research projects, reproducibility

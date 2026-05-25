@@ -8,7 +8,6 @@ track:
 type: talk
 speakers:
 - 8SQRFW
-layout: layout_2
 trackName: Main Conference
 abstract: "Pull request reviews are often the single biggest bottleneck in software
   delivery. What takes minutes to write can sit for days waiting for review, killing

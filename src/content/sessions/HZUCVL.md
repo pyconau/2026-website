@@ -8,7 +8,6 @@ track:
 type: talk
 speakers:
 - WD9KCJ
-layout: layout_2
 trackName: Main Conference
 abstract: "_The virtue of being a lazy programmer, understanding lazy evaluation,
   and understanding lazy imports (3.15)_\r\n\r\nYour boss wants your program to \"\

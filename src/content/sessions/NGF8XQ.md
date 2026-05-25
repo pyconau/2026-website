@@ -8,7 +8,6 @@ track:
 type: talk
 speakers:
 - N8RLSM
-layout: layout_2
 trackName: Main Conference
 abstract: "At Atlassian, we take accessibility seriously enough that we have entire
   teams dedicated to it. There are experts on hand to provide feedback on designs,

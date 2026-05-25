@@ -8,7 +8,6 @@ track: platform-engineering
 type: talk
 speakers:
 - WGSFFL
-layout: layout_2
 trackName: Platform Engineering
 abstract: "Have you ever wondered what it actually takes to deploy your Python/Django
   or any application to Kubernetes - and build a platform around it? Or if you already

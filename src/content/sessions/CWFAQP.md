@@ -8,7 +8,6 @@ track: devrel
 type: talk
 speakers:
 - PTEC7T
-layout: layout_2
 trackName: DevRel
 abstract: "Developer communities are more than just places to ask questions or share
   code. They are platforms where careers grow, ideas spark, and real impact happens.

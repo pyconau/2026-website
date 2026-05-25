@@ -8,7 +8,6 @@ track: platform-engineering
 type: talk
 speakers:
 - QAG9KH
-layout: layout_2
 trackName: Platform Engineering
 abstract: SRE is all about simplicity. So why do so many of us have a copy of 
   The Google Book sitting on our desk? So much of what we build seeks to emulate

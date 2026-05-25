@@ -8,7 +8,6 @@ track:
 type: talk
 speakers:
 - MJ9KTK
-layout: layout_2
 trackName: Main Conference
 abstract: Geoscientists love Python and Jupyter Notebooks for prototyping their 
   ideas. What they often don't like is dealing with containers, CI/CD, version 

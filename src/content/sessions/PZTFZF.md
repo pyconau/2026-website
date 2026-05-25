@@ -8,7 +8,6 @@ track: cybersecurity
 type: talk
 speakers:
 - UMB3JY
-layout: layout_2
 trackName: Cybersecurity
 abstract: Privacy regulations around the world impose strict requirements on how
   organisations handle personal data (such as Australia's Privacy Act, the EU's 

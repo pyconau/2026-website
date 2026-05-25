@@ -8,7 +8,6 @@ track:
 type: talk
 speakers:
 - 9YWARS
-layout: layout_2
 trackName: Main Conference
 abstract: "Porting a scientific software library from a proprietary language to Python
   can potentially increase its user base, but the porting process itself can be tedious

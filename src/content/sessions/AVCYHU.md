@@ -8,7 +8,6 @@ track:
 type: talk
 speakers:
 - WGQRKJ
-layout: layout_2
 trackName: Main Conference
 abstract: "You've written some Python code. It works great on your machine. Now you
   want someone else to use that code. How do you deliver your Python code to someone

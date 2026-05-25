@@ -8,7 +8,6 @@ track:
 type: talk
 speakers:
 - UKAHFT
-layout: layout_2
 trackName: Main Conference
 abstract: "Balancing short-term and long-term objectives during software development
   forms an underpinning tension which often exhibits during code reviews, sprint planning

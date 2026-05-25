@@ -1,5 +1,5 @@
 ---
-name: Jacobseiler
+name: Jacob Seiler
 code: SNSDVY
 hasAvatar: false
 ---

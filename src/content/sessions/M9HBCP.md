@@ -8,7 +8,6 @@ track: education
 type: talk
 speakers:
 - NWBHL9
-layout: layout_2
 trackName: Education
 abstract: "Have you got neurodivergent kids who you’d like to teach coding to, but
   don’t know where to start? Finding a coding project that kids will enjoy is challenging

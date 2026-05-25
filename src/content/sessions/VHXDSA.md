@@ -9,7 +9,6 @@ type: talk
 speakers:
 - GLH9FZ
 - 38JMFR
-layout: layout_2
 trackName: Data & AI
 abstract: "We needed to produce 25 years of gap-free half-hourly weather data in just
   two days. The output had to be continuous, reproducible, and ready for production

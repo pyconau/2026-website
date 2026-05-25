@@ -8,7 +8,6 @@ track: platform-engineering
 type: talk
 speakers:
 - FQRHB7
-layout: layout_2
 trackName: Platform Engineering
 abstract: "Changes are scary. Changes in production are scarier, especially if you
   haven’t done them before. Ideally, you’d have pipelines and staging environments,

@@ -121,7 +121,7 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
                         const speakers = (ps.session.data.speakers || [])
                           .map((code: string) => speakerMap.get(code))
                           .filter(Boolean);
-                        const speakerNames = !isNotYetAnnounced ? speakers.map((s: any) => s.data.name).join(", ") : "";
+                        const speakerNames = isNotYetAnnounced ? "(Session not yet published)" : speakers.map((s: any) => s.data.name).join(", ");
                         const timeStr = ps.session.data.start && ps.session.data.end
                           ? formatSessionTime(ps.session.data.start, ps.session.data.end)
                           : "";
@@ -206,7 +206,7 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
                         const speakers = (ps.session.data.speakers || [])
                           .map((code: string) => speakerMap.get(code))
                           .filter(Boolean);
-                        const speakerNames = !isNotYetAnnounced ? speakers.map((s: any) => s.data.name).join(", ") : "";
+                        const speakerNames = isNotYetAnnounced ? "(Session not yet published)" : speakers.map((s: any) => s.data.name).join(", ");
                         const timeStr = ps.session.data.start && ps.session.data.end
                           ? formatSessionTime(ps.session.data.start, ps.session.data.end)
                           : "";

@@ -9,7 +9,6 @@ type: talk
 speakers:
 - 3US9G9
 - TJVGUM
-layout: layout_2
 trackName: Cybersecurity
 abstract: "In the good ol' days, we worried about individual maintainers becoming
   overburdened, or ripple effects from surprise deletions in dependency graphs. Now,

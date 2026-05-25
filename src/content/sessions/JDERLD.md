@@ -8,7 +8,6 @@ track: data-and-ai
 type: talk
 speakers:
 - SNK8RV
-layout: layout_2
 trackName: Data & AI
 abstract: "AI-assisted screening tools for diabetic retinopathy (DR) are increasingly
   \r\nbeing considered for deployment within national health systems. In Aotearoa
