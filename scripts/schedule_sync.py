@@ -325,7 +325,6 @@ def process_sessions(
             "contentWarning": content_warning,
             "tags": tags,
             "body": body,
-            "layout": "layout_1",  # Default layout for graphics generation
         }
 
         if verbose and (i + 1) % 10 == 0:
@@ -432,8 +431,8 @@ def write_session_file(session: dict, output_dir: Path) -> None:
     code = session["code"]
     output_path = output_dir / f"{code}.md"
 
-    # Load existing frontmatter to preserve custom fields like layout
-    existing_layout = "layout_2"  # default layout
+    # Preserve layout only if the existing file has it set
+    existing_layout = None
     if output_path.exists():
         try:
             with open(output_path, "r", encoding="utf-8") as f:
@@ -441,10 +440,9 @@ def write_session_file(session: dict, output_dir: Path) -> None:
                 match = re.match(r'^---\n(.*?)\n---\n', content, re.DOTALL)
                 if match:
                     existing_frontmatter = yaml.load(match.group(1)) or {}
-                    if "layout" in existing_frontmatter:
-                        existing_layout = existing_frontmatter["layout"]
+                    existing_layout = existing_frontmatter.get("layout")
         except Exception:
-            pass  # If we can't read the file, just use the default layout
+            pass
 
     frontmatter = {
         "title": session["title"],
@@ -455,8 +453,9 @@ def write_session_file(session: dict, output_dir: Path) -> None:
         "track": session["track"],
         "type": session["type"],
         "speakers": session["speakers"],
-        "layout": existing_layout,
     }
+    if existing_layout:
+        frontmatter["layout"] = existing_layout
 
     # Add optional fields only if present
     if session.get("trackName"):
