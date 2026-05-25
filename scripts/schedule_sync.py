@@ -210,8 +210,18 @@ def process_breaks(
             continue
         seen_breaks.add(break_key)
 
+        # Stable code from start datetime + room slug, e.g. BREAK-202608261200-ballroom1
+        start_str = slot.get("start", "")
+        try:
+            start_dt = dateparser.parse(start_str)
+            start_part = start_dt.strftime("%Y%m%d%H%M")
+        except Exception:
+            start_part = re.sub(r"[^0-9]", "", start_str)[:12]
+        room_slug = re.sub(r"[^a-z0-9]+", "", room_display.lower())
+        break_code = f"BREAK-{start_part}-{room_slug}"
+
         break_data = {
-            "code": f"BREAK-{slot['id']}",  # Synthetic code for breaks
+            "code": break_code,
             "title": title,
             "start": slot.get("start"),
             "end": slot.get("end"),
