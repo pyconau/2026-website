@@ -210,12 +210,8 @@ def process_breaks(
             continue
         seen_breaks.add(break_key)
 
-        # Stable code derived from content so slot ID changes don't rename files
-        stable_key = f"{slot.get('start')}-{slot.get('end')}-{title}-{room_display}"
-        stable_hash = hashlib.md5(stable_key.encode()).hexdigest()[:8].upper()
-
         break_data = {
-            "code": f"BREAK-{stable_hash}",
+            "code": f"BREAK-{slot['id']}",  # Synthetic code for breaks
             "title": title,
             "start": slot.get("start"),
             "end": slot.get("end"),
