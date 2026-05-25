@@ -196,7 +196,7 @@ export async function getSessionsForSpecialistTrack(
 
   const sessions = await getCollection("sessions");
   return sessions
-    .filter((session) => matchingSlugs.includes(session.data.track ?? ""))
+    .filter((session) => matchingSlugs.includes(session.data.track ?? "") && !session.data.tags?.includes("not-yet-announced"))
     .sort((a, b) => {
       const aStart = a.data.start?.getTime() ?? 0;
       const bStart = b.data.start?.getTime() ?? 0;
