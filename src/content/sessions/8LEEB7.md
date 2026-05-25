@@ -10,15 +10,31 @@ speakers:
 - 9YWARS
 layout: layout_2
 trackName: Main Conference
-graphicsLayout: right
-theme: accent_violet
+abstract: "Porting a scientific software library from a proprietary language to Python
+  can potentially increase its user base, but the porting process itself can be tedious
+  and error prone, and therefore cries out for automation, such as the use of AI coding
+  agents. At the same time, scientific software libraries must be accurate, performant,
+  easy to use, and easy to maintain. An over-reliance on automated tools can result
+  in the software porting equivalent of AI slop: code that is unreliable and unmaintainable.
+  The application of Research Software Engineering principles to the porting of scientific
+  code can complement AI coding agents in preserving both academic rigour and thorough
+  testing throughout the porting process, resulting in a reliable, well-tested and
+  well-documented library.\r\n\r\nIn 2006, my mathematics PhD project resulted in
+  a highly specialized geometrical toolbox that over the years has been used in diverse
+  scientific and engineering applications. In 2013, at a SciPy conference, one of
+  the attendees asked when the toolbox would be ported to Python.\r\n\r\nOn and off
+  over a period of 20 years, I took that toolbox on a journey from an open source
+  package within a proprietary mathematical software ecosystem to its current state
+  as a polished, production-grade Python library. Firstly, in 2024, motivated by my
+  deepening understanding of the diversity of its applications, I modernized the toolbox
+  itself, including automating the testing of help examples. Next, in 2025, the rapid
+  rise of Large Language Models as coding agents prompted me to undertake the long-delayed
+  Python port. The coding agents did far more than a superficial translation of language
+  syntax to Python. They improved the performance of the code by implementing improved
+  algorithms, they converted the help examples into doctests, they created an automated
+  test harness, they helped me to organize and improve the documentation, and they
+  helped automate the PyPI release process."
 ---
-
-Porting a scientific software library from a proprietary language to Python can potentially increase its user base, but the porting process itself can be tedious and error prone, and therefore cries out for automation, such as the use of AI coding agents. At the same time, scientific software libraries must be accurate, performant, easy to use, and easy to maintain. An over-reliance on automated tools can result in the software porting equivalent of AI slop: code that is unreliable and unmaintainable. The application of Research Software Engineering principles to the porting of scientific code can complement AI coding agents in preserving both academic rigour and thorough testing throughout the porting process, resulting in a reliable, well-tested and well-documented library.
-
-In 2006, my mathematics PhD project resulted in a highly specialized geometrical toolbox that over the years has been used in diverse scientific and engineering applications. In 2013, at a SciPy conference, one of the attendees asked when the toolbox would be ported to Python.
-
-On and off over a period of 20 years, I took that toolbox on a journey from an open source package within a proprietary mathematical software ecosystem to its current state as a polished, production-grade Python library. Firstly, in 2024, motivated by my deepening understanding of the diversity of its applications, I modernized the toolbox itself, including automating the testing of help examples. Next, in 2025, the rapid rise of Large Language Models as coding agents prompted me to undertake the long-delayed Python port. The coding agents did far more than a superficial translation of language syntax to Python. They improved the performance of the code by implementing improved algorithms, they converted the help examples into doctests, they created an automated test harness, they helped me to organize and improve the documentation, and they helped automate the PyPI release process.
 
 This talk presents a case study in transforming specialized high-quality mathematical software from a proprietary interpreter environment to modern Python. It focuses on the application of Research Software Engineering principles to a single-maintainer project, including preserving the integrity of the science while improving usability and maintainability. It covers three stages of the transformation.
 

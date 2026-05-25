@@ -10,13 +10,13 @@ speakers:
 - 8SQRFW
 layout: layout_2
 trackName: Main Conference
-graphicsLayout: right
-theme: stone_emerald
+abstract: "Pull request reviews are often the single biggest bottleneck in software
+  delivery. What takes minutes to write can sit for days waiting for review, killing
+  velocity and frustrating teams.\r\n\r\nThis talk explores why PR queues stall, what
+  we can learn from massive open source projects that have solved this at scale, and
+  the practical techniques, from automation with Python tooling to team process shifts,
+  that can dramatically reduce your time to merge."
 ---
-
-Pull request reviews are often the single biggest bottleneck in software delivery. What takes minutes to write can sit for days waiting for review, killing velocity and frustrating teams.
-
-This talk explores why PR queues stall, what we can learn from massive open source projects that have solved this at scale, and the practical techniques, from automation with Python tooling to team process shifts, that can dramatically reduce your time to merge.
 
 Speed isn't about writing code faster, it's about removing waiting.
 

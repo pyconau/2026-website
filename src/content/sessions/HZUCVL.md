@@ -10,19 +10,14 @@ speakers:
 - WD9KCJ
 layout: layout_2
 trackName: Main Conference
-graphicsLayout: right
-theme: charcoal
+abstract: "_The virtue of being a lazy programmer, understanding lazy evaluation,
+  and understanding lazy imports (3.15)_\r\n\r\nYour boss wants your program to \"\
+  run faster\". But performance can be a tricky thing.\r\nSometimes we can make a
+  choice of _when_ the program will be slow.\r\nThis talk will explore the \"virtue\"\
+  \ of laziness with regards to programmer approach, and lazy evaluation (with generators
+  and `yield`).\r\nBut mainly the talk will focus on the new 3.15 keyword `lazy` and
+  how it can affect module loading times."
 ---
-
-Title: The Virtues of Being Lazy
-Sub title: The virtue of being a lazy programmer, understanding lazy evaluation, and understanding lazy imports (3.15)
-
--------------------------------
-Abstract:
-Your boss wants your program to "run faster". But performance can be a tricky thing.
-Sometimes we can make a choice of _when_ the program will be slow.
-This talk will explore the "virtue" of laziness with regards to programmer approach, and lazy evaluation (with generators and `yield`).
-But mainly the talk will focus on the new 3.15 keyword `lazy` and how it can affect module loading times.
 
 This talk will cover briefly the role of "laziness" in being a programmer. I will then examine the role of laziness in evaluation (generators and `yield`). That will lead us to laziness in imports.
 

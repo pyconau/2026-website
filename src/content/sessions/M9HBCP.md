@@ -10,13 +10,17 @@ speakers:
 - NWBHL9
 layout: layout_2
 trackName: Education
-graphicsLayout: right
-theme: accent_lime
+abstract: "Have you got neurodivergent kids who you’d like to teach coding to, but
+  don’t know where to start? Finding a coding project that kids will enjoy is challenging
+  enough as it is, but finding one that engages neurodivergent kids can be even harder.
+  \r\nLet’s look at some strategies for designing coding projects for school aged
+  students, and break down the technical, physical and emotional considerations that
+  help neurodiverse students succeed. There are many tools we can incorporate into
+  lessons to foster growth, and all have different pros and cons. Both the technologies
+  we use and the way we teach are important. \r\nBy constructing your projects with
+  intention for a neurodiverse audience, it can make them more accessible and entertaining
+  for everyone, and build skills outside of just programming."
 ---
-
-Have you got neurodivergent kids who you’d like to teach coding to, but don’t know where to start? Finding a coding project that kids will enjoy is challenging enough as it is, but finding one that engages neurodivergent kids can be even harder. 
-Let’s look at some strategies for designing coding projects for school aged students, and break down the technical, physical and emotional considerations that help neurodiverse students succeed. There are many tools we can incorporate into lessons to foster growth, and all have different pros and cons. Both the technologies we use and the way we teach are important. 
-By constructing your projects with intention for a neurodiverse audience, it can make them more accessible and entertaining for everyone, and build skills outside of just programming.
 
 Figuring out engaging coding projects for neurodiverse learners can be very challenging. There are many approaches, tools, and methodologies to consider. In many cases, what works with one neurodiverse person may or may not work with another. 
 

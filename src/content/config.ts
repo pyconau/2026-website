@@ -15,6 +15,7 @@ const sessions = defineCollection({
       .default("talk"),
     speakers: z.array(z.string()).default([]),
     sponsor: z.string().optional(),
+    abstract: z.string().optional(),
     contentWarning: z.string().optional(),
     youtubeSlug: z.string().optional(),
     graphicsLayout: z.enum(["left", "right"]).optional(), // Graphics panel layout (left or right)

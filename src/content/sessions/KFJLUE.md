@@ -10,15 +10,13 @@ speakers:
 - PAU3DM
 layout: layout_2
 trackName: Cybersecurity
-graphicsLayout: right
-theme: accent_lavender
+abstract: "Sam built a great gateway. Users are authenticated, requests are validated,
+  the front door is solid. Inside the cluster, services trust each other — because
+  they're inside the cluster.\r\n\r\nThen Omen shows up.\r\n\r\nThis talk follows
+  Sam the SRE through a nightly battle against Omen the Evil Hacker — and how SPIFFE
+  and SPIRE finally give every Python service a cryptographic identity it can prove,
+  not just claim."
 ---
-
-Sam built a great gateway. Users are authenticated, requests are validated, the front door is solid. Inside the cluster, services trust each other — because they're inside the cluster.
-
-Then Omen shows up.
-
-This talk follows Sam the SRE through a nightly battle against Omen the Evil Hacker — and how SPIFFE and SPIRE finally give every Python service a cryptographic identity it can prove, not just claim.
 
 We've all built Castle walls. A solid perimeter and user authentication at the gateway, and then implicit trust everywhere inside — because it's inside the walls, right? Only legitimate traffic gets in.
 But "inside the walls" is not an identity. Any service can walk up to any other and say "hey, it's me." And the other service believes it. Because why wouldn't it?

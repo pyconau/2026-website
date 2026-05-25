@@ -256,10 +256,8 @@ def process_sessions(
         if isinstance(description, dict):
             description = description.get("en", str(description))
 
-        # Combine abstract and description for body
-        body = abstract
-        if description and description != abstract:
-            body = f"{abstract}\n\n{description}"
+        # Abstract goes to frontmatter; description-only content goes to body
+        body = description if description and description != abstract else ""
 
         # Get schedule slot from slots lookup (not from submission directly)
         slot = slots_by_submission.get(code, {})
@@ -307,6 +305,7 @@ def process_sessions(
             "trackName": track_name if track_name else None,
             "type": session_type,
             "speakers": speakers,
+            "abstract": abstract if abstract else None,
             "contentWarning": content_warning,
             "body": body,
             "layout": "layout_1",  # Default layout for graphics generation
@@ -445,6 +444,8 @@ def write_session_file(session: dict, output_dir: Path) -> None:
     # Add optional fields only if present
     if session.get("trackName"):
         frontmatter["trackName"] = session["trackName"]
+    if session.get("abstract"):
+        frontmatter["abstract"] = session["abstract"]
     if session.get("contentWarning"):
         frontmatter["contentWarning"] = session["contentWarning"]
     if session.get("sponsor"):

@@ -10,11 +10,15 @@ speakers:
 - SKY3HY
 layout: layout_2
 trackName: Research Software Engineering
-graphicsLayout: right
-theme: accent_violet
+abstract: Software is widely used and produced in the course of research. Yet, 
+  published works (e.g. journal papers and conference posters) do not always 
+  cite the software that was essential for the research. Citing software has 
+  numerous benefits, including facilitating the reproducibility and transparency
+  of research, as well as providing attribution and credit for the developers. 
+  This talk will discuss the benefits of citing software, how to cite software 
+  and practical suggestions for how to make your software easier for others to 
+  cite.
 ---
-
-Software is widely used and produced in the course of research. Yet, published works (e.g. journal papers and conference posters) do not always cite the software that was essential for the research. Citing software has numerous benefits, including facilitating the reproducibility and transparency of research, as well as providing attribution and credit for the developers. This talk will discuss the benefits of citing software, how to cite software and practical suggestions for how to make your software easier for others to cite.
 
 This talk will include real examples and practical tips. Topics covered will include:
 

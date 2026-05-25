@@ -11,17 +11,20 @@ speakers:
 - K8YDBG
 layout: layout_2
 trackName: Main Conference
-graphicsLayout: right
-theme: accent_coral
+abstract: "Many teams building AI products focus on parsing new context and editing
+  prompts, without knowing if things are improving. They then learn that even a perfect
+  model won't drive success if the product isn't easy to use, or people abandon it
+  after one attempt. Getting the model right is necessary but on its own isn't sufficient.\r\
+  \n\r\nThis talk is about the measurement gap between a model that performs well
+  in offline evaluation and an AI product that actually benefits users. Using a real-world
+  case study, I'll walk through how we built three layers of measurement that gave
+  us genuine confidence in product decisions and shaped team priorities. \r\n\r\n\
+  These three layers - offline model evaluation, online usage metrics, and qualitative
+  user feedback - don't always agree. I'll share why human judgement is essential
+  to make key decisions when navigating conflicting signals, and how to do this with
+  confidence.\r\n\r\nIf you're building AI products and can't answer \"is this actually
+  getting better?\" - this talk is for you."
 ---
-
-Many teams building AI products focus on parsing new context and editing prompts, without knowing if things are improving. They then learn that even a perfect model won't drive success if the product isn't easy to use, or people abandon it after one attempt. Getting the model right is necessary but on its own isn't sufficient.
-
-This talk is about the measurement gap between a model that performs well in offline evaluation and an AI product that actually benefits users. Using a real-world case study, I'll walk through how we built three layers of measurement that gave us genuine confidence in product decisions and shaped team priorities. 
-
-These three layers - offline model evaluation, online usage metrics, and qualitative user feedback - don't always agree. I'll share why human judgement is essential to make key decisions when navigating conflicting signals, and how to do this with confidence.
-
-If you're building AI products and can't answer "is this actually getting better?" - this talk is for you.
 
 Teams building AI products often have many ideas and iterations — parsing new context, editing prompts — without knowing if things are improving overall, or whether fixing one issue is creating another.
 

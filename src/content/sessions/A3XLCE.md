@@ -10,13 +10,15 @@ speakers:
 - EQJWS9
 layout: layout_2
 trackName: Research Software Engineering
-graphicsLayout: right
-theme: accent_violet
+abstract: "I regularly enjoy performance that I absolutely did not earn. That’s because
+  NumPy quietly handles an alarming number of hard problems on my behalf. In this
+  talk, we’ll pop the hood on NumPy and look at what it’s actually doing to make Python
+  fast. We’ll even glance at the source code, gently, and without expecting anyone
+  to be an expert in C. \r\n\r\nThis isn’t a talk about becoming a NumPy wizard or
+  writing “clever” code. It’s about building a better mental model of what NumPy already
+  does for us, so we can stop accidentally getting in its way and continue taking
+  credit for performance we mostly didn’t implement ourselves."
 ---
-
-I regularly enjoy performance that I absolutely did not earn. That’s because NumPy quietly handles an alarming number of hard problems on my behalf. In this talk, we’ll pop the hood on NumPy and look at what it’s actually doing to make Python fast. We’ll even glance at the source code, gently, and without expecting anyone to be an expert in C. 
-
-This isn’t a talk about becoming a NumPy wizard or writing “clever” code. It’s about building a better mental model of what NumPy already does for us, so we can stop accidentally getting in its way and continue taking credit for performance we mostly didn’t implement ourselves.
 
 Python is slow. We all know it. And yet, here we are, running numerical workloads that would make a C programmer nod approvingly. How? NumPy. But not *magic*. NumPy deliberate, well-engineered  NumPy.
 

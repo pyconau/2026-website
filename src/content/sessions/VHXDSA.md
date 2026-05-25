@@ -11,13 +11,23 @@ speakers:
 - 38JMFR
 layout: layout_2
 trackName: Data & AI
-graphicsLayout: left
-theme: accent_lemon
+abstract: "We needed to produce 25 years of gap-free half-hourly weather data in just
+  two days. The output had to be continuous, reproducible, and ready for production
+  use. We achieved that speed by combining domain knowledge, Python, dbt, and AI-assisted
+  coding, with detailed prompting and a few tight loops of refinement rather than
+  a zero-shot approach. In this talk, we’ll show how we used Python, dbt, and the
+  Chronos-2 time-series foundation model to build a practical weather gap-filling
+  pipeline for variables such as temperature, humidity, and wind speed.\r\n\r\nThis
+  talk focuses on a practical Python engineering question: when does a foundation
+  model become a pragmatic shortcut rather than just an impressive demo? We’ll compare
+  our Chronos-based workflow with a more traditional approach using correlations with
+  nearby weather stations, explain why dbt was such a strong backbone for reproducibility
+  and maintainability, and show why that mattered for a pipeline that needed to remain
+  understandable and easy to update. We’ll also show that gap filling is different
+  from ordinary forecasting: because a missing window has data on both sides, future
+  approaches could fill forward from the start of the gap, backward from the end,
+  and meet in the middle."
 ---
-
-We needed to produce 25 years of gap-free half-hourly weather data in just two days. The output had to be continuous, reproducible, and ready for production use. We achieved that speed by combining domain knowledge, Python, dbt, and AI-assisted coding, with detailed prompting and a few tight loops of refinement rather than a zero-shot approach. In this talk, we’ll show how we used Python, dbt, and the Chronos-2 time-series foundation model to build a practical weather gap-filling pipeline for variables such as temperature, humidity, and wind speed.
-
-This talk focuses on a practical Python engineering question: when does a foundation model become a pragmatic shortcut rather than just an impressive demo? We’ll compare our Chronos-based workflow with a more traditional approach using correlations with nearby weather stations, explain why dbt was such a strong backbone for reproducibility and maintainability, and show why that mattered for a pipeline that needed to remain understandable and easy to update. We’ll also show that gap filling is different from ordinary forecasting: because a missing window has data on both sides, future approaches could fill forward from the start of the gap, backward from the end, and meet in the middle.
 
 This talk is for Python users who work with time series, messy data, or production data workflows and want a practical case study rather than a theoretical forecasting talk.
 

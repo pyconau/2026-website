@@ -10,15 +10,15 @@ speakers:
 - UKAHFT
 layout: layout_2
 trackName: Main Conference
-graphicsLayout: right
-theme: accent_violet
+abstract: "Balancing short-term and long-term objectives during software development
+  forms an underpinning tension which often exhibits during code reviews, sprint planning
+  and prioritisation.\r\n\r\nAudiences should attend to see how concepts like modularity,
+  consistent design language and the use of software patterns can be seen as an expression
+  of managing cost and complexity over time, and how this perspective can help bring
+  clarity to processes such as code reviews, sprint planning, prioritisation and effort
+  estimation.\r\n\r\nThis talk comprises an exploration of how to discuss trade-offs
+  during software development, based on technical examples."
 ---
-
-Balancing short-term and long-term objectives during software development forms an underpinning tension which often exhibits during code reviews, sprint planning and prioritisation.
-
-Audiences should attend to see how concepts like modularity, consistent design language and the use of software patterns can be seen as an expression of managing cost and complexity over time, and how this perspective can help bring clarity to processes such as code reviews, sprint planning, prioritisation and effort estimation.
-
-This talk comprises an exploration of how to discuss trade-offs during software development, based on technical examples.
 
 It’s (more or less) obvious why software needs to meet user requirements. It’s also (more or less) obvious why software needs to meet essential security requirements and essential performance requirements. However, there are many other concerns beyond this which may be balanced during software development. For example, consider whether a new feature should use a functional approach or rely heavily on inheritance as a design pattern. There may not seem to be an obvious or objective answer at first.
 

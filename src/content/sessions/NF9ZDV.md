@@ -10,15 +10,16 @@ speakers:
 - JF8RCR
 layout: layout_2
 trackName: Cybersecurity
-graphicsLayout: right
-theme: accent_lavender
+abstract: "Application security is not getting easier. Despite better tools, more
+  CVEs, and widespread “shift-left” adoption, vulnerabilities continue to scale with
+  system complexity.\r\n\r\nThis talk distils 60 years of application security history—from
+  early networked systems to modern cloud-native and AI-driven stacks—and connects
+  it to what Python developers are facing today. Using real incidents, ecosystem data,
+  and patterns observed across decades, the session explains why AppSec keeps failing
+  in familiar ways and where the industry is heading next.\r\n\r\nThe goal is understanding
+  which problems are structural, which are self-inflicted, and which approaches are
+  finally worth investing in."
 ---
-
-Application security is not getting easier. Despite better tools, more CVEs, and widespread “shift-left” adoption, vulnerabilities continue to scale with system complexity.
-
-This talk distils 60 years of application security history—from early networked systems to modern cloud-native and AI-driven stacks—and connects it to what Python developers are facing today. Using real incidents, ecosystem data, and patterns observed across decades, the session explains why AppSec keeps failing in familiar ways and where the industry is heading next.
-
-The goal is understanding which problems are structural, which are self-inflicted, and which approaches are finally worth investing in.
 
 Based on my keynote delivered at OWASP AppSec Singapore 2025, this talk compresses six decades of application security evolution into actionable lessons for modern Python teams.
 

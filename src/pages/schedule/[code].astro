@@ -9,6 +9,7 @@ import {
   getTrackBySlug,
   formatSessionDateTime,
 } from "../../utils/schedule";
+import { marked } from "marked";
 
 export async function getStaticPaths() {
   const sessions = await getCollection("sessions");
@@ -19,8 +20,11 @@ export async function getStaticPaths() {
 }
 
 const { session } = Astro.props;
-const { title, code, start, end, room, track, trackName, type, speakers, sponsor, contentWarning } =
+const { title, code, start, end, room, track, trackName, type, speakers, sponsor, contentWarning, abstract } =
   session.data;
+
+// Render abstract markdown to HTML
+const abstractHtml = abstract ? marked.parse(abstract) : null;
 
 // Canonical session URL for sharing
 const sessionUrl = new URL(`/schedule/${code}`, Astro.site ?? "https://2026.pycon.org.au").toString();
@@ -125,6 +129,7 @@ if (trackData) {
           )}
 
           <div class="rich-text pt-24 fadeInUp prose prose-lg max-w-none">
+            {abstractHtml && <div class="text-intro" set:html={abstractHtml} />}
             <Content />
           </div>
 
@@ -192,6 +197,7 @@ if (trackData) {
                   <div class="flex items-center gap-4">
                   <button
                     id="copy-link-btn"
+                    data-url={sessionUrl}
                     class="inline-flex items-center gap-2 text-sm font-semibold text-charcoal hover:text-emerald transition-colors cursor-pointer"
                     aria-label="Copy link to clipboard"
                   >
@@ -237,11 +243,12 @@ if (trackData) {
   <Footer />
 
   <script src="/src/scripts/animations.js"></script>
-  <script is:inline define:vars={{ sessionUrl }}>
+  <script>
     const btn = document.getElementById("copy-link-btn");
     if (btn) {
       btn.addEventListener("click", async () => {
-        await navigator.clipboard.writeText(sessionUrl);
+        const url = btn.dataset.url ?? window.location.href;
+        await navigator.clipboard.writeText(url);
         const icon = btn.querySelector("i");
         icon.className = "fa-solid fa-check text-2xl";
         btn.classList.add("text-emerald");

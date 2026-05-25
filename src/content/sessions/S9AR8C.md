@@ -10,8 +10,12 @@ speakers:
 - SYHVWJ
 layout: layout_2
 trackName: DevRel
-graphicsLayout: right
-theme: accent_coral
+abstract: GenAI, aka LLMs, have thrown a monkey wrench into the role of DevRel. 
+  What does it mean to create educational materials when someone can just ask 
+  their favourite LLM to create a personalised educational adventure for them? 
+  This talk will investigate options for creating interactive coding 
+  environments that are useful for developers aiming to learn a new technique, 
+  technology, or library.
 ---
 
-GenAI, aka LLMs, have thrown a monkey wrench into the role of DevRel. What does it mean to create educational materials when someone can just ask their favourite LLM to create a personalised educational adventure for them? This talk will investigate options for creating interactive coding environments that are useful for developers aiming to learn a new technique, technology, or library.
+
