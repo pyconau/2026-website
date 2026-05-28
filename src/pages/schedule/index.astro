@@ -5,6 +5,7 @@ import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
 import HeaderStar from "../../components/header/HeaderStar.astro";
 import DayTabs from "../../components/schedule/DayTabs.astro";
+import TypographyLink from "../../components/typography/TypographyLink.astro";
 import Base from "../../layouts/Base.astro";
 
 const allTracks = await getCollection("schedule-specialist-tracks");
@@ -117,7 +118,10 @@ const tracks = allTracks.sort((a, b) => {
             </a>
 
             <!-- Main Conference -->
-            <div class="fadeInUp block p-6 lg:p-8 rounded-2xl bg-lime">
+            <a
+              href="#main-conference"
+              class="fadeInUp block p-6 lg:p-8 rounded-2xl bg-lime"
+            >
               <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                 <div class="flex-1">
                   <h2 class="text-2xl lg:text-3xl font-serif font-bold text-charcoal mb-1">
@@ -132,8 +136,9 @@ const tracks = allTracks.sort((a, b) => {
                     Three days of talks all about Python!
                   </p>
                 </div>
+              
               </div>
-            </div>
+            </a>  
 
             <!-- Sprints -->
             <div class="fadeInUp block p-6 lg:p-8 rounded-2xl bg-lemon">
@@ -202,6 +207,28 @@ const tracks = allTracks.sort((a, b) => {
                 </div>
               </a>
             ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="main-conference">
+    <div class="bg-stone pb-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <h2 class="fadeInUp text-4xl font-serif font-medium -tracking-[0.02em] mb-8">
+            Main Conference
+          </h2>
+          <p class="fadeInUp text-charcoal font-sans text-lg mb-10">
+            This is the core of PyCon AU. Each day starts with an amazing keynote talk, followed by talks on a diverse range of Python related topics. There will be a mix of beginner friendly and advanced talks on both technical and non-technical topics.
+          </p>
+          <p>
+            The main conference track runs concurrently with the specialist tracks on Thursday 27 August <TypographyLink href="/schedule/thursday">(Thursday schedule)</TypographyLink>, Friday 28 August <TypographyLink href="/schedule/friday">(Friday schedule)</TypographyLink> and Saturday 29 August <TypographyLink href="/schedule/saturday">(Saturday schedule)</TypographyLink>.
+          </p>  
+          <div class="grid lg:grid-cols-2 gap-6">
+                </div>
+              </a>
           </div>
         </div>
       </div>
