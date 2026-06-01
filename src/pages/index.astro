@@ -15,6 +15,8 @@ import ConnectSubscribeGetInTouchCards from "../components/ConnectSubscribeGetIn
 const currentSponsors = await getCollection("sponsors", ({ id }) => !id.startsWith("_"));
 const hasCurrentSponsors = currentSponsors.length > 0;
 
+const ogDescription =  "PyCon AU 2026 is Australia's national conference for everyone using the Python programming language, taking place August 26th-August 30th.";
+
 const schemaData = {
   "@context": "https://schema.org",
   "@type": "Event",
@@ -76,7 +78,7 @@ const schemaData = {
 };
 ---
 
-<Base title="PyCon AU 2026" appendSiteTitle={false} schemaData={schemaData}>
+<Base title="PyCon AU 2026" appendSiteTitle={false} schemaData={schemaData} description={ogDescription}>
   <Header dark={false} />
 
   <section class="bg-stone fadeInUp h-[calc(100vh-210px)] pt-[98px]">
