@@ -1,5 +1,5 @@
 ---
-title: '40,000 CVEs and Counting: What 60 Years of AppSec Tells Us About 2025'
+title: '40,000 CVEs and Counting: What 60 Years of AppSec Tells Us About 2026'
 code: NF9ZDV
 start: '2026-08-28T10:45:00+10:00'
 end: '2026-08-28T11:15:00+10:00'
@@ -26,6 +26,6 @@ The session covers three phases:
 
 * 1965–2010 – How early security failures forced secure development practices, training, and process discipline
 * 2011–2023 – Why DevOps, cloud-native architectures, and supply chains multiplied both tooling and risk
-* 2024–2025 and beyond – What AI, complexity, and non-deterministic systems mean for future vulnerabilities
+* 2024–2026 and beyond – What AI, complexity, and non-deterministic systems mean for future vulnerabilities
 
 The talk explains why tool-first security consistently underdelivers, why “shift-left” without engineering context fails, and what emerging approaches like predictive scanning and proactive threat modelling can realistically achieve.

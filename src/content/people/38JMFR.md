@@ -1,7 +1,7 @@
 ---
-name: serg
+name: Serg
 code: 38JMFR
-hasAvatar: false
+hasAvatar: true
 ---
 
 Serg Pintaldi is a Principal Analyst in AI and Machine Learning at the Australian Energy Market Operator (AEMO). His work sits at the intersection of Python, machine learning, and critical infrastructure, where he focuses on turning modern ML techniques into reliable, operational tools for power system operations and planning.

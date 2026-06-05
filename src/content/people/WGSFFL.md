@@ -4,6 +4,6 @@ code: WGSFFL
 hasAvatar: true
 ---
 
-Dipendra is a Solution Architect at Cater Care. He brings together experience in finance, tech support, and systems analysis to bridge business and technology. He collaborates across teams to streamline processes, drive digital transformation, and create better user experiences, always with a focus on practical, people-first solutions.
+Dipendra is an Engineering Lead at Cater Care, based in Sydney. He's spent over eight years in the enterprise landscape, working across financial accounting, system support, data warehousing, and integration pipelines before moving into full-stack application and platform engineering. His core stack is Python, React/TypeScript, and serverless architectures, with a particular interest in cloud-native platform design on Google Cloud and Kubernetes Engine. He cares deeply about developer experience, building systems that scale and that small teams can understand, maintain, and build on.
 
-A passionate advocate for open source and developer culture, Dipendra works mainly with Python, React, and Google Cloud (with a special interest in serverless). He’s committed to making IT smarter, fostering innovation, and helping teams work better together.
+A passionate advocate for open source and developer culture, Dipendra is an active member of the Sydney Python community. He believes in building in public and sharing what works, and what doesn't.
