@@ -2,6 +2,17 @@ name: PR build
 on: pull_request
 
 jobs:
+  type_check:
+    name: Type check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.11.0"
+      - run: npm install
+      - run: npm run check
+
   pr_build:
     name: PR build
     runs-on: ubuntu-latest
