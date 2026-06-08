@@ -35,7 +35,7 @@ const recentPosts = allPosts
 // TODO: Color-ise the category
 ---
 
-<Base title={post.data.title}>
+<Base title={post.data.title} description={post.data.previewText} ogType="article" publishedTime={post.data.published.toISOString()}>
   <PageHeader dark={false}>
     <HeaderBreadcrumbs colour="charcoal">
       <Crumb href="/news">News & Updates</Crumb>
