@@ -1,11 +1,11 @@
-# PyCon Project
+# PyCon AU 2026 Website
 
-A simple Vite-based website for PyCon events.
+The official website for [PyCon AU 2026](https://2026.pycon.org.au) — Australia's national Python conference, held 26–30 August 2026 at Sofitel Brisbane Central.
 
 ## Prerequisites
 
-- Node.js (version 14 or higher)
-- npm or yarn
+- Node.js 22.11.0 (see `.tool-versions`)
+- Python 3.11+ with [uv](https://docs.astral.sh/uv/) (for schedule sync and graphics scripts)
 
 ## Getting Started
 
@@ -18,7 +18,7 @@ A simple Vite-based website for PyCon events.
    ```bash
    npm run dev
    ```
-   This will start the development server, typically at `http://localhost:5173`
+   This will start the development server at `http://localhost:4321`
 
 3. **Build for production**
    ```bash
@@ -32,23 +32,36 @@ A simple Vite-based website for PyCon events.
    ```
    This serves the production build locally for testing
 
+5. **Type check**
+   ```bash
+   npm run check
+   ```
+   Type-checks all `.astro` files via `astro check`
+
 ## Project Structure
 
-- `src/` - Source files (JavaScript and CSS)
-- `public/` - Static assets (SVG icons, etc.)
-- `dist/` - Production build output
-- `index.html` - Main HTML file
-- `about.html` - About page
+```
+├── src/
+│   ├── components/         # Astro components
+│   ├── content/            # Content collections (posts, sessions, people, sponsors, tracks)
+│   ├── layouts/            # Base.astro and Page.astro
+│   ├── pages/              # File-based routing
+│   ├── styles/             # Global CSS (Tailwind)
+│   └── constants.ts        # Site-wide constants (URLs, SEO defaults)
+├── public/                 # Static assets
+├── scripts/                # Schedule sync and graphics generation (Python/uv)
+└── .github/workflows/      # CI: PR checks, production deploy, schedule sync
+```
 
 ## Technologies Used
 
-- Vite (build tool)
-- Tailwind CSS (styling)
-- Alpine.js (JavaScript framework)
-- GSAP (animations)
+- [Astro](https://astro.build) (framework)
+- [Tailwind CSS](https://tailwindcss.com) (styling)
+- [Alpine.js](https://alpinejs.dev) (JavaScript)
+- [GSAP](https://gsap.com) (animations)
 
 ## Media / Credits
 * [Brisbane City at Sunset](/public/images/attend/beda-sunset.jpeg) Credit: @brizzy.pix, supplied by Brisbane Economic Development Agency
-* [Brisbane Cyclists](/public/images/attend/beda-cyclists) Credit: Tourism Australia, supplied by Brisbane Economic Development Agency
+* [Brisbane Cyclists](/public/images/attend/beda-cyclists.jpeg) Credit: Tourism Australia, supplied by Brisbane Economic Development Agency
 * [Brisbane Airport](/public/images/attend/beda-airport.jpeg) Credit: Jen Dainer, supplied by Brisbane Economic Development Agency
 * Other photography by [Jack Skinner](https://jackskinner.com.au) used with permission.
