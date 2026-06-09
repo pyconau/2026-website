@@ -399,11 +399,12 @@ def download_avatar(url: str, output_path: Path) -> bool:
 
         response.raise_for_status()
 
-        # Save ETag for future requests
-        if "ETag" in response.headers:
-            etag_file.parent.mkdir(parents=True, exist_ok=True)
-            with open(etag_file, "w") as f:
-                f.write(response.headers["ETag"])
+        # Pretalx occasionally serves a broken upload as an empty 200 response.
+        # Treat that as a failure so it is retried on a future run, rather than
+        # caching the ETag and surfacing a cryptic Pillow decode error.
+        if not response.content:
+            print(f"  Warning: Empty response body for avatar {url}, skipping")
+            return False
 
         # Process image
         img = Image.open(io.BytesIO(response.content))
@@ -418,6 +419,13 @@ def download_avatar(url: str, output_path: Path) -> bool:
         # Save as JPEG
         output_path.parent.mkdir(parents=True, exist_ok=True)
         img.save(output_path, "JPEG", quality=AVATAR_QUALITY)
+
+        # Save ETag only after a successful save, so a failed/empty download is
+        # not skipped via If-None-Match on the next run.
+        if "ETag" in response.headers:
+            etag_file.parent.mkdir(parents=True, exist_ok=True)
+            with open(etag_file, "w") as f:
+                f.write(response.headers["ETag"])
 
         return True
 
