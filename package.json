@@ -7,6 +7,7 @@
     "dev": "astro dev",
     "build": "cd scripts && uv run python generate_graphics.py && cd .. && astro build",
     "preview": "astro preview",
+    "check": "astro check",
     "start": "astro dev",
     "astro": "astro"
   },
@@ -22,6 +23,7 @@
     "tailwindcss": "^4.1.16"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.9",
     "@astrojs/mdx": "^4.3.7",
     "@tailwindcss/postcss": "^4.1.17",
     "@tailwindcss/typography": "^0.5.19",
