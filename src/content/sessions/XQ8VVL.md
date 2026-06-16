@@ -1,5 +1,5 @@
 ---
-title: 'Adventures in FastAPI: A Choose-Your-Own PyCon Talk'
+title: 'Adventures in FastAPI: A Choose-Your-Own PyCon AU Talk'
 code: XQ8VVL
 start: '2026-08-27T15:10:00+10:00'
 end: '2026-08-27T15:40:00+10:00'
