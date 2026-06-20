@@ -1,5 +1,5 @@
 ---
-name: Amanda J Hogan
+name: Amanda Hogan
 code: MDFERU
 hasAvatar: true
 ---

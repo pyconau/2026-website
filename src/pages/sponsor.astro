@@ -13,25 +13,15 @@ const sponsors = await getCollection("sponsors", ({ id }) => {
   return !id.startsWith("_");
 });
 
-const tierOrder = [
-  "diamond",
-  "platinum",
-  "gold",
-  "standard",
-  "in-kind",
-  "supporting",
-];
-const sponsorsByTier = sponsors.reduce(
-  (acc, sponsor) => {
-    const tier = sponsor.data.tier;
-    if (!acc[tier]) {
-      acc[tier] = [];
-    }
-    acc[tier].push(sponsor);
-    return acc;
-  },
-  {} as Record<string, typeof sponsors>,
-);
+const tierOrder = ["diamond", "platinum", "gold", "standard", "in-kind", "supporting"];
+const sponsorsByTier = sponsors.reduce((acc, sponsor) => {
+  const tier = sponsor.data.tier;
+  if (!acc[tier]) {
+    acc[tier] = [];
+  }
+  acc[tier].push(sponsor);
+  return acc;
+}, {} as Record<string, typeof sponsors>);
 
 const tierLabels: Record<string, string> = {
   diamond: "Diamond Sponsors",
@@ -43,6 +33,10 @@ const tierLabels: Record<string, string> = {
 };
 
 const prospectusUrl = "/files/PyCon AU 2026 Sponsorship Prospectus v5.pdf";
+
+// Display the bare hostname, dropping a leading "www." subdomain.
+const displayHostname = (url: string) =>
+  new URL(url).hostname.replace(/^www\./, "");
 ---
 
 <Base
@@ -50,7 +44,8 @@ const prospectusUrl = "/files/PyCon AU 2026 Sponsorship Prospectus v5.pdf";
   description="Meet the sponsors of PyCon AU 2026. Community conferences rely on generous sponsor support. Find out how to sponsor Australia's national Python conference."
 >
   <PageHeader dark={true} starColour="lime">
-    <HeaderBreadcrumbs colour="lavender" />
+    <HeaderBreadcrumbs colour="lavender">
+    </HeaderBreadcrumbs>
     <PageHeaderTitle textColour="lavender">
       <h1>Sponsors</h1>
     </PageHeaderTitle>
@@ -61,9 +56,7 @@ const prospectusUrl = "/files/PyCon AU 2026 Sponsorship Prospectus v5.pdf";
         class="lg:text-left text-center text-lg font-sans leading-[1.3] font-semibold text-stone px-5 lg:px-0"
         >Become a sponsor today!</span
       >
-      <a
-        href={prospectusUrl}
-        class="btn-arrow btn-arrow--lavender h-full rounded-[89px]! hover:rounded-none!"
+      <a href={prospectusUrl} class="btn-arrow btn-arrow--lavender h-full rounded-[89px]! hover:rounded-none!"
         >Download Prospectus</a
       >
     </div>
@@ -76,170 +69,146 @@ const prospectusUrl = "/files/PyCon AU 2026 Sponsorship Prospectus v5.pdf";
       <div class="container">
         <div class="lg:w-[85%] w-full mx-auto">
           {
-            sponsors.length > 0 ? (
-              <p
-                class="text-intro font-medium text-charcoal lg:w-[80%] fadeInUp"
-                style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;"
-              >
-                Community conferences like PyCon AU rely heavily on the generous
-                support of our sponsors, without whom we could not enjoy many of
-                the conference experiences we celebrate!
+            sponsors.length >0 ? (
+              <p class="text-intro font-medium text-charcoal lg:w-[80%] fadeInUp" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;">
+              Community conferences like PyCon AU rely heavily on the generous support of our sponsors, without whom we could not enjoy many of the conference experiences we celebrate!
               </p>
             ) : null
           }
 
-          {
-            tierOrder.map((tier) => {
-              let tierSponsors = sponsorsByTier[tier];
+          {tierOrder.map((tier) => {
+            let tierSponsors = sponsorsByTier[tier];
 
-              // Combine standard and digital sponsors
-              if (tier === "standard") {
-                const standardSponsors = sponsorsByTier["standard"] || [];
-                const digitalSponsors = sponsorsByTier["digital"] || [];
-                tierSponsors = [...standardSponsors, ...digitalSponsors];
-              }
+            // Combine standard and digital sponsors
+            if (tier === "standard") {
+              const standardSponsors = sponsorsByTier["standard"] || [];
+              const digitalSponsors = sponsorsByTier["digital"] || [];
+              tierSponsors = [...standardSponsors, ...digitalSponsors];
+            }
 
-              if (!tierSponsors || tierSponsors.length === 0) return null;
+            if (!tierSponsors || tierSponsors.length === 0) return null;
 
-              const isPremium = tier === "diamond" || tier === "platinum";
-              const isSupporting = tier === "supporting";
+            const isPremium = tier === "diamond" || tier === "platinum";
+            const isSupporting = tier === "supporting";
 
-              return (
-                <div class="space-y-7 pt-24" id={tier}>
-                  <h2 class="fadeInUp lg:text-6xl text-5xl font-serif -tracking-[0.04em] text-center pb-7">
-                    {tierLabels[tier]}
-                  </h2>
+            return (
+              <div class="space-y-7 pt-24" id={tier}>
+                <h2 class="fadeInUp lg:text-6xl text-5xl font-serif -tracking-[0.04em] text-center pb-7">
+                  {tierLabels[tier]}
+                </h2>
 
-                  {isPremium ? (
-                    <div class="space-y-5">
-                      {tierSponsors.map(async (sponsor) => {
-                        const { Content } = await sponsor.render();
-                        const sponsorSlug = sponsor.id.replace(/\.md$/, "");
-                        return (
-                          <div
-                            id={sponsorSlug}
-                            class="sponsor-card fadeInUp bg-white flex lg:flex-row flex-col rounded-[3.125rem] lg:p-14 p-10 gap-14"
-                          >
-                            <img
-                              src={`/images/sponsors/${sponsor.data.logo}`}
-                              class="lg:w-auto w-[190px]"
-                              alt={sponsor.data.name}
-                            />
-                            <div class="space-y-5 lg:w-[50%]">
-                              <h3 class="text-3xl font-semibold text-charcoal">
-                                {sponsor.data.name}
-                              </h3>
-                              <div class="text-sm font-medium leading-normal tracking-[0.01em]">
-                                <Content />
-                              </div>
-                              {sponsor.data.website && (
-                                <a
-                                  href={sponsor.data.website}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  class="text-base font-medium font-sans leading-[1.2]"
-                                >
-                                  {new URL(sponsor.data.website).hostname}
-                                </a>
-                              )}
+                {isPremium ? (
+                  <div class="space-y-5">
+                    {tierSponsors.map(async (sponsor) => {
+                      const { Content } = await sponsor.render();
+                      const sponsorSlug = sponsor.id.replace(/\.md$/, "");
+                      return (
+                        <div id={sponsorSlug} class="sponsor-card fadeInUp bg-white flex lg:flex-row flex-col items-center rounded-[3.125rem] lg:p-14 p-10 gap-14">
+                          <img
+                            src={`/images/sponsors/${sponsor.data.logo}`}
+                            class="lg:w-[40%] w-[190px] h-auto object-contain shrink-0"
+                            alt={sponsor.data.name}
+                          />
+                          <div class="space-y-5 lg:w-[50%]">
+                            <h3 class="text-3xl font-semibold text-charcoal">
+                              {sponsor.data.name}
+                            </h3>
+                            <div class="text-sm font-medium leading-normal tracking-[0.01em]">
+                              <Content />
                             </div>
+                            {sponsor.data.website && (
+                              <a
+                                href={sponsor.data.website}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-base font-medium font-sans leading-[1.2]"
+                              >
+                                {displayHostname(sponsor.data.website)}
+                              </a>
+                            )}
                           </div>
-                        );
-                      })}
-                    </div>
-                  ) : isSupporting ? (
-                    <div class="flex flex-wrap justify-center gap-5">
-                      {tierSponsors.map(async (sponsor) => {
-                        const { Content } = await sponsor.render();
-                        const sponsorSlug = sponsor.id.replace(/\.md$/, "");
-                        return (
-                          <div
-                            id={sponsorSlug}
-                            class="sponsor-card fadeInUp bg-white flex flex-col rounded-[2rem] p-8 gap-6 lg:w-[calc(33.333%-1rem)] w-full"
-                          >
-                            <img
-                              src={`/images/sponsors/${sponsor.data.logo}`}
-                              class="w-full h-auto object-contain max-h-24"
-                              alt={sponsor.data.name}
-                            />
-                            <div class="space-y-3">
-                              <h3 class="text-xl font-semibold text-charcoal">
-                                {sponsor.data.name}
-                              </h3>
-                              <div class="text-sm font-medium leading-normal tracking-[0.01em]">
-                                <Content />
-                              </div>
-                              {sponsor.data.website && (
-                                <a
-                                  href={sponsor.data.website}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  class="text-sm font-medium font-sans leading-[1.2]"
-                                >
-                                  {new URL(sponsor.data.website).hostname}
-                                </a>
-                              )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : isSupporting ? (
+                  <div class="flex flex-wrap justify-center gap-5">
+                    {tierSponsors.map(async (sponsor) => {
+                      const { Content } = await sponsor.render();
+                      const sponsorSlug = sponsor.id.replace(/\.md$/, "");
+                      return (
+                        <div id={sponsorSlug} class="sponsor-card fadeInUp bg-white flex flex-col rounded-[2rem] p-8 gap-6 lg:w-[calc(33.333%-1rem)] w-full">
+                          <img
+                            src={`/images/sponsors/${sponsor.data.logo}`}
+                            class="w-full h-auto object-contain max-h-24"
+                            alt={sponsor.data.name}
+                          />
+                          <div class="space-y-3">
+                            <h3 class="text-xl font-semibold text-charcoal">
+                              {sponsor.data.name}
+                            </h3>
+                            <div class="text-sm font-medium leading-normal tracking-[0.01em]">
+                              <Content />
                             </div>
+                            {sponsor.data.website && (
+                              <a
+                                href={sponsor.data.website}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-sm font-medium font-sans leading-[1.2]"
+                              >
+                                {displayHostname(sponsor.data.website)}
+                              </a>
+                            )}
                           </div>
-                        );
-                      })}
-                    </div>
-                  ) : (
-                    <div
-                      class={
-                        tierSponsors.length === 1
-                          ? "flex justify-center"
-                          : "grid lg:grid-cols-2 grid-cols-1 gap-x-5 gap-y-10"
-                      }
-                    >
-                      {tierSponsors.map(async (sponsor) => {
-                        const { Content } = await sponsor.render();
-                        const sponsorSlug = sponsor.id.replace(/\.md$/, "");
-                        return (
-                          <div
-                            id={sponsorSlug}
-                            class={`sponsor-card fadeInUp bg-white flex flex-col items-center rounded-[3.125rem] lg:p-14 p-10 gap-14 ${tierSponsors.length === 1 ? "lg:w-[50%]" : ""}`}
-                          >
-                            <img
-                              src={`/images/sponsors/${sponsor.data.logo}`}
-                              class="lg:w-auto w-[190px]"
-                              alt={sponsor.data.name}
-                            />
-                            <div class="space-y-5">
-                              <h3 class="text-3xl font-semibold text-charcoal">
-                                {sponsor.data.name}
-                              </h3>
-                              <div class="text-sm font-medium leading-normal tracking-[0.01em]">
-                                <Content />
-                              </div>
-                              {sponsor.data.website && (
-                                <a
-                                  href={sponsor.data.website}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  class="text-base font-medium font-sans leading-[1.2]"
-                                >
-                                  {new URL(sponsor.data.website).hostname}
-                                </a>
-                              )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div class={tierSponsors.length === 1 ? "flex justify-center" : "grid lg:grid-cols-2 grid-cols-1 gap-x-5 gap-y-10"}>
+                    {tierSponsors.map(async (sponsor) => {
+                      const { Content } = await sponsor.render();
+                      const sponsorSlug = sponsor.id.replace(/\.md$/, "");
+                      return (
+                        <div id={sponsorSlug} class={`sponsor-card fadeInUp bg-white flex flex-col items-center rounded-[3.125rem] lg:p-14 p-10 gap-14 ${tierSponsors.length === 1 ? "lg:w-[50%]" : ""}`}>
+                          <img
+                            src={`/images/sponsors/${sponsor.data.logo}`}
+                            class="lg:w-auto w-[190px]"
+                            alt={sponsor.data.name}
+                          />
+                          <div class="space-y-5">
+                            <h3 class="text-3xl font-semibold text-charcoal">
+                              {sponsor.data.name}
+                            </h3>
+                            <div class="text-sm font-medium leading-normal tracking-[0.01em]">
+                              <Content />
                             </div>
+                            {sponsor.data.website && (
+                              <a
+                                href={sponsor.data.website}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-base font-medium font-sans leading-[1.2]"
+                              >
+                                {displayHostname(sponsor.data.website)}
+                              </a>
+                            )}
                           </div>
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
-              );
-            })
-          }
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
   </section>
 
-  <section
-    class="bg-stone pt-10 pb-32 mt-[-1px] relative after:content-[''] after:absolute after:z-10 after:top-[25%] after:left-0 after:w-full after:h-full after:bg-[url('/images/bg-pattern.svg')] after:bg-cover after:bg-center after:bg-no-repeat"
-  >
+  <section class="bg-stone pt-10 pb-32 mt-[-1px] relative after:content-[''] after:absolute after:z-10 after:top-[25%] after:left-0 after:w-full after:h-full after:bg-[url('/images/bg-pattern.svg')] after:bg-cover after:bg-center after:bg-no-repeat">
     <div class="container relative z-20">
       <div class="fadeInUp text-center space-y-10 text-black mb-10">
         <h3 class="lg:text-5xl text-4xl font-serif">Previously sponsored by</h3>
@@ -249,9 +218,7 @@ const prospectusUrl = "/files/PyCon AU 2026 Sponsorship Prospectus v5.pdf";
       <SponsorBubbles staticLogos={previousSponsors} />
 
       <div class="fadeInUp h-[81px] flex justify-center mt-14 mx-auto">
-        <a
-          href={prospectusUrl}
-          class="btn-arrow btn-arrow--lemon btn-arrow--medium"
+        <a href={prospectusUrl} class="btn-arrow btn-arrow--lemon btn-arrow--medium"
           ><span>Sponsor PyCon AU today!</span></a
         >
       </div>
@@ -266,8 +233,7 @@ const prospectusUrl = "/files/PyCon AU 2026 Sponsorship Prospectus v5.pdf";
     </div>
   </section>
 
-  {
-    /*
+  {/*
   <section class="bg-lime pt-20">
     <div class="container">
       <div class="grid lg:grid-cols-2 gap-5 pb-20">
@@ -284,8 +250,7 @@ const prospectusUrl = "/files/PyCon AU 2026 Sponsorship Prospectus v5.pdf";
       </div>
     </div>
   </section>
-  */
-  }
+  */}
 
   <Footer />
 

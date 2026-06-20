@@ -1,8 +1,9 @@
 ---
 import SideNavItem from "../SideNavItem.astro";
+import type { NavModule } from "../../types/nav";
 
 // Import all cfp pages with their metadata
-const pages = import.meta.glob('../../pages/cfp/*.astro', { eager: true });
+const pages = import.meta.glob<NavModule>('../../pages/cfp/*.astro', { eager: true });
 
 // Helper to convert slug to title (e.g., "specialist-tracks" -> "Specialist Tracks")
 const slugToTitle = (slug: string) =>
@@ -11,7 +12,7 @@ const slugToTitle = (slug: string) =>
 // Extract nav metadata and sort by order, with fallback for pages without nav export
 const navItems = Object.entries(pages)
   .filter(([path]) => !path.includes('index.astro'))
-  .map(([path, mod]: [string, any]) => {
+  .map(([path, mod]) => {
     const slug = path.match(/\/cfp\/(.+)\.astro$/)?.[1] ?? '';
     const nav = mod.nav;
 

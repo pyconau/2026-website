@@ -1,5 +1,5 @@
 ---
-name: Serg
+name: Sergio Pintaldi
 code: 38JMFR
 hasAvatar: true
 ---

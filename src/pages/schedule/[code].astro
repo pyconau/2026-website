@@ -252,10 +252,10 @@ if (trackData) {
         const url = btn.dataset.url ?? window.location.href;
         await navigator.clipboard.writeText(url);
         const icon = btn.querySelector("i");
-        icon.className = "fa-solid fa-check text-2xl";
+        if (icon) icon.className = "fa-solid fa-check text-2xl";
         btn.classList.add("text-emerald");
         setTimeout(() => {
-          icon.className = "fa-solid fa-link text-2xl";
+          if (icon) icon.className = "fa-solid fa-link text-2xl";
           btn.classList.remove("text-emerald");
         }, 2000);
       });

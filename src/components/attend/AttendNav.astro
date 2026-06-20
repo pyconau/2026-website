@@ -1,8 +1,9 @@
 ---
 import SideNavItem from "../SideNavItem.astro";
+import type { NavModule } from "../../types/nav";
 
 // Import all attend pages with their metadata
-const pages = import.meta.glob('../../pages/attend/*.astro', { eager: true });
+const pages = import.meta.glob<NavModule>('../../pages/attend/*.astro', { eager: true });
 
 // Extract nav metadata and sort by order
 const navItems = Object.entries(pages)
@@ -13,12 +14,13 @@ const navItems = Object.entries(pages)
   .map(([path, mod]) => {
     // Extract the slug from the file path
     const slug = path.match(/\/attend\/(.+)\.astro$/)?.[1];
+    const nav = mod.nav!;
     return {
       href: `/attend/${slug}`,
-      title: mod.nav.title,
-      order: mod.nav.order,
-      tile: mod.nav.tile !== undefined ? mod.nav.tile : true,
-      image: mod.nav.image
+      title: nav.title,
+      order: nav.order,
+      tile: nav.tile !== undefined ? nav.tile : true,
+      image: nav.image
     };
   })
   .sort((a, b) => a.order - b.order);
