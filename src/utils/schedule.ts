@@ -220,7 +220,7 @@ export const trackColors: Record<string, { bg: string; text: string }> = {
 /**
  * Get track color configuration
  */
-export function getTrackColor(trackSlug: string | null): {
+export function getTrackColor(trackSlug: string | null | undefined): {
   bg: string;
   text: string;
 } {

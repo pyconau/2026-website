@@ -13,7 +13,7 @@ import TypographyLink from "../../components/typography/TypographyLink.astro";
 
 const tracks = (await getCollection("cfp-specialist-tracks")).sort((a, b) => a.id.localeCompare(b.id));
 
-const buttonOrder = [
+const buttonOrder: string[] = [
   // 'education',
   // 'data-ai',
   // 'devrel',

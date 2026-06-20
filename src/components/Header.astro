@@ -1,6 +1,7 @@
 ---
 import { clsx } from "clsx";
 import HeaderTopNavItem from "./typography/HeaderTopNavItem.astro";
+import type { NavModule } from "../types/nav";
 
 export interface Props {
   dark: boolean;
@@ -9,7 +10,7 @@ export interface Props {
 const { dark } = Astro.props;
 
 // Import all attend pages with their metadata
-const pages = import.meta.glob('../pages/attend/*.astro', { eager: true });
+const pages = import.meta.glob<NavModule>('../pages/attend/*.astro', { eager: true });
 
 // Extract nav metadata and sort by order
 const attendeeGuidePages = Object.entries(pages)
@@ -20,30 +21,11 @@ const attendeeGuidePages = Object.entries(pages)
   .map(([path, mod]) => {
     // Extract the slug from the file path
     const slug = path.match(/\/attend\/(.+)\.astro$/)?.[1];
+    const nav = mod.nav!;
     return {
       href: `/attend/${slug}`,
-      title: mod.nav.title,
-      order: mod.nav.order,
-    };
-  })
-  .sort((a, b) => a.order - b.order);
-
-// Import all CFP pages with their metadata
-const cfpPages = import.meta.glob('../pages/cfp/*.astro', { eager: true });
-
-// Extract nav metadata and sort by order
-const callForProposalsPages = Object.entries(cfpPages)
-  .filter(([path, mod]) => {
-    // Filter out index page and pages without nav metadata
-    return !path.includes('index.astro') && mod.nav;
-  })
-  .map(([path, mod]) => {
-    // Extract the slug from the file path
-    const slug = path.match(/\/cfp\/(.+)\.astro$/)?.[1];
-    return {
-      href: `/cfp/${slug}`,
-      title: mod.nav.title,
-      order: mod.nav.order,
+      title: nav.title,
+      order: nav.order,
     };
   })
   .sort((a, b) => a.order - b.order);
