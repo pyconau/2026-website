@@ -311,9 +311,14 @@ import { TICKETING_URL } from "../constants";
                       Student
                     </h3>
                   </div>
-                  <div class="price">
-                    <span class="text-stone text-4xl font-semibold font-sans"
-                      >TBA</span
+                  <div class="price lg:text-right">
+                    <span
+                      class="text-white text-4xl font-semibold font-sans"
+                      >$300</span
+                    >
+                    <span
+                      class="text-stone/50 text-base font-sans tracking-[0.01em] block leading-tight mt-2"
+                      ><span class="text-xs">or</span> $120<br />per-day</span
                     >
                   </div>
                 </div>
@@ -327,7 +332,7 @@ import { TICKETING_URL } from "../constants";
                       >Enthusiast</span
                     > ticket type.
                   </p>
-                  <p>Student tickets will be made available later in 2026.</p>
+                  <p>Available until sold out.</p>
                 </div>
                 {
                   /* 
@@ -347,17 +352,13 @@ import { TICKETING_URL } from "../constants";
                 */
                 }
               </div>
-              {
-                /* 
               <div class="space-y-7">
                 <a
-                  href="#"
+                  href={TICKETING_URL}
                   class="btn-arrow btn-arrow--coral rounded-[3.125rem]! hover:rounded-none! justify-between py-5!"
                   ><span>Buy Tickets</span></a
                 >
               </div>
-               */
-              }
             </div>
           </div>
         </div>
