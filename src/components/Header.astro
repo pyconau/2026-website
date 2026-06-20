@@ -122,6 +122,30 @@ const callForProposalsPages = Object.entries(cfpPages)
                   Specialist Tracks
                 </a>
               </li>
+              <li>
+                <a
+                  href="/schedule/thursday"
+                  class="text-sm font-semibold font-sans hover:text-emerald"
+                >
+                  Thursday
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/schedule/friday"
+                  class="text-sm font-semibold font-sans hover:text-emerald"
+                >
+                  Friday
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/schedule/saturday"
+                  class="text-sm font-semibold font-sans hover:text-emerald"
+                >
+                  Saturday
+                </a>
+              </li>
             </ul>
           </li>
           <li class="relative group">
@@ -300,8 +324,61 @@ const callForProposalsPages = Object.entries(cfpPages)
         <li x-show="openSubMenu === null">
           <a href="/sponsor"><span>Sponsors</span></a>
         </li>
-        <li x-show="openSubMenu === null">
-          <a href="/schedule"><span class="relative inline-block">Schedule<img src="/images/flourish.svg" alt="" class="absolute -top-3 -right-4 w-7 h-7" /></span></a>
+        <li
+          x-show="openSubMenu === null || openSubMenu === 'schedule'"
+          :class="{ 'sub-menu-open': openSubMenu === 'schedule' }"
+        >
+          <div class="has-child">
+            <a href="/schedule">
+              <span class="relative inline-block">Schedule<img src="/images/flourish.svg" alt="" class="absolute -top-3 -right-4 w-7 h-7" /></span>
+            </a>
+            <svg
+              @click="openSubMenu = openSubMenu === 'schedule' ? null : 'schedule'"
+              xmlns="http://www.w3.org/2000/svg"
+              width="15.966"
+              height="28.934"
+              viewBox="0 0 15.966 28.934"
+              :class="{ 'rotate-90': openSubMenu === 'schedule' }"
+              class=" transition-transform duration-100 ease-in-out"
+              ><g transform="translate(-30.906 0)"
+                ><g transform="translate(0 0)"
+                  ><path
+                    d="M26.347,28.934h-3a16.009,16.009,0,0,1,9.19-14.468,15.977,15.977,0,0,1-4.514-3.176A15.862,15.862,0,0,1,23.347,0h3a12.882,12.882,0,0,0,3.8,9.169,12.882,12.882,0,0,0,9.169,3.8v3A12.967,12.967,0,0,0,26.347,28.934Z"
+                    transform="translate(7.559)"></path></g
+                ></g
+              >
+            </svg>
+          </div>
+          <ul class="flex flex-col gap-3 py-5 mb-4 w-full transition-all duration-500 ease-in-out text-black bg-stone rounded-xl">
+            <li class="px-4">
+              <a
+                href="/schedule/specialist-tracks"
+                class="font-semibold text-2xl font-sans hover:text-emerald"
+                >Specialist Tracks</a
+              >
+            </li>
+            <li class="px-4">
+              <a
+                href="/schedule/thursday"
+                class="font-semibold text-2xl font-sans hover:text-emerald"
+                >Thursday</a
+              >
+            </li>
+            <li class="px-4">
+              <a
+                href="/schedule/friday"
+                class="font-semibold text-2xl font-sans hover:text-emerald"
+                >Friday</a
+              >
+            </li>
+            <li class="px-4">
+              <a
+                href="/schedule/saturday"
+                class="font-semibold text-2xl font-sans hover:text-emerald"
+                >Saturday</a
+              >
+            </li>
+          </ul>
         </li>
         <li x-show="openSubMenu === null">
           <a href="/news/"><span>News & Updates</span></a>
