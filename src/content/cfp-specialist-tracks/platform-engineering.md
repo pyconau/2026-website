@@ -1,6 +1,6 @@
 ---
 title: "Platform Engineering"
-shortDescription: "Share and explore how Platform Engineering ideas such as systems thinking, guardrails, and golden paths empower teams to get their code from commit to production quickly and safely!"
+shortDescription: "Share and explore how platform engineering ideas such as systems thinking, guardrails, and golden paths empower teams to get their code from commit to production quickly and safely!"
 organisers:
   - name: Evan Kohilas
     title: "Platform Senior Software Engineer"
