@@ -370,9 +370,9 @@ import { TICKETING_URL } from "../constants";
               </div>
             </div>
           </div>
-          <div class="fadeInUp bg-[#383838] py-14">
+          <div class="fadeInUp bg-[#383838] py-14 lg:col-span-2">
             <div
-              class="lg:max-w-[426px] w-full lg:px-10 px-5 h-full mx-auto flex flex-col gap-16 justify-between"
+              class="w-full lg:px-10 px-5 h-full mx-auto flex flex-col gap-16 justify-between"
             >
               <div class="space-y-10">
                 <div
@@ -394,45 +394,59 @@ import { TICKETING_URL } from "../constants";
                     >
                   </div>
                 </div>
-                <div class="rich-text">
-                  <p class="text-stone">
-                    A subsidised ticket for school<sup>1</sup> teachers educating
-                    the next generation of bright young minds.
-                  </p>
-                  <p class="text-stone">
-                    It is available to teachers associated with an Australian or
-                    New Zealand educational institution with a .edu.au / .nz
-                    email address.
-                  </p>
-                  <p class="text-stone">
-                    Educators receive all the inclusions of the <span
-                      class="text-emerald font-bold">Professional</span
-                    > ticket type.
-                  </p>
-                </div>
-                <ul class="space-y-5 text-lime">
-                  <li class="flex items-center gap-3">
-                    <img src="/images/tick-lime.svg" alt="tick" />
-                    <span>Includes Education specialist track</span>
-                  </li>
-                  <li class="flex items-center gap-3">
-                    <img src="/images/tick-lime.svg" alt="tick" />
-                    <span>Discounted full conference (optional)</span>
-                  </li>
-                </ul>
-              </div>
-              <div class="space-y-7">
-                <a
-                  href={TICKETING_URL}
-                  class="btn-arrow btn-arrow--lime rounded-[3.125rem]! hover:rounded-none! justify-between py-5!"
-                  ><span>Buy Tickets</span></a
-                >
-                <div>
-                  <span
-                    class="text-sm text-stone font-sans tracking-[0.01em] block leading-normal pl-[0.85em] -indent-[0.85em]"
-                    ><sup>1</sup> For current teachers of primary or secondary
-                    students, including equivalent curricula such as IB.</span
-                  >
+                <div class="grid lg:grid-cols-2 grid-cols-1 gap-10">
+                  <div class="space-y-10">
+                    <div class="rich-text">
+                      <p class="text-stone">
+                        A subsidised ticket for school<sup>1</sup> teachers
+                        educating the next generation of bright young minds.
+                      </p>
+                      <p class="text-stone">
+                        It is available to teachers associated with an
+                        Australian or New Zealand educational institution with a
+                        .edu.au / .nz email address.
+                      </p>
+                    </div>
+                    <p class="text-stone">
+                      Educators receive all the inclusions of the <span
+                        class="text-emerald font-bold">Professional</span
+                      > ticket type.
+                    </p>
+                    <div>
+                      <span
+                        class="text-sm text-stone font-sans tracking-[0.01em] block leading-normal pl-[0.85em] -indent-[0.85em]"
+                        ><sup>1</sup> For current teachers of primary or
+                        secondary students, including equivalent curricula such
+                        as IB.</span
+                      >
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-10 justify-between">
+                    <div class="space-y-10">
+                      <p class="text-stone">Educator tickets include:</p>
+                      <ul class="space-y-5 text-lime">
+                        <li class="flex items-center gap-3">
+                          <img src="/images/tick-lime.svg" alt="tick" />
+                          <span>1-day pass for Friday 27 August</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                          <img src="/images/tick-lime.svg" alt="tick" />
+                          <span>Includes Education specialist track</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                          <img src="/images/tick-lime.svg" alt="tick" />
+                          <span>Discounted full conference (optional)</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="space-y-7">
+                      <a
+                        href={TICKETING_URL}
+                        class="btn-arrow btn-arrow--lime rounded-[3.125rem]! hover:rounded-none! justify-between py-5!"
+                        ><span>Buy Tickets</span></a
+                      >
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
