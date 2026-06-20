@@ -372,30 +372,46 @@ import { TICKETING_URL } from "../constants";
           </div>
           <div class="fadeInUp bg-[#383838] py-14 lg:col-span-2">
             <div
-              class="w-full lg:px-10 px-5 h-full mx-auto flex flex-col gap-16 justify-between"
+              class="w-full h-full flex flex-col gap-16 justify-between"
             >
               <div class="space-y-10">
-                <div
-                  class="flex lg:flex-row flex-col gap-5 lg:gap-0 justify-between"
-                >
-                  <div class="space-y-2">
-                    <h3 class="text-emerald font-sans font-semibold text-4xl">
-                      Educator
-                    </h3>
+                <div class="grid lg:grid-cols-2 grid-cols-1">
+                  <div
+                    class="lg:max-w-[426px] w-full lg:px-10 px-5 mx-auto flex lg:flex-row flex-col gap-5 lg:gap-0 justify-between"
+                  >
+                    <div class="space-y-2">
+                      <h3 class="text-emerald font-sans font-semibold text-4xl">
+                        Educator
+                      </h3>
+                    </div>
+                    <div class="price lg:text-right lg:hidden">
+                      <span
+                        class="text-white text-4xl font-semibold font-sans"
+                        >$250</span
+                      >
+                      <span
+                        class="text-stone/50 text-base font-sans tracking-[0.01em] block leading-tight mt-2"
+                        ><span class="text-xs">or</span> $550<br />for 3-days</span
+                      >
+                    </div>
                   </div>
-                  <div class="price lg:text-right">
-                    <span
-                      class="text-white text-4xl font-semibold font-sans"
-                      >$250</span
-                    >
-                    <span
-                      class="text-stone/50 text-base font-sans tracking-[0.01em] block leading-tight mt-2"
-                      ><span class="text-xs">or</span> $550<br />for 3-days</span
-                    >
+                  <div
+                    class="lg:max-w-[426px] w-full lg:px-10 px-5 mx-auto lg:flex hidden justify-end"
+                  >
+                    <div class="price lg:text-right">
+                      <span
+                        class="text-white text-4xl font-semibold font-sans"
+                        >$250</span
+                      >
+                      <span
+                        class="text-stone/50 text-base font-sans tracking-[0.01em] block leading-tight mt-2"
+                        ><span class="text-xs">or</span> $550<br />for 3-days</span
+                      >
+                    </div>
                   </div>
                 </div>
-                <div class="grid lg:grid-cols-2 grid-cols-1 gap-10">
-                  <div class="space-y-10">
+                <div class="grid lg:grid-cols-2 grid-cols-1">
+                  <div class="space-y-10 lg:max-w-[426px] w-full lg:px-10 px-5 mx-auto">
                     <div class="rich-text">
                       <p class="text-stone">
                         A subsidised ticket for school<sup>1</sup> teachers
@@ -421,13 +437,13 @@ import { TICKETING_URL } from "../constants";
                       >
                     </div>
                   </div>
-                  <div class="flex flex-col gap-10 justify-between">
+                  <div class="flex flex-col gap-10 justify-between lg:max-w-[426px] w-full lg:px-10 px-5 mx-auto">
                     <div class="space-y-10">
                       <p class="text-stone">Educator tickets include:</p>
                       <ul class="space-y-5 text-lime">
                         <li class="flex items-center gap-3">
                           <img src="/images/tick-lime.svg" alt="tick" />
-                          <span>1-day pass for Friday 27 August</span>
+                          <span>1-day ticket for Friday 27 August</span>
                         </li>
                         <li class="flex items-center gap-3">
                           <img src="/images/tick-lime.svg" alt="tick" />
