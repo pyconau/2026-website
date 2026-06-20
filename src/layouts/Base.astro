@@ -22,7 +22,13 @@ const {
   publishedTime,
 } = Astro.props;
 
+const DEFAULT_OG_IMAGE = "/images/og-large-default.png";
 const effectiveDescription = description ?? DEFAULT_DESCRIPTION;
+const effectiveOgImage = ogImage || DEFAULT_OG_IMAGE;
+const isPreviewDeployment = process.env.VERCEL_ENV === "preview";
+const robotsContent = isPreviewDeployment
+  ? "noindex, nofollow"
+  : "max-image-preview:large";
 
 // Convert relative OG image path to absolute URL
 // Priority: request context (dev/ssr) > Astro.site (from config) > default to production
@@ -39,8 +45,8 @@ if (Astro.request?.url) {
   siteUrl = "https://2026.pycon.org.au/";
 }
 
-const absoluteOgImage = ogImage && siteUrl
-  ? new URL(ogImage, siteUrl).toString()
+const absoluteOgImage = effectiveOgImage && siteUrl
+  ? new URL(effectiveOgImage, siteUrl).toString()
   : undefined;
 
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
@@ -58,7 +64,7 @@ const pageTitle = appendSiteTitle ? `${title} — ${SITE_NAME}` : title;
     <link rel="alternate" type="application/rss+xml" title={`${SITE_NAME} News`} href="/rss.xml" />
     <title>{pageTitle}</title>
     <meta name="description" content={effectiveDescription} />
-    <meta name="robots" content="max-image-preview:large" />
+    <meta name="robots" content={robotsContent} />
 
     <!-- Open Graph metadata -->
     <meta property="og:site_name" content={SITE_NAME} />
@@ -68,6 +74,8 @@ const pageTitle = appendSiteTitle ? `${title} — ${SITE_NAME}` : title;
     <meta property="og:description" content={effectiveDescription} />
     <meta property="og:locale" content="en_AU" />
     {absoluteOgImage && <meta property="og:image" content={absoluteOgImage} />}
+    {absoluteOgImage && <meta property="og:image:width" content="1200" />}
+    {absoluteOgImage && <meta property="og:image:height" content="630" />}
     {ogType === "article" && publishedTime && (
       <meta property="article:published_time" content={publishedTime} />
     )}
