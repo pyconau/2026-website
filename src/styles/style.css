@@ -726,6 +726,13 @@ ul.sub-menu {
   @apply font-semibold text-[#747474];
 }
 
+.schedule-track-name--link {
+  @apply no-underline cursor-pointer transition-colors;
+}
+.schedule-track-name--link:hover {
+  @apply text-charcoal underline;
+}
+
 .schedule-event {
   @apply relative left-0 right-0;
   @apply bg-white text-charcoal font-sans font-medium text-xs px-4 py-2 rounded-[1.25rem] flex flex-col justify-between items-start;
