@@ -4,20 +4,9 @@ import Footer from "../../../components/Footer.astro";
 import Header from "../../../components/Header.astro";
 import HeaderStar from "../../../components/header/HeaderStar.astro";
 import Base from "../../../layouts/Base.astro";
-import { getSessionsForSpecialistTrack } from "../../../utils/schedule";
+import { getTrackColor } from "../../../utils/schedule";
 
 const tracks = await getCollection("schedule-specialist-tracks");
-
-// Get session counts for each track
-const tracksWithCounts = await Promise.all(
-  tracks.map(async (track) => {
-    const sessions = await getSessionsForSpecialistTrack(track);
-    return {
-      ...track,
-      sessionCount: sessions.length,
-    };
-  })
-);
 ---
 
 <Base title="Specialist Tracks">
@@ -46,8 +35,9 @@ const tracksWithCounts = await Promise.all(
               </h1>
             </div>
             <p class="text-stone font-sans font-base tracking-[0.01em] leading-normal lg:w-[454px]">
-              Specialist tracks are one day mini-conferences focused on specific
-              niches, fields or industries.
+              Specialist tracks are curated mini-conferences focusing on
+              specific topics within the Python ecosystem. Each track is
+              organised by community members with deep expertise in their area.
             </p>
           </div>
         </div>
@@ -62,20 +52,34 @@ const tracksWithCounts = await Promise.all(
       <div class="container">
         <div class="lg:w-[85%] w-full mx-auto">
           <div class="grid lg:grid-cols-2 gap-8">
-            {tracksWithCounts.map((track) => (
+            {tracks.map((track) => (
               <a
                 href={`/schedule/specialist-tracks/${track.slug}`}
-                class="fadeInUp bg-white hover:bg-lemon p-8 rounded-lg group transition-all duration-300"
+                class="fadeInUp bg-white hover:bg-lemon p-8 rounded-lg group transition-all duration-300 flex flex-col"
               >
                 <h3 class="text-2xl font-serif font-medium text-charcoal group-hover:text-emerald transition-colors duration-300 mb-3">
                   {track.data.title}
                 </h3>
-                <p class="text-charcoal/70 mb-4">{track.data.shortDescription}</p>
-                {track.sessionCount > 0 && (
-                  <span class="text-emerald font-semibold text-sm">
-                    {track.sessionCount} session{track.sessionCount !== 1 ? "s" : ""}
-                  </span>
-                )}
+                <p class="text-charcoal/70 mb-4 flex-1">{track.data.shortDescription}</p>
+                <div class="mt-3 text-right">
+                  {track.data.date ? (
+                    (() => {
+                      const color = getTrackColor(track.slug);
+                      return (
+                        <span
+                          class="inline-block text-xs font-sans px-3 py-1 rounded-full"
+                          style={`background-color: ${color.bg}; color: ${color.text};`}
+                        >
+                          {track.data.date.toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long" })}
+                        </span>
+                      );
+                    })()
+                  ) : (
+                    <span class="text-charcoal/50 text-xs font-sans">
+                      Schedule to be announced
+                    </span>
+                  )}
+                </div>
               </a>
             ))}
           </div>
