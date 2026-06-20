@@ -33,6 +33,10 @@ const tierLabels: Record<string, string> = {
 };
 
 const prospectusUrl = "/files/PyCon AU 2026 Sponsorship Prospectus v5.pdf";
+
+// Display the bare hostname, dropping a leading "www." subdomain.
+const displayHostname = (url: string) =>
+  new URL(url).hostname.replace(/^www\./, "");
 ---
 
 <Base title="Sponsors">
@@ -96,10 +100,10 @@ const prospectusUrl = "/files/PyCon AU 2026 Sponsorship Prospectus v5.pdf";
                       const { Content } = await sponsor.render();
                       const sponsorSlug = sponsor.id.replace(/\.md$/, "");
                       return (
-                        <div id={sponsorSlug} class="sponsor-card fadeInUp bg-white flex lg:flex-row flex-col rounded-[3.125rem] lg:p-14 p-10 gap-14">
+                        <div id={sponsorSlug} class="sponsor-card fadeInUp bg-white flex lg:flex-row flex-col items-center rounded-[3.125rem] lg:p-14 p-10 gap-14">
                           <img
                             src={`/images/sponsors/${sponsor.data.logo}`}
-                            class="lg:w-auto w-[190px]"
+                            class="lg:w-[40%] w-[190px] h-auto object-contain shrink-0"
                             alt={sponsor.data.name}
                           />
                           <div class="space-y-5 lg:w-[50%]">
@@ -116,7 +120,7 @@ const prospectusUrl = "/files/PyCon AU 2026 Sponsorship Prospectus v5.pdf";
                                 rel="noopener noreferrer"
                                 class="text-base font-medium font-sans leading-[1.2]"
                               >
-                                {new URL(sponsor.data.website).hostname}
+                                {displayHostname(sponsor.data.website)}
                               </a>
                             )}
                           </div>
@@ -150,7 +154,7 @@ const prospectusUrl = "/files/PyCon AU 2026 Sponsorship Prospectus v5.pdf";
                                 rel="noopener noreferrer"
                                 class="text-sm font-medium font-sans leading-[1.2]"
                               >
-                                {new URL(sponsor.data.website).hostname}
+                                {displayHostname(sponsor.data.website)}
                               </a>
                             )}
                           </div>
@@ -184,7 +188,7 @@ const prospectusUrl = "/files/PyCon AU 2026 Sponsorship Prospectus v5.pdf";
                                 rel="noopener noreferrer"
                                 class="text-base font-medium font-sans leading-[1.2]"
                               >
-                                {new URL(sponsor.data.website).hostname}
+                                {displayHostname(sponsor.data.website)}
                               </a>
                             )}
                           </div>
