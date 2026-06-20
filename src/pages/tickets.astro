@@ -6,7 +6,10 @@ import Base from "../layouts/Base.astro";
 import { TICKETING_URL } from "../constants";
 ---
 
-<Base title="Tickets">
+<Base
+  title="Tickets"
+  description="Buy tickets for PyCon AU 2026 in Brisbane, August 26–30. Professional, Enthusiast, Contributor and Student tickets available. Group discounts for 5 or more."
+>
   <PageHeader dark={true} starColour="lemon">
     <HeaderBreadcrumbs colour="emerald" />
 
@@ -31,7 +34,9 @@ import { TICKETING_URL } from "../constants";
           <p
             class="text-stone font-sans font-base tracking-[0.01em] leading-normal lg:w-[454px]"
           >
-            PyCon AU offers four types of tickets to attend. Group discounts are available for groups of 5 or more. Bring your team to PyCon AU by registering today!
+            PyCon AU offers four types of tickets to attend. Group discounts are
+            available for groups of 5 or more. Bring your team to PyCon AU by
+            registering today!
           </p>
         </div>
 
@@ -337,8 +342,8 @@ import { TICKETING_URL } from "../constants";
                     students who hold a government issued student concession ID.
                   </p>
                   <p class="text-stone">
-                    Students receive all the inclusions of the <span class="text-lavender font-bold"
-                      >Enthusiast</span
+                    Students receive all the inclusions of the <span
+                      class="text-lavender font-bold">Enthusiast</span
                     > ticket type.
                   </p>
                   <p>Available until sold out.</p>

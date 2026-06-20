@@ -1,0 +1,54 @@
+# PyCon AU 2026
+
+> PyCon AU is Australia's national conference for everyone using the Python programming language. PyCon AU 2026 takes place August 26–30 at Sofitel Brisbane Central, Brisbane, Queensland, Australia.
+
+PyCon AU has been held annually since 2010. It brings together the Australian and international Python community for talks, workshops, specialist tracks, and open spaces. The event is organised by an all-volunteer team under the Linux Australia umbrella.
+
+## Key facts
+
+- **Dates:** Wednesday 26 August – Sunday 30 August 2026
+- **Venue:** Sofitel Brisbane Central, 249 Turbot Street, Brisbane City QLD 4000, Australia
+- **Tickets:** https://pretix.eu/pyconau/2026/
+- **Organiser:** PyCon AU / Linux Australia – https://pycon.org.au/
+- **Wikidata:** https://www.wikidata.org/wiki/Q136290798
+
+## Main sections
+
+- Homepage: https://2026.pycon.org.au/
+- Tickets: https://2026.pycon.org.au/tickets/
+- Schedule: https://2026.pycon.org.au/schedule/
+- News & Announcements: https://2026.pycon.org.au/news/
+- About: https://2026.pycon.org.au/about/
+- About the Conference: https://2026.pycon.org.au/about/the-conference/
+- Our Team: https://2026.pycon.org.au/about/our-team/
+- Culture and Community: https://2026.pycon.org.au/about/culture-and-community/
+- Volunteer: https://2026.pycon.org.au/about/volunteer/
+- Attend (Attendee Guide): https://2026.pycon.org.au/attend/
+- Accommodation: https://2026.pycon.org.au/attend/accommodation/
+- Travel: https://2026.pycon.org.au/attend/travel/
+- Transport: https://2026.pycon.org.au/attend/transport/
+- Financial Assistance: https://2026.pycon.org.au/attend/financial-assistance/
+- International Visitors: https://2026.pycon.org.au/attend/international-visitors/
+- FAQ: https://2026.pycon.org.au/attend/faq/
+- Sponsors: https://2026.pycon.org.au/sponsor/
+- Code of Conduct: https://2026.pycon.org.au/conduct/
+- Refund Policy: https://2026.pycon.org.au/refunds/
+- RSS Feed: https://2026.pycon.org.au/rss.xml
+- Sitemap: https://2026.pycon.org.au/sitemap-index.xml
+
+## Specialist tracks
+
+Specialist tracks are community-organised mini-conferences running within PyCon AU:
+
+- Data and AI: https://2026.pycon.org.au/program/specialist-tracks/data-and-ai/
+- Education: https://2026.pycon.org.au/program/specialist-tracks/education/
+- Cybersecurity: https://2026.pycon.org.au/program/specialist-tracks/cybersecurity/
+- DevRel: https://2026.pycon.org.au/program/specialist-tracks/devrel/
+- Platform Engineering: https://2026.pycon.org.au/program/specialist-tracks/platform-engineering/
+- Research Software Engineering: https://2026.pycon.org.au/program/specialist-tracks/research-software-engineering/
+
+## Social
+
+- Mastodon: https://mastodon.pycon.org.au/@pyconau
+- Bluesky: https://bsky.app/profile/pyconau.bsky.social
+- LinkedIn: https://www.linkedin.com/company/pyconau/

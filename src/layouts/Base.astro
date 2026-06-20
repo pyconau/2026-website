@@ -1,12 +1,15 @@
 ---
 import "../styles/style.css";
+import { DEFAULT_DESCRIPTION, SITE_NAME } from "../constants";
 
 export interface Props {
   title: string;
   appendSiteTitle?: boolean;
   description?: string;
   ogImage?: string;
+  ogType?: string;
   schemaData?: object;
+  publishedTime?: string;
 }
 
 const {
@@ -14,8 +17,18 @@ const {
   appendSiteTitle = true,
   description,
   ogImage,
+  ogType = "website",
   schemaData,
+  publishedTime,
 } = Astro.props;
+
+const DEFAULT_OG_IMAGE = "/images/og-large-default.png";
+const effectiveDescription = description ?? DEFAULT_DESCRIPTION;
+const effectiveOgImage = ogImage || DEFAULT_OG_IMAGE;
+const isPreviewDeployment = process.env.VERCEL_ENV === "preview";
+const robotsContent = isPreviewDeployment
+  ? "noindex, nofollow"
+  : "max-image-preview:large";
 
 // Convert relative OG image path to absolute URL
 // Priority: request context (dev/ssr) > Astro.site (from config) > default to production
@@ -32,25 +45,46 @@ if (Astro.request?.url) {
   siteUrl = "https://2026.pycon.org.au/";
 }
 
-const absoluteOgImage = ogImage && siteUrl
-  ? new URL(ogImage, siteUrl).toString()
+const absoluteOgImage = effectiveOgImage && siteUrl
+  ? new URL(effectiveOgImage, siteUrl).toString()
   : undefined;
+
+const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+const pageTitle = appendSiteTitle ? `${title} — ${SITE_NAME}` : title;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en-AU">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon2.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <title>{title}{appendSiteTitle && " — PyCon AU 2026"}</title>
-    {description && <meta name="description" content={description} />}
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" type="application/rss+xml" title={`${SITE_NAME} News`} href="/rss.xml" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={effectiveDescription} />
+    <meta name="robots" content={robotsContent} />
 
     <!-- Open Graph metadata -->
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
-    {description && <meta property="og:description" content={description} />}
+    <meta property="og:description" content={effectiveDescription} />
+    <meta property="og:locale" content="en_AU" />
     {absoluteOgImage && <meta property="og:image" content={absoluteOgImage} />}
+    {absoluteOgImage && <meta property="og:image:width" content="1200" />}
+    {absoluteOgImage && <meta property="og:image:height" content="630" />}
+    {ogType === "article" && publishedTime && (
+      <meta property="article:published_time" content={publishedTime} />
+    )}
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={effectiveDescription} />
+    {absoluteOgImage && <meta name="twitter:image" content={absoluteOgImage} />}
 
     <!-- Font preconnects and stylesheets -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

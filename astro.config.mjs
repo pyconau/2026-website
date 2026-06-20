@@ -35,7 +35,7 @@ export default defineConfig({
   markdown: {
     syntaxHighlight: "prism",
   },
-  integrations: [mdx(), sitemap()],
+  integrations: [mdx(), sitemap({ filter: (page) => !page.includes("/dev/") })],
   redirects: {
     "/student-showcase": "/cfp/student-showcase",
     // Specialist track shortcuts

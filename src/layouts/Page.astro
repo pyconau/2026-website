@@ -4,12 +4,15 @@ import Base from './Base.astro';
 export interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
+  ogType?: string;
+  schemaData?: object;
 }
 
-const { title, description } = Astro.props;
+const { title, description, ogImage, ogType, schemaData } = Astro.props;
 ---
 
-<Base title={title} description={description}>
+<Base title={title} description={description} ogImage={ogImage} ogType={ogType} schemaData={schemaData}>
   <main class="container mx-auto px-5 py-20">
     <slot />
   </main>
