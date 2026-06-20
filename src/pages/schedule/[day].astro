@@ -1,4 +1,5 @@
 ---
+import { getCollection } from "astro:content";
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
 import DayTabs from "../../components/schedule/DayTabs.astro";
@@ -33,6 +34,12 @@ const allSessions = await getSessionsByDay(day);
 const allSpeakerCodes = allSessions.flatMap((s) => s.data.speakers || []);
 const allSpeakers = await getPeopleByCode([...new Set(allSpeakerCodes)]);
 const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
+
+// Slugs that have a specialist track page, so we only link track names that
+// resolve to a real page.
+const trackSlugs = new Set(
+  (await getCollection("schedule-specialist-tracks")).map((t) => t.slug)
+);
 ---
 
 <Base title={`${dayCapitalized} Schedule - Schedule`}>
@@ -211,6 +218,10 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
                           ? formatSessionTime(ps.session.data.start, ps.session.data.end)
                           : "";
                         const trackName = ps.session.data.trackName;
+                        const trackSlug = ps.session.data.track;
+                        const trackHref = trackSlug && trackSlugs.has(trackSlug)
+                          ? `/schedule/specialist-tracks/${trackSlug}`
+                          : null;
 
                         const EventTag = isNotYetAnnounced ? "div" : "a";
                         return (
@@ -231,7 +242,11 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
                                     </g>
                                   </g>
                                 </svg>
-                                <span class="schedule-track-name">{trackName}</span>
+                                {trackHref ? (
+                                  <a href={trackHref} class="schedule-track-name schedule-track-name--link">{trackName}</a>
+                                ) : (
+                                  <span class="schedule-track-name">{trackName}</span>
+                                )}
                               </div>
                             )}
                             <EventTag

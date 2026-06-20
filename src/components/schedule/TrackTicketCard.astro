@@ -1,0 +1,84 @@
+---
+import { TICKETING_URL } from "../../constants";
+
+interface TicketTier {
+  /** Ticket type name, e.g. "Professional" */
+  name: string;
+  /** Tailwind text colour class for the name, e.g. "text-emerald" */
+  nameColour: string;
+  /** Short description shown under the heading */
+  description: string;
+  /** Headline (primary) price, e.g. "$380" */
+  price: string;
+  /** Secondary price line, e.g. "$850" */
+  secondaryPrice?: string;
+  /** Suffix for the secondary price, e.g. "for 3-days" */
+  secondaryLabel?: string;
+}
+
+export type { TicketTier };
+
+interface Props {
+  trackName: string;
+  date: string;
+  tiers: TicketTier[];
+  buttonClass?: string;
+}
+
+const { trackName, date, tiers, buttonClass = "btn-arrow--emerald" } =
+  Astro.props;
+---
+
+<div class="fadeInUp bg-white py-12 px-8 lg:px-10 w-full max-w-[426px]">
+  <div class="flex flex-col gap-10 h-full justify-between">
+    <div class="text-center text-charcoal">
+      <span class="block font-serif text-sm -tracking-[0.02em]">
+        Attend
+      </span>
+      <h2 class="font-serif text-3xl -tracking-[0.02em] leading-tight">
+        {trackName}
+      </h2>
+      <span class="block font-sans text-sm text-charcoal/60 mt-1">
+        {date}
+      </span>
+    </div>
+    <div class="space-y-8">
+      {
+        tiers.map((tier) => (
+          <div class="space-y-2">
+            <div class="flex justify-between items-end gap-4">
+              <h3 class={`${tier.nameColour} font-sans font-semibold text-2xl leading-none`}>
+                {tier.name}
+              </h3>
+              <div class="price text-left shrink-0">
+                <span class="text-charcoal/50 text-xs font-sans block leading-none mb-1">
+                  From
+                </span>
+                <span class="text-charcoal text-2xl font-semibold font-sans block leading-none">
+                  {tier.price}
+                </span>
+              </div>
+            </div>
+            <div class="flex justify-between items-start gap-4">
+              <p class="text-charcoal/60 font-sans text-xs! leading-snug max-w-[180px]">
+                {tier.description}
+              </p>
+              {tier.secondaryPrice && (
+                <span class="text-charcoal/50 text-base font-sans tracking-[0.01em] block leading-none shrink-0 text-right">
+                  <span class="text-xs">or</span> {tier.secondaryPrice}
+                  <br />
+                  <span class="text-xs">{tier.secondaryLabel}</span>
+                </span>
+              )}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+    <a
+      href={TICKETING_URL}
+      class={`btn-arrow ${buttonClass} rounded-[3.125rem]! hover:rounded-none! justify-between py-5!`}
+      ><span>Register today</span></a
+    >
+  </div>
+</div>
