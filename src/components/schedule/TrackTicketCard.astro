@@ -45,24 +45,29 @@ const { trackName, date, tiers, buttonClass = "btn-arrow--emerald" } =
     <div class="space-y-8">
       {
         tiers.map((tier) => (
-          <div class="flex justify-between items-start gap-4">
-            <div class="space-y-2">
-              <h3 class={`${tier.nameColour} font-sans font-semibold text-2xl`}>
+          <div class="space-y-2">
+            <div class="flex justify-between items-end gap-4">
+              <h3 class={`${tier.nameColour} font-sans font-semibold text-2xl leading-none`}>
                 {tier.name}
               </h3>
+              <div class="price text-left shrink-0">
+                <span class="text-charcoal/50 text-xs font-sans block leading-none mb-1">
+                  From
+                </span>
+                <span class="text-charcoal text-2xl font-semibold font-sans block leading-none">
+                  {tier.price}
+                </span>
+              </div>
+            </div>
+            <div class="flex justify-between items-start gap-4">
               <p class="text-charcoal/60 font-sans text-xs! leading-snug max-w-[180px]">
                 {tier.description}
               </p>
-            </div>
-            <div class="price text-right shrink-0">
-              <span class="text-charcoal text-2xl font-semibold font-sans">
-                {tier.price}
-              </span>
               {tier.secondaryPrice && (
-                <span class="text-charcoal/50 text-base font-sans tracking-[0.01em] block leading-tight mt-2">
+                <span class="text-charcoal/50 text-base font-sans tracking-[0.01em] block leading-none shrink-0 text-right">
                   <span class="text-xs">or</span> {tier.secondaryPrice}
                   <br />
-                  {tier.secondaryLabel}
+                  <span class="text-xs">{tier.secondaryLabel}</span>
                 </span>
               )}
             </div>
