@@ -20,7 +20,7 @@ organisers:
 
 This track includes topics related to:
 * the use of software engineering practices within Python and mixed-language code bases, especially code used for research or created by researchers
-* the use of Python-based software tools (e.g. Spack) within the research software engineering (RSE) ecosystem.
+* the use of Python-based software tools within the research software engineering (RSE) ecosystem.
 * building bridges between the Python and RSE communities.
 
 **This track would be great for:** Researchers, managers and software engineers thinking of using Python and software engineering practices to make software more robust and more usable for reproducible research.

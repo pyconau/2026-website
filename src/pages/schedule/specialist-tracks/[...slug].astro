@@ -6,7 +6,46 @@ import HeaderStar from "../../../components/header/HeaderStar.astro";
 import Base from "../../../layouts/Base.astro";
 import SessionListItem from "../../../components/schedule/SessionListItem.astro";
 import TrackOrganiser from "../../../components/cfp/TrackOrganiser.astro";
+import TrackTicketCard from "../../../components/schedule/TrackTicketCard.astro";
+import type { TicketTier } from "../../../components/schedule/TrackTicketCard.astro";
 import { getSessionsForSpecialistTrack } from "../../../utils/schedule";
+
+// Default ticket pricing shown on every specialist track page. Mirrors the
+// Professional and Enthusiast cards on /tickets, leading with the one-day
+// price as the primary headline.
+const DEFAULT_TICKET_TIERS: TicketTier[] = [
+  {
+    name: "Professional",
+    nameColour: "text-emerald",
+    description: "For people who use Python professionally.",
+    price: "$380",
+    secondaryPrice: "$850",
+    secondaryLabel: "for 3-days",
+  },
+  {
+    name: "Enthusiast",
+    nameColour: "text-lavender",
+    description: "For enthusiasts paying their own way.",
+    price: "$250",
+    secondaryPrice: "$550",
+    secondaryLabel: "for 3-days",
+  },
+];
+
+// Per-track overrides keyed by slug. Education uses the Educator ticket from
+// /tickets instead of the default Professional/Enthusiast pricing.
+const TICKET_TIER_OVERRIDES: Record<string, TicketTier[]> = {
+  education: [
+    {
+      name: "Educator",
+      nameColour: "text-emerald",
+      description: "Subsidised ticket for school teachers.",
+      price: "$250",
+      secondaryPrice: "$550",
+      secondaryLabel: "for 3-days",
+    },
+  ],
+};
 
 export async function getStaticPaths() {
   const tracks = await getCollection("schedule-specialist-tracks");
@@ -17,8 +56,24 @@ export async function getStaticPaths() {
 }
 
 const { track } = Astro.props;
-const { title, shortDescription } = track.data;
+const { title, shortDescription, date } = track.data;
 const { Content } = await track.render();
+
+// e.g. "Friday 27 August"
+const formattedDate = new Intl.DateTimeFormat("en-AU", {
+  weekday: "long",
+  day: "numeric",
+  month: "long",
+  timeZone: "UTC",
+}).format(date);
+
+// Lowercase weekday name used as the /schedule/[day] route param, e.g. "friday".
+const dayParam = new Intl.DateTimeFormat("en-AU", {
+  weekday: "long",
+  timeZone: "UTC",
+})
+  .format(date)
+  .toLowerCase();
 
 // Get sessions for this track
 const sessions = await getSessionsForSpecialistTrack(track);
@@ -27,6 +82,9 @@ const sessions = await getSessionsForSpecialistTrack(track);
 const cfpTracks = await getCollection("cfp-specialist-tracks");
 const cfpTrack = cfpTracks.find((t) => t.slug === track.slug);
 const organisers = cfpTrack?.data.organisers || [];
+
+// Ticket pricing for this track (with per-slug overrides).
+const ticketTiers = TICKET_TIER_OVERRIDES[track.slug] ?? DEFAULT_TICKET_TIERS;
 ---
 
 <Base title={`${title} - Specialist Track`}>
@@ -35,7 +93,7 @@ const organisers = cfpTrack?.data.organisers || [];
   <section class="bg-charcoal pt-[98px] pb-20 overflow-hidden">
     <div class="container relative">
       <img
-        src="/images/star-violet.svg"
+        src="/images/star-lime.svg"
         class="hidden lg:block absolute left-0 top-32"
         alt=""
       />
@@ -55,8 +113,13 @@ const organisers = cfpTrack?.data.organisers || [];
         </div>
         <div class="fadeInUp flex justify-between items-center relative pt-10">
           <div class="space-y-20 lg:w-[45%] w-full relative">
-            <div class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em] leading-none">
-              <h1 class="text-lime">{title}</h1>
+            <div class="space-y-5">
+              <div class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em] leading-none">
+                <h1 class="text-lime">{title}</h1>
+              </div>
+              <p class="text-stone font-sans text-base tracking-[0.01em]">
+                Will run on {formattedDate}
+              </p>
             </div>
           </div>
         </div>
@@ -70,7 +133,7 @@ const organisers = cfpTrack?.data.organisers || [];
     <div class="bg-stone pt-20 pb-52">
       <div class="container">
         <div class="fadeInUp lg:w-[85%] w-full mx-auto">
-          <div class="flex lg:flex-row flex-col lg:gap-0 gap-10 justify-between items-start">
+          <div class="flex lg:flex-row flex-col lg:gap-20 gap-10 justify-between items-start">
             <div class="w-full lg:w-[646px]">
               <p class="text-intro font-medium text-charcoal fadeInUp">
                 {shortDescription}
@@ -79,18 +142,31 @@ const organisers = cfpTrack?.data.organisers || [];
                 <Content />
               </div>
             </div>
-            <div>
-              <a href="/tickets" class="btn-arrow btn-arrow--emerald">
-                Register today
-              </a>
-            </div>
+            <TrackTicketCard
+              trackName={title}
+              date={formattedDate}
+              tiers={ticketTiers}
+            />
           </div>
 
           {sessions.length > 0 && (
             <div class="pt-24">
-              <h3 class="fadeInUp text-5xl font-serif font-medium -tracking-[0.02em] mb-10">
-                Sessions
-              </h3>
+              <div class="fadeInUp flex flex-wrap items-baseline gap-x-10 gap-y-4 mb-10">
+                <h3 class="text-5xl font-serif font-medium -tracking-[0.02em]">
+                  Sessions
+                </h3>
+                <a
+                  href={`/schedule/${dayParam}`}
+                  class="group flex items-center gap-2 text-violet font-sans font-bold text-lg"
+                >
+                  <span class="group-hover:underline">View schedule</span>
+                  <img
+                    src="/images/arrow-small--violet.svg"
+                    alt=""
+                    class="w-7"
+                  />
+                </a>
+              </div>
 
               <div class="space-y-10">
                 {sessions.map((session) => (
