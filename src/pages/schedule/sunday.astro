@@ -1,0 +1,196 @@
+---
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import DayTabs from "../../components/schedule/DayTabs.astro";
+import Base from "../../layouts/Base.astro";
+
+const day = "sunday";
+const dayCapitalized = "Sunday";
+const dateString = "Sunday, 30 August 2026";
+
+// Development sprints run as a single all-day session in one room.
+// Built manually as there is no Sunday session data in the schedule.
+const room = "Lyon";
+const sprintTime = "9:00 am - 5:00 pm";
+// Height matched to a single one-hour block in the detailed layout.
+const sprintHeightPx = 297;
+
+// Time gutter labels. The sprint runs 9am–5pm; we show a few markers down the
+// left and let the single block overlap them (it ends at 5pm, below the 3pm
+// marker). Positions are a percentage of the block height (9am = 0%, 5pm = 100%).
+const timeMarkers = [
+  { label: "9:00 am", topPercent: 0 },
+  { label: "12:00 pm", topPercent: 37.5 },
+  { label: "3:00 pm", topPercent: 75 },
+];
+---
+
+<Base title={`${dayCapitalized} Schedule - Schedule`}>
+  <Header dark={false} />
+
+  <section class="bg-stone pt-[98px] pb-20 overflow-hidden">
+    <div class="container relative">
+      <img src="/images/star-violet.svg" class="spin lg:block hidden absolute left-0 top-32" alt="">
+      <div class="lg:w-[85%] w-full mx-auto">
+        <div class="fadeInUp breadcrumb pt-14">
+          <ul class="flex items-center gap-2 text-violet font-sans font-extrabold text-10pt uppercase tracking-[0.12em]">
+            <li class="flex items-center gap-2"><a href="/">Home</a><span>&gt;</span></li>
+            <li class="flex items-center gap-2"><a href="/schedule">Schedule</a><span>&gt;</span></li>
+            <li class="flex items-center gap-2"><span>{dayCapitalized}</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="lg:w-[85%] w-full mx-auto relative pt-10">
+        <div class="fadeInUp w-full lg:w-[45%] relative">
+          <div class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em]">
+            <h1 class="text-violet">Schedule</h1>
+          </div>
+          <p class="text-charcoal text-lg mt-2">{dateString}</p>
+        </div>
+
+        <!-- Day Tabs -->
+        <div class="fadeInUp mt-10">
+          <DayTabs currentDay={day} />
+        </div>
+      </div>
+    </div>
+
+    <!-- Schedule Grid (single room, manually built) -->
+    <div
+      class="fadeInUp schedule-wrapper sunday-schedule"
+      style="--schedule-room-count: 1;"
+      data-rooms="1"
+      data-layout="detailed"
+    >
+      <!-- Room Headers -->
+      <div class="schedule-title">
+        <div class="space-for-time-column"></div>
+        <div class="schedule-title__room">
+          <span class="font-semibold font-serif">{room}</span>
+        </div>
+      </div>
+
+      <!-- Single all-day block, with time markers down the left gutter -->
+      <div class="schedule">
+        {timeMarkers.map((marker) => (
+          <div class="sunday-row-line" style={`top: ${marker.topPercent}%;`}></div>
+        ))}
+        <div class="time" style={`height: ${sprintHeightPx}px;`}>
+          {timeMarkers.map((marker) => (
+            <span class="sunday-time-marker" style={`top: ${marker.topPercent}%;`}>
+              {marker.label}
+            </span>
+          ))}
+        </div>
+        <div class="column" style={`height: ${sprintHeightPx}px;`}>
+          <div
+            class="schedule-event"
+            style={`height: ${sprintHeightPx}px; background-color: white; color: #282828;`}
+          >
+            <div>
+              <span class="schedule-event-time">{sprintTime}</span>
+            </div>
+            <div>
+              <span class="schedule-event-topic">Development Sprints</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-stone pb-20">
+    <div class="container">
+      <div class="lg:w-[85%] w-full mx-auto rich-text">
+        <h2 class="fadeInUp mt-0!">About Development Sprints</h2>
+        <p class="fadeInUp">
+          Python wouldn’t have gotten to where it is without a welcoming
+          community of developers building cool things together. The
+          development sprints are an open space for people to work on
+          projects with a particular focus on open source projects.
+        </p>
+        <p class="fadeInUp">
+          The sprints are a place for everyone, from experienced open
+          source contributors, to interested first-time contributors, and
+          anyone really! Maybe you want to hang out and try out an idea
+          you have, maybe you’d like to find collaborators for a project
+          you want to start, maybe you’d like someone to help you through
+          your first attempts at open source. We’ll provide tables,
+          chairs, wifi, power and a community of supportive developers.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-lime pt-20">
+    <div class="container">
+      <div class="grid lg:grid-cols-2 grid-cols-1 gap-5 pb-20 fadeInUp">
+        <a href="/schedule/specialist-tracks" class="btn-arrow btn-arrow--emerald btn-arrow--2col">
+          <span>Specialist Tracks</span>
+        </a>
+        <a href="/schedule" class="btn-arrow btn-arrow--emerald btn-arrow--2col">
+          <span>Full Schedule</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <script src="/src/scripts/animations.js"></script>
+</Base>
+
+<style>
+  /* Single, brief all-day block: let the grid size to the bubble rather than
+     forcing fixed 160px slot heights (which would clip / scroll the taller
+     297px block). */
+  .sunday-schedule {
+    overflow: visible;
+  }
+  .sunday-schedule .schedule {
+    margin-top: 1.5rem;
+  }
+  .sunday-schedule .time,
+  .sunday-schedule .column {
+    min-height: 0;
+  }
+
+  /* Time markers down the gutter, positioned by percentage of the block height
+     so the single block visually overlaps them. */
+  .sunday-schedule .time {
+    position: relative;
+    padding-top: 0;
+  }
+  .sunday-time-marker {
+    position: absolute;
+    left: 0;
+    white-space: nowrap;
+  }
+
+  /* Horizontal slot lines spanning the grid, matching the other schedules. */
+  .sunday-schedule .schedule {
+    position: relative;
+  }
+  .sunday-row-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid #dbdbdb;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Match Thursday/Friday width: those days have 3 room columns and render the
+     .schedule grid ~1160px wide (1000px max-width + 80px time column overflow
+     within the 1200px min-width, with 20px padding either side). Replicate the
+     overall width here and let the single room column fill it. */
+  @media (min-width: 1024px) {
+    .sunday-schedule .schedule,
+    .sunday-schedule .schedule-title {
+      max-width: 1000px;
+    }
+  }
+</style>
