@@ -386,7 +386,7 @@ footer ul li a {
   @apply bg-emerald text-stone after:bg-[url('/images/arrow-medium--stone.svg')];
 }
 .btn-arrow--lime {
-  @apply bg-lime text-charcoal after:bg-[url('/images/arrow-medium.svg')];
+  @apply bg-lime text-charcoal! after:bg-[url('/images/arrow-medium.svg')];
 }
 .btn-arrow--lemon {
   @apply bg-lemon text-charcoal! after:bg-[url('/images/arrow-medium--lemon.svg')];
