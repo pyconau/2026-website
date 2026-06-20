@@ -6,9 +6,10 @@ import NewsItemsWidget from "../../components/NewsItemsWidget.astro";
 import TypographyLink from "../../components/typography/TypographyLink.astro";
 import Base from "../../layouts/Base.astro";
 import ConnectSubscribeGetInTouchCards from "../../components/ConnectSubscribeGetInTouchCards.astro";
+import type { NavModule } from "../../types/nav";
 
 // Import all attend pages with their metadata
-const pages = import.meta.glob("./*.astro", { eager: true });
+const pages = import.meta.glob<NavModule>("./*.astro", { eager: true });
 
 // Extract nav metadata for tiles (pages with tile !== false)
 const tileItems = Object.entries(pages)
@@ -17,11 +18,12 @@ const tileItems = Object.entries(pages)
   })
   .map(([path, mod]) => {
     const slug = path.match(/\/([^/]+)\.astro$/)?.[1];
+    const nav = mod.nav!;
     return {
       href: `/attend/${slug}`,
-      title: mod.nav.title,
-      order: mod.nav.order,
-      image: mod.nav.image,
+      title: nav.title,
+      order: nav.order,
+      image: nav.image,
     };
   })
   .sort((a, b) => a.order - b.order)

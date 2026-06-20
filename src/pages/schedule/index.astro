@@ -5,6 +5,7 @@ import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
 import HeaderStar from "../../components/header/HeaderStar.astro";
 import DayTabs from "../../components/schedule/DayTabs.astro";
+import DetailArrow from "../../components/DetailArrow.astro";
 import TypographyLink from "../../components/typography/TypographyLink.astro";
 import Base from "../../layouts/Base.astro";
 
@@ -185,10 +186,13 @@ const tracks = allTracks.sort((a, b) => {
           </p>
           <div class="grid lg:grid-cols-2 gap-6">
             {tracks.map((track) => (
-              <a href={`/schedule/specialist-tracks/${track.slug}`} class="fadeInUp bg-white hover:shadow-lg p-6 rounded-lg flex flex-col transition-shadow duration-300">
-                <h3 class="text-xl font-serif font-medium text-charcoal mb-2">
-                  {track.data.title}
-                </h3>
+              <a href={`/schedule/specialist-tracks/${track.slug}`} class="group fadeInUp bg-white hover:shadow-lg p-6 rounded-lg flex flex-col transition-shadow duration-300">
+                <div class="flex items-center justify-between gap-4 mb-2">
+                  <h3 class="text-xl font-serif font-medium text-charcoal">
+                    {track.data.title}
+                  </h3>
+                  <DetailArrow />
+                </div>
                 <p class="text-charcoal text-sm flex-1">
                   {track.data.shortDescription}
                 </p>
