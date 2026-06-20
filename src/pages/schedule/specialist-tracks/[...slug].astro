@@ -67,13 +67,13 @@ const formattedDate = new Intl.DateTimeFormat("en-AU", {
   timeZone: "UTC",
 }).format(date);
 
-// Lowercase weekday name used as the /schedule/[day] route param, e.g. "friday".
-const dayParam = new Intl.DateTimeFormat("en-AU", {
+// Weekday name, e.g. "Friday". Used for the "{Day} schedule" link label and,
+// lowercased, as the /schedule/[day] route param.
+const weekday = new Intl.DateTimeFormat("en-AU", {
   weekday: "long",
   timeZone: "UTC",
-})
-  .format(date)
-  .toLowerCase();
+}).format(date);
+const dayParam = weekday.toLowerCase();
 
 // Get sessions for this track
 const sessions = await getSessionsForSpecialistTrack(track);
@@ -151,20 +151,12 @@ const ticketTiers = TICKET_TIER_OVERRIDES[track.slug] ?? DEFAULT_TICKET_TIERS;
 
           {sessions.length > 0 && (
             <div class="pt-24">
-              <div class="fadeInUp flex flex-wrap items-baseline gap-x-10 gap-y-4 mb-10">
+              <div class="fadeInUp flex flex-wrap items-center justify-between gap-x-10 gap-y-4 mb-10">
                 <h3 class="text-5xl font-serif font-medium -tracking-[0.02em]">
                   Sessions
                 </h3>
-                <a
-                  href={`/schedule/${dayParam}`}
-                  class="group flex items-center gap-2 text-violet font-sans font-bold text-lg"
-                >
-                  <span class="group-hover:underline">View schedule</span>
-                  <img
-                    src="/images/arrow-small--violet.svg"
-                    alt=""
-                    class="w-7"
-                  />
+                <a href={`/schedule/${dayParam}`} class="btn-arrow">
+                  <span>{weekday} schedule</span>
                 </a>
               </div>
 
