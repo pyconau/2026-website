@@ -70,10 +70,14 @@ import { TICKETING_URL } from "../constants";
                       Professional
                     </h3>
                   </div>
-                  <div class="price">
+                  <div class="price lg:text-right">
                     <span
                       class="text-white text-4xl font-semibold font-sans"
                       >$850</span
+                    >
+                    <span
+                      class="text-stone/50 text-base font-sans tracking-[0.01em] block leading-tight mt-2"
+                      ><span class="text-xs">or</span> $380<br />per-day</span
                     >
                   </div>
                 </div>
@@ -106,6 +110,10 @@ import { TICKETING_URL } from "../constants";
                   </li>
                   <li class="flex items-center gap-3">
                     <img src="/images/tick-lime.svg" alt="tick" />
+                    <span>Group discount for teams of 5+ <sup>3</sup></span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <img src="/images/tick-lime.svg" alt="tick" />
                     <span>Optional Workshops <sup>2</sup></span>
                   </li>
                 </ul>
@@ -127,13 +135,18 @@ import { TICKETING_URL } from "../constants";
                 >
                 <div>
                   <span
-                    class="text-sm text-stone font-sans tracking-[0.01em] block leading-normal"
-                    ><sup>1</sup> Single day passes will be available at a later
-                    stage.</span
+                    class="text-sm text-stone font-sans tracking-[0.01em] block leading-normal pl-[0.85em] -indent-[0.85em]"
+                    ><sup>1</sup> One day passes include specialist tracks and
+                    main conference on that day.</span
                   >
                   <span
-                    class="text-sm text-stone font-sans tracking-[0.01em] block leading-normal"
-                    ><sup>2</sup> Separate registration required</span
+                    class="text-sm text-stone font-sans tracking-[0.01em] block leading-normal pl-[0.85em] -indent-[0.85em]"
+                    ><sup>2</sup> Separate registration required.</span
+                  >
+                  <span
+                    class="text-sm text-stone font-sans tracking-[0.01em] block leading-normal pl-[0.85em] -indent-[0.85em]"
+                    ><sup>3</sup> 5% discount is automatically applied at
+                    checkout. Online orders only.</span
                   >
                 </div>
                 <div class="lg:flex hidden">
@@ -155,10 +168,14 @@ import { TICKETING_URL } from "../constants";
                       Enthusiast
                     </h3>
                   </div>
-                  <div class="price">
+                  <div class="price lg:text-right">
                     <span
                       class="text-white text-4xl font-semibold font-sans"
                       >$550</span
+                    >
+                    <span
+                      class="text-stone/50 text-base font-sans tracking-[0.01em] block leading-tight mt-2"
+                      ><span class="text-xs">or</span> $250<br />per-day</span
                     >
                   </div>
                 </div>
@@ -207,13 +224,13 @@ import { TICKETING_URL } from "../constants";
                 >
                 <div>
                   <span
-                    class="text-sm text-stone font-sans tracking-[0.01em] block leading-normal"
-                    ><sup>1</sup> Single day passes will be available at a later
-                    stage.</span
+                    class="text-sm text-stone font-sans tracking-[0.01em] block leading-normal pl-[0.85em] -indent-[0.85em]"
+                    ><sup>1</sup> One day passes include specialist tracks and
+                    main conference on that day.</span
                   >
                   <span
-                    class="text-sm text-stone font-sans tracking-[0.01em] block leading-normal"
-                    ><sup>2</sup> Separate registration required</span
+                    class="text-sm text-stone font-sans tracking-[0.01em] block leading-normal pl-[0.85em] -indent-[0.85em]"
+                    ><sup>2</sup> Separate registration required.</span
                   >
                 </div>
                 <div class="lg:flex hidden">
@@ -303,9 +320,14 @@ import { TICKETING_URL } from "../constants";
                       Student
                     </h3>
                   </div>
-                  <div class="price">
-                    <span class="text-stone text-4xl font-semibold font-sans"
-                      >TBA</span
+                  <div class="price lg:text-right">
+                    <span
+                      class="text-white text-4xl font-semibold font-sans"
+                      >$300</span
+                    >
+                    <span
+                      class="text-stone/50 text-base font-sans tracking-[0.01em] block leading-tight mt-2"
+                      ><span class="text-xs">or</span> $120<br />per-day</span
                     >
                   </div>
                 </div>
@@ -319,7 +341,7 @@ import { TICKETING_URL } from "../constants";
                       >Enthusiast</span
                     > ticket type.
                   </p>
-                  <p>Student tickets will be made available later in 2026.</p>
+                  <p>Available until sold out.</p>
                 </div>
                 {
                   /* 
@@ -339,17 +361,110 @@ import { TICKETING_URL } from "../constants";
                 */
                 }
               </div>
-              {
-                /* 
               <div class="space-y-7">
                 <a
-                  href="#"
+                  href={TICKETING_URL}
                   class="btn-arrow btn-arrow--coral rounded-[3.125rem]! hover:rounded-none! justify-between py-5!"
                   ><span>Buy Tickets</span></a
                 >
               </div>
-               */
-              }
+            </div>
+          </div>
+          <div class="fadeInUp bg-[#383838] py-14 lg:col-span-2">
+            <div
+              class="w-full h-full flex flex-col gap-16 justify-between"
+            >
+              <div class="space-y-10">
+                <div class="grid lg:grid-cols-2 grid-cols-1">
+                  <div
+                    class="lg:max-w-[426px] w-full lg:px-10 px-5 mx-auto flex lg:flex-row flex-col gap-5 lg:gap-0 justify-between"
+                  >
+                    <div class="space-y-2">
+                      <h3 class="text-emerald font-sans font-semibold text-4xl">
+                        Educator
+                      </h3>
+                    </div>
+                    <div class="price lg:text-right lg:hidden">
+                      <span
+                        class="text-white text-4xl font-semibold font-sans"
+                        >$250</span
+                      >
+                      <span
+                        class="text-stone/50 text-base font-sans tracking-[0.01em] block leading-tight mt-2"
+                        ><span class="text-xs">or</span> $550<br />for 3-days</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="lg:max-w-[426px] w-full lg:px-10 px-5 mx-auto lg:flex hidden justify-end"
+                  >
+                    <div class="price lg:text-right">
+                      <span
+                        class="text-white text-4xl font-semibold font-sans"
+                        >$250</span
+                      >
+                      <span
+                        class="text-stone/50 text-base font-sans tracking-[0.01em] block leading-tight mt-2"
+                        ><span class="text-xs">or</span> $550<br />for 3-days</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="grid lg:grid-cols-2 grid-cols-1">
+                  <div class="space-y-10 lg:max-w-[426px] w-full lg:px-10 px-5 mx-auto">
+                    <div class="rich-text">
+                      <p class="text-stone">
+                        A subsidised ticket for school<sup>1</sup> teachers
+                        educating the next generation of bright young minds.
+                      </p>
+                      <p class="text-stone">
+                        It is available to teachers associated with an
+                        Australian or New Zealand educational institution with a
+                        .edu.au / .nz email address.
+                      </p>
+                    </div>
+                    <p class="text-stone">
+                      Educators receive all the inclusions of the <span
+                        class="text-emerald font-bold">Professional</span
+                      > ticket type.
+                    </p>
+                    <div>
+                      <span
+                        class="text-sm text-stone font-sans tracking-[0.01em] block leading-normal pl-[0.85em] -indent-[0.85em]"
+                        ><sup>1</sup> For current teachers of primary or
+                        secondary students, including equivalent curricula such
+                        as IB.</span
+                      >
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-10 justify-between lg:max-w-[426px] w-full lg:px-10 px-5 mx-auto">
+                    <div class="space-y-10">
+                      <p class="text-stone">Educator tickets include:</p>
+                      <ul class="space-y-5 text-lime">
+                        <li class="flex items-center gap-3">
+                          <img src="/images/tick-lime.svg" alt="tick" />
+                          <span>1-day ticket for Friday 27 August</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                          <img src="/images/tick-lime.svg" alt="tick" />
+                          <span>Includes Education specialist track</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                          <img src="/images/tick-lime.svg" alt="tick" />
+                          <span>Discounted full conference (optional)</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="space-y-7">
+                      <a
+                        href={TICKETING_URL}
+                        class="btn-arrow btn-arrow--lime rounded-[3.125rem]! hover:rounded-none! justify-between py-5!"
+                        ><span>Buy Tickets</span></a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
