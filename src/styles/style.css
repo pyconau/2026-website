@@ -583,7 +583,7 @@ ul.sub-menu {
 
 /* Simple layout: 60-minute slots with shorter height */
 .schedule-wrapper[data-layout="simple"] {
-  --schedule-slot-height: 100px;
+  --schedule-slot-height: 130px;
 }
 
 /* Container that controls overall schedule width */
@@ -614,13 +614,16 @@ ul.sub-menu {
     margin-right: auto;
   }
 
-  /* For days with fewer rooms, constrain max-width to keep columns reasonable */
-  .schedule-wrapper[data-rooms="2"] .schedule-title {
-    max-width: 800px;
-  }
-
+  /* Days with fewer than 4 rooms render skinny; 4+ rooms stay full width.
+     Single-room days match the 3-room width (1000px), consistent with the
+     Sunday page, rather than collapsing to a thin column. */
+  .schedule-wrapper[data-rooms="1"] .schedule-title,
   .schedule-wrapper[data-rooms="3"] .schedule-title {
     max-width: 1000px;
+  }
+
+  .schedule-wrapper[data-rooms="2"] .schedule-title {
+    max-width: 800px;
   }
 }
 
@@ -649,13 +652,16 @@ ul.sub-menu {
     margin-right: auto;
   }
 
-  /* For days with fewer rooms, constrain max-width to keep columns reasonable */
-  .schedule-wrapper[data-rooms="2"] .schedule {
-    max-width: 800px;
-  }
-
+  /* Days with fewer than 4 rooms render skinny; 4+ rooms stay full width.
+     Single-room days match the 3-room width (1000px), consistent with the
+     Sunday page, rather than collapsing to a thin column. */
+  .schedule-wrapper[data-rooms="1"] .schedule,
   .schedule-wrapper[data-rooms="3"] .schedule {
     max-width: 1000px;
+  }
+
+  .schedule-wrapper[data-rooms="2"] .schedule {
+    max-width: 800px;
   }
 }
 
@@ -763,6 +769,14 @@ ul.sub-menu {
   @apply border border-dashed border-[#ccc];
   /* Center vertically: 24px top margin (half of 48px total reduction) */
   margin-top: 24px;
+}
+
+/* Breaks immediately after a long (90m+) session, e.g. Wednesday meal breaks.
+   The preceding session is shortened to leave a gap above, so this break needs
+   no top margin and floors its height to fit its title + time without clipping. */
+.schedule-break--after-long-session {
+  margin-top: 0;
+  min-height: 56px;
 }
 
 .schedule-break-title {

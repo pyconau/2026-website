@@ -504,7 +504,7 @@ export async function getDayDate(dayName: string): Promise<string | null> {
 /**
  * Schedule layout types:
  * - "detailed": 30-minute slots, 160px height - for busy days with many sessions
- * - "simple": 60-minute slots, 100px height - for quieter days with longer sessions
+ * - "simple": 60-minute slots, 130px height - for quieter days with longer sessions
  */
 export type ScheduleLayout = "detailed" | "simple";
 
@@ -516,16 +516,25 @@ const LAYOUT_CONFIG = {
   },
   simple: {
     slotMinutes: 60,
-    slotHeightPx: 100,
+    // 130px gives a 30-min meal break enough room to display its title + time
+    // clearly after the 72px buffer reduction applied to breaks.
+    slotHeightPx: 130,
   },
 } as const;
+
+// Pixels shaved off the bottom of long sessions (> 90 min) so the following
+// break and its track header have clear vertical space and aren't obscured.
+const LONG_SESSION_BOTTOM_MARGIN_PX = 24;
 
 /**
  * Get the recommended layout for a given day
  */
 export function getScheduleLayout(dayName: string): ScheduleLayout {
-  // Monday uses simple layout (fewer, longer sessions)
-  if (dayName.toLowerCase() === "monday") {
+  const day = dayName.toLowerCase();
+  // Monday and Wednesday have fewer, longer sessions (e.g. multi-hour
+  // workshops); use the simple hourly layout so they don't take up
+  // excessive vertical space.
+  if (day === "monday" || day === "wednesday") {
     return "simple";
   }
   // Friday, Saturday, Sunday use detailed layout
@@ -549,6 +558,7 @@ interface SessionDataItem {
   colSpan: number;
   startColumn: number;
   isBreak: boolean;
+  followsLongSession: boolean; // Break immediately after a > 90 min session
 }
 
 /**
@@ -638,6 +648,7 @@ export interface PositionedSession {
   colSpan: number; // Number of room columns to span
   startColumn: number; // 0-indexed starting column position (for breaks)
   isBreak: boolean; // Flag to style breaks differently
+  followsLongSession: boolean; // Break immediately after a > 90 min session
 }
 
 /**
@@ -702,6 +713,11 @@ export async function getScheduleForGrid(
   // Breaks don't count as "preceding" for track header display purposes
   const nonBreakEndTimes = new Map<string, number[]>();
 
+  // Track end times of long (> 90 min) sessions per room, so a break starting
+  // when a long session ends can be given custom styling (it sits in the
+  // vertical space freed by the long session's bottom margin).
+  const longSessionEndTimes = new Map<string, Set<number>>();
+
   // Process sessions and assign to slots
   const sessionData: SessionDataItem[] = [];
 
@@ -717,20 +733,36 @@ export async function getScheduleForGrid(
     const minutesFromStart = (startTime - gridStartTime) / (1000 * 60);
     const slotIndex = Math.floor(minutesFromStart / slotMinutes);
 
-    // Calculate position within the slot as percentage
-    const minutesIntoSlot = minutesFromStart % slotMinutes;
-    // Add 1% top offset for vertical gap between sessions
-    const topPercentRaw = (minutesIntoSlot / slotMinutes) * 100 + 1;
-
-    // Calculate height based on duration (2% shorter for 1% top + 1% bottom gap)
-    const heightPx = (durationMinutes / slotMinutes) * slotHeightPx * 0.98;
-
     const sessionType = session.data.type;
     const isFullWidth = sessionType === "plenary";
     // Plenary sessions only span ballrooms (1, 2, 3), not Lyon
     const plenaryRoomCount = 3;
     const colSpan = isFullWidth ? plenaryRoomCount : 1;
     const isBreak = sessionType === "break";
+
+    // Calculate position within the slot as percentage
+    const minutesIntoSlot = minutesFromStart % slotMinutes;
+    // Add 1% top offset for vertical gap between sessions
+    const topPercentRaw = (minutesIntoSlot / slotMinutes) * 100 + 1;
+
+    // Calculate height based on duration (2% shorter for 1% top + 1% bottom gap)
+    let heightPx = (durationMinutes / slotMinutes) * slotHeightPx * 0.98;
+
+    // Long sessions (> 90 min, e.g. workshops) are rendered a little shorter so
+    // the following break and its track header have clear vertical space below
+    // them instead of being crowded/obscured. Breaks are never shrunk.
+    const isLongSession = !isBreak && durationMinutes > 90;
+    if (isLongSession) {
+      heightPx -= LONG_SESSION_BOTTOM_MARGIN_PX;
+      if (!longSessionEndTimes.has(room)) {
+        longSessionEndTimes.set(room, new Set());
+      }
+      longSessionEndTimes.get(room)!.add(endTime);
+    }
+
+    // Flag breaks that begin exactly when a long session in the same room ends,
+    // so they can receive custom styling for the freed vertical space.
+    const followsLongSession = isBreak && (longSessionEndTimes.get(room)?.has(startTime) ?? false);
 
     // Check for track header display and back-to-back sessions
     // Only non-break sessions count as "preceding" - sessions after breaks should show track headers
@@ -766,6 +798,7 @@ export async function getScheduleForGrid(
       colSpan,
       startColumn,
       isBreak,
+      followsLongSession,
     });
   });
 
@@ -811,6 +844,7 @@ export async function getScheduleForGrid(
         colSpan: s.colSpan,
         startColumn: s.startColumn,
         isBreak: s.isBreak,
+        followsLongSession: s.followsLongSession,
       };
 
       // For full-width sessions, add to first room only (rendering will handle colspan)
