@@ -43,6 +43,13 @@ const speakerData = await getPeopleByCode(speakers);
 // Get track metadata if this is a specialist track session
 const trackData = track ? await getTrackBySlug(track) : null;
 
+// Resolve the sponsor slug (from the Pretalx "Is this a sponsored session"
+// answer, e.g. "meta") to a sponsor markdown file. Only show sponsor branding
+// when the slug matches a sponsor file; the name and logo come from that file.
+const sponsorData = sponsor
+  ? (await getCollection("sponsors")).find((s) => s.slug === sponsor)
+  : undefined;
+
 // Use trackName from Pretalx if available, otherwise fall back to local track title
 const displayTrackName = trackName || trackData?.data.title;
 
@@ -104,9 +111,9 @@ if (trackData) {
                 By {speakerData.map((s) => s.data.name).join(", ")}
               </span>
             )}
-            {sponsor && (
+            {sponsorData && (
               <span class="text-[#747474] text-sm font-semibold">
-                Sponsored by {sponsor}
+                Sponsored by {sponsorData.data.name}
               </span>
             )}
           </div>
@@ -139,14 +146,19 @@ if (trackData) {
             <SpeakerCard person={speaker} />
           ))}
 
-          {sponsor && (
-            <div class="fadeInUp flex justify-between items-center bg-white rounded-[3.125rem] py-5 px-14 mt-14">
+          {sponsorData && (
+            <div class="fadeInUp flex justify-between items-center gap-6 bg-white rounded-[3.125rem] py-5 px-14 mt-14">
               <div>
                 <span class="block text-sm tracking-[0.01em] text-charcoal">
-                  This talk is presented by
+                  This session is presented by
                 </span>
-                <h3 class="text-3xl font-semibold text-charcoal">{sponsor}</h3>
+                <h3 class="text-3xl font-semibold text-charcoal">{sponsorData.data.name}</h3>
               </div>
+              <img
+                src={`/images/sponsors/${sponsorData.data.logo}`}
+                alt={sponsorData.data.name}
+                class="h-16 w-auto max-w-[40%] object-contain"
+              />
             </div>
           )}
 
