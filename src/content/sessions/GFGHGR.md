@@ -8,6 +8,7 @@ track: data-and-ai
 type: talk
 speakers:
 - WUPRPT
+- RVVERU
 trackName: Data & AI
 abstract: "Can you use AI to vibe-code a computer vision pipeline? Yes... sort of.\r\
   \n\r\nIn December 2025, a group of friends built an art installation for Lost Paradise
