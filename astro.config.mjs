@@ -10,7 +10,10 @@ const getSiteUrl = () => {
   // Vercel preview deployments have VERCEL_BRANCH_URL (format: preview-{code}-{slug}.vercel.app)
   // Main/production deployments have VERCEL_URL pointing to custom domain
   if (process.env.VERCEL_BRANCH_URL && process.env.VERCEL_ENV === "preview") {
-    console.log("[astro] Using VERCEL_BRANCH_URL (preview):", process.env.VERCEL_BRANCH_URL);
+    console.log(
+      "[astro] Using VERCEL_BRANCH_URL (preview):",
+      process.env.VERCEL_BRANCH_URL,
+    );
     return `https://${process.env.VERCEL_BRANCH_URL}`;
   }
   // Fallback: VERCEL_URL is available on all Vercel deployments
@@ -35,7 +38,15 @@ export default defineConfig({
   markdown: {
     syntaxHighlight: "prism",
   },
-  integrations: [mdx(), sitemap({ filter: (page) => !page.includes("/dev/") })],
+  integrations: [
+    mdx(),
+    sitemap({
+      filter: (page) =>
+        !page.includes("/dev/") &&
+        !page.includes("/schedule/BREAK-") &&
+        !page.includes("/schedule/wednesday/"),
+    }),
+  ],
   redirects: {
     "/student-showcase": "/cfp/student-showcase",
     // Specialist track shortcuts
@@ -44,7 +55,8 @@ export default defineConfig({
     "/cybersecurity": "/program/specialist-tracks/cybersecurity",
     "/devrel": "/program/specialist-tracks/devrel",
     "/platform-engineering": "/program/specialist-tracks/platform-engineering",
-    "/research-software-engineering": "/program/specialist-tracks/research-software-engineering",
+    "/research-software-engineering":
+      "/program/specialist-tracks/research-software-engineering",
   },
   vite: {
     plugins: [tailwindcss()],

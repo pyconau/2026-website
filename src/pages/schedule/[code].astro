@@ -15,6 +15,7 @@ export async function getStaticPaths() {
   const sessions = await getCollection("sessions");
   return sessions
     .filter((session) => !session.data.tags?.includes("not-yet-announced"))
+    .filter((session) => session.data.type !== "break")
     .map((session) => ({
       params: { code: session.data.code },
       props: { session },
@@ -22,20 +23,36 @@ export async function getStaticPaths() {
 }
 
 const { session } = Astro.props;
-const { title, code, start, end, room, track, trackName, type, speakers, sponsor, contentWarning, abstract } =
-  session.data;
+const {
+  title,
+  code,
+  start,
+  end,
+  room,
+  track,
+  trackName,
+  type,
+  speakers,
+  sponsor,
+  contentWarning,
+  abstract,
+} = session.data;
 
 // Render abstract markdown to HTML
 const abstractHtml = abstract ? marked.parse(abstract) : null;
 
 // Canonical session URL for sharing
-const sessionUrl = new URL(`/schedule/${code}`, Astro.site ?? "https://2026.pycon.org.au").toString();
+const sessionUrl = new URL(
+  `/schedule/${code}`,
+  Astro.site ?? "https://2026.pycon.org.au",
+).toString();
 const shareText = encodeURIComponent(`${title} — PyCon AU 2026`);
 const shareUrl = encodeURIComponent(sessionUrl);
 const { Content } = await session.render();
 
 // Generate OG image path if not a break (uses og output type)
-const ogImage = type !== "break" ? `/graphics/sessions/${code}-og.png` : undefined;
+const ogImage =
+  type !== "break" ? `/graphics/sessions/${code}-og.png` : undefined;
 
 // Get speaker data
 const speakerData = await getPeopleByCode(speakers);
@@ -50,10 +67,19 @@ const displayTrackName = trackName || trackData?.data.title;
 const dateTimeString = start && end ? formatSessionDateTime(start, end) : null;
 
 // Build OG description: title + speakers + track (if not main conf) + date + CTA
-const dateOnly = start ? new Date(start).toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : null;
+const dateOnly = start
+  ? new Date(start).toLocaleDateString("en-AU", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    })
+  : null;
 const ogDescription = [
   title,
-  speakers.length > 0 ? `By ${speakerData.map((s) => s.data.name).join(", ")}` : null,
+  speakers.length > 0
+    ? `By ${speakerData.map((s) => s.data.name).join(", ")}`
+    : null,
   track && track !== "main-conference" ? displayTrackName : null,
   dateOnly,
   "Tickets available now!",
@@ -72,9 +98,55 @@ if (trackData) {
     href: `/schedule/specialist-tracks/${track}`,
   });
 }
+
+// Build Event schema.org structured data
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  name: title,
+  ...(abstract ? { description: abstract } : {}),
+  ...(start ? { startDate: start.toISOString() } : {}),
+  ...(end ? { endDate: end.toISOString() } : {}),
+  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+  eventStatus: "https://schema.org/EventScheduled",
+  location: {
+    "@type": "Place",
+    name: room
+      ? `${room} — Brisbane Convention & Exhibition Centre`
+      : "Brisbane Convention & Exhibition Centre",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Merivale Street",
+      addressLocality: "South Brisbane",
+      addressRegion: "QLD",
+      postalCode: "4101",
+      addressCountry: "AU",
+    },
+  },
+  organizer: {
+    "@type": "Organization",
+    name: "PyCon AU",
+    url: "https://2026.pycon.org.au",
+  },
+  ...(speakerData.length > 0
+    ? {
+        performer: speakerData.map((s) => ({
+          "@type": "Person",
+          name: s.data.name,
+        })),
+      }
+    : {}),
+  url: sessionUrl,
+};
 ---
 
-<Base title={title} ogImage={ogImage} description={ogDescription}>
+<Base
+  title={title}
+  ogImage={ogImage}
+  ogType="event"
+  description={ogDescription}
+  schemaData={schemaData}
+>
   <Header dark={false} />
 
   <section class="bg-stone pt-[98px] pb-20 overflow-hidden">
@@ -82,12 +154,14 @@ if (trackData) {
       <div class="lg:w-[85%] w-full mx-auto">
         <div class="breadcrumb pt-14">
           <ul class="flex items-center gap-2 text-emerald flex-wrap">
-            {breadcrumbs.map((crumb, i) => (
-              <li class="flex items-center gap-2">
-                <a href={crumb.href}>{crumb.label}</a>
-                {i < breadcrumbs.length - 1 && <span>&gt;</span>}
-              </li>
-            ))}
+            {
+              breadcrumbs.map((crumb, i) => (
+                <li class="flex items-center gap-2">
+                  <a href={crumb.href}>{crumb.label}</a>
+                  {i < breadcrumbs.length - 1 && <span>&gt;</span>}
+                </li>
+              ))
+            }
           </ul>
         </div>
       </div>
@@ -99,144 +173,167 @@ if (trackData) {
       <div class="container">
         <div class="lg:w-[824px] mx-auto">
           <div class="fadeInUp flex flex-col items-center">
-            {speakerData.length > 0 && (
-              <span class="text-emerald text-sm font-semibold">
-                By {speakerData.map((s) => s.data.name).join(", ")}
-              </span>
-            )}
-            {sponsor && (
-              <span class="text-[#747474] text-sm font-semibold">
-                Sponsored by {sponsor}
-              </span>
-            )}
+            {
+              speakerData.length > 0 && (
+                <span class="text-emerald text-sm font-semibold">
+                  By {speakerData.map((s) => s.data.name).join(", ")}
+                </span>
+              )
+            }
+            {
+              sponsor && (
+                <span class="text-[#747474] text-sm font-semibold">
+                  Sponsored by {sponsor}
+                </span>
+              )
+            }
           </div>
 
-          <h1 class="fadeInUp text-5xl font-serif font-normal tracking-[-0.02em] text-center w-[95%] mx-auto pt-5">
+          <h1
+            class="fadeInUp text-5xl font-serif font-normal tracking-[-0.02em] text-center w-[95%] mx-auto pt-5"
+          >
             {title}
           </h1>
 
-          <div class="fadeInUp flex flex-wrap lg:flex-nowrap items-center justify-between border-t-2 border-emerald text-sm font-semibold text-emerald mt-7 pt-1 gap-2">
+          <div
+            class="fadeInUp flex flex-wrap lg:flex-nowrap items-center justify-between border-t-2 border-emerald text-sm font-semibold text-emerald mt-7 pt-1 gap-2"
+          >
             {displayTrackName && <span>{displayTrackName}</span>}
             {room && <span>{room}</span>}
-            {dateTimeString && (
-              <span>{dateTimeString}</span>
-            )}
+            {dateTimeString && <span>{dateTimeString}</span>}
           </div>
 
-          {contentWarning && (
-            <div class="fadeInUp bg-coral/20 border-l-4 border-coral p-4 mt-7">
-              <p class="text-charcoal font-semibold">Content Warning</p>
-              <p class="text-charcoal">{contentWarning}</p>
-            </div>
-          )}
+          {
+            contentWarning && (
+              <div class="fadeInUp bg-coral/20 border-l-4 border-coral p-4 mt-7">
+                <p class="text-charcoal font-semibold">Content Warning</p>
+                <p class="text-charcoal">{contentWarning}</p>
+              </div>
+            )
+          }
 
           <div class="rich-text pt-24 fadeInUp prose prose-lg max-w-none">
             {abstractHtml && <div class="text-intro" set:html={abstractHtml} />}
             <Content />
           </div>
 
-          {speakerData.map((speaker) => (
-            <SpeakerCard person={speaker} />
-          ))}
+          {speakerData.map((speaker) => <SpeakerCard person={speaker} />)}
 
-          {sponsor && (
-            <div class="fadeInUp flex justify-between items-center bg-white rounded-[3.125rem] py-5 px-14 mt-14">
-              <div>
-                <span class="block text-sm tracking-[0.01em] text-charcoal">
-                  This talk is presented by
-                </span>
-                <h3 class="text-3xl font-semibold text-charcoal">{sponsor}</h3>
+          {
+            sponsor && (
+              <div class="fadeInUp flex justify-between items-center bg-white rounded-[3.125rem] py-5 px-14 mt-14">
+                <div>
+                  <span class="block text-sm tracking-[0.01em] text-charcoal">
+                    This talk is presented by
+                  </span>
+                  <h3 class="text-3xl font-semibold text-charcoal">
+                    {sponsor}
+                  </h3>
+                </div>
               </div>
-            </div>
-          )}
+            )
+          }
 
-          <div class="fadeInUp flex flex-col lg:flex-row justify-center gap-5 mt-7">
-            {trackData && (
-              <a
-                href={`/schedule/specialist-tracks/${track}`}
-                class="btn-arrow btn-arrow--emerald justify-center"
-              >
-                All {trackData.data.title} Talks
-              </a>
-            )}
-            <a href="/schedule" class="btn-arrow btn-arrow--emerald justify-center">
+          <div
+            class="fadeInUp flex flex-col lg:flex-row justify-center gap-5 mt-7"
+          >
+            {
+              trackData && (
+                <a
+                  href={`/schedule/specialist-tracks/${track}`}
+                  class="btn-arrow btn-arrow--emerald justify-center"
+                >
+                  All {trackData.data.title} Talks
+                </a>
+              )
+            }
+            <a
+              href="/schedule"
+              class="btn-arrow btn-arrow--emerald justify-center"
+            >
               Schedule
             </a>
           </div>
 
-          {type !== "break" && (
-            <div class="fadeInUp mt-14 pt-10 border-t border-emerald/30">
-              <h2 class="text-xl font-semibold text-charcoal mb-6">Share this session</h2>
-              <div class="flex flex-col lg:flex-row justify-between gap-8">
-                <div class="flex flex-col gap-3">
-                  <a
-                    href={`/graphics/sessions/${code}-social.png`}
-                    download
-                    class="inline-flex items-center gap-2 text-sm font-semibold text-emerald hover:underline"
-                  >
-                    <i class="fa-solid fa-download"></i>
-                    Download Social graphic (1280×780)
-                  </a>
-                  <a
-                    href={`/graphics/sessions/${code}-og.png`}
-                    download
-                    class="inline-flex items-center gap-2 text-sm font-semibold text-emerald hover:underline"
-                  >
-                    <i class="fa-solid fa-download"></i>
-                    Download Open Graph image (1200×630)
-                  </a>
-                  <a
-                    href={`/graphics/sessions/${code}-square.png`}
-                    download
-                    class="inline-flex items-center gap-2 text-sm font-semibold text-emerald hover:underline"
-                  >
-                    <i class="fa-solid fa-download"></i>
-                    Download Square graphic (1200×1200)
-                  </a>
-                </div>
-                <div class="flex flex-col gap-3">
-                  <span class="text-md font-semibold text-charcoal">Tell a friend</span>
-                  <div class="flex items-center gap-4">
-                  <button
-                    id="copy-link-btn"
-                    data-url={sessionUrl}
-                    class="inline-flex items-center gap-2 text-sm font-semibold text-charcoal hover:text-emerald transition-colors cursor-pointer"
-                    aria-label="Copy link to clipboard"
-                  >
-                    <i class="fa-solid fa-link text-2xl"></i>
-                  </button>
-                  <a
-                    href={`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 text-sm font-semibold text-charcoal hover:text-emerald transition-colors"
-                    aria-label="Share on LinkedIn"
-                  >
-                    <i class="fa-brands fa-linkedin text-2xl"></i>
-                  </a>
-                  <a
-                    href={`https://bsky.app/intent/compose?text=${shareText}%20${shareUrl}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 text-sm font-semibold text-charcoal hover:text-emerald transition-colors"
-                    aria-label="Share on Bluesky"
-                  >
-                    <i class="fa-brands fa-bluesky text-2xl"></i>
-                  </a>
-                  <a
-                    href={`https://mastodon.social/share?text=${shareText}%20${shareUrl}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 text-sm font-semibold text-charcoal hover:text-emerald transition-colors"
-                    aria-label="Share on Mastodon"
-                  >
-                    <i class="fa-brands fa-mastodon text-2xl"></i>
-                  </a>
+          {
+            type !== "break" && (
+              <div class="fadeInUp mt-14 pt-10 border-t border-emerald/30">
+                <h2 class="text-xl font-semibold text-charcoal mb-6">
+                  Share this session
+                </h2>
+                <div class="flex flex-col lg:flex-row justify-between gap-8">
+                  <div class="flex flex-col gap-3">
+                    <a
+                      href={`/graphics/sessions/${code}-social.png`}
+                      download
+                      class="inline-flex items-center gap-2 text-sm font-semibold text-emerald hover:underline"
+                    >
+                      <i class="fa-solid fa-download" />
+                      Download Social graphic (1280×780)
+                    </a>
+                    <a
+                      href={`/graphics/sessions/${code}-og.png`}
+                      download
+                      class="inline-flex items-center gap-2 text-sm font-semibold text-emerald hover:underline"
+                    >
+                      <i class="fa-solid fa-download" />
+                      Download Open Graph image (1200×630)
+                    </a>
+                    <a
+                      href={`/graphics/sessions/${code}-square.png`}
+                      download
+                      class="inline-flex items-center gap-2 text-sm font-semibold text-emerald hover:underline"
+                    >
+                      <i class="fa-solid fa-download" />
+                      Download Square graphic (1200×1200)
+                    </a>
+                  </div>
+                  <div class="flex flex-col gap-3">
+                    <span class="text-md font-semibold text-charcoal">
+                      Tell a friend
+                    </span>
+                    <div class="flex items-center gap-4">
+                      <button
+                        id="copy-link-btn"
+                        data-url={sessionUrl}
+                        class="inline-flex items-center gap-2 text-sm font-semibold text-charcoal hover:text-emerald transition-colors cursor-pointer"
+                        aria-label="Copy link to clipboard"
+                      >
+                        <i class="fa-solid fa-link text-2xl" />
+                      </button>
+                      <a
+                        href={`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 text-sm font-semibold text-charcoal hover:text-emerald transition-colors"
+                        aria-label="Share on LinkedIn"
+                      >
+                        <i class="fa-brands fa-linkedin text-2xl" />
+                      </a>
+                      <a
+                        href={`https://bsky.app/intent/compose?text=${shareText}%20${shareUrl}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 text-sm font-semibold text-charcoal hover:text-emerald transition-colors"
+                        aria-label="Share on Bluesky"
+                      >
+                        <i class="fa-brands fa-bluesky text-2xl" />
+                      </a>
+                      <a
+                        href={`https://mastodon.social/share?text=${shareText}%20${shareUrl}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 text-sm font-semibold text-charcoal hover:text-emerald transition-colors"
+                        aria-label="Share on Mastodon"
+                      >
+                        <i class="fa-brands fa-mastodon text-2xl" />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            )
+          }
         </div>
       </div>
     </div>
