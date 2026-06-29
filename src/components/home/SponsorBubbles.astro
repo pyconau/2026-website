@@ -23,7 +23,12 @@ let sortedSponsors: Array<{
 }> = [];
 
 // Define tier order for sorting
-const tierOrder = ["diamond", "platinum", "gold", "standard", "digital", "in-kind", "supporting"];
+const tierOrder = ["diamond", "platinum", "gold", "standard", "industry", "digital", "in-kind", "supporting"];
+
+// standard, industry and digital render as a single contiguous group (no gap
+// bubble between them). Collapse them to one key when detecting tier changes.
+const tierGroup = (tier: string | undefined): string =>
+  tier === "industry" || tier === "digital" ? "standard" : (tier || "none");
 
 // Determine mode based on whether staticLogos is provided
 const isStaticMode = staticLogos.length > 0;
@@ -113,16 +118,16 @@ if (sortedSponsors.length <= 3) {
   const nonSupportingSponsors = sortedSponsors.filter(s => s.data.tier !== "supporting");
   const supportingSponsors = sortedSponsors.filter(s => s.data.tier === "supporting");
 
-  // Count sponsors per tier for spacing logic
+  // Count sponsors per tier for spacing logic (grouping standard/industry/digital)
   const tierCounts = new Map<string, number>();
   nonSupportingSponsors.forEach(sponsor => {
-    const tier = sponsor.data.tier || "none";
+    const tier = tierGroup(sponsor.data.tier);
     tierCounts.set(tier, (tierCounts.get(tier) || 0) + 1);
   });
 
   // Place non-supporting sponsors from position 2 onwards (offset by 1 so first bubble is always coloured)
   let sponsorIndex = 0;
-  let currentTier = nonSupportingSponsors[0]?.data.tier;
+  let currentTier = tierGroup(nonSupportingSponsors[0]?.data.tier);
   let sponsorsInCurrentTier = 0;
   let useThreeInterval = true;
 
@@ -130,7 +135,7 @@ if (sortedSponsors.length <= 3) {
     const bubbleIndex = bubbles.findIndex(b => b.position === i);
 
     const sponsor = nonSupportingSponsors[sponsorIndex];
-    const sponsorTier = sponsor.data.tier || "none";
+    const sponsorTier = tierGroup(sponsor.data.tier);
     const tierCount = tierCounts.get(sponsorTier) || 0;
 
     // If tier changed, add a colored bubble between tiers
