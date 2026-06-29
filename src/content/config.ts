@@ -85,6 +85,7 @@ const scheduleSpecialistTracks = defineCollection({
     shortDescription: z.string(),
     pretalxTrack: z.string().optional(),
     date: z.coerce.date().optional(),
+    sponsor: z.string().optional(), // Sponsor slug matching a file in sponsors/
   }),
 });
 
