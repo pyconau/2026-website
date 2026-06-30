@@ -52,7 +52,7 @@ const sponsors = defineCollection({
   type: "content",
   schema: z.object({
     name: z.string(),
-    tier: z.enum(["diamond", "platinum", "gold", "standard", "digital", "in-kind", "supporting"]),
+    tier: z.enum(["diamond", "platinum", "gold", "standard", "industry", "digital", "in-kind", "supporting"]),
     logo: z.string(),
     website: z.string().url().optional(),
   }),
