@@ -79,17 +79,48 @@ for (let i = 1; i <= 15; i++) {
   bubbles.push({ position: i, type: "color", color: colors[(i - 1) % colors.length] });
 }
 
-// Position 9 is always "Your logo here" CTA (only in collection mode)
-if (!isStaticMode) {
+// Distinct tier groups present, in tier order (standard/industry/digital count
+// as one group). Used to decide which placement layout to use.
+const orderedTierGroups: string[] = [];
+sortedSponsors.forEach((s) => {
+  const g = tierGroup(s.data.tier);
+  if (!orderedTierGroups.includes(g)) orderedTierGroups.push(g);
+});
+
+// When the sponsor set spans 4+ tier groups, the fixed 15-bubble grid is full
+// once we add one leading spacer plus one spacer between each group, so there's
+// no room for the CTA. Use a dense, spacer-per-group layout instead.
+const useGroupSpacerLayout = orderedTierGroups.length >= 4;
+
+// Position 9 is always "Your logo here" CTA (only in collection mode), unless
+// the dense group-spacer layout needs every slot for sponsors + spacers.
+if (!isStaticMode && !useGroupSpacerLayout) {
   const ctaIndex = bubbles.findIndex(b => b.position === 9);
   if (ctaIndex !== -1) {
     bubbles[ctaIndex] = { position: 9, type: "cta" };
   }
 }
 
-// Rule: If 3 or fewer sponsors, place by tier
-// Top row positions (1-7) for higher tiers, bottom row (8-15) for supporting
-if (sortedSponsors.length <= 3) {
+if (useGroupSpacerLayout) {
+  // One leading spacer before the first group, then sponsors in tier order with
+  // a single spacer between each tier group. Supporting orgs sort last, so they
+  // naturally land at the end. Spacers are left as their initial coloured bubble.
+  let pos = 2; // position 1 is the leading spacer
+  let currentGroup = tierGroup(sortedSponsors[0]?.data.tier);
+  sortedSponsors.forEach((sponsor) => {
+    const group = tierGroup(sponsor.data.tier);
+    if (group !== currentGroup) {
+      currentGroup = group;
+      pos += 1; // leave a spacer bubble between groups
+    }
+    if (pos > 15) return; // out of bubbles; skip the overflow
+    const bubbleIndex = bubbles.findIndex((b) => b.position === pos);
+    if (bubbleIndex !== -1) {
+      bubbles[bubbleIndex] = { position: pos, type: "sponsor", sponsor };
+    }
+    pos += 1;
+  });
+} else if (sortedSponsors.length <= 3) {
   // Separate sponsors by tier type
   const topTierSponsors = sortedSponsors.filter(s => s.data.tier !== "supporting");
   const supportingSponsors = sortedSponsors.filter(s => s.data.tier === "supporting");
