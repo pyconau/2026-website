@@ -30,6 +30,25 @@ const tierOrder = ["diamond", "platinum", "gold", "standard", "industry", "digit
 const tierGroup = (tier: string | undefined): string =>
   tier === "industry" || tier === "digital" ? "standard" : (tier || "none");
 
+// Estimate how many bubbles the layout needs (sponsors + spacers + CTA), so we
+// can decide whether to grow to a third row. This mirrors the placement logic:
+// one spacer between each distinct tier group, plus a leading spacer; the CTA
+// adds one bubble in collection mode.
+function getBubblesNeeded(
+  sponsors: typeof sortedSponsors,
+  staticMode: boolean
+): number {
+  const groups: string[] = [];
+  sponsors.forEach((s) => {
+    const g = tierGroup(s.data.tier);
+    if (!groups.includes(g)) groups.push(g);
+  });
+  // leading spacer + a spacer before each subsequent group
+  const spacers = groups.length;
+  const cta = staticMode ? 0 : 1;
+  return sponsors.length + spacers + cta;
+}
+
 // Determine mode based on whether staticLogos is provided
 const isStaticMode = staticLogos.length > 0;
 
@@ -64,7 +83,24 @@ if (!isStaticMode) {
 // Available colors for bubbles (excluding white which is for logos)
 const colors = ["emerald", "lemon", "coral", "lime", "lavender"];
 
-// Initialize 15 bubbles (positions 1-15)
+// Bubble grid dimensions. Each row has a different bubble count so rows nest
+// into the gaps of the row above (the offset works because of the bubble
+// radius). Rows are added only as needed: the third row appears only when the
+// content requires more bubbles than the first two rows hold.
+const ROW_SIZES = [7, 8, 9];
+
+// Decide how many bubbles we need, then how many rows that spans. We always
+// keep at least the first two rows so the established 2-row look is preserved.
+const bubblesNeeded = getBubblesNeeded(sortedSponsors, isStaticMode);
+let rowCount = 2;
+let capacity = ROW_SIZES[0] + ROW_SIZES[1];
+while (rowCount < ROW_SIZES.length && capacity < bubblesNeeded) {
+  capacity += ROW_SIZES[rowCount];
+  rowCount += 1;
+}
+const TOTAL_BUBBLES = ROW_SIZES.slice(0, rowCount).reduce((a, b) => a + b, 0);
+
+// Initialize the bubbles (positions 1..TOTAL_BUBBLES)
 type Bubble = {
   position: number;
   type: "stone" | "sponsor" | "color" | "cta";
@@ -75,7 +111,7 @@ type Bubble = {
 const bubbles: Bubble[] = [];
 
 // Initialize all bubbles with colored backgrounds
-for (let i = 1; i <= 15; i++) {
+for (let i = 1; i <= TOTAL_BUBBLES; i++) {
   bubbles.push({ position: i, type: "color", color: colors[(i - 1) % colors.length] });
 }
 
@@ -205,9 +241,25 @@ if (useGroupSpacerLayout) {
   });
 }
 
-// Split bubbles into two rows
-const firstRow = bubbles.filter(b => b.position <= 7);
-const secondRow = bubbles.filter(b => b.position > 7);
+// Split bubbles into rows using the per-row sizes (e.g. 7, then 8, then 9).
+const rows: Bubble[][] = [];
+let rowStart = 0;
+for (let r = 0; r < rowCount; r++) {
+  const rowEnd = rowStart + ROW_SIZES[r];
+  rows.push(bubbles.filter((b) => b.position > rowStart && b.position <= rowEnd));
+  rowStart = rowEnd;
+}
+
+// Fluid desktop bubble size. All rows share one size so the nested offset stays
+// aligned; the size is driven by the widest row in this instance so that row
+// always fits the container without clipping. The page container is full-width
+// minus ~52px of horizontal padding (px-6.5 each side). Capped at the original
+// 159px, floored so bubbles don't get too small before the mobile layout takes
+// over below lg.
+const widestRow = Math.max(...ROW_SIZES.slice(0, rowCount));
+const BUBBLE_MAX_PX = 159;
+const BUBBLE_MIN_PX = 96;
+const bubbleSize = `clamp(${BUBBLE_MIN_PX}px, calc((100vw - 52px) / ${widestRow}), ${BUBBLE_MAX_PX}px)`;
 
 // Helper to render a bubble
 const renderBubble = (bubble: Bubble, rowClass: string) => {
@@ -223,7 +275,12 @@ const renderBubble = (bubble: Bubble, rowClass: string) => {
   };
 
   const bgClass = bubble.type === "sponsor" ? "bg-white" : (colorClassMap[bubble.color || "stone"] || "bg-stone");
-  const baseClass = `${rowClass} ${bgClass} xl:w-[159px] xl:h-[159px] lg:w-[120px] lg:h-[120px] w-[107px] h-[107px] m-1 lg:m-0 shrink-0 rounded-full flex items-center justify-center group`;
+  // Desktop bubbles take the fluid size from the row container's --bubble var
+  // (all rows share it so the nested offset stays aligned). Mobile keeps the
+  // original fixed size and wraps. `lg:size-(--bubble)` resolves to
+  // width/height: var(--bubble) at lg and up.
+  const sizeClass = "w-[107px] h-[107px] m-1 lg:m-0 lg:w-(--bubble) lg:h-(--bubble)";
+  const baseClass = `${rowClass} ${bgClass} ${sizeClass} shrink-0 rounded-full flex items-center justify-center group`;
 
   if (bubble.type === "sponsor" && bubble.sponsor) {
     const logoImg = `<img src="/images/sponsors/${bubble.sponsor.data.logo}" alt="${bubble.sponsor.data.name}" class="w-[80%]" />`;
@@ -238,7 +295,7 @@ const renderBubble = (bubble: Bubble, rowClass: string) => {
       return `<a href="/sponsor#${sponsorSlug}" class="${baseClass}">${logoImg}</a>`;
     }
   } else if (bubble.type === "cta") {
-    const ctaClass = `${rowClass} bg-white xl:w-[159px] xl:h-[159px] lg:w-[120px] lg:h-[120px] w-[107px] h-[107px] m-1 lg:m-0 shrink-0 rounded-full flex items-center justify-center group hover:bg-stone transition-colors`;
+    const ctaClass = `${rowClass} bg-white ${sizeClass} shrink-0 rounded-full flex items-center justify-center group hover:bg-stone transition-colors`;
     return `<a href="/sponsor" class="${ctaClass}"><span class="text-center text-sm font-medium text-charcoal px-4">Your logo here!</span></a>`;
   } else {
     return `<div class="${baseClass}"></div>`;
@@ -246,16 +303,25 @@ const renderBubble = (bubble: Bubble, rowClass: string) => {
 };
 ---
 
-<div class="fadeInUp flex flex-wrap lg:flex-nowrap justify-center mt-20 -m-1 lg:m-0">
-  {firstRow.map(bubble => (
-    <Fragment set:html={renderBubble(bubble, "lg:flex hidden")} />
-  ))}
-</div>
-<div class="fadeInUp flex flex-wrap lg:flex-nowrap justify-center xl:-mt-5 lg:-mt-4 -m-1 lg:m-0">
-  {firstRow.map(bubble => (
-    <Fragment set:html={renderBubble(bubble, "lg:hidden flex")} />
-  ))}
-  {secondRow.map(bubble => (
+<!-- Desktop: one non-wrapping line per row, each nested up under the previous.
+     --bubble is the shared fluid bubble size; the negative top margin nests each
+     row up by ~1/3 of a bubble so they tuck into the gaps above. -->
+{rows.map((row, rowIndex) => (
+  <div
+    class:list={[
+      "fadeInUp hidden lg:flex flex-nowrap justify-center",
+      rowIndex === 0 ? "mt-20" : "",
+    ]}
+    style={`--bubble: ${bubbleSize};${rowIndex > 0 ? " margin-top: calc(var(--bubble) * -0.125);" : ""}`}
+  >
+    {row.map(bubble => (
+      <Fragment set:html={renderBubble(bubble, "lg:flex")} />
+    ))}
+  </div>
+))}
+<!-- Mobile: all bubbles flow together and wrap -->
+<div class="fadeInUp flex lg:hidden flex-wrap justify-center mt-20 -m-1">
+  {bubbles.map(bubble => (
     <Fragment set:html={renderBubble(bubble, "flex")} />
   ))}
 </div>
