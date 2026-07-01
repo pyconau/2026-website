@@ -5,8 +5,8 @@ const sessions = defineCollection({
   schema: z.object({
     title: z.string(),
     code: z.string(),
-    start: z.coerce.date(),
-    end: z.coerce.date(),
+    start: z.coerce.date().nullable(),
+    end: z.coerce.date().nullable(),
     room: z.string(),
     track: z.string().nullable().optional(), // Local slug for linking
     trackName: z.string().optional(), // Original Pretalx track name for display
