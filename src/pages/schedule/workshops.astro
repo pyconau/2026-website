@@ -11,24 +11,23 @@ import { getWorkshopSessions } from "../../utils/schedule";
 const formattedDate = "Wednesday 26 August";
 const dayParam = "wednesday";
 
-// Placeholder ticketing box (TBD) — reuses the specialist-track ticket card for
-// now until workshop ticketing details are confirmed.
+// Workshop ticketing: free for all conference delegates, or a workshops-only
+// ticket. Tier names use the sprints card text colour (charcoal), and prices
+// show a flat figure with no "From" label or secondary pricing subtext.
 const ticketTiers: TicketTier[] = [
   {
-    name: "Professional",
-    nameColour: "text-emerald",
-    description: "For people who use Python professionally.",
-    price: "$380",
-    secondaryPrice: "$850",
-    secondaryLabel: "for 3-days",
+    name: "Free to attend",
+    nameColour: "text-charcoal",
+    description: "For all conference delegates.",
+    price: "Free",
+    showFromLabel: false,
   },
   {
-    name: "Enthusiast",
-    nameColour: "text-lavender",
-    description: "For enthusiasts paying their own way.",
-    price: "$250",
-    secondaryPrice: "$550",
-    secondaryLabel: "for 3-days",
+    name: "Workshops Only",
+    nameColour: "text-charcoal",
+    description: "To attend just the workshops.",
+    price: "$150",
+    showFromLabel: false,
   },
 ];
 
@@ -84,17 +83,18 @@ const sessions = await getWorkshopSessions();
           <div class="flex lg:flex-row flex-col lg:gap-20 gap-10 justify-between items-start">
             <div class="w-full lg:w-[646px]">
               <p class="text-intro font-medium text-charcoal fadeInUp">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Hands-on, instructor led sessions to learn new tools, technology
+                and skills. They're free to attend but require separate
+                registration.
               </p>
               <div class="rich-text mt-6 fadeInUp">
                 <p>
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
+                  Workshops are run by members of the PyCon AU community, or by
+                  our sponsors. Capacity is limited and its important you
+                  register specifically for each workshop you intend on joining.
+                  If you or your team would like to attend just the workshops,
+                  you can purchase a "Just the workshops" ticket to attend on
+                  Wednesday 26 August.
                 </p>
               </div>
             </div>
