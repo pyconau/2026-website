@@ -1,0 +1,164 @@
+---
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import Base from "../../layouts/Base.astro";
+import SessionListItem from "../../components/schedule/SessionListItem.astro";
+import TrackTicketCard from "../../components/schedule/TrackTicketCard.astro";
+import type { TicketTier } from "../../components/schedule/TrackTicketCard.astro";
+import { getWorkshopSessions } from "../../utils/schedule";
+
+// Workshops run on Wednesday 26 August 2026.
+const formattedDate = "Wednesday 26 August";
+const dayParam = "wednesday";
+
+// Placeholder ticketing box (TBD) — reuses the specialist-track ticket card for
+// now until workshop ticketing details are confirmed.
+const ticketTiers: TicketTier[] = [
+  {
+    name: "Professional",
+    nameColour: "text-emerald",
+    description: "For people who use Python professionally.",
+    price: "$380",
+    secondaryPrice: "$850",
+    secondaryLabel: "for 3-days",
+  },
+  {
+    name: "Enthusiast",
+    nameColour: "text-lavender",
+    description: "For enthusiasts paying their own way.",
+    price: "$250",
+    secondaryPrice: "$550",
+    secondaryLabel: "for 3-days",
+  },
+];
+
+const sessions = await getWorkshopSessions();
+---
+
+<Base title="Workshops - Schedule">
+  <Header dark={true} />
+
+  <section class="bg-charcoal pt-[98px] pb-20 overflow-hidden">
+    <div class="container relative">
+      <img
+        src="/images/star-lime.svg"
+        class="hidden lg:block absolute left-0 top-32"
+        alt=""
+      />
+      <div class="lg:w-[85%] w-full mx-auto">
+        <div class="fadeInUp breadcrumb pt-14">
+          <ul class="flex items-center gap-2 text-lime font-sans font-extrabold text-10pt uppercase tracking-[0.12em]">
+            <li class="flex items-center gap-2">
+              <a href="/">Home</a><span>&gt;</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <a href="/schedule">Schedule</a><span>&gt;</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span>Workshops</span>
+            </li>
+          </ul>
+        </div>
+        <div class="fadeInUp flex justify-between items-center relative pt-10">
+          <div class="space-y-20 lg:w-[45%] w-full relative">
+            <div class="space-y-5">
+              <div class="font-serif lg:text-8xl text-[3.625rem] -tracking-[0.022em] leading-none">
+                <h1 class="text-lime">Workshops</h1>
+              </div>
+              <p class="text-stone font-sans text-base tracking-[0.01em]">
+                Will run on {formattedDate}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="header-divider header-divider--lime"></div>
+
+    <div class="bg-stone pt-20 pb-52">
+      <div class="container">
+        <div class="fadeInUp lg:w-[85%] w-full mx-auto">
+          <div class="flex lg:flex-row flex-col lg:gap-20 gap-10 justify-between items-start">
+            <div class="w-full lg:w-[646px]">
+              <p class="text-intro font-medium text-charcoal fadeInUp">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+              <div class="rich-text mt-6 fadeInUp">
+                <p>
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                  irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                  cupidatat non proident, sunt in culpa qui officia deserunt
+                  mollit anim id est laborum.
+                </p>
+              </div>
+            </div>
+            <TrackTicketCard
+              trackName="Workshops"
+              date={formattedDate}
+              tiers={ticketTiers}
+            />
+          </div>
+
+          {sessions.length > 0 && (
+            <div class="pt-24">
+              <div class="fadeInUp flex flex-wrap items-center justify-between gap-x-10 gap-y-4 mb-10">
+                <h3 class="text-5xl font-serif font-medium -tracking-[0.02em]">
+                  Sessions
+                </h3>
+                <a href={`/schedule/${dayParam}`} class="btn-arrow btn-arrow--lime">
+                  <span>Wednesday schedule</span>
+                </a>
+              </div>
+
+              <div class="space-y-10">
+                {sessions.map((session) => (
+                  <SessionListItem session={session} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div class="pt-24">
+            <h3 class="fadeInUp text-5xl font-serif font-medium -tracking-[0.02em] mb-10">
+              How to register
+            </h3>
+            <div class="rich-text fadeInUp">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-lime pt-20">
+    <div class="container">
+      <div class="grid lg:grid-cols-2 grid-cols-1 gap-5 pb-20 fadeInUp">
+        <a href="/schedule" class="btn-arrow btn-arrow--emerald btn-arrow--2col">
+          <span>Full Program</span>
+        </a>
+        <a
+          href="/schedule/specialist-tracks"
+          class="btn-arrow btn-arrow--emerald btn-arrow--2col"
+        >
+          <span>Specialist Tracks</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer topColour="lime" />
+
+  <script src="/src/scripts/animations.js"></script>
+</Base>

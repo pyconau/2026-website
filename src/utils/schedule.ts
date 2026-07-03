@@ -219,6 +219,26 @@ export async function getSessionsForSpecialistTrack(
 }
 
 /**
+ * Get all workshop sessions (type "workshop"), sorted by start time.
+ * Workshops are not a specialist track (no track file), so they are matched by
+ * session type rather than track slug.
+ */
+export async function getWorkshopSessions(): Promise<Session[]> {
+  const sessions = await getCollection("sessions");
+  return sessions
+    .filter(
+      (session) =>
+        session.data.type === "workshop" &&
+        !session.data.tags?.includes("not-yet-announced")
+    )
+    .sort((a, b) => {
+      const aStart = a.data.start?.getTime() ?? 0;
+      const bStart = b.data.start?.getTime() ?? 0;
+      return aStart - bStart;
+    });
+}
+
+/**
  * Track color configuration
  */
 export const trackColors: Record<string, { bg: string; text: string }> = {
