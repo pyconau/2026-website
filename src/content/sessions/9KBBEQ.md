@@ -2,7 +2,7 @@
 title: Launching Rockets with Python
 code: 9KBBEQ
 start: '2026-08-28T10:45:00+10:00'
-end: '2026-08-28T11:15:00+10:00'
+end: '2026-08-28T11:20:00+10:00'
 room: Ballroom 2
 track:
 type: talk

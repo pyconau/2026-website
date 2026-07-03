@@ -1,8 +1,8 @@
 ---
 title: An Intro to Glue Work
 code: 3CYQGY
-start: '2026-08-27T14:00:00+10:00'
-end: '2026-08-27T14:30:00+10:00'
+start: '2026-08-27T14:05:00+10:00'
+end: '2026-08-27T14:35:00+10:00'
 room: Ballroom 2
 track:
 type: talk

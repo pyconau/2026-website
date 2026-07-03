@@ -2,7 +2,7 @@
 title: 'AI-assisted coding, Python and dbt: taking Chronos live in two days'
 code: VHXDSA
 start: '2026-08-27T10:45:00+10:00'
-end: '2026-08-27T11:15:00+10:00'
+end: '2026-08-27T11:20:00+10:00'
 room: Ballroom 3
 track: data-and-ai
 type: talk

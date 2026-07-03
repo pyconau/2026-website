@@ -1,8 +1,8 @@
 ---
 title: 'Adventures in FastAPI: A Choose-Your-Own PyCon AU Talk'
 code: XQ8VVL
-start: '2026-08-27T15:10:00+10:00'
-end: '2026-08-27T15:40:00+10:00'
+start: '2026-08-27T15:15:00+10:00'
+end: '2026-08-27T15:45:00+10:00'
 room: Ballroom 2
 track:
 type: talk

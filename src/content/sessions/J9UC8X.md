@@ -1,8 +1,8 @@
 ---
 title: 'Hash It Out: Teaching Password Security Through Code'
 code: J9UC8X
-start: '2026-08-28T11:55:00+10:00'
-end: '2026-08-28T12:25:00+10:00'
+start: '2026-08-28T12:05:00+10:00'
+end: '2026-08-28T12:35:00+10:00'
 room: Ballroom 1
 track: education
 type: talk

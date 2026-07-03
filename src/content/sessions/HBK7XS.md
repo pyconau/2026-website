@@ -1,8 +1,8 @@
 ---
 title: 'Feed-Forward, Not Feedback: Rethinking Project Based Assessment'
 code: HBK7XS
-start: '2026-08-28T14:35:00+10:00'
-end: '2026-08-28T15:05:00+10:00'
+start: '2026-08-28T14:40:00+10:00'
+end: '2026-08-28T15:10:00+10:00'
 room: Ballroom 1
 track: education
 type: talk

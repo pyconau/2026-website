@@ -1,9 +1,9 @@
 ---
 title: Why computer science matters to musicians
 code: HH8MA3
-start:
-end:
-room: ''
+start: '2026-08-29T15:10:00+10:00'
+end: '2026-08-29T15:40:00+10:00'
+room: Ballroom 3
 track:
 type: talk
 speakers:

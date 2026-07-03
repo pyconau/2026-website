@@ -1,8 +1,8 @@
 ---
 title: 'Ship Reliable RAG: Evals That Grow with Your Retrieval Complexity'
 code: XWLM8L
-start: '2026-08-27T11:20:00+10:00'
-end: '2026-08-27T11:50:00+10:00'
+start: '2026-08-27T11:30:00+10:00'
+end: '2026-08-27T12:00:00+10:00'
 room: Ballroom 3
 track: data-and-ai
 type: talk

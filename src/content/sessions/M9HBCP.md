@@ -1,8 +1,8 @@
 ---
 title: 'The Neurospicy Toolbox: A Guide for Educators'
 code: M9HBCP
-start: '2026-08-28T13:25:00+10:00'
-end: '2026-08-28T13:55:00+10:00'
+start: '2026-08-28T13:30:00+10:00'
+end: '2026-08-28T14:00:00+10:00'
 room: Ballroom 1
 track: education
 type: talk
