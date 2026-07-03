@@ -46,6 +46,7 @@ from config import (
     ROOM_ORDER,
     SESSIONS_OUTPUT_DIR,
     SPECIALIST_TRACKS_DIR,
+    SPONSOR_QUESTION_ID,
     SUBMISSION_TYPE_MAPPING,
 )
 
@@ -306,6 +307,13 @@ def process_sessions(
         submission_answers = answers_by_submission.get(code, [])
         content_warning = get_answer_for_question(submission_answers, CONTENT_WARNING_QUESTION_ID)
 
+        # Get sponsor slug from the "Is this a sponsored session" answer. The raw
+        # value is a sponsor slug (e.g. "meta") that the site maps to a sponsor
+        # markdown file; the page only shows branding when a match exists.
+        sponsor = get_answer_for_question(submission_answers, SPONSOR_QUESTION_ID)
+        if sponsor:
+            sponsor = sponsor.strip().lower()
+
         # Extract tags — Pretalx returns tag IDs (int), resolve to names via tag_id_to_name
         raw_tags = sub.get("tags", []) or []
         tag_map = tag_id_to_name or {}
@@ -323,6 +331,7 @@ def process_sessions(
             "speakers": speakers,
             "abstract": abstract if abstract else None,
             "contentWarning": content_warning,
+            "sponsor": sponsor,
             "tags": tags,
             "body": body,
         }

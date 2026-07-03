@@ -56,8 +56,15 @@ export async function getStaticPaths() {
 }
 
 const { track } = Astro.props;
-const { title, shortDescription, date } = track.data;
+const { title, shortDescription, date, sponsor } = track.data;
 const { Content } = await track.render();
+
+// Resolve the track sponsor slug (e.g. "snowflake") to a sponsor markdown file.
+// Only show the sponsor bubble when the slug matches a sponsor file; the name
+// and logo come from that file.
+const sponsorData = sponsor
+  ? (await getCollection("sponsors")).find((s) => s.slug === sponsor)
+  : undefined;
 
 // e.g. "Friday 27 August"
 const formattedDate = new Intl.DateTimeFormat("en-AU", {
@@ -193,6 +200,22 @@ const ticketTiers = TICKET_TIER_OVERRIDES[track.slug] ?? DEFAULT_TICKET_TIERS;
                   />
                 ))}
               </div>
+            </div>
+          )}
+
+          {sponsorData && (
+            <div class="fadeInUp flex justify-between items-center gap-6 bg-white rounded-[3.125rem] py-5 px-14 mt-14">
+              <div>
+                <span class="block text-sm tracking-[0.01em] text-charcoal">
+                  Track sponsor
+                </span>
+                <h3 class="text-3xl font-semibold text-charcoal">{sponsorData.data.name}</h3>
+              </div>
+              <img
+                src={`/images/sponsors/${sponsorData.data.logo}`}
+                alt={sponsorData.data.name}
+                class="h-16 w-auto max-w-[40%] object-contain"
+              />
             </div>
           )}
         </div>

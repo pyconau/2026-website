@@ -14,6 +14,8 @@ interface TicketTier {
   secondaryPrice?: string;
   /** Suffix for the secondary price, e.g. "for 3-days" */
   secondaryLabel?: string;
+  /** Show the small "From" label above the price. Defaults to true. */
+  showFromLabel?: boolean;
 }
 
 export type { TicketTier };
@@ -51,9 +53,11 @@ const { trackName, date, tiers, buttonClass = "btn-arrow--emerald" } =
                 {tier.name}
               </h3>
               <div class="price text-left shrink-0">
-                <span class="text-charcoal/50 text-xs font-sans block leading-none mb-1">
-                  From
-                </span>
+                {tier.showFromLabel !== false && (
+                  <span class="text-charcoal/50 text-xs font-sans block leading-none mb-1">
+                    From
+                  </span>
+                )}
                 <span class="text-charcoal text-2xl font-semibold font-sans block leading-none">
                   {tier.price}
                 </span>

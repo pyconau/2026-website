@@ -169,13 +169,18 @@ const trackSlugs = new Set(
                           : ps.colSpan === 3 ? "schedule-event-wrapper--span-3"
                           : ps.colSpan === 2 ? "schedule-event-wrapper--span-2"
                           : "";
-                        // Reduce height by 3x track header height (72px) for vertical buffer
-                        const breakHeightPx = ps.heightPx - 72;
+                        // Breaks after a long (90m+) session use custom styling and
+                        // fill the freed vertical space; all others keep the standard
+                        // 72px buffer reduction.
+                        const breakHeightPx = ps.followsLongSession
+                          ? ps.heightPx
+                          : Math.max(ps.heightPx - 72, 24);
+                        const breakClass = ps.followsLongSession ? "schedule-break--after-long-session" : "";
 
                         return (
                           <div class={`schedule-event-wrapper schedule-break-wrapper ${spanClass}`} style={`top: ${ps.topPercent}%;`}>
                             <div
-                              class="schedule-break"
+                              class={`schedule-break ${breakClass}`}
                               style={`height: ${breakHeightPx}px;`}
                             >
                               <span class="schedule-break-title">{ps.session.data.title}</span>
@@ -190,13 +195,18 @@ const trackSlugs = new Set(
                         const timeStr = ps.session.data.start && ps.session.data.end
                           ? formatSessionTime(ps.session.data.start, ps.session.data.end)
                           : "";
-                        // Reduce height by 3x track header height (72px) for vertical buffer
-                        const breakHeightPx = ps.heightPx - 72;
+                        // Breaks after a long (90m+) session use custom styling and
+                        // fill the freed vertical space; all others keep the standard
+                        // 72px buffer reduction.
+                        const breakHeightPx = ps.followsLongSession
+                          ? ps.heightPx
+                          : Math.max(ps.heightPx - 72, 24);
+                        const breakClass = ps.followsLongSession ? "schedule-break--after-long-session" : "";
 
                         return (
                           <div class="schedule-event-wrapper schedule-break-wrapper" style={`top: ${ps.topPercent}%;`}>
                             <div
-                              class="schedule-break"
+                              class={`schedule-break ${breakClass}`}
                               style={`height: ${breakHeightPx}px;`}
                             >
                               <span class="schedule-break-title">{ps.session.data.title}</span>

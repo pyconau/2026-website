@@ -481,6 +481,10 @@ TRACK_THEMES: dict[str | None, list[str]] = {
     "education": ["accent_lime"],
     "cybersecurity": ["accent_lavender"],
     "data-and-ai": ["accent_lemon", "charcoal_lemon"],
+    # Workshops have no track slug, so this is keyed by trackName (see the
+    # theme_track_key fallback in generate_graphics.py). Pin to the non-accented
+    # charcoal theme.
+    "Workshops": ["charcoal"],
 }
 
 # Track → accent color for track label (independent of theme)

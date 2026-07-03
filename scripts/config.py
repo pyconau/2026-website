@@ -22,6 +22,9 @@ CONTENT_WARNING_QUESTION_ID = 5326
 PRONOUNS_QUESTION_ID = 5332
 BLUESKY_QUESTION_ID = 5329
 FEDIVERSE_QUESTION_ID = 5328
+# "Is this a sponsored session" - the answer is a sponsor slug matching a
+# filename in src/content/sponsors/ (e.g. "meta" -> meta.md)
+SPONSOR_QUESTION_ID = 7224
 
 # Submission type ID to session type mapping (discovered via pretalx_questions.py)
 # Maps Pretalx submission type IDs to our session types:
