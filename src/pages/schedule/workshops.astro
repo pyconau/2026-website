@@ -5,7 +5,9 @@ import Base from "../../layouts/Base.astro";
 import SessionListItem from "../../components/schedule/SessionListItem.astro";
 import TrackTicketCard from "../../components/schedule/TrackTicketCard.astro";
 import type { TicketTier } from "../../components/schedule/TrackTicketCard.astro";
+import FAQEntry from "../../components/attend/faq/FAQEntry.astro";
 import { getWorkshopSessions } from "../../utils/schedule";
+import { TICKETING_URL } from "../../constants";
 
 // Workshops run on Wednesday 26 August 2026.
 const formattedDate = "Wednesday 26 August";
@@ -105,6 +107,42 @@ const sessions = await getWorkshopSessions();
             />
           </div>
 
+          <div class="pt-24">
+            <h3 class="fadeInUp text-5xl font-serif font-medium -tracking-[0.02em] mb-10">
+              How to register for workshops
+            </h3>
+            <div class="fadeInUp space-y-4">
+              <FAQEntry title="I'm already registered - can I add workshops?">
+                <ol>
+                  <li>
+                    View your order online using the link emailed to you at the
+                    time of purchase. Alternatively, use the "resend order link"
+                    feature by entering your email at
+                    <a href={TICKETING_URL} target="_blank" rel="noopener noreferrer">
+                      {TICKETING_URL}
+                    </a>
+                  </li>
+                  <li>
+                    Scroll down and "Change your order". Here you can update
+                    add-ons, including workshops and extra shirts etc. Be sure to
+                    save your updated order.
+                  </li>
+                  <li>
+                    Make sure you "Update details", to answer additional required
+                    questions for the add-on products you've added to your ticket.
+                  </li>
+                </ol>
+              </FAQEntry>
+              <FAQEntry title="I'm new to PyCon AU - how do I include workshops when registering?">
+                <p>
+                  Simply register for your ticket as normal. On the second step,
+                  you'll be prompted to select add-ons including t-shirt sizes and
+                  specific workshops.
+                </p>
+              </FAQEntry>
+            </div>
+          </div>
+
           {sessions.length > 0 && (
             <div class="pt-24">
               <div class="fadeInUp flex flex-wrap items-center justify-between gap-x-10 gap-y-4 mb-10">
@@ -123,20 +161,6 @@ const sessions = await getWorkshopSessions();
               </div>
             </div>
           )}
-
-          <div class="pt-24">
-            <h3 class="fadeInUp text-5xl font-serif font-medium -tracking-[0.02em] mb-10">
-              How to register
-            </h3>
-            <div class="rich-text fadeInUp">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
