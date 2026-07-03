@@ -1,7 +1,7 @@
 ---
 name: Ashley Lamont
 code: AENJDR
-hasAvatar: false
+hasAvatar: true
 ---
 
 By day, Ashley is a Frontend Software Engineer (yes, the JavaScript kind) at Atlassian, building the text-editing framework that powers apps like Confluence and Jira.

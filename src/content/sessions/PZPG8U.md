@@ -14,8 +14,6 @@ abstract: "AI agents are everywhere, but most of them fall apart the moment some
   loses its state.\r\n\r\nIn this hands-on workshop, you'll learn how to build AI
   agents that actually work in the real world."
 sponsor: temporal
-graphicsLayout: left
-theme: charcoal
 ---
 
 We'll start from scratch using AWS Strands Agents SDK to build an AI agent, then
