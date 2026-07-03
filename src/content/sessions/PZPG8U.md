@@ -8,11 +8,12 @@ track:
 type: workshop
 speakers:
 - MQWLZW
-trackName: Main Conference
+trackName: Workshops
 abstract: "AI agents are everywhere, but most of them fall apart the moment something
   goes wrong \r\n- a tool call fails\r\n- an API times out\r\n- a long-running workflow
   loses its state.\r\n\r\nIn this hands-on workshop, you'll learn how to build AI
   agents that actually work in the real world."
+sponsor: temporal
 ---
 
 We'll start from scratch using AWS Strands Agents SDK to build an AI agent, then

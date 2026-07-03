@@ -179,6 +179,20 @@ export async function getTrackBySlug(
 }
 
 /**
+ * Get the set of Pretalx track names that map to a specialist-track file in the
+ * repo. Sessions get a sparkle track header only when their trackName is in this
+ * allowlist — tracks without a file (e.g. "Workshops", "Main Conference") don't.
+ */
+export async function getSpecialistTrackNames(): Promise<Set<string>> {
+  const tracks = await getCollection("schedule-specialist-tracks");
+  return new Set(
+    tracks
+      .map((track) => track.data.pretalxTrack)
+      .filter((name): name is string => !!name)
+  );
+}
+
+/**
  * Get sessions that belong to a specialist track based on its pretalxTrack mapping
  */
 export async function getSessionsForSpecialistTrack(
@@ -358,6 +372,7 @@ export async function getSessionsForFlexSchedule(
 }> {
   const sessions = await getSessionsByDay(dayName);
   const rooms = await getRoomsForDay(dayName);
+  const specialistTrackNames = await getSpecialistTrackNames();
 
   // Create flex sessions
   const allFlexSessions: FlexSession[] = [];
@@ -405,7 +420,7 @@ export async function getSessionsForFlexSchedule(
     });
 
     const trackName = fs.session.data.trackName;
-    const isSpecialistTrack = !!trackName && trackName !== "Main Conference";
+    const isSpecialistTrack = !!trackName && specialistTrackNames.has(trackName);
     fs.showTrackHeader = isSpecialistTrack && !hasPrecedingSession;
   });
 
@@ -673,6 +688,7 @@ export async function getScheduleForGrid(
 }> {
   const sessions = await getSessionsByDay(dayName);
   const rooms = await getRoomsForDay(dayName);
+  const specialistTrackNames = await getSpecialistTrackNames();
   const scheduleLayout = layout ?? getScheduleLayout(dayName);
   const { slotMinutes, slotHeightPx } = LAYOUT_CONFIG[scheduleLayout];
 
@@ -769,7 +785,7 @@ export async function getScheduleForGrid(
     const roomEndTimes = nonBreakEndTimes.get(room) || [];
     const hasPrecedingSession = !isBreak && roomEndTimes.includes(startTime);
     const trackName = session.data.trackName;
-    const isSpecialistTrack = !!trackName && trackName !== "Main Conference";
+    const isSpecialistTrack = !!trackName && specialistTrackNames.has(trackName);
     const showTrackHeader = isSpecialistTrack && !hasPrecedingSession;
 
     // Track headers are absolutely positioned above session cards (top: -24px),

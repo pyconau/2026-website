@@ -8,7 +8,7 @@ track:
 type: workshop
 speakers:
 - TV9UKB
-trackName: Main Conference
+trackName: Workshops
 abstract: Adopting type annotations in Python enables developers to catch errors
   earlier, document intent, and scale their projects more safely. This hands-on 
   tutorial will guide attendees through the process of adding type annotations 
