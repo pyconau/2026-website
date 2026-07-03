@@ -2,7 +2,7 @@
 title: 'Kubernetes as LEGO: Building Platforms one block at a time'
 code: 7JZY3E
 start: '2026-08-27T10:45:00+10:00'
-end: '2026-08-27T11:15:00+10:00'
+end: '2026-08-27T11:20:00+10:00'
 room: Ballroom 1
 track: platform-engineering
 type: talk

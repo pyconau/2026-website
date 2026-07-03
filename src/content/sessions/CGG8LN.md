@@ -1,8 +1,8 @@
 ---
 title: How Being Terrified of Code Helped Me Get Girls to Love It
 code: CGG8LN
-start: '2026-08-28T11:20:00+10:00'
-end: '2026-08-28T11:50:00+10:00'
+start: '2026-08-28T11:30:00+10:00'
+end: '2026-08-28T12:00:00+10:00'
 room: Ballroom 1
 track: education
 type: talk

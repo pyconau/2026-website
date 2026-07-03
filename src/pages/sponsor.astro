@@ -79,11 +79,13 @@ const displayHostname = (url: string) =>
           {tierOrder.map((tier) => {
             let tierSponsors = sponsorsByTier[tier];
 
-            // Combine standard and digital sponsors
+            // Combine standard, industry and digital sponsors into the single
+            // "Sponsors" section, in that order, with no separate headings.
             if (tier === "standard") {
               const standardSponsors = sponsorsByTier["standard"] || [];
+              const industrySponsors = sponsorsByTier["industry"] || [];
               const digitalSponsors = sponsorsByTier["digital"] || [];
-              tierSponsors = [...standardSponsors, ...digitalSponsors];
+              tierSponsors = [...standardSponsors, ...industrySponsors, ...digitalSponsors];
             }
 
             if (!tierSponsors || tierSponsors.length === 0) return null;
@@ -174,7 +176,7 @@ const displayHostname = (url: string) =>
                         <div id={sponsorSlug} class={`sponsor-card fadeInUp bg-white flex flex-col items-center rounded-[3.125rem] lg:p-14 p-10 gap-14 ${tierSponsors.length === 1 ? "lg:w-[50%]" : ""}`}>
                           <img
                             src={`/images/sponsors/${sponsor.data.logo}`}
-                            class="lg:w-auto w-[190px]"
+                            class="w-auto max-w-full h-auto max-h-24 object-contain"
                             alt={sponsor.data.name}
                           />
                           <div class="space-y-5">

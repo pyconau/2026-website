@@ -1,8 +1,8 @@
 ---
 title: Assessment in the age of AI
 code: KYA9TU
-start: '2026-08-28T14:00:00+10:00'
-end: '2026-08-28T14:30:00+10:00'
+start: '2026-08-28T14:05:00+10:00'
+end: '2026-08-28T14:35:00+10:00'
 room: Ballroom 1
 track: education
 type: talk

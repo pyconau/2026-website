@@ -1,8 +1,8 @@
 ---
 title: Thursday lightning talks
 code: U8CRTN
-start: '2026-08-27T16:25:00+10:00'
-end: '2026-08-27T17:25:00+10:00'
+start: '2026-08-27T16:30:00+10:00'
+end: '2026-08-27T17:30:00+10:00'
 room: Ballroom 3
 track:
 type: plenary

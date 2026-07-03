@@ -1,13 +1,14 @@
 ---
 title: 'Vibing Vision: how we built a pose tracking art installation in two weeks'
 code: GFGHGR
-start:
-end:
-room: ''
+start: '2026-08-27T15:15:00+10:00'
+end: '2026-08-27T15:45:00+10:00'
+room: Ballroom 3
 track: data-and-ai
 type: talk
 speakers:
 - WUPRPT
+- RVVERU
 trackName: Data & AI
 abstract: "Can you use AI to vibe-code a computer vision pipeline? Yes... sort of.\r\
   \n\r\nIn December 2025, a group of friends built an art installation for Lost Paradise

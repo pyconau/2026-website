@@ -1,8 +1,8 @@
 ---
 title: Enterprise Grade Accessibility for Everyone
 code: NGF8XQ
-start: '2026-08-27T11:55:00+10:00'
-end: '2026-08-27T12:25:00+10:00'
+start: '2026-08-27T12:05:00+10:00'
+end: '2026-08-27T12:35:00+10:00'
 room: Ballroom 2
 track:
 type: talk

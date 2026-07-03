@@ -1,8 +1,8 @@
 ---
 title: 'Stop Prompting, Start Composing: Agent Skills in Practice'
 code: 7KE7PU
-start: '2026-08-27T14:35:00+10:00'
-end: '2026-08-27T15:05:00+10:00'
+start: '2026-08-27T14:40:00+10:00'
+end: '2026-08-27T15:10:00+10:00'
 room: Ballroom 3
 track: data-and-ai
 type: talk

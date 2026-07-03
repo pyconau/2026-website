@@ -1,8 +1,8 @@
 ---
 title: 'TOGA: Checklists and Safety Measures for "Yoloing" in Prod'
 code: QRNWPN
-start: '2026-08-27T11:55:00+10:00'
-end: '2026-08-27T12:25:00+10:00'
+start: '2026-08-27T12:05:00+10:00'
+end: '2026-08-27T12:35:00+10:00'
 room: Ballroom 1
 track: platform-engineering
 type: talk

@@ -1,8 +1,8 @@
 ---
 title: "Please Don't Put That in a Dict: Better Data Models in Python"
 code: TYXRSM
-start: '2026-08-27T14:00:00+10:00'
-end: '2026-08-27T14:30:00+10:00'
+start: '2026-08-27T14:05:00+10:00'
+end: '2026-08-27T14:35:00+10:00'
 room: Ballroom 3
 track: data-and-ai
 type: talk

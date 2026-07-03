@@ -2,7 +2,7 @@
 title: '40,000 CVEs and Counting: What 60 Years of AppSec Tells Us About 2026'
 code: NF9ZDV
 start: '2026-08-28T10:45:00+10:00'
-end: '2026-08-28T11:15:00+10:00'
+end: '2026-08-28T11:20:00+10:00'
 room: Ballroom 3
 track: cybersecurity
 type: talk

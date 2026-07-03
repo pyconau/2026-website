@@ -3,7 +3,7 @@ title: The Good, The Bad, and the Ugly – Python in Secondary Education in
   Queensland
 code: QCWMLU
 start: '2026-08-28T10:45:00+10:00'
-end: '2026-08-28T11:15:00+10:00'
+end: '2026-08-28T11:20:00+10:00'
 room: Ballroom 1
 track: education
 type: talk

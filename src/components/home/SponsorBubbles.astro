@@ -23,7 +23,24 @@ let sortedSponsors: Array<{
 }> = [];
 
 // Define tier order for sorting
-const tierOrder = ["diamond", "platinum", "gold", "standard", "digital", "in-kind", "supporting"];
+const tierOrder = ["diamond", "platinum", "gold", "standard", "industry", "digital", "in-kind", "supporting"];
+
+// standard, industry and digital render as a single contiguous group (no gap
+// bubble between them). Collapse them to one key when detecting tier changes.
+const tierGroup = (tier: string | undefined): string =>
+  tier === "industry" || tier === "digital" ? "standard" : (tier || "none");
+
+// Count the non-supporting tier groups (standard/industry/digital count as one)
+// so we know how many spacer bubbles the group-spacer layout adds.
+function countNonSupportingGroups(sponsors: typeof sortedSponsors): number {
+  const groups: string[] = [];
+  sponsors.forEach((s) => {
+    if (s.data.tier === "supporting") return;
+    const g = tierGroup(s.data.tier);
+    if (!groups.includes(g)) groups.push(g);
+  });
+  return groups.length;
+}
 
 // Determine mode based on whether staticLogos is provided
 const isStaticMode = staticLogos.length > 0;
@@ -59,7 +76,36 @@ if (!isStaticMode) {
 // Available colors for bubbles (excluding white which is for logos)
 const colors = ["emerald", "lemon", "coral", "lime", "lavender"];
 
-// Initialize 15 bubbles (positions 1-15)
+// Bubble grid dimensions. Each row has a different bubble count so rows nest
+// into the gaps of the row above (the offset works because of the bubble
+// radius). Rows are added only as needed: the third row appears only when the
+// content requires more bubbles than the first two rows hold.
+const ROW_SIZES = [7, 8, 9];
+
+// Supporting organisations always occupy the final row. The non-supporting
+// sponsors (plus a leading spacer and one spacer between each tier group) fill
+// the rows above. Work out how many rows the non-supporting block needs, then
+// add the supporting row on top of that. Always keep at least two rows so the
+// established look is preserved.
+const supportingCount = sortedSponsors.filter((s) => s.data.tier === "supporting").length;
+const nonSupportingCount = sortedSponsors.length - supportingCount;
+const nonSupportingBubbles = nonSupportingCount + countNonSupportingGroups(sortedSponsors);
+
+// Rows needed just for the non-supporting block (filling row sizes in order).
+let topRows = 1;
+let topCapacity = ROW_SIZES[0];
+while (topRows < ROW_SIZES.length && topCapacity < nonSupportingBubbles) {
+  topCapacity += ROW_SIZES[topRows];
+  topRows += 1;
+}
+
+// Supporting orgs get their own final row when present; otherwise they share the
+// last non-supporting row. Always at least two rows total.
+let rowCount = supportingCount > 0 ? topRows + 1 : topRows;
+rowCount = Math.min(Math.max(rowCount, 2), ROW_SIZES.length);
+const TOTAL_BUBBLES = ROW_SIZES.slice(0, rowCount).reduce((a, b) => a + b, 0);
+
+// Initialize the bubbles (positions 1..TOTAL_BUBBLES)
 type Bubble = {
   position: number;
   type: "stone" | "sponsor" | "color" | "cta";
@@ -70,21 +116,75 @@ type Bubble = {
 const bubbles: Bubble[] = [];
 
 // Initialize all bubbles with colored backgrounds
-for (let i = 1; i <= 15; i++) {
+for (let i = 1; i <= TOTAL_BUBBLES; i++) {
   bubbles.push({ position: i, type: "color", color: colors[(i - 1) % colors.length] });
 }
 
-// Position 9 is always "Your logo here" CTA (only in collection mode)
-if (!isStaticMode) {
+// Distinct tier groups present, in tier order (standard/industry/digital count
+// as one group). Used to decide which placement layout to use.
+const orderedTierGroups: string[] = [];
+sortedSponsors.forEach((s) => {
+  const g = tierGroup(s.data.tier);
+  if (!orderedTierGroups.includes(g)) orderedTierGroups.push(g);
+});
+
+// When the sponsor set spans 4+ tier groups, adding one leading spacer plus a
+// spacer between each group fills the grid, leaving no room for the CTA. Use a
+// dense, spacer-per-group layout instead.
+const useGroupSpacerLayout = orderedTierGroups.length >= 4;
+
+// Position 9 is always "Your logo here" CTA (only in collection mode), unless
+// the dense group-spacer layout needs every slot for sponsors + spacers.
+if (!isStaticMode && !useGroupSpacerLayout) {
   const ctaIndex = bubbles.findIndex(b => b.position === 9);
   if (ctaIndex !== -1) {
     bubbles[ctaIndex] = { position: 9, type: "cta" };
   }
 }
 
-// Rule: If 3 or fewer sponsors, place by tier
-// Top row positions (1-7) for higher tiers, bottom row (8-15) for supporting
-if (sortedSponsors.length <= 3) {
+if (useGroupSpacerLayout) {
+  const nonSupporting = sortedSponsors.filter((s) => s.data.tier !== "supporting");
+  const supporting = sortedSponsors.filter((s) => s.data.tier === "supporting");
+
+  // First position of the final row, which is reserved for supporting orgs when
+  // any are present (otherwise non-supporting may use it too).
+  const lastRowStart = TOTAL_BUBBLES - ROW_SIZES[rowCount - 1] + 1;
+  const nonSupportingLimit = supporting.length > 0 ? lastRowStart - 1 : TOTAL_BUBBLES;
+
+  // Non-supporting sponsors: one leading spacer, then a spacer between each tier
+  // group, flowing across the rows above the supporting row. Spacers are left as
+  // their initial coloured bubble.
+  let pos = 2; // position 1 is the leading spacer
+  let currentGroup = tierGroup(nonSupporting[0]?.data.tier);
+  nonSupporting.forEach((sponsor) => {
+    const group = tierGroup(sponsor.data.tier);
+    if (group !== currentGroup) {
+      currentGroup = group;
+      pos += 1; // leave a spacer bubble between groups
+    }
+    if (pos > nonSupportingLimit) return; // out of room above the supporting row
+    const bubbleIndex = bubbles.findIndex((b) => b.position === pos);
+    if (bubbleIndex !== -1) {
+      bubbles[bubbleIndex] = { position: pos, type: "sponsor", sponsor };
+    }
+    pos += 1;
+  });
+
+  // Supporting orgs: fill the final row, centred by starting after a leading gap
+  // when the row isn't full.
+  if (supporting.length > 0) {
+    const lastRowSize = ROW_SIZES[rowCount - 1];
+    const leadGap = Math.max(0, Math.floor((lastRowSize - supporting.length) / 2));
+    supporting.forEach((sponsor, idx) => {
+      const supPos = lastRowStart + leadGap + idx;
+      if (supPos > TOTAL_BUBBLES) return;
+      const bubbleIndex = bubbles.findIndex((b) => b.position === supPos);
+      if (bubbleIndex !== -1) {
+        bubbles[bubbleIndex] = { position: supPos, type: "sponsor", sponsor };
+      }
+    });
+  }
+} else if (sortedSponsors.length <= 3) {
   // Separate sponsors by tier type
   const topTierSponsors = sortedSponsors.filter(s => s.data.tier !== "supporting");
   const supportingSponsors = sortedSponsors.filter(s => s.data.tier === "supporting");
@@ -113,16 +213,16 @@ if (sortedSponsors.length <= 3) {
   const nonSupportingSponsors = sortedSponsors.filter(s => s.data.tier !== "supporting");
   const supportingSponsors = sortedSponsors.filter(s => s.data.tier === "supporting");
 
-  // Count sponsors per tier for spacing logic
+  // Count sponsors per tier for spacing logic (grouping standard/industry/digital)
   const tierCounts = new Map<string, number>();
   nonSupportingSponsors.forEach(sponsor => {
-    const tier = sponsor.data.tier || "none";
+    const tier = tierGroup(sponsor.data.tier);
     tierCounts.set(tier, (tierCounts.get(tier) || 0) + 1);
   });
 
   // Place non-supporting sponsors from position 2 onwards (offset by 1 so first bubble is always coloured)
   let sponsorIndex = 0;
-  let currentTier = nonSupportingSponsors[0]?.data.tier;
+  let currentTier = tierGroup(nonSupportingSponsors[0]?.data.tier);
   let sponsorsInCurrentTier = 0;
   let useThreeInterval = true;
 
@@ -130,7 +230,7 @@ if (sortedSponsors.length <= 3) {
     const bubbleIndex = bubbles.findIndex(b => b.position === i);
 
     const sponsor = nonSupportingSponsors[sponsorIndex];
-    const sponsorTier = sponsor.data.tier || "none";
+    const sponsorTier = tierGroup(sponsor.data.tier);
     const tierCount = tierCounts.get(sponsorTier) || 0;
 
     // If tier changed, add a colored bubble between tiers
@@ -169,9 +269,25 @@ if (sortedSponsors.length <= 3) {
   });
 }
 
-// Split bubbles into two rows
-const firstRow = bubbles.filter(b => b.position <= 7);
-const secondRow = bubbles.filter(b => b.position > 7);
+// Split bubbles into rows using the per-row sizes (e.g. 7, then 8, then 9).
+const rows: Bubble[][] = [];
+let rowStart = 0;
+for (let r = 0; r < rowCount; r++) {
+  const rowEnd = rowStart + ROW_SIZES[r];
+  rows.push(bubbles.filter((b) => b.position > rowStart && b.position <= rowEnd));
+  rowStart = rowEnd;
+}
+
+// Fluid desktop bubble size. All rows share one size so the nested offset stays
+// aligned; the size is driven by the widest row in this instance so that row
+// always fits the container without clipping. The page container is full-width
+// minus ~52px of horizontal padding (px-6.5 each side). Capped at the original
+// 159px, floored so bubbles don't get too small before the mobile layout takes
+// over below lg.
+const widestRow = Math.max(...ROW_SIZES.slice(0, rowCount));
+const BUBBLE_MAX_PX = 159;
+const BUBBLE_MIN_PX = 96;
+const bubbleSize = `clamp(${BUBBLE_MIN_PX}px, calc((100vw - 52px) / ${widestRow}), ${BUBBLE_MAX_PX}px)`;
 
 // Helper to render a bubble
 const renderBubble = (bubble: Bubble, rowClass: string) => {
@@ -187,7 +303,12 @@ const renderBubble = (bubble: Bubble, rowClass: string) => {
   };
 
   const bgClass = bubble.type === "sponsor" ? "bg-white" : (colorClassMap[bubble.color || "stone"] || "bg-stone");
-  const baseClass = `${rowClass} ${bgClass} xl:w-[159px] xl:h-[159px] lg:w-[120px] lg:h-[120px] w-[107px] h-[107px] m-1 lg:m-0 shrink-0 rounded-full flex items-center justify-center group`;
+  // Desktop bubbles take the fluid size from the row container's --bubble var
+  // (all rows share it so the nested offset stays aligned). Mobile keeps the
+  // original fixed size and wraps. `lg:size-(--bubble)` resolves to
+  // width/height: var(--bubble) at lg and up.
+  const sizeClass = "w-[107px] h-[107px] m-1 lg:m-0 lg:w-(--bubble) lg:h-(--bubble)";
+  const baseClass = `${rowClass} ${bgClass} ${sizeClass} shrink-0 rounded-full flex items-center justify-center group`;
 
   if (bubble.type === "sponsor" && bubble.sponsor) {
     const logoImg = `<img src="/images/sponsors/${bubble.sponsor.data.logo}" alt="${bubble.sponsor.data.name}" class="w-[80%]" />`;
@@ -202,7 +323,7 @@ const renderBubble = (bubble: Bubble, rowClass: string) => {
       return `<a href="/sponsor#${sponsorSlug}" class="${baseClass}">${logoImg}</a>`;
     }
   } else if (bubble.type === "cta") {
-    const ctaClass = `${rowClass} bg-white xl:w-[159px] xl:h-[159px] lg:w-[120px] lg:h-[120px] w-[107px] h-[107px] m-1 lg:m-0 shrink-0 rounded-full flex items-center justify-center group hover:bg-stone transition-colors`;
+    const ctaClass = `${rowClass} bg-white ${sizeClass} shrink-0 rounded-full flex items-center justify-center group hover:bg-stone transition-colors`;
     return `<a href="/sponsor" class="${ctaClass}"><span class="text-center text-sm font-medium text-charcoal px-4">Your logo here!</span></a>`;
   } else {
     return `<div class="${baseClass}"></div>`;
@@ -210,16 +331,25 @@ const renderBubble = (bubble: Bubble, rowClass: string) => {
 };
 ---
 
-<div class="fadeInUp flex flex-wrap lg:flex-nowrap justify-center mt-20 -m-1 lg:m-0">
-  {firstRow.map(bubble => (
-    <Fragment set:html={renderBubble(bubble, "lg:flex hidden")} />
-  ))}
-</div>
-<div class="fadeInUp flex flex-wrap lg:flex-nowrap justify-center xl:-mt-5 lg:-mt-4 -m-1 lg:m-0">
-  {firstRow.map(bubble => (
-    <Fragment set:html={renderBubble(bubble, "lg:hidden flex")} />
-  ))}
-  {secondRow.map(bubble => (
+<!-- Desktop: one non-wrapping line per row, each nested up under the previous.
+     --bubble is the shared fluid bubble size; the negative top margin nests each
+     row up by ~1/3 of a bubble so they tuck into the gaps above. -->
+{rows.map((row, rowIndex) => (
+  <div
+    class:list={[
+      "fadeInUp hidden lg:flex flex-nowrap justify-center",
+      rowIndex === 0 ? "mt-20" : "",
+    ]}
+    style={`--bubble: ${bubbleSize};${rowIndex > 0 ? " margin-top: calc(var(--bubble) * -0.125);" : ""}`}
+  >
+    {row.map(bubble => (
+      <Fragment set:html={renderBubble(bubble, "lg:flex")} />
+    ))}
+  </div>
+))}
+<!-- Mobile: all bubbles flow together and wrap -->
+<div class="fadeInUp flex lg:hidden flex-wrap justify-center mt-20 -m-1">
+  {bubbles.map(bubble => (
     <Fragment set:html={renderBubble(bubble, "flex")} />
   ))}
 </div>
