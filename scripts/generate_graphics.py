@@ -431,10 +431,15 @@ def generate_graphic(
     session, session_file = load_session_data(session_code)
     session_track = session.get("track")
 
+    # Theme is keyed by track slug; sessions without a slug (main conference,
+    # workshops) fall back to their trackName so a whole named track can be
+    # pinned to a theme via TRACK_THEMES (e.g. "Workshops" -> charcoal).
+    theme_track_key = session_track or session.get("trackName")
+
     # Resolve theme + layout (fully deterministic from code hash + track)
     resolved_theme_name, resolved_layout_name = resolve_theme_and_layout(
         session_code,
-        session_track,
+        theme_track_key,
         theme_override=theme_name or session.get("theme"),
         layout_override=panel_layout_name or session.get("graphicsLayout"),
     )
@@ -546,8 +551,8 @@ def _generate_graphic_for_output_type(
 
     # Draw text regions
     track_name = session.get("trackName", "")
-    # Don't show "Main Conference" track
-    if track_name == "Main Conference":
+    # Don't show the track label for the main conference or workshops
+    if track_name in ("Main Conference", "Workshops"):
         track_name = ""
 
     # Track accent color from track mapping (independent of theme)

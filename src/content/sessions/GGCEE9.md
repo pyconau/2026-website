@@ -17,6 +17,8 @@ abstract: Adopting type annotations in Python enables developers to catch errors
   live demo and a hands-on exercise period, with exercises available at multiple
   difficulty levels.
 sponsor: meta
+graphicsLayout: left
+theme: charcoal
 ---
 
 Throughout the session, we’ll use Pyrefly, a modern, open-source typechecker and language server, as our primary tool for static analysis, however the skills and concepts covered will be broadly applicable to other typecheckers. Typing experts and members of the Pyrefly team will be available throughout the session to provide guidance, answer questions, and help with troubleshooting.
