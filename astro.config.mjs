@@ -38,6 +38,7 @@ export default defineConfig({
   integrations: [mdx(), sitemap({ filter: (page) => !page.includes("/dev/") })],
   redirects: {
     "/student-showcase": "/cfp/student-showcase",
+    "/workshops": "/schedule/workshops",
     // Specialist track shortcuts
     "/data-and-ai": "/program/specialist-tracks/data-and-ai",
     "/education": "/program/specialist-tracks/education",

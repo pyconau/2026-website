@@ -238,6 +238,30 @@ def process_breaks(
     return breaks
 
 
+def _day_key(start: str | None) -> str:
+    """Group sessions by calendar day using the date portion of an ISO start."""
+    return (start or "")[:10]
+
+
+def filter_break_only_rooms(
+    sessions: list[dict],
+    breaks: list[dict],
+) -> list[dict]:
+    """Drop breaks whose (day, room) has no actual session.
+
+    A room that only ever contains breaks on a given day shouldn't create a
+    room column in that day's schedule grid, so we exclude those breaks.
+    """
+    session_day_rooms = {
+        (_day_key(s.get("start")), s.get("room")) for s in sessions
+    }
+    return [
+        b
+        for b in breaks
+        if (_day_key(b.get("start")), b.get("room")) in session_day_rooms
+    ]
+
+
 def process_sessions(
     submissions: list[dict],
     track_mappings: dict[str, str],
@@ -630,6 +654,13 @@ def main():
     print("\nProcessing breaks...")
     breaks = process_breaks(slots_data, room_id_to_name)
     print(f"  Processed {len(breaks)} breaks")
+
+    # Drop breaks in a (day, room) that has no actual sessions. Otherwise a
+    # break-only room (e.g. an afternoon tea placed in a ballroom on a day whose
+    # talks are all in one room) would add an empty room column to that day's
+    # grid, making a genuinely single-room schedule render skinny.
+    breaks = filter_break_only_rooms(sessions, breaks)
+    print(f"  Kept {len(breaks)} breaks after dropping break-only rooms")
 
     print("\nProcessing speakers...")
     # Only process speakers who are associated with confirmed submissions
