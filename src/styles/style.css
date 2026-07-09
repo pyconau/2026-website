@@ -606,6 +606,19 @@ ul.sub-menu {
   width: var(--schedule-mobile-width);
 }
 
+/* Single-room schedules have no horizontal scroll to justify the fixed
+   mobile width, so let them go flexibly full width from the small-mobile
+   breakpoint up rather than staying skinny until the desktop layout (1024px). */
+@media (min-width: 640px) {
+  .schedule-wrapper[data-rooms="1"] .schedule-title {
+    width: auto;
+    min-width: 0;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 @media (min-width: 1024px) {
   .schedule-title {
     width: auto;
@@ -642,6 +655,19 @@ ul.sub-menu {
   /* Mobile: fixed widths for scrolling */
   @apply lg:w-auto;
   width: var(--schedule-mobile-width);
+}
+
+/* Single-room schedules have no horizontal scroll to justify the fixed
+   mobile width, so let them go flexibly full width from the small-mobile
+   breakpoint up rather than staying skinny until the desktop layout (1024px). */
+@media (min-width: 640px) {
+  .schedule-wrapper[data-rooms="1"] .schedule {
+    width: auto;
+    min-width: 0;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 @media (min-width: 1024px) {
