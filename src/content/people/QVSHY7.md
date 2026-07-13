@@ -1,7 +1,7 @@
 ---
 name: Paula Andrea Martinez
 code: QVSHY7
-hasAvatar: false
+hasAvatar: true
 ---
 
 Project Manager at The Australian Research Data Commons, 

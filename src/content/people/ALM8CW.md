@@ -1,7 +1,7 @@
 ---
 name: Ravi Vats
 code: ALM8CW
-hasAvatar: false
+hasAvatar: true
 ---
 
 I am a Lead Data Scientist at Thoughtworks Singapore, where I build LLM agent systems and RAG applications for public sector companies. 
