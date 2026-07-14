@@ -38,6 +38,15 @@ The official website for [PyCon AU 2026](https://2026.pycon.org.au) — Australi
    ```
    Type-checks all `.astro` files via `astro check`
 
+## Astro Content Collections Migration Note
+
+Astro 7 no longer supports the legacy content config location at `src/content/config.ts`.
+
+- Use `src/content.config.ts` for content collection definitions.
+- Ensure each collection defines a `loader` (for example `glob(...)` from `astro/loaders`).
+
+If `npm run dev` fails with a legacy content config error, verify that no `src/content/config.ts` file exists.
+
 ## Project Structure
 
 ```
