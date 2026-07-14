@@ -6,7 +6,7 @@ import PageHeader from "../components/header/PageHeader.astro";
 import PageHeaderTitle from "../components/header/PageHeaderTitle.astro";
 import Base from "../layouts/Base.astro";
 import SponsorBubbles from "../components/home/SponsorBubbles.astro";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import { previousSponsors } from "../data/previousSponsors";
 
 const sponsors = await getCollection("sponsors", ({ id }) => {
@@ -102,7 +102,7 @@ const displayHostname = (url: string) =>
                 {isPremium ? (
                   <div class="space-y-5">
                     {tierSponsors.map(async (sponsor) => {
-                      const { Content } = await sponsor.render();
+                      const { Content } = await render(sponsor);
                       const sponsorSlug = sponsor.id.replace(/\.md$/, "");
                       return (
                         <div id={sponsorSlug} class="sponsor-card fadeInUp bg-white flex lg:flex-row flex-col items-center rounded-[3.125rem] lg:p-14 p-10 gap-14">
@@ -136,7 +136,7 @@ const displayHostname = (url: string) =>
                 ) : isSupporting ? (
                   <div class="flex flex-wrap justify-center gap-5">
                     {tierSponsors.map(async (sponsor) => {
-                      const { Content } = await sponsor.render();
+                      const { Content } = await render(sponsor);
                       const sponsorSlug = sponsor.id.replace(/\.md$/, "");
                       return (
                         <div id={sponsorSlug} class="sponsor-card fadeInUp bg-white flex flex-col rounded-[2rem] p-8 gap-6 lg:w-[calc(33.333%-1rem)] w-full">
@@ -170,7 +170,7 @@ const displayHostname = (url: string) =>
                 ) : (
                   <div class={tierSponsors.length === 1 ? "flex justify-center" : "grid lg:grid-cols-2 grid-cols-1 gap-x-5 gap-y-10"}>
                     {tierSponsors.map(async (sponsor) => {
-                      const { Content } = await sponsor.render();
+                      const { Content } = await render(sponsor);
                       const sponsorSlug = sponsor.id.replace(/\.md$/, "");
                       return (
                         <div id={sponsorSlug} class={`sponsor-card fadeInUp bg-white flex flex-col items-center rounded-[3.125rem] lg:p-14 p-10 gap-14 ${tierSponsors.length === 1 ? "lg:w-[50%]" : ""}`}>

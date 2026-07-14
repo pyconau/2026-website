@@ -1,6 +1,7 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import type { APIContext } from 'astro';
+import { slugFromId } from '../utils/content';
 
 export async function GET(context: APIContext) {
   const posts = await getCollection('posts');
@@ -17,7 +18,7 @@ export async function GET(context: APIContext) {
     items: newsAndAnnouncements.map((post) => ({
       title: post.data.title,
       pubDate: post.data.published,
-      link: `/posts/${post.slug}/`,
+      link: `/posts/${slugFromId(post.id)}/`,
     })),
     customData: `<language>en-au</language>`,
   });
