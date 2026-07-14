@@ -11,7 +11,6 @@ export interface PreviousSponsor {
 
 export const previousSponsors: PreviousSponsor[] = [
   { logo: "previous/mongodb.svg", alt: "MongoDB", tier: "platinum" },
-  { logo: "previous/twilio.svg", alt: "Twilio", tier: "platinum" },
   { logo: "previous/snowflake.png", alt: "Snowflake", tier: "gold" },
   { logo: "previous/kraken-tech.png", alt: "Kraken Tech", tier: "gold" },
   { logo: "previous/psf.svg", alt: "The Python Software Foundation", tier: "gold" },
