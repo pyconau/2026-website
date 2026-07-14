@@ -1,8 +1,7 @@
 import { defineCollection, z } from "astro:content";
-import { glob } from "astro/loaders";
 
 const sessions = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/sessions" }),
+  type: "content",
   schema: z.object({
     title: z.string(),
     code: z.string(),
@@ -26,7 +25,7 @@ const sessions = defineCollection({
 });
 
 const people = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/people" }),
+  type: "content",
   schema: z.object({
     name: z.string(),
     code: z.string(),
@@ -38,7 +37,7 @@ const people = defineCollection({
 });
 
 const posts = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/posts" }),
+  type: "content",
   schema: z.object({
     title: z.string(),
     published: z.coerce.date(),
@@ -50,7 +49,7 @@ const posts = defineCollection({
 });
 
 const sponsors = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/sponsors" }),
+  type: "content",
   schema: z.object({
     name: z.string(),
     tier: z.enum(["diamond", "platinum", "gold", "standard", "industry", "digital", "in-kind", "supporting"]),
@@ -60,7 +59,7 @@ const sponsors = defineCollection({
 });
 
 const cfpSpecialistTracks = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/cfp-specialist-tracks" }),
+  type: "content",
   schema: z.object({
     title: z.string(),
     shortDescription: z.string(),
@@ -80,7 +79,7 @@ const cfpSpecialistTracks = defineCollection({
 });
 
 const scheduleSpecialistTracks = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/schedule-specialist-tracks" }),
+  type: "content",
   schema: z.object({
     title: z.string(),
     shortDescription: z.string(),

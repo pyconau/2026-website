@@ -32,6 +32,9 @@ const getSiteUrl = () => {
 // https://astro.build/config
 export default defineConfig({
   site: getSiteUrl(),
+  legacy: {
+    collectionsBackwardsCompat: true,
+  },
   markdown: {
     syntaxHighlight: "prism",
   },
