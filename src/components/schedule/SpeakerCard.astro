@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
 
 interface Props {
   person: CollectionEntry<"people">;
@@ -7,7 +8,7 @@ interface Props {
 
 const { person } = Astro.props;
 const { name, pronouns, bluesky, fediverse, hasAvatar, code } = person.data;
-const { Content } = await person.render();
+const { Content } = await render(person);
 
 const avatarSrc = hasAvatar ? `/images/people/${code}.jpg` : "/images/avatar-default.png";
 ---

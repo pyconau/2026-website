@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import DetailArrow from "../../components/DetailArrow.astro";
 import Footer from "../../components/Footer.astro";
 import Crumb from "../../components/header/Crumb.astro";
@@ -8,11 +8,12 @@ import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
 import PageHeader from "../../components/header/PageHeader.astro";
 import LongDate from "../../components/typography/LongDate.astro";
 import Base from "../../layouts/Base.astro";
+import { slugFromId } from "../../utils/content";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: slugFromId(post.id) },
     props: { post },
   }));
 }
@@ -22,12 +23,13 @@ type Props = {
 };
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
+const currentPostSlug = slugFromId(post.id);
 
 // Get the two most recent posts, excluding the current one
 const allPosts = await getCollection("posts");
 const recentPosts = allPosts
-  .filter((p) => p.slug !== post.slug)
+  .filter((p) => slugFromId(p.id) !== currentPostSlug)
   .sort((a, b) => b.data.published.getTime() - a.data.published.getTime())
   .slice(0, 2);
 
@@ -86,7 +88,7 @@ const recentPosts = allPosts
           {
             recentPosts.map((recentPost) => (
               <a
-                href={`/posts/${recentPost.slug}`}
+                href={`/posts/${slugFromId(recentPost.id)}`}
                 class="fadeInUp bg-white rounded-[3.125rem] p-10 flex flex-col justify-between gap-20 group hover:bg-white/95"
               >
                 <div class="flex items-center justify-between">

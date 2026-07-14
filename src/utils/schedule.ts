@@ -1,5 +1,6 @@
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
+import { slugFromId } from "./content";
 
 // ============================================================================
 // Configuration
@@ -175,7 +176,7 @@ export async function getTrackBySlug(
   slug: string
 ): Promise<SpecialistTrack | undefined> {
   const tracks = await getCollection("schedule-specialist-tracks");
-  return tracks.find((track) => track.slug === slug);
+  return tracks.find((track) => slugFromId(track.id) === slug);
 }
 
 /**
@@ -206,7 +207,7 @@ export async function getSessionsForSpecialistTrack(
   const allTracks = await getCollection("schedule-specialist-tracks");
   const matchingSlugs = allTracks
     .filter((t) => t.data.pretalxTrack === pretalxTrack)
-    .map((t) => t.slug);
+    .map((t) => slugFromId(t.id));
 
   const sessions = await getCollection("sessions");
   return sessions

@@ -5,6 +5,7 @@ import Header from "../../../components/Header.astro";
 import HeaderStar from "../../../components/header/HeaderStar.astro";
 import Base from "../../../layouts/Base.astro";
 import { getTrackColor } from "../../../utils/schedule";
+import { slugFromId } from "../../../utils/content";
 
 const tracks = await getCollection("schedule-specialist-tracks");
 ---
@@ -54,7 +55,7 @@ const tracks = await getCollection("schedule-specialist-tracks");
           <div class="grid lg:grid-cols-2 gap-8">
             {tracks.map((track) => (
               <a
-                href={`/schedule/specialist-tracks/${track.slug}`}
+                href={`/schedule/specialist-tracks/${slugFromId(track.id)}`}
                 class="fadeInUp bg-white hover:bg-lemon p-8 rounded-lg group transition-all duration-300 flex flex-col"
               >
                 <h3 class="text-2xl font-serif font-medium text-charcoal group-hover:text-emerald transition-colors duration-300 mb-3">
@@ -64,7 +65,7 @@ const tracks = await getCollection("schedule-specialist-tracks");
                 <div class="mt-3 text-right">
                   {track.data.date ? (
                     (() => {
-                      const color = getTrackColor(track.slug);
+                      const color = getTrackColor(slugFromId(track.id));
                       return (
                         <span
                           class="inline-block text-xs font-sans px-3 py-1 rounded-full"

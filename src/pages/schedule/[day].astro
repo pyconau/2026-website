@@ -13,6 +13,7 @@ import {
   getPeopleByCode,
   formatSessionTime,
 } from "../../utils/schedule";
+import { slugFromId } from "../../utils/content";
 
 export async function getStaticPaths() {
   const days = await getConferenceDays();
@@ -38,7 +39,7 @@ const speakerMap = new Map(allSpeakers.map((s) => [s.data.code, s]));
 // Slugs that have a specialist track page, so we only link track names that
 // resolve to a real page.
 const trackSlugs = new Set(
-  (await getCollection("schedule-specialist-tracks")).map((t) => t.slug)
+  (await getCollection("schedule-specialist-tracks")).map((t) => slugFromId(t.id))
 );
 ---
 

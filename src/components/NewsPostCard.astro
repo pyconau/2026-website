@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import DetailArrow from "./DetailArrow.astro";
 import LongDate from "./typography/LongDate.astro";
+import { slugFromId } from "../utils/content";
 
 interface Props {
   slug: string;
@@ -12,7 +13,7 @@ interface Props {
 const { slug, highlight = false, featured = false } = Astro.props;
 
 const posts = await getCollection("posts");
-const post = posts.find((p) => p.slug === slug);
+const post = posts.find((p) => slugFromId(p.id) === slug);
 
 if (!post) {
   throw new Error(`Post with slug "${slug}" not found`);
@@ -26,7 +27,7 @@ const bgClasses = highlight
 {
   featured ? (
     <a
-      href={`/posts/${post.slug}`}
+      href={`/posts/${slugFromId(post.id)}`}
       class={`fadeInUp ${bgClasses} rounded-[3.125rem] p-10 flex flex-col justify-between gap-20 row-span-2 group`}
     >
       <div class="flex lg:flex-nowrap flex-wrap lg:gap-0 gap-2 items-center justify-between">
@@ -51,7 +52,7 @@ const bgClasses = highlight
     </a>
   ) : (
     <a
-      href={`/posts/${post.slug}`}
+      href={`/posts/${slugFromId(post.id)}`}
       class={`fadeInUp ${bgClasses} rounded-[3.125rem] p-10 flex lg:flex-row flex-col justify-between gap-10 row-span-2 group`}
     >
       <div class="flex lg:flex-col lg:flex-nowrap flex-wrap lg:gap-4 gap-2 items-start justify-between lg:w-[20%]">

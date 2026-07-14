@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import CfpNav from "../../components/cfp/CfpNav.astro";
 import SpecialistTrack from "../../components/cfp/SpecialistTrack.astro";
 import Footer from "../../components/Footer.astro";
@@ -10,6 +10,7 @@ import PageHeaderTitle from "../../components/header/PageHeaderTitle.astro";
 import Base from "../../layouts/Base.astro";
 import Callout from "../../components/cfp/Callout.astro";
 import TypographyLink from "../../components/typography/TypographyLink.astro";
+import { slugFromId } from "../../utils/content";
 
 const tracks = (await getCollection("cfp-specialist-tracks")).sort((a, b) => a.id.localeCompare(b.id));
 
@@ -89,8 +90,8 @@ export const nav = {
         
         <div class="flex flex-wrap justify-center gap-4 mt-10">
           {
-            [...tracks].sort((a, b) => buttonOrder.indexOf(a.slug) - buttonOrder.indexOf(b.slug)).map((track) => (
-              <a href={`#${track.slug}`}
+            [...tracks].sort((a, b) => buttonOrder.indexOf(slugFromId(a.id)) - buttonOrder.indexOf(slugFromId(b.id))).map((track) => (
+              <a href={`#${slugFromId(track.id)}`}
                 class="flex items-center gap-4 bg-white rounded-2xl px-6 py-4 shadow-sm hover:shadow-md transition-shadow duration-200 no-underline group">
                 <h3 class="text-lg font-medium text-charcoal group-hover:text-emerald transition-colors duration-200 m-0">
                   {track.data.title}
@@ -117,11 +118,11 @@ export const nav = {
         <div class="lg:w-[85%] w-full mx-auto">
           {
             tracks.map(async (track) => {
-              const { Content } = await track.render();
+              const { Content } = await render(track);
               return (
                 <SpecialistTrack
                   title={track.data.title}
-                  slug={track.slug}
+                  slug={slugFromId(track.id)}
                   shortDescription={track.data.shortDescription}
                   organisers={track.data.organisers}
                 >

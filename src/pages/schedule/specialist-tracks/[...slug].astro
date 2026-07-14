@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import Footer from "../../../components/Footer.astro";
 import Header from "../../../components/Header.astro";
 import HeaderStar from "../../../components/header/HeaderStar.astro";
@@ -9,6 +9,7 @@ import TrackOrganiser from "../../../components/cfp/TrackOrganiser.astro";
 import TrackTicketCard from "../../../components/schedule/TrackTicketCard.astro";
 import type { TicketTier } from "../../../components/schedule/TrackTicketCard.astro";
 import { getSessionsForSpecialistTrack } from "../../../utils/schedule";
+import { slugFromId } from "../../../utils/content";
 
 // Default ticket pricing shown on every specialist track page. Mirrors the
 // Professional and Enthusiast cards on /tickets, leading with the one-day
@@ -50,20 +51,21 @@ const TICKET_TIER_OVERRIDES: Record<string, TicketTier[]> = {
 export async function getStaticPaths() {
   const tracks = await getCollection("schedule-specialist-tracks");
   return tracks.map((track) => ({
-    params: { slug: track.slug },
+    params: { slug: slugFromId(track.id) },
     props: { track },
   }));
 }
 
 const { track } = Astro.props;
 const { title, shortDescription, date, sponsor } = track.data;
-const { Content } = await track.render();
+const { Content } = await render(track);
+const trackSlug = slugFromId(track.id);
 
 // Resolve the track sponsor slug (e.g. "snowflake") to a sponsor markdown file.
 // Only show the sponsor bubble when the slug matches a sponsor file; the name
 // and logo come from that file.
 const sponsorData = sponsor
-  ? (await getCollection("sponsors")).find((s) => s.slug === sponsor)
+  ? (await getCollection("sponsors")).find((s) => slugFromId(s.id) === sponsor)
   : undefined;
 
 // e.g. "Friday 27 August"
@@ -87,11 +89,11 @@ const sessions = await getSessionsForSpecialistTrack(track);
 
 // Get organizer data from CFP collection
 const cfpTracks = await getCollection("cfp-specialist-tracks");
-const cfpTrack = cfpTracks.find((t) => t.slug === track.slug);
+const cfpTrack = cfpTracks.find((t) => slugFromId(t.id) === trackSlug);
 const organisers = cfpTrack?.data.organisers || [];
 
 // Ticket pricing for this track (with per-slug overrides).
-const ticketTiers = TICKET_TIER_OVERRIDES[track.slug] ?? DEFAULT_TICKET_TIERS;
+const ticketTiers = TICKET_TIER_OVERRIDES[trackSlug] ?? DEFAULT_TICKET_TIERS;
 ---
 
 <Base title={`${title} - Specialist Track`}>

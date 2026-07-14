@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
 import Base from "../../layouts/Base.astro";
@@ -10,6 +10,7 @@ import {
   formatSessionDateTime,
 } from "../../utils/schedule";
 import { marked } from "marked";
+import { slugFromId } from "../../utils/content";
 
 export async function getStaticPaths() {
   const sessions = await getCollection("sessions");
@@ -32,7 +33,7 @@ const abstractHtml = abstract ? marked.parse(abstract) : null;
 const sessionUrl = new URL(`/schedule/${code}`, Astro.site ?? "https://2026.pycon.org.au").toString();
 const shareText = encodeURIComponent(`${title} — PyCon AU 2026`);
 const shareUrl = encodeURIComponent(sessionUrl);
-const { Content } = await session.render();
+const { Content } = await render(session);
 
 // Generate OG image path if not a break (uses og output type)
 const ogImage = type !== "break" ? `/graphics/sessions/${code}-og.png` : undefined;
@@ -47,7 +48,7 @@ const trackData = track ? await getTrackBySlug(track) : null;
 // answer, e.g. "meta") to a sponsor markdown file. Only show sponsor branding
 // when the slug matches a sponsor file; the name and logo come from that file.
 const sponsorData = sponsor
-  ? (await getCollection("sponsors")).find((s) => s.slug === sponsor)
+  ? (await getCollection("sponsors")).find((s) => slugFromId(s.id) === sponsor)
   : undefined;
 
 // Use trackName from Pretalx if available, otherwise fall back to local track title
