@@ -1,9 +1,9 @@
 ---
 title: Talk under construction
 code: RCY8RK
-start: '2026-08-27T11:30:00+10:00'
-end: '2026-08-27T12:00:00+10:00'
-room: Ballroom 1
+start:
+end:
+room: ''
 track: platform-engineering
 type: talk
 speakers: []

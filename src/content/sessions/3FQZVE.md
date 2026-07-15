@@ -1,8 +1,8 @@
 ---
-title: Conference welcome & Thursday keynote
+title: Conference welcome
 code: 3FQZVE
 start: '2026-08-27T09:00:00+10:00'
-end: '2026-08-27T10:00:00+10:00'
+end: '2026-08-27T09:15:00+10:00'
 room: Ballroom 3
 track:
 type: plenary
