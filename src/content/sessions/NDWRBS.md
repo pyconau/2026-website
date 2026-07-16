@@ -19,8 +19,6 @@ abstract: "Between early 2025 and April 2026, peak weekday PR merges to Honeycom
   has autonomy, ownership, and feedback loops gets faster without breaking. Which
   shape you land in is downstream of the substrate you already have, not the models
   you can access."
-tags:
-- not-yet-announced
 ---
 
 
