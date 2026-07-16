@@ -1,9 +1,9 @@
 ---
 title: '30 to 70 PRs a day: How we managed to not wreck our systems'
 code: NDWRBS
-start:
-end:
-room: ''
+start: '2026-08-27T09:15:00+10:00'
+end: '2026-08-27T10:00:00+10:00'
+room: Ballroom 3
 track:
 type: plenary
 speakers:
