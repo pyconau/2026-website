@@ -3,6 +3,7 @@ title: "Cybersecurity"
 pretalxTrack: "Cybersecurity"
 shortDescription: "The Cybersecurity track focuses on security awareness, knowledge and practice for software developers, IT operations people, and cybersecurity specialists."
 date: 2026-08-28
+sponsor: chainguard
 ---
 
 In today's cyber threat landscape, security cannot be an afterthought.  Developers, operations, and management need to address cybersecurity at every stage of the technology lifecycle.
