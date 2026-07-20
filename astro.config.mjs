@@ -42,7 +42,7 @@ export default defineConfig({
     // Legacy /program/* URLs (e.g. session links shared before the move to
     // /schedule/*) redirect to their /schedule/* equivalents.
     "/program/[code]": "/schedule/[code]",
-    "/program/specialist-tracks/[slug]": "/schedule/specialist-tracks/[slug]",
+    "/program/specialist-tracks/[...slug]": "/schedule/specialist-tracks/[...slug]",
     // Specialist track shortcuts
     "/data-and-ai": "/schedule/specialist-tracks/data-and-ai",
     "/education": "/schedule/specialist-tracks/education",
