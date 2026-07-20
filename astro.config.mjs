@@ -1,8 +1,29 @@
 // @ts-check
+import { readdirSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
+
+// Legacy /program/<code>-<variant>.png session graphic URLs were shared (e.g.
+// via email) before these moved to /graphics/sessions/. A param redirect can't
+// point at a public/ asset (Astro can't enumerate getStaticPaths for it), so
+// build one explicit static redirect per known session code instead. Codes are
+// the session content filenames.
+const sessionsDir = fileURLToPath(new URL("./src/content/sessions", import.meta.url));
+const sessionGraphicVariants = ["social", "og", "square"];
+const programGraphicRedirects = Object.fromEntries(
+  readdirSync(sessionsDir)
+    .filter((file) => file.endsWith(".md"))
+    .map((file) => file.replace(/\.md$/, ""))
+    .flatMap((code) =>
+      sessionGraphicVariants.map((variant) => [
+        `/program/${code}-${variant}.png`,
+        `/graphics/sessions/${code}-${variant}.png`,
+      ]),
+    ),
+);
 
 // Determine site URL based on environment
 // Reference: https://vercel.com/docs/projects/environment-variables/system-environment-variables
@@ -41,6 +62,7 @@ export default defineConfig({
     "/workshops": "/schedule/workshops",
     // Legacy /program/* URLs (e.g. session links shared before the move to
     // /schedule/*) redirect to their /schedule/* equivalents.
+    ...programGraphicRedirects,
     "/program/[code]": "/schedule/[code]",
     "/program/specialist-tracks/[...slug]": "/schedule/specialist-tracks/[...slug]",
     // Specialist track shortcuts
