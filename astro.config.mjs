@@ -39,13 +39,17 @@ export default defineConfig({
   redirects: {
     "/student-showcase": "/cfp/student-showcase",
     "/workshops": "/schedule/workshops",
+    // Legacy /program/* URLs (e.g. session links shared before the move to
+    // /schedule/*) redirect to their /schedule/* equivalents.
+    "/program/[code]": "/schedule/[code]",
+    "/program/specialist-tracks/[slug]": "/schedule/specialist-tracks/[slug]",
     // Specialist track shortcuts
-    "/data-and-ai": "/program/specialist-tracks/data-and-ai",
-    "/education": "/program/specialist-tracks/education",
-    "/cybersecurity": "/program/specialist-tracks/cybersecurity",
-    "/devrel": "/program/specialist-tracks/devrel",
-    "/platform-engineering": "/program/specialist-tracks/platform-engineering",
-    "/research-software-engineering": "/program/specialist-tracks/research-software-engineering",
+    "/data-and-ai": "/schedule/specialist-tracks/data-and-ai",
+    "/education": "/schedule/specialist-tracks/education",
+    "/cybersecurity": "/schedule/specialist-tracks/cybersecurity",
+    "/devrel": "/schedule/specialist-tracks/devrel",
+    "/platform-engineering": "/schedule/specialist-tracks/platform-engineering",
+    "/research-software-engineering": "/schedule/specialist-tracks/research-software-engineering",
   },
   vite: {
     plugins: [tailwindcss()],
