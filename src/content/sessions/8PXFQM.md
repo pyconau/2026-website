@@ -1,5 +1,5 @@
 ---
-title: Why and How to Cite Software
+title: Why and How to Cite Software (and Get Your Software Cited Too)
 code: 8PXFQM
 start: '2026-08-29T12:30:00+10:00'
 end: '2026-08-29T13:00:00+10:00'
