@@ -1,9 +1,9 @@
 ---
 title: Thursday Keynote
 code: HDVT3J
-start:
-end:
-room: ''
+start: '2026-08-28T09:15:00+10:00'
+end: '2026-08-28T10:00:00+10:00'
+room: Ballroom 3
 track:
 type: plenary
 speakers: []
