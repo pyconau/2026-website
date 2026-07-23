@@ -21,8 +21,6 @@ abstract: "25,000+ resources across deployments, 65,000+ lines of Python, a team
   story of the hair-pulling\r\ncomplexities we built ourselves into and had to build
   ourselves out of."
 sponsor: x-rd
-tags:
-- not-yet-announced
 ---
 
 x-RD's secd3v product hosts isolated services for customer use, such as GitLab,
