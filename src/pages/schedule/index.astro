@@ -79,28 +79,29 @@ const tracks = allTracks.sort((a, b) => {
             Overview
           </h2>
           <div class="space-y-4">
-            <!-- Workshops -->
+            <!-- Main Conference -->
             <a
-              href="/schedule/workshops"
-              class="fadeInUp block p-6 lg:p-8 rounded-2xl bg-lavender"
+              href="#main-conference"
+              class="fadeInUp block p-6 lg:p-8 rounded-2xl bg-lime"
             >
               <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                 <div class="flex-1">
                   <h2 class="text-2xl lg:text-3xl font-serif font-bold text-charcoal mb-1">
-                    Workshops
+                    Main Conference
                   </h2>
-                  <p class="text-charcoal/70 font-sans text-sm">
-                    Wednesday 26 August
+                  <p class="text-charcoal font-sans text-sm">
+                    Thursday - Saturday 27-29 August
                   </p>
                 </div>
                 <div class="flex-1 lg:text-right">
                   <p class="text-charcoal font-sans mb-2">
-                    Workshops are free to attend but space is limited!
+                    Three days of talks all about Python!
                   </p>
                   <p class="text-charcoal font-sans font-bold!">
-                    Ticketed Separately
+                    General Admission
                   </p>
                 </div>
+
               </div>
             </a>
 
@@ -119,56 +120,52 @@ const tracks = allTracks.sort((a, b) => {
                   </p>
                 </div>
                 <div class="flex-1 lg:text-right">
-                  <p class="text-charcoal font-sans">
+                  <p class="text-charcoal font-sans mb-2">
                     Curated by specialist groups within Python community with more in-depth talks.
+                  </p>
+                  <p class="text-charcoal font-sans font-bold!">
+                    General Admission
                   </p>
                 </div>
 
               </div>
             </a>
 
-            <!-- Main Conference -->
-            <a
-              href="#main-conference"
-              class="fadeInUp block p-6 lg:p-8 rounded-2xl bg-lime"
-            >
-              <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                <div class="flex-1">
-                  <h2 class="text-2xl lg:text-3xl font-serif font-bold text-charcoal mb-1">
-                    Main Conference
-                  </h2>
-                  <p class="text-charcoal font-sans text-sm">
-                    Thursday - Saturday 27-29 August
-                  </p>
-                </div>
-                <div class="flex-1 lg:text-right">
-                  <p class="text-charcoal font-sans">
-                    Three days of talks all about Python!
-                  </p>
-                </div>
-              
-              </div>
-            </a>  
+            <!-- Workshops & Sprints (half width) -->
+            <div class="grid lg:grid-cols-2 gap-4">
+              <!-- Workshops -->
+              <a
+                href="/schedule/workshops"
+                class="fadeInUp block p-6 lg:p-8 rounded-2xl bg-lavender"
+              >
+                <h2 class="text-2xl lg:text-3xl font-serif font-bold text-charcoal mb-1">
+                  Workshops
+                </h2>
+                <p class="text-charcoal/70 font-sans text-sm mb-4">
+                  Wednesday 26 August
+                </p>
+                <p class="text-charcoal font-sans mb-2">
+                  Workshops are free to attend but space is limited!
+                </p>
+                <p class="text-charcoal font-sans font-bold!">
+                  Ticketed Separately
+                </p>
+              </a>
 
-            <!-- Sprints -->
-            <div class="fadeInUp block p-6 lg:p-8 rounded-2xl bg-lemon">
-              <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                <div class="flex-1">
-                  <h2 class="text-2xl lg:text-3xl font-serif font-bold text-charcoal mb-1">
-                    Development Sprints
-                  </h2>
-                  <p class="text-charcoal font-sans text-sm">
-                    Sunday 30 August
-                  </p>
-                </div>
-                <div class="flex-1 lg:text-right">
-                  <p class="text-charcoal font-sans mb-2">
-                    Get hands on with open source!
-                  </p>
-                  <p class="text-charcoal font-sans font-bold!">
-                    Ticketed Separately
-                  </p>
-                </div>
+              <!-- Sprints -->
+              <div class="fadeInUp block p-6 lg:p-8 rounded-2xl bg-lemon">
+                <h2 class="text-2xl lg:text-3xl font-serif font-bold text-charcoal mb-1">
+                  Development Sprints
+                </h2>
+                <p class="text-charcoal font-sans text-sm mb-4">
+                  Sunday 30 August
+                </p>
+                <p class="text-charcoal font-sans mb-2">
+                  Get hands on with open source!
+                </p>
+                <p class="text-charcoal font-sans font-bold!">
+                  Ticketed Separately
+                </p>
               </div>
             </div>
           </div>
