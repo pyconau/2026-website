@@ -19,6 +19,7 @@ let sortedSponsors: Array<{
     tier?: string;
     logo: string;
     website?: string;
+    order?: number;
   };
 }> = [];
 
@@ -49,9 +50,12 @@ if (!isStaticMode) {
   // Fetch all sponsors from collection, excluding entries starting with underscore
   const allSponsors = await getCollection("sponsors", ({ id }) => !id.startsWith("_"));
 
-  // Sort sponsors by tier
+  // Sort sponsors by tier, then by the optional `order` field within a tier
+  // (lower first; entries without an order fall to the end of their tier).
   sortedSponsors = allSponsors.sort((a, b) => {
-    return tierOrder.indexOf(a.data.tier) - tierOrder.indexOf(b.data.tier);
+    const tierDiff = tierOrder.indexOf(a.data.tier) - tierOrder.indexOf(b.data.tier);
+    if (tierDiff !== 0) return tierDiff;
+    return (a.data.order ?? Infinity) - (b.data.order ?? Infinity);
   });
 } else {
   // Use static logos (with optional tiers)
