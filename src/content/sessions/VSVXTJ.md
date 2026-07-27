@@ -1,5 +1,5 @@
 ---
-title: Cryptic crosswords, Code golf and Learning the rules of a language
+title: 'Not Black and White: Cryptic Crosswords, Code Golf, and the Rules of a Language'
 code: VSVXTJ
 start: '2026-08-29T14:35:00+10:00'
 end: '2026-08-29T15:05:00+10:00'
