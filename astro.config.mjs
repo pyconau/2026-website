@@ -60,6 +60,8 @@ export default defineConfig({
   redirects: {
     "/student-showcase": "/cfp/student-showcase",
     "/workshops": "/schedule/workshops",
+    // "Brisbane Transport" page was renamed to "Around Brisbane".
+    "/attend/transport": "/attend/around-brisbane",
     // Legacy /program/* URLs (e.g. session links shared before the move to
     // /schedule/*) redirect to their /schedule/* equivalents.
     ...programGraphicRedirects,
