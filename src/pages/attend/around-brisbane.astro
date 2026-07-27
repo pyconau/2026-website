@@ -10,18 +10,18 @@ import Base from "../../layouts/Base.astro";
 
 export const nav = {
   order: 2,
-  title: "Brisbane Transport",
+  title: "Around Brisbane",
   image: "/images/attend/beda-cyclists.jpeg",
 };
 ---
 
-<Base title="Brisbane Transport">
+<Base title="Around Brisbane">
   <PageHeader dark={true} starColour="violet">
     <HeaderBreadcrumbs colour="lavender">
       <Crumb href="/attend/">Attendee Guide</Crumb>
     </HeaderBreadcrumbs>
     <PageHeaderTitle textColour="lavender">
-      <h1>Brisbane Transport</h1>
+      <h1>Around Brisbane</h1>
     </PageHeaderTitle>
   </PageHeader>
 
@@ -55,27 +55,6 @@ export const nav = {
                 terminals for international and domestic flights. Both terminals
                 have local transport connections for taxi, bus, train and ride
                 shares (Uber).
-              </p>
-              <h3 id="airtrain-discount">Airtrain discount for PyCon AU attendees</h3>
-              <p>
-                Airtrain have kindly offered a discounted fare for PyCon AU attendees
-                travelling between Brisbane Airport and the CBD.
-              </p>
-              <p>
-                Airtrain takes approximately 25 minutes from the airport to
-                Central station. The conference is held at the Brisbane Sofitel
-                Central, which is directly above Central station.
-              </p>
-              <ul>
-                <li><b>Code:</b> PYCONAU26</li>
-                <li><b>Travel period:</b> 24 August to 4 September 2026</li>
-                <li><b>Fare:</b> $16 one way, $32 return per person</li>
-                <li><b>Booking deadline:</b> 31 August 2026</li>
-              </ul>
-              <p>
-                The code can be applied when booking tickets via the <TypographyLink
-                  href="https://www.airtrain.com.au/booking-form"
-                  >Airtrain website.</TypographyLink>
               </p>
 
               <h2 id="public-transport">Public transport</h2>
@@ -172,6 +151,18 @@ export const nav = {
             <AttendNav />
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white w-full pt-2 pb-16">
+    <div class="container">
+      <div class="mx-auto w-full max-w-4xl">
+        <iframe
+          src="https://choose.brisbane.qld.au/beda-iframe"
+          class="block w-full h-[1580px] md:h-[720px] border-0"
+          allowfullscreen
+          title="Around Brisbane"></iframe>
       </div>
     </div>
   </section>

@@ -23,6 +23,14 @@ const sponsorsByTier = sponsors.reduce((acc, sponsor) => {
   return acc;
 }, {} as Record<string, typeof sponsors>);
 
+// Within each tier, honour the optional `order` frontmatter field (lower first);
+// entries without an order fall to the end.
+Object.values(sponsorsByTier).forEach((tierSponsors) => {
+  tierSponsors.sort(
+    (a, b) => (a.data.order ?? Infinity) - (b.data.order ?? Infinity)
+  );
+});
+
 const tierLabels: Record<string, string> = {
   diamond: "Diamond Sponsors",
   platinum: "Platinum Sponsor",
@@ -135,8 +143,7 @@ const displayHostname = (url: string) =>
                   </div>
                 ) : isSupporting ? (
                   <div class="flex flex-wrap justify-center gap-5">
-                    {tierSponsors.map(async (sponsor) => {
-                      const { Content } = await sponsor.render();
+                    {tierSponsors.map((sponsor) => {
                       const sponsorSlug = sponsor.id.replace(/\.md$/, "");
                       return (
                         <div id={sponsorSlug} class="sponsor-card fadeInUp bg-white flex flex-col rounded-[2rem] p-8 gap-6 lg:w-[calc(33.333%-1rem)] w-full">
@@ -146,12 +153,6 @@ const displayHostname = (url: string) =>
                             alt={sponsor.data.name}
                           />
                           <div class="space-y-3">
-                            <h3 class="text-xl font-semibold text-charcoal">
-                              {sponsor.data.name}
-                            </h3>
-                            <div class="text-sm font-medium leading-normal tracking-[0.01em]">
-                              <Content />
-                            </div>
                             {sponsor.data.website && (
                               <a
                                 href={sponsor.data.website}

@@ -55,6 +55,7 @@ const sponsors = defineCollection({
     tier: z.enum(["diamond", "platinum", "gold", "standard", "industry", "digital", "in-kind", "supporting"]),
     logo: z.string(),
     website: z.string().url().optional(),
+    order: z.number().optional(), // Display order within a tier (lower first)
   }),
 });
 

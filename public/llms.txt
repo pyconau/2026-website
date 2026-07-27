@@ -26,7 +26,7 @@ PyCon AU has been held annually since 2010. It brings together the Australian an
 - Attend (Attendee Guide): https://2026.pycon.org.au/attend/
 - Accommodation: https://2026.pycon.org.au/attend/accommodation/
 - Travel: https://2026.pycon.org.au/attend/travel/
-- Transport: https://2026.pycon.org.au/attend/transport/
+- Around Brisbane: https://2026.pycon.org.au/attend/around-brisbane/
 - Financial Assistance: https://2026.pycon.org.au/attend/financial-assistance/
 - International Visitors: https://2026.pycon.org.au/attend/international-visitors/
 - FAQ: https://2026.pycon.org.au/attend/faq/
