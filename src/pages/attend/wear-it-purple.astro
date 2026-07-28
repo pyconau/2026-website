@@ -1,0 +1,163 @@
+---
+import AttendNav from "../../components/attend/AttendNav.astro";
+import FAQCategory from "../../components/attend/faq/FAQCategory.astro";
+import FAQEntry from "../../components/attend/faq/FAQEntry.astro";
+import Footer from "../../components/Footer.astro";
+import Crumb from "../../components/header/Crumb.astro";
+import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
+import PageHeader from "../../components/header/PageHeader.astro";
+import PageHeaderTitle from "../../components/header/PageHeaderTitle.astro";
+import Base from "../../layouts/Base.astro";
+
+export const nav = {
+  order: 5,
+  title: "Wear It Purple",
+  image: "/images/attend/bof.jpg",
+};
+---
+
+<Base title="Wear It Purple">
+  <PageHeader dark={true} starColour="violet">
+    <HeaderBreadcrumbs colour="lavender">
+      <Crumb href="/attend/">Attendee Guide</Crumb>
+    </HeaderBreadcrumbs>
+    <PageHeaderTitle textColour="lavender">
+      <h1>Wear It Purple</h1>
+    </PageHeaderTitle>
+  </PageHeader>
+
+  <section>
+    <div class="header-divider header-divider--lavender"></div>
+
+    <div class="bg-stone py-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <div
+            class="flex flex-col lg:flex-row justify-between items-start gap-14"
+          >
+            <div class="lg:w-[80%] w-full">
+              <div class="rich-text">
+                <h2 id="show-your-support">Show your support</h2>
+                <p>
+                  In 2026, PyCon AU happens to also run on Wear It Purple Day. We encourage everyone to wear purple to show your support for young LGBTQIA+ communities.
+                </p>
+                <p>
+                  <a href="https://www.wearitpurple.org/wear-it-purple-day-2026" class="text-violet">Wear It Purple</a> is a volunteer and youth led not-for-profit organisation, working towards raising awareness for young LGBTQIA+ communities. By wearing purple on Friday 28 August, you can show your support, advocacy and allyship to the next generation of LGBTQIA+ youth, including those who are just entering the Python communities around us today.
+                </p>
+                
+              </div>
+
+              <a href="https://www.wearitpurple.org/wear-it-purple-day-2026" class="btn btn--violet inline-block mt-6">
+                Learn more about Wear It Purple Day 2026
+              </a>
+
+              <div class="rich-text mt-16">
+                <h2 id="wear-it-purple-day">Request a purple shirt</h2>
+                <p>
+                  Until <strong>9am AEST on Tuesday 4 August 2026</strong>, you can also request your conference t-shirt to be purple. All orders for a conference shirt will offer you the option to opt in to a purple shirt. If you have already ordered your conference shirt, you can update your order to request a purple shirt up until the same cut-off.
+                </p>
+              </div>
+
+              <img
+                src="/images/attend/purple-mockup.png"
+                alt="Wear It Purple at PyCon AU"
+                width="600"
+                height="600"
+                loading="lazy"
+                class="w-full max-w-[600px] aspect-square object-cover rounded-[3.125rem] mt-8"
+              />
+
+              <FAQCategory title="How to request a purple shirt">
+                <FAQEntry title="I'm about to register, how do I request a purple shirt?">
+                  <p>
+                    You'll be prompted to answer a question about your shirt after you've selected the products & add-ons.
+                    <img
+                      src="/images/attend/request-purple-screenshot.png"
+                      alt={`The pretix order form showing a ticked checkbox labelled "Request my conference t-shirt in purple" beneath a T-shirt order item.`}
+                      width="2232"
+                      height="334"
+                      loading="lazy"
+                      class="w-[90%] h-auto rounded-md border border-stone my-4"
+                    />
+                  </p>
+                </FAQEntry>
+                <FAQEntry title="I've already registered, how can I request a purple shirt?">
+                  <p>
+                    Visit your order page by clicking the link in your order email. You can request the email again <a href="https://pretix.eu/pyconau/2026/resend/">directly from pretix</a>.
+                  </p>
+                  <ol>
+                  <li>
+                    View your order online using the link emailed to you at the
+                    time of purchase. Alternatively, use the "resend order link"
+                    feature by entering your email at
+                    <a href="https://pretix.eu/pyconau/2026/resend/" target="_blank" rel="noopener noreferrer">
+                      https://pretix.eu/pyconau/2026/resend/
+                    </a>
+                  </li>
+                  <li>
+                    Under your Ordered Items (a grey heading bar), select "Update details" where an additional question will be available to request a purple shirt.
+                    <img
+                      src="/images/attend/request-purple-screenshot.png"
+                      alt={`The pretix order form showing a ticked checkbox labelled "Request my conference t-shirt in purple" beneath a T-shirt order item.`}
+                      width="2232"
+                      height="334"
+                      loading="lazy"
+                      class="w-[90%] h-auto rounded-md border border-stone my-4"
+                    />
+                  </li>
+                  <li>
+                    To purchase an additional shirt, you can  also "Change your order". Here you can update
+                    add-ons, including workshops and extra shirts etc. Be sure to
+                    save your updated order, and go back to "Update details" to request your shirt in purple.
+                  </li>
+                  
+                </ol>
+                </FAQEntry>
+              </FAQCategory>
+
+              <FAQCategory title="Frequently Asked Questions">
+                <FAQEntry title="Can I order more than one colour?">
+                  <p>
+                    Yes! If you purchase additional shirts, you can request one (or both) to be in purple.
+                  </p>
+                </FAQEntry>
+                <FAQEntry title="Can I wear other purple clothing?">
+                  <p>
+                    Absolutely! Requesting your PyCon AU 2026 shirt to be purple is optional. Dress it up, or down, if its purple we'd love to see it! Just remember our Code of Conduct (so leave the purple budgie smugglers at home) ;)
+                  </p>
+                </FAQEntry>
+                <FAQEntry title="When is it happening at PyCon AU?">
+                  <p>
+                    We'll be wearing purple on Friday 28 August (which is Wear It Purple Day). That coincides with the Cybersecurity and Education specialist tracks as well.
+                  </p>
+                </FAQEntry>
+                <FAQEntry title="Do I have to participate?">
+                  <p>
+                    This is entirely optional. If your workplace limits your ability to wear purple or support causes publicly there's no obligation to you.
+                  </p>
+                </FAQEntry>
+                <FAQEntry title="Can I donate to Wear It Purple?">
+                  <p>
+                    Wear It Purple has a donation page on their website at <a href="https://www.wearitpurple.org/donate" target="_blank" class="text-violet">https://www.wearitpurple.org/donate</a>
+                  </p>
+                </FAQEntry>
+                <FAQEntry title="I'm having trouble updating my order, can you help?">
+                  <p>
+                    Absolutely! Email contact@pycon.org.au with your order code and we'll help you out. It also helps if you email from the same email on your order so we know its you.
+                  </p>
+                </FAQEntry>
+              </FAQCategory>
+            </div>
+
+            <AttendNav />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <!-- Main scripts (will be added in Phase 5) -->
+  <script src="/src/scripts/animations.js"></script>
+</Base>
