@@ -1,5 +1,5 @@
 ---
-name: Yannik
+name: Yannik Behr
 code: MJ9KTK
 hasAvatar: true
 ---
