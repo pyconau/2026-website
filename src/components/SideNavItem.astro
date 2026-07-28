@@ -2,15 +2,21 @@
 export interface Props {
   href: string;
   routePattern?: string;
+  /** Hover colour for this item; defaults to the emerald used site-wide. */
+  hoverColour?: "emerald" | "violet";
 }
 
-const { href, routePattern } = Astro.props;
+const { href, routePattern, hoverColour = "emerald" } = Astro.props;
 ---
 
 <li
   class={(Astro.routePattern === (routePattern || href) && "active-page") || ""}
 >
-  <a href={href} class="hover:text-emerald transition-all duration-300"
-    ><slot /></a
+  <a
+    href={href}
+    class:list={[
+      hoverColour === "violet" ? "hover:text-violet" : "hover:text-emerald",
+      "transition-all duration-300",
+    ]}><slot /></a
   >
 </li>

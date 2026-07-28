@@ -20,10 +20,27 @@ const navItems = Object.entries(pages)
       title: nav.title,
       order: nav.order,
       tile: nav.tile !== undefined ? nav.tile : true,
-      image: nav.image
+      image: nav.image,
+      group: nav.group,
+      flourish: nav.flourish
     };
   })
   .sort((a, b) => a.order - b.order);
+
+// Collect items into contiguous groups so each group renders under its
+// heading, separated by a divider. An empty `group` means no heading.
+type NavGroup = { heading: string; items: typeof navItems };
+
+const navGroups = navItems.reduce<NavGroup[]>((groups, item) => {
+  const heading = item.group ?? "";
+  const current = groups[groups.length - 1];
+  if (current && current.heading === heading) {
+    current.items.push(item);
+  } else {
+    groups.push({ heading, items: [item] });
+  }
+  return groups;
+}, []);
 ---
 
 <div class="lg:w-[308px] w-full">
@@ -32,11 +49,36 @@ const navItems = Object.entries(pages)
       <a href="/attend/">
         <h3 class="text-intro font-semibold">Attendee Guide</h3>
       </a>
-      <ul class="font-medium font-sans text-charcoal space-y-4 mt-8">
-        {navItems.map((item) => (
-          <SideNavItem href={item.href}>{item.title}</SideNavItem>
-        ))}
-      </ul>
+      {navGroups.map((group, groupIndex) => (
+        <Fragment>
+          {groupIndex > 0 && (
+            <hr class="border-0 border-t border-charcoal/15 mt-6" aria-hidden="true" />
+          )}
+          {group.heading && (
+            <h4 class="font-sans font-bold text-charcoal text-sm uppercase tracking-wide mt-6">
+              {group.heading}
+            </h4>
+          )}
+          <ul class:list={["font-medium font-sans text-charcoal space-y-4", group.heading ? "mt-4" : "mt-6"]}>
+            {group.items.map((item) => (
+              <SideNavItem href={item.href} hoverColour={item.flourish}>
+                {item.flourish ? (
+                  <span class="relative inline-block">
+                    {item.title}
+                    <img
+                      src={item.flourish === "violet" ? "/images/flourish--violet.svg" : "/images/flourish.svg"}
+                      alt=""
+                      class="absolute -top-2 -right-2.5 w-5 h-5"
+                    />
+                  </span>
+                ) : (
+                  item.title
+                )}
+              </SideNavItem>
+            ))}
+          </ul>
+        </Fragment>
+      ))}
     </div>
   </div>
 </div>

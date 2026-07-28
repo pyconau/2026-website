@@ -26,6 +26,7 @@ const attendeeGuidePages = Object.entries(pages)
       href: `/attend/${slug}`,
       title: nav.title,
       order: nav.order,
+      flourish: nav.flourish,
     };
   })
   .sort((a, b) => a.order - b.order);
@@ -165,9 +166,25 @@ const attendeeGuidePages = Object.entries(pages)
                 <li>
                   <a
                     href={page.href}
-                    class="text-sm font-semibold font-sans hover:text-emerald"
+                    class:list={[
+                      "text-sm font-semibold font-sans",
+                      page.flourish === "violet"
+                        ? "hover:text-violet"
+                        : "hover:text-emerald",
+                    ]}
                   >
-                    {page.title}
+                    {page.flourish ? (
+                      <span class="relative inline-block">
+                        {page.title}
+                        <img
+                          src={page.flourish === "violet" ? "/images/flourish--violet.svg" : "/images/flourish.svg"}
+                          alt=""
+                          class="absolute -top-2 -right-2.5 w-5 h-5"
+                        />
+                      </span>
+                    ) : (
+                      page.title
+                    )}
                   </a>
                 </li>
               ))}
@@ -322,9 +339,25 @@ const attendeeGuidePages = Object.entries(pages)
               <li class="px-4">
                 <a
                   href={page.href}
-                  class="font-semibold text-2xl font-sans hover:text-emerald"
+                  class:list={[
+                    "font-semibold text-2xl font-sans",
+                    page.flourish === "violet"
+                      ? "hover:text-violet"
+                      : "hover:text-emerald",
+                  ]}
                 >
-                  {page.title}
+                  {page.flourish ? (
+                    <span class="relative inline-block">
+                      {page.title}
+                      <img
+                        src={page.flourish === "violet" ? "/images/flourish--violet.svg" : "/images/flourish.svg"}
+                        alt=""
+                        class="absolute -top-3 -right-4 w-8 h-8"
+                      />
+                    </span>
+                  ) : (
+                    page.title
+                  )}
                 </a>
               </li>
             ))}
