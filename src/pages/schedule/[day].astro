@@ -2,12 +2,14 @@
 import { getCollection } from "astro:content";
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
+import AgendaList from "../../components/schedule/AgendaList.astro";
 import DayTabs from "../../components/schedule/DayTabs.astro";
 import Base from "../../layouts/Base.astro";
 import {
   getConferenceDays,
   getSessionsByDay,
   getScheduleForGrid,
+  getScheduleForAgenda,
   getDayDate,
   getTrackColor,
   getPeopleByCode,
@@ -26,6 +28,9 @@ const dayCapitalized = day.charAt(0).toUpperCase() + day.slice(1);
 
 // Get sessions for grid layout
 const { rooms, rows, layout } = await getScheduleForGrid(day);
+// Agenda groups for the mobile layout (< 768px). Both layouts render into the
+// same document and CSS chooses between them - see .claude/plans §6.1.
+const agendaGroups = await getScheduleForAgenda(day);
 const dateString = await getDayDate(day);
 const allDays = await getConferenceDays();
 
@@ -80,7 +85,7 @@ const trackSlugs = new Set(
     <!-- Schedule Grid -->
     {rows.length > 0 && (
       <div
-        class="fadeInUp schedule-wrapper"
+        class="fadeInUp schedule-wrapper schedule-wrapper--has-agenda"
         style={`--schedule-room-count: ${rooms.length};`}
         data-rooms={rooms.length}
         data-layout={layout}
@@ -267,11 +272,28 @@ const trackSlugs = new Set(
                               <div>
                                 <span class="schedule-event-time">{timeStr}</span>
                               </div>
-                              <div>
+                              <div class="w-full">
                                 <span class="schedule-event-topic">{ps.session.data.title}</span>
-                                {speakerNames && (
+                                {/* Workshops are ticketed separately from the
+                                    conference, so the card says so inline with
+                                    the speaker name. */}
+                                <span class="schedule-event-footer">
                                   <span class="schedule-event-presenter">{speakerNames}</span>
-                                )}
+                                  {ps.session.data.type === "workshop" && (
+                                    <span class="schedule-event-note">
+                                      <svg
+                                        class="schedule-event-note-icon"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 -960 960 960"
+                                        fill="currentColor"
+                                        aria-hidden="true"
+                                      >
+                                        <path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/>
+                                      </svg>
+                                      <span>Separate registration</span>
+                                    </span>
+                                  )}
+                                </span>
                               </div>
                             </EventTag>
                           </div>
@@ -286,6 +308,17 @@ const trackSlugs = new Set(
         </div>
       </div>
     )}
+
+    <!-- Agenda list: the mobile layout, shown below 768px in place of the grid -->
+    <div class="agenda-wrapper">
+      <div class="container">
+        <AgendaList
+          groups={agendaGroups}
+          speakerMap={speakerMap}
+          trackSlugs={trackSlugs}
+        />
+      </div>
+    </div>
 
     {rows.length === 0 && (
       <div class="container">

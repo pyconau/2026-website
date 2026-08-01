@@ -1,0 +1,189 @@
+---
+import type { AgendaGroup } from "../../utils/schedule";
+import type { Person } from "../../utils/schedule";
+import {
+  formatAgendaTime,
+  getTrackColor,
+} from "../../utils/schedule";
+
+interface Props {
+  groups: AgendaGroup[];
+  speakerMap: Map<string, Person>;
+  trackSlugs: Set<string>;
+}
+
+const { groups, speakerMap, trackSlugs } = Astro.props;
+---
+
+{groups.length > 0 && (
+  <div class="agenda" aria-label="Schedule">
+    {groups.map((group) => (
+      <section class="agenda-group">
+        <h2 class="agenda-group__time">{group.label}</h2>
+
+        <div class="agenda-group__entries">
+          {group.entries.map((entry) => {
+            const { session } = entry;
+            const {
+              code,
+              title,
+              room,
+              start,
+              end,
+              track,
+              trackName,
+              tags,
+            } = session.data;
+
+            const isNotYetAnnounced = tags?.includes("not-yet-announced");
+            const trackColor = getTrackColor(track);
+
+            // Ticketed separately from the conference. Workshops are the only
+            // session type in the collection that is; Sunday's sprints are
+            // included with a contributor ticket and live on their own
+            // hand-built page rather than as sessions.
+            const needsSeparateRegistration = session.data.type === "workshop";
+
+            // Time range, matching the desktop card. Duration is not shown -
+            // the start and end times are what people reason about.
+            const timeText = `${formatAgendaTime(start)} – ${formatAgendaTime(end)}`;
+
+            const speakerNames = (session.data.speakers || [])
+              .map((c: string) => speakerMap.get(c))
+              .filter(Boolean)
+              .map((s: any) => s.data.name)
+              .join(", ");
+
+            const trackHref =
+              track && trackSlugs.has(track)
+                ? `/schedule/specialist-tracks/${track}`
+                : null;
+
+            if (entry.isBreak) {
+              return (
+                <div class="agenda-break">
+                  <span class="agenda-break__title">{title}</span>
+                  <span class="agenda-break__time">
+                    {formatAgendaTime(start)}–{formatAgendaTime(end)}
+                  </span>
+                </div>
+              );
+            }
+
+            // Continuation cards keep the session's own styling - same track
+            // background - so a block already under way reads as the same
+            // session, not a different kind of thing. They carry no star slot
+            // (favouriting is per-session, not per-appearance), no speakers and
+            // no track header.
+            if (entry.isContinuation) {
+              return (
+                <a
+                  href={`/schedule/${code}`}
+                  class="agenda-card agenda-card--continuation"
+                  style={`background-color: ${trackColor.bg}; color: ${trackColor.text};`}
+                >
+                  <div class="agenda-card__row">
+                    <div class="agenda-card__primary">
+                      <span class="agenda-card__title">{title}</span>
+                      <span class="agenda-card__meta">
+                        {room ? `Continues in ${room}` : "Continues"}
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              );
+            }
+
+            const CardTag = isNotYetAnnounced ? "div" : "a";
+
+            return (
+              <div class="agenda-item">
+                {entry.showTrackHeader && trackName && (
+                  <div class="agenda-track-header">
+                    <svg
+                      class="agenda-track-icon"
+                      style={`fill: ${trackColor.bg};`}
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="17.935"
+                      height="17.936"
+                      viewBox="0 0 17.935 17.936"
+                      aria-hidden="true"
+                    >
+                      <g transform="translate(0 10)">
+                        <g transform="translate(0 -10)">
+                          <path d="M8.968,17.936h0A8.968,8.968,0,0,0,0,8.968,8.968,8.968,0,0,0,8.968,0a8.968,8.968,0,0,0,8.968,8.968,8.968,8.968,0,0,0-8.968,8.968"/>
+                        </g>
+                      </g>
+                    </svg>
+                    {trackHref ? (
+                      <a href={trackHref} class="agenda-track-name agenda-track-name--link">{trackName}</a>
+                    ) : (
+                      <span class="agenda-track-name">{trackName}</span>
+                    )}
+                  </div>
+                )}
+
+                <CardTag
+                  href={isNotYetAnnounced ? undefined : `/schedule/${code}`}
+                  class={`agenda-card${isNotYetAnnounced ? " agenda-card--inert" : ""}`}
+                  style={`background-color: ${trackColor.bg}; color: ${trackColor.text};`}
+                >
+                  {/* Two rows, each a flex pair. Top: time + title, with the
+                      star beside them. Bottom: room + speakers, with any
+                      registration note on the right. The star sits only
+                      against the top row rather than spanning the card's full
+                      height, so the bottom row keeps the card's full width. */}
+                  <div class="agenda-card__row">
+                    <div class="agenda-card__primary">
+                      <span class="agenda-card__time">{timeText}</span>
+                      <span class="agenda-card__title">{title}</span>
+                    </div>
+
+                    {/* Reserved for the Phase 3 favourite star. Renders as
+                        empty space, not a dead control - dropping a 44px star
+                        in here must cause no reflow. */}
+                    <div class="agenda-card__star-slot" aria-hidden="true"></div>
+                  </div>
+
+                  <div class="agenda-card__row agenda-card__row--secondary">
+                    <div class="agenda-card__secondary">
+                      {room && !entry.isFullWidth && (
+                        <span class="agenda-card__meta">{room}</span>
+                      )}
+                      {isNotYetAnnounced ? (
+                        <span class="agenda-card__speakers">(Session not yet published)</span>
+                      ) : (
+                        speakerNames && (
+                          <span class="agenda-card__speakers">{speakerNames}</span>
+                        )
+                      )}
+                    </div>
+
+                    {/* Workshops and sprints are ticketed separately from the
+                        conference. Material Symbols "info", inlined rather
+                        than loaded as a font so it costs no request and
+                        inherits the card's text colour. */}
+                    {needsSeparateRegistration && (
+                      <span class="agenda-card__note">
+                        <svg
+                          class="agenda-card__note-icon"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 -960 960 960"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/>
+                        </svg>
+                        <span>Separate registration</span>
+                      </span>
+                    )}
+                  </div>
+                </CardTag>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    ))}
+  </div>
+)}

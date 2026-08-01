@@ -579,6 +579,10 @@ ul.sub-menu {
   --schedule-slot-height: 160px;
   /* Calculate min-width based on room count for mobile scrolling */
   --schedule-mobile-width: calc(80px + (var(--schedule-room-count) * 320px));
+  /* Column gutter. The --span-* width calculations below are derived from this
+     rather than repeating a literal, so a gutter change at any breakpoint can
+     never leave spanning plenaries and breaks misaligned. */
+  --schedule-gutter: 1.5rem;
 }
 
 /* Simple layout: 60-minute slots with shorter height */
@@ -649,7 +653,8 @@ ul.sub-menu {
 }
 
 .schedule {
-  @apply grid gap-x-6 border-y border-[#DBDBDB] mt-10 px-5;
+  @apply grid border-y border-[#DBDBDB] mt-10 px-5;
+  column-gap: var(--schedule-gutter);
   /* Desktop: time column (80px) + flexible room columns */
   grid-template-columns: 80px repeat(var(--schedule-room-count), 1fr);
   /* Mobile: fixed widths for scrolling */
@@ -691,6 +696,88 @@ ul.sub-menu {
   }
 }
 
+/* Tablet grid (768-1023px).
+
+   The 768px agenda breakpoint keeps the grid alive for tablets, but the grid
+   held its fixed --schedule-mobile-width canvas until 1024px, so a tablet
+   scrolled sideways exactly like a phone. Let the columns divide the available
+   width instead of taking a fixed 320px each.
+
+   The gutter shrinks here to buy column width; --schedule-gutter drives the
+   --span-* calculations too, so spanning plenaries and multi-room breaks stay
+   aligned with the columns they span. */
+@media (min-width: 768px) and (max-width: 1023.98px) {
+  .schedule-wrapper {
+    --schedule-gutter: 0.75rem;
+    overflow-x: hidden;
+  }
+
+  .schedule-title,
+  .schedule {
+    width: auto;
+    min-width: 0;
+    margin-left: auto;
+    margin-right: auto;
+    /* Narrower time column: labels are short and every pixel here is a pixel
+       the room columns don't get. */
+    grid-template-columns: 56px repeat(var(--schedule-room-count), 1fr);
+  }
+
+  .schedule-title {
+    column-gap: var(--schedule-gutter);
+  }
+
+  .schedule-title__room {
+    @apply px-1 py-2 text-sm;
+  }
+
+  .schedule-event {
+    @apply px-2 py-1.5;
+    font-size: 0.6875rem;
+    line-height: 1.25;
+    /* Cards carry an inline pixel height from the grid geometry; without this
+       a long title at ~155px per column spills past the card's rounded edge. */
+    overflow: hidden;
+  }
+
+  /* Titles wrap to at most three lines, then ellipsis - the title is what
+     people scan by, so it gets the space, but an unclamped one can outgrow
+     the card at this column width. The card is a flex column, so the clamp
+     goes on the block wrapping the title, not on the inline span. */
+  .schedule-event > div:last-child {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .schedule-event-topic {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .schedule-event-time {
+    font-size: 0.625rem;
+  }
+
+  .schedule-break-title,
+  .schedule-break-time {
+    font-size: 0.6875rem;
+  }
+
+  .schedule-track-name {
+    font-size: 0.625rem;
+  }
+}
+
+/* Four-room days (Saturday) are the pressure case at ~155px per column.
+   Suppressing speaker names below 900px keeps titles readable. */
+@media (min-width: 768px) and (max-width: 899.98px) {
+  .schedule-wrapper[data-rooms="4"] .schedule-event-presenter {
+    display: none;
+  }
+}
+
 .schedule .time {
   @apply text-charcoal font-semibold tracking-[0.01rem] pt-2;
   @apply sticky left-0 z-30 bg-stone;
@@ -715,27 +802,27 @@ ul.sub-menu {
 
 .schedule-event-wrapper--fullwidth {
   /* Full-width sessions span across all room columns */
-  /* Width = (roomCount * 100%) + ((roomCount - 1) * gap) */
+  /* Width = (roomCount * 100%) + ((roomCount - 1) * gutter) */
   @apply z-20;
-  width: calc(var(--schedule-room-count) * 100% + (var(--schedule-room-count) - 1) * 1.5rem);
+  width: calc(var(--schedule-room-count) * 100% + (var(--schedule-room-count) - 1) * var(--schedule-gutter));
 }
 
 .schedule-event-wrapper--span-2 {
-  /* Span 2 columns + 1 gap */
+  /* Span 2 columns + 1 gutter */
   z-index: 15;
-  width: calc(200% + 1.5rem);
+  width: calc(200% + var(--schedule-gutter));
 }
 
 .schedule-event-wrapper--span-3 {
-  /* Span 3 columns + 2 gaps */
+  /* Span 3 columns + 2 gutters */
   z-index: 15;
-  width: calc(300% + 3rem);
+  width: calc(300% + 2 * var(--schedule-gutter));
 }
 
 .schedule-event-wrapper--span-4 {
-  /* Span 4 columns + 3 gaps */
+  /* Span 4 columns + 3 gutters */
   z-index: 15;
-  width: calc(400% + 4.5rem);
+  width: calc(400% + 3 * var(--schedule-gutter));
 }
 
 .schedule-event-track-header {
@@ -746,6 +833,30 @@ ul.sub-menu {
   /* Position above the session card */
   top: -24px;
   left: 0;
+  right: 0;
+  /* The header slot is a fixed 24px, so a label that wraps has its second line
+     clipped behind the card below it. Keep it on one line and let the name
+     ellipsis instead. */
+  white-space: nowrap;
+}
+
+/* Long track names ("Research Software Engineering" needs ~267px) outgrow the
+   column below roughly 1290px, where the 4-room Saturday grid gives each
+   column ~266px. Step the label down a size there rather than let it clip. */
+@media (max-width: 1289.98px) {
+  .schedule-track-name {
+    font-size: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  .schedule-event-track-header {
+    gap: 0.375rem;
+  }
+
+  .schedule-track-icon {
+    width: 14px;
+    height: 14px;
+  }
 }
 
 .schedule-track-icon {
@@ -756,6 +867,8 @@ ul.sub-menu {
 
 .schedule-track-name {
   @apply font-semibold text-[#747474];
+  @apply overflow-hidden text-ellipsis;
+  min-width: 0;
 }
 
 .schedule-track-name--link {
@@ -781,6 +894,23 @@ ul.sub-menu {
 }
 .schedule-event-presenter {
   @apply block;
+}
+
+/* Bottom row of the card: speaker on the left, any note on the right. Wraps
+   rather than crushing the speaker name when the column is narrow. */
+.schedule-event-footer {
+  @apply flex flex-wrap items-baseline justify-between gap-x-2 w-full;
+}
+
+.schedule-event-note {
+  @apply shrink-0 font-normal italic;
+  @apply inline-flex items-center gap-1;
+}
+
+.schedule-event-note-icon {
+  @apply shrink-0;
+  width: 1em;
+  height: 1em;
 }
 
 /* Break styling */
@@ -810,6 +940,206 @@ ul.sub-menu {
 }
 
 .schedule-break-time {
+  @apply block text-charcoal;
+}
+
+/* ==========================================================================
+   Agenda list - the mobile schedule layout (< 768px)
+
+   A second layout over the same session data, not a restyling of the grid.
+   The grid's premise is spatial comparison across rooms, which needs
+   horizontal room a phone doesn't have; below 768px the grid is hidden and
+   this single chronological column replaces it. Both render into the same
+   document - CSS alone chooses between them.
+   ========================================================================== */
+
+.agenda-wrapper {
+  @apply mt-10;
+}
+
+/* The layout swap. Below 768px the agenda replaces the grid entirely; from
+   768px up the grid returns and the agenda is removed from the document flow.
+   No JS branch and no user-agent sniffing - the site is pre-rendered, so a JS
+   decision would flash the wrong layout on load. */
+@media (min-width: 768px) {
+  .agenda-wrapper {
+    display: none;
+  }
+}
+
+/* Only a grid that has an agenda to replace it gets hidden. sunday.astro
+   reuses .schedule-wrapper for its hand-built single-block schedule and has no
+   agenda, so hiding every .schedule-wrapper left that page with nothing at all
+   below 768px. The marker class is opt-in for exactly this reason: a page that
+   reuses the grid styles keeps working unless it opts into the swap. */
+@media (max-width: 767.98px) {
+  .schedule-wrapper--has-agenda {
+    display: none;
+  }
+}
+
+.agenda {
+  @apply flex flex-col;
+  /* The gap between groups does as much wayfinding work as the type does:
+     it is what makes a block read as one time slot rather than a continuous
+     stream of cards. */
+  gap: 2.5rem;
+}
+
+.agenda-group {
+  @apply flex flex-col;
+}
+
+/* Sticky time heading. On a 34-session day the most common failure is losing
+   track of what time you're looking at; this is what prevents it. It replaces
+   the grid's sticky left time column, meaningless without a horizontal axis. */
+/* Matches the desktop time column's type: font-sans, semibold, base size.
+   The rule above it and the gap between groups carry the wayfinding weight
+   instead of an outsized type scale. */
+.agenda-group__time {
+  @apply sticky top-0 z-20 bg-stone;
+  @apply font-sans font-semibold text-charcoal tracking-[0.01rem];
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid #DBDBDB;
+}
+
+.agenda-group__entries {
+  /* Strictly one column. Nothing sits side by side at any width under 768px -
+     the full width is what buys each card a readable title, its room and the
+     star slot without compression. */
+  @apply flex flex-col;
+  gap: 0.625rem;
+}
+
+.agenda-item {
+  @apply relative flex flex-col;
+}
+
+/* Track header matches the desktop treatment: sentence case as authored, not
+   uppercased, at the same size and colour. */
+.agenda-track-header {
+  @apply flex items-center gap-2;
+  @apply font-sans font-semibold text-sm;
+  margin-bottom: 0.25rem;
+}
+
+.agenda-track-icon {
+  @apply flex-shrink-0;
+  width: 17.935px;
+  height: 17.936px;
+}
+
+.agenda-track-name {
+  @apply font-semibold text-[#747474];
+}
+
+.agenda-track-name--link {
+  @apply no-underline cursor-pointer transition-colors;
+}
+
+.agenda-track-name--link:hover {
+  @apply text-charcoal underline;
+}
+
+/* Card typography matches the desktop .schedule-event exactly: font-sans,
+   font-medium, text-xs, with the time and title extrabold. */
+/* Two stacked rows rather than a text column beside a full-height star
+   column, so padding stays even on all four sides and the bottom row gets the
+   card's full width. */
+.agenda-card {
+  @apply relative flex flex-col;
+  @apply bg-white text-charcoal font-sans font-medium text-xs no-underline;
+  @apply rounded-[1.25rem];
+  padding: 0.875rem 1rem;
+  /* WCAG 2.5.8 / iOS HIG minimum tap target. */
+  min-height: 44px;
+}
+
+.agenda-card--inert {
+  @apply pointer-events-none;
+}
+
+/* Continuations are a single row with no star slot. */
+.agenda-card--continuation .agenda-card__row {
+  @apply items-center;
+}
+
+/* A row: text on the left, the star slot or the note on the right. */
+.agenda-card__row {
+  @apply flex items-start justify-between gap-2 w-full;
+}
+
+/* The note sits against the card's bottom-right corner rather than aligning
+   to the first line of the room/speaker stack beside it. */
+.agenda-card__row--secondary {
+  @apply items-end;
+}
+
+.agenda-card__primary,
+.agenda-card__secondary {
+  @apply flex flex-col min-w-0 flex-1;
+}
+
+.agenda-card__time {
+  @apply block font-extrabold;
+}
+
+.agenda-card__title {
+  @apply block font-extrabold;
+}
+
+.agenda-card__meta {
+  @apply block;
+}
+
+.agenda-card__speakers {
+  @apply block;
+}
+
+/* Sits in the card's bottom-right corner - the star slot is in the row above,
+   so nothing indents this. */
+.agenda-card__note {
+  @apply shrink-0 font-normal italic text-right;
+  @apply inline-flex items-center gap-1;
+}
+
+.agenda-card__note-icon {
+  @apply shrink-0;
+  width: 1em;
+  height: 1em;
+}
+
+/* Reserved space for the Phase 3 favourite star. Deliberately empty rather
+   than a visible-but-dead star, which invites tapping and disappoints.
+   Beside the top row only, so it reserves width for the time and title
+   without pushing the bottom row in. Negative margins pull it level with the
+   time's cap height and out to the card's padding edge, where a 44px tap
+   target belongs; dropping a star in causes zero reflow. */
+.agenda-card__star-slot {
+  @apply flex-shrink-0;
+  width: 44px;
+  height: 44px;
+  margin: -0.375rem -0.5rem -0.5rem 0;
+}
+
+/* Breaks: full width, dashed, no room label - the grid's colSpan is
+   meaningless in a single column. Already de-duplicated in the data.
+   Typography matches the desktop .schedule-break. */
+.agenda-break {
+  @apply flex flex-col items-center justify-center text-center;
+  @apply bg-[#f5f5f5] text-charcoal font-sans text-xs;
+  @apply border border-dashed border-[#ccc] rounded-[1.25rem];
+  padding: 0.75rem 1rem;
+  min-height: 44px;
+}
+
+.agenda-break__title {
+  @apply block font-extrabold text-charcoal;
+}
+
+.agenda-break__time {
   @apply block text-charcoal;
 }
 

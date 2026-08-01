@@ -8,6 +8,8 @@ import {
   getPeopleByCode,
   getTrackBySlug,
   formatSessionDateTime,
+  getConferenceDays,
+  CONFERENCE_TIMEZONE,
 } from "../../utils/schedule";
 import { marked } from "marked";
 
@@ -68,17 +70,40 @@ const ogDescription = [
   .filter(Boolean)
   .join(" • ");
 
-// Build breadcrumb
+// Build breadcrumb: Home > Schedule > Thursday. The day's slug is the
+// lowercased weekday in conference time, matching [day].astro's
+// getStaticPaths, and is only added when that day actually has a page to
+// link to. The track is not a breadcrumb - it's linked from the header's
+// meta row instead.
+const conferenceDays = await getConferenceDays();
+const sessionDay = start
+  ? start.toLocaleDateString("en-AU", {
+      weekday: "long",
+      timeZone: CONFERENCE_TIMEZONE,
+    })
+  : null;
+
 const breadcrumbs = [
   { label: "Home", href: "/" },
   { label: "Schedule", href: "/schedule" },
 ];
-if (trackData) {
+if (sessionDay && conferenceDays.includes(sessionDay.toLowerCase())) {
   breadcrumbs.push({
-    label: trackData.data.title,
-    href: `/schedule/specialist-tracks/${track}`,
+    label: sessionDay,
+    href: `/schedule/${sessionDay.toLowerCase()}`,
   });
 }
+
+// Link the track name in the header when it resolves to a page. Specialist
+// tracks have their own page; workshops aren't a specialist track (no track
+// file) but do have a listing page, so they're matched on session type.
+// Anything else - Main Conference, untracked sessions - stays plain text
+// rather than becoming a dead link.
+const trackHref = trackData
+  ? `/schedule/specialist-tracks/${track}`
+  : type === "workshop"
+    ? "/schedule/workshops"
+    : null;
 ---
 
 <Base title={title} ogImage={ogImage} description={ogDescription}>
@@ -118,12 +143,18 @@ if (trackData) {
             )}
           </div>
 
-          <h1 class="fadeInUp text-5xl font-serif font-normal tracking-[-0.02em] text-center w-[95%] mx-auto pt-5">
+          <h1 class="fadeInUp text-3xl md:text-5xl font-serif font-normal tracking-[-0.02em] text-center w-full md:w-[95%] mx-auto pt-5">
             {title}
           </h1>
 
           <div class="fadeInUp flex flex-wrap lg:flex-nowrap items-center justify-between border-t-2 border-emerald text-sm font-semibold text-emerald mt-7 pt-1 gap-2">
-            {displayTrackName && <span>{displayTrackName}</span>}
+            {displayTrackName && (
+              trackHref ? (
+                <a href={trackHref} class="underline hover:no-underline">{displayTrackName}</a>
+              ) : (
+                <span>{displayTrackName}</span>
+              )
+            )}
             {room && <span>{room}</span>}
             {dateTimeString && (
               <span>{dateTimeString}</span>
@@ -147,17 +178,17 @@ if (trackData) {
           ))}
 
           {sponsorData && (
-            <div class="fadeInUp flex justify-between items-center gap-6 bg-white rounded-[3.125rem] py-5 px-14 mt-14">
+            <div class="fadeInUp flex flex-col sm:flex-row justify-between sm:items-center gap-6 bg-white rounded-[2rem] md:rounded-[3.125rem] py-5 px-6 md:px-14 mt-14">
               <div>
                 <span class="block text-sm tracking-[0.01em] text-charcoal">
                   This session is presented by
                 </span>
-                <h3 class="text-3xl font-semibold text-charcoal">{sponsorData.data.name}</h3>
+                <h3 class="text-2xl md:text-3xl font-semibold text-charcoal">{sponsorData.data.name}</h3>
               </div>
               <img
                 src={`/images/sponsors/${sponsorData.data.logo}`}
                 alt={sponsorData.data.name}
-                class="h-16 w-auto max-w-[40%] object-contain"
+                class="h-16 w-auto max-w-full sm:max-w-[40%] object-contain self-start sm:self-auto"
               />
             </div>
           )}

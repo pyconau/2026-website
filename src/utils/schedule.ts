@@ -914,3 +914,232 @@ export async function getScheduleForGrid(
 
   return { rooms: filteredRooms, rows, layout: scheduleLayout };
 }
+
+// ============================================================================
+// Agenda layout (mobile, < 768px)
+// ============================================================================
+
+/**
+ * One appearance of a session within an agenda time group.
+ *
+ * A session that runs across more than one time group appears once per group;
+ * `isContinuation` is a property of that appearance, not of the session. Only
+ * the first appearance is a full card.
+ */
+export interface AgendaEntry {
+  session: Session;
+  isContinuation: boolean;
+  isBreak: boolean;
+  isFullWidth: boolean; // Plenary - spans all rooms, so carries no room label
+  showTrackHeader: boolean;
+  spansMultipleGroups: boolean; // Show a time range rather than a duration
+  durationMinutes: number;
+}
+
+/**
+ * A group of sessions sharing a start time in the agenda list.
+ * Boundaries are the day's distinct session start times, not fixed slots.
+ */
+export interface AgendaGroup {
+  time: Date;
+  label: string;
+  entries: AgendaEntry[];
+}
+
+/**
+ * Format a time for an agenda heading, e.g. "2:00pm".
+ */
+export function formatAgendaTime(date: Date): string {
+  return date
+    .toLocaleTimeString("en-AU", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+      timeZone: CONFERENCE_TIMEZONE,
+    })
+    .replace(/\s(am|pm)/i, "$1")
+    .toLowerCase();
+}
+
+/**
+ * Get schedule data organized as a chronological agenda list, for the mobile
+ * layout below 768px. Sibling to `getScheduleForGrid` - both read the same
+ * session data, so the two layouts cannot disagree about what is on.
+ *
+ * Deliberately carries no grid geometry (topPercent, heightPx, colSpan,
+ * followsLongSession); those are artifacts of the grid's fixed rows.
+ */
+export async function getScheduleForAgenda(
+  dayName: string
+): Promise<AgendaGroup[]> {
+  const sessions = await getSessionsByDay(dayName);
+  const rooms = await getRoomsForDay(dayName);
+  const specialistTrackNames = await getSpecialistTrackNames();
+
+  const usable = sessions.filter(
+    (s) => s.data.start && s.data.end && s.data.room
+  );
+  if (usable.length === 0) return [];
+
+  // De-duplicate breaks on the same (start, end, title) key the grid's
+  // mergeAdjacentBreaks() uses, so Saturday's four-room Lunch collapses to a
+  // single full-width card. colSpan is meaningless in a single column, so
+  // contiguity doesn't matter here - any room set merges to one entry.
+  const breakKey = (s: Session) =>
+    `${s.data.start!.getTime()}-${s.data.end!.getTime()}-${s.data.title}`;
+  const seenBreaks = new Set<string>();
+  const deduped = usable.filter((s) => {
+    if (s.data.type !== "break") return true;
+    const key = breakKey(s);
+    if (seenBreaks.has(key)) return false;
+    seenBreaks.add(key);
+    return true;
+  });
+
+  // Track headers: shown only on the first session of a run in a room, matching
+  // the grid. Breaks don't count as a preceding session.
+  const nonBreakEndTimesByRoom = new Map<string, Set<number>>();
+  for (const s of deduped) {
+    if (s.data.type === "break") continue;
+    const room = s.data.room!;
+    if (!nonBreakEndTimesByRoom.has(room)) {
+      nonBreakEndTimesByRoom.set(room, new Set());
+    }
+    nonBreakEndTimesByRoom.get(room)!.add(s.data.end!.getTime());
+  }
+
+  // Group boundaries are the distinct start times of the day's sessions - the
+  // real times sessions begin, not clock-aligned buckets. Saturday's afternoon
+  // groups are therefore 14:00, 14:35 and 15:10.
+  const allStartTimes = Array.from(
+    new Set(deduped.map((s) => s.data.start!.getTime()))
+  ).sort((a, b) => a - b);
+
+  // Sessions that run straight on from the one before them, in the same room,
+  // with no break between, read as one continuous block rather than as a new
+  // thing starting - the opening followed by the keynote, or the lightning
+  // talks followed by the closing address. The desktop grid gets this for free
+  // from geometry, because 9:15 simply isn't a slot boundary there. Here the
+  // start time would otherwise open its own group and put a time heading
+  // between two cards that belong together.
+  //
+  // Such a start time is absorbed into the previous group instead of beginning
+  // a new one. Derived from the times themselves, so it needs no flag in the
+  // source data and survives the schedule regenerating from Pretalx.
+  const isBackToBackStart = (time: number): boolean => {
+    const startingHere = deduped.filter(
+      (s) => s.data.start!.getTime() === time && s.data.type !== "break"
+    );
+    // Every session starting at this time must continue a session in its own
+    // room; if anything genuinely new begins here, the group stands on its own.
+    if (startingHere.length === 0) return false;
+    return startingHere.every((s) =>
+      deduped.some(
+        (prev) =>
+          prev !== s &&
+          prev.data.type !== "break" &&
+          prev.data.room === s.data.room &&
+          prev.data.end!.getTime() === time
+      )
+    );
+  };
+
+  // The first start time of the day always opens a group.
+  const groupTimes = allStartTimes.filter(
+    (t, i) => i === 0 || !isBackToBackStart(t)
+  );
+
+  // Stable room order within a group, matching the grid's column order.
+  const roomIndex = (room: string) => {
+    const i = rooms.indexOf(room);
+    return i === -1 ? rooms.length : i;
+  };
+
+  // The group a given start time is rendered under. Usually itself, but a
+  // back-to-back start was absorbed above, so it resolves to the latest group
+  // at or before it.
+  const owningGroup = (time: number): number => {
+    let owner = groupTimes[0];
+    for (const t of groupTimes) {
+      if (t <= time) owner = t;
+      else break;
+    }
+    return owner;
+  };
+
+  // A session belongs to every group whose start time falls within its run,
+  // plus the group that owns its own start time. Derived from start/end times,
+  // never from a session code or a duration threshold - the schedule
+  // regenerates from Pretalx and any long session added later must take this
+  // path too.
+  const groupsForSession = (s: Session): number[] => {
+    const start = s.data.start!.getTime();
+    const end = s.data.end!.getTime();
+    // Breaks are excluded from the repeat rule: a break spanning a group
+    // boundary is context, not something you can still join.
+    if (s.data.type === "break") return [owningGroup(start)];
+    const overlapping = groupTimes.filter((t) => t >= start && t < end);
+    const own = owningGroup(start);
+    return overlapping.includes(own) ? overlapping : [own, ...overlapping];
+  };
+
+  const groups: AgendaGroup[] = groupTimes.map((time) => ({
+    time: new Date(time),
+    label: formatAgendaTime(new Date(time)),
+    entries: [],
+  }));
+  const groupByTime = new Map(groups.map((g) => [g.time.getTime(), g]));
+
+  for (const session of deduped) {
+    const start = session.data.start!.getTime();
+    const end = session.data.end!.getTime();
+    const isBreak = session.data.type === "break";
+    const isFullWidth = session.data.type === "plenary";
+    const room = session.data.room!;
+    const durationMinutes = Math.round((end - start) / (1000 * 60));
+
+    const memberGroups = groupsForSession(session);
+    // Only a session appearing in a group later than its own counts as
+    // spanning; being absorbed into an earlier group doesn't make it long.
+    const spansMultipleGroups = memberGroups.some((t) => t > start);
+
+    const trackName = session.data.trackName;
+    const isSpecialistTrack = !!trackName && specialistTrackNames.has(trackName);
+    const hasPrecedingSession =
+      !isBreak && (nonBreakEndTimesByRoom.get(room)?.has(start) ?? false);
+    const showTrackHeader = isSpecialistTrack && !hasPrecedingSession;
+
+    for (const groupTime of memberGroups) {
+      const group = groupByTime.get(groupTime);
+      if (!group) continue;
+      // A continuation is an appearance in a group that began after the
+      // session did. A session absorbed into an earlier group (back-to-back)
+      // starts after its group's time and is emphatically not a continuation.
+      const isContinuation = groupTime > start;
+      group.entries.push({
+        session,
+        isContinuation,
+        isBreak,
+        isFullWidth,
+        // Continuation cards never repeat the track header.
+        showTrackHeader: showTrackHeader && !isContinuation,
+        spansMultipleGroups,
+        durationMinutes,
+      });
+    }
+  }
+
+  // Within a group: regular sessions in room order first, then breaks, then
+  // continuation cards last - context for a block already under way.
+  for (const group of groups) {
+    group.entries.sort((a, b) => {
+      const rank = (e: AgendaEntry) =>
+        e.isContinuation ? 2 : e.isBreak ? 1 : 0;
+      if (rank(a) !== rank(b)) return rank(a) - rank(b);
+      if (a.isFullWidth !== b.isFullWidth) return a.isFullWidth ? -1 : 1;
+      return roomIndex(a.session.data.room!) - roomIndex(b.session.data.room!);
+    });
+  }
+
+  return groups.filter((g) => g.entries.length > 0);
+}
