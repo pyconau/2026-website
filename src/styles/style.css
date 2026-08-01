@@ -903,7 +903,14 @@ ul.sub-menu {
 }
 
 .schedule-event-note {
-  @apply shrink-0 font-semibold italic;
+  @apply shrink-0 font-normal italic;
+  @apply inline-flex items-center gap-1;
+}
+
+.schedule-event-note-icon {
+  @apply shrink-0;
+  width: 1em;
+  height: 1em;
 }
 
 /* Break styling */
@@ -1038,8 +1045,11 @@ ul.sub-menu {
 
 /* Card typography matches the desktop .schedule-event exactly: font-sans,
    font-medium, text-xs, with the time and title extrabold. */
+/* Two stacked rows rather than a text column beside a full-height star
+   column, so padding stays even on all four sides and the bottom row gets the
+   card's full width. */
 .agenda-card {
-  @apply relative flex items-start justify-between gap-2;
+  @apply relative flex flex-col;
   @apply bg-white text-charcoal font-sans font-medium text-xs no-underline;
   @apply rounded-[1.25rem];
   padding: 0.875rem 1rem;
@@ -1051,15 +1061,24 @@ ul.sub-menu {
   @apply pointer-events-none;
 }
 
-/* Continuations keep the session's own background; only the meta line marks
-   them as already under way. */
-.agenda-card--continuation {
+/* Continuations are a single row with no star slot. */
+.agenda-card--continuation .agenda-card__row {
   @apply items-center;
 }
 
-/* Takes the width left over by the star slot, so the footer row's note can
-   sit against the card's right edge. */
-.agenda-card__body {
+/* A row: text on the left, the star slot or the note on the right. */
+.agenda-card__row {
+  @apply flex items-start justify-between gap-2 w-full;
+}
+
+/* The note sits against the card's bottom-right corner rather than aligning
+   to the first line of the room/speaker stack beside it. */
+.agenda-card__row--secondary {
+  @apply items-end;
+}
+
+.agenda-card__primary,
+.agenda-card__secondary {
   @apply flex flex-col min-w-0 flex-1;
 }
 
@@ -1079,27 +1098,30 @@ ul.sub-menu {
   @apply block;
 }
 
-/* Bottom row of the card: speaker on the left, any note pushed to the right.
-   Wraps rather than crushing the speaker name on a narrow phone. */
-.agenda-card__footer {
-  @apply flex flex-wrap items-baseline justify-between gap-x-2 w-full;
+/* Sits in the card's bottom-right corner - the star slot is in the row above,
+   so nothing indents this. */
+.agenda-card__note {
+  @apply shrink-0 font-normal italic text-right;
+  @apply inline-flex items-center gap-1;
 }
 
-/* ml-auto keeps the note against the right edge even when it wraps onto its
-   own line, where justify-between alone would leave it left-aligned. */
-.agenda-card__note {
-  @apply shrink-0 font-semibold italic ml-auto text-right;
+.agenda-card__note-icon {
+  @apply shrink-0;
+  width: 1em;
+  height: 1em;
 }
 
 /* Reserved space for the Phase 3 favourite star. Deliberately empty rather
-   than a visible-but-dead star, which invites tapping and disappoints. The
-   text column is sized around it so dropping a star in causes zero reflow. */
+   than a visible-but-dead star, which invites tapping and disappoints.
+   Beside the top row only, so it reserves width for the time and title
+   without pushing the bottom row in. Negative margins pull it level with the
+   time's cap height and out to the card's padding edge, where a 44px tap
+   target belongs; dropping a star in causes zero reflow. */
 .agenda-card__star-slot {
   @apply flex-shrink-0;
   width: 44px;
   height: 44px;
-  /* Pull level with the title's cap height rather than the card padding. */
-  margin: -0.375rem -0.5rem 0 0;
+  margin: -0.375rem -0.5rem -0.5rem 0;
 }
 
 /* Breaks: full width, dashed, no room label - the grid's colSpan is

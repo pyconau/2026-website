@@ -94,9 +94,16 @@ if (sessionDay && conferenceDays.includes(sessionDay.toLowerCase())) {
   });
 }
 
-// Link the track name in the header when it resolves to a specialist track
-// page. Sessions whose track has no page (e.g. Main Conference) stay plain.
-const trackHref = trackData ? `/schedule/specialist-tracks/${track}` : null;
+// Link the track name in the header when it resolves to a page. Specialist
+// tracks have their own page; workshops aren't a specialist track (no track
+// file) but do have a listing page, so they're matched on session type.
+// Anything else - Main Conference, untracked sessions - stays plain text
+// rather than becoming a dead link.
+const trackHref = trackData
+  ? `/schedule/specialist-tracks/${track}`
+  : type === "workshop"
+    ? "/schedule/workshops"
+    : null;
 ---
 
 <Base title={title} ogImage={ogImage} description={ogDescription}>
