@@ -1334,12 +1334,15 @@ ul.sub-menu {
 .bookmark-btn--pinned .bookmark-btn__glyph--border,
 .bookmark-btn--pinned .bookmark-btn__glyph--add,
 .bookmark-btn--pinned .bookmark-btn__glyph--added,
+.bookmark-btn--pinned .bookmark-btn__glyph--filled,
 .schedule-event:hover .bookmark-btn--pinned .bookmark-btn__glyph--add,
 .agenda-card:hover .bookmark-btn--pinned .bookmark-btn__glyph--add {
   display: none;
 }
 
-.bookmark-btn--pinned .bookmark-btn__glyph--filled {
+/* bookmark_heart, shown only when pinned - a different shape from the plain
+   filled bookmark an attendee saves for themselves. */
+.bookmark-btn--pinned .bookmark-btn__glyph--heart {
   display: inline;
 }
 
@@ -1351,38 +1354,9 @@ ul.sub-menu {
   }
 }
 
-/* Ticketed separately, so favouriting is switched off for now. Kept visible
-   and muted rather than removed: the session genuinely has a control, it is
-   just unavailable, and hiding it entirely would read as an oversight next to
-   neighbouring cards that have one. Deliberately a placeholder - the intended
-   treatment reflects registration rather than simply disabling. */
-.bookmark-btn--disabled {
-  @apply cursor-not-allowed;
-  opacity: 0.4;
-}
-
-/* A disabled control gets no hover intent - it would promise an action that
-   will not happen. It keeps the plain outline in every state. */
-.bookmark-btn--disabled .bookmark-btn__glyph--add,
-.bookmark-btn--disabled .bookmark-btn__glyph--added,
-.bookmark-btn--disabled .bookmark-btn__glyph--filled,
-.schedule-event:hover .bookmark-btn--disabled .bookmark-btn__glyph--add,
-.agenda-card:hover .bookmark-btn--disabled .bookmark-btn__glyph--add {
-  display: none;
-}
-
-.bookmark-btn--disabled .bookmark-btn__glyph--border {
-  display: inline;
-}
-
-/* Still revealed on card hover like any other card bookmark, so its presence
-   and its unavailability are both discoverable. */
-@media (hover: hover) {
-  .schedule-event:hover .bookmark-btn--card.bookmark-btn--disabled,
-  .agenda-card:hover .bookmark-btn--card.bookmark-btn--disabled {
-    opacity: 0.4;
-  }
-}
+/* Sessions ticketed separately render no bookmark at all, so there is no
+   disabled state to style. See BookmarkButton.astro - a greyed-out control
+   still reads as a control, and Wednesday is workshops end to end. */
 
 /* Session detail page: always visible, no hover reveal - there is one control
    and it is not competing with a dense grid, so a reveal would only hide it.

@@ -13,4 +13,5 @@ element's colour. The glyphs used are:
   info                                     src/components/schedule/AgendaList.astro
                                            src/pages/schedule/[day].astro
   bookmark, bookmark_border,
-  bookmark_add, bookmark_added             src/components/schedule/BookmarkButton.astro
+  bookmark_add, bookmark_added,
+  bookmark_heart                           src/components/schedule/BookmarkButton.astro

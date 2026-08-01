@@ -34,11 +34,6 @@ function clearTransient(button) {
  * here directly, never by way of the confirmation transient (§9).
  */
 function applyState(button, favourited) {
-  // A disabled bookmark is not a toggle: it carries neither aria-pressed nor a
-  // "Save:" label, since both would promise an action it does not offer. The
-  // server-rendered label already explains why it cannot be used.
-  if (button.disabled) return;
-
   button.setAttribute("aria-pressed", favourited ? "true" : "false");
 
   // The label follows the action the button will perform, not the state it is
@@ -110,17 +105,15 @@ function init() {
     const button = event.target.closest?.(BUTTON_SELECTOR);
     if (!button) return;
 
-    // Always swallow the click, whatever the bookmark's state. A disabled
-    // <button> fires no click of its own, but the event still reaches the card
-    // link underneath it — so without this, tapping a workshop's switched-off
-    // bookmark would navigate to the session page, which is precisely the bug
-    // this guard exists to prevent everywhere else.
+    // Always swallow the click, whatever the bookmark's state — including a
+    // pinned one, which is a <span> inside a card that is a link. Without this
+    // the event would reach that link and navigate to the session page.
     event.preventDefault();
     event.stopPropagation();
 
-    // Pinned and disabled bookmarks are not toggles. The click is absorbed
-    // above and nothing further happens.
-    if (button.dataset.pinned === "true" || button.disabled) return;
+    // A pinned bookmark is not a toggle. The click is absorbed above and
+    // nothing further happens.
+    if (button.dataset.pinned === "true") return;
 
     onToggle(button);
   });
