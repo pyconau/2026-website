@@ -1011,9 +1011,43 @@ export async function getScheduleForAgenda(
   // Group boundaries are the distinct start times of the day's sessions - the
   // real times sessions begin, not clock-aligned buckets. Saturday's afternoon
   // groups are therefore 14:00, 14:35 and 15:10.
-  const groupTimes = Array.from(
+  const allStartTimes = Array.from(
     new Set(deduped.map((s) => s.data.start!.getTime()))
   ).sort((a, b) => a - b);
+
+  // Sessions that run straight on from the one before them, in the same room,
+  // with no break between, read as one continuous block rather than as a new
+  // thing starting - the opening followed by the keynote, or the lightning
+  // talks followed by the closing address. The desktop grid gets this for free
+  // from geometry, because 9:15 simply isn't a slot boundary there. Here the
+  // start time would otherwise open its own group and put a time heading
+  // between two cards that belong together.
+  //
+  // Such a start time is absorbed into the previous group instead of beginning
+  // a new one. Derived from the times themselves, so it needs no flag in the
+  // source data and survives the schedule regenerating from Pretalx.
+  const isBackToBackStart = (time: number): boolean => {
+    const startingHere = deduped.filter(
+      (s) => s.data.start!.getTime() === time && s.data.type !== "break"
+    );
+    // Every session starting at this time must continue a session in its own
+    // room; if anything genuinely new begins here, the group stands on its own.
+    if (startingHere.length === 0) return false;
+    return startingHere.every((s) =>
+      deduped.some(
+        (prev) =>
+          prev !== s &&
+          prev.data.type !== "break" &&
+          prev.data.room === s.data.room &&
+          prev.data.end!.getTime() === time
+      )
+    );
+  };
+
+  // The first start time of the day always opens a group.
+  const groupTimes = allStartTimes.filter(
+    (t, i) => i === 0 || !isBackToBackStart(t)
+  );
 
   // Stable room order within a group, matching the grid's column order.
   const roomIndex = (room: string) => {
@@ -1021,17 +1055,32 @@ export async function getScheduleForAgenda(
     return i === -1 ? rooms.length : i;
   };
 
-  // A session belongs to every group whose start time falls within its run.
-  // Derived from start/end times, never from a session code or a duration
-  // threshold - the schedule regenerates from Pretalx and any long session
-  // added later must take this path too.
+  // The group a given start time is rendered under. Usually itself, but a
+  // back-to-back start was absorbed above, so it resolves to the latest group
+  // at or before it.
+  const owningGroup = (time: number): number => {
+    let owner = groupTimes[0];
+    for (const t of groupTimes) {
+      if (t <= time) owner = t;
+      else break;
+    }
+    return owner;
+  };
+
+  // A session belongs to every group whose start time falls within its run,
+  // plus the group that owns its own start time. Derived from start/end times,
+  // never from a session code or a duration threshold - the schedule
+  // regenerates from Pretalx and any long session added later must take this
+  // path too.
   const groupsForSession = (s: Session): number[] => {
     const start = s.data.start!.getTime();
     const end = s.data.end!.getTime();
     // Breaks are excluded from the repeat rule: a break spanning a group
     // boundary is context, not something you can still join.
-    if (s.data.type === "break") return [start];
-    return groupTimes.filter((t) => t >= start && t < end);
+    if (s.data.type === "break") return [owningGroup(start)];
+    const overlapping = groupTimes.filter((t) => t >= start && t < end);
+    const own = owningGroup(start);
+    return overlapping.includes(own) ? overlapping : [own, ...overlapping];
   };
 
   const groups: AgendaGroup[] = groupTimes.map((time) => ({
@@ -1050,7 +1099,9 @@ export async function getScheduleForAgenda(
     const durationMinutes = Math.round((end - start) / (1000 * 60));
 
     const memberGroups = groupsForSession(session);
-    const spansMultipleGroups = memberGroups.length > 1;
+    // Only a session appearing in a group later than its own counts as
+    // spanning; being absorbed into an earlier group doesn't make it long.
+    const spansMultipleGroups = memberGroups.some((t) => t > start);
 
     const trackName = session.data.trackName;
     const isSpecialistTrack = !!trackName && specialistTrackNames.has(trackName);
@@ -1061,7 +1112,10 @@ export async function getScheduleForAgenda(
     for (const groupTime of memberGroups) {
       const group = groupByTime.get(groupTime);
       if (!group) continue;
-      const isContinuation = groupTime !== start;
+      // A continuation is an appearance in a group that began after the
+      // session did. A session absorbed into an earlier group (back-to-back)
+      // starts after its group's time and is emphatically not a continuation.
+      const isContinuation = groupTime > start;
       group.entries.push({
         session,
         isContinuation,

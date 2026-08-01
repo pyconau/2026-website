@@ -38,12 +38,9 @@ const { groups, speakerMap, trackSlugs } = Astro.props;
             const isNotYetAnnounced = tags?.includes("not-yet-announced");
             const trackColor = getTrackColor(track);
 
-            // A session running past its own group shows the time it ends
-            // rather than a duration - "until 3:40pm" is easier to reason
-            // about mid-conference than "100 min".
-            const timeText = entry.spansMultipleGroups
-              ? `${formatAgendaTime(start)}–${formatAgendaTime(end)}`
-              : `${entry.durationMinutes} min`;
+            // Time range, matching the desktop card. Duration is not shown -
+            // the start and end times are what people reason about.
+            const timeText = `${formatAgendaTime(start)} – ${formatAgendaTime(end)}`;
 
             const speakerNames = (session.data.speakers || [])
               .map((c: string) => speakerMap.get(c))
@@ -67,20 +64,24 @@ const { groups, speakerMap, trackSlugs } = Astro.props;
               );
             }
 
-            // Continuation cards are context for a block already under way:
-            // subordinate treatment, no star slot, no speakers, no track header.
+            // Continuation cards keep the session's own styling - same track
+            // background - so a block already under way reads as the same
+            // session, not a different kind of thing. They carry no star slot
+            // (favouriting is per-session, not per-appearance), no speakers and
+            // no track header.
             if (entry.isContinuation) {
               return (
-                <a href={`/schedule/${code}`} class="agenda-continuation">
-                  <span class="agenda-continuation__marker" aria-hidden="true">▸</span>
-                  <span class="agenda-continuation__body">
-                    <span class="agenda-continuation__title">{title}</span>
-                    <span class="agenda-continuation__meta">
-                      <span class="agenda-continuation__label">continues</span>
-                      {room && !entry.isFullWidth && <> · {room}</>}
-                      <> · until {formatAgendaTime(end)}</>
+                <a
+                  href={`/schedule/${code}`}
+                  class="agenda-card agenda-card--continuation"
+                  style={`background-color: ${trackColor.bg}; color: ${trackColor.text};`}
+                >
+                  <div class="agenda-card__body">
+                    <span class="agenda-card__title">{title}</span>
+                    <span class="agenda-card__meta">
+                      {room ? `Continues in ${room}` : "Continues"}
                     </span>
-                  </span>
+                  </div>
                 </a>
               );
             }
@@ -120,10 +121,13 @@ const { groups, speakerMap, trackSlugs } = Astro.props;
                   style={`background-color: ${trackColor.bg}; color: ${trackColor.text};`}
                 >
                   <div class="agenda-card__body">
+                    {/* Time first, then title, then speakers - the desktop
+                        card's order. */}
+                    <span class="agenda-card__time">{timeText}</span>
                     <span class="agenda-card__title">{title}</span>
-                    <span class="agenda-card__meta">
-                      {room && !entry.isFullWidth && <>{room} · </>}{timeText}
-                    </span>
+                    {room && !entry.isFullWidth && (
+                      <span class="agenda-card__meta">{room}</span>
+                    )}
                     {isNotYetAnnounced ? (
                       <span class="agenda-card__speakers">(Session not yet published)</span>
                     ) : (
