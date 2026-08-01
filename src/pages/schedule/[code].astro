@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
 import Base from "../../layouts/Base.astro";
+import BookmarkButton from "../../components/schedule/BookmarkButton.astro";
 import SpeakerCard from "../../components/schedule/SpeakerCard.astro";
 import {
   getPeopleByCode,
@@ -147,6 +148,17 @@ const trackHref = trackData
             {title}
           </h1>
 
+          {/* The favourite bookmark. Always visible here - there is one control
+              and it isn't competing with a dense grid, so a hover reveal would
+              only hide it. This page carries no track colour, so currentColor
+              resolves to ordinary page text, which is the right answer.
+              Breaks aren't favouritable. */}
+          {type !== "break" && (
+            <div class="fadeInUp flex justify-center pt-3">
+              <BookmarkButton code={code} title={title} variant="detail" />
+            </div>
+          )}
+
           <div class="fadeInUp flex flex-wrap lg:flex-nowrap items-center justify-between border-t-2 border-emerald text-sm font-semibold text-emerald mt-7 pt-1 gap-2">
             {displayTrackName && (
               trackHref ? (
@@ -288,6 +300,7 @@ const trackHref = trackData
   <Footer />
 
   <script src="/src/scripts/animations.js"></script>
+  <script src="/src/scripts/favourites.js"></script>
   <script>
     const btn = document.getElementById("copy-link-btn");
     if (btn) {

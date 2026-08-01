@@ -1111,17 +1111,220 @@ ul.sub-menu {
   height: 1em;
 }
 
-/* Reserved space for the Phase 3 favourite star. Deliberately empty rather
-   than a visible-but-dead star, which invites tapping and disappoints.
-   Beside the top row only, so it reserves width for the time and title
+/* Space for the favourite bookmark, reserved in Phase 1 and filled in Phase
+   3a. Beside the top row only, so it reserves width for the time and title
    without pushing the bottom row in. Negative margins pull it level with the
    time's cap height and out to the card's padding edge, where a 44px tap
-   target belongs; dropping a star in causes zero reflow. */
+   target belongs; the geometry is unchanged from when the slot was empty, so
+   dropping the bookmark in causes zero reflow. */
 .agenda-card__star-slot {
   @apply flex-shrink-0;
   width: 44px;
   height: 44px;
   margin: -0.375rem -0.5rem -0.5rem 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Favourite bookmark - .claude/plans/phase-3a-local-favourites.md §3
+
+   Four Material Symbols glyphs all ship in the markup; this picks one. The
+   states differ by shape - outline, add, added, filled - never by colour, so
+   they survive both a colour-blind reader and a track whose background is
+   nearly the icon's colour.
+
+   Nothing here sets a colour. The SVG is fill="currentColor" and the cards set
+   `color: <track text colour>` on themselves, so the glyph inherits a colour
+   already chosen to read against that track. If it looks right on one track
+   and wrong on another, the button has fallen out of that inheritance chain -
+   it is not a contrast problem.
+   ------------------------------------------------------------------------ */
+.bookmark-btn {
+  @apply inline-flex items-center justify-center flex-shrink-0;
+  @apply cursor-pointer bg-transparent border-0 p-0;
+  /* WCAG 2.5.8 / iOS HIG minimum tap target, larger than the glyph itself. */
+  width: 44px;
+  height: 44px;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bookmark-btn__icon {
+  @apply block pointer-events-none;
+  width: 24px;
+  height: 24px;
+  transition: transform 150ms ease-out;
+}
+
+/* Exactly one glyph is visible at a time. Default: the unfavourited outline. */
+.bookmark-btn__glyph {
+  display: none;
+}
+
+.bookmark-btn__glyph--border {
+  display: inline;
+}
+
+/* Hover and focus-visible both read as "add this" intent. focus-visible is not
+   optional: without it a keyboard user tabs onto a control that is invisible on
+   the hover-reveal surfaces.
+
+   Hovering the card counts, not just the glyph itself: the card hover is what
+   reveals the control, so revealing a bare outline there and only switching to
+   bookmark_add once the pointer lands on the 44px target would show the wrong
+   thing for the whole approach. The reveal should say what will happen. */
+@media (hover: hover) {
+  .bookmark-btn:hover .bookmark-btn__glyph--border,
+  .schedule-event:hover .bookmark-btn--card .bookmark-btn__glyph--border,
+  .agenda-card:hover .bookmark-btn--card .bookmark-btn__glyph--border {
+    display: none;
+  }
+
+  .bookmark-btn:hover .bookmark-btn__glyph--add,
+  .schedule-event:hover .bookmark-btn--card .bookmark-btn__glyph--add,
+  .agenda-card:hover .bookmark-btn--card .bookmark-btn__glyph--add {
+    display: inline;
+  }
+}
+
+.bookmark-btn:focus-visible .bookmark-btn__glyph--border {
+  display: none;
+}
+
+.bookmark-btn:focus-visible .bookmark-btn__glyph--add {
+  display: inline;
+}
+
+.bookmark-btn:focus-visible {
+  @apply outline-2 outline-offset-2 outline-current;
+  outline-style: solid;
+  border-radius: 0.5rem;
+}
+
+/* Favourited: the filled bookmark wins over every unfavourited glyph,
+   including the card-hover and focus states above, which are more specific
+   than a bare .bookmark-btn:hover and so have to be named here. */
+.bookmark-btn[aria-pressed="true"] .bookmark-btn__glyph--border,
+.bookmark-btn[aria-pressed="true"] .bookmark-btn__glyph--add,
+.schedule-event:hover .bookmark-btn[aria-pressed="true"] .bookmark-btn__glyph--add,
+.agenda-card:hover .bookmark-btn[aria-pressed="true"] .bookmark-btn__glyph--add,
+.bookmark-btn[aria-pressed="true"]:hover .bookmark-btn__glyph--add,
+.bookmark-btn[aria-pressed="true"]:focus-visible .bookmark-btn__glyph--add {
+  display: none;
+}
+
+.bookmark-btn[aria-pressed="true"] .bookmark-btn__glyph--filled {
+  display: inline;
+}
+
+/* The transient confirmation, ~1.2s after a deliberate tap. Applied by script
+   and never by hydration - replaying this on load for every saved session
+   would be absurd. */
+.bookmark-btn.is-just-added .bookmark-btn__glyph--border,
+.bookmark-btn.is-just-added .bookmark-btn__glyph--add,
+.bookmark-btn.is-just-added .bookmark-btn__glyph--filled,
+.schedule-event:hover .bookmark-btn.is-just-added .bookmark-btn__glyph--add,
+.agenda-card:hover .bookmark-btn.is-just-added .bookmark-btn__glyph--add,
+.bookmark-btn.is-just-added:hover .bookmark-btn__glyph--add,
+.bookmark-btn.is-just-added:focus-visible .bookmark-btn__glyph--add {
+  display: none;
+}
+
+.bookmark-btn.is-just-added .bookmark-btn__glyph--added {
+  display: inline;
+}
+
+.bookmark-btn.is-just-added .bookmark-btn__icon {
+  animation: bookmark-pop 300ms ease-out;
+}
+
+@keyframes bookmark-pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* The state change is information; the movement is decoration. Suppress only
+   the decoration - the glyph still swaps. */
+@media (prefers-reduced-motion: reduce) {
+  .bookmark-btn__icon {
+    transition: none;
+  }
+
+  .bookmark-btn.is-just-added .bookmark-btn__icon {
+    animation: none;
+  }
+}
+
+/* Dense surfaces - the agenda list and the desktop grid - hide the control
+   until hover on pointer devices, where the reveal is itself the affordance.
+   On touch there is no hover to reveal it, so it must be present from the
+   start: `(hover: hover)` is the right query rather than a width breakpoint,
+   since the distinction is input type and a touchscreen laptop gets a width
+   query wrong. A favourited or focused bookmark always shows. */
+@media (hover: hover) {
+  .bookmark-btn--card {
+    opacity: 0;
+    transition: opacity 150ms ease-out;
+  }
+
+  .schedule-event:hover .bookmark-btn--card,
+  .agenda-card:hover .bookmark-btn--card,
+  .bookmark-btn--card:hover,
+  .bookmark-btn--card:focus-visible,
+  .bookmark-btn--card[aria-pressed="true"],
+  .bookmark-btn--card.is-just-added {
+    opacity: 1;
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: reduce) {
+  .bookmark-btn--card {
+    transition: none;
+  }
+}
+
+/* The mobile agenda card is touch-first, and its slot was sized for a control
+   that is always there. Hover-reveal on it only applies where a pointer
+   actually exists, which the (hover: hover) block above already scopes. */
+
+/* Desktop grid: overlaid on the card, never in its flow. The card's height is
+   computed from the session's duration and is not free to grow, so a control
+   in the flow would reflow it or clip the title - the 30-minute Saturday card
+   is the tight case. Positioned inside .schedule-event so it still inherits
+   the track's text colour. */
+.schedule-event .bookmark-btn--card {
+  @apply absolute z-10;
+  /* Pulled out over the card's padding so the 44px target sits in the corner
+     without the glyph drifting away from it. */
+  top: -0.25rem;
+  right: -0.25rem;
+}
+
+/* Titles run under the overlaid control, so the first line reserves room for
+   it. Only where a bookmark is actually rendered - breaks and the
+   not-yet-announced placeholder keep the full width. */
+.schedule-event:has(.bookmark-btn) .schedule-event-topic {
+  padding-right: 1.5rem;
+}
+
+/* Session detail page: always visible, no hover reveal - there is one control
+   and it is not competing with a dense grid, so a reveal would only hide it.
+   Larger, since this page has the room. This page carries no track colour, so
+   currentColor resolves to ordinary page text, which is correct. */
+.bookmark-btn--detail {
+  width: 48px;
+  height: 48px;
+}
+
+.bookmark-btn--detail .bookmark-btn__icon {
+  width: 32px;
+  height: 32px;
 }
 
 /* Breaks: full width, dashed, no room label - the grid's colSpan is

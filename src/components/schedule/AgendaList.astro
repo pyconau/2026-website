@@ -5,6 +5,7 @@ import {
   formatAgendaTime,
   getTrackColor,
 } from "../../utils/schedule";
+import BookmarkButton from "./BookmarkButton.astro";
 
 interface Props {
   groups: AgendaGroup[];
@@ -129,8 +130,8 @@ const { groups, speakerMap, trackSlugs } = Astro.props;
                   style={`background-color: ${trackColor.bg}; color: ${trackColor.text};`}
                 >
                   {/* Two rows, each a flex pair. Top: time + title, with the
-                      star beside them. Bottom: room + speakers, with any
-                      registration note on the right. The star sits only
+                      bookmark beside them. Bottom: room + speakers, with any
+                      registration note on the right. The bookmark sits only
                       against the top row rather than spanning the card's full
                       height, so the bottom row keeps the card's full width. */}
                   <div class="agenda-card__row">
@@ -139,10 +140,15 @@ const { groups, speakerMap, trackSlugs } = Astro.props;
                       <span class="agenda-card__title">{title}</span>
                     </div>
 
-                    {/* Reserved for the Phase 3 favourite star. Renders as
-                        empty space, not a dead control - dropping a 44px star
-                        in here must cause no reflow. */}
-                    <div class="agenda-card__star-slot" aria-hidden="true"></div>
+                    {/* The favourite bookmark, filling the 44px slot Phase 1
+                        reserved for it. Inside the card, so it inherits the
+                        track's text colour via currentColor. A session with no
+                        page of its own has no code to favourite against. */}
+                    <div class="agenda-card__star-slot">
+                      {!isNotYetAnnounced && (
+                        <BookmarkButton code={code} title={title} />
+                      )}
+                    </div>
                   </div>
 
                   <div class="agenda-card__row agenda-card__row--secondary">

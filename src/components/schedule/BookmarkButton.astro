@@ -1,0 +1,85 @@
+---
+// The favourite control — Phase 3a (.claude/plans/phase-3a-local-favourites.md §3).
+//
+// A bookmark, not a star: it reads as "save this for later", and it keeps clear
+// of the star motif used decoratively across the site.
+//
+// All four Material Symbols glyphs (Apache 2.0 — see NOTICE) ship inline in the
+// markup and CSS picks between them. Four paths is the wrong size for an icon
+// font: that would be a render-blocking request showing tofu until it lands,
+// exactly when conference wifi is worst. Inlining also matches how the grid
+// already draws its track markers.
+//
+// Every icon uses fill="currentColor" and nothing here takes a colour. The
+// cards set `color: ${trackColor.text}` on themselves, so the glyph inherits a
+// colour already chosen to read against that track's background — on every
+// track, including any added later. Passing a colour in would duplicate a
+// decision that already lives in trackColors.
+
+interface Props {
+  /** Session code — the identity the favourite is stored against. */
+  code: string;
+  /** Session title, for the accessible name. */
+  title: string;
+  /**
+   * Where the button sits. "card" hover-reveals on pointer devices and is
+   * always visible on touch; "detail" is always visible (§3.3).
+   */
+  variant?: "card" | "detail";
+  class?: string;
+}
+
+const { code, title, variant = "card", class: className = "" } = Astro.props;
+---
+
+{/*
+  A real <button>, so it is focusable and activatable by keyboard for free.
+  aria-pressed carries the toggle state and aria-label names the session — a
+  page of buttons all labelled "Save" is unusable on a screen reader. The glyph
+  itself is decorative, so the transient bookmark_added swap never produces a
+  confusing mid-interaction announcement.
+
+  type="button" matters: inside a form this would otherwise submit.
+
+  data-session-code is the client's handle on the session (§7). The code is
+  otherwise only in the card's href, and parsing it back out of a URL would
+  couple favourites to the routing scheme.
+*/}
+<button
+  type="button"
+  class={`bookmark-btn bookmark-btn--${variant}${className ? ` ${className}` : ""}`}
+  data-session-code={code}
+  data-session-title={title}
+  aria-pressed="false"
+  aria-label={`Save: ${title}`}
+>
+  <svg
+    class="bookmark-btn__icon"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 -960 960 960"
+    fill="currentColor"
+    aria-hidden="true"
+    focusable="false"
+  >
+    {/* bookmark_border — unfavourited */}
+    <path
+      class="bookmark-btn__glyph bookmark-btn__glyph--border"
+      d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z"
+    />
+    {/* bookmark_add — hover or focus intent, unfavourited */}
+    <path
+      class="bookmark-btn__glyph bookmark-btn__glyph--add"
+      d="M200-120v-640q0-33 23.5-56.5T280-840h240v80H280v518l200-86 200 86v-278h80v400L480-240 200-120Zm80-640h240-240Zm400 160v-80h-80v-80h80v-80h80v80h80v80h-80v80h-80Z"
+    />
+    {/* bookmark_added — transient confirmation after favouriting */}
+    <path
+      class="bookmark-btn__glyph bookmark-btn__glyph--added"
+      d="m200-120 280-120 280 120v-640q0-33-23.5-56.5T680-840H280q-33 0-56.5 23.5T200-760v640Zm240-320L280-600l56-56 104 104 224-224 56 56-280 280Z"
+    />
+    {/* bookmark — favourited */}
+    <path
+      class="bookmark-btn__glyph bookmark-btn__glyph--filled"
+      d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Z"
+    />
+  </svg>
+</button>
