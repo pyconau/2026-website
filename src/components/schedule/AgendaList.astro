@@ -1,0 +1,148 @@
+---
+import type { AgendaGroup } from "../../utils/schedule";
+import type { Person } from "../../utils/schedule";
+import {
+  formatAgendaTime,
+  getTrackColor,
+} from "../../utils/schedule";
+
+interface Props {
+  groups: AgendaGroup[];
+  speakerMap: Map<string, Person>;
+  trackSlugs: Set<string>;
+}
+
+const { groups, speakerMap, trackSlugs } = Astro.props;
+---
+
+{groups.length > 0 && (
+  <div class="agenda" aria-label="Schedule">
+    {groups.map((group) => (
+      <section class="agenda-group">
+        <h2 class="agenda-group__time">{group.label}</h2>
+
+        <div class="agenda-group__entries">
+          {group.entries.map((entry) => {
+            const { session } = entry;
+            const {
+              code,
+              title,
+              room,
+              start,
+              end,
+              track,
+              trackName,
+              tags,
+            } = session.data;
+
+            const isNotYetAnnounced = tags?.includes("not-yet-announced");
+            const trackColor = getTrackColor(track);
+
+            // A session running past its own group shows the time it ends
+            // rather than a duration - "until 3:40pm" is easier to reason
+            // about mid-conference than "100 min".
+            const timeText = entry.spansMultipleGroups
+              ? `${formatAgendaTime(start)}–${formatAgendaTime(end)}`
+              : `${entry.durationMinutes} min`;
+
+            const speakerNames = (session.data.speakers || [])
+              .map((c: string) => speakerMap.get(c))
+              .filter(Boolean)
+              .map((s: any) => s.data.name)
+              .join(", ");
+
+            const trackHref =
+              track && trackSlugs.has(track)
+                ? `/schedule/specialist-tracks/${track}`
+                : null;
+
+            if (entry.isBreak) {
+              return (
+                <div class="agenda-break">
+                  <span class="agenda-break__title">{title}</span>
+                  <span class="agenda-break__time">
+                    {formatAgendaTime(start)}–{formatAgendaTime(end)}
+                  </span>
+                </div>
+              );
+            }
+
+            // Continuation cards are context for a block already under way:
+            // subordinate treatment, no star slot, no speakers, no track header.
+            if (entry.isContinuation) {
+              return (
+                <a href={`/schedule/${code}`} class="agenda-continuation">
+                  <span class="agenda-continuation__marker" aria-hidden="true">▸</span>
+                  <span class="agenda-continuation__body">
+                    <span class="agenda-continuation__title">{title}</span>
+                    <span class="agenda-continuation__meta">
+                      <span class="agenda-continuation__label">continues</span>
+                      {room && !entry.isFullWidth && <> · {room}</>}
+                      <> · until {formatAgendaTime(end)}</>
+                    </span>
+                  </span>
+                </a>
+              );
+            }
+
+            const CardTag = isNotYetAnnounced ? "div" : "a";
+
+            return (
+              <div class="agenda-item">
+                {entry.showTrackHeader && trackName && (
+                  <div class="agenda-track-header">
+                    <svg
+                      class="agenda-track-icon"
+                      style={`fill: ${trackColor.bg};`}
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="17.935"
+                      height="17.936"
+                      viewBox="0 0 17.935 17.936"
+                      aria-hidden="true"
+                    >
+                      <g transform="translate(0 10)">
+                        <g transform="translate(0 -10)">
+                          <path d="M8.968,17.936h0A8.968,8.968,0,0,0,0,8.968,8.968,8.968,0,0,0,8.968,0a8.968,8.968,0,0,0,8.968,8.968,8.968,8.968,0,0,0-8.968,8.968"/>
+                        </g>
+                      </g>
+                    </svg>
+                    {trackHref ? (
+                      <a href={trackHref} class="agenda-track-name agenda-track-name--link">{trackName}</a>
+                    ) : (
+                      <span class="agenda-track-name">{trackName}</span>
+                    )}
+                  </div>
+                )}
+
+                <CardTag
+                  href={isNotYetAnnounced ? undefined : `/schedule/${code}`}
+                  class={`agenda-card${isNotYetAnnounced ? " agenda-card--inert" : ""}`}
+                  style={`background-color: ${trackColor.bg}; color: ${trackColor.text};`}
+                >
+                  <div class="agenda-card__body">
+                    <span class="agenda-card__title">{title}</span>
+                    <span class="agenda-card__meta">
+                      {room && !entry.isFullWidth && <>{room} · </>}{timeText}
+                    </span>
+                    {isNotYetAnnounced ? (
+                      <span class="agenda-card__speakers">(Session not yet published)</span>
+                    ) : (
+                      speakerNames && (
+                        <span class="agenda-card__speakers">{speakerNames}</span>
+                      )
+                    )}
+                  </div>
+
+                  {/* Reserved for the Phase 3 favourite star. Renders as empty
+                      space, not a dead control - dropping a 44px star in here
+                      must cause no reflow. */}
+                  <div class="agenda-card__star-slot" aria-hidden="true"></div>
+                </CardTag>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    ))}
+  </div>
+)}

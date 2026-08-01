@@ -2,12 +2,14 @@
 import { getCollection } from "astro:content";
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
+import AgendaList from "../../components/schedule/AgendaList.astro";
 import DayTabs from "../../components/schedule/DayTabs.astro";
 import Base from "../../layouts/Base.astro";
 import {
   getConferenceDays,
   getSessionsByDay,
   getScheduleForGrid,
+  getScheduleForAgenda,
   getDayDate,
   getTrackColor,
   getPeopleByCode,
@@ -26,6 +28,9 @@ const dayCapitalized = day.charAt(0).toUpperCase() + day.slice(1);
 
 // Get sessions for grid layout
 const { rooms, rows, layout } = await getScheduleForGrid(day);
+// Agenda groups for the mobile layout (< 768px). Both layouts render into the
+// same document and CSS chooses between them - see .claude/plans §6.1.
+const agendaGroups = await getScheduleForAgenda(day);
 const dateString = await getDayDate(day);
 const allDays = await getConferenceDays();
 
@@ -286,6 +291,17 @@ const trackSlugs = new Set(
         </div>
       </div>
     )}
+
+    <!-- Agenda list: the mobile layout, shown below 768px in place of the grid -->
+    <div class="agenda-wrapper">
+      <div class="container">
+        <AgendaList
+          groups={agendaGroups}
+          speakerMap={speakerMap}
+          trackSlugs={trackSlugs}
+        />
+      </div>
+    </div>
 
     {rows.length === 0 && (
       <div class="container">
