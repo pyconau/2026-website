@@ -128,17 +128,19 @@ const { groups, speakerMap, trackSlugs } = Astro.props;
                     {room && !entry.isFullWidth && (
                       <span class="agenda-card__meta">{room}</span>
                     )}
-                    {isNotYetAnnounced ? (
-                      <span class="agenda-card__speakers">(Session not yet published)</span>
-                    ) : (
-                      speakerNames && (
+                    {/* Bottom row: speaker on the left, note on the right,
+                        matching the desktop card. */}
+                    <span class="agenda-card__footer">
+                      {isNotYetAnnounced ? (
+                        <span class="agenda-card__speakers">(Session not yet published)</span>
+                      ) : (
                         <span class="agenda-card__speakers">{speakerNames}</span>
-                      )
-                    )}
-                    {/* Workshops are ticketed separately from the conference. */}
-                    {session.data.type === "workshop" && (
-                      <span class="agenda-card__note">Separate registration</span>
-                    )}
+                      )}
+                      {/* Workshops are ticketed separately from the conference. */}
+                      {session.data.type === "workshop" && (
+                        <span class="agenda-card__note">Separate registration</span>
+                      )}
+                    </span>
                   </div>
 
                   {/* Reserved for the Phase 3 favourite star. Renders as empty

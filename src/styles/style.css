@@ -1057,8 +1057,10 @@ ul.sub-menu {
   @apply items-center;
 }
 
+/* Takes the width left over by the star slot, so the footer row's note can
+   sit against the card's right edge. */
 .agenda-card__body {
-  @apply flex flex-col min-w-0;
+  @apply flex flex-col min-w-0 flex-1;
 }
 
 .agenda-card__time {
@@ -1077,8 +1079,16 @@ ul.sub-menu {
   @apply block;
 }
 
+/* Bottom row of the card: speaker on the left, any note pushed to the right.
+   Wraps rather than crushing the speaker name on a narrow phone. */
+.agenda-card__footer {
+  @apply flex flex-wrap items-baseline justify-between gap-x-2 w-full;
+}
+
+/* ml-auto keeps the note against the right edge even when it wraps onto its
+   own line, where justify-between alone would leave it left-aligned. */
 .agenda-card__note {
-  @apply block font-semibold italic;
+  @apply shrink-0 font-semibold italic ml-auto text-right;
 }
 
 /* Reserved space for the Phase 3 favourite star. Deliberately empty rather
