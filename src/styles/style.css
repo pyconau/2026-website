@@ -1113,15 +1113,21 @@ ul.sub-menu {
 
 /* Space for the favourite bookmark, reserved in Phase 1 and filled in Phase
    3a. Beside the top row only, so it reserves width for the time and title
-   without pushing the bottom row in. Negative margins pull it level with the
-   time's cap height and out to the card's padding edge, where a 44px tap
-   target belongs; the geometry is unchanged from when the slot was empty, so
-   dropping the bookmark in causes zero reflow. */
+   without pushing the bottom row in.
+
+   The 44px tap target is deliberately wider than the 24px glyph inside it, so
+   its box has ~10px of slack per side. Sizing the negative margins off that
+   slack rather than off nothing is what makes the glyph's right edge line up
+   with the card's 1rem text padding on the left: -0.625rem pulls the box out
+   by the slack exactly, leaving the glyph itself sitting on the padding edge.
+   The vertical margins keep it level with the time's cap height. Card
+   geometry is unchanged from when the slot was empty, so the bookmark still
+   causes zero reflow. */
 .agenda-card__star-slot {
   @apply flex-shrink-0;
   width: 44px;
   height: 44px;
-  margin: -0.375rem -0.5rem -0.5rem 0;
+  margin: -0.375rem -0.625rem -0.5rem 0;
 }
 
 /* ---------------------------------------------------------------------------
@@ -1293,24 +1299,89 @@ ul.sub-menu {
    that is always there. Hover-reveal on it only applies where a pointer
    actually exists, which the (hover: hover) block above already scopes. */
 
-/* Desktop grid: overlaid on the card, never in its flow. The card's height is
-   computed from the session's duration and is not free to grow, so a control
-   in the flow would reflow it or clip the title - the 30-minute Saturday card
-   is the tight case. Positioned inside .schedule-event so it still inherits
-   the track's text colour. */
-.schedule-event .bookmark-btn--card {
-  @apply absolute z-10;
-  /* Pulled out over the card's padding so the 44px target sits in the corner
-     without the glyph drifting away from it. */
-  top: -0.25rem;
-  right: -0.25rem;
+/* Desktop grid: the time and the bookmark share the card's top row, in normal
+   flow. The card's height comes from the session's duration and is not free to
+   grow, so the 44px target must not set that row's height - it is allowed to
+   overflow its line box instead, which keeps the row as tall as the time text
+   alone and leaves the shortest cards (a 30-minute Saturday session) exactly
+   as tall as they were. */
+.schedule-event-top {
+  @apply flex items-start justify-between gap-2 w-full;
+  /* The row is only as tall as the time text; the taller button overflows it
+     rather than pushing the title down. */
+  min-height: 0;
 }
 
-/* Titles run under the overlaid control, so the first line reserves room for
-   it. Only where a bookmark is actually rendered - breaks and the
-   not-yet-announced placeholder keep the full width. */
-.schedule-event:has(.bookmark-btn) .schedule-event-topic {
-  padding-right: 1.5rem;
+.schedule-event .bookmark-btn--card {
+  /* Negative margins absorb the tap target's slack around the 24px glyph, so
+     the glyph's right edge lines up with the card's 1rem text padding and the
+     button claims no vertical space in the row. Same reasoning as the agenda
+     card's star slot. */
+  margin-top: -0.625rem;
+  margin-right: -0.625rem;
+  margin-bottom: -0.625rem;
+}
+
+/* Pinned: the welcomes, the keynotes and the close. Everyone is at these, so
+   the bookmark states that rather than offering a choice - filled, always
+   visible, and not interactive. Rendered as a <span>, so there is no focus
+   ring or pointer to suppress; it just needs to always show the filled glyph
+   and never respond to hover. */
+.bookmark-btn--pinned {
+  @apply cursor-default;
+}
+
+.bookmark-btn--pinned .bookmark-btn__glyph--border,
+.bookmark-btn--pinned .bookmark-btn__glyph--add,
+.bookmark-btn--pinned .bookmark-btn__glyph--added,
+.schedule-event:hover .bookmark-btn--pinned .bookmark-btn__glyph--add,
+.agenda-card:hover .bookmark-btn--pinned .bookmark-btn__glyph--add {
+  display: none;
+}
+
+.bookmark-btn--pinned .bookmark-btn__glyph--filled {
+  display: inline;
+}
+
+/* Never hover-reveal a pinned bookmark: it is not a control, so hiding it
+   until hover would misrepresent it as one and hide the information. */
+@media (hover: hover) {
+  .bookmark-btn--card.bookmark-btn--pinned {
+    opacity: 1;
+  }
+}
+
+/* Ticketed separately, so favouriting is switched off for now. Kept visible
+   and muted rather than removed: the session genuinely has a control, it is
+   just unavailable, and hiding it entirely would read as an oversight next to
+   neighbouring cards that have one. Deliberately a placeholder - the intended
+   treatment reflects registration rather than simply disabling. */
+.bookmark-btn--disabled {
+  @apply cursor-not-allowed;
+  opacity: 0.4;
+}
+
+/* A disabled control gets no hover intent - it would promise an action that
+   will not happen. It keeps the plain outline in every state. */
+.bookmark-btn--disabled .bookmark-btn__glyph--add,
+.bookmark-btn--disabled .bookmark-btn__glyph--added,
+.bookmark-btn--disabled .bookmark-btn__glyph--filled,
+.schedule-event:hover .bookmark-btn--disabled .bookmark-btn__glyph--add,
+.agenda-card:hover .bookmark-btn--disabled .bookmark-btn__glyph--add {
+  display: none;
+}
+
+.bookmark-btn--disabled .bookmark-btn__glyph--border {
+  display: inline;
+}
+
+/* Still revealed on card hover like any other card bookmark, so its presence
+   and its unavailability are both discoverable. */
+@media (hover: hover) {
+  .schedule-event:hover .bookmark-btn--card.bookmark-btn--disabled,
+  .agenda-card:hover .bookmark-btn--card.bookmark-btn--disabled {
+    opacity: 0.4;
+  }
 }
 
 /* Session detail page: always visible, no hover reveal - there is one control

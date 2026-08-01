@@ -153,17 +153,15 @@ const trackSlugs = new Set(
                             >
                               {/* Plenaries are favouritable; breaks are not,
                                   and render as .schedule-break rather than
-                                  through here. Overlaid, not in the flow -
-                                  the card's height comes from the session's
-                                  duration and cannot grow. */}
-                              {!isNotYetAnnounced && (
-                                <BookmarkButton
-                                  code={ps.session.data.code}
-                                  title={ps.session.data.title}
-                                />
-                              )}
-                              <div>
+                                  through here. */}
+                              <div class="schedule-event-top">
                                 <span class="schedule-event-time">{timeStr}</span>
+                                {!isNotYetAnnounced && (
+                                  <BookmarkButton
+                                    code={ps.session.data.code}
+                                    title={ps.session.data.title}
+                                  />
+                                )}
                               </div>
                               <div>
                                 <span class="schedule-event-topic">{ps.session.data.title}</span>
@@ -281,18 +279,18 @@ const trackSlugs = new Set(
                               class="schedule-event"
                               style={`height: ${ps.heightPx}px; background-color: ${trackColor.bg}; color: ${trackColor.text};`}
                             >
-                              {/* Inside the card, so currentColor resolves to
-                                  this track's text colour. Overlaid rather
-                                  than in the flow, so the shortest cards
-                                  neither reflow nor clip their title. */}
-                              {!isNotYetAnnounced && (
-                                <BookmarkButton
-                                  code={ps.session.data.code}
-                                  title={ps.session.data.title}
-                                />
-                              )}
-                              <div>
+                              {/* Time and bookmark share the top row, the same
+                                  pairing the agenda card uses. Inside the
+                                  card, so currentColor resolves to this
+                                  track's text colour. */}
+                              <div class="schedule-event-top">
                                 <span class="schedule-event-time">{timeStr}</span>
+                                {!isNotYetAnnounced && (
+                                  <BookmarkButton
+                                    code={ps.session.data.code}
+                                    title={ps.session.data.title}
+                                  />
+                                )}
                               </div>
                               <div class="w-full">
                                 <span class="schedule-event-topic">{ps.session.data.title}</span>

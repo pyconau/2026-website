@@ -16,6 +16,11 @@
 // track, including any added later. Passing a colour in would duplicate a
 // decision that already lives in trackColors.
 
+import {
+  isAlwaysFavourited,
+  isNotFavouritable,
+} from "../../utils/favourites-config";
+
 interface Props {
   /** Session code — the identity the favourite is stored against. */
   code: string;
@@ -30,28 +35,58 @@ interface Props {
 }
 
 const { code, title, variant = "card", class: className = "" } = Astro.props;
+
+// Two curated exceptions to ordinary favouriting, both keyed on session code.
+// Pinned wins if a code somehow appears in both lists: "everyone is at this"
+// is a stronger statement than "you cannot save this".
+const pinned = isAlwaysFavourited(code);
+const disabled = !pinned && isNotFavouritable(code);
+
+// A pinned bookmark has nothing to activate, so it is not a button.
+const Element = pinned ? "span" : "button";
 ---
 
 {/*
-  A real <button>, so it is focusable and activatable by keyboard for free.
-  aria-pressed carries the toggle state and aria-label names the session — a
-  page of buttons all labelled "Save" is unusable on a screen reader. The glyph
-  itself is decorative, so the transient bookmark_added swap never produces a
-  confusing mid-interaction announcement.
+  Ordinarily a real <button>, so it is focusable and activatable by keyboard
+  for free. aria-pressed carries the toggle state and aria-label names the
+  session — a page of buttons all labelled "Save" is unusable on a screen
+  reader. The glyph itself is decorative, so the transient bookmark_added swap
+  never produces a confusing mid-interaction announcement.
 
   type="button" matters: inside a form this would otherwise submit.
 
   data-session-code is the client's handle on the session (§7). The code is
   otherwise only in the card's href, and parsing it back out of a URL would
   couple favourites to the routing scheme.
+
+  A pinned session renders a <span role="img"> rather than a disabled <button>:
+  there is no action to offer, so it should not be focusable or announced as a
+  control. It is still announced — as an image with a name — because "everyone
+  is at this one" is information a screen reader user needs just as much;
+  aria-hidden would have hidden it from them entirely while leaving it visible
+  to everyone else.
+
+  Disabled sessions do stay buttons — the control is real but switched off,
+  which is what `disabled` means, and it is the element the eventual
+  registration-aware treatment will replace.
 */}
-<button
-  type="button"
-  class={`bookmark-btn bookmark-btn--${variant}${className ? ` ${className}` : ""}`}
+<Element
+  type={pinned ? undefined : "button"}
+  class={`bookmark-btn bookmark-btn--${variant}${pinned ? " bookmark-btn--pinned" : ""}${disabled ? " bookmark-btn--disabled" : ""}${className ? ` ${className}` : ""}`}
   data-session-code={code}
   data-session-title={title}
-  aria-pressed="false"
-  aria-label={`Save: ${title}`}
+  data-pinned={pinned ? "true" : undefined}
+  disabled={disabled ? true : undefined}
+  aria-pressed={pinned || disabled ? undefined : "false"}
+  role={pinned ? "img" : undefined}
+  title={pinned ? "Everyone's invited to this one" : undefined}
+  aria-label={
+    pinned
+      ? `Everyone's invited: ${title}`
+      : disabled
+        ? `Separate registration required: ${title}`
+        : `Save: ${title}`
+  }
 >
   <svg
     class="bookmark-btn__icon"
@@ -82,4 +117,4 @@ const { code, title, variant = "card", class: className = "" } = Astro.props;
       d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Z"
     />
   </svg>
-</button>
+</Element>
