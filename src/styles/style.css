@@ -1177,15 +1177,29 @@ ul.sub-menu {
    Hovering the card counts, not just the glyph itself: the card hover is what
    reveals the control, so revealing a bare outline there and only switching to
    bookmark_add once the pointer lands on the 44px target would show the wrong
-   thing for the whole approach. The reveal should say what will happen. */
+   thing for the whole approach. The reveal should say what will happen.
+
+   Card-level hover is scoped to 768px and up, matching the reveal it belongs
+   to. Below that the agenda list is the layout, its bookmarks are permanently
+   visible, and sweeping a mouse across a card should not flip every outline to
+   bookmark_add. Hovering the control itself still reads as intent at any
+   width. */
 @media (hover: hover) {
-  .bookmark-btn:hover .bookmark-btn__glyph--border,
+  .bookmark-btn:hover .bookmark-btn__glyph--border {
+    display: none;
+  }
+
+  .bookmark-btn:hover .bookmark-btn__glyph--add {
+    display: inline;
+  }
+}
+
+@media (hover: hover) and (min-width: 768px) {
   .schedule-event:hover .bookmark-btn--card .bookmark-btn__glyph--border,
   .agenda-card:hover .bookmark-btn--card .bookmark-btn__glyph--border {
     display: none;
   }
 
-  .bookmark-btn:hover .bookmark-btn__glyph--add,
   .schedule-event:hover .bookmark-btn--card .bookmark-btn__glyph--add,
   .agenda-card:hover .bookmark-btn--card .bookmark-btn__glyph--add {
     display: inline;
@@ -1267,13 +1281,19 @@ ul.sub-menu {
   }
 }
 
-/* Dense surfaces - the agenda list and the desktop grid - hide the control
-   until hover on pointer devices, where the reveal is itself the affordance.
-   On touch there is no hover to reveal it, so it must be present from the
-   start: `(hover: hover)` is the right query rather than a width breakpoint,
-   since the distinction is input type and a touchscreen laptop gets a width
-   query wrong. A favourited or focused bookmark always shows. */
-@media (hover: hover) {
+/* Hover-reveal is scoped to the desktop grid at 768px and up, where cards are
+   dense and the reveal is itself the affordance.
+
+   Both conditions matter. `(hover: hover)` keeps the control permanently
+   visible for anyone on a touchscreen, and the 768px floor matches the layout
+   swap: below it the grid is replaced by the agenda list, which is the mobile
+   layout whatever pointer happens to be attached. Gating on pointer type
+   alone hid the outline in a narrow desktop window and in devtools responsive
+   mode - the agenda layout, but with a mouse - so the blank state looked
+   broken there while working on a real phone.
+
+   A favourited or focused bookmark always shows. */
+@media (hover: hover) and (min-width: 768px) {
   .bookmark-btn--card {
     opacity: 0;
     transition: opacity 150ms ease-out;
@@ -1289,7 +1309,7 @@ ul.sub-menu {
   }
 }
 
-@media (hover: hover) and (prefers-reduced-motion: reduce) {
+@media (hover: hover) and (min-width: 768px) and (prefers-reduced-motion: reduce) {
   .bookmark-btn--card {
     transition: none;
   }
