@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
 import AgendaList from "../../components/schedule/AgendaList.astro";
+import BookmarkButton from "../../components/schedule/BookmarkButton.astro";
 import DayTabs from "../../components/schedule/DayTabs.astro";
 import Base from "../../layouts/Base.astro";
 import {
@@ -150,8 +151,17 @@ const trackSlugs = new Set(
                               class="schedule-event"
                               style={`height: ${ps.heightPx}px; background-color: white; color: #282828;`}
                             >
-                              <div>
+                              {/* Plenaries are favouritable; breaks are not,
+                                  and render as .schedule-break rather than
+                                  through here. */}
+                              <div class="schedule-event-top">
                                 <span class="schedule-event-time">{timeStr}</span>
+                                {!isNotYetAnnounced && (
+                                  <BookmarkButton
+                                    code={ps.session.data.code}
+                                    title={ps.session.data.title}
+                                  />
+                                )}
                               </div>
                               <div>
                                 <span class="schedule-event-topic">{ps.session.data.title}</span>
@@ -269,8 +279,18 @@ const trackSlugs = new Set(
                               class="schedule-event"
                               style={`height: ${ps.heightPx}px; background-color: ${trackColor.bg}; color: ${trackColor.text};`}
                             >
-                              <div>
+                              {/* Time and bookmark share the top row, the same
+                                  pairing the agenda card uses. Inside the
+                                  card, so currentColor resolves to this
+                                  track's text colour. */}
+                              <div class="schedule-event-top">
                                 <span class="schedule-event-time">{timeStr}</span>
+                                {!isNotYetAnnounced && (
+                                  <BookmarkButton
+                                    code={ps.session.data.code}
+                                    title={ps.session.data.title}
+                                  />
+                                )}
                               </div>
                               <div class="w-full">
                                 <span class="schedule-event-topic">{ps.session.data.title}</span>
@@ -345,4 +365,5 @@ const trackSlugs = new Set(
   <Footer />
 
   <script src="/src/scripts/animations.js"></script>
+  <script src="/src/scripts/favourites.js"></script>
 </Base>

@@ -1,0 +1,17 @@
+Third-party assets bundled in this repository.
+
+Material Symbols
+https://github.com/google/material-design-icons
+Copyright Google LLC
+Licensed under the Apache License, Version 2.0
+https://www.apache.org/licenses/LICENSE-2.0
+
+Individual Material Symbols glyphs are inlined as SVG paths rather than loaded
+as an icon font, so that they cost no extra request and inherit the surrounding
+element's colour. The glyphs used are:
+
+  info                                     src/components/schedule/AgendaList.astro
+                                           src/pages/schedule/[day].astro
+  bookmark, bookmark_border,
+  bookmark_add, bookmark_added,
+  bookmark_heart                           src/components/schedule/BookmarkButton.astro

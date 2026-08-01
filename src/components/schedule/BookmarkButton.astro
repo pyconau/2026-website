@@ -1,0 +1,121 @@
+---
+// The favourite control — Phase 3a (.claude/plans/phase-3a-local-favourites.md §3).
+//
+// A bookmark, not a star: it reads as "save this for later", and it keeps clear
+// of the star motif used decoratively across the site.
+//
+// All four Material Symbols glyphs (Apache 2.0 — see NOTICE) ship inline in the
+// markup and CSS picks between them. Four paths is the wrong size for an icon
+// font: that would be a render-blocking request showing tofu until it lands,
+// exactly when conference wifi is worst. Inlining also matches how the grid
+// already draws its track markers.
+//
+// Every icon uses fill="currentColor" and nothing here takes a colour. The
+// cards set `color: ${trackColor.text}` on themselves, so the glyph inherits a
+// colour already chosen to read against that track's background — on every
+// track, including any added later. Passing a colour in would duplicate a
+// decision that already lives in trackColors.
+
+import {
+  isAlwaysFavourited,
+  isNotFavouritable,
+} from "../../utils/favourites-config";
+
+interface Props {
+  /** Session code — the identity the favourite is stored against. */
+  code: string;
+  /** Session title, for the accessible name. */
+  title: string;
+  /**
+   * Where the button sits. "card" hover-reveals on pointer devices and is
+   * always visible on touch; "detail" is always visible (§3.3).
+   */
+  variant?: "card" | "detail";
+  class?: string;
+}
+
+const { code, title, variant = "card", class: className = "" } = Astro.props;
+
+// Two curated exceptions to ordinary favouriting, both keyed on session code.
+// Pinned wins if a code somehow appears in both lists: "everyone is at this"
+// is a stronger statement than "you cannot save this".
+const pinned = isAlwaysFavourited(code);
+const disabled = !pinned && isNotFavouritable(code);
+
+// A pinned bookmark has nothing to activate, so it is not a button.
+const Element = pinned ? "span" : "button";
+
+// Sessions that cannot be favourited render nothing at all. A greyed-out
+// control still reads as a control - it draws the eye, invites a tap and then
+// refuses - and Wednesday is workshops end to end, so that meant a column of
+// dead icons. The card already carries a "Separate registration" note, which
+// says the same thing without implying an action.
+//
+// Ordinarily this is a real <button>, so it is focusable and activatable by
+// keyboard for free. aria-pressed carries the toggle state and aria-label
+// names the session - a page of buttons all labelled "Save" is unusable on a
+// screen reader. The glyph is decorative, so the transient bookmark_added swap
+// never produces a confusing mid-interaction announcement. type="button"
+// matters: inside a form this would otherwise submit.
+//
+// data-session-code is the client's handle on the session (plan §7). The code
+// is otherwise only in the card's href, and parsing it back out of a URL would
+// couple favourites to the routing scheme.
+//
+// A pinned session renders a <span role="img"> instead: there is no action to
+// offer, so it should not be focusable or announced as a control. It is still
+// announced - as an image with a name - because "everyone is at this one" is
+// information a screen reader user needs just as much; aria-hidden would have
+// hidden it from them entirely while leaving it visible to everyone else.
+---
+
+{!disabled && (
+<Element
+  type={pinned ? undefined : "button"}
+  class={`bookmark-btn bookmark-btn--${variant}${pinned ? " bookmark-btn--pinned" : ""}${className ? ` ${className}` : ""}`}
+  data-session-code={code}
+  data-session-title={title}
+  data-pinned={pinned ? "true" : undefined}
+  aria-pressed={pinned ? undefined : "false"}
+  role={pinned ? "img" : undefined}
+  title={pinned ? "Everyone's invited to this one" : undefined}
+  aria-label={pinned ? `Everyone's invited: ${title}` : `Save: ${title}`}
+>
+  <svg
+    class="bookmark-btn__icon"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 -960 960 960"
+    fill="currentColor"
+    aria-hidden="true"
+    focusable="false"
+  >
+    {/* bookmark_border — unfavourited */}
+    <path
+      class="bookmark-btn__glyph bookmark-btn__glyph--border"
+      d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z"
+    />
+    {/* bookmark_add — hover or focus intent, unfavourited */}
+    <path
+      class="bookmark-btn__glyph bookmark-btn__glyph--add"
+      d="M200-120v-640q0-33 23.5-56.5T280-840h240v80H280v518l200-86 200 86v-278h80v400L480-240 200-120Zm80-640h240-240Zm400 160v-80h-80v-80h80v-80h80v80h80v80h-80v80h-80Z"
+    />
+    {/* bookmark_added — transient confirmation after favouriting */}
+    <path
+      class="bookmark-btn__glyph bookmark-btn__glyph--added"
+      d="m200-120 280-120 280 120v-640q0-33-23.5-56.5T680-840H280q-33 0-56.5 23.5T200-760v640Zm240-320L280-600l56-56 104 104 224-224 56 56-280 280Z"
+    />
+    {/* bookmark — favourited */}
+    <path
+      class="bookmark-btn__glyph bookmark-btn__glyph--filled"
+      d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Z"
+    />
+    {/* bookmark_heart — pinned: everyone is at this one. A distinct glyph
+        rather than the plain filled bookmark, so "we've saved this for you"
+        does not look identical to "you saved this". */}
+    <path
+      class="bookmark-btn__glyph bookmark-btn__glyph--heart"
+      d="M480-388q51-47 82.5-77.5T611-518q17-22 23-38.5t6-35.5q0-36-26-62t-62-26q-21 0-40.5 8.5T480-648q-12-15-31-23.5t-41-8.5q-36 0-62 26t-26 62q0 19 5.5 35t22.5 38q17 22 48 52.5t84 78.5ZM200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Z"
+    />
+  </svg>
+</Element>
+)}
