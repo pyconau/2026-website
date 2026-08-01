@@ -950,8 +950,13 @@ ul.sub-menu {
   }
 }
 
+/* Only a grid that has an agenda to replace it gets hidden. sunday.astro
+   reuses .schedule-wrapper for its hand-built single-block schedule and has no
+   agenda, so hiding every .schedule-wrapper left that page with nothing at all
+   below 768px. The marker class is opt-in for exactly this reason: a page that
+   reuses the grid styles keeps working unless it opts into the swap. */
 @media (max-width: 767.98px) {
-  .schedule-wrapper {
+  .schedule-wrapper--has-agenda {
     display: none;
   }
 }
