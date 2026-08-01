@@ -86,6 +86,11 @@ function hydrate() {
     // no aria-pressed to correct. Leave them exactly as they came.
     if (button.dataset.pinned === "true") continue;
 
+    // Drop any confirmation left over from before — on a bfcache restore the
+    // class can come back with no timer behind it, and hydration settles
+    // straight to the stored state either way (§9).
+    clearTransient(button);
+
     const code = button.dataset.sessionCode;
     // A stored code that isn't in this build's schedule — a cancelled session,
     // or a stale entry — simply has no button here. It is skipped, not
@@ -97,6 +102,22 @@ function hydrate() {
 
 function init() {
   hydrate();
+
+  // A page restored from the back/forward cache does not re-run this script:
+  // the DOM comes back frozen exactly as it was left, so a session favourited
+  // on its own page after leaving the schedule reads as unfavourited until a
+  // manual refresh. event.persisted marks that restore, and re-hydrating is
+  // cheap enough to just do again.
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted) hydrate();
+  });
+
+  // The same staleness without bfcache: a second tab, or a mobile browser that
+  // discarded and rebuilt this one. Re-reading on the way back to visible
+  // catches both.
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") hydrate();
+  });
 
   // Every bookmark sits inside a card that is itself a link to the session
   // page, so the click must be stopped dead: without both calls, favouriting
