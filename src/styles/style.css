@@ -896,6 +896,16 @@ ul.sub-menu {
   @apply block;
 }
 
+/* Bottom row of the card: speaker on the left, any note on the right. Wraps
+   rather than crushing the speaker name when the column is narrow. */
+.schedule-event-footer {
+  @apply flex flex-wrap items-baseline justify-between gap-x-2 w-full;
+}
+
+.schedule-event-note {
+  @apply shrink-0 font-semibold italic;
+}
+
 /* Break styling */
 .schedule-break-wrapper {
   z-index: 15;
@@ -1065,6 +1075,10 @@ ul.sub-menu {
 
 .agenda-card__speakers {
   @apply block;
+}
+
+.agenda-card__note {
+  @apply block font-semibold italic;
 }
 
 /* Reserved space for the Phase 3 favourite star. Deliberately empty rather

@@ -272,11 +272,17 @@ const trackSlugs = new Set(
                               <div>
                                 <span class="schedule-event-time">{timeStr}</span>
                               </div>
-                              <div>
+                              <div class="w-full">
                                 <span class="schedule-event-topic">{ps.session.data.title}</span>
-                                {speakerNames && (
+                                {/* Workshops are ticketed separately from the
+                                    conference, so the card says so inline with
+                                    the speaker name. */}
+                                <span class="schedule-event-footer">
                                   <span class="schedule-event-presenter">{speakerNames}</span>
-                                )}
+                                  {ps.session.data.type === "workshop" && (
+                                    <span class="schedule-event-note">Separate registration</span>
+                                  )}
+                                </span>
                               </div>
                             </EventTag>
                           </div>

@@ -135,6 +135,10 @@ const { groups, speakerMap, trackSlugs } = Astro.props;
                         <span class="agenda-card__speakers">{speakerNames}</span>
                       )
                     )}
+                    {/* Workshops are ticketed separately from the conference. */}
+                    {session.data.type === "workshop" && (
+                      <span class="agenda-card__note">Separate registration</span>
+                    )}
                   </div>
 
                   {/* Reserved for the Phase 3 favourite star. Renders as empty
