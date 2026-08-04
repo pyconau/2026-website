@@ -1,7 +1,7 @@
 ---
 name: Amber Taylor
 code: HAUZCJ
-hasAvatar: false
+hasAvatar: true
 ---
 
-Trans woman in tech, cross-disciplinary software engineer. I love debugging!
+Cross-disciplinary software engineer, woman in STEM. I've been coding on a computer since I was 11 years old. I love solving tricky problems and launching rockets!
