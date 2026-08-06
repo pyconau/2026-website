@@ -10,6 +10,7 @@
 
 [Things all presenters should know](#things-all-presenters-should-know)
 
+* [Talk introductions](#talk-introductions)  
 * [Talk Duration](#talk-duration)  
 * [Slide Tips](#slide-tips)  
 * [Conduct and Expectations](#conduct-and-expectations)  
@@ -39,6 +40,20 @@
 
 ## Things all presenters should know
 
+### Talk introductions
+
+Each talk will be introduced by a Session Chair. This is either a volunteer from the community, or one of the specialist track organisers who is hosting the track. In the 5 minutes before your talk, the session chair will greet you, help you set up, and confirm your name and pronouns.
+
+Once your talk is ready to start, the following will occur:
+
+1. The session chair will cue the AV team (usually a thumbs up signal), and an animated stinger will play in the room to welcome everyone back (and get their attention).  
+2. The session chair will give a short ‘welcome back’ and mention your name and talk title as the next talk in the room. We do not intend on reading out biographies or abstracts.  
+3. The session chair will invite the audience to give you a welcome round of applause  
+4. As you walk on stage to a room full of applause \- a short second animated stinger with “Please welcome Your Name”  will show on the screen, cue’ing the start of talk recording.  
+5. The AV team will automatically transition over to your slides (remember you tested them a few minutes before). ***Trust the AV team, and give a strong, confident start to your talk.***
+
+*If you have spoken at PyCon AU before, you may recall that this is a slightly different sequence of introductions and animated stingers.*
+
 ### Talk Duration
 
 **All talks run for half an hour (30 minutes)\*, including questions.**
@@ -55,6 +70,8 @@ You have two choices for taking questions for your talk:
 Your Session Chair will sit in the front row and give you time warning cards at 5, 2, and 1 minutes remaining, and STOP when you have hit your time (e.g. at 25 minutes if you want 5 minutes for questions). Please speak with your Session Chair before your talk about any preferences you have.
 
 There are 5 minutes between talks for changeover (if you have presented at PyCon AU before, this is tighter than previous years). **Please respect this time limit**. Once your slot is over, please collect your things and continue any conversations in the hallway, in order to give the next speaker an equal chance to prepare.
+
+\* The only sessions that are not 30 minutes are keynotes (45m) and workshops (2h - not recorded).
 
 ### Slide Tips
 
