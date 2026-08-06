@@ -1,0 +1,54 @@
+---
+import AttendNav from "../../components/attend/AttendNav.astro";
+import Footer from "../../components/Footer.astro";
+import Crumb from "../../components/header/Crumb.astro";
+import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
+import PageHeader from "../../components/header/PageHeader.astro";
+import PageHeaderTitle from "../../components/header/PageHeaderTitle.astro";
+import Base from "../../layouts/Base.astro";
+// Page body lives in markdown so it can be edited without touching this file.
+import { Content } from "../../content/attend/speakers-guide.md";
+
+export const nav = {
+  order: 7,
+  group: "During PyCon AU",
+  title: "Speakers Guide",
+  image: "/images/attend/bof.jpg",
+};
+---
+
+<Base title="Speakers Guide">
+  <PageHeader dark={true} starColour="violet">
+    <HeaderBreadcrumbs colour="lavender">
+      <Crumb href="/attend/">Attendee Guide</Crumb>
+    </HeaderBreadcrumbs>
+    <PageHeaderTitle textColour="lavender">
+      <h1>Speakers Guide</h1>
+    </PageHeaderTitle>
+  </PageHeader>
+
+  <section>
+    <div class="header-divider header-divider--lavender"></div>
+
+    <div class="bg-stone py-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <div
+            class="flex flex-col lg:flex-row justify-between items-start gap-14"
+          >
+            <div class="lg:w-[80%] w-full rich-text">
+              <Content />
+            </div>
+
+            <AttendNav />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <!-- Main scripts (will be added in Phase 5) -->
+  <script src="/src/scripts/animations.js"></script>
+</Base>

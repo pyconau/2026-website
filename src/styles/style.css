@@ -232,6 +232,18 @@ footer ul li a {
   @apply mb-14;
 }
 
+/* Pull-quote style callout, e.g. the welcome note atop the Speakers Guide.
+   Sits on the stone page background, so it reads as a white card. */
+.rich-text blockquote {
+  @apply bg-white rounded-[2.5rem] px-10 py-8 my-10 space-y-4;
+}
+.rich-text blockquote > :first-child {
+  @apply mt-0;
+}
+.rich-text blockquote > :last-child {
+  @apply mb-0;
+}
+
 .rich-text h1 {
   @apply font-serif lg:text-6xl text-5xl font-medium tracking-[-0.02em] leading-[1.3] mt-10;
 }
