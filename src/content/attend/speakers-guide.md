@@ -127,15 +127,13 @@ The talks will also be uploaded to the Linux Australia mirror, at [https://mirro
 
 You will (and may have already) received emails from “Next Day Video”, our AV recording team \- we’d love our presenters to review your video before we publish to the wider world.  The team aims to post-produce videos within 24 hours of your presentation (with some exceptions).
 
-We will publish these talks under a [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) licence.
-
 ### Your Published Talk Details
 
 Your talk information and biography is [up on our website](https://2026.pycon.org.au/schedule/).
 
 Please take the time to look over your talk entry, and make sure that you are happy with your abstract and biography.
 
-Should you wish to update your biography, profile photo, or abstract, please email any changes to [program@pycon.org.au](mailto:program@pycon.org.au) from the same email address you used to submit your talk, or register for the conference. (We are using this email to contact you right now.)  The presentation title and your name(s) on the official schedule is what will be encoded into the video.
+Should you wish to update your biography, profile photo, or abstract, please email any changes to [program@pycon.org.au](mailto:program@pycon.org.au) from the same email address you used to submit your talk, or register for the conference. (We used this email to send you this guide.)  The presentation title and your name(s) on the official schedule is what will be encoded into the video.
 
 We advise you to send through any changes as soon as possible, ahead of the event, as the organising team will be very busy during the event and will not have time to push website changes outside of egregious errors or emergencies.
 
