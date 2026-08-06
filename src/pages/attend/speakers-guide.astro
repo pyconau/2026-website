@@ -13,7 +13,7 @@ export const nav = {
   order: 7,
   group: "During PyCon AU",
   title: "Speakers Guide",
-  image: "/images/attend/bof.jpg",
+  image: "/images/attend/speakers_guide.jpg",
 };
 ---
 
@@ -22,9 +22,22 @@ export const nav = {
     <HeaderBreadcrumbs colour="lavender">
       <Crumb href="/attend/">Attendee Guide</Crumb>
     </HeaderBreadcrumbs>
-    <PageHeaderTitle textColour="lavender">
-      <h1>Speakers Guide</h1>
-    </PageHeaderTitle>
+    <div
+      class="flex flex-col lg:flex-row justify-between items-center relative pt-10"
+    >
+      <PageHeaderTitle textColour="lavender">
+        <h1>Speakers Guide</h1>
+      </PageHeaderTitle>
+      <div class="lg:w-1/2 w-full fadeInUp">
+        <div class="group flex justify-end relative">
+          <img
+            src="/images/attend/speakers_guide.jpg"
+            alt=""
+            class="lg:pb-0 pb-14 rounded-4xl max-h-96"
+          />
+        </div>
+      </div>
+    </div>
   </PageHeader>
 
   <section>
