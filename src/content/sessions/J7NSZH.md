@@ -1,5 +1,5 @@
 ---
-title: Why Your ML Pipeline Needs an Agent (and How to Build One
+title: Why Your ML Pipeline Needs an Agent (and How to Build One)
 code: J7NSZH
 start: '2026-08-27T12:05:00+10:00'
 end: '2026-08-27T12:35:00+10:00'
