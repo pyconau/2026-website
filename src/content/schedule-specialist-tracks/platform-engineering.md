@@ -3,6 +3,7 @@ title: "Platform Engineering"
 pretalxTrack: "Platform Engineering"
 shortDescription: "Share and explore how platform engineering ideas such as systems thinking, guardrails, and golden paths empower teams to get their code from commit to production quickly and safely!"
 date: 2026-08-27
+sponsor: honeycomb
 ---
 
 Are you passionate about empowering teams (or AI Agents) to get code from commit to production rapidly, on demand and with minimal cognitive load or interruption to the users of your platform? Do you find yourself thinking about how to systemically approach problems like security and scalability?
