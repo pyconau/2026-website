@@ -60,7 +60,17 @@ const displayTrackName = trackName || trackData?.data.title;
 const dateTimeString = start && end ? formatSessionDateTime(start, end) : null;
 
 // Build OG description: title + speakers + track (if not main conf) + date + CTA
-const dateOnly = start ? new Date(start).toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : null;
+// timeZone is required: without it the build machine's zone is used, and a
+// morning Brisbane session formats to the previous day on a UTC CI builder.
+const dateOnly = start
+  ? new Date(start).toLocaleDateString("en-AU", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      timeZone: CONFERENCE_TIMEZONE,
+    })
+  : null;
 const ogDescription = [
   title,
   speakers.length > 0 ? `By ${speakerData.map((s) => s.data.name).join(", ")}` : null,
