@@ -1,33 +1,48 @@
 ---
 title: "Last minute tickets, streaming and community discounts!"
 published: 2026-08-11T09:00:00+10:00
-previewText: "There's still time to join us at PyCon AU 2026 — in Brisbane or online."
+previewText: "Today we’ve got new ways for you to attend the conference with last minute tickets!"
 category: "news"
 ---
-PyCon AU 2026 is nearly here, and there's still time to join us! Whether you're coming to Brisbane in person or joining us from your desk, here's what you need to know.
 
-### Last minute tickets
+We can’t wait to see everyone in just two weeks\! Today we’ve got new ways for you to attend the conference with last minute tickets\!
 
-Tickets are still available, and you can register right up until the conference begins. Head to the [tickets page](/tickets/) to register at Professional, Enthusiast or Student levels.
+## Online tickets now available
 
-If you can only make it for part of the week, one day tickets are still available too. A one day ticket includes all talks on that day — both the specialist tracks and the main conference.
+That’s right\! PyCon AU 2026 will be available via live stream for anyone who can’t make it to Brisbane\!  Registration covers access to the full three days of talks including all 6 specialist tracks, along with access to the attendee discord.
 
-### Attend online
+Streaming will be available via PyCon AU’s streaming platform, which means you’ll have to be registered to catch it live.
 
-Can't make it to Brisbane? Talks at PyCon AU 2026 will be available online via live stream. The online ticket is **$120** and includes access to the live streaming service, along with Discord access so you can join the conversation.
+Register your “Online Only” tickets for $120 today.
 
-Your online ticket includes:
+<div class="flex justify-around py-5">
+    <a href="https://pretix.eu/pyconau/2026/" class="btn-arrow no-underline!">
+        <span>Online tickets</span>
+    </a>
+</div>
 
-* 3-day conference stream (Thursday - Saturday)
-* Attendee Discord access
-* Keynotes & lightning talks
+## Community discounts
 
-Note: PyCon AU is not a 'hybrid' conference. Streams may be paused during scheduled breaks, and some activities, networking and exhibition spaces on-site will not be available to remote delegates. Workshops and sprints are not available as a live stream.
+We recognise many people in the PyCon AU community are doing it tough this year. If that's you, we hope this discount voucher helps you to still make it in person.
 
-### Community discounts
+If you’re unemployed or between jobs but can still make it to the conference in person then these vouchers offer a substantial discount on an Enthusiast ticket. We recognise this is an imperfect solution to address affordability but we hope it helps at least some people still make it.
 
-Bringing your team? We'll apply 5% off at checkout when you register 5 or more Professional tickets online, and you'll still receive a GST invoice for your records.
+There’s no formal eligibility to register using these community discounts \- it’s an honour system. 
 
-For larger groups, email [contact@pycon.org.au](mailto:contact@pycon.org.au) to request a group order form and we can help your team register with procurement or accounts payable payment terms.
+* **Enthusiast \- 1 day tickets**: use registration voucher [COMMUNITY-CSBEK8XLWLGUK7YV](https://pretix.eu/pyconau/2026/redeem?voucher=COMMUNITY-CSBEK8XLWLGUK7YV). To attend two days at PyCon AU, please register with a one day ticket for each day you wish to attend.  
+* **Enthusiast \- 3 day ticket**: use registration voucher [COMMUNITY-K4FYQ82YZPWCNHF6](https://pretix.eu/pyconau/2026/redeem?voucher=COMMUNITY-K4FYQ82YZPWCNHF6). This includes Thursday, Friday and Saturday.
 
-We can't wait to see you — in person or online!
+*These tickets are already priced to include all available discounts (and more), and are not intended for teams or professional registration.*
+
+## Last minute registrations
+
+We plan to keep registrations open for as long as possible. Register this week to guarantee your seat at the conference. Registrations after 14 August will be subject to available per-day capacity as we must allocate final catering numbers ahead of the conference.
+
+Register today, and don’t delay\!
+
+<div class="flex justify-around py-10">
+    <a href="https://pretix.eu/pyconau/2026/" class="btn-arrow no-underline!">
+        <span>Register Today</span>
+    </a>
+</div>
+
