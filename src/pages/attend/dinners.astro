@@ -1,0 +1,106 @@
+---
+import AttendNav from "../../components/attend/AttendNav.astro";
+import MapEmbed from "../../components/attend/MapEmbed.astro";
+import Footer from "../../components/Footer.astro";
+import Crumb from "../../components/header/Crumb.astro";
+import HeaderBreadcrumbs from "../../components/header/HeaderBreadcrumbs.astro";
+import PageHeader from "../../components/header/PageHeader.astro";
+import PageHeaderTitle from "../../components/header/PageHeaderTitle.astro";
+import TypographyLink from "../../components/typography/TypographyLink.astro";
+import Base from "../../layouts/Base.astro";
+
+export const nav = {
+  order: 8,
+  group: "During PyCon AU",
+  title: "Dinners",
+};
+---
+
+<Base title="Dinners">
+  <PageHeader dark={true} starColour="violet">
+    <HeaderBreadcrumbs colour="lavender">
+      <Crumb href="/attend/">Attendee Guide</Crumb>
+    </HeaderBreadcrumbs>
+    <PageHeaderTitle textColour="lavender">
+      <h1>Dinners</h1>
+    </PageHeaderTitle>
+  </PageHeader>
+
+  <section>
+    <div class="header-divider header-divider--lavender"></div>
+
+    <div class="bg-stone py-20">
+      <div class="container">
+        <div class="lg:w-[85%] w-full mx-auto">
+          <div
+            class="flex flex-col lg:flex-row justify-between items-start gap-14"
+          >
+            <div class="lg:w-[80%] w-full rich-text">
+              <p class="text-intro font-medium text-charcoal fadeInUp">
+                Dinner is one of the best ways to meet people at PyCon AU. Any
+                night of the conference works, and we're nudging you towards
+                Friday 28 August. Make it your one dinner night, and go with
+                people you haven't met yet.
+              </p>
+              <p>
+                Ask the group next to you at afternoon tea what they're doing, or
+                say yes when someone asks you. Here are a few ideas to get you
+                started.
+              </p>
+
+              <h2 id="food-courts">Food courts near Brisbane Central</h2>
+              <p>
+                A few minutes' walk from the venue, and hard to beat for a big
+                group. Everyone orders separately, so a mix of dietary needs and
+                budgets sorts itself out. Post Office Square is a good starting
+                point, with several more around Queen Street and Adelaide Street.
+              </p>
+              <MapEmbed
+                query="Post Office Square Food Court, Brisbane QLD"
+                title="Map of Post Office Square Food Court, Brisbane"
+              />
+
+              <h2 id="south-bank">South Bank</h2>
+              <p>
+                Hop on a <TypographyLink
+                  href="/attend/around-brisbane#public-transport">50c train</TypographyLink
+                > from Central to South Bank for riverside dining along Little Stanley
+                Street and the Riverside Terrace, with the city skyline across the
+                water. Yes, there's New Zealand real fruit ice cream down there too.
+              </p>
+              <MapEmbed
+                query="South Bank Parklands, Brisbane QLD"
+                title="Map of South Bank Parklands, Brisbane"
+              />
+
+              <h2 id="fortitude-valley">Fortitude Valley</h2>
+              <p>
+                A short train ride or a walk from the venue, with an assortment
+                of bars and restaurants packed into a few blocks around Brunswick
+                Street Mall and Chinatown. Good pick if your group wants a
+                livelier night, or somewhere to keep talking afterwards.
+              </p>
+              <MapEmbed
+                query="Brunswick Street Mall, Fortitude Valley QLD"
+                title="Map of Brunswick Street Mall, Fortitude Valley"
+              />
+
+              <h2 id="go-anywhere">Go anywhere you like</h2>
+              <p>
+                This isn't an all-inclusive list, just some ideas for you all. Go
+                wherever you fancy, and take someone new with you.
+              </p>
+            </div>
+
+            <AttendNav />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <!-- Main scripts (will be added in Phase 5) -->
+  <script src="/src/scripts/animations.js"></script>
+</Base>
