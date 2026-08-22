@@ -6,8 +6,10 @@ on:
     branches:
       - main
   schedule:
-    # Run hourly between 8am-midnight UTC
-    - cron: "0 8-23 * * *"
+    # Run every 30 minutes between 07:00–20:00 AEST (UTC+10)
+    # 07:00–20:00 AEST = 21:00–10:00 UTC (spans midnight, so two cron entries)
+    - cron: "0,30 21-23 * * *"
+    - cron: "0,30 0-10 * * *"
 
 jobs:
   check:
