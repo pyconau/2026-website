@@ -1,0 +1,25 @@
+---
+interface Props {
+  /** Search term to centre the map on, e.g. "South Bank Parklands, Brisbane QLD". */
+  query: string;
+  /** Accessible name for the iframe. */
+  title: string;
+  zoom?: number;
+  class?: string;
+}
+
+const { query, title, zoom = 15, class: className = "" } = Astro.props;
+
+// Keyless embed - the Maps Embed API proper needs an API key we don't have.
+const src = `https://www.google.com/maps?q=${encodeURIComponent(query)}&z=${zoom}&output=embed`;
+---
+
+<div class={`aspect-video w-full rounded-3xl overflow-hidden ${className}`}>
+  <iframe
+    src={src}
+    class="block w-full h-full border-0"
+    title={title}
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    allowfullscreen></iframe>
+</div>
