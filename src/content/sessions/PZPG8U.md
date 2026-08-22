@@ -32,5 +32,6 @@ fault-tolerant.
 workflows
 
 **Who should attend:** Developers curious about Building. Production ready AI agents, whether you're just getting
+
 **Prerequisites:** Basic Python knowledge and a laptop with Python 3.12+ installed.
 No prior experience with the OpenAI SDK, MCP, or Temporal is required; just bring your laptop and a sense of curiosity.
