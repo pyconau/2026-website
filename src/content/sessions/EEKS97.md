@@ -8,9 +8,14 @@ track:
 type: plenary
 speakers:
 - PB9BKD
-abstract: "Everything you need to know if you've never been to a PyCon AU before.\r\
-  \n\r\nA pre-conference explainer on how PyCon AU works and some of the extra and
-  side events which make our conference special."
+abstract: "New to PyCon AU? Start here. Every year we run a short, friendly session
+  before the main program kicks off, covering the things that aren't on the schedule:
+  how the conference actually flows, the traditions and in-jokes you'll hear all week
+  (and where to look them up if you miss one), and the side events, from Birds of
+  a Feather sessions to community dinners, that often become people's favourite part
+  of PyCon AU. \r\n\r\nWhether you're a first-time attendee, a first-time speaker,
+  or just curious how a volunteer-run conference works, come along and get your bearings
+  before day one properly begins."
 ---
 
 
