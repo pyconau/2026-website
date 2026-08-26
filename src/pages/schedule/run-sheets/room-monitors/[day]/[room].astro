@@ -1,0 +1,839 @@
+---
+import "../../../../../styles/style.css";
+import {
+  getConferenceDays,
+  getSessionsByDay,
+  getRoomsForDay,
+  getPeopleByCode,
+  formatSessionTime,
+  formatAgendaTime,
+  CONFERENCE_TIMEZONE,
+} from "../../../../../utils/schedule";
+
+export async function getStaticPaths() {
+  const days = await getConferenceDays();
+  const paths = [];
+
+  for (const day of days) {
+    const rooms = await getRoomsForDay(day);
+    const allSessions = await getSessionsByDay(day);
+
+    for (const room of rooms) {
+      const roomSessions = allSessions.filter(
+        (s) => s.data.room === room && s.data.type !== "break"
+      );
+      if (roomSessions.length === 0) continue;
+
+      const roomSlug = room.toLowerCase().replace(/\s+/g, "-");
+      paths.push({
+        params: { day: day.toLowerCase(), room: roomSlug },
+        props: { day, room },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { day, room } = Astro.props as { day: string; room: string };
+const dayCapitalized = day.charAt(0).toUpperCase() + day.slice(1);
+
+const allSessions = await getSessionsByDay(day);
+const roomSessions = allSessions
+  .filter((s) => s.data.room === room)
+  .sort(
+    (a, b) => (a.data.start?.getTime() ?? 0) - (b.data.start?.getTime() ?? 0)
+  );
+
+// A block is a run of consecutive sessions in this room with no break between
+// them. Breaks are their own session entries, so they are the separators.
+const blocks: (typeof roomSessions)[] = [];
+let currentBlock: typeof roomSessions = [];
+for (const session of roomSessions) {
+  if (session.data.type === "break") {
+    if (currentBlock.length > 0) blocks.push(currentBlock);
+    currentBlock = [];
+  } else {
+    currentBlock.push(session);
+  }
+}
+if (currentBlock.length > 0) blocks.push(currentBlock);
+
+const speakerCodes = [
+  ...new Set(roomSessions.flatMap((s) => s.data.speakers || [])),
+];
+const speakerEntries = await getPeopleByCode(speakerCodes);
+const speakerMap = new Map(speakerEntries.map((p) => [p.data.code, p]));
+
+const MINUTE = 60 * 1000;
+
+const DUTY_OFFICER_PHONE = "0479 183 889";
+
+type SessionRow = {
+  code: string;
+  time: string;
+  title: string;
+};
+
+type SpeakerRow = {
+  id: string;
+  name: string;
+  pronouns: string | undefined;
+  appearances: SessionRow[];
+};
+
+const blockData = blocks.map((sessions, index) => {
+  const start = sessions[0].data.start;
+  const end = sessions[sessions.length - 1].data.end;
+
+  const sessionRows: SessionRow[] = sessions.map((session) => ({
+    code: session.data.code,
+    time:
+      session.data.start && session.data.end
+        ? formatSessionTime(session.data.start, session.data.end)
+        : "",
+    title: session.data.title,
+  }));
+
+  // One row per person, however many times they appear in the block - the
+  // monitor is ticking off humans in the room, not sessions. Each of their
+  // sessions is still listed under their name.
+  const speakerRows: SpeakerRow[] = [];
+  const rowsByCode = new Map<string, SpeakerRow>();
+  sessions.forEach((session, sessionIndex) => {
+    for (const code of session.data.speakers || []) {
+      const person = speakerMap.get(code);
+      if (!person) continue;
+      let row = rowsByCode.get(code);
+      if (!row) {
+        row = {
+          id: `${index}-${code}`,
+          name: person.data.name,
+          pronouns: person.data.pronouns,
+          appearances: [],
+        };
+        rowsByCode.set(code, row);
+        speakerRows.push(row);
+      }
+      row.appearances.push(sessionRows[sessionIndex]);
+    }
+  });
+
+  return {
+    index,
+    sessions,
+    sessionRows,
+    speakerRows,
+    speakerCount: speakerRows.length,
+    rangeStr: start && end ? formatSessionTime(start, end) : "",
+    crewCall: start ? formatAgendaTime(new Date(start.getTime() - 15 * MINUTE)) : "",
+    speakerCall: start ? formatAgendaTime(new Date(start.getTime() - 10 * MINUTE)) : "",
+  };
+});
+
+const dateString =
+  roomSessions[0]?.data.start?.toLocaleDateString("en-AU", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: CONFERENCE_TIMEZONE,
+  }) ?? dayCapitalized;
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Room Monitor Run Sheet — {room} — {dateString}</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Roboto+Slab:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: var(--font-sans);
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--color-charcoal);
+        background: #fff;
+        padding: 2rem;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .page-header {
+        border-bottom: 3px solid var(--color-violet);
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .page-header h1 {
+        font-family: var(--font-serif);
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: var(--color-charcoal);
+      }
+
+      .page-header .meta {
+        font-size: 0.85rem;
+        color: var(--color-charcoal);
+        opacity: 0.6;
+        margin-top: 0.25rem;
+      }
+
+      .nav-back {
+        display: inline-block;
+        margin-bottom: 1.5rem;
+        font-size: 0.85rem;
+        color: var(--color-violet);
+        text-decoration: none;
+      }
+
+      .nav-back:hover {
+        text-decoration: underline;
+      }
+
+      .block {
+        border: 1px solid #d0d0d0;
+        border-radius: 6px;
+        margin-bottom: 2rem;
+        overflow: hidden;
+      }
+
+      .block + .block {
+        break-before: page;
+        page-break-before: always;
+      }
+
+      .block-header {
+        background: var(--color-stone);
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid #d0d0d0;
+      }
+
+      .block-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: var(--color-violet);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .block-label-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 1rem;
+      }
+
+      .monitor-name-label {
+        flex-shrink: 0;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--color-charcoal);
+        opacity: 0.55;
+      }
+
+      .block-time {
+        font-family: var(--font-serif);
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: var(--color-charcoal);
+      }
+
+      .block-body {
+        padding: 1rem;
+      }
+
+      .call-times {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.25rem;
+      }
+
+      .call-time {
+        flex: 1 1 220px;
+        border: 2px solid var(--color-violet);
+        border-radius: 6px;
+        padding: 0.6rem 0.85rem;
+      }
+
+      .call-time .who {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--color-charcoal);
+        opacity: 0.6;
+      }
+
+      .call-time .when {
+        font-family: var(--font-serif);
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--color-violet);
+        line-height: 1.2;
+      }
+
+      .section-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--color-charcoal);
+        opacity: 0.5;
+        margin-bottom: 0.4rem;
+        margin-top: 1rem;
+      }
+
+      .section-label:first-child {
+        margin-top: 0;
+      }
+
+      .checklist {
+        list-style: none;
+        counter-reset: step;
+      }
+
+      .checklist > li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+        padding: 0.6rem 0;
+        border-bottom: 1px solid #eee;
+        font-size: 0.95rem;
+      }
+
+      .checklist > li:last-child {
+        border-bottom: none;
+      }
+
+      .checklist input[type="checkbox"] {
+        margin-top: 3px;
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        accent-color: var(--color-violet);
+      }
+
+      .step-body {
+        flex: 1;
+      }
+
+      .step-number {
+        font-weight: 700;
+        color: var(--color-violet);
+        margin-right: 0.35rem;
+      }
+
+      .speaker-list {
+        list-style: none;
+        margin-top: 0.5rem;
+      }
+
+      .speaker-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+        padding: 0.35rem 0;
+        border-top: 1px dashed #e0e0e0;
+      }
+
+      .speaker-name {
+        font-weight: 700;
+      }
+
+      .speaker-pronouns {
+        font-weight: 400;
+        opacity: 0.6;
+        margin-left: 0.3rem;
+      }
+
+      .speaker-meta {
+        display: block;
+        font-size: 0.85rem;
+        opacity: 0.7;
+      }
+
+      .talk-code {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        color: var(--color-violet);
+        margin-right: 0.4rem;
+      }
+
+      .section-hint {
+        font-weight: 400;
+        text-transform: none;
+        letter-spacing: 0;
+      }
+
+      .attendance-list {
+        list-style: none;
+      }
+
+      .attendance-list li {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.4rem 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .attendance-list li:last-child {
+        border-bottom: none;
+      }
+
+      .attendance-talk {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .attendance-title {
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      .attendance-time {
+        font-size: 0.85rem;
+        opacity: 0.7;
+        margin-right: 0.4rem;
+      }
+
+      .attendance-box {
+        flex-shrink: 0;
+        width: 5rem;
+        height: 2.2rem;
+        border: 1px solid var(--color-charcoal);
+        border-radius: 4px;
+        background: #fff;
+      }
+
+      .no-speakers {
+        font-style: italic;
+        opacity: 0.6;
+      }
+
+      .procedure-intro {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .step-aside {
+        opacity: 0.6;
+      }
+
+      .radio-line {
+        display: block;
+        border-bottom: 1px solid #d0d0d0;
+        min-height: 1.5rem;
+        margin-top: 0.35rem;
+        font-size: 0.9rem;
+      }
+
+      .radio-call {
+        display: block;
+        background: #f5f2ff;
+        border-left: 3px solid var(--color-violet);
+        padding: 0.4rem 0.7rem;
+        margin-top: 0.4rem;
+        font-family: var(--font-serif);
+        font-size: 0.95rem;
+      }
+
+      .radio-call .cue {
+        display: block;
+        font-family: var(--font-sans);
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        opacity: 0.55;
+      }
+
+      .notes-section {
+        margin-top: 1rem;
+      }
+
+      /*
+       * The running header is a table-header-group so that print reserves
+       * space for it on every page. A position: fixed header repeats but
+       * takes up no room in the flow, so page 2 onwards prints underneath it.
+       */
+      .sheet,
+      .sheet > thead,
+      .sheet > tbody,
+      .sheet tr,
+      .sheet td {
+        display: block;
+      }
+
+      .sheet > thead {
+        display: none;
+      }
+
+      .print-page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding-bottom: 0.3rem;
+        margin-bottom: 1.5rem;
+        border-bottom: 2px solid var(--color-violet);
+        font-family: var(--font-sans);
+        font-size: 0.75rem;
+      }
+
+      .duty-phone {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--color-charcoal);
+        opacity: 0.6;
+        white-space: nowrap;
+      }
+
+      .duty-phone strong {
+        color: var(--color-violet);
+        letter-spacing: 0.04em;
+      }
+
+      .page-header .duty-phone {
+        margin-top: 0.35rem;
+        opacity: 1;
+      }
+
+      .print-page-header .room {
+        font-weight: 700;
+        color: var(--color-violet);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .print-page-header .meta {
+        color: var(--color-charcoal);
+        opacity: 0.6;
+      }
+
+      @page {
+        margin: 1.2cm;
+      }
+
+      @media print {
+        body {
+          padding: 0;
+          font-size: 11px;
+          line-height: 1.4;
+          max-width: none;
+        }
+
+        .nav-back,
+        .page-header {
+          display: none;
+        }
+
+        .sheet {
+          display: table;
+          width: 100%;
+        }
+
+        .sheet > thead {
+          display: table-header-group;
+        }
+
+        .sheet > tbody {
+          display: table-row-group;
+        }
+
+        .sheet tr {
+          display: table-row;
+        }
+
+        .sheet td {
+          display: table-cell;
+        }
+
+        .block {
+          margin-bottom: 0;
+          break-inside: avoid;
+          page-break-inside: avoid;
+        }
+
+        .block-header {
+          padding: 0.5rem 0.8rem;
+        }
+
+        .block-time {
+          font-size: 1.1rem;
+        }
+
+        .block-body {
+          padding: 0.65rem;
+        }
+
+        .call-time {
+          padding: 0.45rem 0.7rem;
+        }
+
+        .call-time .when {
+          font-size: 1.25rem;
+        }
+
+        .call-times {
+          gap: 0.6rem;
+          margin-bottom: 0.6rem;
+        }
+
+        .section-label {
+          margin-top: 0.55rem;
+        }
+
+        .checklist > li {
+          padding: 0.2rem 0;
+        }
+
+        .speaker-list li {
+          padding: 0.1rem 0;
+        }
+
+        .speaker-meta {
+          font-size: 0.8rem;
+        }
+
+        .attendance-list li {
+          padding: 0.18rem 0;
+          gap: 0.5rem;
+        }
+
+        /* Keep each talk to a single line so a block of long titles still
+           fits one page - the talk code and time identify it regardless. */
+        .attendance-talk {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .attendance-box {
+          width: 3.5rem;
+          height: 1.5rem;
+        }
+
+        .procedure-intro {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .step-aside {
+        opacity: 0.6;
+      }
+
+      .radio-line {
+          min-height: 1.1rem;
+          margin-top: 0.2rem;
+        }
+
+        .radio-call {
+          margin-top: 0.2rem;
+          padding: 0.25rem 0.55rem;
+        }
+
+        .notes-section {
+          margin-top: 0.45rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="nav-back" href={`/schedule/run-sheets/room-monitors/${day}`}>&larr; Back to {dayCapitalized} run sheets</a>
+
+    <div class="page-header">
+      <h1>Room Monitor Run Sheet &mdash; {room}</h1>
+      <p class="meta">{dateString} &middot; PyCon AU 2026 &middot; For room monitors</p>
+      <p class="duty-phone">
+        Duty officer <strong>{DUTY_OFFICER_PHONE}</strong>
+      </p>
+    </div>
+
+    <table class="sheet">
+      <thead>
+        <tr>
+          <td>
+            <div class="print-page-header">
+              <span class="room">{room}</span>
+              <span class="duty-phone">
+                Duty officer <strong>{DUTY_OFFICER_PHONE}</strong>
+              </span>
+              <span class="meta">{dateString} &middot; For room monitors</span>
+            </div>
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="block">
+              <div class="block-header">
+                <div class="block-label">Radio procedure</div>
+                <div class="block-time">Duty officer</div>
+              </div>
+              <div class="block-body">
+                <p class="procedure-intro">
+                  Notify the duty officer when all speakers are present, or if any
+                  speaker is not present 5 minutes before the block start time.
+                </p>
+                <span class="radio-call">
+                  <span class="cue">If everyone is present</span>
+                  &ldquo;Duty Officer, this is {room}, all speakers accounted for, over.&rdquo;
+                </span>
+                <span class="radio-call">
+                  <span class="cue">If people are missing</span>
+                  &ldquo;Duty Officer, this is {room}, over.&rdquo; &mdash; wait for
+                  acknowledgement, then tell them who is missing.
+                </span>
+              </div>
+            </div>
+
+            {blockData.map((block) => (
+      <div class="block">
+        <div class="block-header">
+          <div class="block-label-row">
+            <span class="block-label">Block {block.index + 1} of {blockData.length}</span>
+            <span class="monitor-name-label">Room monitor name</span>
+          </div>
+          <div class="block-time">{block.rangeStr}</div>
+        </div>
+        <div class="block-body">
+          <div class="call-times">
+            <div class="call-time">
+              <div class="who">Room monitor &amp; session chair call</div>
+              <div class="when">{block.crewCall}</div>
+            </div>
+            <div class="call-time">
+              <div class="who">Speaker call</div>
+              <div class="when">{block.speakerCall}</div>
+            </div>
+          </div>
+
+          <div class="section-label">Before the block starts</div>
+          <ul class="checklist">
+            <li>
+              <input type="checkbox" id={`av-${block.index}`} />
+              <div class="step-body">
+                <label for={`av-${block.index}`}>
+                  <span class="step-number">1.</span>
+                  Make yourself known to the AV volunteer(s) for this room
+                </label>
+              </div>
+            </li>
+
+            <li>
+              <input type="checkbox" id={`chair-${block.index}`} />
+              <div class="step-body">
+                <label for={`chair-${block.index}`}>
+                  <span class="step-number">2.</span>
+                  Find your session chair
+                </label>
+                <span class="radio-line" />
+              </div>
+            </li>
+
+            <li>
+              <input type="checkbox" id={`gifts-${block.index}`} />
+              <div class="step-body">
+                <label for={`gifts-${block.index}`}>
+                  <span class="step-number">3.</span>
+                  Ensure you have <strong>{block.speakerCount}</strong>{" "}
+                  speaker {block.speakerCount === 1 ? "gift" : "gifts"} and thank
+                  you {block.speakerCount === 1 ? "card" : "cards"} for
+                  {block.speakerCount === 1 ? " this speaker" : " these speakers"}
+                </label>
+              </div>
+            </li>
+
+            <li>
+              <input type="checkbox" id={`present-${block.index}`} />
+              <div class="step-body">
+                <label for={`present-${block.index}`}>
+                  <span class="step-number">4.</span>
+                  You have every speaker in this block
+                </label>
+                {block.speakerRows.length > 0 ? (
+                  <ul class="speaker-list">
+                    {block.speakerRows.map((speaker) => (
+                      <li>
+                        <input type="checkbox" id={`speaker-${speaker.id}`} />
+                        <label for={`speaker-${speaker.id}`}>
+                          <span class="speaker-name">{speaker.name}</span>
+                          {speaker.pronouns && (
+                            <span class="speaker-pronouns">({speaker.pronouns})</span>
+                          )}
+                          {speaker.appearances.map((appearance) => (
+                            <span class="speaker-meta">
+                              <span class="talk-code">{appearance.code}</span>
+                              {appearance.time} &middot; {appearance.title}
+                            </span>
+                          ))}
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p class="no-speakers">No speakers listed for this block.</p>
+                )}
+              </div>
+            </li>
+
+            <li>
+              <input type="checkbox" id={`duty-${block.index}`} />
+              <div class="step-body">
+                <label for={`duty-${block.index}`}>
+                  <span class="step-number">5.</span>
+                  Notify the duty officer <span class="step-aside">(see radio procedure)</span>
+                </label>
+              </div>
+            </li>
+          </ul>
+
+          <div class="section-label">
+            Approximate attendance <span class="section-hint">(count during each talk)</span>
+          </div>
+          <ul class="attendance-list">
+            {block.sessionRows.map((session) => (
+              <li>
+                <div class="attendance-talk">
+                  <span class="talk-code">{session.code}</span>
+                  <span class="attendance-time">{session.time}</span>
+                  <span class="attendance-title">{session.title}</span>
+                </div>
+                <span class="attendance-box" />
+              </li>
+            ))}
+          </ul>
+
+          <div class="notes-section">
+            <div class="section-label">Notes</div>
+          </div>
+        </div>
+      </div>
+            ))}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

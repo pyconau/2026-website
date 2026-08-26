@@ -1,0 +1,122 @@
+---
+import {
+  getConferenceDays,
+  getSessionsByDay,
+  CONFERENCE_TIMEZONE,
+} from "../../../../utils/schedule";
+
+const days = await getConferenceDays();
+
+const dayData = await Promise.all(
+  days.map(async (day) => {
+    const sessions = await getSessionsByDay(day);
+    const dateString =
+      sessions[0]?.data.start?.toLocaleDateString("en-AU", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        timeZone: CONFERENCE_TIMEZONE,
+      }) ?? (day.charAt(0).toUpperCase() + day.slice(1));
+    return { day, dateString };
+  })
+);
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Room Monitor Run Sheets — PyCon AU 2026</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        font-family: sans-serif;
+        font-size: 15px;
+        line-height: 1.6;
+        color: #1a1a1a;
+        background: #fff;
+        padding: 2rem;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .nav-back {
+        display: inline-block;
+        margin-bottom: 1.5rem;
+        font-size: 0.85rem;
+        color: #511fe5;
+        text-decoration: none;
+      }
+
+      .nav-back:hover { text-decoration: underline; }
+
+      h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.25rem;
+        color: #1a1a1a;
+      }
+
+      .meta {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+        border-bottom: 3px solid #511fe5;
+        padding-bottom: 1rem;
+      }
+
+      .day-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .day-link {
+        display: block;
+        padding: 1rem 1.25rem;
+        border: 1px solid #d0d0d0;
+        border-radius: 6px;
+        color: #511fe5;
+        text-decoration: none;
+        transition: background 0.15s;
+      }
+
+      .day-link:hover {
+        background: #f5f2ff;
+        border-color: #511fe5;
+      }
+
+      .day-name {
+        font-weight: 700;
+        font-size: 1.05rem;
+      }
+
+      .day-date {
+        font-size: 0.85rem;
+        color: #666;
+        margin-top: 0.1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <a class="nav-back" href="/schedule/run-sheets">&larr; All run sheets</a>
+
+    <h1>Room Monitor Run Sheets</h1>
+    <p class="meta">PyCon AU 2026 &middot; For internal use only</p>
+
+    <ul class="day-list">
+      {dayData.map(({ day, dateString }) => (
+        <li>
+          <a class="day-link" href={`/schedule/run-sheets/room-monitors/${day}`}>
+            <div class="day-name">{day.charAt(0).toUpperCase() + day.slice(1)}</div>
+            <div class="day-date">{dateString}</div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </body>
+</html>
