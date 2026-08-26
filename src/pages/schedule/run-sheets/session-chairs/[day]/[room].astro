@@ -219,19 +219,13 @@ const dateString =
         margin-left: 0.4rem;
       }
 
-      .speaker-bio {
-        margin-top: 0.3rem;
-        font-size: 0.75rem;
-        color: var(--color-charcoal);
-        opacity: 0.85;
-      }
-
-      .speaker-bio p {
-        margin-bottom: 0.4rem;
-      }
-
-      .speaker-bio p:last-child {
-        margin-bottom: 0;
+      .session-code {
+        font-size: 0.7rem;
+        opacity: 0.5;
+        margin-left: 0.5rem;
+        font-weight: 400;
+        text-transform: none;
+        letter-spacing: 0;
       }
 
       .divider {
@@ -279,59 +273,33 @@ const dateString =
         cursor: pointer;
       }
 
-      .bio-more {
-        font-size: 0.8rem;
-        color: var(--color-violet);
-        font-style: italic;
-        margin-left: 0.25rem;
-      }
-
-      .intro-row {
+      .please-welcome-row {
         display: flex;
         align-items: center;
-        gap: 0.6rem;
+        gap: 0.5rem;
         margin-top: 0.5rem;
-        flex-wrap: wrap;
-        font-size: 0.85rem;
+        font-size: 0.9rem;
       }
 
-      .intro-label {
+      .please-welcome-label {
         font-weight: 600;
-        color: var(--color-charcoal);
         white-space: nowrap;
-      }
-
-      .intro-option {
-        display: flex;
-        align-items: center;
-        gap: 0.3rem;
-        cursor: pointer;
-        white-space: nowrap;
-      }
-
-      .intro-option input {
-        accent-color: var(--color-violet);
-      }
-
-      .intro-or {
         color: var(--color-charcoal);
-        opacity: 0.5;
       }
 
-      .intro-write-line {
+      .please-welcome-line {
         flex: 1;
-        min-width: 8rem;
         border: none;
         border-bottom: 1px solid #d0d0d0;
         height: 1.6rem;
         background: transparent;
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         font-family: var(--font-sans);
         color: var(--color-charcoal);
         outline: none;
       }
 
-      .intro-write-line:focus {
+      .please-welcome-line:focus {
         border-bottom-color: var(--color-violet);
       }
 
@@ -340,7 +308,7 @@ const dateString =
       }
 
       @media print {
-        .intro-write-line {
+        .please-welcome-line {
           border-bottom-color: #999;
         }
       }
@@ -411,7 +379,8 @@ const dateString =
       <p class="meta">{dateString} &middot; PyCon AU 2026 &middot; For session chairs</p>
     </div>
 
-    {roomSessions.map((session) => {
+
+{roomSessions.map((session) => {
       const timeStr =
         session.data.start && session.data.end
           ? formatSessionTime(session.data.start, session.data.end)
@@ -423,7 +392,12 @@ const dateString =
       return (
         <div class="session-block">
           <div class="session-header">
-            {timeStr && <div class="session-time">{timeStr}</div>}
+            {timeStr && (
+              <div class="session-time">
+                {timeStr}
+                <span class="session-code">{session.data.code}</span>
+              </div>
+            )}
             <div class="session-title">{session.data.title}</div>
           </div>
           <div class="session-body">
@@ -434,39 +408,20 @@ const dateString =
                 </div>
                 {sessionSpeakers.map((speaker: any) => (
                   <div class="speaker">
-                    <div>
-                      <span class="speaker-name">{speaker.name}</span>
-                      {speaker.pronouns && (
-                        <span class="speaker-pronouns">({speaker.pronouns})</span>
-                      )}
-                    </div>
-                    {speaker.firstParagraphHtml && (
-                      <div class="speaker-bio">
-                        <span set:html={speaker.firstParagraphHtml} />
-                        {speaker.hasMoreParagraphs && (
-                          <span class="bio-more">(more)</span>
-                        )}
-                      </div>
+                    <span class="speaker-name">{speaker.name}</span>
+                    {speaker.pronouns && (
+                      <span class="speaker-pronouns">({speaker.pronouns})</span>
                     )}
-                    <div class="intro-row">
-                      <span class="intro-label">How to introduce?</span>
-                      <label class="intro-option">
-                        <input
-                          type="radio"
-                          name={`intro-${session.data.code}-${speaker.code}`}
-                          value="bio"
-                        />
-                        Use bio
-                      </label>
-                      <span class="intro-or">or:</span>
-                      <input
-                        class="intro-write-line"
-                        type="text"
-                        aria-label="Custom introduction"
-                      />
-                    </div>
                   </div>
                 ))}
+                <div class="please-welcome-row">
+                  <span class="please-welcome-label">Please welcome</span>
+                  <input
+                    class="please-welcome-line"
+                    type="text"
+                    aria-label="Introduction"
+                  />
+                </div>
               </>
             )}
 
@@ -475,8 +430,11 @@ const dateString =
             <div class="section-label">Session chair checklist</div>
             <ul class="checklist">
               <li>
+                Room monitor name:
+              </li>
+              <li>
                 <input type="checkbox" id={`lanyard-${session.data.code}`} />
-                <label for={`lanyard-${session.data.code}`}>Lanyard removed (speaker facing camera)</label>
+                <label for={`lanyard-${session.data.code}`}>Lanyard removed</label>
               </li>
               <li>
                 <input type="checkbox" id={`water-${session.data.code}`} />
