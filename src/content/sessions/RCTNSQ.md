@@ -1,9 +1,9 @@
 ---
 title: Global Instructing Lock pending
 code: RCTNSQ
-start: '2026-08-27T11:30:00+10:00'
-end: '2026-08-27T12:00:00+10:00'
-room: Ballroom 2
+start:
+end:
+room: ''
 track:
 type: talk
 speakers: []

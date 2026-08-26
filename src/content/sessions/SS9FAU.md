@@ -1,9 +1,9 @@
 ---
 title: 'Productivity: a dialogue'
 code: SS9FAU
-start: '2026-08-27T10:45:00+10:00'
-end: '2026-08-27T11:20:00+10:00'
-room: Ballroom 2
+start: '2026-08-28T10:45:00+10:00'
+end: '2026-08-28T11:20:00+10:00'
+room: Ballroom 3
 track:
 type: talk
 speakers:

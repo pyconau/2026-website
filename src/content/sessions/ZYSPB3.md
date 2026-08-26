@@ -1,8 +1,8 @@
 ---
 title: Switching from Sphinx to Markdown
 code: ZYSPB3
-start: '2026-08-29T15:10:00+10:00'
-end: '2026-08-29T15:40:00+10:00'
+start: '2026-08-27T10:45:00+10:00'
+end: '2026-08-27T11:20:00+10:00'
 room: Ballroom 2
 track:
 type: talk

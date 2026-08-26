@@ -3,7 +3,7 @@ title: 'Vibe-Check Your Vibe Code: Surviving the Era of Agentic Open Source Depe
 code: RQR97D
 start: '2026-08-28T13:30:00+10:00'
 end: '2026-08-28T14:00:00+10:00'
-room: Ballroom 3
+room: Ballroom 2
 track: cybersecurity
 type: talk
 speakers:
