@@ -59,6 +59,7 @@ export default defineConfig({
   integrations: [mdx(), sitemap({ filter: (page) => !page.includes("/dev/") })],
   redirects: {
     "/student-showcase": "/cfp/student-showcase",
+    "/culture": "/about/culture-and-community",
     "/workshops": "/schedule/workshops",
     // "Brisbane Transport" page was renamed to "Around Brisbane".
     "/attend/transport": "/attend/around-brisbane",
