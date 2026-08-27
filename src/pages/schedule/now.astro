@@ -255,8 +255,15 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
 
       .empty { font-size: calc(var(--u) * 0.05); color: var(--muted); }
 
-      /* Only the tall layout has the vertical room for a speaker line. */
+      /* Only the tall layout has the vertical room for a speaker line on the
+         session that is running - but the "next" one always carries its
+         title and speakers, since that is what people in the foyer are
+         deciding on. */
       .room .who { display: none; }
+      .room .who--next { display: block; }
+
+      /* One line only in the wide strip; the tall layout relaxes it below. */
+      .title--next { -webkit-line-clamp: 1; }
 
       /* --- Full-width banner (shared break, plenary, start/end of day) ---- */
 
@@ -280,6 +287,20 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
          so it sits smaller than the rooms carrying the live sessions. */
       .banner--trailing { flex: 0.7 1 0; }
       .banner--trailing .headline { font-size: calc(var(--u) * 0.07); }
+
+      /* Slimmer still: there is a talk before this break, so it is only a
+         heads-up - name, countdown, clock time - not the next thing on. */
+      .banner--slim {
+        flex: 0.42 1 0;
+        gap: calc(var(--u) * 0.008);
+        padding: calc(var(--u) * 0.025) calc(var(--u) * 0.03);
+      }
+      .banner--slim .headline {
+        font-size: calc(var(--u) * 0.05);
+        -webkit-line-clamp: 1;
+      }
+      .banner--slim .rem { font-size: calc(var(--u) * 0.045); }
+      .banner--slim .at { font-size: calc(var(--u) * 0.045); }
 
       .banner .headline {
         font-size: calc(var(--u) * 0.085);
@@ -330,6 +351,7 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
         .rooms { flex-direction: column; }
         .strip { flex-direction: column; flex: 1.4 1 0; }
         .room .who { display: block; }
+        .title--next { -webkit-line-clamp: 2; }
         .clock { font-size: calc(var(--u) * 0.12); }
         .banner .headline { font-size: calc(var(--u) * 0.075); }
       }
@@ -510,7 +532,12 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
                 el("span", "at", timeOf(state.next.start)),
               ])
             );
-            if (compact) box.appendChild(el("div", "title", state.next.title));
+            box.appendChild(
+              el("div", "title title--next", state.next.title)
+            );
+            if (state.next.who) {
+              box.appendChild(el("div", "who who--next", state.next.who));
+            }
           } else {
             box.appendChild(line("Next", [el("span", "empty", "done for the day")]));
           }
@@ -527,6 +554,19 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
           b.appendChild(
             el("div", "rem", mins <= 0 ? "starting" : "in " + remaining(mins))
           );
+          return b;
+        }
+
+        // A break with a talk in front of it: not the next thing on, so it
+        // only gets a name, a countdown and the time it starts.
+        function renderLaterBreak(brk, now) {
+          var b = el("div", "banner banner--break banner--trailing banner--slim");
+          b.appendChild(el("div", "lbl", "Then"));
+          b.appendChild(el("div", "headline", brk.title));
+          var l = el("div", "line");
+          l.appendChild(el("span", "rem", "in " + remaining(minutesUntil(brk.start, now))));
+          l.appendChild(el("span", "at", timeOf(brk.start)));
+          b.appendChild(l);
           return b;
         }
 
@@ -640,7 +680,16 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
             );
           });
           board.appendChild(rooms);
-          if (sharedBreak) board.appendChild(renderNextBreak(sharedBreak, now));
+          if (sharedBreak) {
+            board.appendChild(renderNextBreak(sharedBreak, now));
+          } else {
+            // No room is heading straight into a break, but one is still
+            // coming after the current round of talks - worth flagging small.
+            var laterBreak = sessions.filter(function (s) {
+              return s.type === "break" && s.start > now;
+            })[0];
+            if (laterBreak) board.appendChild(renderLaterBreak(laterBreak, now));
+          }
         }
 
         function roomStrip(states, compact) {
