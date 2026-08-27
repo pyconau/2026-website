@@ -11,6 +11,7 @@ import {
   getSessionsByDay,
   getScheduleForGrid,
   getScheduleForAgenda,
+  getSlotMinutes,
   getDayDate,
   getTrackColor,
   getPeopleByCode,
@@ -29,6 +30,9 @@ const dayCapitalized = day.charAt(0).toUpperCase() + day.slice(1);
 
 // Get sessions for grid layout
 const { rooms, rows, layout } = await getScheduleForGrid(day);
+// How long one slot row covers. The current-time line needs it to work out how
+// far down a row "now" falls; everything else about the row is already pixels.
+const slotMinutes = getSlotMinutes(layout);
 // Agenda groups for the mobile layout (< 768px). Both layouts render into the
 // same document and CSS chooses between them - see .claude/plans §6.1.
 const agendaGroups = await getScheduleForAgenda(day);
@@ -102,7 +106,7 @@ const trackSlugs = new Set(
         </div>
 
         <!-- Schedule Rows -->
-        <div class="schedule">
+        <div class="schedule" data-slot-minutes={slotMinutes}>
           {rows.map((row, rowIndex) => {
             // Get all sessions in this row, separating by type
             const allSessionsInRow = Array.from(row.sessionsByRoom.values()).flat();
@@ -112,7 +116,10 @@ const trackSlugs = new Set(
             return (
               <>
                 {rowIndex > 0 && <div class="new-row"></div>}
-                <div class="time">{row.label}</div>
+                {/* data-slot-start is the row's absolute instant, which is what
+                    the current-time line measures against. The label alone is
+                    ambiguous - it carries no date and no timezone. */}
+                <div class="time" data-slot-start={row.time.toISOString()}>{row.label}</div>
 
                 {/* Render room columns - each column renders sessions for that room */}
                 {rooms.map((room, roomIdx) => {
@@ -325,6 +332,11 @@ const trackSlugs = new Set(
               </>
             );
           })}
+
+          {/* Current-time line. Positioned by src/scripts/current-time.js and
+              hidden until that script decides "now" falls inside this day, so
+              the other four day pages never flash a line they shouldn't have. */}
+          <div class="schedule-now" data-schedule-now hidden aria-hidden="true"></div>
         </div>
       </div>
     )}
@@ -366,4 +378,5 @@ const trackSlugs = new Set(
 
   <script src="/src/scripts/animations.js"></script>
   <script src="/src/scripts/favourites.js"></script>
+  <script src="/src/scripts/current-time.js"></script>
 </Base>
