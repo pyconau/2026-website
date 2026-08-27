@@ -1,0 +1,662 @@
+---
+import {
+  getConferenceDays,
+  getRoomsForDay,
+  getSessionsByDay,
+  getPeopleByCode,
+  CONFERENCE_TIMEZONE,
+} from "../../utils/schedule";
+
+// A "what's on now / up next" board for the foyer screens. It is deliberately
+// unlinked from the rest of the site and rendered as a standalone document -
+// the same shape the run sheets use - because it is displayed in a 200px
+// strip (either 200px wide or 200px tall), not inside the site chrome.
+//
+// The whole day's schedule is embedded as JSON and the current slot is worked
+// out in the browser, so one static page stays correct all day.
+
+type BoardSession = {
+  code: string;
+  title: string;
+  type: string;
+  rooms: string[];
+  start: string;
+  end: string;
+  who: string;
+};
+
+type BoardDay = {
+  key: string; // YYYY-MM-DD in conference time
+  label: string; // "Thu 27 Aug"
+  rooms: string[];
+  sessions: BoardSession[];
+};
+
+const dayNames = await getConferenceDays();
+const days: BoardDay[] = [];
+
+for (const dayName of dayNames) {
+  const sessions = (await getSessionsByDay(dayName)).filter(
+    (s) => s.data.room && s.data.start && s.data.end
+  );
+  if (sessions.length === 0) continue;
+
+  const rooms = await getRoomsForDay(dayName);
+  // Plenaries are scheduled into a single room but every ballroom watches
+  // them, so they occupy all the ballroom columns here just as they span them
+  // in the schedule grid.
+  const ballrooms = rooms.filter((r) => r.startsWith("Ballroom"));
+
+  const speakerCodes = [
+    ...new Set(sessions.flatMap((s) => s.data.speakers || [])),
+  ];
+  const people = await getPeopleByCode(speakerCodes);
+  const nameByCode = new Map(people.map((p) => [p.data.code, p.data.name]));
+
+  const first = sessions[0].data.start!;
+
+  days.push({
+    key: first.toLocaleDateString("en-CA", { timeZone: CONFERENCE_TIMEZONE }),
+    label: first
+      .toLocaleDateString("en-AU", {
+        weekday: "short",
+        day: "numeric",
+        month: "short",
+        timeZone: CONFERENCE_TIMEZONE,
+      })
+      .replace(",", ""),
+    rooms,
+    sessions: sessions.map((s) => ({
+      code: s.data.code,
+      title: s.data.title,
+      type: s.data.type,
+      rooms:
+        s.data.type === "plenary" && ballrooms.includes(s.data.room)
+          ? ballrooms
+          : [s.data.room],
+      start: s.data.start!.toISOString(),
+      end: s.data.end!.toISOString(),
+      who: (s.data.speakers || [])
+        .map((c: string) => nameByCode.get(c))
+        .filter(Boolean)
+        .join(", "),
+    })),
+  });
+}
+
+// Escaped so a "</script>" in any title cannot close the JSON island early.
+const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
+  /</g,
+  "\\u003c"
+);
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Now &amp; Next — PyCon AU 2026</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <style is:inline>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        /* Both target sizes constrain one axis to 200px, so scaling off the
+           smaller viewport axis gives the same type size in each orientation. */
+        --u: clamp(150px, min(100vw, 100vh), 420px);
+        --gap: calc(var(--u) * 0.03);
+        --charcoal: #282828;
+        --stone: #eaeaea;
+        --lime: #bdf462;
+        --lemon: #f2bf36;
+        --lavender: #b380ff;
+        --coral: #ef553c;
+        --violet: #511fe5;
+        --muted: #9a9a9a;
+      }
+
+      html, body { height: 100%; overflow: hidden; }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: var(--charcoal);
+        color: #fff;
+        font-variant-numeric: tabular-nums;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .wrap {
+        height: 100%;
+        display: flex;
+        gap: var(--gap);
+        padding: var(--gap);
+      }
+
+      /* --- Clock rail ---------------------------------------------------- */
+
+      .rail {
+        display: flex;
+        flex: none;
+        align-items: baseline;
+        gap: calc(var(--u) * 0.04);
+      }
+
+      .clock {
+        font-size: calc(var(--u) * 0.15);
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: -0.02em;
+      }
+
+      .clock .mer { font-size: 0.55em; font-weight: 600; }
+
+      .rail .day {
+        font-size: calc(var(--u) * 0.055);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--lime);
+      }
+
+      /* --- Room columns -------------------------------------------------- */
+
+      .board {
+        flex: 1;
+        min-width: 0;
+        min-height: 0;
+        display: flex;
+        gap: var(--gap);
+      }
+
+      .rooms {
+        flex: 3 1 0;
+        min-width: 0;
+        min-height: 0;
+        display: flex;
+        gap: var(--gap);
+      }
+
+      .room {
+        flex: 1 1 0;
+        min-width: 0;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: calc(var(--u) * 0.012);
+        padding: calc(var(--u) * 0.03) calc(var(--u) * 0.04);
+        background: #333;
+        border-left: calc(var(--u) * 0.02) solid var(--accent, var(--lime));
+        border-radius: calc(var(--u) * 0.02);
+        overflow: hidden;
+      }
+
+      .room-name {
+        font-size: calc(var(--u) * 0.05);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--accent, var(--lime));
+      }
+
+      /* Wraps rather than clipping the session code when a room column is
+         narrow - the code is the one thing that must stay readable. */
+      .line {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 0 calc(var(--u) * 0.025);
+        min-width: 0;
+      }
+
+      .lbl {
+        flex: none;
+        font-size: calc(var(--u) * 0.042);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+      }
+
+      .code {
+        flex: none;
+        font-size: calc(var(--u) * 0.062);
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      .at {
+        flex: none;
+        font-size: calc(var(--u) * 0.055);
+        font-weight: 600;
+        color: var(--lemon);
+      }
+
+      .rem { flex: none; font-size: calc(var(--u) * 0.05); font-weight: 600; color: var(--muted); }
+
+      .title {
+        font-size: calc(var(--u) * 0.048);
+        line-height: 1.25;
+        color: var(--stone);
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .who {
+        font-size: calc(var(--u) * 0.042);
+        color: var(--muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .empty { font-size: calc(var(--u) * 0.05); color: var(--muted); }
+
+      /* Only the tall layout has the vertical room for a speaker line. */
+      .room .who { display: none; }
+
+      /* --- Full-width banner (shared break, plenary, start/end of day) ---- */
+
+      .banner {
+        flex: 1;
+        min-width: 0;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: calc(var(--u) * 0.015);
+        padding: calc(var(--u) * 0.03) calc(var(--u) * 0.045);
+        border-radius: calc(var(--u) * 0.02);
+        background: var(--violet);
+        overflow: hidden;
+      }
+
+      .banner--break { background: #3b3b3b; }
+
+      /* Trailing panel: the break is what comes next, not what is happening,
+         so it sits smaller than the rooms carrying the live sessions. */
+      .banner--trailing { flex: 0.7 1 0; }
+      .banner--trailing .headline { font-size: calc(var(--u) * 0.07); }
+
+      .banner .headline {
+        font-size: calc(var(--u) * 0.085);
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.01em;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .banner .rem { color: var(--lime); font-size: calc(var(--u) * 0.055); }
+      .banner .who { color: rgba(255, 255, 255, 0.75); }
+
+      /* The banner keeps the room strip beside it so "up next" per room is
+         still visible while everyone is on a break. */
+      .strip {
+        display: flex;
+        gap: var(--gap);
+        flex: none;
+        /* Without this the rooms' min-content width becomes the strip's
+           floor and squashes the banner down to a few characters. */
+        min-width: 0;
+        min-height: 0;
+      }
+
+      .strip .room {
+        justify-content: center;
+        padding: calc(var(--u) * 0.02) calc(var(--u) * 0.03);
+        background: transparent;
+      }
+
+      /* --- Orientation --------------------------------------------------- */
+
+      /* Wide and short (the ~200px-tall strip): everything sits in one row. */
+      .wrap { flex-direction: row; align-items: stretch; }
+      .rail { flex-direction: column; justify-content: center; align-items: flex-start; gap: 0; }
+      .board { flex-direction: row; }
+      .rooms { flex-direction: row; }
+      .strip { flex-direction: row; flex: 1.4 1 0; }
+
+      /* Tall and narrow (the ~200px-wide strip): everything stacks. */
+      @media (max-aspect-ratio: 1 / 1) {
+        .wrap { flex-direction: column; }
+        .rail { flex-direction: row; align-items: baseline; justify-content: space-between; }
+        .board { flex-direction: column; }
+        .rooms { flex-direction: column; }
+        .strip { flex-direction: column; flex: 1.4 1 0; }
+        .room .who { display: block; }
+        .clock { font-size: calc(var(--u) * 0.12); }
+        .banner .headline { font-size: calc(var(--u) * 0.075); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="rail">
+        <div class="clock" id="clock">&nbsp;</div>
+        <div class="day" id="day">&nbsp;</div>
+      </div>
+      <div class="board" id="board"></div>
+    </div>
+
+    <script type="application/json" id="board-data" set:html={payloadJson} />
+
+    <script is:inline>
+      (function () {
+        var DATA = JSON.parse(document.getElementById("board-data").textContent);
+        var TZ = DATA.tz;
+        var ACCENTS = ["var(--lime)", "var(--lemon)", "var(--lavender)", "var(--coral)"];
+
+        var params = new URLSearchParams(location.search);
+
+        var timeFmt = new Intl.DateTimeFormat("en-AU", {
+          hour: "numeric", minute: "2-digit", hour12: true, timeZone: TZ,
+        });
+        var dayKeyFmt = new Intl.DateTimeFormat("en-CA", {
+          year: "numeric", month: "2-digit", day: "2-digit", timeZone: TZ,
+        });
+
+        function timeOf(d) {
+          return timeFmt.format(d).replace(/\s/g, "").toLowerCase();
+        }
+
+        // Minutes past midnight in conference time, used so ?t= can be given
+        // as a wall clock time without hard-coding the UTC offset.
+        function wallMinutes(d) {
+          var parts = new Intl.DateTimeFormat("en-GB", {
+            hour: "2-digit", minute: "2-digit", hour12: false, timeZone: TZ,
+          }).formatToParts(d);
+          var h = 0, m = 0;
+          parts.forEach(function (p) {
+            if (p.type === "hour") h = parseInt(p.value, 10);
+            if (p.type === "minute") m = parseInt(p.value, 10);
+          });
+          return h * 60 + m;
+        }
+
+        function pickDay() {
+          if (!DATA.days.length) return null;
+          var forced = params.get("day");
+          if (forced) {
+            var byKey = DATA.days.filter(function (d) { return d.key === forced; })[0];
+            if (byKey) return byKey;
+            var byLabel = DATA.days.filter(function (d) {
+              return d.label.toLowerCase().indexOf(forced.toLowerCase()) === 0;
+            })[0];
+            if (byLabel) return byLabel;
+          }
+          var today = dayKeyFmt.format(new Date());
+          var match = DATA.days.filter(function (d) { return d.key === today; })[0];
+          if (match) return match;
+          // Off-day: show the next conference day, or the last one once the
+          // conference is over, so the screen is never blank.
+          var upcoming = DATA.days.filter(function (d) { return d.key > today; });
+          return upcoming.length ? upcoming[0] : DATA.days[DATA.days.length - 1];
+        }
+
+        var day = pickDay();
+        var sessions = day
+          ? day.sessions.map(function (s) {
+              return {
+                code: s.code, title: s.title, type: s.type, rooms: s.rooms, who: s.who,
+                start: new Date(s.start), end: new Date(s.end),
+              };
+            })
+          : [];
+        sessions.sort(function (a, b) { return a.start - b.start; });
+
+        function currentTime() {
+          var real = new Date();
+          var t = params.get("t");
+          if (!t || !sessions.length) return real;
+          if (/^\d{1,2}:\d{2}$/.test(t)) {
+            var bits = t.split(":");
+            var target = parseInt(bits[0], 10) * 60 + parseInt(bits[1], 10);
+            var anchor = sessions[0].start;
+            return new Date(anchor.getTime() + (target - wallMinutes(anchor)) * 60000);
+          }
+          var parsed = new Date(t);
+          return isNaN(parsed) ? real : parsed;
+        }
+
+        function minutesUntil(then, now) {
+          return Math.max(0, Math.ceil((then - now) / 60000));
+        }
+
+        function remaining(mins) {
+          if (mins <= 0) return "now";
+          if (mins < 60) return mins + " min";
+          var h = Math.floor(mins / 60);
+          return h + "h " + (mins % 60) + "m";
+        }
+
+        function el(tag, cls, text) {
+          var n = document.createElement(tag);
+          if (cls) n.className = cls;
+          if (text != null) n.textContent = text;
+          return n;
+        }
+
+        function line(label, nodes) {
+          var l = el("div", "line");
+          l.appendChild(el("span", "lbl", label));
+          nodes.forEach(function (n) { if (n) l.appendChild(n); });
+          return l;
+        }
+
+        // Per room: what is on right now, and the next session that is not a
+        // break - a break is what the board already says you are in, so the
+        // useful "next" is the talk after it.
+        function stateFor(room, now) {
+          var inRoom = sessions.filter(function (s) { return s.rooms.indexOf(room) !== -1; });
+          var current = inRoom.filter(function (s) { return s.start <= now && now < s.end; })[0] || null;
+          var upcoming = inRoom.filter(function (s) { return s.start > now; });
+          var next = upcoming.filter(function (s) { return s.type !== "break"; })[0] || null;
+          // If a break falls between now and that next session, it is the
+          // thing the room actually needs warning about - "Lunch in 15 min"
+          // matters more than the code of the talk on the far side of it.
+          var soonBreak = upcoming[0] && upcoming[0].type === "break" ? upcoming[0] : null;
+          return { room: room, current: current, next: next, soonBreak: soonBreak };
+        }
+
+        function renderRoom(state, accent, compact, hideBreak) {
+          var box = el("section", "room");
+          box.style.setProperty("--accent", accent);
+          box.appendChild(el("h2", "room-name", state.room));
+
+          if (!compact) {
+            if (state.current && state.current.type !== "break") {
+              box.appendChild(
+                line("Now", [
+                  el("span", "code", state.current.code),
+                  el("span", "rem", remaining(minutesUntil(state.current.end, nowRef)) + " left"),
+                ])
+              );
+              box.appendChild(el("div", "title", state.current.title));
+              if (state.current.who) box.appendChild(el("div", "who", state.current.who));
+            } else if (state.current) {
+              box.appendChild(
+                line("Now", [
+                  el("span", "code", state.current.title),
+                  el("span", "rem", remaining(minutesUntil(state.current.end, nowRef)) + " left"),
+                ])
+              );
+            } else {
+              // The five minutes between one talk ending and the next
+              // starting - naming it beats an empty dash on a foyer screen.
+              box.appendChild(line("Now", [el("span", "empty", "Changeover")]));
+            }
+          }
+
+          if (state.soonBreak && !hideBreak) {
+            var untilBreak = minutesUntil(state.soonBreak.start, nowRef);
+            box.appendChild(
+              line("Then", [
+                el("span", "code", state.soonBreak.title),
+                el("span", "rem", untilBreak <= 0 ? "starting" : "in " + remaining(untilBreak)),
+              ])
+            );
+          }
+
+          if (state.next) {
+            box.appendChild(
+              line("Next", [
+                el("span", "code", state.next.code),
+                el("span", "at", timeOf(state.next.start)),
+              ])
+            );
+            if (compact) box.appendChild(el("div", "title", state.next.title));
+          } else {
+            box.appendChild(line("Next", [el("span", "empty", "done for the day")]));
+          }
+          return box;
+        }
+
+        // The mirror image of the break banner: while a break is on it leads
+        // the board, and while one is coming it trails it.
+        function renderNextBreak(brk, now) {
+          var b = el("div", "banner banner--break banner--trailing");
+          b.appendChild(el("div", "lbl", "Next"));
+          b.appendChild(el("div", "headline", brk.title));
+          var mins = minutesUntil(brk.start, now);
+          b.appendChild(
+            el("div", "rem", mins <= 0 ? "starting" : "in " + remaining(mins))
+          );
+          return b;
+        }
+
+        function renderBanner(headline, sub, remText, variant) {
+          var b = el("div", "banner" + (variant ? " banner--" + variant : ""));
+          b.appendChild(el("div", "headline", headline));
+          if (sub) b.appendChild(el("div", "who", sub));
+          if (remText) b.appendChild(el("div", "rem", remText));
+          return b;
+        }
+
+        var nowRef = new Date();
+
+        function render() {
+          var now = (nowRef = currentTime());
+          var board = document.getElementById("board");
+          board.textContent = "";
+
+          document.getElementById("clock").innerHTML = timeOf(now).replace(
+            /(am|pm)$/,
+            '<span class="mer">$1</span>'
+          );
+          document.getElementById("day").textContent = day ? day.label : "";
+
+          if (!day) {
+            board.appendChild(renderBanner("No schedule", "", "", "break"));
+            return;
+          }
+
+          var states = day.rooms.map(function (r) { return stateFor(r, now); });
+          var withCurrent = states.filter(function (s) { return s.current; });
+
+          // Everyone in the same session (a plenary), or everyone on a break:
+          // one headline reads far better on a 200px strip than three copies
+          // of it. Rooms keep their "up next" alongside.
+          // A plenary collapses even when a room has nothing on (Lyon is
+          // empty during the keynotes); anything else has to be running
+          // everywhere before it speaks for the whole floor.
+          var shared =
+            withCurrent.length > 0 &&
+            withCurrent.every(function (s) {
+              return s.current.code === withCurrent[0].current.code;
+            });
+          var sameCode =
+            shared &&
+            (withCurrent[0].current.type === "plenary" ||
+              withCurrent.length === states.length);
+          var allBreak =
+            withCurrent.length > 0 &&
+            states.every(function (s) { return !s.current || s.current.type === "break"; });
+
+          var dayStart = sessions.length ? sessions[0].start : null;
+          var dayEnd = sessions.reduce(function (acc, s) {
+            return !acc || s.end > acc ? s.end : acc;
+          }, null);
+
+          if (dayStart && now < dayStart) {
+            board.appendChild(
+              renderBanner(
+                "Doors open soon",
+                "First session " + timeOf(dayStart),
+                "starts in " + remaining(minutesUntil(dayStart, now)),
+                "break"
+              )
+            );
+            board.appendChild(roomStrip(states, true));
+            return;
+          }
+
+          if (dayEnd && now >= dayEnd) {
+            board.appendChild(renderBanner("That's a wrap", day.label, "", "break"));
+            return;
+          }
+
+          if (sameCode || allBreak) {
+            var lead = withCurrent[0].current;
+            var endsAt = withCurrent.reduce(function (acc, s) {
+              return s.current.end > acc ? s.current.end : acc;
+            }, withCurrent[0].current.end);
+            board.appendChild(
+              renderBanner(
+                lead.title,
+                allBreak ? "" : lead.who,
+                remaining(minutesUntil(endsAt, now)) + " left",
+                allBreak ? "break" : null
+              )
+            );
+            board.appendChild(roomStrip(states, true));
+            return;
+          }
+
+          // Every room heading into the same break at the same time gets one
+          // panel at the end of the board rather than the same line repeated
+          // in each column.
+          var sharedBreak =
+            states.length > 0 &&
+            states.every(function (s) {
+              return (
+                s.soonBreak &&
+                s.soonBreak.title === states[0].soonBreak.title &&
+                s.soonBreak.start.getTime() === states[0].soonBreak.start.getTime()
+              );
+            })
+              ? states[0].soonBreak
+              : null;
+
+          var rooms = el("div", "rooms");
+          states.forEach(function (s, i) {
+            rooms.appendChild(
+              renderRoom(s, ACCENTS[i % ACCENTS.length], false, !!sharedBreak)
+            );
+          });
+          board.appendChild(rooms);
+          if (sharedBreak) board.appendChild(renderNextBreak(sharedBreak, now));
+        }
+
+        function roomStrip(states, compact) {
+          var strip = el("div", "strip");
+          states.forEach(function (s, i) {
+            strip.appendChild(renderRoom(s, ACCENTS[i % ACCENTS.length], compact));
+          });
+          return strip;
+        }
+
+        render();
+        setInterval(render, 10000);
+        // The schedule is baked in at build time, so pick up a redeploy
+        // without anyone having to touch the screen.
+        setTimeout(function () { location.reload(); }, 30 * 60 * 1000);
+      })();
+    </script>
+  </body>
+</html>
