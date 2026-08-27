@@ -532,11 +532,18 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
           return l;
         }
 
+        // A session that runs in several rooms (a plenary mirrored onto every
+        // ballroom screen) belongs to the last of them alphabetically, so the
+        // board shows it once instead of repeating it down the strip.
+        function homeRoom(s) {
+          return s.rooms.slice().sort()[s.rooms.length - 1];
+        }
+
         // Per room: what is on right now, and the next session that is not a
         // break - a break is what the board already says you are in, so the
         // useful "next" is the talk after it.
         function stateFor(room, now) {
-          var inRoom = sessions.filter(function (s) { return s.rooms.indexOf(room) !== -1; });
+          var inRoom = sessions.filter(function (s) { return homeRoom(s) === room; });
           var current = inRoom.filter(function (s) { return s.start <= now && now < s.end; })[0] || null;
           var upcoming = inRoom.filter(function (s) { return s.start > now; });
           var next = upcoming.filter(function (s) { return s.type !== "break"; })[0] || null;
