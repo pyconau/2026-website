@@ -542,12 +542,26 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
         // Per room: what is on right now, and the next session that is not a
         // break - a break is what the board already says you are in, so the
         // useful "next" is the talk after it.
-        function stateFor(room, now) {
+        function stateFor(room, now, nextBreak) {
           var inRoom = sessions.filter(function (s) { return homeRoom(s) === room; });
           var current = inRoom.filter(function (s) { return s.start <= now && now < s.end; })[0] || null;
           var upcoming = inRoom.filter(function (s) { return s.start > now; });
           var next = upcoming.filter(function (s) { return s.type !== "break"; })[0] || null;
-          return { room: room, current: current, next: next };
+          // A room that has not opened yet is left off the board entirely:
+          // Ballroom 1 and 2 do nothing on a main day until after the morning
+          // tea that follows the keynote in Ballroom 3, and an "up next" two
+          // hours out only steals width from the room that is running. The
+          // test is whether the room's first session of the day lands on the
+          // far side of the next break - if it is in this round of talks the
+          // room belongs on the board even before it starts.
+          var firstTalk = inRoom.filter(function (s) { return s.type !== "break"; })[0] || null;
+          var pending =
+            !current &&
+            !!firstTalk &&
+            now < firstTalk.start &&
+            !!nextBreak &&
+            firstTalk.start >= nextBreak.start;
+          return { room: room, current: current, next: next, pending: pending };
         }
 
         // The talk block inside a room column: label, code, title, speakers.
@@ -600,8 +614,8 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
 
         function roomStrip(states, compact) {
           var strip = el("div", "strip");
-          states.forEach(function (s, i) {
-            strip.appendChild(renderRoom(s, ACCENTS[i % ACCENTS.length], compact));
+          states.forEach(function (s) {
+            strip.appendChild(renderRoom(s, s.accent, compact));
           });
           return strip;
         }
@@ -686,7 +700,25 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
             return;
           }
 
-          var states = day.rooms.map(function (r) { return stateFor(r, now); });
+          // The next break anywhere on the floor: shared by every room, so it
+          // belongs in the foot - and it is also the line that decides which
+          // rooms are open yet.
+          var nextBreak = sessions.filter(function (s) {
+            return s.type === "break" && s.start > now;
+          })[0] || null;
+
+          var allStates = day.rooms.map(function (r, i) {
+            var st = stateFor(r, now, nextBreak);
+            // Keyed off the room's place in the day, not its place on the
+            // board, so a room keeps its colour when the ones beside it come
+            // and go.
+            st.accent = ACCENTS[i % ACCENTS.length];
+            return st;
+          });
+          var states = allStates.filter(function (s) { return !s.pending; });
+          // Before the first room opens there is nothing else to show, so the
+          // strip falls back to the whole day's rooms.
+          if (!states.length) states = allStates;
           var withCurrent = states.filter(function (s) { return s.current; });
 
           var dayStart = sessions.length ? sessions[0].start : null;
@@ -694,11 +726,7 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
             return !acc || s.end > acc ? s.end : acc;
           }, null);
 
-          // The next break anywhere on the floor, and the next round of talks
-          // - both shared by every room, so both belong in the foot.
-          var nextBreak = sessions.filter(function (s) {
-            return s.type === "break" && s.start > now;
-          })[0] || null;
+          // The next round of talks, shared by every room.
           var nextStart = states.reduce(function (acc, s) {
             if (!s.next) return acc;
             return !acc || s.next.start < acc ? s.next.start : acc;
@@ -774,10 +802,8 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
           // Mid-changeover nothing is on in any room, so the rooms drop the
           // "Now" block rather than repeat the rail's word three times.
           var rooms = el("div", "rooms");
-          states.forEach(function (s, i) {
-            rooms.appendChild(
-              renderRoom(s, ACCENTS[i % ACCENTS.length], withCurrent.length === 0)
-            );
+          states.forEach(function (s) {
+            rooms.appendChild(renderRoom(s, s.accent, withCurrent.length === 0));
           });
           board.appendChild(rooms);
         }
