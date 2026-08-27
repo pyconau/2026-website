@@ -576,6 +576,38 @@ export function getScheduleLayout(dayName: string): ScheduleLayout {
   return "detailed";
 }
 
+/**
+ * Minutes covered by one slot row of a given layout. Exported so a page can
+ * label its rows with their length without repeating the 30/60 literals that
+ * LAYOUT_CONFIG owns - the current-time line reads it off the rendered grid.
+ */
+export function getSlotMinutes(layout: ScheduleLayout): number {
+  return LAYOUT_CONFIG[layout].slotMinutes;
+}
+
+/**
+ * Minutes past the hour of an instant, read on the conference clock.
+ *
+ * Date#getMinutes() reads it on the build host's clock instead. The two agree
+ * wherever the host sits at a whole-hour offset, but not in a half-hour one
+ * (Adelaide, Kolkata): there a host-clock floor lands the grid half an hour off
+ * the conference-clock slot boundary it is meant to sit on, and a CI runner's
+ * timezone silently decides what the schedule says. Rows are labelled in
+ * CONFERENCE_TIMEZONE and the current-time line measures against their absolute
+ * instants, so both have to round on the same clock the labels are written in.
+ */
+function conferenceMinutesPastHour(date: Date): number {
+  const minutePart = new Intl.DateTimeFormat("en-AU", {
+    timeZone: CONFERENCE_TIMEZONE,
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  })
+    .formatToParts(date)
+    .find((part) => part.type === "minute");
+  return minutePart ? Number(minutePart.value) : date.getMinutes();
+}
+
 // Room order for column spanning logic
 const ROOM_ORDER = ["Ballroom 1", "Ballroom 2", "Ballroom 3", "Stradbroke Room", "Junior Ballroom"];
 
@@ -733,14 +765,20 @@ export async function getScheduleForGrid(
     return { rooms: [], rows: [], layout: scheduleLayout };
   }
 
-  // Round down to nearest slot boundary for start
+  // Round down to the nearest slot boundary for start, up for end - both on the
+  // conference clock, see conferenceMinutesPastHour(). Every timezone offset is
+  // a whole number of minutes, so shifting by absolute milliseconds moves the
+  // conference wall clock by exactly the amount asked for.
   const gridStart = new Date(earliest);
-  gridStart.setMinutes(Math.floor(gridStart.getMinutes() / slotMinutes) * slotMinutes, 0, 0);
+  const startOvershoot = conferenceMinutesPastHour(gridStart) % slotMinutes;
+  gridStart.setTime(gridStart.getTime() - startOvershoot * 60_000);
+  gridStart.setSeconds(0, 0);
 
-  // Round up to nearest slot boundary for end
   const gridEnd = new Date(latest);
-  if (gridEnd.getMinutes() % slotMinutes !== 0) {
-    gridEnd.setMinutes(Math.ceil(gridEnd.getMinutes() / slotMinutes) * slotMinutes, 0, 0);
+  const endOvershoot = conferenceMinutesPastHour(gridEnd) % slotMinutes;
+  if (endOvershoot !== 0) {
+    gridEnd.setTime(gridEnd.getTime() + (slotMinutes - endOvershoot) * 60_000);
+    gridEnd.setSeconds(0, 0);
   }
 
   const gridStartTime = gridStart.getTime();
@@ -908,7 +946,9 @@ export async function getScheduleForGrid(
       sessionsByRoom,
     });
 
-    current.setMinutes(current.getMinutes() + slotMinutes);
+    // Absolute, not host-local: setMinutes() would step the build host's wall
+    // clock, which is not the clock these rows are labelled and measured on.
+    current.setTime(current.getTime() + slotMinutes * 60_000);
     slotIndex++;
   }
 
