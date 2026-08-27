@@ -403,7 +403,10 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
         .rail-top { flex-direction: row; align-items: baseline; justify-content: space-between; width: 100%; }
         .board { flex-direction: column; }
         .rooms { flex-direction: column; }
-        .foot { flex-direction: column; }
+        /* Two short panels side by side read better than stacked when the
+           strip is narrow but tall - there is width to spare, not height. */
+        .foot { flex-direction: row; }
+        .foot .panel { flex: 1 1 0; }
         .strip { flex-direction: column; flex: 1.4 1 0; }
         .title { -webkit-line-clamp: 2; }
         .clock { font-size: calc(var(--u) * 0.12); }
@@ -623,8 +626,8 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
             var b = el("div", "panel panel--break");
             b.appendChild(el("div", "headline", brk.title));
             b.appendChild(line("", [
-              el("span", "rem", "in " + remaining(minutesUntil(brk.start, now))),
               el("span", "at", timeOf(brk.start)),
+              el("span", "rem", "in " + remaining(minutesUntil(brk.start, now))),
             ]));
             foot.appendChild(b);
           }
