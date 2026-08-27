@@ -135,11 +135,21 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
 
       /* --- Clock rail ---------------------------------------------------- */
 
+      /* Every room runs to the same clock this year, so the countdown for the
+         talks that are on lives here once, beside the time, instead of being
+         repeated in every room column. */
       .rail {
         display: flex;
         flex: none;
+        min-width: 0;
+        gap: calc(var(--u) * 0.01);
+      }
+
+      .rail-top {
+        display: flex;
         align-items: baseline;
         gap: calc(var(--u) * 0.04);
+        min-width: 0;
       }
 
       .clock {
@@ -159,6 +169,24 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
         color: var(--lime);
       }
 
+      .status {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 0 calc(var(--u) * 0.025);
+        min-width: 0;
+      }
+
+      .status .what {
+        font-size: calc(var(--u) * 0.045);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--stone);
+      }
+
+      .status .rem { color: var(--lime); font-size: calc(var(--u) * 0.05); }
+
       /* --- Room columns -------------------------------------------------- */
 
       .board {
@@ -170,7 +198,7 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
       }
 
       .rooms {
-        flex: 3 1 0;
+        flex: 1 1 0;
         min-width: 0;
         min-height: 0;
         display: flex;
@@ -184,8 +212,8 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
         display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: calc(var(--u) * 0.012);
-        padding: calc(var(--u) * 0.03) calc(var(--u) * 0.04);
+        gap: calc(var(--u) * 0.008);
+        padding: calc(var(--u) * 0.025) calc(var(--u) * 0.035);
         background: #333;
         border-left: calc(var(--u) * 0.02) solid var(--accent, var(--lime));
         border-radius: calc(var(--u) * 0.02);
@@ -198,6 +226,22 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
         text-transform: uppercase;
         letter-spacing: 0.07em;
         color: var(--accent, var(--lime));
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /* Children keep their natural height rather than being squashed by the
+         column - fit() shrinks the type scale when they no longer fit, and it
+         can only see that if they are allowed to overflow. */
+      .room > *, .panel > * { flex: none; }
+
+      /* Hairline between what is on and what follows it in the same room. */
+      .sep {
+        flex: none;
+        height: 1px;
+        margin: calc(var(--u) * 0.012) 0;
+        background: rgba(255, 255, 255, 0.16);
       }
 
       /* Wraps rather than clipping the session code when a room column is
@@ -240,7 +284,7 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
         line-height: 1.25;
         color: var(--stone);
         display: -webkit-box;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
         overflow: hidden;
       }
@@ -255,17 +299,43 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
 
       .empty { font-size: calc(var(--u) * 0.05); color: var(--muted); }
 
-      /* Only the tall layout has the vertical room for a speaker line on the
-         session that is running - but the "next" one always carries its
-         title and speakers, since that is what people in the foyer are
-         deciding on. */
-      .room .who { display: none; }
-      .room .who--next { display: block; }
+      /* --- Trailing panel: when the next round starts, then the break ----- */
 
-      /* One line only in the wide strip; the tall layout relaxes it below. */
-      .title--next { -webkit-line-clamp: 1; }
+      .foot {
+        flex: none;
+        min-width: 0;
+        min-height: 0;
+        display: flex;
+        gap: var(--gap);
+      }
 
-      /* --- Full-width banner (shared break, plenary, start/end of day) ---- */
+      .panel {
+        flex: none;
+        min-width: 0;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: calc(var(--u) * 0.008);
+        padding: calc(var(--u) * 0.025) calc(var(--u) * 0.035);
+        border-radius: calc(var(--u) * 0.02);
+        background: #333;
+        overflow: hidden;
+      }
+
+      .panel .headline {
+        font-size: calc(var(--u) * 0.052);
+        font-weight: 700;
+        line-height: 1.15;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .panel--break { background: #3b3b3b; }
+
+      /* --- Full-width banner (shared plenary, break, start/end of day) ---- */
 
       .banner {
         flex: 1;
@@ -282,25 +352,6 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
       }
 
       .banner--break { background: #3b3b3b; }
-
-      /* Trailing panel: the break is what comes next, not what is happening,
-         so it sits smaller than the rooms carrying the live sessions. */
-      .banner--trailing { flex: 0.7 1 0; }
-      .banner--trailing .headline { font-size: calc(var(--u) * 0.07); }
-
-      /* Slimmer still: there is a talk before this break, so it is only a
-         heads-up - name, countdown, clock time - not the next thing on. */
-      .banner--slim {
-        flex: 0.42 1 0;
-        gap: calc(var(--u) * 0.008);
-        padding: calc(var(--u) * 0.025) calc(var(--u) * 0.03);
-      }
-      .banner--slim .headline {
-        font-size: calc(var(--u) * 0.05);
-        -webkit-line-clamp: 1;
-      }
-      .banner--slim .rem { font-size: calc(var(--u) * 0.045); }
-      .banner--slim .at { font-size: calc(var(--u) * 0.045); }
 
       .banner .headline {
         font-size: calc(var(--u) * 0.085);
@@ -338,20 +389,23 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
 
       /* Wide and short (the ~200px-tall strip): everything sits in one row. */
       .wrap { flex-direction: row; align-items: stretch; }
-      .rail { flex-direction: column; justify-content: center; align-items: flex-start; gap: 0; }
+      .rail { flex-direction: column; justify-content: center; align-items: flex-start; }
+      .rail-top { flex-direction: column; align-items: flex-start; gap: 0; }
       .board { flex-direction: row; }
       .rooms { flex-direction: row; }
+      .foot { flex-direction: column; justify-content: center; }
       .strip { flex-direction: row; flex: 1.4 1 0; }
 
       /* Tall and narrow (the ~200px-wide strip): everything stacks. */
       @media (max-aspect-ratio: 1 / 1) {
         .wrap { flex-direction: column; }
-        .rail { flex-direction: row; align-items: baseline; justify-content: space-between; }
+        .rail { flex-direction: column; }
+        .rail-top { flex-direction: row; align-items: baseline; justify-content: space-between; width: 100%; }
         .board { flex-direction: column; }
         .rooms { flex-direction: column; }
+        .foot { flex-direction: column; }
         .strip { flex-direction: column; flex: 1.4 1 0; }
-        .room .who { display: block; }
-        .title--next { -webkit-line-clamp: 2; }
+        .title { -webkit-line-clamp: 2; }
         .clock { font-size: calc(var(--u) * 0.12); }
         .banner .headline { font-size: calc(var(--u) * 0.075); }
       }
@@ -359,11 +413,15 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
   </head>
   <body>
     <div class="wrap">
-      <div class="rail">
-        <div class="clock" id="clock">&nbsp;</div>
-        <div class="day" id="day">&nbsp;</div>
-      </div>
+      <header class="rail">
+        <div class="rail-top">
+          <div class="clock" id="clock">&nbsp;</div>
+          <div class="day" id="day">&nbsp;</div>
+        </div>
+        <div class="status" id="status"></div>
+      </header>
       <div class="board" id="board"></div>
+      <footer class="foot" id="foot"></footer>
     </div>
 
     <script type="application/json" id="board-data" set:html={payloadJson} />
@@ -466,7 +524,7 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
 
         function line(label, nodes) {
           var l = el("div", "line");
-          l.appendChild(el("span", "lbl", label));
+          if (label) l.appendChild(el("span", "lbl", label));
           nodes.forEach(function (n) { if (n) l.appendChild(n); });
           return l;
         }
@@ -479,95 +537,47 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
           var current = inRoom.filter(function (s) { return s.start <= now && now < s.end; })[0] || null;
           var upcoming = inRoom.filter(function (s) { return s.start > now; });
           var next = upcoming.filter(function (s) { return s.type !== "break"; })[0] || null;
-          // If a break falls between now and that next session, it is the
-          // thing the room actually needs warning about - "Lunch in 15 min"
-          // matters more than the code of the talk on the far side of it.
-          var soonBreak = upcoming[0] && upcoming[0].type === "break" ? upcoming[0] : null;
-          return { room: room, current: current, next: next, soonBreak: soonBreak };
+          return { room: room, current: current, next: next };
         }
 
-        function renderRoom(state, accent, compact, hideBreak) {
+        // The talk block inside a room column: label, code, title, speakers.
+        // Countdowns and start times are deliberately absent - every room is
+        // on the same clock, so those live in the rail and the foot.
+        function slot(box, label, s) {
+          if (!s) {
+            box.appendChild(line(label, [el("span", "empty", "—")]));
+            return;
+          }
+          var isBreak = s.type === "break";
+          box.appendChild(line(label, [el("span", "code", isBreak ? s.title : s.code)]));
+          if (!isBreak) {
+            box.appendChild(el("div", "title", s.title));
+            if (s.who) box.appendChild(el("div", "who", s.who));
+          }
+        }
+
+        function renderRoom(state, accent, compact) {
           var box = el("section", "room");
           box.style.setProperty("--accent", accent);
           box.appendChild(el("h2", "room-name", state.room));
 
           if (!compact) {
-            if (state.current && state.current.type !== "break") {
-              box.appendChild(
-                line("Now", [
-                  el("span", "code", state.current.code),
-                  el("span", "rem", remaining(minutesUntil(state.current.end, nowRef)) + " left"),
-                ])
-              );
-              box.appendChild(el("div", "title", state.current.title));
-              if (state.current.who) box.appendChild(el("div", "who", state.current.who));
-            } else if (state.current) {
-              box.appendChild(
-                line("Now", [
-                  el("span", "code", state.current.title),
-                  el("span", "rem", remaining(minutesUntil(state.current.end, nowRef)) + " left"),
-                ])
-              );
+            if (state.current) {
+              slot(box, "Now", state.current);
             } else {
               // The five minutes between one talk ending and the next
               // starting - naming it beats an empty dash on a foyer screen.
               box.appendChild(line("Now", [el("span", "empty", "Changeover")]));
             }
-          }
-
-          if (state.soonBreak && !hideBreak) {
-            var untilBreak = minutesUntil(state.soonBreak.start, nowRef);
-            box.appendChild(
-              line("Then", [
-                el("span", "code", state.soonBreak.title),
-                el("span", "rem", untilBreak <= 0 ? "starting" : "in " + remaining(untilBreak)),
-              ])
-            );
+            box.appendChild(el("div", "sep"));
           }
 
           if (state.next) {
-            box.appendChild(
-              line("Next", [
-                el("span", "code", state.next.code),
-                el("span", "at", timeOf(state.next.start)),
-              ])
-            );
-            box.appendChild(
-              el("div", "title title--next", state.next.title)
-            );
-            if (state.next.who) {
-              box.appendChild(el("div", "who who--next", state.next.who));
-            }
+            slot(box, "Next", state.next);
           } else {
             box.appendChild(line("Next", [el("span", "empty", "done for the day")]));
           }
           return box;
-        }
-
-        // The mirror image of the break banner: while a break is on it leads
-        // the board, and while one is coming it trails it.
-        function renderNextBreak(brk, now) {
-          var b = el("div", "banner banner--break banner--trailing");
-          b.appendChild(el("div", "lbl", "Next"));
-          b.appendChild(el("div", "headline", brk.title));
-          var mins = minutesUntil(brk.start, now);
-          b.appendChild(
-            el("div", "rem", mins <= 0 ? "starting" : "in " + remaining(mins))
-          );
-          return b;
-        }
-
-        // A break with a talk in front of it: not the next thing on, so it
-        // only gets a name, a countdown and the time it starts.
-        function renderLaterBreak(brk, now) {
-          var b = el("div", "banner banner--break banner--trailing banner--slim");
-          b.appendChild(el("div", "lbl", "Then"));
-          b.appendChild(el("div", "headline", brk.title));
-          var l = el("div", "line");
-          l.appendChild(el("span", "rem", "in " + remaining(minutesUntil(brk.start, now))));
-          l.appendChild(el("span", "at", timeOf(brk.start)));
-          b.appendChild(l);
-          return b;
         }
 
         function renderBanner(headline, sub, remText, variant) {
@@ -578,10 +588,78 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
           return b;
         }
 
-        var nowRef = new Date();
+        function roomStrip(states, compact) {
+          var strip = el("div", "strip");
+          states.forEach(function (s, i) {
+            strip.appendChild(renderRoom(s, ACCENTS[i % ACCENTS.length], compact));
+          });
+          return strip;
+        }
+
+        // The rail's second line: what the floor is doing and how long is
+        // left of it, once, for every room.
+        function setStatus(what, remText) {
+          var status = document.getElementById("status");
+          status.textContent = "";
+          if (what) status.appendChild(el("span", "what", what));
+          if (remText) status.appendChild(el("span", "rem", remText));
+        }
+
+        function renderFoot(nextStart, brk, now) {
+          var foot = document.getElementById("foot");
+          foot.textContent = "";
+
+          if (nextStart) {
+            var p = el("div", "panel");
+            p.appendChild(el("div", "lbl", "Next talks"));
+            p.appendChild(line("", [
+              el("span", "at", timeOf(nextStart)),
+              el("span", "rem", "in " + remaining(minutesUntil(nextStart, now))),
+            ]));
+            foot.appendChild(p);
+          }
+
+          if (brk) {
+            var b = el("div", "panel panel--break");
+            b.appendChild(el("div", "headline", brk.title));
+            b.appendChild(line("", [
+              el("span", "rem", "in " + remaining(minutesUntil(brk.start, now))),
+              el("span", "at", timeOf(brk.start)),
+            ]));
+            foot.appendChild(b);
+          }
+        }
+
+        // The board carries more rooms on some days than others, so a type
+        // scale fixed to the viewport eventually clips a room. Start at the
+        // size the strip wants and step down until every box holds its
+        // content.
+        function fit() {
+          var root = document.documentElement;
+          var boxes = document.querySelectorAll(".room, .panel, .banner");
+          var u = Math.max(150, Math.min(Math.min(window.innerWidth, window.innerHeight), 420));
+          for (var step = 0; step < 16; step++) {
+            root.style.setProperty("--u", u.toFixed(2) + "px");
+            var over = false;
+            for (var i = 0; i < boxes.length; i++) {
+              // The boxes centre their content, so overflow spills out of both
+              // ends and scrollHeight does not see it - compare the first and
+              // last child against the box instead.
+              var kids = boxes[i].children;
+              if (!kids.length) continue;
+              var box = boxes[i].getBoundingClientRect();
+              if (
+                kids[0].getBoundingClientRect().top < box.top - 1 ||
+                kids[kids.length - 1].getBoundingClientRect().bottom > box.bottom + 1
+              ) { over = true; break; }
+            }
+            if (!over) return;
+            u *= 0.94;
+          }
+        }
 
         function render() {
-          var now = (nowRef = currentTime());
+          var now = currentTime();
           var board = document.getElementById("board");
           board.textContent = "";
 
@@ -592,12 +670,48 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
           document.getElementById("day").textContent = day ? day.label : "";
 
           if (!day) {
+            setStatus("No schedule", "");
+            renderFoot(null, null, now);
             board.appendChild(renderBanner("No schedule", "", "", "break"));
             return;
           }
 
           var states = day.rooms.map(function (r) { return stateFor(r, now); });
           var withCurrent = states.filter(function (s) { return s.current; });
+
+          var dayStart = sessions.length ? sessions[0].start : null;
+          var dayEnd = sessions.reduce(function (acc, s) {
+            return !acc || s.end > acc ? s.end : acc;
+          }, null);
+
+          // The next break anywhere on the floor, and the next round of talks
+          // - both shared by every room, so both belong in the foot.
+          var nextBreak = sessions.filter(function (s) {
+            return s.type === "break" && s.start > now;
+          })[0] || null;
+          var nextStart = states.reduce(function (acc, s) {
+            if (!s.next) return acc;
+            return !acc || s.next.start < acc ? s.next.start : acc;
+          }, null);
+
+          if (dayStart && now < dayStart) {
+            setStatus("Doors open", "in " + remaining(minutesUntil(dayStart, now)));
+            // The banner already says when the first session is, and morning
+            // tea is a long way off - the foot would only be noise.
+            renderFoot(null, null, now);
+            board.appendChild(
+              renderBanner("Doors open soon", "First session " + timeOf(dayStart), "", "break")
+            );
+            board.appendChild(roomStrip(states, true));
+            return;
+          }
+
+          if (dayEnd && now >= dayEnd) {
+            setStatus("That's a wrap", "");
+            renderFoot(null, null, now);
+            board.appendChild(renderBanner("That's a wrap", day.label, "", "break"));
+            return;
+          }
 
           // Everyone in the same session (a plenary), or everyone on a break:
           // one headline reads far better on a 200px strip than three copies
@@ -618,39 +732,25 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
             withCurrent.length > 0 &&
             states.every(function (s) { return !s.current || s.current.type === "break"; });
 
-          var dayStart = sessions.length ? sessions[0].start : null;
-          var dayEnd = sessions.reduce(function (acc, s) {
-            return !acc || s.end > acc ? s.end : acc;
+          // The soonest end, not the latest: rooms share a clock, so an
+          // outlier like the all-afternoon unconference must not stretch the
+          // countdown past the changeover everyone else is waiting on.
+          var endsAt = withCurrent.reduce(function (acc, s) {
+            return !acc || s.current.end < acc ? s.current.end : acc;
           }, null);
-
-          if (dayStart && now < dayStart) {
-            board.appendChild(
-              renderBanner(
-                "Doors open soon",
-                "First session " + timeOf(dayStart),
-                "starts in " + remaining(minutesUntil(dayStart, now)),
-                "break"
-              )
-            );
-            board.appendChild(roomStrip(states, true));
-            return;
-          }
-
-          if (dayEnd && now >= dayEnd) {
-            board.appendChild(renderBanner("That's a wrap", day.label, "", "break"));
-            return;
-          }
+          var leftText = endsAt ? remaining(minutesUntil(endsAt, now)) + " left" : "";
 
           if (sameCode || allBreak) {
             var lead = withCurrent[0].current;
-            var endsAt = withCurrent.reduce(function (acc, s) {
-              return s.current.end > acc ? s.current.end : acc;
-            }, withCurrent[0].current.end);
+            // A break's name is short and worth repeating in the rail; a
+            // plenary title is not - the banner beside it already carries it.
+            setStatus(allBreak ? lead.title : "Current talk", leftText);
+            renderFoot(nextStart, allBreak ? null : nextBreak, now);
             board.appendChild(
               renderBanner(
                 lead.title,
                 allBreak ? "" : lead.who,
-                remaining(minutesUntil(endsAt, now)) + " left",
+                "",
                 allBreak ? "break" : null
               )
             );
@@ -658,50 +758,28 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
             return;
           }
 
-          // Every room heading into the same break at the same time gets one
-          // panel at the end of the board rather than the same line repeated
-          // in each column.
-          var sharedBreak =
-            states.length > 0 &&
-            states.every(function (s) {
-              return (
-                s.soonBreak &&
-                s.soonBreak.title === states[0].soonBreak.title &&
-                s.soonBreak.start.getTime() === states[0].soonBreak.start.getTime()
-              );
-            })
-              ? states[0].soonBreak
-              : null;
+          setStatus(withCurrent.length ? "Current talks" : "Changeover", leftText);
+          renderFoot(nextStart, nextBreak, now);
 
+          // Mid-changeover nothing is on in any room, so the rooms drop the
+          // "Now" block rather than repeat the rail's word three times.
           var rooms = el("div", "rooms");
           states.forEach(function (s, i) {
             rooms.appendChild(
-              renderRoom(s, ACCENTS[i % ACCENTS.length], false, !!sharedBreak)
+              renderRoom(s, ACCENTS[i % ACCENTS.length], withCurrent.length === 0)
             );
           });
           board.appendChild(rooms);
-          if (sharedBreak) {
-            board.appendChild(renderNextBreak(sharedBreak, now));
-          } else {
-            // No room is heading straight into a break, but one is still
-            // coming after the current round of talks - worth flagging small.
-            var laterBreak = sessions.filter(function (s) {
-              return s.type === "break" && s.start > now;
-            })[0];
-            if (laterBreak) board.appendChild(renderLaterBreak(laterBreak, now));
-          }
         }
 
-        function roomStrip(states, compact) {
-          var strip = el("div", "strip");
-          states.forEach(function (s, i) {
-            strip.appendChild(renderRoom(s, ACCENTS[i % ACCENTS.length], compact));
-          });
-          return strip;
+        function draw() {
+          render();
+          fit();
         }
 
-        render();
-        setInterval(render, 10000);
+        draw();
+        setInterval(draw, 10000);
+        window.addEventListener("resize", draw);
         // The schedule is baked in at build time, so pick up a redeploy
         // without anyone having to touch the screen.
         setTimeout(function () { location.reload(); }, 30 * 60 * 1000);
