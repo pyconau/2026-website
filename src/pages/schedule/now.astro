@@ -187,6 +187,33 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
 
       .status .rem { color: var(--lime); font-size: calc(var(--u) * 0.05); }
 
+      /* How far through its current talk a room is. It lives in the room
+         rather than beside the rail's countdown because the rooms do not
+         really share a clock - Ballroom 3 can be halfway through a long talk
+         while 1 and 2 are already in changeover - so one bar for the floor
+         would be wrong for every room but the one it was measuring. */
+      .bar {
+        flex: none;
+        height: calc(var(--u) * 0.012);
+        margin-top: calc(var(--u) * 0.014);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.16);
+        overflow: hidden;
+      }
+
+      .bar > i {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+        background: var(--accent, var(--lime));
+      }
+
+      /* On the banner the whole floor is in one session, so the single bar
+         is accurate - it just needs to read against the violet. */
+      .banner .bar { background: rgba(255, 255, 255, 0.25); }
+      .banner .bar > i { background: #fff; }
+      .banner--break .bar > i { background: var(--lime); }
+
       /* --- Room columns -------------------------------------------------- */
 
       .board {
@@ -567,7 +594,7 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
         // The talk block inside a room column: label, code, title, speakers.
         // Countdowns and start times are deliberately absent - every room is
         // on the same clock, so those live in the rail and the foot.
-        function slot(box, label, s) {
+        function slot(box, label, s, now) {
           if (!s) {
             box.appendChild(line(label, [el("span", "empty", "—")]));
             return;
@@ -578,16 +605,21 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
             box.appendChild(el("div", "title", s.title));
             if (s.who) box.appendChild(el("div", "who", s.who));
           }
+          // `now` is only passed for what is on, so only that block gets a bar.
+          if (now) {
+            var b = bar(s, now);
+            if (b) box.appendChild(b);
+          }
         }
 
-        function renderRoom(state, accent, compact) {
+        function renderRoom(state, accent, compact, now) {
           var box = el("section", "room");
           box.style.setProperty("--accent", accent);
           box.appendChild(el("h2", "room-name", state.room));
 
           if (!compact) {
             if (state.current) {
-              slot(box, "Now", state.current);
+              slot(box, "Now", state.current, now);
             } else {
               // The five minutes between one talk ending and the next
               // starting - naming it beats an empty dash on a foyer screen.
@@ -604,18 +636,22 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
           return box;
         }
 
-        function renderBanner(headline, sub, remText, variant) {
+        function renderBanner(headline, sub, remText, variant, progressFor, now) {
           var b = el("div", "banner" + (variant ? " banner--" + variant : ""));
           b.appendChild(el("div", "headline", headline));
           if (sub) b.appendChild(el("div", "who", sub));
           if (remText) b.appendChild(el("div", "rem", remText));
+          if (progressFor) {
+            var p = bar(progressFor, now);
+            if (p) b.appendChild(p);
+          }
           return b;
         }
 
-        function roomStrip(states, compact) {
+        function roomStrip(states, compact, now) {
           var strip = el("div", "strip");
           states.forEach(function (s) {
-            strip.appendChild(renderRoom(s, s.accent, compact));
+            strip.appendChild(renderRoom(s, s.accent, compact, now));
           });
           return strip;
         }
@@ -627,6 +663,20 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
           status.textContent = "";
           if (what) status.appendChild(el("span", "what", what));
           if (remText) status.appendChild(el("span", "rem", remText));
+        }
+
+        // A bar filled to how far `s` has run, or null when there is nothing
+        // to measure - a zero-length session, or no session at all.
+        function bar(s, now) {
+          if (!s) return null;
+          var span = s.end - s.start;
+          if (span <= 0) return null;
+          var frac = Math.min(1, Math.max(0, (now - s.start) / span));
+          var b = el("div", "bar");
+          var fill = el("i");
+          fill.style.width = (frac * 100).toFixed(2) + "%";
+          b.appendChild(fill);
+          return b;
         }
 
         function renderFoot(nextStart, brk, now) {
@@ -740,7 +790,7 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
             board.appendChild(
               renderBanner("Doors open soon", "First session " + timeOf(dayStart), "", "break")
             );
-            board.appendChild(roomStrip(states, true));
+            board.appendChild(roomStrip(states, true, now));
             return;
           }
 
@@ -789,10 +839,12 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
                 lead.title,
                 allBreak ? "" : lead.who,
                 "",
-                allBreak ? "break" : null
+                allBreak ? "break" : null,
+                lead,
+                now
               )
             );
-            board.appendChild(roomStrip(states, true));
+            board.appendChild(roomStrip(states, true, now));
             return;
           }
 
@@ -803,7 +855,7 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
           // "Now" block rather than repeat the rail's word three times.
           var rooms = el("div", "rooms");
           states.forEach(function (s) {
-            rooms.appendChild(renderRoom(s, s.accent, withCurrent.length === 0));
+            rooms.appendChild(renderRoom(s, s.accent, withCurrent.length === 0, now));
           });
           board.appendChild(rooms);
         }
