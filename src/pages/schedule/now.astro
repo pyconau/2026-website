@@ -814,11 +814,39 @@ const payloadJson = JSON.stringify({ tz: CONFERENCE_TIMEZONE, days }).replace(
         }
 
         draw();
-        setInterval(draw, 10000);
         window.addEventListener("resize", draw);
+
+        // One rAF loop drives both the redraw and the reload, each gated on
+        // its own elapsed time rather than its own timer. The board only ever
+        // changes on the minute, so a frame that arrives early does nothing.
+        //
+        // The point of rAF over an interval is what happens off-screen: a
+        // hidden tab (or a screen the browser has stopped painting) gets no
+        // frames at all, so nothing runs until it is visible again - where an
+        // interval would keep re-rendering the whole board to no one. The
+        // first frame back is late by however long that lasted, which both
+        // gates read as "past due" and act on straight away.
+        var DRAW_MS = 10 * 1000;
         // The schedule is baked in at build time, so pick up a redeploy
         // without anyone having to touch the screen.
-        setTimeout(function () { location.reload(); }, 30 * 60 * 1000);
+        var RELOAD_MS = 30 * 60 * 1000;
+        var lastDraw = Date.now();
+        var loaded = lastDraw;
+
+        function tick() {
+          var t = Date.now();
+          if (t - loaded >= RELOAD_MS) {
+            location.reload();
+            return;
+          }
+          if (t - lastDraw >= DRAW_MS) {
+            lastDraw = t;
+            draw();
+          }
+          window.requestAnimationFrame(tick);
+        }
+
+        window.requestAnimationFrame(tick);
       })();
     </script>
   </body>
