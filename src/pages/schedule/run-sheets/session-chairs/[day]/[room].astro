@@ -1,0 +1,487 @@
+---
+import "../../../../../styles/style.css";
+import { marked } from "marked";
+import {
+  getConferenceDays,
+  getSessionsByDay,
+  getRoomsForDay,
+  getPeopleByCode,
+  formatSessionTime,
+  CONFERENCE_TIMEZONE,
+} from "../../../../../utils/schedule";
+
+export async function getStaticPaths() {
+  const days = await getConferenceDays();
+  const paths = [];
+
+  for (const day of days) {
+    const rooms = await getRoomsForDay(day);
+    const allSessions = await getSessionsByDay(day);
+
+    for (const room of rooms) {
+      const roomSessions = allSessions.filter(
+        (s) => s.data.room === room && s.data.type !== "break"
+      );
+      if (roomSessions.length === 0) continue;
+
+      const roomSlug = room.toLowerCase().replace(/\s+/g, "-");
+      paths.push({
+        params: { day: day.toLowerCase(), room: roomSlug },
+        props: { day, room },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { day, room } = Astro.props as { day: string; room: string };
+const dayCapitalized = day.charAt(0).toUpperCase() + day.slice(1);
+
+const allSessions = await getSessionsByDay(day);
+const roomSessions = allSessions
+  .filter((s) => s.data.room === room && s.data.type !== "break")
+  .sort(
+    (a, b) =>
+      (a.data.start?.getTime() ?? 0) - (b.data.start?.getTime() ?? 0)
+  );
+
+const speakerCodes = [
+  ...new Set(roomSessions.flatMap((s) => s.data.speakers || [])),
+];
+const speakerEntries = await getPeopleByCode(speakerCodes);
+
+type RenderedSpeaker = {
+  code: string;
+  name: string;
+  pronouns: string | undefined;
+  firstParagraphHtml: string;
+  hasMoreParagraphs: boolean;
+};
+
+const renderedSpeakers: RenderedSpeaker[] = await Promise.all(
+  speakerEntries.map(async (person) => {
+    const fullHtml = person.body ? await marked.parse(person.body) : "";
+    const firstPMatch = fullHtml.match(/<p>[\s\S]*?<\/p>/);
+    const firstParagraphHtml = firstPMatch ? firstPMatch[0] : fullHtml;
+    const hasMoreParagraphs = (fullHtml.match(/<\/p>/g) ?? []).length > 1;
+    return {
+      code: person.data.code,
+      name: person.data.name,
+      pronouns: person.data.pronouns,
+      firstParagraphHtml,
+      hasMoreParagraphs,
+    };
+  })
+);
+
+const speakerMap = new Map(renderedSpeakers.map((s) => [s.code, s]));
+
+const dateString =
+  roomSessions[0]?.data.start?.toLocaleDateString("en-AU", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: CONFERENCE_TIMEZONE,
+  }) ?? dayCapitalized;
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Run Sheet — {room} — {dateString}</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Roboto+Slab:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        /* Run sheet type accent: violet marks a session chair sheet. */
+        --sheet-accent: var(--color-violet);
+      }
+
+      body {
+        font-family: var(--font-sans);
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--color-charcoal);
+        background: #fff;
+        padding: 2rem;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .page-header {
+        border-bottom: 3px solid var(--sheet-accent);
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .page-header h1 {
+        font-family: var(--font-serif);
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: var(--color-charcoal);
+      }
+
+      .page-header .meta {
+        font-size: 0.85rem;
+        color: var(--color-charcoal);
+        opacity: 0.6;
+        margin-top: 0.25rem;
+      }
+
+      .nav-back {
+        display: inline-block;
+        margin-bottom: 1.5rem;
+        font-size: 0.85rem;
+        color: var(--sheet-accent);
+        text-decoration: none;
+      }
+
+      .nav-back:hover {
+        text-decoration: underline;
+      }
+
+      .session-block {
+        border: 1px solid #d0d0d0;
+        border-radius: 6px;
+        margin-bottom: 2rem;
+        overflow: hidden;
+      }
+
+      .session-block + .session-block {
+        break-before: page;
+        page-break-before: always;
+      }
+
+      .session-header {
+        background: var(--color-stone);
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid #d0d0d0;
+      }
+
+      .session-time {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--sheet-accent);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 0.25rem;
+      }
+
+      .session-title {
+        font-family: var(--font-serif);
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: var(--color-charcoal);
+      }
+
+      .session-body {
+        padding: 1rem;
+      }
+
+      .section-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--color-charcoal);
+        opacity: 0.5;
+        margin-bottom: 0.4rem;
+        margin-top: 1rem;
+      }
+
+      .section-label:first-child {
+        margin-top: 0;
+      }
+
+      .speaker {
+        margin-bottom: 0.9rem;
+      }
+
+      .speaker-name {
+        font-weight: 700;
+        font-size: 0.95rem;
+      }
+
+      .speaker-pronouns {
+        font-size: 0.85rem;
+        color: var(--color-charcoal);
+        opacity: 0.6;
+        margin-left: 0.4rem;
+      }
+
+      .session-code {
+        font-size: 0.7rem;
+        opacity: 0.5;
+        margin-left: 0.5rem;
+        font-weight: 400;
+        text-transform: none;
+        letter-spacing: 0;
+      }
+
+      .divider {
+        border: none;
+        border-top: 1px solid #d0d0d0;
+        margin: 1rem 0;
+      }
+
+      .checklist {
+        list-style: none;
+        margin-top: 0.4rem;
+      }
+
+      .checklist li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+        padding: 0.4rem 0;
+        border-bottom: 1px solid #eee;
+        font-size: 0.9rem;
+      }
+
+      .checklist li:last-child {
+        border-bottom: none;
+      }
+
+      .checklist input[type="checkbox"] {
+        margin-top: 2px;
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        accent-color: var(--sheet-accent);
+      }
+
+      .questions-row {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 0.25rem;
+      }
+
+      .questions-row label {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        cursor: pointer;
+      }
+
+      .please-welcome-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      .please-welcome-label {
+        font-weight: 600;
+        white-space: nowrap;
+        color: var(--color-charcoal);
+      }
+
+      .please-welcome-line {
+        flex: 1;
+        border: none;
+        border-bottom: 1px solid #d0d0d0;
+        height: 1.6rem;
+        background: transparent;
+        font-size: 0.9rem;
+        font-family: var(--font-sans);
+        color: var(--color-charcoal);
+        outline: none;
+      }
+
+      .please-welcome-line:focus {
+        border-bottom-color: var(--sheet-accent);
+      }
+
+      .notes-section {
+        margin-top: 0.75rem;
+      }
+
+      .sheet-type {
+        font-weight: 700;
+        font-size: 0.75rem;
+        color: var(--sheet-accent);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      @media print {
+        .please-welcome-line {
+          border-bottom-color: #999;
+        }
+      }
+
+      .print-page-header {
+        display: none;
+      }
+
+      @page {
+        margin-top: 2.5cm;
+      }
+
+      @media print {
+        body {
+          padding: 1rem;
+          font-size: 12px;
+        }
+
+        .nav-back,
+        .page-header {
+          display: none;
+        }
+
+        .session-block {
+          margin-top: 2.5rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .print-page-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+          position: fixed;
+          top: 0;
+          left: 1rem;
+          right: 1rem;
+          padding-bottom: 0.3rem;
+          border-bottom: 2px solid var(--sheet-accent);
+          background: #fff;
+          font-family: var(--font-sans);
+          font-size: 0.75rem;
+        }
+
+        .print-page-header .room {
+          font-weight: 700;
+          color: var(--sheet-accent);
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+        }
+
+        .print-page-header .meta {
+          color: var(--color-charcoal);
+          opacity: 0.6;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="print-page-header">
+      <span class="room">{room}</span>
+      <span class="sheet-type">Session chair</span>
+      <span class="meta">{dateString}</span>
+    </div>
+
+    <a class="nav-back" href={`/schedule/run-sheets/session-chairs/${day}`}>&larr; Back to {dayCapitalized} run sheets</a>
+
+    <div class="page-header">
+      <p class="sheet-type">Session chair</p>
+      <h1>Run Sheet &mdash; {room}</h1>
+      <p class="meta">{dateString} &middot; PyCon AU 2026</p>
+    </div>
+
+
+{roomSessions.map((session) => {
+      const timeStr =
+        session.data.start && session.data.end
+          ? formatSessionTime(session.data.start, session.data.end)
+          : "";
+      const sessionSpeakers = (session.data.speakers || [])
+        .map((code: string) => speakerMap.get(code))
+        .filter(Boolean);
+
+      return (
+        <div class="session-block">
+          <div class="session-header">
+            {timeStr && (
+              <div class="session-time">
+                {timeStr}
+                <span class="session-code">{session.data.code}</span>
+              </div>
+            )}
+            <div class="session-title">{session.data.title}</div>
+          </div>
+          <div class="session-body">
+            {sessionSpeakers.length > 0 && (
+              <>
+                <div class="section-label">
+                  {sessionSpeakers.length === 1 ? "Speaker" : "Speakers"}
+                </div>
+                {sessionSpeakers.map((speaker: any) => (
+                  <div class="speaker">
+                    <span class="speaker-name">{speaker.name}</span>
+                    {speaker.pronouns && (
+                      <span class="speaker-pronouns">({speaker.pronouns})</span>
+                    )}
+                  </div>
+                ))}
+                <div class="please-welcome-row">
+                  <span class="please-welcome-label">Please welcome</span>
+                  <input
+                    class="please-welcome-line"
+                    type="text"
+                    aria-label="Introduction"
+                  />
+                </div>
+              </>
+            )}
+
+            <hr class="divider" />
+
+            <div class="section-label">Session chair checklist</div>
+            <ul class="checklist">
+              <li>
+                Room monitor name:
+              </li>
+              <li>
+                <input type="checkbox" id={`lanyard-${session.data.code}`} />
+                <label for={`lanyard-${session.data.code}`}>Lanyard removed</label>
+              </li>
+              <li>
+                <input type="checkbox" id={`water-${session.data.code}`} />
+                <label for={`water-${session.data.code}`}>Speaker(s) have water</label>
+              </li>
+              <li>
+                <input type="checkbox" id={`pronouns-${session.data.code}`} />
+                <label for={`pronouns-${session.data.code}`}>Confirm pronouns</label>
+              </li>
+              <li>
+                <div style="flex: 1;">
+                  <div>Questions at the end?</div>
+                  <div class="questions-row">
+                    <label>
+                      <input type="radio" name={`questions-${session.data.code}`} value="yes" />
+                      Yes
+                    </label>
+                    <label>
+                      <input type="radio" name={`questions-${session.data.code}`} value="no" />
+                      No
+                    </label>
+                  </div>
+                </div>
+              </li>
+            </ul>
+
+            <div class="notes-section">
+              <div class="section-label">Notes</div>
+            </div>
+          </div>
+        </div>
+      );
+    })}
+  </body>
+</html>

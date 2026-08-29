@@ -597,6 +597,15 @@ ul.sub-menu {
   --schedule-gutter: 1.5rem;
 }
 
+/* Colour of the current-time line. Charcoal, the theme's ink: no track colour
+   is charcoal (trackColors in src/utils/schedule.ts), so the line can never be
+   mistaken for one of the cards it crosses, and a neutral rule marks the time
+   without competing with the colour the cards are already using to say what
+   track they belong to. A red would read as a sixth track. */
+:root {
+  --schedule-now-color: var(--color-charcoal);
+}
+
 /* Simple layout: 60-minute slots with shorter height */
 .schedule-wrapper[data-layout="simple"] {
   --schedule-slot-height: 130px;
@@ -665,7 +674,18 @@ ul.sub-menu {
 }
 
 .schedule {
-  @apply grid border-y border-[#DBDBDB] mt-10 px-5;
+  @apply grid border-y border-[#DBDBDB] mt-10;
+  /* Positioning context for .schedule-now. The line is placed in pixels from
+     the top of the grid, and its script reads row offsets against this. */
+  position: relative;
+  /* The horizontal padding, as a variable rather than a px-5 utility, because
+     .schedule-now has to inset by exactly this much to line up with the
+     columns: an absolutely positioned child resolves left/right against the
+     padding box, so left: 0 would put it out in the gutter. Same reasoning as
+     --schedule-gutter above - a length two rules must agree on is a variable,
+     not a literal repeated in both. */
+  --schedule-padding-x: 1.25rem;
+  padding-inline: var(--schedule-padding-x);
   column-gap: var(--schedule-gutter);
   /* Desktop: time column (80px) + flexible room columns */
   grid-template-columns: 80px repeat(var(--schedule-room-count), 1fr);
@@ -805,6 +825,71 @@ ul.sub-menu {
   @apply border-b border-[#DBDBDB];
   /* Span all columns: time + rooms */
   grid-column: 1 / -1;
+}
+
+/* ==========================================================================
+   Current time
+   --------------------------------------------------------------------------
+   One line across the grid at the current instant, positioned by
+   src/scripts/current-time.js. Drawn in --schedule-now-color - see its
+   definition above for why that is the theme's charcoal.
+   ========================================================================== */
+
+.schedule-now {
+  @apply absolute;
+  /* Inset by the grid's own padding, so the dot lands on the time column rather
+     than out in the gutter: an absolutely positioned child resolves left/right
+     against the padding box, so left: 0 would miss the axis it is anchoring to.
+     The line bleeds back out to the right on its own - see ::after. */
+  left: var(--schedule-padding-x);
+  right: var(--schedule-padding-x);
+  /* Zero height, so both children centre on the element's own top edge - which
+     is the instant the script positioned it at. The line is a child rather
+     than a border on this box: drawn as a border it would run the full width
+     behind the dot, and the dot's curve would leave it showing as a notch. */
+  height: 0;
+  display: flex;
+  align-items: center;
+  /* Above the sticky time column (30) as well as every event (10, 15, 20):
+     the line has to cross the time column to be read against it. */
+  z-index: 35;
+  /* The line marks a moment; clicks belong to the sessions underneath it. */
+  pointer-events: none;
+}
+
+/* Dot at the left end, on the time axis - the anchor that ties the line to the
+   column it is read against. Static: the grid never scrolls sideways under it,
+   because below 768px the agenda replaces it outright and from 768px up the
+   columns divide the available width instead of overflowing it. */
+.schedule-now::before {
+  content: "";
+  flex: none;
+  /* Sized against the 1px line: big enough to read as a deliberate anchor at a
+     glance, small enough not to outweigh the line it belongs to. */
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background-color: var(--schedule-now-color);
+}
+
+/* The line, starting where the dot ends and running out through the grid's
+   right-hand padding. Bleeding past the last column reads as the moment
+   carrying on rather than stopping neatly at the edge of the timetable, and it
+   is the one end free to do so: the left end has the dot anchoring it to the
+   time axis. Negative margin rather than a wider box, so the overhang is tied
+   to the padding it is cancelling and the two cannot drift apart. */
+.schedule-now::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  margin-right: calc(-1 * var(--schedule-padding-x));
+  background-color: var(--schedule-now-color);
+}
+
+/* The line's own display: flex would otherwise beat [hidden], which is how the
+   script says "not now". */
+.schedule-now[hidden] {
+  display: none;
 }
 
 .schedule-event-wrapper {

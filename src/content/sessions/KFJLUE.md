@@ -3,7 +3,7 @@ title: Can I Trust You? Service-to-Service Identity with SPIFFE
 code: KFJLUE
 start: '2026-08-28T11:30:00+10:00'
 end: '2026-08-28T12:00:00+10:00'
-room: Ballroom 3
+room: Ballroom 2
 track: cybersecurity
 type: talk
 speakers:

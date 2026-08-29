@@ -14,7 +14,8 @@ abstract: "_Do you feel that hard drives and USBs aren’t keeping pace with you
   present a novel (and potentially ill-advised) alternative: a file-system that uses
   Slack Emojis as a storage device. We'll dive into how file systems work, how you
   can use Python to turn Slack Emojis into infinite free file storage, and maybe find
-  out if this was secretly a terrible idea all along."
+  out if this was secretly a terrible idea all along. Plus maybe there'll be stickers
+  :)"
 ---
 
 File Systems are an integral part of how modern computers work. They organise the bits and bytes on your hard drives and USB drives, turning them into files and folders that your computer can read.
@@ -23,4 +24,4 @@ Sometimes it's easy for them to feel a bit like arcane magic, though. We rarely 
 
 Together, we'll dive into how file systems turn your files and folders into bits and bytes, how they organise and keep track of everything, how we can apply that to Slack emojis, and how the limitations of Slack emojis can spark creative (and frankly, pretty cool) solutions to old problems.
 
-This talk is for you, whether you're an expert on file systems, scratching your head at why you'd store file systems in Slack emojis, or you've never thought about how they work before. Come along to learn about how file systems actually store and organise your data, and how we can use Python to build them in new and silly ways.
+This talk is for you, whether you're an expert on file systems, scratching your head at why you'd store file systems in Slack emojis, or you've never thought about how they work before. Come along to learn about how file systems actually store and organise your data, and how we can use Python to build them in new and silly ways. Plus maybe there'll be stickers :)

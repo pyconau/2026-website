@@ -3,7 +3,7 @@ title: Privacy data encryption & deletion while preserving analytical integrity
 code: PZTFZF
 start: '2026-08-28T14:40:00+10:00'
 end: '2026-08-28T15:10:00+10:00'
-room: Ballroom 3
+room: Ballroom 2
 track: cybersecurity
 type: talk
 speakers:

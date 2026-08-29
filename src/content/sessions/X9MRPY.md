@@ -3,7 +3,7 @@ title: Experiments in Engineering without reading code
 code: X9MRPY
 start: '2026-08-28T12:05:00+10:00'
 end: '2026-08-28T12:35:00+10:00'
-room: Ballroom 2
+room: Ballroom 3
 track:
 type: talk
 speakers:

@@ -3,7 +3,7 @@ title: Why should I write software well?
 code: JK7XEF
 start: '2026-08-28T14:40:00+10:00'
 end: '2026-08-28T15:10:00+10:00'
-room: Ballroom 2
+room: Ballroom 3
 track:
 type: talk
 speakers:

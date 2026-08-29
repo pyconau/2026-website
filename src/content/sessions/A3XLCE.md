@@ -9,27 +9,27 @@ type: talk
 speakers:
 - EQJWS9
 trackName: Research Software Engineering
-abstract: "I regularly enjoy performance that I absolutely did not earn. That’s because
+abstract: "I regularly enjoy performance that I absolutely did not earn. That's because
   NumPy quietly handles an alarming number of hard problems on my behalf. In this
-  talk, we’ll pop the hood on NumPy and look at what it’s actually doing to make Python
-  fast. We’ll even glance at the source code, gently, and without expecting anyone
-  to be an expert in C. \r\n\r\nThis isn’t a talk about becoming a NumPy wizard or
-  writing “clever” code. It’s about building a better mental model of what NumPy already
-  does for us, so we can stop accidentally getting in its way and continue taking
-  credit for performance we mostly didn’t implement ourselves."
+  talk, we'll pop the hood on NumPy and look at what it's actually doing to make Python
+  fast. We'll even glance at the source code, gently, and without expecting anyone
+  to be an expert in C.\r\n\r\nThis isn't a talk about becoming a NumPy wizard or
+  writing \"clever\" code. It's about building a better mental model of what NumPy
+  already does for us — one that makes the costs visible, so we can stop accidentally
+  getting in NumPy's way and continue taking credit for performance we mostly didn't
+  implement ourselves."
 ---
 
-Python is slow. We all know it. And yet, here we are, running numerical workloads that would make a C programmer nod approvingly. How? NumPy. But not *magic*. NumPy deliberate, well-engineered  NumPy.
+Python is slow. We all know it. And yet, here we are, running numerical workloads that would make a C programmer nod approvingly. How? NumPy. But not magic. Deliberate, well-engineered NumPy.
 
-In this talk I'll walk through the handful of core ideas that explain most of NumPy's performance. The goal isn't a how-to guide  it's a mental model. One that I think will change how you write numerical Python.
+In this talk I'll walk through the handful of core ideas that explain most of NumPy's performance. The goal isn't a how-to guide; it's a mental model. One that I think will change how you write numerical Python.
 
-We'll start by watching Python loops disappear. When you write `a ** 2`, no Python interpreter is crawling over your million elements  a pre-compiled C kernel is. NumPy isn't accelerating Python; it's relocating the work somewhere Python never touches. Once you see it that way, a lot of things click into place.
+We'll start by watching Python loops disappear. When you write ​​`a ** 2`, no Python interpreter is crawling over your million elements a pre-compiled C kernel is. NumPy isn't accelerating Python; it's relocating the work somewhere Python never touches. Once you see it that way, a lot of things click into place.
 
-From there, we'll get into the `ndarray` itself. I'll show you the C struct underneath every array  the data pointer, shape, strides, and dtype fields that make it tick. Once you understand strides, you'll realise that transposing a massive array, reshaping it, or slicing it doesn't copy a single byte. NumPy is
-pulling a surprisingly elegant trick, and once you see it, you can't unsee it.
+From there, we'll get into the ndarray itself. I'll show you the C struct underneath every array: the data pointer, shape, strides, and dtype fields that make it tick. Once you understand strides, you'll see that operations like transpose and slicing don't move a single byte — and you'll also see why an innocent-looking reshape can sometimes secretly copy gigabytes. NumPy is pulling a surprisingly elegant trick, and once you see it, you can't unsee it.
 
-Next up: broadcasting and cache-friendly execution. Broadcasting isn't just a convenience  it's a way to express complex operations without materialising large intermediate arrays. And when you combine it with contiguous memory access, your loops stay tight, your cache stays warm, and NumPy can quietly hand things off to SIMD and BLAS without you lifting a finger.
+Next up: broadcasting and cache-friendly execution. Broadcasting isn't just a convenience. It's a contract that lets you express complex operations without materialising large intermediate arrays. And when you combine it with contiguous memory access, your loops stay tight, your cache stays warm, and NumPy can quietly hand things off to SIMD and BLAS without you lifting a finger.
 
-To tie it all together, we'll optimise a game of Minesweeper. Using stride tricks, convolution, and vectorised Monte Carlo sampling, we'll turn a nest of Python loops into clean, fast NumPy code, and I'll show you exactly how each concept from the talk contributes.
+To make all of this concrete, the talk threads two real examples through it: a piece of innocent-looking code that secretly allocates 3GB, and a compact NumPy expression that, by the end, you'll be able to read line-by-line predicting exactly what NumPy did to memory.
 
-If you use NumPy regularly and have ever wondered *why* it's fast rather than just *that* it's fast, this talk is for you. You'll leave with a practical mental model that makes you a better NumPy programmer  without having to worry about any of the details NumPy is already handling for you.
+If you use NumPy regularly and have ever wondered why it's fast rather than just that it's fast, this talk is for you. You'll leave with a practical mental model that makes you a better NumPy programmer, without having to worry about any of the details NumPy is already handling for you.

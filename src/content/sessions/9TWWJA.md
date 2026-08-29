@@ -3,7 +3,7 @@ title: Whoops! I Accidentally Leaked My Credentials (again)
 code: 9TWWJA
 start: '2026-08-28T12:05:00+10:00'
 end: '2026-08-28T12:35:00+10:00'
-room: Ballroom 3
+room: Ballroom 2
 track: cybersecurity
 type: talk
 speakers:

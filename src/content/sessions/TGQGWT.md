@@ -1,8 +1,8 @@
 ---
 title: Closing address
 code: TGQGWT
-start: '2026-08-29T17:15:00+10:00'
-end: '2026-08-29T17:30:00+10:00'
+start: '2026-08-29T17:20:00+10:00'
+end: '2026-08-29T17:35:00+10:00'
 room: Ballroom 3
 track:
 type: plenary

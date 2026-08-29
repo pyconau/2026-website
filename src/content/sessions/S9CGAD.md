@@ -1,9 +1,9 @@
 ---
 title: from where?!? import what?!?
 code: S9CGAD
-start: '2026-08-29T10:45:00+10:00'
-end: '2026-08-29T11:15:00+10:00'
-room: Ballroom 3
+start: '2026-08-27T11:30:00+10:00'
+end: '2026-08-27T12:00:00+10:00'
+room: Ballroom 2
 track:
 type: talk
 speakers:
