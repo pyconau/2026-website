@@ -1,8 +1,8 @@
 ---
 title: Saturday lightning talks
 code: PKSEBP
-start: '2026-08-29T16:25:00+10:00'
-end: '2026-08-29T17:15:00+10:00'
+start: '2026-08-29T16:20:00+10:00'
+end: '2026-08-29T17:20:00+10:00'
 room: Ballroom 3
 track:
 type: plenary
