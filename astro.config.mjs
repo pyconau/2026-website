@@ -59,6 +59,8 @@ export default defineConfig({
   integrations: [mdx(), sitemap({ filter: (page) => !page.includes("/dev/") })],
   redirects: {
     "/student-showcase": "/cfp/student-showcase",
+    // Brand reveal was teased at /curves.html before the story was published.
+    "/curves.html": "/posts/the-new-curlyboi",
     "/culture": "/about/culture-and-community",
     "/workshops": "/schedule/workshops",
     // "Brisbane Transport" page was renamed to "Around Brisbane".
