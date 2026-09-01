@@ -1,5 +1,5 @@
 ---
-name: Zoe
+name: Zoe Braddock
 code: EUXXHR
 hasAvatar: true
 ---
