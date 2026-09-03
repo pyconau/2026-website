@@ -8,8 +8,8 @@ track:
 type: plenary
 speakers:
 - SLEHXC
-abstract: "Welcome to PyCon AU 2026!\r\nJoin us for a short welcome address by conference
-  co-director Nic Crouch followed by the daily keynote on the plenary stage"
+abstract: "Welcome to PyCon AU 2026!\r\nJoin us for a short welcome address by Conference
+  Co-Director Nic Crouch followed by the daily keynote on the plenary stage"
 ---
 
 

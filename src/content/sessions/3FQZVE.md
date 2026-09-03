@@ -8,8 +8,8 @@ track:
 type: plenary
 speakers:
 - PB9BKD
-abstract: "Welcome to PyCon AU 2026!\r\nJoin us for a short welcome address by conference
-  director Jack Skinner followed by the daily keynote on the plenary stage."
+abstract: "Welcome to PyCon AU 2026!\r\nJoin us for a short welcome address by Conference
+  Director Jack Skinner followed by the daily keynote on the plenary stage."
 ---
 
 

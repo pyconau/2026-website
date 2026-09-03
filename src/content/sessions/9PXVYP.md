@@ -8,8 +8,8 @@ track:
 type: plenary
 speakers:
 - H3PQDH
-abstract: "Welcome to PyCon AU 2026!\r\nJoin us for a short welcome address by conference
-  co-director Sophie Quinn-Graham, followed by the daily keynote on the plenary stage"
+abstract: "Welcome to PyCon AU 2026!\r\nJoin us for a short welcome address by Conference
+  Co-Director Sophie Quinn-Graham, followed by the daily keynote on the plenary stage"
 ---
 
 
