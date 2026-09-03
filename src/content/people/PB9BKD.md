@@ -4,4 +4,6 @@ code: PB9BKD
 hasAvatar: true
 ---
 
-Chief troublemaker at PyCon AU 2026
+Troublemaker in Chief at PyCon AU 2026.
+
+When not organising conferences, he is a consultant [CTO For Hire](https://ctoforhire.com.au), [local community organiser](https://luma.com/sydtechleaders) and [startup founder](https://frontgate.app).
