@@ -11,7 +11,7 @@ Eight proposals elected to publish via a parallel peer-reviewed effort to includ
 
 You can now read the combined proceedings on Zenodo, and reference them via DOI [10.5281/zenodo.22784195](https://doi.org/10.5281/zenodo.22784195).
 
-Thank you to editors Alan Rubbin and Richard Littauer for shepherding this process, and congratulations to our nine published speakers!
+Thank you to editors Alan Rubin and Richard Littauer for shepherding this process, and congratulations to our nine published speakers!
 
 <div class="flex justify-around py-10">
     <a href="https://zenodo.org/records/22784195" target="_blank" rel="noopener noreferrer" class="btn-arrow no-underline!">
