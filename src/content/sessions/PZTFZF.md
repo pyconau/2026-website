@@ -17,6 +17,7 @@ abstract: Privacy regulations around the world impose strict requirements on how
   sensitive data is cumbersome, error-prone, and breaks referential integrity. 
   Meanwhile, sensitive data sitting in plaintext is exposed the moment a breach 
   occurs.
+youtubeSlug: 1Akx-O3eIxQ
 ---
 
 This talk introduces a novel data pipeline architecture, enabled by an open-source Python library created by the speaker, to solve this complex compliance requirement in a single action.

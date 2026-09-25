@@ -80,6 +80,12 @@ PEOPLE_OUTPUT_DIR = "src/content/people"
 AVATARS_OUTPUT_DIR = "public/images/people"
 SPECIALIST_TRACKS_DIR = "src/content/specialist-tracks"
 
+# Next Day Video recordings feed. Entries match Pretalx submissions on
+# conf_key == submission code. The last good copy is committed to
+# NEXTDAYVIDEO_CACHE_PATH so the sync still works if the feed is unreachable.
+NEXTDAYVIDEO_FEED_URL = "https://portal.nextdayvideo.com.au/main/C/pyconau/S/pyconau_2026.json"
+NEXTDAYVIDEO_CACHE_PATH = "scripts/data/nextdayvideo.json"
+
 # Avatar image settings
 AVATAR_SIZE = (225, 225)
 AVATAR_QUALITY = 95

@@ -16,6 +16,7 @@ abstract: "_Do you feel that hard drives and USBs aren’t keeping pace with you
   can use Python to turn Slack Emojis into infinite free file storage, and maybe find
   out if this was secretly a terrible idea all along. Plus maybe there'll be stickers
   :)"
+youtubeSlug: eycYXxNV4wI
 ---
 
 File Systems are an integral part of how modern computers work. They organise the bits and bytes on your hard drives and USB drives, turning them into files and folders that your computer can read.

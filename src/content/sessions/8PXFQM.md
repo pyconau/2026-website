@@ -17,6 +17,7 @@ abstract: Software is widely used and produced in the course of research. Yet,
   This talk will discuss the benefits of citing software, how to cite software 
   and practical suggestions for how to make your software easier for others to 
   cite.
+youtubeSlug: rR3Nn7fpRGY
 ---
 
 This talk will include real examples and practical tips. Topics covered will include:

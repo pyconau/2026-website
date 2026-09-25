@@ -21,6 +21,7 @@ abstract: AI agents are changing how we build software. They have augmented our
   breaks when your smallest unit of work is no longer deterministic. It is drawn
   from real experience building an enterprise architect agent, with practical 
   examples in Python.
+youtubeSlug: frHgBj8-Wms
 ---
 
 We've spent decades perfecting abstractions for code such as functions, classes, modules, services. Each one helped us manage complexity at increasing levels of codebase and team size. But AI agents have bent this model by introducing a new opportunity using natural language.

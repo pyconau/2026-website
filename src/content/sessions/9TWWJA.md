@@ -21,6 +21,7 @@ abstract: "Leaked credentials aren't a new problem, but the complexity of modern
   into scalable credential scanning and ecosystem-level protections for developers
   and organisations who want to keep their credentials secure to help when every second
   counts."
+youtubeSlug: MVDU3qtacvY
 ---
 
 Credential leaks have been around for as long as there have been credentials to leak. Because of the history, it's easy to think of credential leaks as a solved problem.

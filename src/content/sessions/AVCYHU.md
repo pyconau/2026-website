@@ -19,6 +19,7 @@ abstract: "You've written some Python code. It works great on your machine. Now 
   an overview of some of the tools that can be used to produce a standalone application,
   and a detailed look at one of those options - Briefcase. Finally, you'll be introduced
   some of the possibly unexpected benefits of bundling your code as a standalone application."
+youtubeSlug: eKcLUC3lkrQ
 ---
 
 There are a wide number of ways to get Python code into the hands of others - some of which are well known, some of which aren't. There is no one "right" solution for every situation, and picking the right solution for the right situation can be complicated.

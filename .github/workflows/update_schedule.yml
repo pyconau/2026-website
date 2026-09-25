@@ -42,10 +42,10 @@ jobs:
       - uses: EndBug/add-and-commit@v9
         id: add-and-commit
         with:
-          add: 'src/content/sessions src/content/people public/images/people'
+          add: 'src/content/sessions src/content/people public/images/people scripts/data'
           author_name: GitHub Actions
           author_email: program@pycon.org.au
-          message: "Auto-update the schedule from Pretalx"
+          message: "Auto-update the schedule from Pretalx and Next Day Video"
         env:
           GITHUB_TOKEN: ${{ secrets.SCHEDULE_SYNC_TOKEN }}
 

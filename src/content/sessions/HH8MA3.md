@@ -15,6 +15,7 @@ abstract: Making live music in a high-tech way provides new opportunities for
   the technical hurdles they face. We’ll showcase the tools used to create 
   custom control surfaces, how to overcome latency and stability issues, and 
   explore the vast creative possibilities.
+youtubeSlug: 6HTGAuKVtWI
 ---
 
 You’ll get a practical look at extending existing music tools with Python to build your own custom live performance framework. Through live demonstrations, you’ll see these ideas in action. This kind of live system is almost a new type of complex instrument. It involves recording audio and data from multiple pieces of hardware, and allows for real-time improvised looping, resampling, effects chains, and unique sound synthesis. Custom control surfaces can allow for real-time manipulation of any aspect of the audio at any time, giving the user complete control of the soundscape and where it goes next.

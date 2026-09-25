@@ -32,6 +32,7 @@ abstract: "RAG applications come in many shapes. Some start as simple keyword se
   scientists who are building or planning to build reliable and robust RAG applications
   and want a practical mental model for when to introduce which evaluations as their
   system grows in complexity."
+youtubeSlug: 7b3wm5wyqfo
 ---
 
 The talk begins by introducing the use case: an AI-assisted IT support ticket resolution system that takes a ticket's title, description, comments, and log files as input and produces a one-shot resolution.

@@ -12,6 +12,7 @@ speakers:
 - H3PQDH
 abstract: We conclude PyCon AU 2026 together for closing remarks as we reflect 
   on what was, and look forward to what will be (sprints!)
+youtubeSlug: Va5gxfYJa3I
 ---
 
 

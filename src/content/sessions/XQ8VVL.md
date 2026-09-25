@@ -18,6 +18,7 @@ abstract: "Do you ever go to a talk and find that the speaker doesn't talk about
   There's far too much in one framework to talk about it all in 30 minutes though,
   so you'll get to vote on which topics I should focus on, which examples should get
   more detail, and what matters to you."
+youtubeSlug: 2qYMESUS8FQ
 ---
 
 I've used a lot of web frameworks over the years. First I was a student and used Flask. Then I was a consultant and used Ruby on Rails. After that, I used Django at a startup. In Big Tech I used Java's Spring framework.

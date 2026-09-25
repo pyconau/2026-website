@@ -18,6 +18,7 @@ abstract: "I regularly enjoy performance that I absolutely did not earn. That's 
   already does for us — one that makes the costs visible, so we can stop accidentally
   getting in NumPy's way and continue taking credit for performance we mostly didn't
   implement ourselves."
+youtubeSlug: UYB98zQ8Nn8
 ---
 
 Python is slow. We all know it. And yet, here we are, running numerical workloads that would make a C programmer nod approvingly. How? NumPy. But not magic. Deliberate, well-engineered NumPy.

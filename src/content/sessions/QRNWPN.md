@@ -19,6 +19,7 @@ abstract: "Changes are scary. Changes in production are scarier, especially if y
   make good decisions under pressure.\r\n\r\nIn this talk, I’ll draw on those ideas
   and apply them to platform engineering, looking at how to recognise when to commit
   to a change and when it’s safer to abort and try again."
+youtubeSlug: K8VqMpqIZyY
 ---
 
 This talk is aimed at SREs, Platform Engineers, or anyone who works on a production "thing".

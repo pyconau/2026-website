@@ -20,6 +20,7 @@ abstract: "How do you get teenagers to care about what data they share online? H
   to facilitate teaching deeper computer and cyber literacy, by peeking behind the
   curtain at what bad actors are actually doing, and how you can apply this technique
   to other topics."
+youtubeSlug: qcQs2SEvDzo
 ---
 
 Getting kids to think critically about their security online is pretty tricky. They get told what they should or shouldn't be doing on social media all the time, but is it really sinking in? 

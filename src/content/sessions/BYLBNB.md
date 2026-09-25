@@ -12,6 +12,7 @@ trackName: Main Conference
 abstract: "Join us for the Friday morning keynote presented by Cam Wilson: \"Slop,
   jobs and Elon Musk: why Australians don't trust AI and what that means for all of
   us\"."
+youtubeSlug: -xB6oHkrC4A
 ---
 
 

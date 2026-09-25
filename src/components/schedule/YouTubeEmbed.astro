@@ -1,0 +1,42 @@
+---
+interface Props {
+  /** YouTube video ID, e.g. "MmbmfrKy6ZQ". */
+  videoId: string;
+  /** Session title, used for the accessible names. */
+  title: string;
+}
+
+const { videoId, title } = Astro.props;
+
+// Click-to-play: show YouTube's thumbnail with our play button, and only load
+// the player iframe (and its scripts) once the viewer asks for it.
+// maxresdefault (1280x720) is the largest thumbnail YouTube serves. It only
+// exists for HD uploads, which every Next Day Video recording is.
+const thumbnail = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
+const embedSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+---
+
+<div x-data="{ playing: false }" class="relative w-full aspect-video">
+  <button
+    type="button"
+    x-show="!playing"
+    @click={`playing = true; $refs.videoIframe.src = '${embedSrc}'`}
+    class="absolute top-0 left-0 w-full h-full z-20 cursor-pointer"
+    aria-label={`Play recording: ${title}`}
+  >
+    <img src={thumbnail} class="w-full h-full object-cover pt-0! m-0!" alt="" loading="lazy" />
+    <img
+      src="/images/play-btn.svg"
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pt-0! m-0!"
+      alt=""
+    />
+  </button>
+  <iframe
+    x-ref="videoIframe"
+    title={`Recording: ${title}`}
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen
+    class="absolute top-0 left-0 w-full h-full border-0"
+  ></iframe>
+</div>

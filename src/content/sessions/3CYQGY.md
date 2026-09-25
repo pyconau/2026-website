@@ -14,6 +14,7 @@ abstract: "Every team has at least one go-to person that gets others out of stic
   team, or getting bogged down in work that isn’t part of their job description? Let’s
   get stuck into the concept of glue work, and how handling it properly can help your
   team bond."
+youtubeSlug: RdNHum7MXX0
 ---
 
 This talk is geared towards anyone who works with other people! 

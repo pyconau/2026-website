@@ -16,6 +16,7 @@ abstract: "_The virtue of being a lazy programmer, understanding lazy evaluation
   \ of laziness with regards to programmer approach, and lazy evaluation (with generators
   and `yield`).\r\nBut mainly the talk will focus on the new 3.15 keyword `lazy` and
   how it can affect module loading times."
+youtubeSlug: Po5tQsQpgGo
 ---
 
 This talk will cover briefly the role of "laziness" in being a programmer. I will then examine the role of laziness in evaluation (generators and `yield`). That will lead us to laziness in imports.

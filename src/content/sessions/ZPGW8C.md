@@ -28,6 +28,7 @@ abstract: "_You’ve shared your code. You’ve shared your data.…so why can�
   risks based on a structured view of common contributing factors. If you have ever
   struggled to rerun your own code, or someone else’s, this talk offers a different
   way to think about why, and what to do about it."
+youtubeSlug: OmCEDTX24Tk
 ---
 
 Reproducibility is widely recognised as important, yet in practice it is often treated as a final step, something to address once development is complete. In fast-moving research environments, this approach rarely works.

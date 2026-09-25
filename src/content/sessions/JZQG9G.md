@@ -19,6 +19,7 @@ abstract: "Most of us learn testing by writing examples. Put some input in, chec
   thought to test ourselves. I’ll show how this changes the way you think about tests,
   where it works especially well, and how to start using it in real Python projects
   without making your test suite harder to understand."
+youtubeSlug: cNHMKCZFaN0
 ---
 
 Property based testing is one of those ideas that can feel slightly magical the first time you see it working. You write down the behaviour that should always be true, and suddenly your tests are exploring inputs you never bothered to write by hand. Empty strings, giant integers, unexpected Unicode, awkward combinations of values, all the annoying little corners where bugs like to hide… Hypothesis goes looking for them on purpose.

@@ -16,6 +16,7 @@ abstract: Python powers the world’s most critical research, yet the software
   research tools. Attendees will be motivated to transition from fragile scripts
   to sustainable and citable reusable software infrastructure that endure long 
   after the code is working for a specific use case.
+youtubeSlug: OLujgkCsZek
 ---
 
 As Python continues to dominate the research landscape across fields from radio astronomy to biosecurity. The fundamental challenge has shifted from "how do we code?" to "how do we sustain code?". This presentation deep dives into the real motivators of the people building and sustaining research software by distilling insights from four years of interviews with leading Australian Research Software Engineers. 

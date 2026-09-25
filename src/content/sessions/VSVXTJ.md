@@ -24,6 +24,7 @@ abstract: "_Golf lessons beginning in month six for Tiger Woods (6)_\r\nCode gol
   Do you use the walrus operator? It can save you a whole line!  Come along and learn
   a bit about code golf and a bit about cryptic crosswords and probably get addicted
   to one or the other.\r\n\r\n(The answer was _JUNGLE_ by the way)"
+youtubeSlug: 3KecTYWzFI8
 ---
 
 "But how was anyone supposed to know that?!" is a phrase I hear often when I try to teach the rules of  cryptic crosswords

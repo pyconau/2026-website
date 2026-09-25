@@ -10,6 +10,7 @@ speakers:
 - SLEHXC
 - WD7XBJ
 abstract: Like regular talks, but shorter! Anything could happen!
+youtubeSlug: c_uTx1fHf4w
 ---
 
 Lightning talks are presented by YOU! Yes you! 🫵

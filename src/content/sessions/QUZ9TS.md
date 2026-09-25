@@ -15,6 +15,7 @@ abstract: "Pull request reviews are often the single biggest bottleneck in softw
   we can learn from massive open source projects that have solved this at scale, and
   the practical techniques, from automation with Python tooling to team process shifts,
   that can dramatically reduce your time to merge."
+youtubeSlug: tJavRD5iG60
 ---
 
 Speed isn't about writing code faster, it's about removing waiting.

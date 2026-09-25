@@ -26,6 +26,7 @@ abstract: "We needed to produce 25 years of gap-free half-hourly weather data in
   from ordinary forecasting: because a missing window has data on both sides, future
   approaches could fill forward from the start of the gap, backward from the end,
   and meet in the middle."
+youtubeSlug: A3ttzf7HBV0
 ---
 
 This talk is for Python users who work with time series, messy data, or production data workflows and want a practical case study rather than a theoretical forecasting talk.

@@ -19,6 +19,7 @@ abstract: "Tech demos can make or break a presentation, and sometimes even a com
   audiences. We'll also cover how to fit a surprising amount into a short window,
   how to stay flexible when things change at the last minute, and how to balance risk
   and impact when failure isn't an option."
+youtubeSlug: 2LH7eEwk484
 ---
 
 Building tech demos that effectively show off features while remaining realistic and compelling is a skill I've learned over several years. Sometimes through failure, sometimes through success. I've built and (not always personally) delivered keynotes to tens of thousands of people and videos for feature releases viewed by hundreds of thousands.

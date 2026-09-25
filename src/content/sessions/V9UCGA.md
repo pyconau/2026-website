@@ -16,6 +16,7 @@ abstract: SRE is all about simplicity. So why do so many of us have a copy of
   finished. This talk asks - does my medium-sized scale up need Chaos 
   Engineering, circuit breakers, and a 10 tier severity matrix… or does it need 
   a spreadsheet?
+youtubeSlug: Gh8Xyd_UEf4
 ---
 
 SRE suffers from a rather serious problem. We are a group of people who love working on complicated problems. We want challenges and ways to show what we know about reliability. And when we can’t find them… we create them.

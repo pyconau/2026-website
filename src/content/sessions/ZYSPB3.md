@@ -21,6 +21,7 @@ abstract: "For most of Python's history, the predominant option for documentatio
   for automating the process. You'll learn how you can engage the community to assist
   with the effort. Finally, you'll learn why it's worth the effort to make a change
   of this magnitude."
+youtubeSlug: vKV2MV0l068
 ---
 
 This talk is for anyone who is currently maintaining Sphinx documentation and is interested in migrating to a Markdown solution, or is interested in starting new documentation and wants to know what alternatives there are to Sphinx. I would consider this to be an intermediate level talk; folks who are brand new to open source contributing or programming will still get something out of it, but those who have some experience with documentation will benefit the most.

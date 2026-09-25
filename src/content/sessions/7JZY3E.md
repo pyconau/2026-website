@@ -17,6 +17,7 @@ abstract: "Have you ever wondered what it actually takes to deploy your Python/D
   a custom operator in plain Python using kopf.\r\nAt each step, we ask: Does this
   next block solve a real problem, or create a new one? You'll leave with a composable
   mental model and a sharper instinct for when to stop."
+youtubeSlug: WHclVPLwti8
 ---
 
 Platform engineering has a complexity problem. The default playbook - install everything, abstract it all away - produces platforms that are expensive to operate and painful to debug. This talk is for Python developers who are Kubernetes-curious but find the ecosystem overwhelming, and for engineers already using Kubernetes to visually reflect on and revisit their experience with it.

@@ -20,6 +20,7 @@ abstract: "At the start of 2026 I decided I wanted to build my own Coding Agent.
   them to do a good job. So how can we feel safe? What techniques do we need to apply?
   What technologies do we build? How do we Engineer in a world where we no longer
   read code?"
+youtubeSlug: f3304q9mPio
 ---
 
 In this talk I'll go through our journey of building small low-risk software without human review. I'll talk about my experiments in building software without review, and the systems I'm building. I'll also talk about the systems I'm using in production to drive high quality code and anti-fragility through AI review. Then how I'm thinking about the future of work in Software Engineering, and whether human review will be a part of that.

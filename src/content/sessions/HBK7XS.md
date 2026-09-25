@@ -27,6 +27,7 @@ abstract: "When students can use AI to generate code, explain syntax, and accele
   teaching Python, data science, or project-based computing subjects, this offers
   a practical way to design assessment for an AI-open classroom without falling back
   on bans or surveillance."
+youtubeSlug: MR_cRo7suNI
 ---
 
 

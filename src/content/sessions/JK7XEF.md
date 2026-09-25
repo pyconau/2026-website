@@ -17,6 +17,7 @@ abstract: "Balancing short-term and long-term objectives during software develop
   clarity to processes such as code reviews, sprint planning, prioritisation and effort
   estimation.\r\n\r\nThis talk comprises an exploration of how to discuss trade-offs
   during software development, based on technical examples."
+youtubeSlug: S6Qk_VOYwBI
 ---
 
 It’s (more or less) obvious why software needs to meet user requirements. It’s also (more or less) obvious why software needs to meet essential security requirements and essential performance requirements. However, there are many other concerns beyond this which may be balanced during software development. For example, consider whether a new feature should use a functional approach or rely heavily on inheritance as a design pattern. There may not seem to be an obvious or objective answer at first.

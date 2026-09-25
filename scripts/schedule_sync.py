@@ -3,7 +3,8 @@
 Sync Pretalx schedule data to PyCon AU website.
 
 This script fetches session and speaker data from the Pretalx API and generates
-markdown files with frontmatter for Astro content collections.
+markdown files with frontmatter for Astro content collections. Recorded sessions
+get a youtubeSlug from the Next Day Video feed.
 
 Usage:
     cd scripts && uv run python schedule_sync.py
@@ -15,12 +16,14 @@ Environment variables:
 
 import hashlib
 import io
+import json
 import os
 import re
 import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Any
+from urllib.parse import parse_qs, urlparse
 
 import requests
 from dateutil import parser as dateparser
@@ -35,6 +38,8 @@ from config import (
     CONTENT_WARNING_QUESTION_ID,
     EVENT_TIMEZONE,
     FEDIVERSE_QUESTION_ID,
+    NEXTDAYVIDEO_CACHE_PATH,
+    NEXTDAYVIDEO_FEED_URL,
     PEOPLE_OUTPUT_DIR,
     PLENARY_ROOMS,
     PLENARY_SESSION_CODES,
@@ -459,6 +464,59 @@ def download_avatar(url: str, output_path: Path) -> bool:
         return False
 
 
+def youtube_video_id(url: str) -> str | None:
+    """Extract the video ID from a youtu.be or youtube.com/watch URL."""
+    parsed = urlparse(url)
+    host = (parsed.hostname or "").removeprefix("www.")
+    if host == "youtu.be":
+        return parsed.path.strip("/") or None
+    if host in ("youtube.com", "m.youtube.com"):
+        return parse_qs(parsed.query).get("v", [None])[0]
+    return None
+
+
+def load_nextdayvideo_feed(project_root: Path) -> list[dict]:
+    """Fetch the Next Day Video feed, falling back to the committed cache.
+
+    A successful fetch refreshes the cache, so an outage of the feed never
+    removes videos that were already on the site.
+    """
+    cache_path = project_root / NEXTDAYVIDEO_CACHE_PATH
+    try:
+        response = requests.get(NEXTDAYVIDEO_FEED_URL, timeout=60)
+        response.raise_for_status()
+        episodes = response.json()
+        if not isinstance(episodes, list):
+            raise ValueError("expected a JSON list of episodes")
+    except (requests.RequestException, ValueError) as e:
+        if not cache_path.exists():
+            print(f"  Warning: could not fetch Next Day Video feed ({e}) and no cache exists")
+            return []
+        print(f"  Warning: could not fetch Next Day Video feed ({e}), using cache")
+        with open(cache_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+
+    cache_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(cache_path, "w", encoding="utf-8") as f:
+        json.dump(episodes, f, indent=2, ensure_ascii=False)
+        f.write("\n")
+    return episodes
+
+
+def youtube_slugs_by_code(episodes: list[dict]) -> dict[str, str]:
+    """Map Pretalx submission code (Next Day Video conf_key) to YouTube video ID."""
+    slugs: dict[str, str] = {}
+    for episode in episodes:
+        code = episode.get("conf_key")
+        host_url = episode.get("host_url")
+        if not (code and host_url and episode.get("released")):
+            continue
+        video_id = youtube_video_id(host_url)
+        if video_id:
+            slugs[code] = video_id
+    return slugs
+
+
 def write_session_file(session: dict, output_dir: Path) -> None:
     """Write a session markdown file with frontmatter."""
     code = session["code"]
@@ -501,6 +559,8 @@ def write_session_file(session: dict, output_dir: Path) -> None:
         frontmatter["sponsor"] = session["sponsor"]
     if session.get("tags"):
         frontmatter["tags"] = session["tags"]
+    if session.get("youtubeSlug"):
+        frontmatter["youtubeSlug"] = session["youtubeSlug"]
 
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -646,10 +706,18 @@ def main():
 
     print(f"  Grouped into {len(answers_by_speaker)} speakers, {len(answers_by_submission)} submissions")
 
+    print("\nFetching recordings from Next Day Video...")
+    youtube_slugs = youtube_slugs_by_code(load_nextdayvideo_feed(project_root))
+    print(f"  Found {len(youtube_slugs)} released YouTube recordings")
+
     # Process data
     print("\nProcessing sessions...")
     sessions = process_sessions(submissions, track_mappings, track_id_to_name, slots_by_submission, answers_by_submission, tag_id_to_name)
     print(f"  Processed {len(sessions)} sessions")
+    for session in sessions:
+        if session["code"] in youtube_slugs:
+            session["youtubeSlug"] = youtube_slugs[session["code"]]
+    print(f"  Matched {sum(1 for s in sessions if s.get('youtubeSlug'))} sessions to recordings")
 
     print("\nProcessing breaks...")
     breaks = process_breaks(slots_data, room_id_to_name)

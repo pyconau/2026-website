@@ -20,6 +20,7 @@ abstract: AI assistants can answer most technical questions in seconds now. So
   keeping them engaged, and using AI behind the scenes to create that content 
   faster without sacrificing the human judgement that makes it more than just AI
   slop.
+youtubeSlug: jsHTcAAVta8
 ---
 
 Developer education is at an inflection point. AI coding assistants have made it trivially easy to get a snippet of code or a quick explanation, which means the bar for "worth my time" educational content has never been higher. As developer advocates, we need to rethink what we offer that AI cannot: curated learning journeys, real hands-on environments, and the confidence that comes from having built something yourself.

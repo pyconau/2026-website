@@ -14,6 +14,7 @@ abstract: Before the advent of Cloud Computing, owning all your servers and
   only game in town. But despite The Cloud having turned into The Hyperscalers, 
   owning your platform from the switch plane on up is still available... and it 
   rocks!
+youtubeSlug: Evp7nCOe8hU
 ---
 
 I am going to take you on a little tour through a platform stack.

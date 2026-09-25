@@ -11,6 +11,7 @@ speakers:
 trackName: Main Conference
 abstract: If Australia's electoral districts were drawn just a bit differently 
   (or by a lot), how much would that change election results?
+youtubeSlug: rTGV3FC8p3w
 ---
 
 The Australian Electoral Commission (AEC) controls electoral boundaries in Australia - they do a fantastic job. They also provide us with voting data that shows us how different booths vote. Could we take this data and become the anti-AEC?
