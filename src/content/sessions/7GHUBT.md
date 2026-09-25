@@ -21,6 +21,7 @@ abstract: "Every day at 2pm, our microservice crashed. Same traffic patterns, sa
   \n- Querying and visualising traces to debug production mysteries\r\n\r\nLeave knowing
   exactly where to start instrumenting your own services—and why you should, before
   2pm strikes your system."
+youtubeSlug: JsqsPkS6mls
 ---
 
 This talk is designed for Python developers who have relied on logs and metrics for production debugging but haven't yet adopted distributed tracing, as well as SREs who appreciate a good production war story. No prerequisites are required, basic familiarity with Python, HTTP services, and databases is helpful but not required.

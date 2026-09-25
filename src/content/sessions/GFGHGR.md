@@ -26,6 +26,7 @@ abstract: "Can you use AI to vibe-code a computer vision pipeline? Yes... sort o
   iterating on DepthAI pipelines, creating real-time data visualisations to track
   keypoints, and what we learned about the limits of generative AI models when debugging
   real-world systems."
+youtubeSlug: Xiz6iLRgX3w
 ---
 
 This talk will cover the following topics

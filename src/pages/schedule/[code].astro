@@ -5,6 +5,7 @@ import Header from "../../components/Header.astro";
 import Base from "../../layouts/Base.astro";
 import BookmarkButton from "../../components/schedule/BookmarkButton.astro";
 import SpeakerCard from "../../components/schedule/SpeakerCard.astro";
+import YouTubeEmbed from "../../components/schedule/YouTubeEmbed.astro";
 import {
   getPeopleByCode,
   getTrackBySlug,
@@ -25,7 +26,7 @@ export async function getStaticPaths() {
 }
 
 const { session } = Astro.props;
-const { title, code, start, end, room, track, trackName, type, speakers, sponsor, contentWarning, abstract } =
+const { title, code, start, end, room, track, trackName, type, speakers, sponsor, contentWarning, abstract, youtubeSlug } =
   session.data;
 
 // Render abstract markdown to HTML
@@ -76,7 +77,7 @@ const ogDescription = [
   speakers.length > 0 ? `By ${speakerData.map((s) => s.data.name).join(", ")}` : null,
   track && track !== "main-conference" ? displayTrackName : null,
   dateOnly,
-  "Tickets available now!",
+  youtubeSlug ? "Watch the recording!" : "Tickets available now!",
 ]
   .filter(Boolean)
   .join(" • ");
@@ -191,6 +192,7 @@ const trackHref = trackData
           )}
 
           <div class="rich-text pt-24 fadeInUp prose prose-lg max-w-none">
+            {youtubeSlug && <YouTubeEmbed videoId={youtubeSlug} title={title} />}
             {abstractHtml && <div class="text-intro" set:html={abstractHtml} />}
             <Content />
           </div>

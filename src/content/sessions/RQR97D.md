@@ -25,6 +25,7 @@ abstract: "In the good ol' days, we worried about individual maintainers becomin
   one legend in Nebraska has already left the chat. Come for the existential dread;
   stay for the practical tips on not letting your dependency graph become (more of)
   a dumpster fire."
+youtubeSlug: C9F6AnmQ2dk
 ---
 
 We are seeing a massive shift in how code is produced and reviewed, and the scale that this is happening at. While having "eyes on the code" forms the foundation of open-source security, a significant portion of those eyes are now LLMs. ("AIs on the code", anyone? 🫠) 

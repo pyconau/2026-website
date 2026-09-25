@@ -19,6 +19,7 @@ abstract: "Improving in archery often goes beyond simply increasing your score; 
   practice, while also creating a record of shot placement that can be analysed over
   time. This makes it possible to look beyond individual scores and start tracking
   broader patterns in accuracy and consistency."
+youtubeSlug: gy75OvC9LTI
 ---
 
 This talk goes beyond just detecting objects in an image: I cover the realities of hand annotating hundreds of training images, transforming model predictions into calibrated target co-ordinates, inferring scores from geometry, wrangling with validation, and making the whole thing usable in the field. 

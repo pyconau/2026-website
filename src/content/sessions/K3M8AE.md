@@ -27,6 +27,7 @@ abstract: "Authentication continues to fail not because users ignore security ad
   of how passkeys work, understand the role of biometrics as a local unlock mechanism,
   and gain practical guidance on how individuals and developers can start using passkeys
   today through modern, open web standards."
+youtubeSlug: xBl7zaFqHrA
 ---
 
 

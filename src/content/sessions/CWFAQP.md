@@ -23,6 +23,7 @@ abstract: "Developer communities are more than just places to ask questions or s
   or community builder, you’ll walk away with actionable insights on how to find your
   people, grow your presence, and help shape communities that give back as much as
   they give you."
+youtubeSlug: 7PnLOuQ-Vvw
 ---
 
 

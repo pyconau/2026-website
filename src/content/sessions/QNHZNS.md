@@ -15,6 +15,7 @@ abstract: Geoscientists love Python and Jupyter Notebooks for prototyping their
   New Zealand or received a notebook called final_model_v3_ACTUAL_FINAL.ipynb 
   and were asked to "just put it on the server" come along to see how Earth 
   Sciences New Zealand bridges the gap between research and production.
+youtubeSlug: GyQVNjLEVVE
 ---
 
 Detecting when volcanoes may erupt or where and when to expect earthquakes, tsunamis, and landslides are hard problems and subject of active research. Increasingly, scientists developing new algorithms for geohazard monitoring are incentivised to not only write research proposals and publish papers but also ensure that their research is not only useful but also usable and used. I will show how we at Earth Sciences New Zealand tackle this problem through T-shaped skills: teach scientists just enough dev-ops and provide them with templates and helper scripts for git, CI/CD, and running their algorithms and data visualisations in containers on local and public cloud infrastructure so they can look after their algorithms themselves. We believe this is the best long-term strategy to harness cutting-edge research in operations.

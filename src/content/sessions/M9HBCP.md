@@ -19,6 +19,7 @@ abstract: "Have you got neurodivergent kids who you’d like to teach coding to,
   we use and the way we teach are important. \r\nBy constructing your projects with
   intention for a neurodiverse audience, it can make them more accessible and entertaining
   for everyone, and build skills outside of just programming."
+youtubeSlug: BdmEZpcTv3U
 ---
 
 Figuring out engaging coding projects for neurodiverse learners can be very challenging. There are many approaches, tools, and methodologies to consider. In many cases, what works with one neurodiverse person may or may not work with another. 

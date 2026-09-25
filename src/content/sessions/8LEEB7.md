@@ -33,6 +33,7 @@ abstract: "Porting a scientific software library from a proprietary language to 
   algorithms, they converted the help examples into doctests, they created an automated
   test harness, they helped me to organize and improve the documentation, and they
   helped automate the PyPI release process."
+youtubeSlug: EinnQT0ptRY
 ---
 
 This talk presents a case study in transforming specialized high-quality mathematical software from a proprietary interpreter environment to modern Python. It focuses on the application of Research Software Engineering principles to a single-maintainer project, including preserving the integrity of the science while improving usability and maintainability. It covers three stages of the transformation.

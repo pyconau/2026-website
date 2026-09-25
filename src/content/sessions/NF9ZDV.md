@@ -18,6 +18,7 @@ abstract: "Application security is not getting easier. Despite better tools, mor
   in familiar ways and where the industry is heading next.\r\n\r\nThe goal is understanding
   which problems are structural, which are self-inflicted, and which approaches are
   finally worth investing in."
+youtubeSlug: VX-QMNZFy80
 ---
 
 Based on my keynote delivered at OWASP AppSec Singapore 2025, this talk compresses six decades of application security evolution into actionable lessons for modern Python teams.

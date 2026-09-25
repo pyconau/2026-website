@@ -13,6 +13,7 @@ abstract: "Dictionaries are one of the first tools Python developers reach for: 
   flexible, and easy to use when building something new. But when do they stop being
   enough? And when it's easy to generate dataclasses and classes, how do you know
   if that structure is actually useful?"
+youtubeSlug: syof1ZRT92M
 ---
 
 I used to reach for dictionaries for everything. New feature? Dict. API response? Dict. LLM call? Dict.

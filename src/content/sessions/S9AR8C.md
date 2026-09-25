@@ -15,6 +15,7 @@ abstract: GenAI, aka LLMs, have thrown a monkey wrench into the role of DevRel.
   This talk will investigate options for creating interactive coding 
   environments that are useful for developers aiming to learn a new technique, 
   technology, or library.
+youtubeSlug: l4EZbTUupMo
 ---
 
 

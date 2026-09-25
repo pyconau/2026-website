@@ -23,6 +23,7 @@ abstract: 'Every ML team knows the pain: the majority of practitioner time goes 
   lessons about where agents shine and where they still fall short. You’ll leave with
   a practical framework for thinking about agent-assisted ML in your own stack.'
 sponsor: snowflake
+youtubeSlug: KG-rJraGnxM
 ---
 
 ML practitioners still spend most of their time on data preparation and pipeline plumbing rather than modeling. Agentic ML offers a different response: agents that operate in a continuous observe-reason-execute-evaluate loop with deep awareness of your data context — unlike AutoML (no reasoning) or code-generation chatbots (no execution).

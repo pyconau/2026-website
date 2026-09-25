@@ -26,6 +26,7 @@ abstract: "Moving computationally intensive scientific algorithms from desktop a
   Python vs. when to reach for C++ \r\n- Use profiling tools to identify real bottlenecks—not
   assumed ones \r\n- Apply quality guardrails that catch bugs and prevent performance
   regressions \r\n- Design compute workloads for cloud-native horizontal scaling"
+youtubeSlug: wsri-peBmTA
 ---
 
 Over the past 18 months, our team has migrated several battle-tested geological algorithms to a cloud-based Python platform. The work touched every layer: from designing high-level cloud-native architecture to low-level optimization and loop vectorization. Along the way, profiling repeatedly surprised us—the bottlenecks were not where we expected. 

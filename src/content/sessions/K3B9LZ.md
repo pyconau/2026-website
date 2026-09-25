@@ -16,6 +16,7 @@ abstract: Every few years somebody swears the newest tool to magically avoid
   of “code without coders” crashed on the same rocks. You’ll leave with a 
   pocketful of history, a nose for hype, and concrete ways to pair AI helpers 
   with your hard-won craft instead of handing the keys over.
+youtubeSlug: kpNXG7M_5mg
 ---
 
 Software history is riddled with promises that business folk would simply _describe_ what they want and let the machine do the rest. COBOL and BASIC claimed managers would write their own programs. HyperTalk let anyone click-build a HyperCard stack. BPML and UML tried to generate systems straight from diagrams created by managers and experts in meetings. Constraint based rule engines argued that if you just captured every rule, which managers could just write down, then the code would materialise. Low-code platforms repackaged the dream for the web, and now LLM agentic assistants and “natural-language” IDEs are the latest contenders.  

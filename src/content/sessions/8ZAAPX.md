@@ -17,6 +17,7 @@ abstract: "25,000+ resources, 65,000+ lines of Python, two engineers.\r\n\r\nFiv
   with Infrastructure as Software is a great way to create complex problems with Infrastructure
   as Software."
 sponsor: x-rd
+youtubeSlug: zqVhfDqgDmE
 ---
 
 x-RD's platform secd3v hosts isolated services for customers. Every tenant is encapsulated within it's own AWS account. We heavilty use Pulumi to manage nearly every aspect of this environment, our internal environments, and the stacks we use for development. This automation is powered from a shared Python codebase; skywater (so named for the 1964 cloud-seeding projects).

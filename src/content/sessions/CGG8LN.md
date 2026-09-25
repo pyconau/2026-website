@@ -17,6 +17,7 @@ abstract: Girls don’t leave STEM once; they leave three times. First, in prima
   girls to give it a chance. By being openly honest about my fear, connecting 
   code to real hobbies, and normalising failure out loud, I turn anxiety into 
   curiosity - and keep more girls in the room.
+youtubeSlug: rwc9EmYxpcE
 ---
 
 This talk is for Python educators, mentors, and community organisers who care about women in tech but keep watching girls disappear at every stage. I’ll share what I’ve seen as an educator and volunteer across schools and outreach programs: three crucial dropout points for girls - primary school, senior subject choices, and first‑year engineering - and how my “I’m terrified of coding” honesty weirdly helps.

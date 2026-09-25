@@ -19,6 +19,7 @@ abstract: "At Atlassian, we take accessibility seriously enough that we have ent
   fall short, and what they cost to implement. You can then use this information to
   figure out which solutions best fit your particular situation, and how you can get
   the best bang for your accessibility buck."
+youtubeSlug: 0RvePCjr3bw
 ---
 
 

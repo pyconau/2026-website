@@ -14,6 +14,7 @@ abstract: With IDEs like VS Code wanting to autocomplete your entire file based
   skill of our students, rather than the skills of Claude? This talk will 
   explore what is being done in schools and universities across QLD, and offer 
   suggestions for what you can try in your classroom.
+youtubeSlug: QqYhEkM1Lx8
 ---
 
 When designing any assessment, we want to ensure it allows students to provide evidence that accurately represents their knowledge, understanding and skills. Ideally, it should also be straightforward to administer and mark! 

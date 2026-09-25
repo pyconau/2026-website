@@ -18,6 +18,7 @@ abstract: "Errors. They happen. Sometimes we wish they wouldn't but they do and 
   ways of thinking about what an error even is. I'd like to take you on a bit of a
   philosophical exploration about what happens when things go wrong, how we know they've
   gone wrong, and what we do about it."
+youtubeSlug: FLZKFNzpvDE
 ---
 
 

@@ -15,6 +15,7 @@ abstract: "Sam built a great gateway. Users are authenticated, requests are vali
   Sam the SRE through a nightly battle against Omen the Evil Hacker — and how SPIFFE
   and SPIRE finally give every Python service a cryptographic identity it can prove,
   not just claim."
+youtubeSlug: gvILKTg4Jow
 ---
 
 We've all built Castle walls. A solid perimeter and user authentication at the gateway, and then implicit trust everywhere inside — because it's inside the walls, right? Only legitimate traffic gets in.

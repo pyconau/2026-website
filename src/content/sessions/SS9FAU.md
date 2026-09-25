@@ -16,6 +16,7 @@ abstract: "What does it mean to be productive? If you work in software developme
   that’s partly due to the at least partially creative nature of the work we do.\r\
   \n\r\nSo when a tool comes along and promises to make you more productive, how do
   you assess that?"
+youtubeSlug: c5k-blqtk9g
 ---
 
 Yes, this is a talk about LLMs. It’s a talk about the effects of LLMs and what they mean for people in the software development industry. We feel like there’s a discussion to be had around what the role of a software developer was, what it is now, and what it could look like in the future.

@@ -15,6 +15,7 @@ abstract: "Breathing is something we all do, tens of thousands of times a day, w
   like a human - using the Python Arcade library and techniques for modeling human
   breathing dynamics based on the scientific research.\r\nTurns out there's a lot
   more to what keeps us alive than first meets the eye."
+youtubeSlug: R37h9rzc4m0
 ---
 
 This talk is for anyone curious about what happens when you try to make software that reflects your own humanity back to you. I'll share my journey from the spark of an idea through to a working, humanlike-breathing simulator—covering how to model an unfamiliar domain using techniques from the scientific literature, and how strategic modularisation helped keep the project (mostly) out of spaghetti-code territory. By the end, you'll have a framework for growing software from nothing, and a new appreciation for the things we do 20,000 times a day without ever noticing.

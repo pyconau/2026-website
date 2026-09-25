@@ -14,6 +14,7 @@ abstract: "`import re`. `from pathlib import Path`. Python's import system is ea
   statements we write actually work. Sometimes, however, things do go wrong, and knowing
   where to look for more information can mean the difference between scratching our
   heads in bafflement and quickly solving whatever problem we're facing."
+youtubeSlug: 45jSG3465oc
 ---
 
 For a lot of import related problems, the exception and associated traceback tell us everything we need to know to resolve the issue. Other problems can require a deeper investigation. Are we actually importing the module we think we're importing? Is the interpreter even looking in the right place for the modules we expect it to be loading? We've noticed our application is taking ages to start, where is all that time going?
