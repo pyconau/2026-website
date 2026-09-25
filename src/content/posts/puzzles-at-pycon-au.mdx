@@ -1,0 +1,107 @@
+---
+title: "Puzzles @ PyConAU"
+published: 2026-09-25T19:00:00+10:00
+category: "news"
+previewText: "This post shares the puzzle solutions for challenges at PyCon AU 2026"
+---
+
+import BlogPostImage from "../../components/typography/BlogPostImage.astro";
+
+**Spoiler alert: this post contains the puzzle solutions and intended solve paths for challenges at PyCon AU 2026.**
+
+
+We had four published puzzles during PyCon AU intended to bring attendees together to share, collaborate and win prizes.
+
+## Badge Challenge
+> **Clue:** There are three random words on the back of each badge, but YOUR words are not that random. This puzzle is best solved with others to gather all the clues, but there's no need to spell things.
+
+Attendees were encouraged to share the words on their badge with others and solve the challenge as a group.
+
+For example my badge contained the words: `AMUSING SUBTLE ATTENTIVE`.
+
+In total 16 words were distributed *mostly* evenly across all badges. The script to update words for each delegate codified them as follows:
+
+```python
+WORDS = (  
+    ("PROACTIVE", "PAPA"),  
+    ("AMUSING", "ALPHA"),  
+    ("CUNNING", "CHARLIE"),  
+    ("KIND", "KILO"),  
+    ("ATTENTIVE", "ALPHA"),  
+    ("GENTLE", "GOLF"),  
+    ("ENERGETIC", "ECHO"),  
+    ("SUBTLE", "SIERRA"),  
+)  
+```
+
+*Note: an earlier iteration of this puzzle design piloted a more mathematical slant leveraging the greek alphabet but changed to (attempt to) use the NATO spelling alphabet instead. Some delegates correctly picked up that “ALPHA” should therefore have been “ALFA”)*
+
+#### Intended solution
+
+1. Collect all 16 words, ideally from meeting 5-10 people over the course of the conference. 
+2. Remove the words that spell things (a reference to the NATO alphabet).  
+3. Find that the first letters of the remaining words is an anagram for a python-related term.
+
+Congratulations to Margaret who’s winning solve ‘PACKAGES’ was randomly selected for a prize\!
+
+## Exhibitors
+
+> **Clue:** Each exhibitor in the foyer has a two digit number they can share with you. Our sponsors are lovely characters, go say and see what comes up.
+
+#### Intended solution
+
+1. Meet enough sponsors that they give you their two digit codes  
+2. Recognise characters were within the ASCII character range for A-Z.  
+3. Spell the correct word having met enough sponsors to make a good guess.
+
+Additionally, the clue had an intentional turn of phrase to suggest ‘characters’ as a nod towards converting numbers to letters.
+
+We also wanted sponsors to have a good time with this challenge, so some gave away the clues for free while others shared them behind some kind of activity or conversation.  Similarly, we didn’t expect attendees to interact with every sponsor (and completion isn’t the goal \- quality connection is), so the clue could also be guessed with a subset of characters.
+
+Congratulations Connor who’s correct solve ‘JOYSTICK’ earned them a prize\!
+
+## Thursday Challenge
+
+**Clue** Thursday's clue was shared in shifts: at conference opening, signage at afternoon tea, and the closing remarks. (\#puzzles has a copy of the clues for late participants).
+
+On Thursday we released three clues during the day:
+
+* “OHTFR” was on screen at the conference opening  
+* “IRE” was on table topper signage with ‘ROTATE FOR MORE’ labels  
+* “LJURER” was then on screen after lightning talks
+
+**Intended Solve**:
+
+1. Collect all three ‘groups’ of clues.  
+2. Note that the signage clue was ordered by the rotation labels  
+3. Join all three clues together to form “OHTFR IRE LJURER”  
+4. Take reference from the clue being shared in ‘shifts’, to perform a rot13 shift on the clue text.
+
+And the winner of the Thursday challenge was Raphael who submitted ‘BUGS EVERYWHERE’.
+
+## Glow up
+
+> **Clue:** We're loving our new conference glow up this year\! We'd love to tell you how it started. (This challenge became available after morning tea on Saturday)
+
+Attendees hopefully noticed some extra graphics had been added to the holding loop between talks. Some additional signage was placed around the conference with more of these oddly positioned and lettered shapes.
+
+#### Intended Solution
+
+1. Spot enough segments around the conference space  
+2. Find out how to assemble them in a physical puzzle.  
+3. Follow the URL on the conference website
+
+<BlogPostImage
+  src="/images/news/curves_solve.png"
+  alt="Assembled curve segments revealing the puzzle URL"
+  title="Glow up solution"
+  class="max-w-md rounded-xl pt-0! mt-7"
+/>
+
+Puzzle hunters visiting /curves.html on the conference site were redirected to a [fresh news post](/posts/the-new-curlyboi/) which fairly boldly referred to the newly branded snake illustration.
+
+*Note: Challengers indicated the lime coloured segment might not have been distributed on Saturday \- but managed to guess the URL from remaining segments anyway.*
+
+And after several astute competitors submitted ‘bulkyboi’, we must say congratulations to Peter who also won a prize for his solve\!
+
+*A note from Jack: this was my first time building a ‘puzzle hunt’ style challenge so not everything went perfectly. For its ups and its downs, its errors and its omissions, thank you to everyone who played part in Puzzles @ PyCon AU \- I hope you stay in touch with your fellow puzzle hunters\!*

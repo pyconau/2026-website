@@ -3,9 +3,10 @@ interface Props {
   src: string;
   alt: string;
   title: string;
+  class?: string;
 }
 
-const { src, alt, title } = Astro.props;
+const { src, alt, title, class: className } = Astro.props;
 ---
 
-<img src={src} class="max-w-[90%] mx-auto" alt={alt} title={title} />
+<img src={src} class:list={["max-w-[90%] mx-auto", className]} alt={alt} title={title} />
