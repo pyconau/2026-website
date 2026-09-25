@@ -10,9 +10,9 @@ const { videoId, title } = Astro.props;
 
 // Click-to-play: show YouTube's thumbnail with our play button, and only load
 // the player iframe (and its scripts) once the viewer asks for it.
-// hqdefault exists for every video; its 4:3 letterboxing is cropped away by
-// object-cover in the 16:9 box.
-const thumbnail = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+// maxresdefault (1280x720) is the largest thumbnail YouTube serves. It only
+// exists for HD uploads, which every Next Day Video recording is.
+const thumbnail = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
 const embedSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
 ---
 
