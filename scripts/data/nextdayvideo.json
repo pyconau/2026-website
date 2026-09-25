@@ -24,6 +24,7 @@
     "archive_url": "",
     "archive_mp4_url": "",
     "twitter_url": "",
+    "thumbnail_url": "",
     "presenters": [
       {
         "id": "36eb9901-ae5a-4e78-a0ab-e4a310b8193b",
@@ -58,6 +59,7 @@
     "archive_url": "",
     "archive_mp4_url": "",
     "twitter_url": "",
+    "thumbnail_url": "",
     "presenters": [
       {
         "id": "debcefd7-fc0a-43e3-829b-055d322577d0",
@@ -92,6 +94,7 @@
     "archive_url": "",
     "archive_mp4_url": "",
     "twitter_url": "",
+    "thumbnail_url": "",
     "presenters": [
       {
         "id": "ab614426-d6ec-43e4-ad89-d2f26f9ce927",
@@ -126,6 +129,7 @@
     "archive_url": "",
     "archive_mp4_url": "",
     "twitter_url": "",
+    "thumbnail_url": "",
     "presenters": [
       {
         "id": "87be3827-65a8-4fdd-9e97-f74ebd0bc19a",
@@ -160,6 +164,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/MmbmfrKy6ZQ/hqdefault.jpg",
     "presenters": [
       {
         "id": "87be3827-65a8-4fdd-9e97-f74ebd0bc19a",
@@ -204,6 +209,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/Rg2j3K-wyyg/hqdefault.jpg",
     "presenters": [
       {
         "id": "17b6226e-b15a-4108-a94b-f47bd70e43c9",
@@ -214,35 +220,41 @@
     "start_at": "23:10 26.08.2026"
   },
   {
-    "id": 16814,
-    "location": "Ballroom 2",
-    "location_slug": "ballroom_2",
-    "name": "Switching from Sphinx to Markdown",
-    "slug": "Switching_from_Sphinx_to_Markdown",
-    "authors": "Kattni",
-    "description": "For most of Python's history, the predominant option for documentation has been Sphinx and reStructuredText. However, a majority of other ecosystems have adopted Markdown. There are historical reasons for reStructuredText being a better choice, however, Markdown is now up to the task.\r\n\r\nIn this talk, you'll learn why Markdown is a better option for your project's documentation. You'll be introduced to MkDocs, a static site generator built around Markdown content, and a series of associated plugins and extensions that you need to bring Sphinx-like capabilities to Markdown documentation. You'll also hear a case study of migrating multiple large, existing Sphinx-based documentation bases to Markdown, including the tools used for automating the process. You'll learn how you can engage the community to assist with the effort. Finally, you'll learn why it's worth the effort to make a change of this magnitude.",
+    "id": 16804,
+    "location": "Ballroom 3",
+    "location_slug": "ballroom_3",
+    "name": "AI-assisted coding, Python and dbt: taking Chronos live in two days",
+    "slug": "AIassisted_coding_Python_and_dbt_taking_Chronos_live_in_two_days",
+    "authors": "Jay Stein, Sergio Pintaldi",
+    "description": "We needed to produce 25 years of gap-free half-hourly weather data in just two days. The output had to be continuous, reproducible, and ready for production use. We achieved that speed by combining domain knowledge, Python, dbt, and AI-assisted coding, with detailed prompting and a few tight loops of refinement rather than a zero-shot approach. In this talk, we’ll show how we used Python, dbt, and the Chronos-2 time-series foundation model to build a practical weather gap-filling pipeline for variables such as temperature, humidity, and wind speed.\r\n\r\nThis talk focuses on a practical Python engineering question: when does a foundation model become a pragmatic shortcut rather than just an impressive demo? We’ll compare our Chronos-based workflow with a more traditional approach using correlations with nearby weather stations, explain why dbt was such a strong backbone for reproducibility and maintainability, and show why that mattered for a pipeline that needed to remain understandable and easy to update. We’ll also show that gap filling is different from ordinary forecasting: because a missing window has data on both sides, future approaches could fill forward from the start of the gap, backward from the end, and meet in the middle.",
     "start": "2026-08-27T00:45:00Z",
     "duration": "00:30:00",
-    "track": "Main Conference",
+    "track": "Data & AI",
     "prerecord": false,
     "state": 15,
     "released": true,
     "license": "CC BY-NC-SA",
     "tags": "",
-    "conf_key": "ZYSPB3",
-    "conf_url": "https://2026.pycon.org.au/schedule/ZYSPB3/",
-    "host_url": "http://youtu.be/vKV2MV0l068",
-    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Thursday/Switching_from_Sphinx_to_Markdown.webm",
-    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Thursday/Switching_from_Sphinx_to_Markdown.srt",
+    "conf_key": "VHXDSA",
+    "conf_url": "https://2026.pycon.org.au/schedule/VHXDSA/",
+    "host_url": "http://youtu.be/A3ttzf7HBV0",
+    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Thursday/AIassisted_coding_Python_and_dbt_taking_Chronos_live_in_two_days.webm",
+    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Thursday/AIassisted_coding_Python_and_dbt_taking_Chronos_live_in_two_days.srt",
     "rax_mp4_url": null,
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/A3ttzf7HBV0/hqdefault.jpg",
     "presenters": [
       {
-        "id": "1a0001ff-40f1-4f54-b922-294bb2ea0519",
-        "name": "Kattni",
-        "avatar_url": "https://pretalx.com/media/avatars/DCSCPQ_w6Wmbnb.webp"
+        "id": "5bb78f20-1f81-4ade-bf24-70ab10ad3d58",
+        "name": "Jay Stein",
+        "avatar_url": "https://pretalx.com/media/avatars/3L8ZMJ_qwqPTf8.webp"
+      },
+      {
+        "id": "5f07ee5f-1a95-4ab6-8337-8f6bec0c073e",
+        "name": "Sergio Pintaldi",
+        "avatar_url": "https://pretalx.com/media/avatars/RQHJWA_BLOyPBZ.webp"
       }
     ],
     "start_at": "00:40 27.08.2026"
@@ -272,6 +284,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/WHclVPLwti8/hqdefault.jpg",
     "presenters": [
       {
         "id": "7f32712a-017f-4d88-83a4-bf052376a905",
@@ -282,77 +295,39 @@
     "start_at": "00:40 27.08.2026"
   },
   {
-    "id": 16804,
-    "location": "Ballroom 3",
-    "location_slug": "ballroom_3",
-    "name": "AI-assisted coding, Python and dbt: taking Chronos live in two days",
-    "slug": "AIassisted_coding_Python_and_dbt_taking_Chronos_live_in_two_days",
-    "authors": "Jay Stein, Sergio Pintaldi",
-    "description": "We needed to produce 25 years of gap-free half-hourly weather data in just two days. The output had to be continuous, reproducible, and ready for production use. We achieved that speed by combining domain knowledge, Python, dbt, and AI-assisted coding, with detailed prompting and a few tight loops of refinement rather than a zero-shot approach. In this talk, we’ll show how we used Python, dbt, and the Chronos-2 time-series foundation model to build a practical weather gap-filling pipeline for variables such as temperature, humidity, and wind speed.\r\n\r\nThis talk focuses on a practical Python engineering question: when does a foundation model become a pragmatic shortcut rather than just an impressive demo? We’ll compare our Chronos-based workflow with a more traditional approach using correlations with nearby weather stations, explain why dbt was such a strong backbone for reproducibility and maintainability, and show why that mattered for a pipeline that needed to remain understandable and easy to update. We’ll also show that gap filling is different from ordinary forecasting: because a missing window has data on both sides, future approaches could fill forward from the start of the gap, backward from the end, and meet in the middle.",
+    "id": 16814,
+    "location": "Ballroom 2",
+    "location_slug": "ballroom_2",
+    "name": "Switching from Sphinx to Markdown",
+    "slug": "Switching_from_Sphinx_to_Markdown",
+    "authors": "Kattni",
+    "description": "For most of Python's history, the predominant option for documentation has been Sphinx and reStructuredText. However, a majority of other ecosystems have adopted Markdown. There are historical reasons for reStructuredText being a better choice, however, Markdown is now up to the task.\r\n\r\nIn this talk, you'll learn why Markdown is a better option for your project's documentation. You'll be introduced to MkDocs, a static site generator built around Markdown content, and a series of associated plugins and extensions that you need to bring Sphinx-like capabilities to Markdown documentation. You'll also hear a case study of migrating multiple large, existing Sphinx-based documentation bases to Markdown, including the tools used for automating the process. You'll learn how you can engage the community to assist with the effort. Finally, you'll learn why it's worth the effort to make a change of this magnitude.",
     "start": "2026-08-27T00:45:00Z",
     "duration": "00:30:00",
-    "track": "Data & AI",
+    "track": "Main Conference",
     "prerecord": false,
     "state": 15,
     "released": true,
     "license": "CC BY-NC-SA",
     "tags": "",
-    "conf_key": "VHXDSA",
-    "conf_url": "https://2026.pycon.org.au/schedule/VHXDSA/",
-    "host_url": "http://youtu.be/A3ttzf7HBV0",
-    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Thursday/AIassisted_coding_Python_and_dbt_taking_Chronos_live_in_two_days.webm",
-    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Thursday/AIassisted_coding_Python_and_dbt_taking_Chronos_live_in_two_days.srt",
+    "conf_key": "ZYSPB3",
+    "conf_url": "https://2026.pycon.org.au/schedule/ZYSPB3/",
+    "host_url": "http://youtu.be/vKV2MV0l068",
+    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Thursday/Switching_from_Sphinx_to_Markdown.webm",
+    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Thursday/Switching_from_Sphinx_to_Markdown.srt",
     "rax_mp4_url": null,
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/vKV2MV0l068/hqdefault.jpg",
     "presenters": [
       {
-        "id": "5bb78f20-1f81-4ade-bf24-70ab10ad3d58",
-        "name": "Jay Stein",
-        "avatar_url": "https://pretalx.com/media/avatars/3L8ZMJ_qwqPTf8.webp"
-      },
-      {
-        "id": "5f07ee5f-1a95-4ab6-8337-8f6bec0c073e",
-        "name": "Sergio Pintaldi",
-        "avatar_url": "https://pretalx.com/media/avatars/RQHJWA_BLOyPBZ.webp"
+        "id": "1a0001ff-40f1-4f54-b922-294bb2ea0519",
+        "name": "Kattni",
+        "avatar_url": "https://pretalx.com/media/avatars/DCSCPQ_w6Wmbnb.webp"
       }
     ],
     "start_at": "00:40 27.08.2026"
-  },
-  {
-    "id": 16818,
-    "location": "Ballroom 1",
-    "location_slug": "ballroom_1",
-    "name": "Automation First, Regrets Later",
-    "slug": "Automation_First_Regrets_Later",
-    "authors": "Alisdair Robertson",
-    "description": "25,000+ resources, 65,000+ lines of Python, two engineers.\r\n\r\nFive years ago we made a commitment to automating (almost) everything we could about our platform. Deployments, Guardrails, Observability, Identity, and everything between.\r\nSo far we have been seeing that through with extensive use of Infrastructure as Software.\r\n\r\nFive years later, I have regrets.\r\n\r\nSolving complex problems with Infrastructure as Software is a great way to create complex problems with Infrastructure as Software.",
-    "start": "2026-08-27T01:30:00Z",
-    "duration": "00:30:00",
-    "track": "Platform Engineering",
-    "prerecord": false,
-    "state": 15,
-    "released": true,
-    "license": "CC BY-NC-SA",
-    "tags": "",
-    "conf_key": "8ZAAPX",
-    "conf_url": "https://2026.pycon.org.au/schedule/8ZAAPX/",
-    "host_url": "http://youtu.be/zqVhfDqgDmE",
-    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_1/Thursday/Automation_First_Regrets_Later.webm",
-    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_1/Thursday/Automation_First_Regrets_Later.srt",
-    "rax_mp4_url": null,
-    "archive_url": null,
-    "archive_mp4_url": "",
-    "twitter_url": null,
-    "presenters": [
-      {
-        "id": "73711a02-419d-4dea-8d45-dc483c26a515",
-        "name": "Alisdair Robertson",
-        "avatar_url": "https://pretalx.com/media/avatars/7HXJEK_DXV5YWc.webp"
-      }
-    ],
-    "start_at": "01:25 27.08.2026"
   },
   {
     "id": 16796,
@@ -379,11 +354,47 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/45jSG3465oc/hqdefault.jpg",
     "presenters": [
       {
         "id": "b56047e6-4571-40c2-8b3e-e89d8696933a",
         "name": "Alyssa Coghlan",
         "avatar_url": "https://pretalx.com/media/avatars/FYVKMX_0EN8MJC.webp"
+      }
+    ],
+    "start_at": "01:25 27.08.2026"
+  },
+  {
+    "id": 16818,
+    "location": "Ballroom 1",
+    "location_slug": "ballroom_1",
+    "name": "Automation First, Regrets Later",
+    "slug": "Automation_First_Regrets_Later",
+    "authors": "Alisdair Robertson",
+    "description": "25,000+ resources, 65,000+ lines of Python, two engineers.\r\n\r\nFive years ago we made a commitment to automating (almost) everything we could about our platform. Deployments, Guardrails, Observability, Identity, and everything between.\r\nSo far we have been seeing that through with extensive use of Infrastructure as Software.\r\n\r\nFive years later, I have regrets.\r\n\r\nSolving complex problems with Infrastructure as Software is a great way to create complex problems with Infrastructure as Software.",
+    "start": "2026-08-27T01:30:00Z",
+    "duration": "00:30:00",
+    "track": "Platform Engineering",
+    "prerecord": false,
+    "state": 15,
+    "released": true,
+    "license": "CC BY-NC-SA",
+    "tags": "",
+    "conf_key": "8ZAAPX",
+    "conf_url": "https://2026.pycon.org.au/schedule/8ZAAPX/",
+    "host_url": "http://youtu.be/zqVhfDqgDmE",
+    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_1/Thursday/Automation_First_Regrets_Later.webm",
+    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_1/Thursday/Automation_First_Regrets_Later.srt",
+    "rax_mp4_url": null,
+    "archive_url": null,
+    "archive_mp4_url": "",
+    "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/zqVhfDqgDmE/hqdefault.jpg",
+    "presenters": [
+      {
+        "id": "73711a02-419d-4dea-8d45-dc483c26a515",
+        "name": "Alisdair Robertson",
+        "avatar_url": "https://pretalx.com/media/avatars/7HXJEK_DXV5YWc.webp"
       }
     ],
     "start_at": "01:25 27.08.2026"
@@ -413,6 +424,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/7b3wm5wyqfo/hqdefault.jpg",
     "presenters": [
       {
         "id": "ec459e52-3470-48cd-bd9e-865147cd84c4",
@@ -447,6 +459,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/KG-rJraGnxM/hqdefault.jpg",
     "presenters": [
       {
         "id": "a6be4ef1-d328-4d61-9177-6531c27ba9dd",
@@ -486,6 +499,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/0RvePCjr3bw/hqdefault.jpg",
     "presenters": [
       {
         "id": "0ab44a08-fc79-424d-bc16-4830c133f5e0",
@@ -520,6 +534,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/K8VqMpqIZyY/hqdefault.jpg",
     "presenters": [
       {
         "id": "26bd006a-b349-4464-b932-fa4791b2308b",
@@ -530,35 +545,36 @@
     "start_at": "02:00 27.08.2026"
   },
   {
-    "id": 16827,
-    "location": "Ballroom 2",
-    "location_slug": "ballroom_2",
-    "name": "Your Python container is 90% stuff you didn't ask for",
-    "slug": "Your_Python_container_is_90_stuff_you_didnt_ask_for",
-    "authors": "Scott Norris",
-    "description": "Docker pull python:3.x feels like you asked for Python. What you actually got was ~430 packages: a shell, two package managers, a C compiler, and a few hundred known CVEs - an entire distro userland your app will never use, but an attacker with RCE absolutely will.",
+    "id": 16811,
+    "location": "Ballroom 3",
+    "location_slug": "ballroom_3",
+    "name": "From Pixels to Points: Inferring Archery Scores with Computer Vision",
+    "slug": "From_Pixels_to_Points_Inferring_Archery_Scores_with_Computer_Vision",
+    "authors": "Jacob Seiler",
+    "description": "Improving in archery often goes beyond simply increasing your score; it also means building consistency, tightening groupings, and recognising patterns such as shots drifting off-centre.  However, tracking the final position of arrows after each shot is a slow, imprecise, and awkward process. \r\n\r\nIn this talk, I show how I trained and validated a computer vision pipeline using oriented object detection to infer arrow locations and scores directly from a target image. By deploying this system on a Raspberry Pi, the process becomes simple enough to use during regular practice, while also creating a record of shot placement that can be analysed over time. This makes it possible to look beyond individual scores and start tracking broader patterns in accuracy and consistency.",
     "start": "2026-08-27T02:40:00Z",
     "duration": "00:30:00",
-    "track": "Main Conference",
+    "track": "Data & AI",
     "prerecord": false,
     "state": 15,
     "released": true,
     "license": "CC BY-NC-SA",
     "tags": "",
-    "conf_key": "KQMV9M",
-    "conf_url": "https://2026.pycon.org.au/schedule/KQMV9M/",
-    "host_url": "http://youtu.be/DLg5v2yIX4k",
-    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Thursday/Your_Python_container_is_90_stuff_you_didnt_ask_for.webm",
-    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Thursday/Your_Python_container_is_90_stuff_you_didnt_ask_for.srt",
+    "conf_key": "YGUJEG",
+    "conf_url": "https://2026.pycon.org.au/schedule/YGUJEG/",
+    "host_url": "http://youtu.be/gy75OvC9LTI",
+    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Thursday/From_Pixels_to_Points_Inferring_Archery_Scores_with_Computer_Vision.webm",
+    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Thursday/From_Pixels_to_Points_Inferring_Archery_Scores_with_Computer_Vision.srt",
     "rax_mp4_url": null,
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/gy75OvC9LTI/hqdefault.jpg",
     "presenters": [
       {
-        "id": "7b6c847d-4234-4699-8f3a-9a72f4e06026",
-        "name": "Scott Norris",
-        "avatar_url": "https://pretalx.com/media/avatars/avatar_bInEgoI.webp"
+        "id": "ff154a04-f327-4152-8318-0a08063c27d5",
+        "name": "Jacob Seiler",
+        "avatar_url": "https://pretalx.com/media/avatars/PHC9L8_iTU8UMl.webp"
       }
     ],
     "start_at": "02:35 27.08.2026"
@@ -588,6 +604,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/Xjyr5yi3HVo/hqdefault.jpg",
     "presenters": [
       {
         "id": "1d0fa06e-5ec5-4b78-9d98-d4761fc3893b",
@@ -598,69 +615,71 @@
     "start_at": "02:35 27.08.2026"
   },
   {
-    "id": 16811,
-    "location": "Ballroom 3",
-    "location_slug": "ballroom_3",
-    "name": "From Pixels to Points: Inferring Archery Scores with Computer Vision",
-    "slug": "From_Pixels_to_Points_Inferring_Archery_Scores_with_Computer_Vision",
-    "authors": "Jacob Seiler",
-    "description": "Improving in archery often goes beyond simply increasing your score; it also means building consistency, tightening groupings, and recognising patterns such as shots drifting off-centre.  However, tracking the final position of arrows after each shot is a slow, imprecise, and awkward process. \r\n\r\nIn this talk, I show how I trained and validated a computer vision pipeline using oriented object detection to infer arrow locations and scores directly from a target image. By deploying this system on a Raspberry Pi, the process becomes simple enough to use during regular practice, while also creating a record of shot placement that can be analysed over time. This makes it possible to look beyond individual scores and start tracking broader patterns in accuracy and consistency.",
+    "id": 16827,
+    "location": "Ballroom 2",
+    "location_slug": "ballroom_2",
+    "name": "Your Python container is 90% stuff you didn't ask for",
+    "slug": "Your_Python_container_is_90_stuff_you_didnt_ask_for",
+    "authors": "Scott Norris",
+    "description": "Docker pull python:3.x feels like you asked for Python. What you actually got was ~430 packages: a shell, two package managers, a C compiler, and a few hundred known CVEs - an entire distro userland your app will never use, but an attacker with RCE absolutely will.",
     "start": "2026-08-27T02:40:00Z",
     "duration": "00:30:00",
-    "track": "Data & AI",
+    "track": "Main Conference",
     "prerecord": false,
     "state": 15,
     "released": true,
     "license": "CC BY-NC-SA",
     "tags": "",
-    "conf_key": "YGUJEG",
-    "conf_url": "https://2026.pycon.org.au/schedule/YGUJEG/",
-    "host_url": "http://youtu.be/gy75OvC9LTI",
-    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Thursday/From_Pixels_to_Points_Inferring_Archery_Scores_with_Computer_Vision.webm",
-    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Thursday/From_Pixels_to_Points_Inferring_Archery_Scores_with_Computer_Vision.srt",
+    "conf_key": "KQMV9M",
+    "conf_url": "https://2026.pycon.org.au/schedule/KQMV9M/",
+    "host_url": "http://youtu.be/DLg5v2yIX4k",
+    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Thursday/Your_Python_container_is_90_stuff_you_didnt_ask_for.webm",
+    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Thursday/Your_Python_container_is_90_stuff_you_didnt_ask_for.srt",
     "rax_mp4_url": null,
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/DLg5v2yIX4k/hqdefault.jpg",
     "presenters": [
       {
-        "id": "ff154a04-f327-4152-8318-0a08063c27d5",
-        "name": "Jacob Seiler",
-        "avatar_url": "https://pretalx.com/media/avatars/PHC9L8_iTU8UMl.webp"
+        "id": "7b6c847d-4234-4699-8f3a-9a72f4e06026",
+        "name": "Scott Norris",
+        "avatar_url": "https://pretalx.com/media/avatars/avatar_bInEgoI.webp"
       }
     ],
     "start_at": "02:35 27.08.2026"
   },
   {
-    "id": 16801,
-    "location": "Ballroom 3",
-    "location_slug": "ballroom_3",
-    "name": "Please Don't Put That in a Dict: Better Data Models in Python",
-    "slug": "Please_Dont_Put_That_in_a_Dict_Better_Data_Models_in_Python",
-    "authors": "Arshia Sharma",
-    "description": "Dictionaries are one of the first tools Python developers reach for: fast, flexible, and easy to use when building something new. But when do they stop being enough? And when it's easy to generate dataclasses and classes, how do you know if that structure is actually useful?",
+    "id": 16750,
+    "location": "Ballroom 1",
+    "location_slug": "ballroom_1",
+    "name": "From On-Prem to the Cloud and Back Again",
+    "slug": "From_OnPrem_to_the_Cloud_and_Back_Again",
+    "authors": "Luke",
+    "description": "Before the advent of Cloud Computing, owning all your servers and keeping them in a server room or a leased datacenter was the norm if not the only game in town. But despite The Cloud having turned into The Hyperscalers, owning your platform from the switch plane on up is still available... and it rocks!",
     "start": "2026-08-27T04:05:00Z",
     "duration": "00:30:00",
-    "track": "Data & AI",
+    "track": "Platform Engineering",
     "prerecord": false,
     "state": 15,
     "released": true,
     "license": "CC BY-NC-SA",
     "tags": "",
-    "conf_key": "TYXRSM",
-    "conf_url": "https://2026.pycon.org.au/schedule/TYXRSM/",
-    "host_url": "http://youtu.be/syof1ZRT92M",
-    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Thursday/Please_Dont_Put_That_in_a_Dict_Better_Data_Models_in_Python.webm",
-    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Thursday/Please_Dont_Put_That_in_a_Dict_Better_Data_Models_in_Python.srt",
+    "conf_key": "8VSJFM",
+    "conf_url": "https://2026.pycon.org.au/schedule/8VSJFM/",
+    "host_url": "http://youtu.be/Evp7nCOe8hU",
+    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_1/Thursday/From_OnPrem_to_the_Cloud_and_Back_Again.webm",
+    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_1/Thursday/From_OnPrem_to_the_Cloud_and_Back_Again.srt",
     "rax_mp4_url": null,
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/Evp7nCOe8hU/hqdefault.jpg",
     "presenters": [
       {
-        "id": "12ff57af-f40b-474e-afc6-e1ba9a333251",
-        "name": "Arshia Sharma",
-        "avatar_url": "https://pretalx.com/media/avatars/9ZHEFK_Sc4tuqq.webp"
+        "id": "fa723e38-95e7-4a62-9770-885e1169230e",
+        "name": "Luke",
+        "avatar_url": "https://pretalx.com/media/avatars/HGQL3C_sXh0kYk.webp"
       }
     ],
     "start_at": "04:00 27.08.2026"
@@ -690,6 +709,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/RdNHum7MXX0/hqdefault.jpg",
     "presenters": [
       {
         "id": "8f1124c1-4f16-424e-9e45-ff60f82655b2",
@@ -700,48 +720,14 @@
     "start_at": "04:00 27.08.2026"
   },
   {
-    "id": 16750,
-    "location": "Ballroom 1",
-    "location_slug": "ballroom_1",
-    "name": "From On-Prem to the Cloud and Back Again",
-    "slug": "From_OnPrem_to_the_Cloud_and_Back_Again",
-    "authors": "Luke",
-    "description": "Before the advent of Cloud Computing, owning all your servers and keeping them in a server room or a leased datacenter was the norm if not the only game in town. But despite The Cloud having turned into The Hyperscalers, owning your platform from the switch plane on up is still available... and it rocks!",
-    "start": "2026-08-27T04:05:00Z",
-    "duration": "00:30:00",
-    "track": "Platform Engineering",
-    "prerecord": false,
-    "state": 15,
-    "released": true,
-    "license": "CC BY-NC-SA",
-    "tags": "",
-    "conf_key": "8VSJFM",
-    "conf_url": "https://2026.pycon.org.au/schedule/8VSJFM/",
-    "host_url": "http://youtu.be/Evp7nCOe8hU",
-    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_1/Thursday/From_OnPrem_to_the_Cloud_and_Back_Again.webm",
-    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_1/Thursday/From_OnPrem_to_the_Cloud_and_Back_Again.srt",
-    "rax_mp4_url": null,
-    "archive_url": null,
-    "archive_mp4_url": "",
-    "twitter_url": null,
-    "presenters": [
-      {
-        "id": "fa723e38-95e7-4a62-9770-885e1169230e",
-        "name": "Luke",
-        "avatar_url": "https://pretalx.com/media/avatars/HGQL3C_sXh0kYk.webp"
-      }
-    ],
-    "start_at": "04:00 27.08.2026"
-  },
-  {
-    "id": 16746,
+    "id": 16801,
     "location": "Ballroom 3",
     "location_slug": "ballroom_3",
-    "name": "Stop Prompting, Start Composing: Agent Skills in Practice",
-    "slug": "Stop_Prompting_Start_Composing_Agent_Skills_in_Practice",
-    "authors": "Marty Kieliszek",
-    "description": "AI agents are changing how we build software. They have augmented our software engineering workflow and challenged us to practice a new discipline, Agentic Engineering. Central to this emerging discipline is the skill, a natural language markdown file that bundles workflows, tools, and domain knowledge into a new unit of work for defining what an agent can do. Adopted as an open standard across the industry, skills sit above programming languages, not within them. If you've ever written a runbook, a playbook, or an SOP, you already understand what a skill encodes. This talk explores what a skill is, how skills compose through context rather than interfaces, and what breaks when your smallest unit of work is no longer deterministic. It is drawn from real experience building an enterprise architect agent, with practical examples in Python.",
-    "start": "2026-08-27T04:40:00Z",
+    "name": "Please Don't Put That in a Dict: Better Data Models in Python",
+    "slug": "Please_Dont_Put_That_in_a_Dict_Better_Data_Models_in_Python",
+    "authors": "Arshia Sharma",
+    "description": "Dictionaries are one of the first tools Python developers reach for: fast, flexible, and easy to use when building something new. But when do they stop being enough? And when it's easy to generate dataclasses and classes, how do you know if that structure is actually useful?",
+    "start": "2026-08-27T04:05:00Z",
     "duration": "00:30:00",
     "track": "Data & AI",
     "prerecord": false,
@@ -749,23 +735,24 @@
     "released": true,
     "license": "CC BY-NC-SA",
     "tags": "",
-    "conf_key": "7KE7PU",
-    "conf_url": "https://2026.pycon.org.au/schedule/7KE7PU/",
-    "host_url": "http://youtu.be/frHgBj8-Wms",
-    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Thursday/Stop_Prompting_Start_Composing_Agent_Skills_in_Practice.webm",
-    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Thursday/Stop_Prompting_Start_Composing_Agent_Skills_in_Practice.srt",
+    "conf_key": "TYXRSM",
+    "conf_url": "https://2026.pycon.org.au/schedule/TYXRSM/",
+    "host_url": "http://youtu.be/syof1ZRT92M",
+    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Thursday/Please_Dont_Put_That_in_a_Dict_Better_Data_Models_in_Python.webm",
+    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Thursday/Please_Dont_Put_That_in_a_Dict_Better_Data_Models_in_Python.srt",
     "rax_mp4_url": null,
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/syof1ZRT92M/hqdefault.jpg",
     "presenters": [
       {
-        "id": "67e0293f-cb0d-4816-a8e2-c32d3e8363bc",
-        "name": "Marty Kieliszek",
-        "avatar_url": "https://pretalx.com/media/avatars/NSSGEM_NagsFR6.webp"
+        "id": "12ff57af-f40b-474e-afc6-e1ba9a333251",
+        "name": "Arshia Sharma",
+        "avatar_url": "https://pretalx.com/media/avatars/9ZHEFK_Sc4tuqq.webp"
       }
     ],
-    "start_at": "04:35 27.08.2026"
+    "start_at": "04:00 27.08.2026"
   },
   {
     "id": 16793,
@@ -792,6 +779,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/JNwvXcc_Evw/hqdefault.jpg",
     "presenters": [
       {
         "id": "26bfaa7a-b98c-46a1-acdc-b2096e986c29",
@@ -826,11 +814,47 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/JsqsPkS6mls/hqdefault.jpg",
     "presenters": [
       {
         "id": "f32a233e-d67a-4adb-86af-48d307177f9e",
         "name": "David Bell",
         "avatar_url": "https://pretalx.com/media/avatars/VL8SUG_q0VifjW.webp"
+      }
+    ],
+    "start_at": "04:35 27.08.2026"
+  },
+  {
+    "id": 16746,
+    "location": "Ballroom 3",
+    "location_slug": "ballroom_3",
+    "name": "Stop Prompting, Start Composing: Agent Skills in Practice",
+    "slug": "Stop_Prompting_Start_Composing_Agent_Skills_in_Practice",
+    "authors": "Marty Kieliszek",
+    "description": "AI agents are changing how we build software. They have augmented our software engineering workflow and challenged us to practice a new discipline, Agentic Engineering. Central to this emerging discipline is the skill, a natural language markdown file that bundles workflows, tools, and domain knowledge into a new unit of work for defining what an agent can do. Adopted as an open standard across the industry, skills sit above programming languages, not within them. If you've ever written a runbook, a playbook, or an SOP, you already understand what a skill encodes. This talk explores what a skill is, how skills compose through context rather than interfaces, and what breaks when your smallest unit of work is no longer deterministic. It is drawn from real experience building an enterprise architect agent, with practical examples in Python.",
+    "start": "2026-08-27T04:40:00Z",
+    "duration": "00:30:00",
+    "track": "Data & AI",
+    "prerecord": false,
+    "state": 15,
+    "released": true,
+    "license": "CC BY-NC-SA",
+    "tags": "",
+    "conf_key": "7KE7PU",
+    "conf_url": "https://2026.pycon.org.au/schedule/7KE7PU/",
+    "host_url": "http://youtu.be/frHgBj8-Wms",
+    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Thursday/Stop_Prompting_Start_Composing_Agent_Skills_in_Practice.webm",
+    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Thursday/Stop_Prompting_Start_Composing_Agent_Skills_in_Practice.srt",
+    "rax_mp4_url": null,
+    "archive_url": null,
+    "archive_mp4_url": "",
+    "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/frHgBj8-Wms/hqdefault.jpg",
+    "presenters": [
+      {
+        "id": "67e0293f-cb0d-4816-a8e2-c32d3e8363bc",
+        "name": "Marty Kieliszek",
+        "avatar_url": "https://pretalx.com/media/avatars/NSSGEM_NagsFR6.webp"
       }
     ],
     "start_at": "04:35 27.08.2026"
@@ -860,6 +884,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/Xiz6iLRgX3w/hqdefault.jpg",
     "presenters": [
       {
         "id": "a8bb0929-c92a-4905-8c07-0b27e49cb590",
@@ -870,40 +895,6 @@
         "id": "1920af4e-2740-4acd-b7d2-128c487c879f",
         "name": "Will Cohen",
         "avatar_url": "https://pretalx.com/media/avatars/HWL98Z_p0Q5ODg.webp"
-      }
-    ],
-    "start_at": "05:10 27.08.2026"
-  },
-  {
-    "id": 16803,
-    "location": "Ballroom 1",
-    "location_slug": "ballroom_1",
-    "name": "Just Enough Reliability",
-    "slug": "Just_Enough_Reliability",
-    "authors": "Shaun O'Keefe",
-    "description": "SRE is all about simplicity. So why do so many of us have a copy of The Google Book sitting on our desk? So much of what we build seeks to emulate companies with millions (if not billions) of customers, while we have neither the scale to justify such effort, nor the runway to still be around when we’re finished. This talk asks - does my medium-sized scale up need Chaos Engineering, circuit breakers, and a 10 tier severity matrix… or does it need a spreadsheet?",
-    "start": "2026-08-27T05:15:00Z",
-    "duration": "00:30:00",
-    "track": "Platform Engineering",
-    "prerecord": false,
-    "state": 15,
-    "released": true,
-    "license": "CC BY-NC-SA",
-    "tags": "",
-    "conf_key": "V9UCGA",
-    "conf_url": "https://2026.pycon.org.au/schedule/V9UCGA/",
-    "host_url": "http://youtu.be/Gh8Xyd_UEf4",
-    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_1/Thursday/Just_Enough_Reliability.webm",
-    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_1/Thursday/Just_Enough_Reliability.srt",
-    "rax_mp4_url": null,
-    "archive_url": null,
-    "archive_mp4_url": "",
-    "twitter_url": null,
-    "presenters": [
-      {
-        "id": "d4c63e2d-493f-4e85-ac74-e890dbd0d29a",
-        "name": "Shaun O'Keefe",
-        "avatar_url": "https://pretalx.com/media/avatars/TURKPC_fxTKsj5.webp"
       }
     ],
     "start_at": "05:10 27.08.2026"
@@ -933,11 +924,47 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/2qYMESUS8FQ/hqdefault.jpg",
     "presenters": [
       {
         "id": "b4c4a139-5dbc-406b-b31b-9eb949caea6a",
         "name": "Jack Reichelt",
         "avatar_url": "https://pretalx.com/media/avatars/8UFZNX_HAvVdXp.webp"
+      }
+    ],
+    "start_at": "05:10 27.08.2026"
+  },
+  {
+    "id": 16803,
+    "location": "Ballroom 1",
+    "location_slug": "ballroom_1",
+    "name": "Just Enough Reliability",
+    "slug": "Just_Enough_Reliability",
+    "authors": "Shaun O'Keefe",
+    "description": "SRE is all about simplicity. So why do so many of us have a copy of The Google Book sitting on our desk? So much of what we build seeks to emulate companies with millions (if not billions) of customers, while we have neither the scale to justify such effort, nor the runway to still be around when we’re finished. This talk asks - does my medium-sized scale up need Chaos Engineering, circuit breakers, and a 10 tier severity matrix… or does it need a spreadsheet?",
+    "start": "2026-08-27T05:15:00Z",
+    "duration": "00:30:00",
+    "track": "Platform Engineering",
+    "prerecord": false,
+    "state": 15,
+    "released": true,
+    "license": "CC BY-NC-SA",
+    "tags": "",
+    "conf_key": "V9UCGA",
+    "conf_url": "https://2026.pycon.org.au/schedule/V9UCGA/",
+    "host_url": "http://youtu.be/Gh8Xyd_UEf4",
+    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_1/Thursday/Just_Enough_Reliability.webm",
+    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_1/Thursday/Just_Enough_Reliability.srt",
+    "rax_mp4_url": null,
+    "archive_url": null,
+    "archive_mp4_url": "",
+    "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/Gh8Xyd_UEf4/hqdefault.jpg",
+    "presenters": [
+      {
+        "id": "d4c63e2d-493f-4e85-ac74-e890dbd0d29a",
+        "name": "Shaun O'Keefe",
+        "avatar_url": "https://pretalx.com/media/avatars/TURKPC_fxTKsj5.webp"
       }
     ],
     "start_at": "05:10 27.08.2026"
@@ -967,6 +994,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/O4DR831jxVU/hqdefault.jpg",
     "presenters": [
       {
         "id": "243845cd-ebc8-4ce2-a65e-a4826ec41bcc",
@@ -1006,6 +1034,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/NJWlnqVMm0o/hqdefault.jpg",
     "presenters": [
       {
         "id": "87be3827-65a8-4fdd-9e97-f74ebd0bc19a",
@@ -1050,6 +1079,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/-xB6oHkrC4A/hqdefault.jpg",
     "presenters": [
       {
         "id": "7e9e8ae1-ba94-42c5-a3ff-21d52b7921af",
@@ -1058,40 +1088,6 @@
       }
     ],
     "start_at": "23:10 27.08.2026"
-  },
-  {
-    "id": 16787,
-    "location": "Ballroom 1",
-    "location_slug": "ballroom_1",
-    "name": "The Good, The Bad, and the Ugly – Python in Secondary Education in Queensland",
-    "slug": "The_Good_The_Bad_and_the_Ugly_Python_in_Secondary_Education_in_Queensland",
-    "authors": "Matt Collyer",
-    "description": "Python has become a standard for many (although not all) secondary schools teaching Digital Technologies in Queensland and Australia more broadly. Yet challenges remain in bridging the gap between technical skills that schools are expected to teach and the expertise that industry requires.",
-    "start": "2026-08-28T00:45:00Z",
-    "duration": "00:30:00",
-    "track": "Education",
-    "prerecord": false,
-    "state": 15,
-    "released": true,
-    "license": "CC BY-NC-SA",
-    "tags": "",
-    "conf_key": "QCWMLU",
-    "conf_url": "https://2026.pycon.org.au/schedule/QCWMLU/",
-    "host_url": "http://youtu.be/-J8qAM-pXTA",
-    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_1/Friday/The_Good_The_Bad_and_the_Ugly_Python_in_Secondary_Education_in_Queensland.webm",
-    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_1/Friday/The_Good_The_Bad_and_the_Ugly_Python_in_Secondary_Education_in_Queensland.srt",
-    "rax_mp4_url": null,
-    "archive_url": null,
-    "archive_mp4_url": "",
-    "twitter_url": null,
-    "presenters": [
-      {
-        "id": "9a117e13-9f54-4883-a838-1059c21700fb",
-        "name": "Matt Collyer",
-        "avatar_url": "https://pretalx.com/media/avatars/YZDUTX_6DgqscQ.webp"
-      }
-    ],
-    "start_at": "00:40 28.08.2026"
   },
   {
     "id": 16797,
@@ -1118,6 +1114,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/c5k-blqtk9g/hqdefault.jpg",
     "presenters": [
       {
         "id": "49e2e10e-67f1-48e9-859e-3830f7bd4feb",
@@ -1128,6 +1125,41 @@
         "id": "243845cd-ebc8-4ce2-a65e-a4826ec41bcc",
         "name": "Daisy Leigh Brenecki",
         "avatar_url": "https://pretalx.com/media/avatars/VCVVRF_5tNFcGH.webp"
+      }
+    ],
+    "start_at": "00:40 28.08.2026"
+  },
+  {
+    "id": 16787,
+    "location": "Ballroom 1",
+    "location_slug": "ballroom_1",
+    "name": "The Good, The Bad, and the Ugly – Python in Secondary Education in Queensland",
+    "slug": "The_Good_The_Bad_and_the_Ugly_Python_in_Secondary_Education_in_Queensland",
+    "authors": "Matt Collyer",
+    "description": "Python has become a standard for many (although not all) secondary schools teaching Digital Technologies in Queensland and Australia more broadly. Yet challenges remain in bridging the gap between technical skills that schools are expected to teach and the expertise that industry requires.",
+    "start": "2026-08-28T00:45:00Z",
+    "duration": "00:30:00",
+    "track": "Education",
+    "prerecord": false,
+    "state": 15,
+    "released": true,
+    "license": "CC BY-NC-SA",
+    "tags": "",
+    "conf_key": "QCWMLU",
+    "conf_url": "https://2026.pycon.org.au/schedule/QCWMLU/",
+    "host_url": "http://youtu.be/-J8qAM-pXTA",
+    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_1/Friday/The_Good_The_Bad_and_the_Ugly_Python_in_Secondary_Education_in_Queensland.webm",
+    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_1/Friday/The_Good_The_Bad_and_the_Ugly_Python_in_Secondary_Education_in_Queensland.srt",
+    "rax_mp4_url": null,
+    "archive_url": null,
+    "archive_mp4_url": "",
+    "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/-J8qAM-pXTA/hqdefault.jpg",
+    "presenters": [
+      {
+        "id": "9a117e13-9f54-4883-a838-1059c21700fb",
+        "name": "Matt Collyer",
+        "avatar_url": "https://pretalx.com/media/avatars/YZDUTX_6DgqscQ.webp"
       }
     ],
     "start_at": "00:40 28.08.2026"
@@ -1157,6 +1189,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/VX-QMNZFy80/hqdefault.jpg",
     "presenters": [
       {
         "id": "1814297e-dbc0-4e4b-a4b0-1958b84c0500",
@@ -1165,40 +1198,6 @@
       }
     ],
     "start_at": "00:40 28.08.2026"
-  },
-  {
-    "id": 16774,
-    "location": "Ballroom 2",
-    "location_slug": "ballroom_2",
-    "name": "Can I Trust You? Service-to-Service Identity with SPIFFE",
-    "slug": "Can_I_Trust_You_ServicetoService_Identity_with_SPIFFE",
-    "authors": "Oliver Bassett",
-    "description": "Sam built a great gateway. Users are authenticated, requests are validated, the front door is solid. Inside the cluster, services trust each other — because they're inside the cluster.\r\n\r\nThen Omen shows up.\r\n\r\nThis talk follows Sam the SRE through a nightly battle against Omen the Evil Hacker — and how SPIFFE and SPIRE finally give every Python service a cryptographic identity it can prove, not just claim.",
-    "start": "2026-08-28T01:30:00Z",
-    "duration": "00:30:00",
-    "track": "Cybersecurity",
-    "prerecord": false,
-    "state": 15,
-    "released": true,
-    "license": "CC BY-NC-SA",
-    "tags": "",
-    "conf_key": "KFJLUE",
-    "conf_url": "https://2026.pycon.org.au/schedule/KFJLUE/",
-    "host_url": "http://youtu.be/gvILKTg4Jow",
-    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Friday/Can_I_Trust_You_ServicetoService_Identity_with_SPIFFE.webm",
-    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Friday/Can_I_Trust_You_ServicetoService_Identity_with_SPIFFE.srt",
-    "rax_mp4_url": null,
-    "archive_url": null,
-    "archive_mp4_url": "",
-    "twitter_url": null,
-    "presenters": [
-      {
-        "id": "2937a591-c302-49bc-9c9c-600bdea7b19d",
-        "name": "Oliver Bassett",
-        "avatar_url": "https://pretalx.com/media/avatars/9XGXBL_Fe25ScS.webp"
-      }
-    ],
-    "start_at": "01:25 28.08.2026"
   },
   {
     "id": 16753,
@@ -1225,6 +1224,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/ztSzPvTBiIU/hqdefault.jpg",
     "presenters": [
       {
         "id": "a583238e-f627-4514-842b-db3ceab4de0b",
@@ -1235,6 +1235,41 @@
         "id": "2f3026cb-3561-44fc-a6f4-44799142a0f8",
         "name": "Amber Taylor",
         "avatar_url": "https://pretalx.com/media/avatars/NGZVVT_xLfk3Ud.webp"
+      }
+    ],
+    "start_at": "01:25 28.08.2026"
+  },
+  {
+    "id": 16774,
+    "location": "Ballroom 2",
+    "location_slug": "ballroom_2",
+    "name": "Can I Trust You? Service-to-Service Identity with SPIFFE",
+    "slug": "Can_I_Trust_You_ServicetoService_Identity_with_SPIFFE",
+    "authors": "Oliver Bassett",
+    "description": "Sam built a great gateway. Users are authenticated, requests are validated, the front door is solid. Inside the cluster, services trust each other — because they're inside the cluster.\r\n\r\nThen Omen shows up.\r\n\r\nThis talk follows Sam the SRE through a nightly battle against Omen the Evil Hacker — and how SPIFFE and SPIRE finally give every Python service a cryptographic identity it can prove, not just claim.",
+    "start": "2026-08-28T01:30:00Z",
+    "duration": "00:30:00",
+    "track": "Cybersecurity",
+    "prerecord": false,
+    "state": 15,
+    "released": true,
+    "license": "CC BY-NC-SA",
+    "tags": "",
+    "conf_key": "KFJLUE",
+    "conf_url": "https://2026.pycon.org.au/schedule/KFJLUE/",
+    "host_url": "http://youtu.be/gvILKTg4Jow",
+    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Friday/Can_I_Trust_You_ServicetoService_Identity_with_SPIFFE.webm",
+    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Friday/Can_I_Trust_You_ServicetoService_Identity_with_SPIFFE.srt",
+    "rax_mp4_url": null,
+    "archive_url": null,
+    "archive_mp4_url": "",
+    "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/gvILKTg4Jow/hqdefault.jpg",
+    "presenters": [
+      {
+        "id": "2937a591-c302-49bc-9c9c-600bdea7b19d",
+        "name": "Oliver Bassett",
+        "avatar_url": "https://pretalx.com/media/avatars/9XGXBL_Fe25ScS.webp"
       }
     ],
     "start_at": "01:25 28.08.2026"
@@ -1264,6 +1299,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/rwc9EmYxpcE/hqdefault.jpg",
     "presenters": [
       {
         "id": "6788bc2d-a229-458b-a5b9-98763659f730",
@@ -1298,6 +1334,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/f3304q9mPio/hqdefault.jpg",
     "presenters": [
       {
         "id": "bef39715-b1f6-402e-9d00-2f3c1f6d0177",
@@ -1332,6 +1369,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/MVDU3qtacvY/hqdefault.jpg",
     "presenters": [
       {
         "id": "a2c8d197-c903-42a0-857a-4fdf8397284e",
@@ -1366,6 +1404,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/qcQs2SEvDzo/hqdefault.jpg",
     "presenters": [
       {
         "id": "63b72a1d-17b3-4795-bd21-6e69d30a7487",
@@ -1374,40 +1413,6 @@
       }
     ],
     "start_at": "02:00 28.08.2026"
-  },
-  {
-    "id": 16790,
-    "location": "Ballroom 3",
-    "location_slug": "ballroom_3",
-    "name": "Breaking the PR Review Bottleneck",
-    "slug": "Breaking_the_PR_Review_Bottleneck",
-    "authors": "Pavel Oborin",
-    "description": "Pull request reviews are often the single biggest bottleneck in software delivery. What takes minutes to write can sit for days waiting for review, killing velocity and frustrating teams.\r\n\r\nThis talk explores why PR queues stall, what we can learn from massive open source projects that have solved this at scale, and the practical techniques, from automation with Python tooling to team process shifts, that can dramatically reduce your time to merge.",
-    "start": "2026-08-28T03:30:00Z",
-    "duration": "00:30:00",
-    "track": "Main Conference",
-    "prerecord": false,
-    "state": 15,
-    "released": true,
-    "license": "CC BY-NC-SA",
-    "tags": "",
-    "conf_key": "QUZ9TS",
-    "conf_url": "https://2026.pycon.org.au/schedule/QUZ9TS/",
-    "host_url": "http://youtu.be/tJavRD5iG60",
-    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Friday/Breaking_the_PR_Review_Bottleneck.webm",
-    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Friday/Breaking_the_PR_Review_Bottleneck.srt",
-    "rax_mp4_url": null,
-    "archive_url": null,
-    "archive_mp4_url": "",
-    "twitter_url": null,
-    "presenters": [
-      {
-        "id": "3bcbb6e7-c978-447e-8688-0806feb2c839",
-        "name": "Pavel Oborin",
-        "avatar_url": "https://pretalx.com/media/avatars/H3YZZ3_uiYTu2P.webp"
-      }
-    ],
-    "start_at": "03:25 28.08.2026"
   },
   {
     "id": 16778,
@@ -1434,11 +1439,47 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/BdmEZpcTv3U/hqdefault.jpg",
     "presenters": [
       {
         "id": "381741b6-288d-4862-951b-057af17e0df6",
         "name": "Maddie Mackey",
         "avatar_url": "https://pretalx.com/media/avatars/LN3WQM_lkiZxGx.webp"
+      }
+    ],
+    "start_at": "03:25 28.08.2026"
+  },
+  {
+    "id": 16790,
+    "location": "Ballroom 3",
+    "location_slug": "ballroom_3",
+    "name": "Breaking the PR Review Bottleneck",
+    "slug": "Breaking_the_PR_Review_Bottleneck",
+    "authors": "Pavel Oborin",
+    "description": "Pull request reviews are often the single biggest bottleneck in software delivery. What takes minutes to write can sit for days waiting for review, killing velocity and frustrating teams.\r\n\r\nThis talk explores why PR queues stall, what we can learn from massive open source projects that have solved this at scale, and the practical techniques, from automation with Python tooling to team process shifts, that can dramatically reduce your time to merge.",
+    "start": "2026-08-28T03:30:00Z",
+    "duration": "00:30:00",
+    "track": "Main Conference",
+    "prerecord": false,
+    "state": 15,
+    "released": true,
+    "license": "CC BY-NC-SA",
+    "tags": "",
+    "conf_key": "QUZ9TS",
+    "conf_url": "https://2026.pycon.org.au/schedule/QUZ9TS/",
+    "host_url": "http://youtu.be/tJavRD5iG60",
+    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Friday/Breaking_the_PR_Review_Bottleneck.webm",
+    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Friday/Breaking_the_PR_Review_Bottleneck.srt",
+    "rax_mp4_url": null,
+    "archive_url": null,
+    "archive_mp4_url": "",
+    "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/tJavRD5iG60/hqdefault.jpg",
+    "presenters": [
+      {
+        "id": "3bcbb6e7-c978-447e-8688-0806feb2c839",
+        "name": "Pavel Oborin",
+        "avatar_url": "https://pretalx.com/media/avatars/H3YZZ3_uiYTu2P.webp"
       }
     ],
     "start_at": "03:25 28.08.2026"
@@ -1468,6 +1509,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/C9F6AnmQ2dk/hqdefault.jpg",
     "presenters": [
       {
         "id": "b2730b19-ef02-42fa-bd84-19e2ffe8ca0a",
@@ -1507,45 +1549,12 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/QqYhEkM1Lx8/hqdefault.jpg",
     "presenters": [
       {
         "id": "a19a2b18-09f0-41f1-b9f8-85866b9a974e",
         "name": "Thea Koutsoukis",
         "avatar_url": "https://pretalx.com/media/avatars/XDM3GY_2M8HY55.webp"
-      }
-    ],
-    "start_at": "04:00 28.08.2026"
-  },
-  {
-    "id": 16773,
-    "location": "Ballroom 2",
-    "location_slug": "ballroom_2",
-    "name": "Authentication for humans, why passkeys finally make sense.",
-    "slug": "Authentication_for_humans_why_passkeys_finally_make_sense",
-    "authors": "George Coldham",
-    "description": "Authentication continues to fail not because users ignore security advice, but because our systems rely on humans managing reusable secrets. Despite password managers and multi-factor authentication, phishing and credential theft remain the most common causes of account compromise.\r\n\r\nThis talk examines why password-based authentication fails at a structural level. We will explore the assumptions passwords make about human behaviour, why those assumptions break down in practice, and why layered controls like MFA often add friction without removing core failure modes.\r\n\r\nWe will then introduce passkeys as a human-centred redesign of authentication. We will explain what passkeys are, how they work using public-key cryptography, and why removing shared secrets improves security and usability at the same time.\r\n\r\nUsing two real-world examples, we will show how passkeys succeed where passwords struggle. We will examine phishing attacks that bypass traditional MFA, and explain how passkeys eliminate the need for users to identify real login pages. We will also look at account compromise caused by password reuse, and how passkeys prevent cross-site impact by design.\r\n\r\nAttendees will leave with a clear mental model of how passkeys work, understand the role of biometrics as a local unlock mechanism, and gain practical guidance on how individuals and developers can start using passkeys today through modern, open web standards.",
-    "start": "2026-08-28T04:05:00Z",
-    "duration": "00:30:00",
-    "track": "Cybersecurity",
-    "prerecord": false,
-    "state": 15,
-    "released": true,
-    "license": "CC BY-NC-SA",
-    "tags": "",
-    "conf_key": "K3M8AE",
-    "conf_url": "https://2026.pycon.org.au/schedule/K3M8AE/",
-    "host_url": "http://youtu.be/xBl7zaFqHrA",
-    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Friday/Authentication_for_humans_why_passkeys_finally_make_sense.webm",
-    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Friday/Authentication_for_humans_why_passkeys_finally_make_sense.srt",
-    "rax_mp4_url": null,
-    "archive_url": null,
-    "archive_mp4_url": "",
-    "twitter_url": null,
-    "presenters": [
-      {
-        "id": "d1a2bb88-cf28-4ddb-8910-a09fb473de71",
-        "name": "George Coldham",
-        "avatar_url": "https://pretalx.com/media/avatars/KND8AG_ky9OOtH.webp"
       }
     ],
     "start_at": "04:00 28.08.2026"
@@ -1575,6 +1584,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/OLujgkCsZek/hqdefault.jpg",
     "presenters": [
       {
         "id": "5d86d146-e827-4ac9-9254-37da0f32b557",
@@ -1585,38 +1595,39 @@
     "start_at": "04:00 28.08.2026"
   },
   {
-    "id": 16771,
-    "location": "Ballroom 3",
-    "location_slug": "ballroom_3",
-    "name": "Why should I write software well?",
-    "slug": "Why_should_I_write_software_well",
-    "authors": "Tennessee Leeuwenburg",
-    "description": "Balancing short-term and long-term objectives during software development forms an underpinning tension which often exhibits during code reviews, sprint planning and prioritisation.\r\n\r\nAudiences should attend to see how concepts like modularity, consistent design language and the use of software patterns can be seen as an expression of managing cost and complexity over time, and how this perspective can help bring clarity to processes such as code reviews, sprint planning, prioritisation and effort estimation.\r\n\r\nThis talk comprises an exploration of how to discuss trade-offs during software development, based on technical examples.",
-    "start": "2026-08-28T04:40:00Z",
+    "id": 16773,
+    "location": "Ballroom 2",
+    "location_slug": "ballroom_2",
+    "name": "Authentication for humans, why passkeys finally make sense.",
+    "slug": "Authentication_for_humans_why_passkeys_finally_make_sense",
+    "authors": "George Coldham",
+    "description": "Authentication continues to fail not because users ignore security advice, but because our systems rely on humans managing reusable secrets. Despite password managers and multi-factor authentication, phishing and credential theft remain the most common causes of account compromise.\r\n\r\nThis talk examines why password-based authentication fails at a structural level. We will explore the assumptions passwords make about human behaviour, why those assumptions break down in practice, and why layered controls like MFA often add friction without removing core failure modes.\r\n\r\nWe will then introduce passkeys as a human-centred redesign of authentication. We will explain what passkeys are, how they work using public-key cryptography, and why removing shared secrets improves security and usability at the same time.\r\n\r\nUsing two real-world examples, we will show how passkeys succeed where passwords struggle. We will examine phishing attacks that bypass traditional MFA, and explain how passkeys eliminate the need for users to identify real login pages. We will also look at account compromise caused by password reuse, and how passkeys prevent cross-site impact by design.\r\n\r\nAttendees will leave with a clear mental model of how passkeys work, understand the role of biometrics as a local unlock mechanism, and gain practical guidance on how individuals and developers can start using passkeys today through modern, open web standards.",
+    "start": "2026-08-28T04:05:00Z",
     "duration": "00:30:00",
-    "track": "Main Conference",
+    "track": "Cybersecurity",
     "prerecord": false,
     "state": 15,
     "released": true,
     "license": "CC BY-NC-SA",
     "tags": "",
-    "conf_key": "JK7XEF",
-    "conf_url": "https://2026.pycon.org.au/schedule/JK7XEF/",
-    "host_url": "http://youtu.be/S6Qk_VOYwBI",
-    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Friday/Why_should_I_write_software_well.webm",
-    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Friday/Why_should_I_write_software_well.srt",
+    "conf_key": "K3M8AE",
+    "conf_url": "https://2026.pycon.org.au/schedule/K3M8AE/",
+    "host_url": "http://youtu.be/xBl7zaFqHrA",
+    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Friday/Authentication_for_humans_why_passkeys_finally_make_sense.webm",
+    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Friday/Authentication_for_humans_why_passkeys_finally_make_sense.srt",
     "rax_mp4_url": null,
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/xBl7zaFqHrA/hqdefault.jpg",
     "presenters": [
       {
-        "id": "59c131b3-a61b-45e7-9795-fa2fada16831",
-        "name": "Tennessee Leeuwenburg",
-        "avatar_url": "https://pretalx.com/media/avatars/ZZQ9TE_RbCnkwe.webp"
+        "id": "d1a2bb88-cf28-4ddb-8910-a09fb473de71",
+        "name": "George Coldham",
+        "avatar_url": "https://pretalx.com/media/avatars/KND8AG_ky9OOtH.webp"
       }
     ],
-    "start_at": "04:35 28.08.2026"
+    "start_at": "04:00 28.08.2026"
   },
   {
     "id": 16766,
@@ -1643,6 +1654,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/MR_cRo7suNI/hqdefault.jpg",
     "presenters": [
       {
         "id": "dd8253c2-4ddf-43a7-b7fb-9466f6787df9",
@@ -1677,6 +1689,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/1Akx-O3eIxQ/hqdefault.jpg",
     "presenters": [
       {
         "id": "4e6a0de4-f7ad-427a-b6c6-aef78af5b491",
@@ -1687,35 +1700,81 @@
     "start_at": "04:35 28.08.2026"
   },
   {
-    "id": 16747,
-    "location": "Ballroom 2",
-    "location_slug": "ballroom_2",
-    "name": "Disentangling formatted strings with T-strings",
-    "slug": "Disentangling_formatted_strings_with_Tstrings",
-    "authors": "Simon Merrick",
-    "description": "In October 2025, Python 3.14 was released and with it t-strings, which promise to help python developers write better, and safer python code. While on the surface, t-string share a similar name to f-strings and are instantiated with a similar syntax, the resulting Template type, and the intended usage and audience there of is not always immediately understood. This talk explores what they are, how they work, who they are for and how they are core to a python philosophy of using constructs and guardrails to helping python developers write safer code.",
-    "start": "2026-08-28T05:55:00Z",
+    "id": 16771,
+    "location": "Ballroom 3",
+    "location_slug": "ballroom_3",
+    "name": "Why should I write software well?",
+    "slug": "Why_should_I_write_software_well",
+    "authors": "Tennessee Leeuwenburg",
+    "description": "Balancing short-term and long-term objectives during software development forms an underpinning tension which often exhibits during code reviews, sprint planning and prioritisation.\r\n\r\nAudiences should attend to see how concepts like modularity, consistent design language and the use of software patterns can be seen as an expression of managing cost and complexity over time, and how this perspective can help bring clarity to processes such as code reviews, sprint planning, prioritisation and effort estimation.\r\n\r\nThis talk comprises an exploration of how to discuss trade-offs during software development, based on technical examples.",
+    "start": "2026-08-28T04:40:00Z",
     "duration": "00:30:00",
-    "track": "Cybersecurity",
+    "track": "Main Conference",
     "prerecord": false,
     "state": 15,
     "released": true,
     "license": "CC BY-NC-SA",
     "tags": "",
-    "conf_key": "8CA7D3",
-    "conf_url": "https://2026.pycon.org.au/schedule/8CA7D3/",
-    "host_url": "http://youtu.be/-wy0ZFIydPI",
-    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Friday/Disentangling_formatted_strings_with_Tstrings.webm",
-    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Friday/Disentangling_formatted_strings_with_Tstrings.srt",
+    "conf_key": "JK7XEF",
+    "conf_url": "https://2026.pycon.org.au/schedule/JK7XEF/",
+    "host_url": "http://youtu.be/S6Qk_VOYwBI",
+    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Friday/Why_should_I_write_software_well.webm",
+    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Friday/Why_should_I_write_software_well.srt",
     "rax_mp4_url": null,
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/S6Qk_VOYwBI/hqdefault.jpg",
     "presenters": [
       {
-        "id": "02914663-25fb-45d3-8475-38815a09b7bb",
-        "name": "Simon Merrick",
-        "avatar_url": "https://pretalx.com/media/avatars/9JRZ8S_p1JebZR.webp"
+        "id": "59c131b3-a61b-45e7-9795-fa2fada16831",
+        "name": "Tennessee Leeuwenburg",
+        "avatar_url": "https://pretalx.com/media/avatars/ZZQ9TE_RbCnkwe.webp"
+      }
+    ],
+    "start_at": "04:35 28.08.2026"
+  },
+  {
+    "id": 16776,
+    "location": "Ballroom 3",
+    "location_slug": "ballroom_3",
+    "name": "Student Showcase",
+    "slug": "Student_Showcase_4",
+    "authors": "Amanda Hogan, Nicky Ringland, Alison Wong",
+    "description": "We're thrilled to announce that PyConAU's Education Track will once again feature a dedicated Student Showcase, giving Australian high school students the chance to present their Python projects on the conference stage.",
+    "start": "2026-08-28T05:55:00Z",
+    "duration": "00:100:00",
+    "track": "Education",
+    "prerecord": false,
+    "state": 15,
+    "released": true,
+    "license": "CC BY-NC-SA",
+    "tags": "",
+    "conf_key": "KRR377",
+    "conf_url": "https://2026.pycon.org.au/schedule/KRR377/",
+    "host_url": "http://youtu.be/QZeTJZjX0x8",
+    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Friday/Student_Showcase_4.webm",
+    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Friday/Student_Showcase_4.srt",
+    "rax_mp4_url": null,
+    "archive_url": null,
+    "archive_mp4_url": "",
+    "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/QZeTJZjX0x8/hqdefault.jpg",
+    "presenters": [
+      {
+        "id": "5906c444-10cf-4997-9413-e46251336317",
+        "name": "Amanda Hogan",
+        "avatar_url": "https://pretalx.com/media/avatars/HYXK8D_XHtc43t.webp"
+      },
+      {
+        "id": "b2730b19-ef02-42fa-bd84-19e2ffe8ca0a",
+        "name": "Nicky Ringland",
+        "avatar_url": "https://pretalx.com/media/avatars/X99XWA_gWCnIFK.webp"
+      },
+      {
+        "id": "18cfe3fb-e070-4fcb-a390-e87b8ed3bfa8",
+        "name": "Alison Wong",
+        "avatar_url": "https://pretalx.com/media/avatars/8NDWMQ_tF5V4FI.webp"
       }
     ],
     "start_at": "05:50 28.08.2026"
@@ -1745,6 +1804,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/EinnQT0ptRY/hqdefault.jpg",
     "presenters": [
       {
         "id": "6d29d303-33ae-4033-8d38-f2af60b20701",
@@ -1755,45 +1815,36 @@
     "start_at": "05:50 28.08.2026"
   },
   {
-    "id": 16776,
-    "location": "Ballroom 3",
-    "location_slug": "ballroom_3",
-    "name": "Student Showcase",
-    "slug": "Student_Showcase_4",
-    "authors": "Amanda Hogan, Nicky Ringland, Alison Wong",
-    "description": "We're thrilled to announce that PyConAU's Education Track will once again feature a dedicated Student Showcase, giving Australian high school students the chance to present their Python projects on the conference stage.",
+    "id": 16747,
+    "location": "Ballroom 2",
+    "location_slug": "ballroom_2",
+    "name": "Disentangling formatted strings with T-strings",
+    "slug": "Disentangling_formatted_strings_with_Tstrings",
+    "authors": "Simon Merrick",
+    "description": "In October 2025, Python 3.14 was released and with it t-strings, which promise to help python developers write better, and safer python code. While on the surface, t-string share a similar name to f-strings and are instantiated with a similar syntax, the resulting Template type, and the intended usage and audience there of is not always immediately understood. This talk explores what they are, how they work, who they are for and how they are core to a python philosophy of using constructs and guardrails to helping python developers write safer code.",
     "start": "2026-08-28T05:55:00Z",
-    "duration": "00:100:00",
-    "track": "Education",
+    "duration": "00:30:00",
+    "track": "Cybersecurity",
     "prerecord": false,
     "state": 15,
     "released": true,
     "license": "CC BY-NC-SA",
     "tags": "",
-    "conf_key": "KRR377",
-    "conf_url": "https://2026.pycon.org.au/schedule/KRR377/",
-    "host_url": "http://youtu.be/QZeTJZjX0x8",
-    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Friday/Student_Showcase_4.webm",
-    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Friday/Student_Showcase_4.srt",
+    "conf_key": "8CA7D3",
+    "conf_url": "https://2026.pycon.org.au/schedule/8CA7D3/",
+    "host_url": "http://youtu.be/-wy0ZFIydPI",
+    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Friday/Disentangling_formatted_strings_with_Tstrings.webm",
+    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Friday/Disentangling_formatted_strings_with_Tstrings.srt",
     "rax_mp4_url": null,
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/-wy0ZFIydPI/hqdefault.jpg",
     "presenters": [
       {
-        "id": "5906c444-10cf-4997-9413-e46251336317",
-        "name": "Amanda Hogan",
-        "avatar_url": "https://pretalx.com/media/avatars/HYXK8D_XHtc43t.webp"
-      },
-      {
-        "id": "b2730b19-ef02-42fa-bd84-19e2ffe8ca0a",
-        "name": "Nicky Ringland",
-        "avatar_url": "https://pretalx.com/media/avatars/X99XWA_gWCnIFK.webp"
-      },
-      {
-        "id": "18cfe3fb-e070-4fcb-a390-e87b8ed3bfa8",
-        "name": "Alison Wong",
-        "avatar_url": "https://pretalx.com/media/avatars/8NDWMQ_tF5V4FI.webp"
+        "id": "02914663-25fb-45d3-8475-38815a09b7bb",
+        "name": "Simon Merrick",
+        "avatar_url": "https://pretalx.com/media/avatars/9JRZ8S_p1JebZR.webp"
       }
     ],
     "start_at": "05:50 28.08.2026"
@@ -1823,6 +1874,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/kpNXG7M_5mg/hqdefault.jpg",
     "presenters": [
       {
         "id": "6fe678d1-da5d-4f14-84ca-4b6225e21ad3",
@@ -1857,6 +1909,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/i7aShi9nnCg/hqdefault.jpg",
     "presenters": [
       {
         "id": "e86eb05c-6536-419d-9606-f183b07d7d46",
@@ -1891,6 +1944,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/nXMpsae_I6I/hqdefault.jpg",
     "presenters": [
       {
         "id": "87be3827-65a8-4fdd-9e97-f74ebd0bc19a",
@@ -1935,6 +1989,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/oSysrYmPWT8/hqdefault.jpg",
     "presenters": [
       {
         "id": "183e59a0-7708-443d-8e4b-90b6ea6f7e63",
@@ -1969,45 +2024,12 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/cNHMKCZFaN0/hqdefault.jpg",
     "presenters": [
       {
         "id": "6fe678d1-da5d-4f14-84ca-4b6225e21ad3",
         "name": "Sam Bishop",
         "avatar_url": "https://pretalx.com/media/avatars/RSUKRU_HQZpTL3.webp"
-      }
-    ],
-    "start_at": "00:40 29.08.2026"
-  },
-  {
-    "id": 16795,
-    "location": "Ballroom 1",
-    "location_slug": "ballroom_1",
-    "name": "DevRelling in the age of GenAI",
-    "slug": "DevRelling_in_the_age_of_GenAI",
-    "authors": "Brett Morgan",
-    "description": "GenAI, aka LLMs, have thrown a monkey wrench into the role of DevRel. What does it mean to create educational materials when someone can just ask their favourite LLM to create a personalised educational adventure for them? This talk will investigate options for creating interactive coding environments that are useful for developers aiming to learn a new technique, technology, or library.",
-    "start": "2026-08-29T00:45:00Z",
-    "duration": "00:30:00",
-    "track": "DevRel",
-    "prerecord": false,
-    "state": 15,
-    "released": true,
-    "license": "CC BY-NC-SA",
-    "tags": "",
-    "conf_key": "S9AR8C",
-    "conf_url": "https://2026.pycon.org.au/schedule/S9AR8C/",
-    "host_url": "http://youtu.be/l4EZbTUupMo",
-    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_1/Saturday/DevRelling_in_the_age_of_GenAI.webm",
-    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_1/Saturday/DevRelling_in_the_age_of_GenAI.srt",
-    "rax_mp4_url": null,
-    "archive_url": null,
-    "archive_mp4_url": "",
-    "twitter_url": null,
-    "presenters": [
-      {
-        "id": "ef3ed5a7-ee37-4136-91eb-ad6f0e51f544",
-        "name": "Brett Morgan",
-        "avatar_url": ""
       }
     ],
     "start_at": "00:40 29.08.2026"
@@ -2037,11 +2059,47 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/OmCEDTX24Tk/hqdefault.jpg",
     "presenters": [
       {
         "id": "b4cad10e-1f7b-4bfd-81c8-ca98d1023e53",
         "name": "Zara Hassan",
         "avatar_url": "https://pretalx.com/media/avatars/NFJ73E_ymcrUCH.webp"
+      }
+    ],
+    "start_at": "00:40 29.08.2026"
+  },
+  {
+    "id": 16795,
+    "location": "Ballroom 1",
+    "location_slug": "ballroom_1",
+    "name": "DevRelling in the age of GenAI",
+    "slug": "DevRelling_in_the_age_of_GenAI",
+    "authors": "Brett Morgan",
+    "description": "GenAI, aka LLMs, have thrown a monkey wrench into the role of DevRel. What does it mean to create educational materials when someone can just ask their favourite LLM to create a personalised educational adventure for them? This talk will investigate options for creating interactive coding environments that are useful for developers aiming to learn a new technique, technology, or library.",
+    "start": "2026-08-29T00:45:00Z",
+    "duration": "00:30:00",
+    "track": "DevRel",
+    "prerecord": false,
+    "state": 15,
+    "released": true,
+    "license": "CC BY-NC-SA",
+    "tags": "",
+    "conf_key": "S9AR8C",
+    "conf_url": "https://2026.pycon.org.au/schedule/S9AR8C/",
+    "host_url": "http://youtu.be/l4EZbTUupMo",
+    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_1/Saturday/DevRelling_in_the_age_of_GenAI.webm",
+    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_1/Saturday/DevRelling_in_the_age_of_GenAI.srt",
+    "rax_mp4_url": null,
+    "archive_url": null,
+    "archive_mp4_url": "",
+    "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/l4EZbTUupMo/hqdefault.jpg",
+    "presenters": [
+      {
+        "id": "ef3ed5a7-ee37-4136-91eb-ad6f0e51f544",
+        "name": "Brett Morgan",
+        "avatar_url": ""
       }
     ],
     "start_at": "00:40 29.08.2026"
@@ -2071,6 +2129,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/Po5tQsQpgGo/hqdefault.jpg",
     "presenters": [
       {
         "id": "3bb903a1-1787-4233-8188-8083b9479b27",
@@ -2105,6 +2164,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/7PnLOuQ-Vvw/hqdefault.jpg",
     "presenters": [
       {
         "id": "4369275e-27e9-4253-965e-9469347084f8",
@@ -2139,6 +2199,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/UYB98zQ8Nn8/hqdefault.jpg",
     "presenters": [
       {
         "id": "926f76b6-3bd0-4e63-aa2b-fb5b24bdeafe",
@@ -2147,40 +2208,6 @@
       }
     ],
     "start_at": "01:15 29.08.2026"
-  },
-  {
-    "id": 16786,
-    "location": "Ballroom 3",
-    "location_slug": "ballroom_3",
-    "name": "Is storing files in Slack emojis a bad idea? Maybe. Let’s do it anyway!",
-    "slug": "Is_storing_files_in_Slack_emojis_a_bad_idea_Maybe_Lets_do_it_anyway",
-    "authors": "Ashley Lamont",
-    "description": "_Do you feel that hard drives and USBs aren’t keeping pace with your organisation’s \"AI-first dynamic cloud-based SaaS B2B\" technology strategy?_ \r\n\r\nToday, I present a novel (and potentially ill-advised) alternative: a file-system that uses Slack Emojis as a storage device. We'll dive into how file systems work, how you can use Python to turn Slack Emojis into infinite free file storage, and maybe find out if this was secretly a terrible idea all along. Plus maybe there'll be stickers :)",
-    "start": "2026-08-29T01:55:00Z",
-    "duration": "00:30:00",
-    "track": "Main Conference",
-    "prerecord": false,
-    "state": 15,
-    "released": true,
-    "license": "CC BY-NC-SA",
-    "tags": "",
-    "conf_key": "Q7LCGQ",
-    "conf_url": "https://2026.pycon.org.au/schedule/Q7LCGQ/",
-    "host_url": "http://youtu.be/eycYXxNV4wI",
-    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Saturday/Is_storing_files_in_Slack_emojis_a_bad_idea_Maybe_Lets_do_it_anyway.webm",
-    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Saturday/Is_storing_files_in_Slack_emojis_a_bad_idea_Maybe_Lets_do_it_anyway.srt",
-    "rax_mp4_url": null,
-    "archive_url": null,
-    "archive_mp4_url": "",
-    "twitter_url": null,
-    "presenters": [
-      {
-        "id": "b102dffa-2c17-4a12-a88a-53db17b28bd1",
-        "name": "Ashley Lamont",
-        "avatar_url": "https://pretalx.com/media/avatars/8R97UF_d7ZVhlE.webp"
-      }
-    ],
-    "start_at": "01:50 29.08.2026"
   },
   {
     "id": 16780,
@@ -2207,11 +2234,47 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/wsri-peBmTA/hqdefault.jpg",
     "presenters": [
       {
         "id": "d99b81f3-3374-4f1c-8990-df9053585480",
         "name": "Alex Zinovev",
         "avatar_url": "https://pretalx.com/media/avatars/QXNMWF_JQHtRTT.webp"
+      }
+    ],
+    "start_at": "01:50 29.08.2026"
+  },
+  {
+    "id": 16786,
+    "location": "Ballroom 3",
+    "location_slug": "ballroom_3",
+    "name": "Is storing files in Slack emojis a bad idea? Maybe. Let’s do it anyway!",
+    "slug": "Is_storing_files_in_Slack_emojis_a_bad_idea_Maybe_Lets_do_it_anyway",
+    "authors": "Ashley Lamont",
+    "description": "_Do you feel that hard drives and USBs aren’t keeping pace with your organisation’s \"AI-first dynamic cloud-based SaaS B2B\" technology strategy?_ \r\n\r\nToday, I present a novel (and potentially ill-advised) alternative: a file-system that uses Slack Emojis as a storage device. We'll dive into how file systems work, how you can use Python to turn Slack Emojis into infinite free file storage, and maybe find out if this was secretly a terrible idea all along. Plus maybe there'll be stickers :)",
+    "start": "2026-08-29T01:55:00Z",
+    "duration": "00:30:00",
+    "track": "Main Conference",
+    "prerecord": false,
+    "state": 15,
+    "released": true,
+    "license": "CC BY-NC-SA",
+    "tags": "",
+    "conf_key": "Q7LCGQ",
+    "conf_url": "https://2026.pycon.org.au/schedule/Q7LCGQ/",
+    "host_url": "http://youtu.be/eycYXxNV4wI",
+    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Saturday/Is_storing_files_in_Slack_emojis_a_bad_idea_Maybe_Lets_do_it_anyway.webm",
+    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Saturday/Is_storing_files_in_Slack_emojis_a_bad_idea_Maybe_Lets_do_it_anyway.srt",
+    "rax_mp4_url": null,
+    "archive_url": null,
+    "archive_mp4_url": "",
+    "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/eycYXxNV4wI/hqdefault.jpg",
+    "presenters": [
+      {
+        "id": "b102dffa-2c17-4a12-a88a-53db17b28bd1",
+        "name": "Ashley Lamont",
+        "avatar_url": "https://pretalx.com/media/avatars/8R97UF_d7ZVhlE.webp"
       }
     ],
     "start_at": "01:50 29.08.2026"
@@ -2241,6 +2304,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/jsHTcAAVta8/hqdefault.jpg",
     "presenters": [
       {
         "id": "9510018f-5cd9-4e2d-a885-d9c01eb1c3e4",
@@ -2275,6 +2339,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/eKcLUC3lkrQ/hqdefault.jpg",
     "presenters": [
       {
         "id": "36eb9901-ae5a-4e78-a0ab-e4a310b8193b",
@@ -2309,6 +2374,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/rR3Nn7fpRGY/hqdefault.jpg",
     "presenters": [
       {
         "id": "7c5dc9d3-edd2-4c4e-a2e1-377719355244",
@@ -2343,6 +2409,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/2LH7eEwk484/hqdefault.jpg",
     "presenters": [
       {
         "id": "6476d483-dc69-4a8e-976f-ac7fbea32824",
@@ -2351,40 +2418,6 @@
       }
     ],
     "start_at": "02:25 29.08.2026"
-  },
-  {
-    "id": 16751,
-    "location": "Ballroom 3",
-    "location_slug": "ballroom_3",
-    "name": "Knocking On A Process’s Door: Introspecting Live Python Processes",
-    "slug": "Knocking_On_A_Processs_Door_Introspecting_Live_Python_Processes",
-    "authors": "Raphael Gaschignard",
-    "description": "When dealing with a misbehaving Python program, classic strategies like adding piles of print statements can be unsatisfying. Fortunately, Python gives us many ways of \"looking inside\" a running Python process, getting very rich information instantly.\r\n\r\nWe will look at how we can introspect live Python processes, uncovering what a program is doing, and why it’s doing it. We will also cover pragmatic tips on how to tailor these tools for your own problem’s needs, including when restarting your process isn’t an option!",
-    "start": "2026-08-29T04:00:00Z",
-    "duration": "00:30:00",
-    "track": "Main Conference",
-    "prerecord": false,
-    "state": 15,
-    "released": true,
-    "license": "CC BY-NC-SA",
-    "tags": "",
-    "conf_key": "97G398",
-    "conf_url": "https://2026.pycon.org.au/schedule/97G398/",
-    "host_url": "http://youtu.be/NN0LikYrxh8",
-    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Saturday/Knocking_On_A_Processs_Door_Introspecting_Live_Python_Processes.webm",
-    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Saturday/Knocking_On_A_Processs_Door_Introspecting_Live_Python_Processes.srt",
-    "rax_mp4_url": null,
-    "archive_url": null,
-    "archive_mp4_url": "",
-    "twitter_url": null,
-    "presenters": [
-      {
-        "id": "c50ce97d-b035-4b4b-bc0f-bba2a5e850a9",
-        "name": "Raphael Gaschignard",
-        "avatar_url": ""
-      }
-    ],
-    "start_at": "03:55 29.08.2026"
   },
   {
     "id": 16756,
@@ -2411,6 +2444,7 @@
     "archive_url": "",
     "archive_mp4_url": "",
     "twitter_url": "",
+    "thumbnail_url": "",
     "presenters": [
       {
         "id": "2a3dd001-c03c-4296-974b-61639ec636c6",
@@ -2450,11 +2484,47 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/iwuUqhBWncA/hqdefault.jpg",
     "presenters": [
       {
         "id": "ca0a6b58-9329-4a6c-b6e8-5c8ed219db78",
         "name": "Noah Kantrowitz",
         "avatar_url": "https://pretalx.com/media/avatars/MY7QMZ_y0OB8S3.webp"
+      }
+    ],
+    "start_at": "03:55 29.08.2026"
+  },
+  {
+    "id": 16751,
+    "location": "Ballroom 3",
+    "location_slug": "ballroom_3",
+    "name": "Knocking On A Process’s Door: Introspecting Live Python Processes",
+    "slug": "Knocking_On_A_Processs_Door_Introspecting_Live_Python_Processes",
+    "authors": "Raphael Gaschignard",
+    "description": "When dealing with a misbehaving Python program, classic strategies like adding piles of print statements can be unsatisfying. Fortunately, Python gives us many ways of \"looking inside\" a running Python process, getting very rich information instantly.\r\n\r\nWe will look at how we can introspect live Python processes, uncovering what a program is doing, and why it’s doing it. We will also cover pragmatic tips on how to tailor these tools for your own problem’s needs, including when restarting your process isn’t an option!",
+    "start": "2026-08-29T04:00:00Z",
+    "duration": "00:30:00",
+    "track": "Main Conference",
+    "prerecord": false,
+    "state": 15,
+    "released": true,
+    "license": "CC BY-NC-SA",
+    "tags": "",
+    "conf_key": "97G398",
+    "conf_url": "https://2026.pycon.org.au/schedule/97G398/",
+    "host_url": "http://youtu.be/NN0LikYrxh8",
+    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Saturday/Knocking_On_A_Processs_Door_Introspecting_Live_Python_Processes.webm",
+    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Saturday/Knocking_On_A_Processs_Door_Introspecting_Live_Python_Processes.srt",
+    "rax_mp4_url": null,
+    "archive_url": null,
+    "archive_mp4_url": "",
+    "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/NN0LikYrxh8/hqdefault.jpg",
+    "presenters": [
+      {
+        "id": "c50ce97d-b035-4b4b-bc0f-bba2a5e850a9",
+        "name": "Raphael Gaschignard",
+        "avatar_url": ""
       }
     ],
     "start_at": "03:55 29.08.2026"
@@ -2484,6 +2554,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/rTGV3FC8p3w/hqdefault.jpg",
     "presenters": [
       {
         "id": "016b491a-fb52-4e5e-8c9a-1f68fbf0b1bd",
@@ -2518,6 +2589,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/3KecTYWzFI8/hqdefault.jpg",
     "presenters": [
       {
         "id": "5906c444-10cf-4997-9413-e46251336317",
@@ -2552,6 +2624,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/R37h9rzc4m0/hqdefault.jpg",
     "presenters": [
       {
         "id": "dd0fd53e-1803-4ce2-b168-2380815b67fd",
@@ -2586,6 +2659,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/92N6tuoS2bk/hqdefault.jpg",
     "presenters": [
       {
         "id": "ded693e6-a6a7-4113-8112-b069da94e60a",
@@ -2596,13 +2670,13 @@
     "start_at": "04:30 29.08.2026"
   },
   {
-    "id": 16817,
-    "location": "Ballroom 3",
-    "location_slug": "ballroom_3",
-    "name": "Why computer science matters to musicians",
-    "slug": "Why_computer_science_matters_to_musicians",
-    "authors": "Jesse Manser",
-    "description": "Making live music in a high-tech way provides new opportunities for creativity, but comes with a range of challenges. In this talk, we will open a window into just how many ‘hats’ a digital artist needs to wear, and discuss the technical hurdles they face. We’ll showcase the tools used to create custom control surfaces, how to overcome latency and stability issues, and explore the vast creative possibilities.",
+    "id": 16829,
+    "location": "Ballroom 2",
+    "location_slug": "ballroom_2",
+    "name": "State of Exception(s)",
+    "slug": "State_of_Exceptions",
+    "authors": "Benno Rice",
+    "description": "Errors. They happen. Sometimes we wish they wouldn't but they do and the code we write and the systems we build have to handle that. The processes by which we detect failures and handle them varies a lot though and the \"right\" way to deal with failures has been a topic of discussion generally only eclipsed by how to do packaging and how to format code.\r\n\r\nDifferent languages, platforms, and frameworks all not only handle errors differently but frequently have entirely different ways of thinking about what an error even is. I'd like to take you on a bit of a philosophical exploration about what happens when things go wrong, how we know they've gone wrong, and what we do about it.",
     "start": "2026-08-29T05:10:00Z",
     "duration": "00:30:00",
     "track": "Main Conference",
@@ -2611,20 +2685,21 @@
     "released": true,
     "license": "CC BY-NC-SA",
     "tags": "",
-    "conf_key": "HH8MA3",
-    "conf_url": "https://2026.pycon.org.au/schedule/HH8MA3/",
-    "host_url": "http://youtu.be/6HTGAuKVtWI",
-    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Saturday/Why_computer_science_matters_to_musicians.webm",
-    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Saturday/Why_computer_science_matters_to_musicians.srt",
+    "conf_key": "JE3KTP",
+    "conf_url": "https://2026.pycon.org.au/schedule/JE3KTP/",
+    "host_url": "http://youtu.be/FLZKFNzpvDE",
+    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Saturday/State_of_Exceptions.webm",
+    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Saturday/State_of_Exceptions.srt",
     "rax_mp4_url": null,
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/FLZKFNzpvDE/hqdefault.jpg",
     "presenters": [
       {
-        "id": "462bad8a-3663-47e0-bba1-99fcfe15adae",
-        "name": "Jesse Manser",
-        "avatar_url": "https://pretalx.com/media/avatars/QCU8S3_6xKD35u.webp"
+        "id": "49e2e10e-67f1-48e9-859e-3830f7bd4feb",
+        "name": "Benno Rice",
+        "avatar_url": "https://pretalx.com/media/avatars/GQHDVE_RTMyYiv.webp"
       }
     ],
     "start_at": "05:05 29.08.2026"
@@ -2654,6 +2729,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/GyQVNjLEVVE/hqdefault.jpg",
     "presenters": [
       {
         "id": "3c444229-88f0-417f-bd0d-21c4659384da",
@@ -2664,13 +2740,13 @@
     "start_at": "05:05 29.08.2026"
   },
   {
-    "id": 16829,
-    "location": "Ballroom 2",
-    "location_slug": "ballroom_2",
-    "name": "State of Exception(s)",
-    "slug": "State_of_Exceptions",
-    "authors": "Benno Rice",
-    "description": "Errors. They happen. Sometimes we wish they wouldn't but they do and the code we write and the systems we build have to handle that. The processes by which we detect failures and handle them varies a lot though and the \"right\" way to deal with failures has been a topic of discussion generally only eclipsed by how to do packaging and how to format code.\r\n\r\nDifferent languages, platforms, and frameworks all not only handle errors differently but frequently have entirely different ways of thinking about what an error even is. I'd like to take you on a bit of a philosophical exploration about what happens when things go wrong, how we know they've gone wrong, and what we do about it.",
+    "id": 16817,
+    "location": "Ballroom 3",
+    "location_slug": "ballroom_3",
+    "name": "Why computer science matters to musicians",
+    "slug": "Why_computer_science_matters_to_musicians",
+    "authors": "Jesse Manser",
+    "description": "Making live music in a high-tech way provides new opportunities for creativity, but comes with a range of challenges. In this talk, we will open a window into just how many ‘hats’ a digital artist needs to wear, and discuss the technical hurdles they face. We’ll showcase the tools used to create custom control surfaces, how to overcome latency and stability issues, and explore the vast creative possibilities.",
     "start": "2026-08-29T05:10:00Z",
     "duration": "00:30:00",
     "track": "Main Conference",
@@ -2679,20 +2755,21 @@
     "released": true,
     "license": "CC BY-NC-SA",
     "tags": "",
-    "conf_key": "JE3KTP",
-    "conf_url": "https://2026.pycon.org.au/schedule/JE3KTP/",
-    "host_url": "http://youtu.be/FLZKFNzpvDE",
-    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Saturday/State_of_Exceptions.webm",
-    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_2/Saturday/State_of_Exceptions.srt",
+    "conf_key": "HH8MA3",
+    "conf_url": "https://2026.pycon.org.au/schedule/HH8MA3/",
+    "host_url": "http://youtu.be/6HTGAuKVtWI",
+    "public_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Saturday/Why_computer_science_matters_to_musicians.webm",
+    "caption_url": "https://mirror.linux.org.au/pub/pycon-au/2026/ballroom_3/Saturday/Why_computer_science_matters_to_musicians.srt",
     "rax_mp4_url": null,
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/6HTGAuKVtWI/hqdefault.jpg",
     "presenters": [
       {
-        "id": "49e2e10e-67f1-48e9-859e-3830f7bd4feb",
-        "name": "Benno Rice",
-        "avatar_url": "https://pretalx.com/media/avatars/GQHDVE_RTMyYiv.webp"
+        "id": "462bad8a-3663-47e0-bba1-99fcfe15adae",
+        "name": "Jesse Manser",
+        "avatar_url": "https://pretalx.com/media/avatars/QCU8S3_6xKD35u.webp"
       }
     ],
     "start_at": "05:05 29.08.2026"
@@ -2722,6 +2799,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/c_uTx1fHf4w/hqdefault.jpg",
     "presenters": [
       {
         "id": "21b222bc-e924-4635-b718-41111bd31999",
@@ -2761,6 +2839,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/WNnjQJPrniQ/hqdefault.jpg",
     "presenters": [],
     "start_at": "06:55 29.08.2026"
   },
@@ -2789,6 +2868,7 @@
     "archive_url": null,
     "archive_mp4_url": "",
     "twitter_url": null,
+    "thumbnail_url": "https://i.ytimg.com/vi/Va5gxfYJa3I/hqdefault.jpg",
     "presenters": [
       {
         "id": "87be3827-65a8-4fdd-9e97-f74ebd0bc19a",
