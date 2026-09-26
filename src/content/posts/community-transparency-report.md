@@ -9,7 +9,7 @@ previewText: "Transparency report relating to the PyCon AU code of conduct."
 
 #### Preface
 
-As part of building community at PyCon AU this year (link), Matt Cengia led our ‘community team’, tasked with exemplifying the conference's community values as well as being a point of support and contact relating to our Code of Conduct. These efforts are analogous with what the ‘Safety team’ focused on at previous PyCons AU, but under a slightly tweaked name to address the team's intended impact and goals.
+As part of [building community](/posts/building-community/) at PyCon AU this year, Matt Cengia led our ‘community team’, tasked with exemplifying the conference's community values as well as being a point of support and contact relating to our [Code of Conduct](/conduct/). These efforts are analogous with what the ‘Safety team’ focused on at previous PyCons AU, but under a slightly tweaked name to address the team's intended impact and goals.
 
 The team also collaborated with the organising team & venue on several improvements around the conference space including:
 

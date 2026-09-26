@@ -30,7 +30,7 @@ Organising the conference on a longer time horizon gave us the ability to do mor
 
 We had a handful of puzzles or challenges to solve during the conference. These weren’t just for puzzles-sake, they were each designed to create more authentic and less ‘tacky’ ways of connecting with other attendees.
 
-While we had a few more planned, we ultimately refined and published four puzzles during the conference \- all of which were solved. This post has more on puzzles, but I’ll touch briefly on the design intent here:
+While we had a few more planned, we ultimately refined and published four puzzles during the conference \- all of which were solved. [This post has more on puzzles](/posts/puzzles-at-pycon-au/), but I’ll touch briefly on the design intent here:
 
 * The Badge challenge encouraged attendees to share ‘three random words’ on the back of their badge \- allowing groups to solve the puzzle together. This is a much better icebreaker than ‘what do you do’.  
 * The sponsor challenge gave sponsors a two digit code to give away, and enough codes collected should allow you to solve the clue. We picked a solve word that didn’t require all clues, so attendees had some flexibility on how they wanted to engage with sponsors without requiring they connect with every single exhibitor.  
@@ -52,8 +52,8 @@ Our community team, formerly the ‘safety team’, were one important part of a
 
 ## Code of Conduct
 
-Our Code of Conduct exists for a reason \- unfortunately there are times we need to deal with undesirable behaviour. It’s there to help codify what behaviour we don’t tolerate in the community, and to give us a framework for ensuring everyone is safe and welcome. We always have, and will continue to, enforce the Code of Conduct when needed.
+Our [Code of Conduct](/conduct/) exists for a reason \- unfortunately there are times we need to deal with undesirable behaviour. It’s there to help codify what behaviour we don’t tolerate in the community, and to give us a framework for ensuring everyone is safe and welcome. We always have, and will continue to, enforce the Code of Conduct when needed.
 
 Therefore, the community team also carried a mobile phone 24/7 during the conference, and were functionally ‘on call’ if someone needed to raise a concern relating to the code of conduct. The number was printed on the back of attendee badges, as well as available on the website.
 
-We are also very happy to share the community transparency report (link) that has also been published today, alongside this post.
+We are also very happy to share the [community transparency report](/posts/community-transparency-report/) that has also been published today, alongside this post.
