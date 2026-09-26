@@ -2,7 +2,7 @@
 title: "Community transparency report"
 published: 2026-09-26T09:02:00+10:00
 category: "news"
-previewText: "Transparency report relating to the PyCon AU code of conduct."
+previewText: "Transparency report relating to the PyCon AU Code of Conduct."
 ---
 
 *This post is co-authored by Jack Skinner & Matt Cengia.*
