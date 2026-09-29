@@ -65,6 +65,7 @@ export default defineConfig({
     "/workshops": "/schedule/workshops",
     // "Brisbane Transport" page was renamed to "Around Brisbane".
     "/attend/transport": "/attend/around-brisbane",
+    "/academic-proceedings": "/posts/academic-proceedings-published",
     // Legacy /program/* URLs (e.g. session links shared before the move to
     // /schedule/*) redirect to their /schedule/* equivalents.
     ...programGraphicRedirects,
